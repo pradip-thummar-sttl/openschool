@@ -40,7 +40,7 @@ const HeaderPMInner = (props) => {
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>{props.pupilName}</Text>
                     </View>
@@ -51,7 +51,7 @@ const HeaderPMInner = (props) => {
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        <Notification onPress={() => props.onEditPress()} style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -62,25 +62,25 @@ const HeaderPMInner = (props) => {
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(0), props.tabIndex(0)}}>
+                                onPress={() => { setSelectedTab(0), props.tabIndex(0) }}>
                                 <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>Pupil profile</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(1),props.tabIndex(1)}}>
+                                onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
                                 <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>parent chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(2),props.tabIndex(2)}}>
+                                onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Pupil chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(3),props.tabIndex(3)}}>
+                                onPress={() => { setSelectedTab(3), props.tabIndex(3) }}>
                                 <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
                             </TouchableOpacity>
                         </View>
