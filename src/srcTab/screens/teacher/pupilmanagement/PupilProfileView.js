@@ -272,8 +272,8 @@ const PupilProfileView = (props) => {
                                                     <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                                 </View>
                                             </View>
+                                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                         </View>
-                                        {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                     </View>
                                     <View>
 
@@ -283,13 +283,11 @@ const PupilProfileView = (props) => {
                         </View>
                     </View>
                     :
-                    <View style={{ width: isHide ? '100%' : '100%', }}>
-
-                        <Chat tabs={tabSelected} data={props.selectedPupil} />
-                    </View>
+                    <Chat tabs={tabSelected} data={props.selectedPupil} />
             }
-
         </View>
+
+        </View >
     );
 }
 export default PupilProfileView;
