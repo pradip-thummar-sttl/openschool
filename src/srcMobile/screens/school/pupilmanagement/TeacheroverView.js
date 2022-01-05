@@ -97,6 +97,7 @@ const TeacheroverView = (props) => {
     return (
         <View>
             <View style={{ width: '100%', height: '100%' }}>
+                
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -130,7 +131,7 @@ const TeacheroverView = (props) => {
                                                                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.rewardColumn}>

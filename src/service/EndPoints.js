@@ -78,10 +78,8 @@ export const EndPoints = {
     TeachingYear: 'teachingyear',
     ClassSetup: 'classsetup',
 
-    //
     SaveLessionRecord:"lessionrecord",
-
-    //
     getAllNotifications : 'getnotifocation',
-    deleteNotification : 'notificationdelete'
+    deleteNotification : 'notificationdelete',
+    pupilbyclasssetup:"pupilbyclasssetup",
 }

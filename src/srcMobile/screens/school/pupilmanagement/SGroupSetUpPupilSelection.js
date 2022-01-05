@@ -56,9 +56,7 @@ const SGroupSetUpPupilSelection = (props) => {
             setSelectedPupils(previoslySelectedData)
         }
 
-
-
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.pupilbyclasssetup}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
@@ -69,7 +67,6 @@ const SGroupSetUpPupilSelection = (props) => {
         }, (err) => {
             setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
-
         })
 
     }, [])
