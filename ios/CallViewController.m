@@ -169,7 +169,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   QBUUser *user = [QBUUser user];
   user.ID = self.currentUserID.integerValue;
   user.fullName = self.currentName;
-  user.login=@"stud29@silvertouch.com";
+  user.login=@"teacher7@silvertouch.com";
   user.password=@"Admin@123";
   [Profile synchronizeUser:user];
   
@@ -298,7 +298,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     } else {
         [strongSelf connectToChat:user];
     }
-          
+
   } errorBlock:^(QBResponse * _Nonnull response) {
     NSLog(@"%@=========>", response);
     [QBRequest logInWithUserLogin:profile.login
@@ -640,30 +640,30 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //    }
     if (weakSelf.users.count >= 1) {
         // Creating private chat.
-        [SVProgressHUD show];
-        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
-
-
-
-
-
-      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
-            if (response.error) {
-                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
-                return;
-            }
-            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
-            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
-        
-        [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+//        [SVProgressHUD show];
+//        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
+//
+//
+//
+//
+//
+//      [weakSelf.chatManager createGroupDialogWithName:weakSelf.titlee occupants:weakSelf.users completion:^(QBResponse * _Nullable response, QBChatDialog * _Nullable createdDialog) {
+//            if (response.error) {
+//                [SVProgressHUD showErrorWithStatus:response.error.error.localizedDescription];
+//                return;
+//            }
+//            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
+//            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
+//
+//        [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
 //            [self openNewDialog:createdDialog];
           UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
           ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-          chatController.dialogID = createdDialog.ID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
           chatController.currentUserID = weakSelf.currentUserID;
           chatController.currentUserName=weakSelf.currentName;
           [weakSelf presentViewController:chatController animated:false completion:nil];
-        }];
+//        }];
 
        
 
@@ -674,7 +674,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //              [weakSelf presentViewController:chatController animated:false completion:nil];
 //
 //            }];
-        }];
+//        }];
     }
 
 
