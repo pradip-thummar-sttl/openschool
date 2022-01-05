@@ -88,7 +88,7 @@ const TeacherProfileAdd = (props) => {
             if (res.flag) {
                 var userData = res.data
                 userData.map((item) => {
-                    if (item.Name === 'Pupil') {
+                    if (item.Name === 'Teacher') {
                         setUserType(item._id)
                     }
                 })

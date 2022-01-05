@@ -124,6 +124,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private TextView tvTeacherEmoji;
     private TextView tvTitle;
     private ImageView button_screen_sharing;
+    private ImageView btnChat;
     private TextView tvShare;
     private ImageView whiteboard;
     private ImageView icPEmoji1;
@@ -478,6 +479,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
+        btnChat = (ImageView) view.findViewById(R.id.btnChat);
         tvShare = (TextView) view.findViewById(R.id.tvShare);
         whiteboard = (ImageView) view.findViewById(R.id.whiteboard);
         icPEmoji1 = (ImageView) view.findViewById(R.id.icPEmoji1);
@@ -714,28 +716,16 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
             }
         });
 
-
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
+            }
+        });
 
         button_screen_sharing.setOnClickListener(v -> {
-//            startScreenSharing();
-
-//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
-
-//            conversationFragmentCallbackListener.onLaunchChatRoom(opponents, title);
-
-//            System.out.println("KDKDKD =>: " + currentUserID);
-//            QBRTCVideoTrack videoTrack = conversationFragmentCallbackListener.getVideoTrackMap().get(currentUserID);
-//            System.out.println("KDKDKD =>: " + videoTrack);
-//            if (videoTrack == null) {
-////                screenSharingToggle.setChecked(!isChecked);
-//                return;
-//            }
-//            if (controlLayoutVisible) {
-//                toggleCamera(true);
-            System.out.println("KDKDKD =>: on line 612");
-            startScreenSharing();
-//            }
-//            controlsDispatcher.wakeupControls();
+             System.out.println("KDKDKD =>: on line 612");
+             startScreenSharing();
         });
 
         tvShare.setOnClickListener(new View.OnClickListener() {

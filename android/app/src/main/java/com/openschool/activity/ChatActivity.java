@@ -148,6 +148,7 @@ public class ChatActivity extends BaseActivity implements OnMediaPickedListener,
     private ServiceConnection callServiceConnection;
     private String currentName;
     private String currentUserID;
+    private boolean isTeacher;
 
     public static void startForResultFromCall(Activity activity, int code, String dialogId, boolean isOpenFromCall) {
         Intent intent = new Intent(activity, ChatActivity.class);
@@ -173,18 +174,20 @@ public class ChatActivity extends BaseActivity implements OnMediaPickedListener,
         String dialogID = getIntent().getStringExtra(EXTRA_DIALOG_ID);
         currentName = getIntent().getStringExtra(EXTRA_CURRENT_NAME);
         currentUserID = getIntent().getStringExtra(EXTRA_CURRENT_USER_ID);
+        isTeacher = getIntent().getBooleanExtra(com.openschool.util.Consts.EXTRA_DIALOG_IS_TEACHER, false);
         Log.d(TAG, "Getting Dialog ID from EXTRA => ID : " + dialogID);
 
         QBUser qbUser = new QBUser();
         qbUser.setId(Integer.parseInt(currentUserID));
         qbUser.setFullName(currentName);
-        qbUser.setLogin("teacher7@silvertouch.com");
+        qbUser.setLogin(isTeacher ? "teacher7@silvertouch.com" : "stud29@silvertouch.com");
         qbUser.setPassword("Admin@123");
         currentUser = qbUser;
         getSharedPrefsHelper().saveQbUser(qbUser);
 
         NetworkConnectionChecker networkChecker = new NetworkConnectionChecker(getApplication());
 
+        System.out.println("KDKDKD: " + getChatHelper().isLogged());
         if (!getChatHelper().isLogged() && networkChecker.isConnectedNow()) {
             reloginToChat();
         }
@@ -196,7 +199,7 @@ public class ChatActivity extends BaseActivity implements OnMediaPickedListener,
 //        }
 
         qbChatDialog = getQBDialogsHolder().getDialogById(dialogID);
-        Log.d(TAG, "Deserialized dialog = " + qbChatDialog);
+        Log.d(TAG, "Deserialized dialog = ");
 
         try {
             qbChatDialog.initForChat(QBChatService.getInstance());

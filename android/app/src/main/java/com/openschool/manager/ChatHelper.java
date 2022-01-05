@@ -98,7 +98,7 @@ public class ChatHelper {
     public void loginToChat(final QBUser user, final QBEntityCallback<Void> callback) {
         Log.d(TAG, "Login to Chat");
         if (!qbChatService.isLoggedIn()) {
-            Log.d(TAG, "Not logged in -> QBChatService.login");
+            Log.d(TAG, "Not logged in -> QBChatService.login " + user);
             qbChatService.login(user, callback);
         } else {
             Log.d(TAG, "Already Logged In");
