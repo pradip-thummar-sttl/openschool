@@ -39,17 +39,12 @@ const ParentZonePerformance = (props) => {
         getLessonData()
     }, [])
 
-    useEffect(() => {
-        console.log('chartData', chartData);
-    }, [chartData])
-
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -64,16 +59,14 @@ const ParentZonePerformance = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
                 lessonData.push(data)
-                console.log('lessonData', lessonData);
                 setChartData(lessonData)
             } else {
                 showMessage(res.message)
@@ -92,7 +85,6 @@ const ParentZonePerformance = (props) => {
                         <View style={PAGESTYLE.graphBox}>
                             <View style={PAGESTYLE.generalRow}>
                                 <View style={PAGESTYLE.chartBlock}>
-                                    {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
                                     <ActivityRings
                                         data={chartData}
                                         config={activityConfig} />
@@ -109,7 +101,6 @@ const ParentZonePerformance = (props) => {
                                     </View>
                                 </View>
                             </View>
-                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                         </View>
                         <View>
 

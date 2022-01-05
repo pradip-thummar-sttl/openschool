@@ -152,31 +152,7 @@ const TeacherProfileView = (props) => {
                                         </View>
                                     </View>
                                 </View>
-                                {/* <View style={PAGESTYLE.graphBlock}>
-                                    <View style={PAGESTYLE.graphBox}>
-                                        <View style={PAGESTYLE.generalRow}>
-                                            <View style={PAGESTYLE.chartBlock}>
-                                                <ActivityRings
-                                                    data={chartData}
-                                                    config={activityConfig} />
-                                            </View>
-                                            <View>
-                                                <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
-                                                <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                                    <Image style={PAGESTYLE.purpleMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
-                                                </View>
-                                                <View style={PAGESTYLE.generalRow}>
-                                                    <Image style={PAGESTYLE.orangeMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
-                                                </View>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View>
-
-                                    </View>
-                                </View> */}
+                               
                             </KeyboardAwareScrollView>
                         </View>
                     </View>

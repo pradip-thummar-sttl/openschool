@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { ActivityIndicator, Image, ImageBackground, SafeAreaView, Text, View } from "react-native";
-import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
+import {  Image, Text, View } from "react-native";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
-import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
 import Chat from "../../Chat/Chat";
@@ -46,17 +43,15 @@ const PupilProfileView = (props) => {
     };
 
     useEffect(() => {
-        console.log('chartData', chartData);
-    }, [chartData])
+        getLessonData();
+    },[])
 
     const getLessonData = () => {
-        console.log('`${EndPoints.GetCountLession}/${item.PupilId}`', `${EndPoints.GetCountLession}/${item.PupilId}`);
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -71,11 +66,10 @@ const PupilProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -141,7 +135,6 @@ const PupilProfileView = (props) => {
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInner
                 onEditPress={() => props.navigations.navigation.navigate('PupilProfileEdit', { item: item, onGoBack: () => onGoBack() })}
-                // onEditPress={() => props.navigations.navigation.navigate('PupilProfileEdit')}
                 navigateToBack={() => props.navigateToBack()} tabIndex={(index) => { setTabSelected(index) }}
                 pupilName={props.selectedPupil.FirstName + ' ' + props.selectedPupil.LastName} />
             {
@@ -151,16 +144,11 @@ const PupilProfileView = (props) => {
                             <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                                 <View style={PAGESTYLE.managementDetail}>
                                     <View style={PAGESTYLE.managementBlockTop}>
-                                        {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                         <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
                                                 source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                         </View>
-                                        {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                        {/* </ImageBackground> */}
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
                                         <View style={PAGESTYLE.nameSmlBlock}>
@@ -230,13 +218,11 @@ const PupilProfileView = (props) => {
                                                     activeOpacity={opacity}
                                                     onPress={() => setInstantRewards()}>
                                                     <View>
-                                                        {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
                                                         <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
                                         </View>
-                                        {/* <Text style={[PAGESTYLE.paragraphText, PAGESTYLE.annotationBox]}>{props.selectedPupil.Feedback}</Text> */}
                                         <TextInput
                                             returnKeyType={"next"}
                                             multiline={true}
@@ -256,7 +242,6 @@ const PupilProfileView = (props) => {
                                     <View style={[PAGESTYLE.graphBox, { bottom: 5 }]}>
                                         <View style={PAGESTYLE.generalRow}>
                                             <View style={PAGESTYLE.chartBlock}>
-                                                {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
                                                 <ActivityRings
                                                     data={chartData}
                                                     config={activityConfig} />
@@ -272,7 +257,6 @@ const PupilProfileView = (props) => {
                                                     <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
                                                 </View>
                                             </View>
-                                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                         </View>
                                     </View>
                                     <View>
@@ -286,8 +270,6 @@ const PupilProfileView = (props) => {
                     <Chat tabs={tabSelected} data={props.selectedPupil} />
             }
         </View>
-
-        </View >
     );
 }
 export default PupilProfileView;

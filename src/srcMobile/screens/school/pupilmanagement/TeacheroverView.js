@@ -65,12 +65,7 @@ const TeacheroverView = (props) => {
 
     const fetchRecord = (searchBy, filterBy) => {
 
-        // setSelectedTabIndex(item)
-        // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
-        // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
-        console.log(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`);
         Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-            console.log('res of all pupil by teacher----------->>>>>>', res)
             if (res.flag) {
                 setLoading(false)
                 setPupilData(res.data)
