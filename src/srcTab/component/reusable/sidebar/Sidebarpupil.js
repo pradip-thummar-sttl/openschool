@@ -17,6 +17,7 @@ import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
+import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
 
 
 const Sidebar = (props) => {
@@ -132,7 +133,8 @@ const Sidebar = (props) => {
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
+                    {/* <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}> */}
+                    <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
                         {/* <Image
                             style={styles.menuIcon}
                             source={Images.MyAchievements}
@@ -162,7 +164,8 @@ const Sidebar = (props) => {
                             source={Images.OpenSchool}
                         /> */}
                         {/* open school icon add karvano che */}
-                        <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        {/* <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} /> */}
+                        <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
 
                         {
                             isSmall ? null :
@@ -186,7 +189,7 @@ const Sidebar = (props) => {
                     {/* <Image source={Images.cartoon} style={styles.cartoonIcon} /> */}
                     {/* cartoon icon add karvano che */}
                 </View>
-                <View style={[styles.userInfo, styles.userInfobottom]}>
+                <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.userInfo, styles.userInfobottom]}>
                     <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                     {
                         isSmall ? null :
@@ -200,7 +203,7 @@ const Sidebar = (props) => {
                                 </TouchableOpacity>
                             </>
                     }
-                </View>
+                </TouchableOpacity>
             </Animated.View>
         </View>
     );
