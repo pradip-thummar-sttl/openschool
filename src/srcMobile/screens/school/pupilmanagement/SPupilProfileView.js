@@ -3,11 +3,8 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
-import FONTS from '../../../../utils/Fonts';
 import HeaderPMInner from "./HeaderPMInner";
-import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import Chat from "../../Chat/Chat";
@@ -16,14 +13,6 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
 import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
-import TickMarkWhite from '../../../../svg/teacher/lessonhwplanner/TickMark_White'
-import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
-import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
-import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
-import BronzeFill from '../../../../svg/teacher/lessonhwplanner/StarBronze_Fill'
-import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill'
-import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
-import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 
 const { CallModule } = NativeModules;
@@ -44,10 +33,6 @@ const SPupilProfileView = (props) => {
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
 
-    console.log('item', item);
-    // const handleOnClick = (index) => {
-    //     setTabSelected(index)
-    // }
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -82,20 +67,12 @@ const SPupilProfileView = (props) => {
         getLessonData()
     }, [])
 
-    useEffect(() => {
-        console.log('chartData', chartData);
-    }, [chartData])
-
     const getLessonData = () => {
-
-
-
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -112,11 +89,10 @@ const SPupilProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -188,6 +164,7 @@ const SPupilProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={PAGESTYLE.MainProfile}>
                         <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
+                            
                             <View style={PAGESTYLE.mainContainerProfile}>
                                 <View style={PAGESTYLE.profileImageArea}>
                                     <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
@@ -196,6 +173,7 @@ const SPupilProfileView = (props) => {
                                     </View>
                                 </View>
                             </View>
+                            
                             <View style={PAGESTYLE.mainDetails}>
                                 <View style={PAGESTYLE.fieldDetails}>
                                     <Text LABLE style={PAGESTYLE.label}>Pupil name</Text>
@@ -230,6 +208,7 @@ const SPupilProfileView = (props) => {
                                     <Text P style={PAGESTYLE.data}>{item.IsActive ? 'Active' : 'Deactive'}</Text>
                                 </View>
                             </View>
+                            
                             <View HR style={STYLE.hrCommon}></View>
 
                             <View style={{ flexDirection: 'row', }}>
@@ -249,7 +228,6 @@ const SPupilProfileView = (props) => {
 
                             <View style={PAGESTYLE.pupilPerfomance}>
                                 <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                                {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
 
                                 <View style={PAGESTYLE.performancePArent}>
                                     <ActivityRings
@@ -270,6 +248,7 @@ const SPupilProfileView = (props) => {
                                     <Text style={PAGESTYLE.bottomText}>Based on {item.FirstName + ' ' + item.LastName}'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
                                 </View>
                             </View>
+
                         </ScrollView>
                     </View>
                     :

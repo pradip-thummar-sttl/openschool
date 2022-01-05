@@ -86,7 +86,7 @@ export default StyleSheet.create({
 
     // Right View
     borderView: {
-        width: hp(70),
+        width: hp(100),
         height: wp(60),
         borderWidth: 1,
         borderRadius: 10,

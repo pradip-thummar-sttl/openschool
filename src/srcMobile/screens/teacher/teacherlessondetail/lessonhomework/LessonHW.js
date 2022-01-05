@@ -399,9 +399,9 @@ const TLHomeWork = (props) => {
                     extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 5 : 7}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 0 : 7}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,{top :  Platform.OS === 'android'  ?  3.5  : 0}]}
+                                style={[PAGESTYLE.checkMark,]}
                                 value={item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -538,14 +538,12 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.dropDownFormInput}>
                                     <Text style={PAGESTYLE.subjectText}>Due Date</Text>
                                     <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
-                                        {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                         <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                         <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy}>{selectDate}</Text>
                                             </View>
                                         </TouchableOpacity>
-                                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
@@ -562,10 +560,6 @@ const TLHomeWork = (props) => {
                             />
                         </View>
                         <View style={PAGESTYLE.videoRecording}>
-                            {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                            </TouchableOpacity> */}
                             <Popupaddrecording
                                 recordingArr={recordingArr}
                                 isVisible={isAddRecording}
@@ -638,10 +632,6 @@ const TLHomeWork = (props) => {
                         </View>
                     </View>
                 </View>
-                {/* <Popupaddrecording isVisible={isAddRecording} onClose={() => setAddRecording(false)}
-                    onScreeCamera={() => onScreeCamera()}
-                    onScreeVoice={() => onScreeVoice()}
-                    onCameraOnly={() => onCameraOnly()} /> */}
                 {renderRecordingNamePopup()}
                 <DateTimePickerModal
                     isVisible={isDatePickerVisible}

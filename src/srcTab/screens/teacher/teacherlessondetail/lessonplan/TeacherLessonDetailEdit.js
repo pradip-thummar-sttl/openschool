@@ -521,8 +521,8 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', }}
                         renderItem={({ item, index }) => (
-                            <View style={[PAGESTYLE.alignRow,{paddingHorizontal  :hp(2),
-                                width : '33.33%',
+                            <View style={[PAGESTYLE.alignRow,{
+                                width : '33.33%',marginHorizontal  : 3
                            }]}>
                                 <CheckBox
                                     style={{ ...PAGESTYLE.checkMarkTool }}

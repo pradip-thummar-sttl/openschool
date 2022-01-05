@@ -267,7 +267,7 @@ const LessonDetail = (props) => {
                         
                         {tabIndex == 2 ?
                             <View style={PAGESTYLE.filterbarMain}>
-                                <View style={PAGESTYLE.field}>
+                                <View style={[PAGESTYLE.field]}>
                                     <TextInput
                                         ref={textInput}
                                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
@@ -278,7 +278,7 @@ const LessonDetail = (props) => {
                                             setSearchKeyword(keyword);
                                         }} />
                                     <TouchableOpacity
-                                        style={[PAGESTYLE.userIcon1Parent]}
+                                        style={[PAGESTYLE.userIcon1Parent,{width : 50,height : 60}]}
                                         activeOpacity={opacity}
                                         onPress={() => {searchKeyword ? isSearchActive && setSearchActive(false):setSearchActive(true)}}>
                                         {isSearchActive ?

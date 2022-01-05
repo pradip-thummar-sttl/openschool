@@ -3,11 +3,7 @@ import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
-// import PAGESTYLE from './Style';
-// Style
 import FONTS from '../../../../utils/Fonts';
-// import HeaderPMInner from "./HeaderPMInner";
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import moment from 'moment';
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
@@ -24,17 +20,12 @@ import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import BronzeFill from '../../../../svg/teacher/lessonhwplanner/StarBronze_Fill'
 import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill'
 import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
-import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
-import HeaderPMInner from "../../teacher/pupilmanagement/HeaderPMInner";
 import SchoolHeaderProfile from "./SchoolHeaderProfile";
 import PAGESTYLE from "./Style";
 
-const { CallModule } = NativeModules;
-
 const SchoolProfileView = (props) => {
     const item = [] //props.route.params.item;
-    const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
     const [isBronze, setBronze] = useState(false);
@@ -42,10 +33,6 @@ const SchoolProfileView = (props) => {
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
 
-    console.log('item', item);
-    // const handleOnClick = (index) => {
-    //     setTabSelected(index)
-    // }
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -69,14 +56,6 @@ const SchoolProfileView = (props) => {
         height: 200
     };
 
-    const handleOnClick = (index) => {
-        setTabSelected(index)
-        console.log('reference', myref);
-        if (myref.current) {
-            myref.current.refresh();
-        }
-    }
-
     useEffect(() => {
         getLessonData()
     }, [])
@@ -87,11 +66,10 @@ const SchoolProfileView = (props) => {
 
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -106,11 +84,10 @@ const SchoolProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -169,13 +146,6 @@ const SchoolProfileView = (props) => {
 
     return (
         <View>
-            {/* <HeaderPMInner
-                name={'My Profile'}
-                navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item })}
-                onAlertPress={() => props.navigation.openDrawer()}
-                tabIndex={(index) => { handleOnClick(index) }}
-            /> */}
             <SchoolHeaderProfile 
             onAlertPress={()=>{props.navigation.openDrawer()}}
             onEditPress={()=>{}}

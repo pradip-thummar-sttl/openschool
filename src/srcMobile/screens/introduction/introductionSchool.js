@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, Text, ScrollView, Alert, Dimensions, Platform } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import ViewSlider from 'react-native-view-slider'
 import COLORS from '../../../utils/Colors';
@@ -35,7 +35,7 @@ export default class Introduction extends Component {
                             <Introduction3 navigateToLogin={() => this.navigateToLogin() } />
                         </>
                     }
-                    style={styles.slider}
+                    style={[styles.slider,{bottom : Platform.OS === 'android' ? 0 : 10}]}
                     slideCount={3}
                     dots={this.state.activeDot >= 3 ? false : true}
                     dotActiveColor={COLORS.dotActive}

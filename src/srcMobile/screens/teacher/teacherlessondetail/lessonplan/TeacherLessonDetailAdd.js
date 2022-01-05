@@ -257,19 +257,6 @@ const TLDetailAdd = (props) => {
     }
 
     const onScreeCamera = () => {
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
-        // setTimeout(() => {
-
-        //     RecordScreen.stopRecording().then((res) => {
-        //         if (res) {
-        //             console.log('response of recording', res)
-        //             const url = res.result.outputURL;
-        //         }
-        //     }).catch((error) =>
-        //         console.warn(error)
-        //     );
-
-        // }, 4000);
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
@@ -280,8 +267,6 @@ const TLDetailAdd = (props) => {
     }
 
     const startRecording = async () => {
-        // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
             if (res === "granted") {
@@ -289,8 +274,6 @@ const TLDetailAdd = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
-                console.log('hello', res2);
-
                 if (res2 === "granted") {
                     setRecordingStarted(true)
                     RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
@@ -332,12 +315,7 @@ const TLDetailAdd = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                // let obj = {
-                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                //     originalname: 'MY_RECORDING.mp4',
-                //     fileName: 'MY_RECORDING.mp4',
-                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                // }
+               
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -352,8 +330,6 @@ const TLDetailAdd = (props) => {
                 console.log('url', url);
             }
         } else {
-            // setRecordingStarted(false)
-            // toggleModal()
             showMessage('Please provide recording name proper')
         }
     }
@@ -379,7 +355,6 @@ const TLDetailAdd = (props) => {
             }
         });
         setAddRecording(false)
-
     }
 
 
@@ -437,7 +412,7 @@ const TLDetailAdd = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(1), }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(0.5), paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                        <View style={{ margin: hp(0.5),justifyContent : 'center', paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             {/* <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text> */}
                             <TextInput
                                 style={{ width: '90%', height: 41, fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
@@ -913,11 +888,9 @@ const TLDetailAdd = (props) => {
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()}>
                                             <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <View style={PAGESTYLE.subjectDateTimePicker}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select'}</Text>
-                                                    {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </View>
@@ -928,12 +901,11 @@ const TLDetailAdd = (props) => {
 
                                 </View>
                                 {
-                                    IsDeliveredLive ?
+                                    IsDeliveredLive &&
                                         <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
                                             {fromTimeDropDown()}
-
                                             {toTimeDropDown()}
-                                        </View> : null
+                                        </View>
                                 }
 
                                 <View style={PAGESTYLE.lessonDesc}>
@@ -963,16 +935,11 @@ const TLDetailAdd = (props) => {
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {pupilListView()}
-
                                 {itemCheckListView()}
 
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                                    {/* <View style={PAGESTYLE.toggleGrp}>
-                                        <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                    </View> */}
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />

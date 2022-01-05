@@ -101,12 +101,8 @@ const PopupdataSecondCSVUpload = (props) => {
                         style={{ width: '70%', height: '50%', alignSelf:'center', borderRadius: hp(2), backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute' }}
                         size={'large'}
                         color={COLORS.yellowDark} />
-
                 }
             </Modal>
-
-
-           
         </View>
     );
 }

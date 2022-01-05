@@ -83,11 +83,10 @@ const PupilProfileView = (props) => {
 
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -102,11 +101,10 @@ const PupilProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
@@ -164,11 +162,11 @@ const PupilProfileView = (props) => {
     }
 
     return (
-        <View style={{flex: 1}}>
+        <View style={{ flex: 1 }}>
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item , onGoBack: () => props.route.params.onGoBack()})}
+                navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item, onGoBack: () => props.route.params.onGoBack() })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />
@@ -176,7 +174,7 @@ const PupilProfileView = (props) => {
                 {
                     tabSelected === 0 ?
                         <View style={PAGESTYLE.MainProfile}>
-                            <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
+                            <ScrollView style={PAGESTYLE.scrollViewCommon1} showsVerticalScrollIndicator={false}>
                                 <View style={PAGESTYLE.mainContainerProfile}>
                                     <View style={PAGESTYLE.profileImageArea}>
                                         {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
@@ -204,7 +202,7 @@ const PupilProfileView = (props) => {
                                         <Text P style={PAGESTYLE.data}>{item.Note ? item.Note : '-'}</Text>
                                     </View>
                                 </View>
-                                <View HR style={STYLE.hrCommon}></View>
+                                <View HR style={STYLE.hrCommon} />
                                 <View style={PAGESTYLE.rewardSection}>
                                     <View style={PAGESTYLE.fieldDetails}>
                                         <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -266,15 +264,11 @@ const PupilProfileView = (props) => {
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
                                 </View>
-                                <View HR style={STYLE.hrCommon}></View>
+                                <View HR style={STYLE.hrCommon} />
                                 <View style={PAGESTYLE.pupilPerfomance}>
                                     <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                                    {/* <Image style={PAGESTYLE.graph} source={Images.graphImagePupilPerfomance}></Image> */}
-
                                     <View style={PAGESTYLE.performancePArent}>
-                                        <ActivityRings
-                                            data={chartData}
-                                            config={activityConfig} />
+                                        <ActivityRings data={chartData} config={activityConfig} />
 
                                         <View style={{ flexDirection: 'row', height: 50 }}>
                                             <View style={PAGESTYLE.colorLeftParent}>
@@ -286,7 +280,7 @@ const PupilProfileView = (props) => {
                                                 <Text style={PAGESTYLE.introText}>{`Effort over last${'\n'}month`}</Text>
                                             </View>
                                         </View>
-                                        <View HR style={STYLE.hrCommon}></View>
+                                        <View HR style={STYLE.hrCommon} />
                                         <Text style={PAGESTYLE.bottomText}>Based on {item.FirstName + ' ' + item.LastName}'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
                                     </View>
                                 </View>

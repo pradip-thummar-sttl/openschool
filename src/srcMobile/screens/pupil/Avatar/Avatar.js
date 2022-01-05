@@ -21,8 +21,8 @@ import FONTS from '../../../../utils/Fonts';
 import { BadgeIcon, User } from '../../../../utils/Model'
 import { Var } from '../../../../utils/Constant'
 
-var tabs = [
-    { name: 'COLOUR', isSelected: false },
+const tabs = [
+    { name: 'COLOUR', isSelected: true },
     { name: 'HAIR', isSelected: false, },
     { name: 'EYES', isSelected: false, },
     { name: 'MOUTH', isSelected: false, },

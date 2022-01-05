@@ -371,7 +371,8 @@ const Sidebar = (props) => {
                                 <Ic_LessonPlanner style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
+                            {/* <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}> */}
+                            <TouchableOpacity style={[styles.menuItem, selectedModule == 3 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAchievements}
@@ -412,7 +413,7 @@ const Sidebar = (props) => {
                         {/* <View style={styles.cartoon}>
                         <Image source={Images.cartoon} style={styles.cartoonIcon} />
                     </View> */}
-                        <View style={[styles.userInfo, styles.userInfobottom]}>
+                        <TouchableOpacity onPress={() => { props.navigation.replace('Setting'); setSelectedModule(3); props.navigation.closeDrawer() }} style={[styles.userInfo, styles.userInfobottom]}>
                             <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                             <View style={styles.profileTextMain}>
                                 <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: wp(35) }]}>{User.user.FirstName} {User.user.LastName}</Text>
@@ -421,7 +422,7 @@ const Sidebar = (props) => {
                                 {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                                 <More style={styles.moreIcon} height={5} width={hp(3)} />
                             </TouchableOpacity>
-                        </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
 

@@ -45,12 +45,12 @@ const PopupAddNewData = (props) => {
     return (
         <View>
             <TouchableOpacity
-                style={styles.buttonGroup}
+                style={[styles.buttonGroup,]}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
                 {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                <Text style={styles.commonButtonGreenheader}>Add Entry</Text>
+                <Text style={[styles.commonButtonGreenheader]}>Add Entry</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
+        width : 200,height : 50
     },
     addIcon: {
         width: hp(1.55),
@@ -159,5 +160,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        // backgroundColor : 'green',
+        
     },
 });

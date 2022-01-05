@@ -316,10 +316,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGrayIntro,
         // paddingRight: hp(1),
-        // marginLeft: 15,
-        width : Platform.OS === 'android' ? '40%' : '55%'
+        marginLeft: Platform.OS === 'android' ? 0 : 10,
+        width : Platform.OS === 'android' ? '40%' : '55%',
         // width: '40%',
-        // backgroundColor : 'green'
+      
         
     },
     checkBoxLabelTextNone: {
@@ -1462,7 +1462,7 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // marginTop:hp(2),
         justifyContent: 'center',
-        // marginVertical: hp(2)
-        marginBottom : Platform.OS === 'android' ? 0 : 10
+        marginVertical: hp(2),
+        // marginBottom : Platform.OS === 'android' ? 0 : 10
     },
 });

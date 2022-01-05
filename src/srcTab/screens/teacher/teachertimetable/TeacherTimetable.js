@@ -247,6 +247,7 @@ const TeacherTimeTable = (props) => {
                                 onFilter={(filter)=>fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD'))} />
 
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
+                            <ScrollView>
                                 {isTimeTableLoading ?
                                     <ActivityIndicator
                                         style={{ flex: 1 }}
@@ -254,13 +255,16 @@ const TeacherTimeTable = (props) => {
                                         color={COLORS.yellowDark} />
                                     :
                                     timeTableData.length > 0 ?
-                                        <View style={{ ...PAGESTYLE.mainPage1 }}>
+                                        <View 
+                                       style={{ ...PAGESTYLE.mainPage1 ,}}>
                                             <View style={PAGESTYLE.days}>
+                                              
                                                 {days.map((data, index) => (
                                                     <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
                                                         <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                                     </View>
                                                 ))}
+                                               
                                             </View>
 
                                             <FlatList
@@ -288,7 +292,9 @@ const TeacherTimeTable = (props) => {
                                             <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                                         </ScrollView>
                                 }
+                                 </ScrollView>
                             </View>
+                           
                         </View>
             }
         </View >

@@ -79,8 +79,10 @@ const TLHomeWork = (props) => {
 
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+    const [ischecked,setIsChecked] = useState(false)
 
     useEffect(() => {
+       
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
 
@@ -181,6 +183,7 @@ const TLHomeWork = (props) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
+        setIsChecked(!ischecked)
     }
     const onScreeCamera = () => {
         setAddRecording(false)
@@ -418,6 +421,7 @@ const TLHomeWork = (props) => {
                         : null
                 }
                 <FlatList
+                    extraData={ischecked}
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
@@ -436,7 +440,7 @@ const TLHomeWork = (props) => {
                             />
                             <Text style={[PAGESTYLE.checkBoxLabelText]}>{item.ItemName}</Text>
                             <TouchableOpacity
-                                style={PAGESTYLE.userIcon1Parent}
+                                style={[PAGESTYLE.userIcon1Parent]}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
                                 {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
@@ -597,7 +601,7 @@ const TLHomeWork = (props) => {
                                 onRemoveRecording={() => removeRecording()} />
 
                             <View style={[PAGESTYLE.requirementofClass,]}>
-                                <Text style={PAGESTYLE.requireText}>Create gghhChecklist</Text>
+                                <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
                                 <View style={PAGESTYLE.checkBoxGroup}>
                                     {
                                         // checkItem.map((item, index) => {
