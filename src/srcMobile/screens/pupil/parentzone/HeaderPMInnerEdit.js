@@ -35,8 +35,8 @@ const HeaderPMInner = (props) => {
 
     return (
         <View style={styles.headerMain}>
-            <View style={styles.headerMaintop}>
-                <View style={styles.titleRow}>
+            <View style={[styles.headerMaintop]}>
+                <View style={[styles.titleRow]}>
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
@@ -80,14 +80,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
-        paddingBottom: 15,
+        paddingBottom: 12,
     },
     headerMain: {
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(5.85),
+        paddingTop: Platform.OS == 'android' ? hp(1.5) : hp(5),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
