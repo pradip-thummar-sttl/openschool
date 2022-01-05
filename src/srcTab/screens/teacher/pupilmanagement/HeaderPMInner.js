@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 import {
     Menu,
     MenuOptions,
@@ -46,13 +47,29 @@ const HeaderPMInner = (props) => {
                     </View>
                 </View>
 
-                <View style={styles.headerRight}>
-                    <TouchableOpacity
-                        style={styles.notificationBar}
-                        activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        <Notification onPress={() => props.onEditPress()} style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity>
+                <View style={{ flexDirection: 'row' }}>
+                    <View>
+                    <TouchableOpacity activeOpacity={opacity}
+                            onPress={() => props.onEditPress()} 
+                            style={{
+                                backgroundColor: COLORS.dashboardGreenButton,
+
+                                padding: hp(1.5),
+                                borderRadius: hp(1),
+
+                                marginHorizontal: 5,
+
+                            }}>
+                            <EditWhite style={{
+                                width: hp(1.77),
+                                height: hp(1.77),
+                                resizeMode: 'contain',
+                                alignSelf: 'center',
+                            }} height={hp(1.77)} width={hp(1.77)} />
+                        </TouchableOpacity>
+                    </View>
+                 
+
                 </View>
             </View>
             <View style={styles.whiteBg}>
@@ -102,7 +119,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
-        paddingBottom: hp(2),
+        paddingBottom: Platform.OS == 'android' ? hp(1) : hp(2),
         // paddingtop : Platform.OS === 'android' ? 0 : hp(2)
     },
     headerMain: {
