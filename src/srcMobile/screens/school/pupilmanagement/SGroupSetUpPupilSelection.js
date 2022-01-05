@@ -62,7 +62,6 @@ const SGroupSetUpPupilSelection = (props) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
-                console.log('----set pupil------', res.data)
                 setPupilsClone(res.data)
             } else {
                 showMessage(res.message)
@@ -340,19 +339,9 @@ const SGroupSetUpPupilSelection = (props) => {
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
-                {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
                 <BackArrow style={PAGESTYLE.backArrow} height={hp(2.34)} width={hp(2.34)} />
-
             </TouchableOpacity>
-            {/* <TextInput
-                returnKeyType={"done"}
-                style={PAGESTYLE.input1}
-                placeholder="Enter group name"
-                autoCapitalize={'sentences'}
-                maxLength={40}
-                placeholderTextColor={COLORS.darkGrayIntro}
-                value={groupName}
-                onChangeText={groupName => { setGroupName(groupName) }} /> */}
+          
             {teacherDropDown()}
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.left1}>

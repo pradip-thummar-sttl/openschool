@@ -3,7 +3,6 @@ import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image 
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
 import {
     Menu,
@@ -37,21 +36,10 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-    // const [isCsvPopup, setCsvPopup] = useState(false)
 
-
-    useEffect(() => {
-        // if (!isSearchActive) {
-        //     props.onClearSearch()
-        //     setKeyword('')
-        //     textInput.current.clear()
-        // } else {
-        //     props.onSearch()
-        // }
-    }, [isSearchActive])
+   
 
     useEffect(() => {
-        // props.onFilter(filterBy)
         console.log('log of props in header pm mobile', props.tabs);
         setSelectedTab(props.tabs)
     }, [filterBy, props.tabs])
@@ -75,8 +63,6 @@ const HeaderPM = (props) => {
 
     return (
         <View style={styles.headerMain}>
-            {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
-
             <View style={styles.headerMaintop}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
@@ -87,10 +73,8 @@ const HeaderPM = (props) => {
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <View style={styles.massagesIcon}>
                             <Notification />
-                            {/* <View style={STYLE.redDot}></View> */}
                         </View>
                         {
                             BadgeIcon.isBadge ?
@@ -99,24 +83,9 @@ const HeaderPM = (props) => {
                     </TouchableOpacity>
                 </View>
             </View>
-            {props.tabs === 0 ?
+            {props.tabs === 0 &&
                 <View style={styles.searchParent}>
                     <View style={styles.searchInner}>
-                        {/* <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => {
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                            }}>
-                            <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                            {isSearchActive ?
-                                <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} /> :
-                                <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />}
-                        </TouchableOpacity> */}
-
                         {!isSearchActive ?
                             <TouchableOpacity
                                 activeOpacity={opacity}
@@ -140,10 +109,6 @@ const HeaderPM = (props) => {
                                 props.onSearchKeyword(keyword);
                             }} />
                         <Menu>
-                            <MenuTrigger>
-                                {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
-
-                            </MenuTrigger>
                             <MenuOptions>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
@@ -151,13 +116,7 @@ const HeaderPM = (props) => {
                                         onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                         <View style={styles.filterList}>
                                             <Text style={styles.filterListText}>Name</Text>
-                                            {selectedIndex == 0 ?
-                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
-
-                                                :
-                                                null
-                                            }
+                                            {selectedIndex == 0 &&<CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -167,12 +126,7 @@ const HeaderPM = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={styles.filterList}>
                                             <Text style={styles.filterListText}>DOB</Text>
-                                            {selectedIndex == 1 ?
-                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
-                                                :
-                                                null
-                                            }
+                                            {selectedIndex == 1 &&<CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />}
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -180,14 +134,11 @@ const HeaderPM = (props) => {
                         </Menu>
                     </View>
 
-                    <TouchableOpacity style={styles.buttonGroup}
-                        onPress={() => refRBSheet.current.open()}>
-                        {/* props.navigateToAddNewUser() */}
-                        {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
+                    <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
                         <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
                         <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
-                </View> : null
+                </View>
             }
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>

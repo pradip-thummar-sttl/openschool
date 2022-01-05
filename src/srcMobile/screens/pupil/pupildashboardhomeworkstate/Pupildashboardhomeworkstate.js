@@ -55,16 +55,7 @@ const PupuilDashboardHomeWorkState = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
-                                        {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
-                                            <Text style={PAGESTYLE.date}>25</Text>
-                                            <Text style={PAGESTYLE.month}>Sept</Text>
-                                        </ImageBackground> */}
-                                        <View>
-                                            <TouchableOpacity>
-                                                {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
-                                            </TouchableOpacity>
-                                        </View>
+                                       
                                     </View>
                                 </View>
                             </View>

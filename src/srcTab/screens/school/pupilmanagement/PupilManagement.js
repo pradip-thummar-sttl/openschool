@@ -219,7 +219,6 @@ const PupilManagement = (props) => {
                                             </>
                                             :
                                             <View style={PAGESTYLE.mainContainer}>
-                                                {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
                                                 <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
                                                 <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                                 <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
