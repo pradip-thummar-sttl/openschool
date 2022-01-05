@@ -95,7 +95,7 @@ const Header = (props) => {
                         }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Menu style={{ marginLeft: 10}}>
+                    <Menu style={{marginLeft: 10}}>
                         <MenuTrigger style={{alignItems : 'center',justifyContent : 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
                         <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
                         </MenuTrigger>
@@ -122,12 +122,7 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -137,12 +132,7 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
-                                        {selectedIndex == 2 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -152,25 +142,18 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
-                                        {selectedIndex == 3 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 3 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                     
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity>
@@ -314,23 +297,8 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
-    // filterListWrap: {
-    //     paddingTop: hp(1),
-    //     paddingLeft: hp(1.2),
-    //     paddingRight: hp(1.2),
-    //     paddingBottom: hp(1),
-    //     position: 'absolute',
-    //     backgroundColor: COLORS.white,
-    //     top: hp(5.5),
-    //     width: hp(30.98),
-    //     borderRadius: hp(1),
-    //     shadowColor: COLORS.black,
-    //     shadowOffset: { width: 0, height: hp(1), },
-    //     shadowOpacity: 0.05,
-    //     shadowRadius: hp(1),
-    // },
+    
     filterListWrap: {
-        width: hp(26.98),
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
@@ -338,9 +306,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        // position: 'absolute',
-        // top: hp(6),
-        // backgroundColor : 'green'
     },
     checkMark: {
         width: hp(1.48),

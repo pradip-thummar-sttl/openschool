@@ -4,46 +4,25 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
+import {Menu,MenuOptions,MenuOption,MenuTrigger,} from 'react-native-popup-menu';
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import { opacity } from "../../../../utils/Constant";
-import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
-import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../svg/common/HamburgerMenu";
 import Ic_Search from '../../../../svg/teacher/pupilmanagement/Ic_Search'
 import CloseBlack from '../../../../svg/teacher/pupilmanagement/Close_Black'
 import AddWhite from '../../../../svg/teacher/timetable/Add_White'
 import Notification from '../../../../svg/teacher/dashboard/Notification'
-import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
-import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
-import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
-import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
-import { BadgeIcon } from "../../../../utils/Model";
 const TeacheroverViewHeader = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [tabIndex, setSelectedTab] = useState(0);
     const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
-    const [isModalVisible, setModalVisible] = useState(false)
-    const [keyword, setKeyword] = useState('')
-
-   
-
-    useEffect(() => {
-        console.log('log of props in header pm mobile', props.tabs);
-        setSelectedTab(props.tabs)
-    }, [filterBy, props.tabs])
-
+    const [selectedIndex, setSelectedIndex] = useState(0)
 
     const onPressSearch = () => {
         setSearchActive(true)
@@ -51,16 +30,19 @@ const TeacheroverViewHeader = (props) => {
             props.onSearch()
         }, 500)
     }
-
     const onPressClose = () => {
         setSearchActive(false)
         setTimeout(() => {
             props.onClearSearch()
-            setKeyword('')
             textInput.current.clear()
         }, 500)
     }
 
+    const onFilter = (filter) => {
+        setTimeout(() => {
+            props.onFilter(filter)
+        }, 500)
+    }
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -76,10 +58,6 @@ const TeacheroverViewHeader = (props) => {
                         <View style={styles.massagesIcon}>
                             <Notification />
                         </View>
-                        {
-                            BadgeIcon.isBadge ?
-                                <View style={STYLE.redDot}></View> : null
-                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -101,37 +79,48 @@ const TeacheroverViewHeader = (props) => {
 
                         <TextInput
                             ref={textInput}
-                            style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                            style={{ width:'85%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                             placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
-                            onChangeText={keyword => {
-                                setKeyword(keyword);
-                                props.onSearchKeyword(keyword);
-                            }} />
+                            onChangeText={keyword => {  props.onSearchKeyword(keyword);}} />
+
                         <Menu>
-                            <MenuOptions>
-                                <MenuOption style={styles.borderList}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
-                                        <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>Name</Text>
-                                            {selectedIndex == 0 &&<CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />}
-                                        </View>
-                                    </TouchableOpacity>
-                                </MenuOption>
-                                <MenuOption style={styles.borderList}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
-                                        <View style={styles.filterList}>
-                                            <Text style={styles.filterListText}>DOB</Text>
-                                            {selectedIndex == 1 &&<CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />}
-                                        </View>
-                                    </TouchableOpacity>
-                                </MenuOption>
-                            </MenuOptions>
-                        </Menu>
+                        <MenuTrigger>
+                            <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                        </MenuTrigger>
+                        <MenuOptions style={styles.filterListWrap}>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setSelectedIndex(0);onFilter("name"); }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Name</Text>
+                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setSelectedIndex(1);onFilter("group"); }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Group</Text>
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                            <MenuOption style={styles.borderList}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => { setSelectedIndex(2);onFilter("dob"); }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>DOB</Text>
+                                        {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                    </View>
+                                </TouchableOpacity>
+                            </MenuOption>
+                        </MenuOptions>
+                    </Menu>
                     </View>
 
                     <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
@@ -373,15 +362,8 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
+        padding: hp(1),
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        right: hp(0),
-        width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },

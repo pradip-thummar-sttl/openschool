@@ -72,7 +72,6 @@ const SGroupSetUpPupilSelection = (props) => {
     }, [])
 
     const loadTeacher = () => {
-        console.log('User.user.UserDetialId', User.user.UserDetialId);
         const data = {
             Searchby: "",
             Filterby: ""

@@ -19,12 +19,11 @@ import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import NoPupil from '../../../../svg/emptystate/NoPupil';
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
+import TeacheroverViewHeader from "./TeacheroverViewHeader";
 
 const { CallModule } = NativeModules;
 
 const TeacheroverView = (props) => {
-    // const item = props.route.params.item;
-    const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
@@ -63,9 +62,10 @@ const TeacheroverView = (props) => {
         fetchRecord('', 'name')
     }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
+    const fetchRecord = (search, filter) => {
 
-        let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
+        setLoading(true)
+        let data = { Searchby: search, Filterby: filter, page: "1", limit: "100" }
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
                 setLoading(false)
@@ -76,17 +76,6 @@ const TeacheroverView = (props) => {
         }, (err) => {
             console.log('error of absent check', err);
         })
-
-        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-        //     if (res.flag) {
-        //         setLoading(false)
-        //         setPupilData(res.data)
-        //     } else {
-        //         showMessage(res.message)
-        //     }
-        // }, (err) => {
-        //     console.log('Err of all pupil by teacher', err)
-        // })
     }
 
     const openNotification = () => {
@@ -97,8 +86,8 @@ const TeacheroverView = (props) => {
     return (
         <View>
             <View style={{ width: '100%', height: '100%' }}>
-                
-                <HeaderPM
+
+                <TeacheroverViewHeader
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     tabs={selectedTabIndex}
@@ -111,7 +100,10 @@ const TeacheroverView = (props) => {
                     onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{ paddingBottom: 10 }} >
+                    <ScrollView showsVerticalScrollIndicator={false} 
+                    style={PAGESTYLE.mainPage} 
+                    contentContainerStyle={{ paddingBottom: 10 }} 
+                    >
                         <View style={PAGESTYLE.mainContainer}>
                             {
                                 isLoading ?
@@ -175,7 +167,6 @@ const TeacheroverView = (props) => {
                                         })
                                         :
                                         <View style={PAGESTYLE.mainContainer}>
-                                            {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
                                             <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
                                             <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                             <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
