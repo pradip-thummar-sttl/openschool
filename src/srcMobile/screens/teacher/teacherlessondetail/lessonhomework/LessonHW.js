@@ -399,9 +399,9 @@ const TLHomeWork = (props) => {
                     extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 5 : 7}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 0 : 7}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,{top :  Platform.OS === 'android'  ?  3.5  : 0}]}
+                                style={[PAGESTYLE.checkMark,]}
                                 value={item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

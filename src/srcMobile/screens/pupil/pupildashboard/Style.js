@@ -545,7 +545,7 @@ export default StyleSheet.create({
         marginTop: hp(6),
         marginBottom: hp(2),
         justifyContent: 'center',
-        flexDirection: 'row',
+        // flexDirection: 'row',
     },
     achivementBox: {
         borderColor: COLORS.dashboardBorder,

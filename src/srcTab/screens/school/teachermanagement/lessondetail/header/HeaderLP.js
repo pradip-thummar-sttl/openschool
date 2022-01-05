@@ -15,11 +15,12 @@ const HeaderLP = (props) => {
 
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={[styles.headerMain,{top : Platform.OS === 'ios' ? 4 : 0}]}>
+            <View style={[styles.headerMain,{top : Platform.OS === 'ios' ? 10 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
+                        onPress={() => props.navigateToBack()}
+                        style={{justifyContent : 'center',alignItems : 'center'}}>
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.lessonData.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>

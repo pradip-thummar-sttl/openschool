@@ -15,7 +15,7 @@ import STYLE from "../../../../../../utils/Style";
 const HeaderHW = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
-            <View style={[styles.headerMain,,{top : Platform.OS === 'ios' ? 4 : 0}]}>
+            <View style={[styles.headerMain,,{top : Platform.OS === 'ios' ? 10 : 0}]}>
                 <Text style={styles.mainTitle}>
                     <TouchableOpacity
                         activeOpacity={opacity}

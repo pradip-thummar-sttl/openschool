@@ -1221,16 +1221,18 @@ export default StyleSheet.create({
         position: 'absolute',
         right: 10,
         top: 2,
+        width :25 ,
+        height : 25
+      
         
+              
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2),
         height: hp(2),
         resizeMode: 'contain',
-        alignSelf: 'center',
-        // top: hp(1),
-        top : Platform.OS === 'android' ? hp(1) : hp(2),
+        // top : Platform.OS === 'android' ? hp(1) : hp(1),
         right: 5
        
     },
@@ -1347,10 +1349,11 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     checkMark: {
-        width: 15,
+        width: Platform.OS === 'android' ?  22 : 15,
         height: 15,
         left: 3,
         resizeMode: 'contain',
+        
         
     },
     checkMarkTool: {
