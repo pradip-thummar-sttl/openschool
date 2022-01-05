@@ -453,7 +453,7 @@ const NewMessage = (props) => {
 
     const isTextInputEditable = () =>{
 
-        if(status == 'Draft' || status == 'Sent'){
+        if(status == 'Sent'){
             return false;
         }
         else{
@@ -479,7 +479,7 @@ const NewMessage = (props) => {
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
-                                disabled={status == 'Draft' || status == 'Sent'}
+                                disabled={status == 'Sent'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
@@ -522,10 +522,10 @@ const NewMessage = (props) => {
                     <View style={styles.field1}>
                         <View style={styles.copyInputParent}>
                             {parentListView()}
-                            {status == 'Draft' || status == 'Sent' ?
+                            {status == 'Sent' ?
                                 null :
                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />}
-                            {status == 'Draft' || status == 'Sent' ?
+                            {status == 'Sent' ?
                                 null :
                                 <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>}
                         </View>
