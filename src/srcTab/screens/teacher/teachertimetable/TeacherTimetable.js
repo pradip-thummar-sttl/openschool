@@ -192,7 +192,7 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
             CurrentDate:currentDate
         }
-
+        console.log('data', data);
         console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
@@ -205,6 +205,7 @@ const TeacherTimeTable = (props) => {
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
+            // setTimeTableLoading(false)
         })
 
 
@@ -226,6 +227,7 @@ const TeacherTimeTable = (props) => {
             {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
+                        onAlertPress={() => openNotification()}
                         goBack={() => setTeacherLessonDetail(false)}
                         onRefresh={() => refresh()}
                         data={teacherDetailData} />
@@ -233,7 +235,8 @@ const TeacherTimeTable = (props) => {
                     isTeacherLessonAdd ?
                         <TLDetailAdd
                             goBack={() => setTeacherLessonAdd(false)}
-                            onRefresh={() => refresh()} />
+                            onRefresh={() => refresh()}
+                            onAlertPress={() => openNotification()}  />
                         :
                         <View style={{ width: isHide ? '100%' : '78%' }}>
                             <HeaderTT
