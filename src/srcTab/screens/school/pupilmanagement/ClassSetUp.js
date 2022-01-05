@@ -40,7 +40,7 @@ const ClassSetUp = () => {
 
         setPupilLoading(true)
 
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.pupilbyclasssetup}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)

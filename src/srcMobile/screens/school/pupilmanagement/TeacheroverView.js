@@ -65,7 +65,8 @@ const TeacheroverView = (props) => {
 
     const fetchRecord = (searchBy, filterBy) => {
 
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
+        Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
                 setLoading(false)
                 setPupilData(res.data)
@@ -73,8 +74,19 @@ const TeacheroverView = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
-            console.log('Err of all pupil by teacher', err)
+            console.log('error of absent check', err);
         })
+
+        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        //     if (res.flag) {
+        //         setLoading(false)
+        //         setPupilData(res.data)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('Err of all pupil by teacher', err)
+        // })
     }
 
     const openNotification = () => {
@@ -84,7 +96,8 @@ const TeacheroverView = (props) => {
 
     return (
         <View>
-            <View style={{ width:'100%', height:'100%' }}>
+            <View style={{ width: '100%', height: '100%' }}>
+                
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -118,7 +131,7 @@ const TeacheroverView = (props) => {
                                                                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.rewardColumn}>

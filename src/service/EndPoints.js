@@ -49,6 +49,7 @@ export const EndPoints = {
     GetPupilRewards: 'getpupilrewards',
     GetAllAvtar : 'getallavatar',
     UpdateAvtar : 'updateavatar',
+    PupilGetAvatar :'pupilgetavatar',
 
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",
@@ -78,10 +79,8 @@ export const EndPoints = {
     TeachingYear: 'teachingyear',
     ClassSetup: 'classsetup',
 
-    //
     SaveLessionRecord:"lessionrecord",
-
-    //
     getAllNotifications : 'getnotifocation',
-    deleteNotification : 'notificationdelete'
+    deleteNotification : 'notificationdelete',
+    pupilbyclasssetup:"pupilbyclasssetup",
 }
