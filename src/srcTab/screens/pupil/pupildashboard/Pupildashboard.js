@@ -226,7 +226,7 @@ const PupuilDashboard = (props) => {
                 })
             }
 
-            Service.get(`${`pupilgetavatar`}/${User.user.UserDetialId}`, (res) => {
+            Service.get(`${EndPoints.PupilGetAvatar}/${User.user.UserDetialId}`, (res) => {
                 if (res.flag === true) {
                     console.log('------get pupilAvatar---------', res.data)
                     allAvatrData.map((data, index) => {
