@@ -11,7 +11,6 @@ import BackArrow from "../../../../../../svg/common/BackArrow";
 import TickMarkWhite from "../../../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const HeaderAddNew = (props) => {
-    console.log('props', props);
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>

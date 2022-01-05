@@ -27,7 +27,7 @@ import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 import { BadgeIcon } from "../../../../utils/Model";
-const HeaderPM = (props) => {
+const TeacheroverViewHeader = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
     const [tabIndex, setSelectedTab] = useState(0);
@@ -202,7 +202,7 @@ const HeaderPM = (props) => {
         </View>
     );
 }
-export default HeaderPM;
+export default TeacheroverViewHeader;
 
 const styles = StyleSheet.create({
     headerMaintop: {

@@ -14,31 +14,14 @@ import Chat from "../../Chat/Chat";
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
-import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
-import TickMarkWhite from '../../../../svg/teacher/lessonhwplanner/TickMark_White'
-import Bronze from '../../../../svg/teacher/pupilmanagement/StarBronze';
-import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
-import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
-import BronzeFill from '../../../../svg/teacher/lessonhwplanner/StarBronze_Fill'
-import SilverFill from '../../../../svg/teacher/lessonhwplanner/StartSilver_Fill'
-import GoldFill from '../../../../svg/teacher/lessonhwplanner/StarGold_Fill'
-import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 import HeaderPTInner from "./HeaderPTInner";
 import STLessonList from "./schoolLessonlist/STLessonList";
 
-const { CallModule } = NativeModules;
-
 const TeacherProfileView = (props) => {
     const item = props.route.params.item;
-    const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
-
-    const [isBronze, setBronze] = useState(false);
-    const [isSilver, setSilver] = useState(false);
-    const [isGold, setGold] = useState(false);
-    const [feedBack, setFeedback] = useState('')
     const [teacherCountData, setTeacherCountData] = useState([])
 
     useEffect(() => {
@@ -54,15 +37,8 @@ const TeacherProfileView = (props) => {
         props.navigation.goBack()
         return true;
     }
-
-    const [chartData, setChartData] = useState([])
-
     const myref = useRef(null);
-
-    const activityConfig = {
-        width: 200,
-        height: 200
-    };
+   
 
     const handleOnClick = (index) => {
         setTabSelected(index)
@@ -72,11 +48,7 @@ const TeacherProfileView = (props) => {
     }
 
     useEffect(() => {
-        getLessonData()
-
-        console.log(`${EndPoints.TeacherDetails}/${item.TeacherId}`);
         Service.get(`${EndPoints.TeacherDetails}/${item.TeacherId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setTeacherCountData(res.data)
             } else {
@@ -86,92 +58,6 @@ const TeacherProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }, [])
-
-    useEffect(() => {
-        console.log('chartData', chartData);
-    }, [chartData])
-
-    const getLessonData = () => {
-        Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
-            if (res.flag) {
-                let per = res.data.percentage
-                let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
-                    color: COLORS.purpleDark,
-                    backgroundColor: COLORS.lightPurple
-                }]
-                getHomeworkData(data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('Err of all pupil by teacher', err)
-        })
-    }
-
-    const getHomeworkData = (lessonData) => {
-        Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
-            if (res.flag) {
-                let per = res.data.percentage
-                let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
-                    color: COLORS.yellowDark,
-                    backgroundColor: COLORS.lightYellow
-                }
-                lessonData.push(data)
-                setChartData(lessonData)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('Err of all pupil by teacher', err)
-        })
-    }
-
-    const setInstantRewards = () => {
-        if (!isBronze && !isSilver && !isGold) {
-            showMessage(MESSAGE.selectReward)
-            return
-        }
-
-        let data = {
-            TeacherID: User.user._id,
-            PupilID: item.PupilId,
-            Reward: isBronze ? '3' : isSilver ? '6' : '9',
-            Feedback: feedBack,
-            CreatedBy: User.user._id
-        }
-
-        Service.post(data, `${EndPoints.AddInstantReward}`, (res) => {
-            console.log('res of all pupil by teacher', res)
-            if (res.flag) {
-                setBronze(false)
-                setSilver(false)
-                setGold(false)
-                setFeedback('')
-                showMessage(MESSAGE.rewarded)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('Err of all pupil by teacher', err)
-        })
-    }
-
-    const onStarSelection = (index) => {
-        setBronze(false)
-        setSilver(false)
-        setGold(false)
-        if (index == 3) {
-            setBronze(true)
-        } else if (index == 6) {
-            setSilver(true)
-        } else if (index == 9) {
-            setGold(true)
-        }
-    }
 
     const openNotification = () => {
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => { } })

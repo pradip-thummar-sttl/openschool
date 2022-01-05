@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, } from "react-native";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
-// import DateTimePicker from '@react-native-community/datetimepicker';
 import { opacity, showMessage } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
@@ -17,7 +14,6 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
 import { User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const MPopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
@@ -69,10 +65,8 @@ const MPopupdataSecondCSVUpload = (props) => {
             setLoader(false);
             console.log('response of get all lesson error', err)
         })
-
     }
-
-
+    
     return (
         <View>
             <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}>

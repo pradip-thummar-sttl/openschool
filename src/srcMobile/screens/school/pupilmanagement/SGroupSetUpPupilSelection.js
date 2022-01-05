@@ -56,13 +56,10 @@ const SGroupSetUpPupilSelection = (props) => {
             setSelectedPupils(previoslySelectedData)
         }
 
-
-
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.pupilbyclasssetup}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
-                console.log('----set pupil------', res.data)
                 setPupilsClone(res.data)
             } else {
                 showMessage(res.message)
@@ -70,7 +67,6 @@ const SGroupSetUpPupilSelection = (props) => {
         }, (err) => {
             setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
-
         })
 
     }, [])
@@ -340,19 +336,9 @@ const SGroupSetUpPupilSelection = (props) => {
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
-                {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
                 <BackArrow style={PAGESTYLE.backArrow} height={hp(2.34)} width={hp(2.34)} />
-
             </TouchableOpacity>
-            {/* <TextInput
-                returnKeyType={"done"}
-                style={PAGESTYLE.input1}
-                placeholder="Enter group name"
-                autoCapitalize={'sentences'}
-                maxLength={40}
-                placeholderTextColor={COLORS.darkGrayIntro}
-                value={groupName}
-                onChangeText={groupName => { setGroupName(groupName) }} /> */}
+          
             {teacherDropDown()}
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.left1}>

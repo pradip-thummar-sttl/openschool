@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 import {
     Menu,
     MenuOptions,
@@ -51,7 +52,29 @@ const HeaderPMInner = (props) => {
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
                             {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
-                            <Text>Hello</Text>
+                            <View style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                            }}>
+                                <TouchableOpacity activeOpacity={opacity}
+                                    // onPress={() => props.navigateToEdit()}
+                                    style={{
+                                        backgroundColor: COLORS.dashboardGreenButton,
+                                        // alignSelf: 'flex-end',
+                                        padding: hp(1.5),
+                                        borderRadius: hp(1),
+                                        // marginBottom: hp(1.32),
+                                        marginHorizontal: 5
+                                    }}>
+                                    <EditWhite style={{
+                                        width: hp(1.57),
+                                        height: hp(1.57),
+                                        resizeMode: 'contain',
+                                        alignSelf: 'center',
+                                    }} height={hp(1.57)} width={hp(1.57)} />
+                                </TouchableOpacity>
+
+                            </View>
                         </TouchableOpacity>
                     </View>
                     :

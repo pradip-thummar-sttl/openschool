@@ -37,7 +37,7 @@ const Pupillist = (props, { item }) => (
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props.item.GroupName ? props.item.GroupName : 'Group 1A'}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props.item.GroupName.length != 0 ? props.item.GroupName[0] : '-'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
@@ -102,21 +102,33 @@ const PupilManagement = (props) => {
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
-        let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
-        }
+        // let data = {
+        //     Searchby: searchBy,
+        //     Filterby: filterBy,
+        // }
 
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
+        Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
-                setPupilData(res.data)
                 setLoading(false)
+                setPupilData(res.data)
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
-            console.log('Err of all pupil by teacher', err)
+            console.log('error of absent check', err);
         })
+
+        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        //     if (res.flag) {
+        //         setPupilData(res.data)
+        //         setLoading(false)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('Err of all pupil by teacher', err)
+        // })
     }
 
     const refresh = () => {
@@ -126,10 +138,7 @@ const PupilManagement = (props) => {
 
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist
-                item={item}
-                onPupilClick={() => { setPupilProfile(true); setSelectedItem(item) }}
-            />
+            <Pupillist item={item} onPupilClick={() => { setPupilProfile(true); setSelectedItem(item) }}/>
         );
     };
     const openNotification = () => {
@@ -176,7 +185,6 @@ const PupilManagement = (props) => {
                                                 <View style={PAGESTYLE.pupilTable}>
                                                     <View style={PAGESTYLE.pupilTableHeadingMain}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
-                                                        {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                                     </View>
                                                     <View style={PAGESTYLE.pupilTableHeadingMain}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
@@ -219,7 +227,6 @@ const PupilManagement = (props) => {
                                             </>
                                             :
                                             <View style={PAGESTYLE.mainContainer}>
-                                                {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
                                                 <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
                                                 <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                                                 <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>

@@ -53,11 +53,10 @@ const PupilProfileView = (props) => {
 
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -74,16 +73,17 @@ const PupilProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
+                
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per === null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
                 setSubmittedHomework(res.data.total)
                 lessonData.push(data)
+
                 setChartData(lessonData)
             } else {
                 showMessage(res.message)
@@ -95,14 +95,12 @@ const PupilProfileView = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage1}>
-            {!isLessonDetail ?
+            {!isLessonDetail &&
                 <HeaderPMInner
                     navigateToBack={() => props.navigateToBack()}
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
                     pupilName={item.FirstName + ' ' + item.LastName} />
-                :
-                null
             }
             <View style={{ flex: 1 }}>
                 {
@@ -187,10 +185,8 @@ const PupilProfileView = (props) => {
                                         <View style={PAGESTYLE.graphBox}>
                                             <View style={PAGESTYLE.generalRow}>
                                                 <View style={PAGESTYLE.chartBlock}>
-                                                    {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
-                                                    <ActivityRings
-                                                        data={chartData}
-                                                        config={activityConfig} />
+                                                    {console.log("chartData 3------>", chartData)}
+                                                    <ActivityRings data={chartData} config={activityConfig} />
                                                 </View>
                                                 <View>
                                                     <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
@@ -204,7 +200,6 @@ const PupilProfileView = (props) => {
                                                     </View>
                                                 </View>
                                             </View>
-                                            {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
                                         </View>
                                         <View>
 

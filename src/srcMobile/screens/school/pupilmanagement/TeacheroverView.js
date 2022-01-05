@@ -65,12 +65,8 @@ const TeacheroverView = (props) => {
 
     const fetchRecord = (searchBy, filterBy) => {
 
-        // setSelectedTabIndex(item)
-        // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
-        // Service.get(`${EndPoints.GetLessionById}/${User.user._id}/name/${searchBy}`, (res) => {
-        console.log(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`);
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-            console.log('res of all pupil by teacher----------->>>>>>', res)
+        let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
+        Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
                 setLoading(false)
                 setPupilData(res.data)
@@ -78,8 +74,19 @@ const TeacheroverView = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
-            console.log('Err of all pupil by teacher', err)
+            console.log('error of absent check', err);
         })
+
+        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        //     if (res.flag) {
+        //         setLoading(false)
+        //         setPupilData(res.data)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('Err of all pupil by teacher', err)
+        // })
     }
 
     const openNotification = () => {
@@ -88,10 +95,9 @@ const TeacheroverView = (props) => {
     }
 
     return (
-        console.log('iscsvpopup', isCsvPopup),
         <View>
-            <View style={{ width: isHide ? '100%' : '100%' }}>
-                {/* <MPopupdataSecondCSVUpload isVisible={isCsvPopup} onClose={()=>setCsvPopup(false)} /> */}
+            <View style={{ width: '100%', height: '100%' }}>
+                
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -100,7 +106,6 @@ const TeacheroverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, 'name')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'name') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     navigateToCsvPopup={() => { setCsvPopup(true); console.log('iscsvpopup', isCsvPopup); }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                     onNotification={() => openNotification()}
@@ -126,7 +131,7 @@ const TeacheroverView = (props) => {
                                                                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                                                             </View>
                                                             <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.rewardColumn}>

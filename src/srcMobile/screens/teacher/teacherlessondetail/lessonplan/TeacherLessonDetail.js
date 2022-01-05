@@ -24,10 +24,7 @@ const TLDetail = (props) => {
     const [mateIndex, setMateIndex] = useState(-1)
     const [recordIndex, setRecordIndex] = useState(-1)
 
-
-
     return (
-
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
@@ -50,7 +47,6 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <View style={PAGESTYLE.alignRow}>
-                                    {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} /> */}
                                     <Calender style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                     <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
                                 </View>
@@ -60,7 +56,6 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.subjectText}>Time</Text>
                             <View style={PAGESTYLE.subjectDateTime}>
                                 <View style={PAGESTYLE.alignRow}>
-                                    {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
                                     <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                     <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
                                 </View>
@@ -71,7 +66,6 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.subjectText}>Participants</Text>
                         <View style={PAGESTYLE.subjectDateTime}>
                             <View style={PAGESTYLE.alignRow}>
-                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} /> */}
                                 <Participants style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: wp(50) }]}>{props.lessonData.GroupName}</Text>
                             </View>
@@ -89,7 +83,6 @@ const TLDetail = (props) => {
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
                                 <View style={[PAGESTYLE.checkBoxLabelLine,{paddingVertical  :5}]}>
-                                    {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text numberOfLines={1} style={[PAGESTYLE.lessonPointText, { width: wp(82) }]}>{item.ItemName}</Text>
                                 </View>
@@ -97,7 +90,6 @@ const TLDetail = (props) => {
                             keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
-                    {/* <View style={STYLE.hrCommon}></View> */}
                     <View style={PAGESTYLE.checkBoxGrpWrap}>
                         <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Individual pupils</Text>
 
@@ -136,7 +128,7 @@ const TLDetail = (props) => {
                     </View>
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>
-                    {props.lessonData.MaterialList.length > 0 ?
+                    {props.lessonData.MaterialList.length > 0 &&
                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                             <Text style={PAGESTYLE.requireText}>Learning material</Text>
                             <FlatList
@@ -155,36 +147,17 @@ const TLDetail = (props) => {
                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                     color={COLORS.blueBorder} />
                                                 :
-                                                // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                 <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                             }
-                                            {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                         </View>
                                     </TouchableOpacity>
                                 )}
                                 keyExtractor={(item, index) => index.toString()}
                             />
                         </View>
-                        :
-                        null
                     }
 
-                    {/* {props.lessonData.RecommendedList.length > 0 ?
-                        <FlatList
-                            data={props.lessonData.RecommendedList}
-                            style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
-                            renderItem={({ item, index }) => (
-                                <View style={PAGESTYLE.thumbVideo}>
-                                    <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
-                                </View>
-                            )}
-                            keyExtractor={(item, index) => index.toString()}
-                        />
-                        :
-                        null
-                    } */}
-
-                    {props.lessonData.RecordingList.length > 0 ?
+                    {props.lessonData.RecordingList.length > 0 &&
                         <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                             <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                             <TouchableOpacity
@@ -199,15 +172,11 @@ const TLDetail = (props) => {
                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                         color={COLORS.blueBorder} />
                                     :
-                                    // <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
                                     <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                 }
-                                {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                                 <Text numberOfLines={1} style={[PAGESTYLE.videoLinkText, { width: wp(70) }]}>{props.lessonData.RecordingList[0].originalname}</Text>
                             </TouchableOpacity>
                         </View>
-                        :
-                        null
                     }
 
                     {props.lessonData.ChatTranscript ?
@@ -215,40 +184,12 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
                             <View style={PAGESTYLE.fileGrp}>
                                 <Text style={PAGESTYLE.fileName}>Filename</Text>
-                                {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                 <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                             </View>
                         </View>
                         :
                         null
                     }
-
-                    {/* <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                        <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
-                        <View style={PAGESTYLE.videoLinkBlockRight}>
-                            <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} />
-                            <Text style={PAGESTYLE.videoLinkText}>Lesson Recording</Text>
-                        </View>
-                    </View>
-                    <View style={PAGESTYLE.fileBoxGrpWrap}>
-                        <Text style={PAGESTYLE.requireText}>Chat transcript</Text>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                        <View style={PAGESTYLE.fileGrp}>
-                            <Text style={PAGESTYLE.fileName}>Filename</Text>
-                            <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                        </View>
-                    </View> */}
                 </View>
             </View>
         </View>

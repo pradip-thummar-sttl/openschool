@@ -393,7 +393,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
     },
     scrollViewCommon: {
-        marginBottom: hp(30),
+        marginBottom: hp(0.3),
     },
     scrollViewCommonPupilEdit: {
         marginBottom: hp(15),

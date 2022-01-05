@@ -321,6 +321,7 @@ export default StyleSheet.create({
         width: '100%',
         height: hp(13.8),
         resizeMode: 'contain',
+        backgroundColor:COLORS.lightBlueLogin
     },
     profileOuter: {
         borderRadius: hp(100),
@@ -368,6 +369,9 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+    },
+    scrollViewCommon1: {
+        marginBottom: hp(0.5),
     },
     scrollViewCommon: {
         marginBottom: hp(30),
