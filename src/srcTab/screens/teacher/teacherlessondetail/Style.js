@@ -1462,7 +1462,7 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // marginTop:hp(2),
         justifyContent: 'center',
-        // marginVertical: hp(2)
-        marginBottom : Platform.OS === 'android' ? 0 : 10
+        marginVertical: hp(2),
+        // marginBottom : Platform.OS === 'android' ? 0 : 10
     },
 });

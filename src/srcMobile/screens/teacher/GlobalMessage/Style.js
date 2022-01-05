@@ -252,10 +252,11 @@ export default StyleSheet.create({
         paddingLeft: hp(1.5),
     },
     checkMark: {
-        width: hp(1.84),
+        width:Platform.OS === 'android' ? hp(3)  : hp(1.84),
         height: hp(1.84),
         top: hp(0.35),
         fontFamily: FONTS.fontBold,
+        
     },
     toggleGrp: {
         flexDirection: 'row',

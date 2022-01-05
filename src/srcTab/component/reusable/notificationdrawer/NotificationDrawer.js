@@ -80,7 +80,7 @@ const NotificationDrawer = (props) => {
     
 
     getAllNotification = () => {
-
+        console.log('user dtaaaa===>', User.user)
         let data = {
             userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId,//"6047645b9a6ac02f68642c72",
             page: "1",
