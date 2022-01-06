@@ -5,17 +5,8 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
-import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import HeaderPM from "./HeaderPM";
 import ParentZoneProfile from "./ParentZoneProfile";
 import ParentZoneSchoolDetails from "./ParentZoneSchoolDetails";
@@ -24,8 +15,6 @@ import ParentZonePerformance from "./ParentZonePerformance";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
 import ParentChat from "./Chat/ParentChat";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 var moment = require('moment');
 
