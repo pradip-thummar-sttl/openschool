@@ -29,6 +29,7 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
+    console.log('===========',selectedIndex);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
