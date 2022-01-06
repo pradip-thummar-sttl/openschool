@@ -107,6 +107,7 @@ const Message = (props) => {
                 {!isAddMessage ?
                     <>
                         <HeaderWhitepupilMessage
+                            navigation = {props.navigation}
                             onSearchKeyword={(keyword) => setKeyword(keyword)}
                             onSearch={() => fetchRecord(keyword, filterBy)}
                             onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}

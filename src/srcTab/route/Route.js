@@ -167,7 +167,7 @@ function ScreenStack() {
 function MyDrawer() {
     return (
         <Drawer.Navigator
-            drawerContent={props => <NotificationDrawer {...props} />}
+        drawerContent={props => <NotificationDrawer {...props} />}
             drawerPosition='right'
             headerMode='none'
             drawerStyle={STYLE.drawerWidth} >

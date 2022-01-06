@@ -666,7 +666,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         <TeacherLessonList navigation={props.navigation} />
                                         :
                                         selectedIndex == 3 ?
-                                            <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                            <PupilManagement  navigation={props.navigation} tabs={pupilManagementselectedTab} />
                                             : selectedIndex == 5 ?
                                                 <TeacherSetting navigation={props.navigation} />
                                                 :

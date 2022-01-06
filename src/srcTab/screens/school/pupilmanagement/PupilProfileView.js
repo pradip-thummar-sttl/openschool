@@ -34,7 +34,7 @@ const PupilProfileView = (props) => {
     const [tabSelected, setTabSelected] = useState(0);
 
     const item = props.selectedPupil;
-    console.log('item', item);
+    
     const [chartData, setChartData] = useState([])
     const [joinedLesson, setJoinedLesson] = useState(0)
     const [submittedHomework, setSubmittedHomework] = useState(0)

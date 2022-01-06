@@ -116,7 +116,7 @@ const TeacheroverView = (props) => {
                                         pupilData.map((item, index) => {
                                             return (
                                                 <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
-                                                    <View style={[PAGESTYLE.pupilData]}>
+                                                    <View style={[PAGESTYLE.pupilData,]}>
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>
                                                                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>

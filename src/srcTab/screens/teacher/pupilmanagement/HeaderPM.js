@@ -29,7 +29,7 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-
+    console.log('99999999999999999',props);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -53,8 +53,8 @@ const HeaderPM = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                    <TouchableOpacity style={{}}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />

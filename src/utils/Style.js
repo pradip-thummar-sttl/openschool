@@ -152,6 +152,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
+        marginBottom : 10
     },
     commonButtonBordered: {
         backgroundColor: COLORS.transparent,

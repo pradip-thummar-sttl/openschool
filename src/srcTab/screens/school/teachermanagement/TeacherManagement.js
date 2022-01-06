@@ -97,6 +97,7 @@ const TeacherManagement = (props) => {
     }
 
     const pupilRender = ({ item }) => {
+        console.log('props ->>>>>>> 100', props)
         return (
             <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
         );

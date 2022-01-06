@@ -54,6 +54,7 @@ const LessonList = (props) => {
     const pupilRender = ({ item }) => {
         return (
             <Pupillist
+            
                 item={item}
                 navigateToDetail={() => { setItem(item), setTLDetail(true), props.setLessonDetail(true) }}
             />

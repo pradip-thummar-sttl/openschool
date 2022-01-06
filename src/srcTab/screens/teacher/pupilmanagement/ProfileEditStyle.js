@@ -186,8 +186,9 @@ export default StyleSheet.create({
     },
     thumbTopUser: {
         position: 'absolute',
-        left: 78,
-        top: 32,
+        left  : Platform.OS === 'android' ? hp(25) : 78,
+        // left: 78,
+        top:  Platform.OS === 'android' ? 22 : 32,
     },
     thumbTopUser1: {
         width: hp(13),
@@ -456,7 +457,7 @@ export default StyleSheet.create({
         width: hp(4),
         height: hp(4),
         position: 'absolute',
-        bottom: hp(-1.5),
+        bottom: Platform.OS === 'android' ? hp(-0.5) : hp(-1.5),
         borderRadius: 100,
         backgroundColor: COLORS.white,
         alignItems: 'center',
