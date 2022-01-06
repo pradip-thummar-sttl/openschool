@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { View, Text, TextInput, FlatList, Platform, BackHandler, SafeAreaView } from 'react-native'
+import { View, Text, TextInput, FlatList, Platform, BackHandler, SafeAreaView, KeyboardAvoidingView } from 'react-native'
 import Styles from './Style'
 import COLORS from '../../../../utils/Colors'
 import Style from '../../../../utils/Style'
@@ -193,12 +193,12 @@ const NewMessage = (props) => {
         props.navigation.goBack()
     }
 
-    const isTextInputEditable = () =>{
+    const isTextInputEditable = () => {
 
-        if(status == 'Sent'){
+        if (status == 'Sent') {
             return false;
         }
-        else{
+        else {
             return true;
         }
     }
@@ -213,29 +213,32 @@ const NewMessage = (props) => {
                 // onGoback={() => props.navigation.goBack()}
                 onGoback={() => onBackPress()}
                 status={status} />
-
-            <ScrollView style={{ height: '100%' }}>
-                <View style={[Styles.field1,]}>
-                    <Text label style={Style.labelCommon}>Title</Text>
-                    <View style={[Styles.copyInputParent, { justifyContent: 'center' }]}>
-                        <TextInput
-                            multiline={false}
-                            numberOfLines={1}
-                            placeholder='Enter title of the message'
-                            returnKeyType={"next"}
-                            onSubmitEditing={() => { t2.current.focus(); }}
-                            value={title}
-                            autoCapitalize={'sentences'}
-                            editable={isTextInputEditable()}
-                            placeholderStyle={Styles.somePlaceholderStyle}
-                            style={Styles.commonInputTextarea1}
-                            onChangeText={title => setTitle(title)} />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+            >
+                <ScrollView style={{ height: '100%' }}>
+                    <View style={[Styles.field1,]}>
+                        <Text label style={Style.labelCommon}>Title</Text>
+                        <View style={[Styles.copyInputParent, { justifyContent: 'center' }]}>
+                            <TextInput
+                                multiline={false}
+                                numberOfLines={1}
+                                placeholder='Enter title of the message'
+                                returnKeyType={"next"}
+                                onSubmitEditing={() => { t2.current.focus(); }}
+                                value={title}
+                                autoCapitalize={'sentences'}
+                                editable={isTextInputEditable()}
+                                placeholderStyle={Styles.somePlaceholderStyle}
+                                style={Styles.commonInputTextarea1}
+                                onChangeText={title => setTitle(title)} />
+                        </View>
                     </View>
-                </View>
 
-                <View style={Styles.field1}>
-                    <View style={Styles.copyInputParent}>
-                        {/* <TextInput
+                    <View style={Styles.field1}>
+                        <View style={Styles.copyInputParent}>
+                            {/* <TextInput
                         multiline={false}
                         placeholder='Enter title of the message'
                         value={event}
@@ -243,33 +246,34 @@ const NewMessage = (props) => {
                         placeholderTextColor={COLORS.black}
                         style={Styles.commonInputTextarea1}
                         onChangeText={eventName => setEvent(eventName)} /> */}
-                        {parentListView()}
+                            {parentListView()}
 
+                        </View>
                     </View>
-                </View>
 
-                {status == 'Sent' ? null :
-                    <View style={[Styles.field1, { flexDirection: 'row' }]}>
-                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />
-                        <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
-                    </View>}
+                    {status == 'Sent' ? null :
+                        <View style={[Styles.field1, { flexDirection: 'row' }]}>
+                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />
+                            <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                        </View>}
 
-                <View style={Styles.field1}>
-                    <Text label style={Style.labelCommon}>Message</Text>
-                    <View style={Styles.copyInputParent}>
-                        <TextInput
-                            ref={t2}
-                            multiline={true}
-                            placeholder='Write a message here'
-                            value={message}
-                            autoCapitalize={'sentences'}
-                            editable={isTextInputEditable()}
-                            placeholderStyle={Styles.somePlaceholderStyle}
-                            style={[Styles.commonInputTextarea1, Styles.inputHeight]}
-                            onChangeText={message => setMessage(message)} />
+                    <View style={Styles.field1}>
+                        <Text label style={Style.labelCommon}>Message</Text>
+                        <View style={Styles.copyInputParent}>
+                            <TextInput
+                                ref={t2}
+                                multiline={true}
+                                placeholder='Write a message here'
+                                value={message}
+                                autoCapitalize={'sentences'}
+                                editable={isTextInputEditable()}
+                                placeholderStyle={Styles.somePlaceholderStyle}
+                                style={[Styles.commonInputTextarea1, Styles.inputHeight]}
+                                onChangeText={message => setMessage(message)} />
+                        </View>
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </View>
 
     )
