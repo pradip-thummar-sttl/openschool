@@ -232,7 +232,7 @@ const PupilTimetable = (props) => {
                     refreshList={() => refresh()} 
                     onFilter={(filter)=>fetchRecord(searchKeyword, filter,moment().format('YYYY-MM-DD'))} />
 
-                <View style={{ ...PAGESTYLE.backgroundTable, }}>
+                <ScrollView style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
                             style={{ flex: 1 }}
@@ -250,7 +250,7 @@ const PupilTimetable = (props) => {
                                 </View>
 
                                 <FlatList 
-                                style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
+                                style={{ ...STYLE.padLeftRight, paddingLeft: 0}}
                                 horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                                 initialScrollIndex={scrollIndex}
@@ -310,7 +310,7 @@ const PupilTimetable = (props) => {
                                 <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>
                     }
-                </View>
+                </ScrollView>
             </View>
         </View>
     );

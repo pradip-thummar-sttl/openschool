@@ -192,13 +192,14 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
             CurrentDate:currentDate
         }
-        console.log('data', data);
+       
         console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
                 setTimeTableData(res.data)
+                console.log('----------------------------->>> data', res.data);
                 // dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
