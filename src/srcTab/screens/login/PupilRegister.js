@@ -432,7 +432,7 @@ class Login extends Component {
                         </View>
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
-                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
+                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity style={{top : Platform.OS === 'android' ? 6 : 0}}><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity style={{top : Platform.OS === 'android' ? 6 : 0}}><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -580,7 +580,7 @@ const styles = StyleSheet.create({
         width :  Platform.OS === 'android' ? 200 : 250,
         // width: 250,
         // height: 55,
-        height :  Platform.OS === 'android' ? 45 : 55,
+        height :  Platform.OS === 'android' ? 50 : 55,
         paddingVertical: 15
     },
     getStartText: {

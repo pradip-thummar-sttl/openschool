@@ -94,7 +94,7 @@ export default StyleSheet.create({
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
-        marginBottom  : Platform.OS === 'android' ? 0 : 20
+        marginBottom  : 20
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',

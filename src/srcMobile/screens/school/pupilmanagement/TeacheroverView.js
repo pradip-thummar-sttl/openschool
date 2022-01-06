@@ -96,7 +96,7 @@ const TeacheroverView = (props) => {
 
     return (
         <View>
-            <View style={{ width: '100%', height: '100%' }}>
+            <View style={{ width: '100%', height: '100%', }}>
                 
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -112,7 +112,7 @@ const TeacheroverView = (props) => {
                 />
                 {selectedTabIndex == 0 ?
                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage} contentContainerStyle={{ paddingBottom: 10 }} >
-                        <View style={PAGESTYLE.mainContainer}>
+                        <View style={[PAGESTYLE.mainContainer]}>
                             {
                                 isLoading ?
                                     <ActivityIndicator
@@ -124,7 +124,7 @@ const TeacheroverView = (props) => {
                                         pupilData.map((item, index) => {
                                             return (
                                                 <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
-                                                    <View style={[PAGESTYLE.pupilData]}>
+                                                    <View style={[PAGESTYLE.pupilData,]}>
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>
                                                                 <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>

@@ -25,6 +25,7 @@ import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/Empty
 import MESSAGE from "../../../../utils/Messages";
 import ParentChat from "./Chat/ParentChat";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 var moment = require('moment');
 

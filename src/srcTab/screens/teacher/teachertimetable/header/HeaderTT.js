@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         backgroundColor: COLORS.white,
         top:Platform.OS === 'android' ? 0 : hp(5.5),
-        width: hp(30.98),
+        // width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
