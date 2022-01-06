@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
     //     shadowRadius: hp(1),
     // },
     filterListWrap: {
-        width: hp(26.98),
+        // width: hp(26.98),
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),

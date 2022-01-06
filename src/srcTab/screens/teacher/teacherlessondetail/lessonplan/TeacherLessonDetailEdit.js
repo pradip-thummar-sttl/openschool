@@ -948,6 +948,7 @@ const TLDetailEdit = (props) => {
                             lessonData={lessonData}
                             navigateToBack={() => {
                                 props.onRefresh();
+                                console.log('props from teacherlesson detail screen', props);
                                 props.goBack()
                             }}
                             onAlertPress={() => { props.onAlertPress() }}
