@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native';
 // import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -289,138 +289,140 @@ class Login extends Component {
         this.setState({ isPasswordHide: !this.state.isPasswordHide });
     }
 
+    onChild = () => {
+        return (
+            <>
+                <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                <View style={styles.loginForm}>
+                    <Text style={styles.fieldInputLabel}>Email</Text>
+                    <View style={styles.field}>
+
+                        <TextInput
+                            returnKeyType={"next"}
+                            onSubmitEditing={() => { this.t2.focus(); }}
+                            style={STYLE.commonInput}
+                            placeholder="Enter email"
+                            autoCapitalize={false}
+                            maxLength={40}
+                            value={this.state.userName}
+                            placeholderTextColor={COLORS.lightplaceholder}
+                            onChangeText={userName => this.setState({ userName })} />
+                    </View>
+                    <Text style={styles.fieldInputLabel}>Password</Text>
+                    <View style={styles.field}>
+                        <View style={styles.eyeParent}>
+                            <TextInput
+                                ref={(input) => { this.t2 = input; }}
+                                style={STYLE.commonInputPassword}
+                                placeholder="Password"
+                                value={this.state.password}
+                                maxLength={30}
+                                placeholderTextColor={COLORS.lightplaceholder}
+                                secureTextEntry={this.state.isPasswordHide}
+                                onChangeText={password => this.setState({ password })} />
+
+                            <View style={styles.eye}>
+                                <TouchableOpacity
+                                    activeOpacity={opacity}
+                                    onPress={() => this.setPasswordVisibility()}>
+                                    {
+                                        this.state.isPasswordHide ?
+                                            <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                            :
+                                            <HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                    }
+
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles.bottomLoginFeild}>
+                        <View style={styles.rememberFeild}>
+                            <CheckBox
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                style={STYLE.checkBoxcommon1}
+                                value={this.state.isRemember}
+                                boxType={'square'}
+                                onCheckColor={COLORS.white}
+                                onTintColor={COLORS.checkBlue}
+                                tintColor={COLORS.checkBlue}
+                                onFillColor={COLORS.checkBlue}
+                                onChange={() => this.setState({ isRemember: !this.state.isRemember })}
+                            />
+                            <Text style={styles.label}>Remember Me</Text>
+                        </View>
+                        <View style={styles.forgotLink}>
+                            <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
+                        </View>
+                    </View>
+                    <View style={styles.loginButtonView}>
+                        <TouchableOpacity
+                            activeOpacity={opacity}
+                            onPress={() => {
+                                isDesignBuild ?
+                                    this.props.navigation.replace('TeacherDashboard')
+                                    :
+                                    this.isFieldsValidated()
+
+                            }}>
+                            {this.state.isLoading ?
+                                <ActivityIndicator
+                                    style={STYLE.commonButtonGreen}
+                                    size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                    color={COLORS.white} />
+                                :
+                                <Text
+                                    style={styles.commonButtonGreen}>Login to Continue</Text>
+                            }
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={styles.getStarted}>
+                    {this.props.route.params.userType == 'Pupil' &&
+                        <>
+                            <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
+                            <TouchableOpacity
+                                activeOpacity={opacity}
+                                onPress={() => {
+                                    this.props.navigation.replace('PupilRegister', { userType: "Pupil" })
+                                }}>
+                                <Text style={styles.getStartedLink}> Get Started</Text>
+                            </TouchableOpacity>
+                        </>
+                    }
+                </View>
+                <View style={styles.bottomLoginIntro}>
+                    <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
+                    <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
+                </View>
+            </>
+        )
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
                     {this.props.route.params.userType == 'Pupil' ?
-                        // <ImageBackground source={Images.LoginBack} style={styles.image}></ImageBackground>
-                        // <TabletLoginSideimg style={styles.image} height={'100%'} width={'100%'} />
                         <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
                         :
-                        // <ImageBackground source={Images.TeacherLoginBack} style={styles.image}></ImageBackground>
                         <TabletLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
-
                     }
                 </View>
                 <View style={styles.rightContent}>
-                    <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start' }}>
-                        <Text h3 style={styles.titleLogin}>{this.props.route.params.userType == 'Teacher' || this.props.route.params.userType == 'School' ? 'Teacher & School Login' : 'Pupil Login'}</Text>
+                    {
+                        Platform.OS == "ios" ?
+                            <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
+                            {this.onChild()}
+                            </KeyboardAwareScrollView>
+                            :
+                            <KeyboardAvoidingView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
+                            {this.onChild()}
+                            </KeyboardAvoidingView>
+                    }
 
-                        <View style={styles.loginForm}>
-                            <Text style={styles.fieldInputLabel}>Email</Text>
-                            <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.UserIconLogin} /> */}
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    onSubmitEditing={() => { this.t2.focus(); }}
-                                    style={STYLE.commonInput}
-                                    placeholder="Enter email"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    value={this.state.userName}
-                                    placeholderTextColor={COLORS.lightplaceholder}
-                                    onChangeText={userName => this.setState({ userName })} />
-                            </View>
-                            <Text style={styles.fieldInputLabel}>Password</Text>
-                            <View style={styles.field}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.Password} /> */}
-                                <View style={styles.eyeParent}>
-                                    <TextInput
-                                        ref={(input) => { this.t2 = input; }}
-                                        style={STYLE.commonInputPassword}
-                                        placeholder="Password"
-                                        value={this.state.password}
-                                        maxLength={30}
-                                        placeholderTextColor={COLORS.lightplaceholder}
-                                        secureTextEntry={this.state.isPasswordHide}
-                                        onChangeText={password => this.setState({ password })} />
-
-                                    <View style={styles.eye}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => this.setPasswordVisibility()}>
-                                            {/* <Image
-                                                style={styles.password}
-                                                source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
-                                            {
-                                                this.state.isPasswordHide ?
-                                                    <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                    : <HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                            }
-
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-                            </View>
-                            <View style={styles.bottomLoginFeild}>
-                                <View style={styles.rememberFeild}>
-                                    <CheckBox
-                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                        style={STYLE.checkBoxcommon1}
-                                        value={this.state.isRemember}
-                                        boxType={'square'}
-                                        onCheckColor={COLORS.white}
-                                        onTintColor={COLORS.checkBlue}
-                                        tintColor={COLORS.checkBlue}
-                                        onFillColor={COLORS.checkBlue}
-                                        onChange={() => this.setState({ isRemember: !this.state.isRemember })}
-                                    />
-                                    <Text style={styles.label}>Remember Me</Text>
-                                </View>
-                                <View style={styles.forgotLink}>
-                                    <Text style={styles.forgotPass} onPress={() => null}>Forgot Password?</Text>
-                                </View>
-                            </View>
-                            <View style={styles.loginButtonView}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => {
-                                        isDesignBuild ?
-                                            this.props.navigation.replace('TeacherDashboard')
-                                            :
-                                            this.isFieldsValidated()
-
-                                    }}>
-                                    {this.state.isLoading ?
-                                        <ActivityIndicator
-                                            style={STYLE.commonButtonGreen}
-                                            size={Platform.OS == 'ios' ? 'small' : 'small'}
-                                            color={COLORS.white} />
-                                        :
-                                        <Text
-                                            style={styles.commonButtonGreen}>Login to Continue</Text>
-                                    }
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={styles.getStarted}>
-                            {this.props.route.params.userType == 'Pupil' ?
-                                <>
-                                    <Text style={styles.getStartedText}> New to MyEd Open School?</Text>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => {
-                                            this.props.navigation.replace('PupilRegister', { userType: "Pupil" })
-                                        }}>
-                                        <Text style={styles.getStartedLink}> Get Started</Text>
-                                    </TouchableOpacity>
-                                </>
-                                :
-                                null
-                            }
-                        </View>
-                        <View style={styles.bottomLoginIntro}>
-                            <Text style={STYLE.commonFonts}>You can’t create an account in the app.</Text>
-                            <Text style={STYLE.commonFontsPuple}>Head over to our website to register and come back when you’ve made an account.</Text>
-                        </View>
-                    </KeyboardAwareScrollView>
-                </View>
             </View>
+            </View >
         );
     }
 }
@@ -437,6 +439,7 @@ function mapDispatchToProps(dispatch) {
         setPupilAuthData: (data) => dispatch(setPupilAuthData(data)),
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
     getStarted: {
