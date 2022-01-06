@@ -12,6 +12,8 @@ import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler'
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
+import ToggleSwitch from 'toggle-switch-react-native';
+import STYLE from '../../../../utils/Style';
 
 const SchoolNewMessage = (props) => {
     const t2 = useRef(null);
@@ -37,6 +39,19 @@ const SchoolNewMessage = (props) => {
     const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
+    }
+
+    const [isSwitch, setSwitch] = useState(false)
+    const switchOnOff = (isOn) => {
+        setSwitch(isOn)
+        if (isOn) {
+            setSelectedParents(parentsData)
+        }
+        else {
+            let allselectedData = selectedParents
+            allselectedData = []
+            setSelectedParents(allselectedData)
+        }
     }
 
     useEffect(() => {
@@ -81,6 +96,7 @@ const SchoolNewMessage = (props) => {
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
+                                disabled={status == 'Sent'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
@@ -170,6 +186,18 @@ const SchoolNewMessage = (props) => {
         })
     }
 
+
+    const isTextInputEditable = () =>{
+
+        if(status == 'Sent'){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
+
     return (
 
 
@@ -192,6 +220,7 @@ const SchoolNewMessage = (props) => {
                             onSubmitEditing={() => { t2.current.focus(); }}
                             value={title}
                             autoCapitalize={'sentences'}
+                            editable={isTextInputEditable()}
                             placeholderStyle={Styles.somePlaceholderStyle}
                             style={Styles.commonInputTextarea1}
                             onChangeText={title => setTitle(title)} />
@@ -213,6 +242,12 @@ const SchoolNewMessage = (props) => {
                     </View>
                 </View>
 
+                {status == 'Sent' ? null :
+                    <View style={[Styles.field1, { flexDirection: 'row' }]}>
+                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />
+                        <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                    </View>}
+
                 <View style={Styles.field1}>
                     <Text label style={Style.labelCommon}>Message</Text>
                     <View style={Styles.copyInputParent}>
@@ -222,6 +257,7 @@ const SchoolNewMessage = (props) => {
                             placeholder='Write a message here'
                             value={message}
                             autoCapitalize={'sentences'}
+                            editable={isTextInputEditable()}
                             placeholderStyle={Styles.somePlaceholderStyle}
                             style={[Styles.commonInputTextarea1, Styles.inputHeight]}
                             onChangeText={message => setMessage(message)} />

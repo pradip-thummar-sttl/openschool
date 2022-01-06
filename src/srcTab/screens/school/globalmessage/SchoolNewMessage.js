@@ -30,8 +30,8 @@ const SchoolNewMessage = (props) => {
     const [isLoading, setLoading] = useState(true)
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
-   
-   
+
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -56,9 +56,17 @@ const SchoolNewMessage = (props) => {
         }
     }, [data])
 
-    const [isSwitch, setSwitch] = useState(true)
+    const [isSwitch, setSwitch] = useState(false)
     const switchOnOff = (isOn) => {
         setSwitch(isOn)
+        if (isOn) {
+            setSelectedParents(parentsData)
+        }
+        else {
+            let allselectedData = selectedParents
+            allselectedData = []
+            setSelectedParents(allselectedData)
+        }
     }
 
     // parentsData.map(() => {
@@ -71,7 +79,7 @@ const SchoolNewMessage = (props) => {
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
                 setPatrentsData(res.data)
-                
+
             } else {
                 showMessage(res.message)
             }
@@ -158,7 +166,19 @@ const SchoolNewMessage = (props) => {
             setLoading(false)
         })
     }
-    console.log(parentsData,'--------------------------');
+
+    const isTextInputEditable = () => {
+
+        if (status == 'Sent') {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+
+    console.log(parentsData, '--------------------------');
     const parentListView = () => {
         return (
             <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
@@ -177,6 +197,7 @@ const SchoolNewMessage = (props) => {
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
+                                disabled={status == 'Sent'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
@@ -189,6 +210,8 @@ const SchoolNewMessage = (props) => {
             </View>
         );
     };
+
+
 
     return (
         <View style={{ height: '100%', backgroundColor: COLORS.white }}>
@@ -209,8 +232,9 @@ const SchoolNewMessage = (props) => {
                                 value={title}
                                 autoCapitalize={'sentences'}
                                 placeholderStyle={styles.somePlaceholderStyle}
+                                editable={isTextInputEditable()}
                                 placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1,{paddingVertical : Platform.OS === 'android' ? 3 :0 } , styles.inputWidth]}
+                                style={[styles.commonInputTextarea1, { paddingVertical: Platform.OS === 'android' ? 3 : 0 }, styles.inputWidth]}
                                 onChangeText={title => setTitle(title)} />
                         </View>
                     </View>
@@ -226,11 +250,14 @@ const SchoolNewMessage = (props) => {
                         style={styles.commonInputTextarea1}
                         onChangeText={eventName => setEvent(eventName)} /> */}
                             {parentListView()}
-
-                            <ToggleSwitch onColor={COLORS.dashboardGreenButton}
-                                isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                            />
-                            <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                            {status == 'Sent' ?
+                                null :
+                                <ToggleSwitch onColor={COLORS.dashboardGreenButton}
+                                    isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
+                                />}
+                            {status == 'Sent' ?
+                                null :
+                                <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>}
 
                         </View>
                     </View>
@@ -244,6 +271,7 @@ const SchoolNewMessage = (props) => {
                                 placeholder='Write a message here'
                                 value={message}
                                 autoCapitalize={'sentences'}
+                                editable={isTextInputEditable()}
                                 placeholderStyle={styles.somePlaceholderStyle}
                                 placeholderTextColor={COLORS.borderGrp}
                                 style={[styles.commonInputTextarea1, styles.inputHeight]}
@@ -257,7 +285,7 @@ const SchoolNewMessage = (props) => {
                             activeOpacity={opacity}
                             onPress={() => saveMessage('Draft')}>
                             {/* <Image style={styles.addIcon} source={Images.CheckIcon} /> */}
-                            <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)}/>
+                            <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                             <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
                         </TouchableOpacity>
                     }
