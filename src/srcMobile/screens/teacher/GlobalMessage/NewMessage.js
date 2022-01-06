@@ -11,6 +11,8 @@ import CheckBox from '@react-native-community/checkbox';
 import { Service } from '../../../../service/Service'
 import MESSAGE from '../../../../utils/Messages'
 import { ScrollView } from 'react-native-gesture-handler'
+import ToggleSwitch from 'toggle-switch-react-native';
+import STYLE from '../../../../utils/Style';
 
 const NewMessage = (props) => {
     const t2 = useRef(null);
@@ -36,6 +38,19 @@ const NewMessage = (props) => {
     const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
+    }
+
+    const [isSwitch, setSwitch] = useState(false)
+    const switchOnOff = (isOn) => {
+        setSwitch(isOn)
+        if (isOn) {
+            setSelectedParents(parentsData)
+        }
+        else {
+            let allselectedData = selectedParents
+            allselectedData = []
+            setSelectedParents(allselectedData)
+        }
     }
 
     useEffect(() => {
@@ -80,6 +95,7 @@ const NewMessage = (props) => {
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 value={isPupilChecked(index)}
+                                disabled={status == 'Sent'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
@@ -95,7 +111,7 @@ const NewMessage = (props) => {
 
     const isPupilChecked = (_index) => {
         if (selectedParents.length > 0) {
-            if (selectedParents.some(ele => ele.MobileNumber == parentsData[_index].MobileNumber)) {
+            if (selectedParents.some(ele => ele._id == parentsData[_index]._id)) {
                 return true
             } else {
                 return false
@@ -108,7 +124,7 @@ const NewMessage = (props) => {
     const pushPupilItem = (isSelected, _index) => {
         console.log('isSelected', isSelected, _index);
         if (!isSelected) {
-            const newList = selectedParents.filter((item, index) => item.MobileNumber !== parentsData[_index].MobileNumber);
+            const newList = selectedParents.filter((item, index) => item._id !== parentsData[_index]._id);
             setSelectedParents(newList)
         } else {
             setSelectedParents([...selectedParents, parentsData[_index]])
@@ -177,6 +193,16 @@ const NewMessage = (props) => {
         props.navigation.goBack()
     }
 
+    const isTextInputEditable = () =>{
+
+        if(status == 'Sent'){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     return (
 
 
@@ -200,6 +226,7 @@ const NewMessage = (props) => {
                             onSubmitEditing={() => { t2.current.focus(); }}
                             value={title}
                             autoCapitalize={'sentences'}
+                            editable={isTextInputEditable()}
                             placeholderStyle={Styles.somePlaceholderStyle}
                             style={Styles.commonInputTextarea1}
                             onChangeText={title => setTitle(title)} />
@@ -221,6 +248,12 @@ const NewMessage = (props) => {
                     </View>
                 </View>
 
+                {status == 'Sent' ? null :
+                    <View style={[Styles.field1, { flexDirection: 'row' }]}>
+                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />
+                        <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>
+                    </View>}
+
                 <View style={Styles.field1}>
                     <Text label style={Style.labelCommon}>Message</Text>
                     <View style={Styles.copyInputParent}>
@@ -230,6 +263,7 @@ const NewMessage = (props) => {
                             placeholder='Write a message here'
                             value={message}
                             autoCapitalize={'sentences'}
+                            editable={isTextInputEditable()}
                             placeholderStyle={Styles.somePlaceholderStyle}
                             style={[Styles.commonInputTextarea1, Styles.inputHeight]}
                             onChangeText={message => setMessage(message)} />
