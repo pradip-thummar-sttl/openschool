@@ -165,13 +165,14 @@ const styles = StyleSheet.create({
     headerBarMainWhite: {
         paddingLeft: hp(2.99),
         paddingRight: hp(4.16),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
         paddingBottom: hp(1.5),
         shadowColor: COLORS.SidebarHeaderShadow,
         shadowOffset: { width: 0, height: 1, },
         shadowOpacity: 0.08,
         shadowRadius: 2,
+        // backgroundColor : 'red'
     },
     headerMain: {
         flexDirection: 'row',
