@@ -57,6 +57,11 @@ const TeacherProfileAdd = (props) => {
         getUserType()
     }, [])
 
+    // const openNotification = () => {
+    //     Var.isCalender = false
+    //     BadgeIcon.isBadge = false
+    //     props.navigation.openDrawer() 
+    // }
     const loadTeachingYear = () => {
         Service.get(`${EndPoints.TeachingYear}`, (res) => {
             console.log('response of GetSubjectBySchoolId response', res)
@@ -88,7 +93,7 @@ const TeacherProfileAdd = (props) => {
             if (res.flag) {
                 var userData = res.data
                 userData.map((item) => {
-                    if (item.Name === 'Pupil') {
+                    if (item.Name === 'Teacher') {
                         setUserType(item._id)
                     }
                 })
@@ -287,6 +292,7 @@ const TeacherProfileAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
+                openNotification = {() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 
@@ -294,10 +300,10 @@ const TeacherProfileAdd = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
-                            <View style={PAGESTYLE.managementBlockTop}>
+                            <View style={[PAGESTYLE.managementBlockTop]}>
                                 {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                <View style={PAGESTYLE.thumbTopUser}>
+                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
+                                <View style={[PAGESTYLE.thumbTopUser]}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => showActionChooser()}>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -74,7 +74,7 @@ const PopupaddnewdataTM = (props) => {
                                         style={styles.entryData}
                                         onPress={() => { setModalVisible(false); props.navigateToAddTeacher() }}>
                                         {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                        <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                                        <ImportIndividual style={styles.entryIcon} height={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} width={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} />
                                         <Text style={styles.entryTitle}>Add Mnually</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -121,14 +121,14 @@ const styles = StyleSheet.create({
         // marginRight: hp(-4.23),
     },
     entryData: {
-        marginLeft: 30,
+        marginLeft:   Platform.OS === 'android' ? 20  : 30,
         alignItems: 'center',
     },
     entryIcon: {
         width: hp(11.19),
         height: hp(11.19),
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom:  Platform.OS === 'android' ? 0 : hp(2.6),
     },
     entryTitle: {
         fontSize: hp(1.56),
@@ -136,6 +136,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+        right : Platform.OS === 'android' ? hp(3) : 0,
+        bottom : Platform.OS === 'android' ? hp(1.5) : 0
     },
     buttonGroup: {
         position: 'relative',

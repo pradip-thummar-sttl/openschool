@@ -191,7 +191,7 @@ export default StyleSheet.create({
     },
     managementBlockTop:{
         flexDirection:'row',
-        height:hp(12.5),
+        height:hp(19),
         position: 'relative',
     },
     commonInput: {
@@ -325,8 +325,8 @@ export default StyleSheet.create({
         borderWidth: 3,
         backgroundColor:'#ECEDF0',
         position:'absolute',
-        left:hp(5),
-        bottom:hp(-4),
+        left:hp(8),
+        bottom:hp(-3),
     },
     topBannerBtn:{
         position:'absolute',

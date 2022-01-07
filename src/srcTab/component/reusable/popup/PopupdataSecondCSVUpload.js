@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, Platform } from "react-native";
 import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -79,7 +79,7 @@ const PopupdataSecondCSVUpload = (props) => {
                 style={styles.entryData}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                <ImportCSV style={styles.entryIcon} height={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} width={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} />
                 <Text style={styles.entryTitle}>Import From CSV</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
@@ -229,14 +229,16 @@ const styles = StyleSheet.create({
         paddingRight: hp(0.9),
     },
     entryData: {
-        marginRight: 30,
-        alignItems: 'center'
+        marginRight:  Platform.OS === 'android' ? 0 : 30,
+        alignItems: 'center',
+        marginLeft:  Platform.OS === 'android' ? 20 : 0
+        // backgroundColor  :'red'
     },
     entryIcon: {
         width: hp(11.19),
         height: hp(11.19),
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom: Platform.OS === 'android' ? 0 : hp(2.6),
     },
     upload: {
         width: '100%',
@@ -263,6 +265,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+        right  : Platform.OS === 'android' ? hp(4) : 0,
+        bottom  : Platform.OS === 'android' ? 10 : 0
     },
     subjectDateTime: {
         alignItems: 'flex-start',

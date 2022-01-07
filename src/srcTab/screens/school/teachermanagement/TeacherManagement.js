@@ -112,7 +112,9 @@ const TeacherManagement = (props) => {
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
+                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} 
+                openNotification = {props.openNotification()}
+                selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
                     :
                     isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
                         :
