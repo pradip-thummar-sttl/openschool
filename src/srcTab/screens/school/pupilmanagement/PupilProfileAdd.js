@@ -142,7 +142,7 @@ const PupilProfileAdd = (props) => {
         } else if (!email.trim() || !emailValidate(email)) {
             showMessage(MESSAGE.email)
             return false
-        } else if (!mobile.trim() && mobile.length > 16) {
+        } else if (!mobile.trim() && mobile.length < 5 && mobile.length > 16) {
             showMessage(MESSAGE.phone)
             return false
         }
