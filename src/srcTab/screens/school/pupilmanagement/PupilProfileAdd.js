@@ -296,14 +296,9 @@ const PupilProfileAdd = (props) => {
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={PAGESTYLE.managementBlockTop}>
-                                {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                 <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                 <View style={PAGESTYLE.thumbTopUser}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}
-
-                                    >
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', width: '100%', borderRadius: 100,  backgroundColor: COLORS.lightGrey }}
                                             source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
                                         <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)}/>
