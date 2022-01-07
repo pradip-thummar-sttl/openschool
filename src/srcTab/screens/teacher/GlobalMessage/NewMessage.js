@@ -289,7 +289,7 @@
 // export default NewMessage
 
 import React, { useState, useEffect, useRef } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView, BackHandler, Platform } from 'react-native'
+import { View, Text, TextInput, TouchableOpacity, Image, FlatList, SafeAreaView, BackHandler, Platform, KeyboardAvoidingView } from 'react-native'
 import NewMessageHeader from '../../../component/reusable/header/NewMessageHeader'
 import COLORS from '../../../../utils/Colors';
 import STYLE from '../../../../utils/Style';
@@ -451,12 +451,12 @@ const NewMessage = (props) => {
         })
     }
 
-    const isTextInputEditable = () =>{
+    const isTextInputEditable = () => {
 
-        if(status == 'Sent'){
+        if (status == 'Sent') {
             return false;
         }
-        else{
+        else {
             return true;
         }
     }
@@ -499,66 +499,71 @@ const NewMessage = (props) => {
                 onSent={() => saveMessage('Sent')}
                 onGoback={() => props.goBack()}
                 status={status} />
-            <ScrollView>
-                <SafeAreaView style={{ paddingHorizontal: 20 }}>
-                    <View style={styles.field1}>
-                        <Text label style={STYLE.labelCommon}>Message Title</Text>
-                        <View style={styles.copyInputParent}>
-                            <TextInput
-                                multiline={false}
-                                placeholder='Enter title of the message'
-                                returnKeyType={"next"}
-                                onSubmitEditing={() => { t2.current.focus(); }}
-                                value={title}
-                                autoCapitalize={'sentences'}
-                                editable={isTextInputEditable()}
-                                placeholderStyle={styles.somePlaceholderStyle}
-                                placeholderTextColor={COLORS.borderGrp}
-                                style={[styles.commonInputTextarea1, , styles.inputWidth, { paddingVertical: Platform.OS === 'android' ? 3 : 0 }]}
-                                onChangeText={title => setTitle(title)} />
+            <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+            >
+                <ScrollView>
+                    <SafeAreaView style={{ paddingHorizontal: 20, marginBottom: 50 }}>
+                        <View style={styles.field1}>
+                            <Text label style={STYLE.labelCommon}>Message Title</Text>
+                            <View style={styles.copyInputParent}>
+                                <TextInput
+                                    multiline={false}
+                                    placeholder='Enter title of the message'
+                                    returnKeyType={"next"}
+                                    onSubmitEditing={() => { t2.current.focus(); }}
+                                    value={title}
+                                    autoCapitalize={'sentences'}
+                                    editable={isTextInputEditable()}
+                                    placeholderStyle={styles.somePlaceholderStyle}
+                                    placeholderTextColor={COLORS.borderGrp}
+                                    style={[styles.commonInputTextarea1, , styles.inputWidth, { paddingVertical: Platform.OS === 'android' ? 3 : 0 }]}
+                                    onChangeText={title => setTitle(title)} />
+                            </View>
                         </View>
-                    </View>
 
-                    <View style={styles.field1}>
-                        <View style={styles.copyInputParent}>
-                            {parentListView()}
-                            {status == 'Sent' ?
-                                null :
-                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />}
-                            {status == 'Sent' ?
-                                null :
-                                <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>}
+                        <View style={styles.field1}>
+                            <View style={styles.copyInputParent}>
+                                {parentListView()}
+                                {status == 'Sent' ?
+                                    null :
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />}
+                                {status == 'Sent' ?
+                                    null :
+                                    <Text label style={[STYLE.labelCommon, { color: COLORS.black, }]}>Send to all parents</Text>}
+                            </View>
                         </View>
-                    </View>
 
-                    <View style={styles.field1}>
-                        <Text label style={STYLE.labelCommon}>Message</Text>
-                        <View style={styles.copyInputParent}>
-                            <TextInput
-                                ref={t2}
-                                multiline={true}
-                                placeholder='Write a message here'
-                                value={message}
-                                autoCapitalize={'sentences'}
-                                placeholderStyle={styles.somePlaceholderStyle}
-                                placeholderTextColor={COLORS.borderGrp}
-                                editable={isTextInputEditable()}
-                                style={[styles.commonInputTextarea1, styles.inputHeight]}
-                                onChangeText={message => setMessage(message)} />
+                        <View style={styles.field1}>
+                            <Text label style={STYLE.labelCommon}>Message</Text>
+                            <View style={styles.copyInputParent}>
+                                <TextInput
+                                    ref={t2}
+                                    multiline={true}
+                                    placeholder='Write a message here'
+                                    value={message}
+                                    autoCapitalize={'sentences'}
+                                    placeholderStyle={styles.somePlaceholderStyle}
+                                    placeholderTextColor={COLORS.borderGrp}
+                                    editable={isTextInputEditable()}
+                                    style={[styles.commonInputTextarea1, styles.inputHeight]}
+                                    onChangeText={message => setMessage(message)} />
+                            </View>
                         </View>
-                    </View>
-                    {status == 'Draft' || status == 'Sent' ?
-                        null
-                        :
-                        <TouchableOpacity style={styles.buttonGroup1}
-                            activeOpacity={opacity}
-                            onPress={() => saveMessage('Draft')}>
-                            <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                            <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
-                        </TouchableOpacity>
-                    }
-                </SafeAreaView>
-            </ScrollView>
+                        {status == 'Draft' || status == 'Sent' ?
+                            null
+                            :
+                            <TouchableOpacity style={styles.buttonGroup1}
+                                activeOpacity={opacity}
+                                onPress={() => saveMessage('Draft')}>
+                                <TickMarkGreen style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
+                                <Text style={styles.commonButtonGreenheaderwithicon}>SAVE AS DRAFT</Text>
+                            </TouchableOpacity>
+                        }
+                    </SafeAreaView>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </View>
     )
 }
