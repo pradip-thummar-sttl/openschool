@@ -250,7 +250,6 @@ const TeacherProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedYear([...selectedYear, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedYear.length > 0 ? selectedYear[selectedYear.length - 1].Title : 'Select a Year'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -309,20 +308,20 @@ const TeacherProfileAdd = (props) => {
                                         onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)} />
+                                            <View style={PAGESTYLE.editprofileStyl}>
+                                            <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                                            </View>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={PAGESTYLE.topBannerParent}>
+
+                                <View style={PAGESTYLE.btnSendView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.topBannerBtn1}>Send Invite</Text>
+                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                                {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                {/* </ImageBackground> */}
+                               
                             </View>
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
                                 <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>

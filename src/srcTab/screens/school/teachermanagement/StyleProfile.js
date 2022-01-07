@@ -190,9 +190,10 @@ export default StyleSheet.create({
        // flex:1,
     },
     managementBlockTop:{
-        flexDirection:'row',
-        height:hp(19),
+        height:hp(12.5),
         position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center'
     },
     commonInput: {
         color:COLORS.darkGrayIntro,
@@ -318,8 +319,8 @@ export default StyleSheet.create({
         resizeMode: 'cover',
     },
     thumbTopUser:{
-        width: hp(12.5),
-        height:hp(12.5),
+        width: hp(13),
+        height:hp(13),
         borderRadius: 96,
         borderColor:COLORS.white,
         borderWidth: 3,
@@ -600,13 +601,22 @@ export default StyleSheet.create({
     insightMain: {
         fontSize: 20,
         fontFamily: FONTS.fontBold,
-    },pzEditIcon: {
-        width: hp(4),
-        height: hp(4),
+    },
+    pzEditIcon: {
+        width: hp(1.7),
+        height: hp(1.7),
         resizeMode: 'contain',
+    },
+    editprofileStyl: {
+        width: hp(2),
+        height: hp(2),
+        padding:hp(1.7),
         position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-0.3),
+        left: hp(4),
+        bottom: hp(0),
+        zIndex:1,
+        justifyContent:'center',
+        alignItems:'center',
         borderRadius: hp(100),
         backgroundColor: COLORS.white,
         borderColor: COLORS.editBorder,
@@ -633,4 +643,26 @@ export default StyleSheet.create({
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
     },
+
+    btnSendView:{
+        width: wp(12),
+        height: hp(5),
+        borderRadius: 8,
+        borderWidth: 1,
+        marginRight:hp(2),
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
+        justifyContent:'center',
+        alignItems:'center',
+    },
+    btnSendTextView:{
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: 12,
+        lineHeight: 37.5,
+        textTransform: 'uppercase',
+        textAlign: 'center',
+        overflow: 'hidden',
+        borderColor: COLORS.buttonGreen,
+    }
 });
