@@ -52,18 +52,17 @@ const PopupaddnewdataPM = (props) => {
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { toggleModal() }}>
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    <View style={styles.popupContent}>
-                        <View style={styles.tabcontent}>
-                            <View style={styles.beforeBorder}>
-                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
-                                <View style={styles.entryContentMain}>
-                                    <PopupdataSecondCSVUpload userType={'Pupil'} />
-                                   
-                                    <TouchableOpacity activeOpacity={opacity} style={styles.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
-                                        <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                                        <Text style={styles.entryTitle}>Add Mnually</Text>
-                                    </TouchableOpacity>
-                                </View>
+                    <View style={styles.beforeBorder}>
+                        <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
+                        <View style={styles.entryContentMain}>
+                            <View style={styles.btnSelectionView}>
+                                <PopupdataSecondCSVUpload userType={'Pupil'} />
+                            </View>
+                            <View style={styles.btnSelectionView}>
+                                <TouchableOpacity activeOpacity={opacity} style={styles.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
+                                    <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                                    <Text style={styles.entryTitle}>Add Mnually</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -100,18 +99,8 @@ const styles = StyleSheet.create({
         marginBottom: hp(4.5),
         marginTop: hp(4.5),
     },
-    entryContentMain: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    entryData: {
-        width: hp(15),
-        height: hp(20),
-        marginLeft: 30,
-        justifyContent:'center',
-        alignItems:'center',
-        alignItems: 'center',
-    },
+
+
     entryIcon: {
         resizeMode: 'contain',
         marginBottom: hp(2.6),
@@ -150,5 +139,27 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+    },
+
+    beforeBorder: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    entryContentMain: {
+        flexDirection: 'row',
+       justifyContent:'space-between'
+    },
+    btnSelectionView: {
+        height: hp(20),
+        paddingHorizontal:wp(1),
+        alignItems:'center',
+       
+    },
+    entryData: {
+        width: hp(15),
+        height: hp(20),
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignItems: 'center',
     },
 });

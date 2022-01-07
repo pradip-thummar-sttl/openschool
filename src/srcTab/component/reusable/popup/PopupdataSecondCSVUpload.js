@@ -389,9 +389,8 @@ const styles = StyleSheet.create({
     entryData: {
         width: hp(15),
         height: hp(20),
-        marginLeft: 30,
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         alignItems: 'center',
     },
 
