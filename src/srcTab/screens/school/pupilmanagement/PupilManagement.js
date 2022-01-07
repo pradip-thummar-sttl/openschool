@@ -157,7 +157,8 @@ const PupilManagement = (props) => {
                 isPupilAdd ?
                     <PupilProfileAdd
                         selectedPupil={selectedItem}
-                        navigateToBack={() => setPupilAdd(false)} />
+                        navigateToBack={() => setPupilAdd(false)}
+                        openNotification={() => openNotification()} />
                     :
                     <>
                         <HeaderPM

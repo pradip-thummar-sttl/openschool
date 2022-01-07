@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -108,7 +108,7 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%',paddingVertical : 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%', paddingVertical: 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search pupil"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
@@ -119,53 +119,55 @@ const HeaderPM = (props) => {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10 }}>
                             <Menu style={{}}>
                                 <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
-                                <MenuOptions style={styles.filterListWrap}>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { setFilterBy('name'); setSelectedIndex(0) }}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Name</Text>
-                                                {selectedIndex == 0 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { setFilterBy('group'); setSelectedIndex(1) }}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Group</Text>
-                                                {selectedIndex == 1 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity
-                                            activeOpacity={opacity}
-                                            onPress={() => { setFilterBy('dob'); setSelectedIndex(2) }}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>DOB</Text>
-                                                {selectedIndex == 2 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                </MenuOptions>
+                              
+                                    <MenuOptions style={styles.filterListWrap}>
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => { setFilterBy('name'); setSelectedIndex(0) }}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>Name</Text>
+                                                    {selectedIndex == 0 ?
+                                                        // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                        <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                        :
+                                                        null
+                                                    }
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => { setFilterBy('group'); setSelectedIndex(1) }}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>Group</Text>
+                                                    {selectedIndex == 1 ?
+                                                        // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                        <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                        :
+                                                        null
+                                                    }
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity
+                                                activeOpacity={opacity}
+                                                onPress={() => { setFilterBy('dob'); setSelectedIndex(2) }}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>DOB</Text>
+                                                    {selectedIndex == 2 ?
+                                                        // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                        <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                        :
+                                                        null
+                                                    }
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                    </MenuOptions>
+                              
                             </Menu>
                             {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                             <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
@@ -353,11 +355,11 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
         paddingBottom: hp(1),
-        position: 'absolute',
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
+        // top: hp(5.5),
         right: hp(0),
-        width: hp(30.78),
+        // width: Platform.OS === 'android' ? hp(0) : hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },

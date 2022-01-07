@@ -250,6 +250,7 @@ const TeacherProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedYear([...selectedYear, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedYear.length > 0 ? selectedYear[selectedYear.length - 1].Title : 'Select a Year'}</Text>
+                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -287,7 +288,8 @@ const TeacherProfileAdd = (props) => {
             </View>
         );
     };
-
+;
+console.log('&&&&&&&&&&&&&&&',props);
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
@@ -300,6 +302,7 @@ const TeacherProfileAdd = (props) => {
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={[PAGESTYLE.managementBlockTop]}>
+                                {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
                                 <View style={[PAGESTYLE.thumbTopUser]}>
                                     <TouchableOpacity
@@ -307,23 +310,22 @@ const TeacherProfileAdd = (props) => {
                                         onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                            <View style={PAGESTYLE.editprofileStyl}>
-                                            <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
-                                            </View>
+                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)} />
                                     </TouchableOpacity>
                                 </View>
-
-                                <View style={PAGESTYLE.btnSendView}>
+                                <View style={PAGESTYLE.topBannerParent}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
+                                        <Text style={PAGESTYLE.topBannerBtn1}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                               
+                                {/* <TouchableOpacity>
+                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
+                                            </TouchableOpacity> */}
+                                {/* </ImageBackground> */}
                             </View>
-
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
                                 <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                     {yearDropDown()}
                                 </View>

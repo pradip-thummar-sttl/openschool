@@ -284,10 +284,11 @@ const PupilProfileAdd = (props) => {
         setEmail('')
         setMobile('')
     }
-
+    console.log('555555',props);
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
+                openNotification = {() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 
