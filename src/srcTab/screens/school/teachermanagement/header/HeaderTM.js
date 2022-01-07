@@ -85,25 +85,6 @@ const HeaderTM = (props) => {
             <View style={styles.searchParent}>
                 <Text style={[styles.tabsText, styles.tabsTextSelected]}>Teacher Overview</Text>
                 <View style={styles.searchInner}>
-                    {/* <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
-                        <Image style={{ height: 20, resizeMode: 'contain', }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} />
-                        {isSearchActive ?
-                            <CloseBlack height={20} width={20} />
-                            :
-                            <SearchBlue height={18} width={18} />
-                        }
-                    </TouchableOpacity> */}
 
                     {isSearchActive ?
                         <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >

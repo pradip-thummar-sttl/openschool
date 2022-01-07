@@ -10,6 +10,8 @@ import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import PopupdataSecondCSVUpload from "./PopupdataSecondCSVUpload";
+import PopStyle from '../popup/newPupilAndTeacherAddPopupStyle'
+
 const PopupaddnewdataPM = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -47,21 +49,22 @@ const PopupaddnewdataPM = (props) => {
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
             </TouchableOpacity>
+
             <Modal isVisible={isModalVisible}>
-                <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={() => { toggleModal() }}>
-                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                <View style={PopStyle.popupLarge}>
+                    <TouchableOpacity style={PopStyle.cancelButton} onPress={() => { toggleModal() }}>
+                        <CloseBlack style={PopStyle.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    <View style={styles.beforeBorder}>
-                        <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
-                        <View style={styles.entryContentMain}>
-                            <View style={styles.btnSelectionView}>
+                    <View style={PopStyle.beforeBorder}>
+                        <Text h2 style={PopStyle.titleTab}>Add New Pupils</Text>
+                        <View style={PopStyle.entryContentMain}>
+                            <View style={PopStyle.btnSelectionView}>
                                 <PopupdataSecondCSVUpload userType={'Pupil'} />
                             </View>
-                            <View style={styles.btnSelectionView}>
-                                <TouchableOpacity activeOpacity={opacity} style={styles.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
-                                    <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                                    <Text style={styles.entryTitle}>Add Mnually</Text>
+                            <View style={PopStyle.btnSelectionView}>
+                                <TouchableOpacity activeOpacity={opacity} style={PopStyle.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
+                                    <ImportIndividual style={PopStyle.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                                    <Text style={PopStyle.entryTitle}>Add Mnually</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -74,44 +77,13 @@ const PopupaddnewdataPM = (props) => {
 export default PopupaddnewdataPM;
 
 const styles = StyleSheet.create({
-    cancelButton: {
-        position: 'absolute',
-        right: hp(1.5),
-        zIndex: 9,
-        top: hp(1),
-    },
-    popupLarge: {
-        backgroundColor: COLORS.white,
-        borderRadius: hp(2),
-        width: hp(80.59),
-        alignItems: 'center',
-        alignSelf: 'center',
-        overflow: 'hidden',
-        fontFamily: FONTS.fontRegular,
-        position: 'relative',
-        paddingBottom: hp(6.5),
-    },
-    titleTab: {
-        fontSize: hp(2.86),
-        fontFamily: FONTS.fontSemiBold,
-        lineHeight: hp(3.38),
-        color: COLORS.darkGray,
-        marginBottom: hp(4.5),
-        marginTop: hp(4.5),
-    },
+   
+    
+    
 
 
-    entryIcon: {
-        resizeMode: 'contain',
-        marginBottom: hp(2.6),
-    },
-    entryTitle: {
-        fontSize: hp(1.56),
-        fontFamily: FONTS.fontBold,
-        color: COLORS.darkGray,
-        textAlign: 'center',
-        textTransform: 'uppercase',
-    },
+    
+    
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
@@ -141,25 +113,5 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
 
-    beforeBorder: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    entryContentMain: {
-        flexDirection: 'row',
-       justifyContent:'space-between'
-    },
-    btnSelectionView: {
-        height: hp(20),
-        paddingHorizontal:wp(1),
-        alignItems:'center',
-       
-    },
-    entryData: {
-        width: hp(15),
-        height: hp(20),
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignItems: 'center',
-    },
+  
 });

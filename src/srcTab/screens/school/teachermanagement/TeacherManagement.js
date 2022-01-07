@@ -97,7 +97,6 @@ const TeacherManagement = (props) => {
     }
 
     const pupilRender = ({ item }) => {
-        console.log('props ->>>>>>> 100', props)
         return (
             <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
         );
@@ -108,7 +107,6 @@ const TeacherManagement = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
     }
-    console.log('?????????????',props);
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
