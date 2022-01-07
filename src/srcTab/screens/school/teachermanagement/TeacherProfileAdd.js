@@ -300,7 +300,6 @@ const TeacherProfileAdd = (props) => {
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={[PAGESTYLE.managementBlockTop]}>
-                                {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
                                 <View style={[PAGESTYLE.thumbTopUser]}>
                                     <TouchableOpacity
@@ -323,7 +322,8 @@ const TeacherProfileAdd = (props) => {
                                 </View>
                                
                             </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
+
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
                                 <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                     {yearDropDown()}
                                 </View>

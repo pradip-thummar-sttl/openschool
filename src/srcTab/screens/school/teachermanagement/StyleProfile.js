@@ -314,7 +314,6 @@ export default StyleSheet.create({
     },
     managementopImage:{
         width: '100%',
-        position: 'absolute',
         top: 0,
         resizeMode: 'cover',
     },
@@ -327,7 +326,7 @@ export default StyleSheet.create({
         backgroundColor:'#ECEDF0',
         position:'absolute',
         left:hp(8),
-        bottom:hp(-3),
+        bottom:hp(-5),
     },
     topBannerBtn:{
         position:'absolute',
@@ -647,13 +646,14 @@ export default StyleSheet.create({
     btnSendView:{
         width: wp(12),
         height: hp(5),
+        right:hp(2),
         borderRadius: 8,
         borderWidth: 1,
-        marginRight:hp(2),
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
         justifyContent:'center',
         alignItems:'center',
+        position:'absolute'
     },
     btnSendTextView:{
         fontFamily: FONTS.fontBold,
