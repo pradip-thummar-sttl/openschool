@@ -645,10 +645,11 @@ export default StyleSheet.create({
     },
 
     btnSendView:{
-        width: 128,
-        height: 40,
+        width: wp(12),
+        height: hp(5),
         borderRadius: 8,
         borderWidth: 1,
+        marginRight:hp(2),
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
         justifyContent:'center',
