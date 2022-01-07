@@ -580,6 +580,7 @@ export default StyleSheet.create({
     },
     dropDownFormInput: {
         width: hp(38.4),
+        marginRight: hp(2.5),
     },
     dropDownFormInput1: {
         width: '60%',

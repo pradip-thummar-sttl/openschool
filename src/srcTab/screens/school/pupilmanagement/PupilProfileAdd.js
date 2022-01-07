@@ -89,7 +89,6 @@ const PupilProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -372,7 +371,7 @@ const PupilProfileAdd = (props) => {
                                     <Text style={PAGESTYLE.fieldInputLabel}>Date of Birth</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TouchableOpacity onPress={() => showDatePicker()}>
-                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
+                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row',height: hp(6), }]}>
                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
                                                 <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
