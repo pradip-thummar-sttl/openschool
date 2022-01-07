@@ -75,13 +75,11 @@ const PopupdataSecondCSVUpload = (props) => {
     }
     return (
         <View>
-            <TouchableOpacity
-                style={styles.entryData}
-                activeOpacity={opacity}
-                onPress={toggleModal}>
-                <ImportCSV style={styles.entryIcon} height={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} width={Platform.OS === 'android' ? hp(22.19) : hp(11.19)} />
-                <Text style={styles.entryTitle}>Import From CSV</Text>
+            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}>
+                <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                <Text style={styles.popTitle}>Import From CSV</Text>
             </TouchableOpacity>
+          
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
@@ -228,18 +226,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
     },
-    entryData: {
-        marginRight:  Platform.OS === 'android' ? 0 : 30,
-        alignItems: 'center',
-        marginLeft:  Platform.OS === 'android' ? 20 : 0
-        // backgroundColor  :'red'
-    },
-    entryIcon: {
-        width: hp(11.19),
-        height: hp(11.19),
-        resizeMode: 'contain',
-        marginBottom: Platform.OS === 'android' ? 0 : hp(2.6),
-    },
+    
     upload: {
         width: '100%',
         height: 200,
@@ -258,15 +245,6 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         marginTop: 10
-    },
-    entryTitle: {
-        fontSize: hp(1.56),
-        fontFamily: FONTS.fontBold,
-        color: COLORS.darkGray,
-        textAlign: 'center',
-        textTransform: 'uppercase',
-        right  : Platform.OS === 'android' ? hp(4) : 0,
-        bottom  : Platform.OS === 'android' ? 10 : 0
     },
     subjectDateTime: {
         alignItems: 'flex-start',
@@ -392,6 +370,29 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.6),
         alignSelf: 'center'
+    },
+
+    // new update
+
+    popTitle: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
+        color: COLORS.darkGray,
+        textAlign: 'center',
+        textTransform: 'uppercase',
+    },
+    entryIcon: {
+        resizeMode: 'contain',
+        marginBottom: hp(2.6),
+    },
+
+    entryData: {
+        width: hp(15),
+        height: hp(20),
+        marginLeft: 30,
+        justifyContent:'center',
+        alignItems:'center',
+        alignItems: 'center',
     },
 
 });

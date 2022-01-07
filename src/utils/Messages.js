@@ -49,7 +49,8 @@ const MESSAGE = {
     setCode: 'You have set code successfully',
     groupCreated: 'Group created successfully',
     groupUpdated: 'Group updated successfully',
-    selectDOB: 'Please sselect date of birth',
+    selectDOB: 'Please select date of birth',
+    selectTeacher: 'Please select Teacher',
     relation: 'Please enter relation with pupil',
     passCode: 'Please enter four digit pass code',
     parentNAme: 'Please enter parent name',
@@ -96,7 +97,7 @@ const MESSAGE = {
     noTeacher1: 'No teachers here yet',
     noTeacher2: 'Take it easy and enjoy a break',
 
-    selectTeacher: 'Please select any teacher',
+    selectTeacher: 'Please select teacher',
     classSetup: 'Class setup successfully',
     parentFirstName: 'Please enter parent first name',
     parentLastName: 'Please enter parent last name',

@@ -301,10 +301,8 @@ const TeacherProfileAdd = (props) => {
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={[PAGESTYLE.managementBlockTop]}>
                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
-                                <View style={[PAGESTYLE.thumbTopUser]}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}>
+                                <View style={PAGESTYLE.TeacherProfileMainView}>
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
                                             <View style={PAGESTYLE.editprofileStyl}>

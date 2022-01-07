@@ -1,21 +1,13 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
-import DateTimePicker from '@react-native-community/datetimepicker';
-import RNPickerSelect from 'react-native-picker-select';
 import { opacity } from "../../../../utils/Constant";
-import PopupdataSecond from "./PopupdataSecond";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
-import NewEvent from "../../../../svg/teacher/timetable/NewEvent";
-import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
-import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import PopupdataSecondCSVUpload from "./PopupdataSecondCSVUpload";
 const PopupaddnewdataPM = (props) => {
@@ -52,14 +44,12 @@ const PopupaddnewdataPM = (props) => {
                 style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
             </TouchableOpacity>
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <TouchableOpacity style={styles.cancelButton} onPress={() => { toggleModal() }}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     <View style={styles.popupContent}>
@@ -68,11 +58,8 @@ const PopupaddnewdataPM = (props) => {
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupils</Text>
                                 <View style={styles.entryContentMain}>
                                     <PopupdataSecondCSVUpload userType={'Pupil'} />
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        style={styles.entryData}
-                                        onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
-                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
+                                   
+                                    <TouchableOpacity activeOpacity={opacity} style={styles.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
                                         <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Add Mnually</Text>
                                     </TouchableOpacity>
@@ -120,12 +107,14 @@ const styles = StyleSheet.create({
         // marginRight: hp(-4.23),
     },
     entryData: {
+        width: hp(15),
+        height: hp(20),
         marginLeft: 30,
+        justifyContent:'center',
+        alignItems:'center',
         alignItems: 'center',
     },
     entryIcon: {
-        width: hp(11.19),
-        height: hp(11.19),
         resizeMode: 'contain',
         marginBottom: hp(2.6),
     },

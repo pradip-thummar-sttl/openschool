@@ -643,10 +643,15 @@ export default StyleSheet.create({
         backgroundColor: COLORS.buttonGreen,
     },
 
+  
+
+    // updates
     btnSendView:{
         width: wp(12),
         height: hp(5),
-        right:hp(2),
+        right:hp(1),
+        top:hp(4.5),
+        bottom:hp(5),
         borderRadius: 8,
         borderWidth: 1,
         borderColor: COLORS.buttonGreen,
@@ -664,5 +669,16 @@ export default StyleSheet.create({
         textAlign: 'center',
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
-    }
+    },
+    TeacherProfileMainView:{
+        width: hp(13),
+        height:hp(13),
+        borderRadius: 96,
+        borderColor:COLORS.white,
+        borderWidth: 3,
+        backgroundColor:'#ECEDF0',
+        position:'absolute',
+        left:hp(8),
+        bottom:Platform.OS == 'ios' ? hp(-8) : hp(-9),
+    },
 });

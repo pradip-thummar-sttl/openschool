@@ -130,7 +130,11 @@ const PupilProfileAdd = (props) => {
         } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
-        } else if (!parentFirstName.trim()) {
+        }else if (!selectedTeacher.length) {
+            showMessage(MESSAGE.selectTeacher)
+            return false
+        } 
+        else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
         } else if (!parentLastName.trim()) {
@@ -148,7 +152,6 @@ const PupilProfileAdd = (props) => {
     }
 
     const saveProfile = () => {
-        // setLoading(true)
 
         let data = {
             SchoolId: User.user.UserDetialId,
@@ -164,8 +167,6 @@ const PupilProfileAdd = (props) => {
             IsInvited: 'false',
             Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
         }
-
-        console.log('data', data);
 
         Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
@@ -285,6 +286,17 @@ const PupilProfileAdd = (props) => {
         setMobile('')
     }
 
+    const onDataPicker =()=>{
+        return(
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                maximumDate={new Date()}
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
+        )
+    }
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
@@ -295,29 +307,29 @@ const PupilProfileAdd = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
-                            <View style={PAGESTYLE.managementBlockTop}>
-                                <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                <View style={PAGESTYLE.thumbTopUser}>
+                        <View style={[PAGESTYLE.managementBlockTop]}>
+                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
+                                <View style={PAGESTYLE.TeacherProfileMainView}>
                                     <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
-                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100,  backgroundColor: COLORS.lightGrey }}
-                                            source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)}/>
+                                        <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
+                                            source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
+                                            <View style={PAGESTYLE.editprofileStyl}>
+                                            <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                                            </View>
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={PAGESTYLE.topBannerParent}>
+                                <View style={PAGESTYLE.btnSendView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.topBannerBtn1}>Send Invite</Text>
+                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                                {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                {/* </ImageBackground> */}
+                               
                             </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
+                           
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
                                 <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>First Name</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
@@ -446,13 +458,7 @@ const PupilProfileAdd = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <DateTimePickerModal
-                            isVisible={isDatePickerVisible}
-                            mode="date"
-                            maximumDate={new Date()}
-                            onConfirm={handleConfirm}
-                            onCancel={hideDatePicker}
-                        />
+                       {onDataPicker()}
                     </KeyboardAwareScrollView>
                 </View>
             </View>
