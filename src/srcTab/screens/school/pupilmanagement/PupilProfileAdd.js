@@ -300,6 +300,7 @@ const PupilProfileAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
+                openNotification = {() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 

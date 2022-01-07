@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -103,6 +103,7 @@ const styles = StyleSheet.create({
     entryContentMain: {
         flexDirection: 'row',
         alignItems: 'center',
+        // backgroundColor : 'red'
         // marginLeft: hp(-4.23),
         // marginRight: hp(-4.23),
     },
@@ -113,10 +114,11 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center',
         alignItems: 'center',
+        // backgroundColor : 'red',
     },
     entryIcon: {
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom: Platform.OS === 'android' ? 0 : hp(2.6),
     },
     entryTitle: {
         fontSize: hp(1.56),
@@ -124,6 +126,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+        right : 14,
+      bottom : Platform.OS === 'android' ? 10.5 : 0
     },
     buttonGroup: {
         position: 'relative',

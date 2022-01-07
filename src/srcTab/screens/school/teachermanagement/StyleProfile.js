@@ -320,7 +320,7 @@ export default StyleSheet.create({
     thumbTopUser:{
         width: hp(13),
         height:hp(13),
-        borderRadius: 96,
+        borderRadius: hp(6.5),
         borderColor:COLORS.white,
         borderWidth: 3,
         backgroundColor:'#ECEDF0',

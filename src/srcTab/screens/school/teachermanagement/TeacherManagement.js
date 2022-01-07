@@ -108,15 +108,15 @@ const TeacherManagement = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer() 
     }
+    console.log('?????????????',props);
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} 
-                openNotification = {props.openNotification()}
                 selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
                     :
-                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
+                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} openNotification={() => {openNotification()}} />
                         :
                         <>
                             <HeaderTM
