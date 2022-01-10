@@ -310,21 +310,21 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     profileImageArea: {
+        height:hp(20),
         alignItems: 'center',
-        backgroundColor:'#90daff'
     },
     coverImage: {
         width: '100%',
         height: hp(13.8),
         resizeMode: 'contain',
+        backgroundColor:'#90daff'
     },
     profileOuter: {
         borderRadius: hp(100),
         borderWidth: 1,
         borderColor: COLORS.white,
-        position: 'absolute',
-        top: hp(7.38),
-        backgroundColor: COLORS.white
+        position:'absolute',
+        top:hp(5)
     },
     profileImage: {
         width: hp(13),
@@ -338,14 +338,13 @@ export default StyleSheet.create({
         paddingHorizontal: hp(2),
     },
     mainDetailsForm: {
-        marginVertical: hp(10),
         paddingHorizontal: hp(2),
     },
     fieldDetails: {
         marginBottom: hp(4.3),
     },
     fieldDetailsForm: {
-        marginBottom: hp(3),
+        marginBottom: hp(2),
         position: 'relative',
     },
     label: {
@@ -384,7 +383,6 @@ export default StyleSheet.create({
         fontSize: hp(1.8),
         fontFamily: FONTS.fontRegular,
         color: COLORS.lightGray,
-        marginBottom: hp(0.8),
         paddingLeft: hp(1.5),
     },
     data: {
@@ -615,6 +613,23 @@ export default StyleSheet.create({
         color: COLORS.lightGray,
         paddingBottom: hp(1),
     },
+    dropDown1: {
+        flexDirection: 'row',
+        width: '100%',
+        color: COLORS.darkGray,
+        fontSize: 18,
+        borderWidth: 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        overflow: 'hidden',
+        borderRadius: hp(1.0),
+        lineHeight: hp(2.3),
+        height: hp(6),
+        paddingLeft: hp(2.0),
+        paddingRight: hp(2.0),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        fontFamily: FONTS.fontRegular,
+    },
     calIcon: {
         resizeMode: 'contain',
         width: hp(1.76),
@@ -636,6 +651,32 @@ export default StyleSheet.create({
     },
     dropDownFormInput: {
         width: '100%',
-        marginBottom:hp(3)
     },
+
+    // new
+    editprofileStyl: {
+        width: hp(2),
+        height: hp(2),
+        padding:hp(1.7),
+        position: 'absolute',
+        left: hp(4.5),
+        bottom: hp(-1),
+        zIndex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: hp(100),
+        backgroundColor: COLORS.white,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
+    },
+    pzEditIcon: {
+        width: hp(1.7),
+        height: hp(1.7),
+        resizeMode: 'contain',
+    },
+    mainInnerView: {
+        marginTop: hp(1),
+        paddingHorizontal: hp(2),
+    },
+    
 });

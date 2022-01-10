@@ -32,17 +32,19 @@ const SPupilProfileEdit = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, [props.navigation]);
+    const item = props.route.params.item;
+    console.log('8888888',item);
 
     const [isHide, action] = useState(true);
     const [userType, setUserType] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [selectedDate, setSelectedDate] = useState('')
+    const [firstName, setFirstName] = useState(item.FirstName);
+    const [lastName, setLastName] = useState(item.LastName);
+    const [selectedDate, setSelectedDate] = useState(item.Dob)
     const [assignedTeacher, setAssignedTeacher] = useState('');
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(item.Email);
     const [mobile, setMobile] = useState('');
-    const [parentFirstName, setParentFirstName] = useState('');
-    const [parentLastName, setParentLastName] = useState('');
+    const [parentFirstName, setParentFirstName] = useState(item.ParentFirstName);
+    const [parentLastName, setParentLastName] = useState(item.ParentLastName);
     const [profileUri, setProfileUri] = useState('')
     const [isLoading, setLoading] = useState(false)
     const [teachers, setTeachers] = useState([])
@@ -69,7 +71,7 @@ const SPupilProfileEdit = (props) => {
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+            console.log('response of GetSubjectBySchoolId response', res.data)
             if (res.code == 200) {
                 setTeachers(res.data)
             } else {
@@ -83,7 +85,7 @@ const SPupilProfileEdit = (props) => {
     const teacherDropDown = () => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
-                <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
+                <Text style={PAGESTYLE.fieldInputLabel1}>Assigned Teacher</Text>
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
@@ -134,10 +136,11 @@ const SPupilProfileEdit = (props) => {
         } else if (!parentLastName.trim()) {
             showMessage(MESSAGE.parentLastName)
             return false
-        } else if (!email.trim() || !emailValidate(email)) {
-            showMessage(MESSAGE.email)
-            return false
-        } 
+        }
+        // } else if (!email.trim() || !emailValidate(email)) {
+        //     showMessage(MESSAGE.email)
+        //     return false
+        // } 
         // else if (!mobile.trim()) {
         //     showMessage(MESSAGE.phone)
         //     return false
@@ -151,7 +154,7 @@ const SPupilProfileEdit = (props) => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
+            // TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             ParentFirstName: parentFirstName,
             ParentLastName: parentLastName,
             FirstName: firstName,
@@ -166,10 +169,11 @@ const SPupilProfileEdit = (props) => {
 
         console.log('data', data);
 
-        Service.post(data, `${EndPoints.Pupil}`, (res) => {
+        Service.post(data, `${EndPoints.PupilUpdate}/${item._id}`, (res) => {
             if (res.code == 200) {
-                console.log('response of save lesson', res)
-                uploadProfile(res.data._id)
+                console.log('response of edit pupil', res);
+                showMessage(res.message)
+                // uploadProfile(res.data._id)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -281,7 +285,7 @@ const SPupilProfileEdit = (props) => {
             <HeaderPMInnerEdit
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
-                OnSaveEdit={() => validateFields()}
+                onPressSave={() => validateFields()}
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
@@ -341,11 +345,12 @@ const SPupilProfileEdit = (props) => {
                             <TouchableOpacity onPress={() => showDatePicker()}>
                                 <View style={[STYLE.commonInputGrayBack, { flexDirection: 'row' }]}>
                                     <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
+                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate}</Text>
                                     <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                                 </View>
                             </TouchableOpacity>
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                            {/* selectedDate ? selectedDate : 'Select Date' */}
                         </View>
                         
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -363,8 +368,8 @@ const SPupilProfileEdit = (props) => {
                             />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
-                            <Text LABLE style={PAGESTYLE.labelForm}>Assigned Teacher</Text>
-                            <TextInput
+                            {/* <Text LABLE style={PAGESTYLE.labelForm}>Assigned Teacher</Text> */}
+                            {/* <TextInput
                                 returnKeyType={"next"}
                                 style={[STYLE.commonInputGrayBack,{paddingVertical  : 3}]}
                                 placeholder="Assigned Teacher"
@@ -372,8 +377,11 @@ const SPupilProfileEdit = (props) => {
                                 maxLength={40}
                                 value={assignedTeacher}
                                 placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={firstName => setAssignedTeacher(firstName)}
-                            />
+                                onChan
+                                geText={firstName => setAssignedTeacher(firstName)}
+                            /> */}
+                            {teacherDropDown()}
+
                         </View>
                         <View HR style={STYLE.hrCommon}></View>
 
@@ -412,6 +420,7 @@ const SPupilProfileEdit = (props) => {
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={email}
+                                editable={false}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={firstName => setEmail(firstName)}
                             />

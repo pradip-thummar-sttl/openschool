@@ -133,6 +133,10 @@ const PupilManagement = (props) => {
         setPupilEdit(true);
         setPupilProfile(false);
     }
+    const onRefress = () => {
+        setPupilEdit(false);
+        fetchRecord('', 'name');
+    }
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.backgroundColorCommon }}>
             {
@@ -143,7 +147,7 @@ const PupilManagement = (props) => {
                         <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => setPupilAdd(false)} />
                         :
                         isPupilEdit ?
-                            <PupilProfileEdit navigateToBack={() => setPupilEdit(false)} 
+                            <PupilProfileEdit navigateToBack={() => onRefress()} 
                             selectedPupil={selectedItem} openNotification={() => { openNotification() }} />
                             :
                             <>

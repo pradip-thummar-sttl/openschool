@@ -131,7 +131,7 @@ const ParentZoneProfileEdit = (props) => {
 
         Service.post(data, `${EndPoints.UpdateParent}/${pupilId}`, (res) => {
             if (res.code == 200) {
-                console.log('response of save lesson', res)
+                console.log('response of save lesson', res.data)
                 uploadProfile(res.data)
             } else {
                 showMessage(res.message)
