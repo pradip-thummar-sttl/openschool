@@ -31,7 +31,7 @@ const HeaderPTInnerEdit = (props) => {
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-
+    console.log('=======',props);
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>

@@ -21,6 +21,7 @@ import STLessonList from "./schoolLessonlist/STLessonList";
 
 const TeacherProfileView = (props) => {
     const item = props.route.params.item;
+    console.log('item', item)
     const [tabSelected, setTabSelected] = useState(0);
     const [teacherCountData, setTeacherCountData] = useState([])
 
@@ -93,13 +94,17 @@ const TeacherProfileView = (props) => {
                                         <Text LABLE style={PAGESTYLE.label}>Teaching Year</Text>
                                         <Text P style={PAGESTYLE.data}>{item.TeachingYear}</Text>
                                     </View>
-                                    <View style={PAGESTYLE.fieldDetails}>
+                                    {/* <View style={PAGESTYLE.fieldDetails}>
                                         <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
                                         <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
-                                    </View>
+                                    </View> */}
                                     <View style={PAGESTYLE.fieldDetails}>
                                         <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
                                         <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
+                                    </View>
+                                    <View style={PAGESTYLE.fieldDetails}>
+                                        <Text LABLE style={PAGESTYLE.label}>Email</Text>
+                                        <Text P style={PAGESTYLE.data}>{item.Email}</Text>
                                     </View>
                                     <View style={PAGESTYLE.fieldDetails}>
                                         <Text LABLE style={PAGESTYLE.label}>status</Text>
