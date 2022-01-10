@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NativeModules, View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, ActivityIndicator, BackHandler, Platform } from "react-native";
+import {  View, Text, TouchableOpacity, ScrollView, Image, FlatList, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import MESSAGE from '../../../../utils/Messages';
-import { showMessage } from '../../../../utils/Constant';
 import PAGESTYLE from './ProfileStyle';
-import FONTS from '../../../../utils/Fonts';
-import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
+import { TextInput } from "react-native-gesture-handler";
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import HeaderPTInnerEdit from "./HeaderPTInnerEdit";
 import { Service } from "../../../../service/Service";
@@ -15,39 +13,31 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { User } from "../../../../utils/Model";
 import { MenuOption, Menu, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
-
-
-const { CallModule } = NativeModules;
+import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
+import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
+import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 
 const TeacherProfileEdit = (props) => {
     const item = props.route.params.item;
-    console.log(']]]]]]]]]]',item);
     const [isFirstName, setFirstName] = useState();
-    
     const [isLastName, setLastName] = useState();
     const [isProfileUri, setProfileUri] = useState('');
-
     const [isLoading, setLoading] = useState(false);
     const [isListOfYear, setListOfYear] = useState([])
     const [isYearTitle, setYearTitle] = useState('')
-    const [status,setStatus] = useState('')
+    const [status, setStatus] = useState('')
     const [teacherCountData, setTeacherCountData] = useState([])
-
     const [isListOfTitle, setListOfTitle] = useState([])
     const [isTitle, setTitle] = useState('')
-
     const [isUserTypeid, setUserType] = useState('')
 
-    const t1 = useRef(null);
-    const t2 = useRef(null);
-    const t3 = useRef(null);
-
     useEffect(() => {
-        setYearTitle(props?.selectedTeacher?.TeachingYear);
-        setTitle(props?.selectedTeacher?.TitleName);
-        setFirstName(props?.selectedTeacher?.FirstName);
-        setLastName(props?.selectedTeacher?.LastName);
-    }, [props.selectedTeacher])
+        setYearTitle(item?.TeachingYear);
+        setTitle(item?.TitleName);
+        setFirstName(item?.FirstName);
+        setLastName(item?.LastName);
+
+    }, [])
 
     useEffect(() => {
         loadTeachingYear();
@@ -55,7 +45,7 @@ const TeacherProfileEdit = (props) => {
         getUserType();
     }, []);
 
-       
+
 
     const loadTeachingYear = () => {
         Service.get(`${EndPoints.TeachingYear}`, (res) => {
@@ -79,15 +69,19 @@ const TeacherProfileEdit = (props) => {
         })
     }
 
-    const validateFields = () => {
-        if (!isFirstName.trim()) {
-            showMessage(MESSAGE.firstName)
-            return false
-        } else if (!isLastName.trim()) {
-            showMessage(MESSAGE.lastName)
-            return false
-        }
-        saveProfile()
+    const getUserType = () => {
+        Service.get(EndPoints.GetAllUserType, (res) => {
+            if (res.flag) {
+                var userData = res.data
+                userData.map((item) => {
+                    if (item.Name === 'Teacher') {
+                        setUserType(item._id)
+                    }
+                })
+            } else {
+            }
+        }, (err) => {
+        })
     }
 
     const getSelectYeasr = () => {
@@ -110,19 +104,15 @@ const TeacherProfileEdit = (props) => {
         return id;
     }
 
-    const getUserType = () => {
-        Service.get(EndPoints.GetAllUserType, (res) => {
-            if (res.flag) {
-                var userData = res.data
-                userData.map((item) => {
-                    if (item.Name === 'Teacher') {
-                        setUserType(item._id)
-                    }
-                })
-            } else {
-            }
-        }, (err) => {
-        })
+    const validateFields = () => {
+        if (!isFirstName.trim()) {
+            showMessage(MESSAGE.firstName)
+            return false
+        } else if (!isLastName.trim()) {
+            showMessage(MESSAGE.lastName)
+            return false
+        }
+        saveProfile();
     }
 
     const saveProfile = () => {
@@ -131,25 +121,23 @@ const TeacherProfileEdit = (props) => {
             Title: getSelectTitle(),
             FirstName: isFirstName,
             LastName: isLastName,
-            Email: props?.selectedTeacher?.Email,
+            Email: item?.Email,
             UserTypeId: isUserTypeid,
             ProfilePicture: '',
-            UniqueNumber: props?.selectedTeacher?.UniqueNumber,
+            UniqueNumber: item?.UniqueNumber,
             TeachingYear: getSelectYeasr(),
             IsInvited: 'true',
             CreatedBy: User.user.UserDetialId,
         }
 
-        Service.post(data, `${EndPoints.TeacherProfileEdit}/${props?.selectedTeacher?.TeacherId}`, (res) => {
+        Service.post(data, `${EndPoints.TeacherProfileEdit}/${item?.TeacherId}`, (res) => {
             if (res.code == 200) {
-                console.log('response of save lesson', res)
                 uploadProfile(res.data._id)
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
-            console.log('response of get all lesson error', err)
             setLoading(false)
         })
     }
@@ -157,8 +145,10 @@ const TeacherProfileEdit = (props) => {
     const uploadProfile = (teacherId) => {
         if (!isProfileUri) {
             setLoading(false)
-            resetFeilds()
-            showMessage(MESSAGE.updateTeacherProfile)
+           
+            showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
+                props.navigation.goBack();
+            })
             return
         }
 
@@ -173,16 +163,15 @@ const TeacherProfileEdit = (props) => {
         Service.postFormData(data, `${EndPoints.TeacherUploadProfile}/${teacherId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
-                resetFeilds()
-                showMessage(MESSAGE.updateTeacherProfile)
-                console.log('response of save lesson', res)
+                showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
+                    props.navigation.goBack();
+                })
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
         })
 
     }
@@ -232,14 +221,10 @@ const TeacherProfileEdit = (props) => {
         );
     }
 
-    const resetFeilds = () => {
-
-    }
-
     const yearDropDown = () => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
-                <Text style={PAGESTYLE.fieldInputLabel}>Teaching Year</Text>
+                <Text style={PAGESTYLE.labelForm}>Teaching Year</Text>
 
                 <Menu onSelect={(item) => setYearTitle(item.Title)}>
                     <MenuTrigger style={[PAGESTYLE.dropDown1]}>
@@ -262,9 +247,9 @@ const TeacherProfileEdit = (props) => {
     const onTitleDropDown = () => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
-                <Text style={PAGESTYLE.fieldInputLabel}>Title</Text>
+                <Text style={PAGESTYLE.labelForm}>Title</Text>
                 <Menu onSelect={(item) => setTitle(item.Title)}>
-                    <MenuTrigger style={[PAGESTYLE.dropDown]}>
+                    <MenuTrigger style={[PAGESTYLE.dropDown1]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{isTitle}</Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
@@ -285,30 +270,31 @@ const TeacherProfileEdit = (props) => {
         <View>
             <HeaderPTInnerEdit
                 navigateToBack={() => props.navigation.goBack()}
-                // onAlertPress={() => props.navigation.openDrawer()}
                 onSavePressed={() => validateFields()}
-
                 openNotification={() => props.openNotification()}
-                // navigateToBack={() => props.navigateToBack()}
-                // tabIndex={(index) => { setTabSelected(index) }} 
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
-                    <View style={PAGESTYLE.mainContainerProfile}>
-                        <View style={PAGESTYLE.profileImageArea}>
-                            {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
-                            <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
 
-                            <View style={PAGESTYLE.profileOuter}>
-                                <Image style={PAGESTYLE.profileImage}></Image>
-                                <TouchableOpacity onPress={() => showActionChooser()} style={PAGESTYLE.editProfileMain}>
-                                    {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                </TouchableOpacity>
-                            </View>
+                    <View style={PAGESTYLE.profileImageArea}>
+                        <View style={PAGESTYLE.coverImage}>
+                            <TopBackImg  height={hp(13.8)} width={'100%'} />
+                        </View>
+                        <View style={PAGESTYLE.profileOuter} >
+                            <Image style={PAGESTYLE.profileImage}
+                                source={{ uri: !isProfileUri.uri ? baseUrl + item?.ProfilePicture : isProfileUri.uri }} />
+                            <TouchableOpacity style={PAGESTYLE.editprofileStyl} activeOpacity={opacity} onPress={() => showActionChooser()}>
+                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                            </TouchableOpacity>
                         </View>
                     </View>
+
                     <View style={PAGESTYLE.mainDetailsForm}>
-                        {/* {onTitleDropDown()} */}
+
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            {onTitleDropDown()}
+                        </View>
+
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
                             <TextInput
@@ -337,17 +323,6 @@ const TeacherProfileEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             {yearDropDown()}
-                            {/* <Text LABLE style={PAGESTYLE.labelForm}>Teaching Year</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                placeholder="Teaching Year"
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={selectedYear}
-                                placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={selectedYear => setSelectedYear(selectedYear)} /> */}
-                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                         </View>
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -358,10 +333,9 @@ const TeacherProfileEdit = (props) => {
                                 placeholder="Unique I.D (auto-generated)"
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={props?.selectedTeacher?.UniqueNumber}
+                                value={item?.UniqueNumber}
                                 editable={false}
                                 placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={(uniqueNumber) => { setUniqueNumber(uniqueNumber) }}
                             />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -373,38 +347,12 @@ const TeacherProfileEdit = (props) => {
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 editable={false}
-                                value={props?.selectedTeacher?.Email}
+                                value={item?.Email}
                                 placeholderTextColor={COLORS.menuLightFonts}
-                                // onChangeText={(email) => { setEmail(email) }}
                             />
                         </View>
-                        <View style={PAGESTYLE.fieldDetailsForm}>
-                            <Text LABLE style={PAGESTYLE.labelForm}>Status</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={status}
-                                editable={false}
-                                placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={status => setStatus(status)}
-                            />
-                        </View>
-                        {/* <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Notes</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                multiline={true}
-                                autoCapitalize={'sentences'}
-                                numberOfLines={4}
-                                placeholder='Write something about your pupil here…'
-                                style={PAGESTYLE.commonInputTextareaBoldGrey} />
-                        </View> */}
                     </View>
                     <View HR style={STYLE.hrCommon}></View>
-                   
-
                 </ScrollView>
             </View>
         </View>

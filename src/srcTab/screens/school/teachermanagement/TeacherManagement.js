@@ -88,8 +88,6 @@ const TeacherManagement = (props) => {
             setDataLoading(false)
             console.log('response of get all lesson error', err)
         })
-
-
     }
 
     const refresh = () => {
@@ -112,6 +110,10 @@ const TeacherManagement = (props) => {
         setTeacherAddEdit(true);
         setTeacherDetail(false);
     }
+    const onRefress = () => {
+        setTeacherAddEdit(false);
+        fetchRecord('', '')
+    }
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
@@ -122,7 +124,7 @@ const TeacherManagement = (props) => {
                         :
                         isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} openNotification={() => { openNotification() }} />
                             :
-                            isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => setTeacherAddEdit(false)} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />
+                            isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => onRefress()} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />
                                 :
                                 <>
                                     <HeaderTM

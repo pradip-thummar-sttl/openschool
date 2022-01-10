@@ -148,7 +148,6 @@ const TeacherManagement = (props) => {
 
     return (
         <View>
-
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
                 openCsv={()=>{}}
