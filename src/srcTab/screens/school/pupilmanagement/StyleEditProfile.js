@@ -158,69 +158,44 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardGreenButton,
     },
     label: {
-        fontSize: 14,
+        fontSize: 14, 
         textAlign: 'center',
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
     },
     // Mamagement UI starts
-    managementBlankImgWrap: {
-        textAlign: 'center',
-        alignItems: 'center',
-        marginTop: hp(22.13),
-        marginBottom: hp(18),
-        flex: 1,
+    managementBlankImgWrap:{
+        textAlign:'center',
+        alignItems:'center',
+        marginTop:hp(22.13),
+        marginBottom:hp(18),
+        flex:1,
     },
-    blankPageImage: {
-        width: hp(35.03),
-        height: hp(30.77),
+    blankPageImage:{
+        width:hp(35.03),
+        height:hp(30.77),
         resizeMode: 'contain',
     },
-    blankManageTextBold: {
-        fontSize: hp(2.86),
-        fontFamily: FONTS.fontBold,
-        textAlign: 'center',
+    blankManageTextBold:{
+        fontSize:hp(2.86),
+        fontFamily:FONTS.fontBold,
+        textAlign:'center',
     },
-    blankManageTextNormal: {
-        fontSize: hp(1.82),
-        fontFamily: FONTS.fontRegular,
-        textAlign: 'center',
+    blankManageTextNormal:{
+        fontSize:hp(1.82),
+        fontFamily:FONTS.fontRegular,
+        textAlign:'center',
     },
-    managementDetail: {
-        // flex:1,
+    managementDetail:{
     },
-    managementBlockTop: {
-        height:hp(12.5),
-        position: 'relative',
-        alignItems:'flex-end',
-        justifyContent:'center'
-    },
-    commonInput: {
-        color: COLORS.darkGrayIntro,
-        fontSize: 14,
-        borderWidth: 1,
-        borderColor: COLORS.videoLinkBorder,
-        overflow: 'hidden',
-        borderRadius: 6,
-        lineHeight: 20,
-        height: 40,
-        paddingHorizontal: 10,
-        textAlignVertical: 'center',
-        fontFamily: FONTS.fontRegular,
-    },
+   
+   
     loginAccountForm: {
 
         flexDirection: 'row',
         justifyContent: 'space-between',
 
         marginBottom: hp('2.0%'),
-    },
-    hrLine: {
-        backgroundColor: COLORS.commonBorderColor,
-        width: '80%',
-        marginTop: 20,
-        alignSelf: 'center',
-        height: 1
     },
     filedSpace: {
         width: hp(38.4),
@@ -234,353 +209,10 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.lightGray,
-        paddingBottom: hp(1),
-    },
-    calIcon: {
-        resizeMode: 'contain',
-        width: hp(1.76),
-        marginRight:hp(1.04),
-        alignSelf: 'center',
-    },
-    dateTimetextdummy: {
-        fontSize: hp(1.82),
-        color: COLORS.darkGray,
-        fontFamily: FONTS.fontRegular,
-        alignSelf: 'center',
-    },
-    dropDownArrow:{
-        width:hp(1.51),
-        resizeMode:'contain',
-        position:'absolute',
-        right:hp(1.4),
-        alignSelf: 'center',
-    },
-    field: {
-        position: 'relative',
-        // marginRight: hp(1.69),
-    },
-    fullInput: {
-        width: hp(79.5),
-        paddingTop: hp(1.5),
-    },
-    profileFormTopSpace: {
-        marginTop: hp(2),
-    },
-    managementopImage: {
-        width: '100%',
-        top: 0,
-        resizeMode: 'cover',
-        // width: '100%',
-        // height: hp(14.06),
-        // resizeMode: 'contain',
-        // position: 'relative',
-    },
-    thumbTopUser: {
-        width: hp(12.5),
-        height: hp(12.5),
-        borderRadius: 96,
-        borderColor: COLORS.white,
-        borderWidth: 3,
-        backgroundColor: '#ECEDF0',
-        position: 'absolute',
-        left: hp(5),
-        bottom: hp(-4),
-    },
-    topBannerBtn: {
-        position: 'absolute',
-        right: hp(5),
-        top: hp(2),
-        paddingLeft: hp(3),
-        paddingRight: hp(3),
-        fontFamily: FONTS.fontBold,
-        color: COLORS.white,
-        fontSize: hp(1.56),
-    },
-    managementNameSec: {
-        flexDirection: 'row',
-        paddingLeft: hp(26.04),
-        paddingTop: hp(5.64),
-    },
-    userLabel: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.lightGray,
-    },
-    userName: {
-        fontFamily: FONTS.fontBold,
-        fontSize: hp(1.82),
-        color: COLORS.darkGray,
-    },
-    nameSmlBlock: {
-        width: '25%',
-    },
-    dateSmlBlock: {
-        width: '25%',
-    },
-    paragraphText: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.introGreyColor,
-        flexWrap: 'wrap',
-        paddingBottom: hp(2),
-    },
-    paragraphText1: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.introGreyColor,
-        flexWrap: 'wrap',
-        paddingBottom: hp(2),
-        height: hp(15)
-    },
-    tickLayout: {
-        backgroundColor: COLORS.buttonGreen,
-        borderRadius: 10,
-        height: 15,
-        width: 15,
-        justifyContent: 'center',
-        alignItems: 'center',
-        resizeMode: 'contain'
-    },
-    tickLayoutPArent: {
-        backgroundColor: COLORS.buttonGreen,
-        borderRadius: 10,
-        height: 35,
-        width: 35,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // position: 'absolute',
-        alignSelf: 'flex-end',
-        marginBottom: wp(1)
-    },
-    managementParaSec: {
-        marginRight: hp(20.05),
-        marginTop: hp(5),
-        paddingLeft: hp(26.04),
-    },
-    ratingBlock: {
-        width: '100%',
-        marginTop: hp(2.5),
-    },
-    achivementBox: {
-        width: '100%',
-        height: 150,
-        alignItems: 'center',
-        paddingHorizontal: 10,
-        flexDirection: 'row'
-    },
-    starSelectedText: {
-        fontFamily: FONTS.fontBold,
-        color: COLORS.white,
-        fontSize: hp(1.82),
-        lineHeight: hp(5.1),
-    },
-    starSelected: {
-        width: hp(4.94),
-        height: hp(4.68),
-        resizeMode: 'contain',
-        alignItems: 'center',
-        alignSelf: 'center',
-        marginBottom: hp(1.5),
-    },
-    rewardStarMark: {
-        justifyContent: 'space-around',
-        width: '100%',
-        flexDirection: 'row',
-        paddingTop: hp(3.05),
-        paddingBottom: hp(3.05),
-    },
-    centerText: {
-        alignItems: 'center',
-    },
-    starText: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.darkGray,
-    },
-    ratingTitle: {
-        fontFamily: FONTS.fontBold,
-        fontSize: hp(1.82),
-        color: COLORS.darkGray,
-        marginLeft: hp(1.95),
-    },
-    separater: {
-        borderLeftWidth: 1,
-        borderLeftColor: COLORS.dashboardBorder,
-        borderRightWidth: 1,
-        borderRightColor: COLORS.dashboardBorder,
-        width: hp(14.32),
-    },
-    centerStar: {
-        alignItems: 'center',
-    },
-    whiteBg: {
-        backgroundColor: COLORS.white,
-        paddingBottom: hp(2),
-        paddingTop: hp(0),
-    },
-    annotationText: {
-        width: hp(72.91),
-        marginTop: hp(2.5),
-    },
-    rateAnnotationBlock: {
-        flexDirection: 'row',
-        height: 200
-    },
-    annotationBox: {
-        borderWidth: 1,
-        borderColor: COLORS.dashboardBorder,
-        borderRadius: hp(1.8),
-        padding: hp(1.95),
-    },
-    anoteTitle: {
-        paddingLeft: hp(1.95),
-        paddingBottom: hp(1.80),
-    },
-    graphBlock: {
-        flexDirection: 'row',
-        margin: hp(3),
-    },
-    graphTitle: {
-        fontFamily: FONTS.fontBold,
-        color: COLORS.darkGray,
-        fontSize: hp(2.08),
-        marginTop: hp(5),
-        marginLeft: hp(2.3),
-    },
-    chartBlock: {
-        // width:hp(28.20),
-        alignItems: 'flex-start',
-    },
-    mngmntchartImg: {
-        width: hp(25.20),
-        height: hp(25.20),
-        resizeMode: 'contain',
-    },
-    generalRow: {
-        flexDirection: 'row',
-    },
-    purpleMark: {
-        width: 10,
-        height: 10,
-        borderRadius: hp(1.8),
-        backgroundColor: 'purple'
-    },
-    labelMark: {
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.lightGray,
-        fontSize: hp(1.82),
-    },
-    normalText: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.introGreyColor,
-    },
-    graphChartText: {
-        fontFamily: FONTS.fontRegular,
-        fontSize: hp(1.82),
-        color: COLORS.introGreyColor,
-        marginTop: hp(7),
-        marginBottom: hp(4),
-    },
-    graphBox: {
-        borderColor: COLORS.dashboardBorder,
-        borderWidth: 1,
-        backgroundColor: COLORS.white,
-        borderRadius: hp(1.8),
-        elevation: 1,
-        shadowColor: COLORS.lightGrayPupil,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 1,
-        width: '100%',
-        padding: hp(3),
-    },
-    purpleMark: {
-        width: hp(1.82),
-        height: hp(1.82),
-        resizeMode: 'contain',
-        marginTop: hp(0.3),
-        marginRight: hp(1.5),
-        backgroundColor: '#BE8CFF',
-        borderRadius: 5,
-    },
-    orangeMark: {
-        width: hp(1.82),
-        height: hp(1.82),
-        resizeMode: 'contain',
-        marginTop: hp(0.3),
-        marginRight: hp(1.5),
-        borderRadius: 5,
-        backgroundColor: 'orange'
-    },
-    mngmntgraphImg: {
-        width: hp(118.16),
-        height: hp(37.36),
-        resizeMode: 'contain',
-    },
-    listBottomSpace: {
-        marginBottom: hp(1.5),
-    },
-    createGrpBlock: {
-        width: '100%',
-        height: 235,
-        backgroundColor: COLORS.backgroundColorCommon,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'center',
-        borderRadius: 6,
-        borderColor: COLORS.blueBorder,
-        borderWidth: 1,
-        borderStyle: 'dashed',
-    },
-    createGrpImage: {
-        width: 52.91,
-        height: 43.57,
-        resizeMode: 'contain',
-        marginBottom: 30,
-    },
-    insightBox: {
-        backgroundColor: COLORS.greyInsight,
-        borderRadius: 10,
-        width: 140,
-        height: 150,
-        marginHorizontal: 10,
-        paddingHorizontal: 15,
-        paddingTop: 40
-    },
-    insightLabel: {
-        color: COLORS.menuLightFonts,
-        fontFamily: FONTS.fontBold,
-    },
-    insightMain: {
-        fontSize: 20,
-        fontFamily: FONTS.fontBold,
-    }, 
-    topBannerParent: {
-        paddingHorizontal: 6,
-        position: 'absolute',
-        // right: 32,
-        right : Platform.OS === 'android' ? 6 : 32,
-        top: Platform.OS === 'android' ? 17 : hp(18)
-    },
-    topBannerBtn1: {
-        fontFamily: FONTS.fontBold,
-        color: COLORS.white,
-        fontSize: 12,
-        lineHeight: 37.5,
-        textTransform: 'uppercase',
-        borderRadius: 8,
-        borderWidth: 1,
-        width: 128,
-        height: 40,
-        textAlign: 'center',
-        overflow: 'hidden',
-        borderColor: COLORS.buttonGreen,
-        backgroundColor: COLORS.buttonGreen,
+        paddingBottom: hp(0.5),
     },
     dropDownFormInput: {
         width: hp(38.4),
-        marginRight: hp(2.5),
     },
     dropDownFormInput1: {
         width: '60%',
@@ -651,42 +283,414 @@ export default StyleSheet.create({
         paddingRight: hp('2.0%'),
         alignSelf: 'center',
     },
-    dropDownSmallWrap1: {
-        flexDirection: 'row',
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.darkGray,
-        fontSize: hp('1.9%'),
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
-        borderTopLeftRadius: hp('1.0%'),
-        borderBottomLeftRadius: hp('1.0%'),
-        lineHeight: hp(2.3),
-        height: hp('6%'),
-        paddingLeft: hp('2.0%'),
-        paddingRight: hp('2.0%'),
-        alignSelf: 'center',
+    field: {
+        position: 'relative',
     },
-    dropDownSmallWrap2: {
-        flexDirection: 'row',
-        fontFamily: FONTS.fontRegular,
-        color: COLORS.darkGray,
-        fontSize: hp('1.9%'),
-        borderWidth: 1,
-        borderColor: COLORS.commonBorderColor,
-        borderTopRightRadius: hp('1.0%'),
-        borderBottomRightRadius: hp('1.0%'),
-        lineHeight: hp(2.3),
-        height: hp('6%'),
-        paddingLeft: hp('2.0%'),
-        paddingRight: hp('2.0%'),
-        alignSelf: 'center',
+    fullInput: {
+        width: hp(79.5),
+        paddingTop: hp(1.5),
     },
-
-     // updates
-     pzEditIcon: {
+    profileFormTopSpace: {
+        marginTop: hp(2),
+    },
+   
+    thumbTopUser:{
+        width: hp(13),
+        height:hp(13),
+        borderRadius: hp(6.5),
+        borderColor:COLORS.white,
+        borderWidth: 3,
+        backgroundColor:'#ECEDF0',
+        position:'absolute',
+        left:hp(8),
+        bottom:hp(-5),
+    },
+    topBannerBtn:{
+        position:'absolute',
+        right:hp(5),
+        top:hp(2),
+        paddingLeft:hp(3),
+        paddingRight:hp(3),
+        fontFamily:FONTS.fontBold,
+        color:COLORS.white,
+        fontSize:hp(1.56),
+    },
+    managementNameSec:{
+        flexDirection:'row',
+        paddingLeft:hp(26.04),
+        paddingTop:hp(8.64),
+    },
+    userLabel:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.lightGray,
+    },
+    userName:{
+        fontFamily:FONTS.fontBold,
+        fontSize:hp(1.82),
+        color:COLORS.darkGray,
+    },
+    nameSmlBlock:{
+        width: '25%',
+        marginEnd : Platform.OS === 'ios' ? 30 : 0
+    },
+    dateSmlBlock:{
+        width: '25%',
+    },
+    paragraphText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.introGreyColor,
+        flexWrap:'wrap',
+        paddingBottom:hp(2), 
+    },
+    paragraphText1:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.introGreyColor,
+        flexWrap:'wrap',
+        paddingBottom:hp(2), 
+        height: hp(15)
+    },
+    tickLayout: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 15,
+        width: 15,
+        justifyContent: 'center',
+        alignItems: 'center',
+        resizeMode: 'contain'
+    },
+    tickLayoutPArent: {
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: 10,
+        height: 35,
+        width: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        // position: 'absolute',
+        alignSelf: 'flex-end',
+        marginBottom:wp(1)
+    },
+    managementParaSec:{
+        marginRight:hp(20.05),
+        marginTop:hp(5),
+        paddingLeft:hp(26.04),
+    },
+    ratingBlock:{
+        width:'100%',
+        marginTop: hp(2.5),
+    },
+    achivementBox:{
+        width :'100%',
+        height: 150,
+        alignItems:'center',
+        paddingHorizontal: 10,
+        flexDirection: 'row'
+    },
+    starSelectedText:{
+        fontFamily: FONTS.fontBold,
+        color:COLORS.white,
+        fontSize: hp(1.82),
+        lineHeight: hp(5.1),
+    },
+    starSelected:{
+        width:hp(4.94),
+        height:hp(4.68),
+        resizeMode: 'contain',
+        alignItems:'center',
+        alignSelf: 'center',
+        marginBottom:hp(1.5),
+    },
+    rewardStarMark:{
+        justifyContent: 'space-around',
+        width:'100%',
+        flexDirection: 'row',
+        paddingTop:hp(3.05),
+        paddingBottom:hp(3.05),
+    },
+    centerText:{
+        alignItems:'center',
+    },
+    starText:{
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+    },
+    ratingTitle:{
+        fontFamily: FONTS.fontBold,
+        fontSize: hp(1.82),
+        color:COLORS.darkGray,
+        paddingBottom:hp(1.5),
+        marginBottom:wp(1.2),
+        marginLeft: hp(1.95),
+    },
+    separater:{
+        borderLeftWidth:1,
+        borderLeftColor:COLORS.dashboardBorder,
+        borderRightWidth:1,
+        borderRightColor:COLORS.dashboardBorder,
+        width:hp(14.32),
+    },
+    centerStar:{
+        alignItems:'center',
+    },
+    whiteBg: {
+        backgroundColor: COLORS.white,
+        paddingBottom: hp(2),
+        paddingTop: hp(0),
+    },
+    annotationText:{
+        width:hp(72.91),
+        marginTop: hp(2.5),
+    },
+    rateAnnotationBlock:{
+        flexDirection:'row',
+        height: 200
+    },
+    annotationBox:{
+        borderWidth:1,
+        borderColor:COLORS.dashboardBorder,
+        borderRadius:hp(1.8),
+        padding:hp(1.95),
+    },
+    anoteTitle:{
+        paddingLeft:hp(1.95),
+        paddingBottom:hp(1.80),
+    },
+    graphBlock:{
+        flexDirection:'row',
+        margin:hp(3),
+    },
+    graphTitle:{
+        fontFamily: FONTS.fontBold,
+        color:COLORS.darkGray,
+        fontSize: hp(2.08),
+        marginTop:hp(5),
+        marginLeft:hp(2.3),
+    },
+    chartBlock:{
+        // width:hp(28.20),
+        alignItems:'flex-start',
+    },
+    mngmntchartImg:{
+        width:hp(25.20),
+        height:hp(25.20),
+        resizeMode: 'contain',
+    },
+    generalRow:{
+        flexDirection:'row',
+    },
+    purpleMark:{
+        width:10,
+        height:10,
+        borderRadius:hp(1.8),
+        backgroundColor:'purple'
+    },
+    labelMark:{
+        fontFamily: FONTS.fontRegular,
+        color:COLORS.lightGray,
+        fontSize: hp(1.82), 
+    },
+    normalText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.introGreyColor,
+    },
+    graphChartText:{
+        fontFamily:FONTS.fontRegular,
+        fontSize:hp(1.82),
+        color:COLORS.introGreyColor,
+        marginTop:hp(7),
+        marginBottom:hp(4),
+    },
+    graphBox:{
+        borderColor: COLORS.dashboardBorder,
+        borderWidth: 1,
+        backgroundColor:COLORS.white,
+        borderRadius:hp(1.8),
+        elevation: 1,        
+        shadowColor: COLORS.lightGrayPupil,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
+        width:'100%',
+        padding:hp(3),
+    },
+    purpleMark:{
+        width:hp(1.82),
+        height:hp(1.82),
+        resizeMode: 'contain',
+        marginTop:hp(0.3),
+        marginRight:hp(1.5),
+        backgroundColor:'#BE8CFF',
+        borderRadius: 5,
+    },
+    orangeMark:{
+        width:hp(1.82),
+        height:hp(1.82),
+        resizeMode: 'contain',
+        marginTop:hp(0.3),
+        marginRight:hp(1.5),
+        borderRadius:5,
+        backgroundColor:'orange'
+    },
+    mngmntgraphImg:{
+        width:hp(118.16),
+        height:hp(37.36),
+        resizeMode: 'contain',
+    },
+    listBottomSpace:{
+        marginBottom:hp(1.5),
+    },
+    createGrpBlock: {
+        width: '100%',
+        height: 235,
+        backgroundColor: COLORS.backgroundColorCommon,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 6,
+        borderColor: COLORS.blueBorder,
+        borderWidth: 1,
+        borderStyle: 'dashed',
+    },
+    createGrpImage: {
+        width: 52.91,
+        height: 43.57,
+        resizeMode: 'contain',
+        marginBottom: 30,
+    },
+    insightBox: {
+        backgroundColor: COLORS.greyInsight,
+        borderRadius: 10,
+        flex: 1,
+        height: 150,
+        marginHorizontal: 10,
+        paddingHorizontal: 15,
+        paddingTop: 40
+    },
+    insightLabel: {
+        color: COLORS.menuLightFonts,
+        fontFamily: FONTS.fontBold,
+    },
+    insightMain: {
+        fontSize: 20,
+        fontFamily: FONTS.fontBold,
+    },
+    pzEditIcon: {
         width: hp(1.7),
         height: hp(1.7),
         resizeMode: 'contain',
+    },
+    
+    topBannerParent: {
+        paddingHorizontal: 10,
+        position: 'absolute',
+        right: 32,
+        top: 17,
+    },
+    topBannerBtn1: {
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: 12,
+        lineHeight: 37.5,
+        textTransform: 'uppercase',
+        borderRadius: 8,
+        borderWidth: 1,
+        width: 128,
+        height: 40,
+        textAlign: 'center',
+        overflow: 'hidden',
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
+    },
+
+  
+
+    // updates
+    innerView:{ width: hp(110), marginTop: hp(12), flexDirection: 'row', 
+    justifyContent:'space-around', alignSelf: 'center' },
+    
+    secondHeader:{
+        height:hp(12.5),
+        position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center',
+    },
+    //Profile
+
+    commonInput: {
+        height: hp(5.5),
+        color:COLORS.darkGrayIntro,
+        fontSize: 14,
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        lineHeight: 20,
+        paddingHorizontal: hp(1),
+        textAlignVertical: 'center',
+        fontFamily: FONTS.fontRegular,
+    },
+
+    SelectDateView: {
+        width: hp(38.4),
+        height: hp(5.5),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        overflow: 'hidden',
+        borderRadius: 6,
+        alignSelf:'center',
+        alignItems:'center',
+        paddingHorizontal:hp(1),
+        flexDirection: 'row', 
+       
+    },
+    calIcon: {
+        resizeMode: 'contain',
+        width: hp(1.76),
+        marginRight:hp(1.04),
+        alignSelf: 'center',
+    },
+    dateTimetextdummy: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
+        alignSelf: 'center',
+        marginTop:hp(0.2)
+    },
+    dropDownArrow:{
+        width:hp(1.51),
+        resizeMode:'contain',
+        position:'absolute',
+        right:hp(1.4),
+        alignSelf: 'center',
+    },
+
+    managementBlockTop:{
+        height:hp(12.5),
+        position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center',
+        backgroundColor:'#90daff'
+    },
+    managementopImage:{
+        width: '100%',
+        resizeMode:'stretch',
+    },
+    imageViewStyle:{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 },
+    
+    TeacherProfileMainView:{
+        width: hp(13),
+        height:hp(13),
+        borderRadius: 96,
+        borderColor:COLORS.white,
+        borderWidth: 3,
+        backgroundColor:'#ECEDF0',
+        position:'absolute',
+        left:hp(8),
+        bottom:Platform.OS == 'ios' ? hp(-8) : hp(-9),
     },
     editprofileStyl: {
         width: hp(2),
@@ -703,30 +707,21 @@ export default StyleSheet.create({
         borderColor: COLORS.editBorder,
         borderWidth: 1,
     },
-     TeacherProfileMainView:{
-        width: hp(13),
-        height:hp(13),
-        borderRadius: 96,
-        borderColor:COLORS.white,
-        borderWidth: 3,
-        backgroundColor:'#ECEDF0',
-        position:'absolute',
-        left:hp(8),
-        bottom:Platform.OS == 'ios' ? hp(-8) : hp(-9),
-    },
     btnSendView:{
+        right:hp(1),
+        top:hp(4.5),
+        bottom:hp(5),
+        justifyContent:'center',
+        alignItems:'center',
+        position:'absolute'
+    },
+    btnInnerSendView:{
         width: wp(12),
         height: hp(5),
-        right:hp(1),
-        top:hp(4.7),
-        bottom:hp(5),
         borderRadius: 8,
         borderWidth: 1,
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
-        justifyContent:'center',
-        alignItems:'center',
-        position:'absolute'
     },
     btnSendTextView:{
         fontFamily: FONTS.fontBold,
@@ -738,11 +733,5 @@ export default StyleSheet.create({
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
     },
-     // updates
-     secondHeader:{
-        height:hp(12.5),
-        position: 'relative',
-        alignItems:'flex-end',
-        justifyContent:'center',
-    },
+  
 });

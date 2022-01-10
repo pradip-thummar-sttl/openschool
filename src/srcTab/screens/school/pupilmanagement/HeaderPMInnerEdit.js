@@ -6,7 +6,7 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import BackArrow from "../../../../svg/common/BackArrow";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
-const HeaderPMInnerAdd = (props) => {
+const HeaderPMInnerEdit = (props) => {
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -17,7 +17,7 @@ const HeaderPMInnerAdd = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>Add New Teacher</Text>
+                        <Text style={styles.mainTitle}>Edit Pupil</Text>
                     </View>
                 </View>
 
@@ -33,7 +33,7 @@ const HeaderPMInnerAdd = (props) => {
         </View>
     );
 }
-export default HeaderPMInnerAdd;
+export default HeaderPMInnerEdit;
 
 const styles = StyleSheet.create({
     headerMaintop: {

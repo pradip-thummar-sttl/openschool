@@ -51,9 +51,7 @@ const TeacherProfileAdd = (props) => {
 
     useEffect(() => {
         loadTeachingYear()
-
         loadTitle()
-
         getUserType()
     }, [])
 
@@ -272,7 +270,6 @@ const TeacherProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedTitle([...selectedTitle, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTitle.length > 0 ? selectedTitle[selectedTitle.length - 1].Title : 'Select a Title'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>

@@ -102,6 +102,8 @@ const MESSAGE = {
     parentFirstName: 'Please enter parent first name',
     parentLastName: 'Please enter parent last name',
     inviteSent: 'Invitation sent successfully',
+    updateTeacherProfile: 'Update teacher profile successfully',
+    updatePupilProfile: 'Update pupil profile successfully',
     selectYear: 'Please select teaching year',
     selectTitle: 'Please select title',
 }

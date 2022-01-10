@@ -47,16 +47,14 @@ const HeaderPMInner = (props) => {
         }
     }
     const onFilter = (index) => {
-        if(index ===0)
-        {
+        if (index === 0) {
             setSelectedIndex(0)
-            setFilterBy('Subject'); 
+            setFilterBy('Subject');
             props.onSearch(searchKeyword, "Subject")
         }
-        else
-        {
+        else {
             setSelectedIndex(1)
-            setFilterBy('Date'); 
+            setFilterBy('Date');
             props.onSearch(searchKeyword, "Date")
         }
 
@@ -111,56 +109,59 @@ const HeaderPMInner = (props) => {
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
+                    {
+                        tabIndex == 2 &&
+                        <View style={styles.serachView}>
+                            <View style={styles.field}>
+                                <TouchableOpacity onPress={() => { onSearch() }} style={[PAGESTYLE.userIcon1Parent]} activeOpacity={opacity}>
+                                    {
+                                        isSearchActive ?
+                                            <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
+                                            :
+                                            <SearchBlue style={[PAGESTYLE.userIcon1]} height={20} width={20} />
+                                    }
+                                </TouchableOpacity>
 
-                    <View style={styles.serachView}>
-                        <View style={styles.field}>
-                            <TouchableOpacity onPress={() => { onSearch() }} style={[PAGESTYLE.userIcon1Parent]} activeOpacity={opacity}>
-                                {
-                                    isSearchActive ?
-                                        <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
-                                        :
-                                        <SearchBlue style={[PAGESTYLE.userIcon1]} height={20} width={20} />
-                                }
-                            </TouchableOpacity>
+                                <TextInput
+                                    ref={textInput}
+                                    style={[styles.searchHeader, { width: '100%', paddingVertical: Platform.OS === 'android' ? 2.5 : 0 }]}
+                                    placeholder="Search pupil"
+                                    maxLength={50}
 
-                            <TextInput
-                                ref={textInput}
-                                style={[styles.searchHeader,{width : '100%',paddingVertical : Platform.OS === 'android' ? 2.5 : 0}]}
-                                placeholder="Search pupil"
-                                maxLength={50}
+                                    placeholderTextColor={COLORS.menuLightFonts}
+                                    onChangeText={keyword => { setSearchKeyword(keyword); }} />
+                            </View>
 
-                                placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={keyword => { setSearchKeyword(keyword); }} />
+                            <View style={styles.field1}>
+                                <Menu>
+                                    <MenuTrigger>
+                                        <Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                                    </MenuTrigger>
+
+                                    <MenuOptions style={styles.filterListWrap}>
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity onPress={() => { onFilter(0) }} activeOpacity={opacity}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>Subject </Text>
+                                                    {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                        <MenuOption style={styles.borderList}>
+                                            <TouchableOpacity onPress={() => { onFilter(1); setFilterBy('Date'); setSelectedIndex(1) }} activeOpacity={opacity}>
+                                                <View style={styles.filterList}>
+                                                    <Text style={styles.filterListText}>Date</Text>
+                                                    {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                                </View>
+                                            </TouchableOpacity>
+                                        </MenuOption>
+                                    </MenuOptions>
+                                </Menu>
+                                <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                            </View>
+
                         </View>
-
-                        <View style={styles.field1}>
-                            <Menu>
-                                <MenuTrigger>
-                                    <Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
-                                </MenuTrigger>
-
-                                <MenuOptions style={styles.filterListWrap}>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity onPress={() => { onFilter(0)}} activeOpacity={opacity}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Subject </Text>
-                                                {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                    <MenuOption style={styles.borderList}>
-                                        <TouchableOpacity onPress={() => { onFilter(1); setFilterBy('Date'); setSelectedIndex(1) }} activeOpacity={opacity}>
-                                            <View style={styles.filterList}>
-                                                <Text style={styles.filterListText}>Date</Text>
-                                                {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
-                                            </View>
-                                        </TouchableOpacity>
-                                    </MenuOption>
-                                </MenuOptions>
-                            </Menu>
-                            <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
-                        </View>
-                    </View>
+                    }
                 </View>
             </View>
 
@@ -173,8 +174,19 @@ export default HeaderPMInner;
 
 const styles = StyleSheet.create({
     serachView: {
+        height:hp(6),
         flexDirection: 'row'
     },
+    lessonPlanTop: {
+        flexDirection: 'row',
+    },
+    lessonPlanTab: {
+        height:hp(6),
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+
     field: {
         position: 'relative',
         width: hp(30),
@@ -211,7 +223,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.themeBlue,
         fontSize: hp('1.9%'),
-      
+
     },
     userIcon1Parent: {
         position: 'absolute',
@@ -320,14 +332,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
 
     },
-    lessonPlanTop: {
-        flexDirection: 'row',
-    },
-    lessonPlanTab: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    },
+    
+   
     tabs: {
         paddingRight: hp(2.5),
     },

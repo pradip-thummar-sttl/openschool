@@ -314,8 +314,7 @@ export default StyleSheet.create({
     },
     managementopImage:{
         width: '100%',
-        top: 0,
-        resizeMode: 'cover',
+        resizeMode:'stretch',
     },
     thumbTopUser:{
         width: hp(13),
@@ -646,6 +645,12 @@ export default StyleSheet.create({
   
 
     // updates
+    secondHeader:{
+        height:hp(12.5),
+        position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center',
+    },
     btnSendView:{
         width: wp(12),
         height: hp(5),

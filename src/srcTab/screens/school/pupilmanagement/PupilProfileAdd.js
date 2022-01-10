@@ -7,25 +7,12 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
-// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
-import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './StyleProfile';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
-import Chat from "../../Chat/Chat";
-import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
-import BronzeFill from "../../../../svg/teacher/pupilmanagement/StarBronze_Fill";
-import Bronze from "../../../../svg/teacher/pupilmanagement/StarBronze";
-import SilverFill from "../../../../svg/teacher/pupilmanagement/StartSilver_Fill";
-import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
-import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
-import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
-import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import HeaderPMInnerAdd from "./HeaderPMInnerAdd";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
@@ -269,7 +256,6 @@ const PupilProfileAdd = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
