@@ -16,12 +16,7 @@ import PupilHomeWorkDetail from './homework/PupilHomeWorkDetail';
 import PupilHomeWorkSubmitted from './homework/PupilHomeWorkSubmitted';
 import PupilHomeWorkMarked from './homework/PupilHomeWorkMarked';
 import Header4 from '../../../component/reusable/header/bulck/Header4'
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
+import { Menu, MenuOptions,MenuOption,MenuTrigger,} from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
@@ -59,7 +54,6 @@ const PupilLessonDetail = (props) => {
     const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
-        console.log('keyword', keyword);
         if (initialRender.current) {
             initialRender.current = false
         } else {
@@ -96,13 +90,8 @@ const PupilLessonDetail = (props) => {
     }, [filterBy])
 
     useEffect(() => {
-        // const unsubscribe = props.navigation.addListener('focus', () => {
         getLessonData('', '')
         getHomeworkData('', '')
-        // });
-        // return () => {
-        //     unsubscribe;
-        // }
     }, [])
 
     const getHomeworkData = (searchBy, filterBy) => {
@@ -139,7 +128,6 @@ const PupilLessonDetail = (props) => {
 
         })
     }
-
     const getLessonData = (searchBy, filterBy) => {
         let data = {
             Searchby: searchBy,
@@ -168,7 +156,6 @@ const PupilLessonDetail = (props) => {
 
         })
     }
-
     const searchHeader = () => {
         return (
 
@@ -317,16 +304,12 @@ const PupilLessonDetail = (props) => {
                                 navigatePupilHomeworkesubmited={(item) => { setItem(item), setHomeWorkSubmitted(true) }}
                                 navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }} />
                     }
-                    {/* <HeaderBulk /> */}
-                    {/* <PupilLessonDetailInternal /> */}
-                    {/* <PupilHomeWorkDetail /> */}
-                    {/* <PupilHomeWorkSubmitted /> */}
-                    {/* <PupilHomeWorkMarked /> */}
                 </ScrollView>
 
             </View>
         )
     }
+    
     return (
         <View style={PAGESTYLE.mainPage}>
             {
