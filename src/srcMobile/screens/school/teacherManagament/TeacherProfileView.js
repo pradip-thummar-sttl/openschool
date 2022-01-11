@@ -39,7 +39,7 @@ const TeacherProfileView = (props) => {
         return true;
     }
     const myref = useRef(null);
-   
+
 
     const handleOnClick = (index) => {
         setTabSelected(index)
@@ -77,15 +77,13 @@ const TeacherProfileView = (props) => {
                     tabSelected === 0 ?
                         <View style={PAGESTYLE.MainProfile}>
                             <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
-                                <View style={PAGESTYLE.mainContainerProfile}>
-                                    <View style={PAGESTYLE.profileImageArea}>
-                                        <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
-                                        <View style={PAGESTYLE.profileOuter}>
-                                            <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
-                                        </View>
+                                <View style={PAGESTYLE.profileImageArea}>
+                                    <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
+                                    <View style={PAGESTYLE.profileOuter}>
+                                        <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />
                                     </View>
                                 </View>
-                                <View style={PAGESTYLE.mainDetails}>
+                                <View style={PAGESTYLE.mainInnerView}>
                                     <View style={PAGESTYLE.fieldDetails}>
                                         <Text LABLE style={PAGESTYLE.label}>Teacher name</Text>
                                         <Text P style={PAGESTYLE.data}>{item.FirstName} {item.LastName}</Text>
@@ -94,10 +92,6 @@ const TeacherProfileView = (props) => {
                                         <Text LABLE style={PAGESTYLE.label}>Teaching Year</Text>
                                         <Text P style={PAGESTYLE.data}>{item.TeachingYear}</Text>
                                     </View>
-                                    {/* <View style={PAGESTYLE.fieldDetails}>
-                                        <Text LABLE style={PAGESTYLE.label}>Date of birth</Text>
-                                        <Text P style={PAGESTYLE.data}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
-                                    </View> */}
                                     <View style={PAGESTYLE.fieldDetails}>
                                         <Text LABLE style={PAGESTYLE.label}>Unique I.D (auto-generated)</Text>
                                         <Text P style={PAGESTYLE.data}>{item.UniqueNumber}</Text>
