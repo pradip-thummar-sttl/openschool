@@ -32,7 +32,6 @@ const PupilProfileEdit = (props) => {
     const [isUserType, setUserType] = useState('')
     const [isLoading, setLoading] = useState(false);
 
-
     useEffect(() => {
         setFirstName(props?.selectedPupil?.FirstName);
         setLastName(props?.selectedPupil?.LastName);
@@ -42,7 +41,7 @@ const PupilProfileEdit = (props) => {
         setMobile(props?.selectedPupil?.MobileNumber + '');
         getUserType();
 
-        console.log("props ---->", props.selectedPupil);
+        console.log("props ----> props.selectedPupil", props.selectedPupil);
 
     }, [props.selectedPupil])
 
@@ -146,8 +145,11 @@ const PupilProfileEdit = (props) => {
             MobileNumber: isMobile,
             CreatedBy: User.user.UserDetialId,
         }
+        console.log('THIS IS URL `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`', `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`)
+        console.log('data in tab profile edoit',data)
 
         Service.post(data, `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`, (res) => {
+           console.log('THIS IS RESPONSE --------> res', res);
             if (res.code == 200) {
                 uploadProfile(res.data.UserDetialId)
             } else {

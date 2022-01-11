@@ -14,6 +14,7 @@ import { User } from "../../../../utils/Model";
 import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
+import { useFocusEffect } from "@react-navigation/native";
 
 const { CallModule } = NativeModules;
 
@@ -155,7 +156,7 @@ const SPupilProfileView = (props) => {
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('SPupilProfileEdit', { item: item })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('SPupilProfileEdit', { item: item,navigateToBack: () => props.navigation.goBack() })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />
