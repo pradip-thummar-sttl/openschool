@@ -12,17 +12,6 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.runAnimation()
-
-        // setTimeout(() => {
-        //     // AsyncStorage.getItem('user').then((user) => {
-        //     //     if (user) {
-        //     //         User.user = user
-        //     //         this.props.navigation.replace('TeacherDashboard')
-        //     //     } else {
-        //             this.launchNextScreen()
-        //         // }
-        //     // })
-        // }, 3000);
     }
 
     runAnimation() {

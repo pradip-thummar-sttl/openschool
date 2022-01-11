@@ -174,14 +174,12 @@ const TeacherProfileAdd = (props) => {
                 setLoading(false)
                 resetFeilds()
                 showMessage(MESSAGE.inviteSent)
-                console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
         })
 
     }
