@@ -44,15 +44,15 @@ const HeaderWhitepupilMessage = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false;
-        console.log('this is props from opennoti',props)
+        console.log('this is props from opennoti', props)
         // props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
         // props.navigation.navigate('NotificationDrawer', {
         //     onGoBack: () => 
-               
+
         //         fetchRecord('','')
-            
+
         // })
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
     }
 
     return (
@@ -63,7 +63,7 @@ const HeaderWhitepupilMessage = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={[styles.notificationBar,{ position: 'relative'},]}
+                    <TouchableOpacity style={[styles.notificationBar, { position: 'relative' },]}
                         onPress={() => openNotification()}
                         activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
@@ -75,8 +75,8 @@ const HeaderWhitepupilMessage = (props) => {
                 </View>
             </View>
             <View style={styles.searchParent}>
+                
                 <View style={styles.searchInner}>
-
                     <TouchableOpacity activeOpacity={opacity} onPress={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}>
                         {isSearchActive ?
                             <CloseBlack height={20} width={20} />
@@ -84,10 +84,10 @@ const HeaderWhitepupilMessage = (props) => {
                             <SearchBlue height={20} width={20} />
                         }
                     </TouchableOpacity>
-
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingVertical: 3, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingVertical: 3, paddingHorizontal: 10, 
+                        fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search Messages"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -96,6 +96,7 @@ const HeaderWhitepupilMessage = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
+
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
                         <MenuTrigger><Text style={[styles.commonButtonBorderedheader]}>By Date</Text></MenuTrigger>
@@ -121,8 +122,9 @@ const HeaderWhitepupilMessage = (props) => {
                         </MenuOptions>
                     </Menu>
                 </TouchableOpacity>
+                
                 <TouchableOpacity
-                    style={styles.buttonGroup}
+                    style={styles.buttonGroup1}
                     activeOpacity={opacity}
                     onPress={() => props.onNewMessage()}>
                     <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
@@ -170,7 +172,7 @@ const styles = StyleSheet.create({
         width: hp(5.20),
         height: hp(5.20),
         resizeMode: 'contain',
-        
+
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -255,6 +257,7 @@ const styles = StyleSheet.create({
         height: hp(5.20),
         fontSize: hp(1.82),
     },
+
     buttonGroup: {
         position: 'absolute',
         flexDirection: 'row',
@@ -262,22 +265,24 @@ const styles = StyleSheet.create({
         right: 15,
         width: '15%',
     },
-    commonButtonGreenheader: {
+
+    buttonGroup1: {
         backgroundColor: COLORS.dashboardGreenButton,
-        color: COLORS.white,
-        fontSize: hp(1.56),
         borderRadius: hp(1),
-        overflow: 'hidden',
-        textAlign: 'center',
+        height: hp(6),
         paddingLeft: hp(4.175),
         paddingRight: hp(1.8),
-        height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
+        paddingTop: hp(1.7),
+        paddingBottom: hp(1.7),
+        justifyContent:'center'
+    },
+    commonButtonGreenheader: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        textAlign: 'center',
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-
     },
     addIcon: {
         width: hp(1.55),
@@ -388,23 +393,26 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: COLORS.white,
         height: 50,
         width: '100%',
-        paddingLeft: hp(2.99),
-        paddingRight: hp(4.16),
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp(2),
         marginTop: 15,
-        paddingBottom: 5,
+        justifyContent:'space-between'
     },
     searchInner: {
+        width: Platform.OS == 'android'? '86%':'84%',
         height: '100%',
         borderColor: COLORS.borderGrp,
         borderWidth: 1,
         borderRadius: 10,
-        width: Platform.OS === 'android' ? '80%' : '70%',
-        flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10,
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent:'center',
+        paddingHorizontal: 10,
+        
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',

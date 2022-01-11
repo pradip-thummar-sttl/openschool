@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -57,10 +57,8 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity style={styles.notificationBar}
-                        // onPress={() => null}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>
@@ -90,16 +88,13 @@ const HeaderPM = (props) => {
                             <TouchableOpacity
                                 activeOpacity={opacity}
                                 onPress={() => {
-                                    keyword ?
+                                    keyword &&
                                         isSearchActive ?
                                             setSearchActive(false)
                                             :
                                             setSearchActive(true)
-                                        :
-                                        null
+                                       
                                 }}>
-                                {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                                    source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                                 {isSearchActive ?
                                     <CloseBlack height={15} width={15} />
                                     :
@@ -108,7 +103,7 @@ const HeaderPM = (props) => {
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%',paddingVertical : 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%', paddingVertical: 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search pupil"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
@@ -126,12 +121,7 @@ const HeaderPM = (props) => {
                                             onPress={() => { setFilterBy('name'); setSelectedIndex(0) }}>
                                             <View style={styles.filterList}>
                                                 <Text style={styles.filterListText}>Name</Text>
-                                                {selectedIndex == 0 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
+                                                {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                             </View>
                                         </TouchableOpacity>
                                     </MenuOption>
@@ -141,12 +131,7 @@ const HeaderPM = (props) => {
                                             onPress={() => { setFilterBy('group'); setSelectedIndex(1) }}>
                                             <View style={styles.filterList}>
                                                 <Text style={styles.filterListText}>Group</Text>
-                                                {selectedIndex == 1 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
+                                                {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                             </View>
                                         </TouchableOpacity>
                                     </MenuOption>
@@ -156,18 +141,12 @@ const HeaderPM = (props) => {
                                             onPress={() => { setFilterBy('dob'); setSelectedIndex(2) }}>
                                             <View style={styles.filterList}>
                                                 <Text style={styles.filterListText}>DOB</Text>
-                                                {selectedIndex == 2 ?
-                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                                    :
-                                                    null
-                                                }
+                                                {selectedIndex == 2 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                             </View>
                                         </TouchableOpacity>
                                     </MenuOption>
                                 </MenuOptions>
                             </Menu>
-                            {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                             <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                         </View>
                         <PopupaddnewdataPM
@@ -353,11 +332,11 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
         paddingBottom: hp(1),
-        position: 'absolute',
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
+        // top: hp(5.5),
         right: hp(0),
-        width: hp(30.78),
+        // width: Platform.OS === 'android' ? hp(0) : hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },

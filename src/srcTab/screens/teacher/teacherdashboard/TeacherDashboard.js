@@ -70,24 +70,8 @@ const Item = ({ onPress, style, item }) => (
                 <Text style={PAGESTYLE.timing}>{item.StartTime} - {item.EndTime}</Text>
             </View>
         </View>
-        {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
-
     </TouchableOpacity>
-    // <TouchableOpacity onPress={onPress} style={[PAGESTYLE.item, style]}>
-    //     <View style={PAGESTYLE.classSubject}>
-    //         <View style={PAGESTYLE.subjecRow}>
-    //             <View style={PAGESTYLE.border}></View>
-    //             <View>
-    //                 <Text style={PAGESTYLE.subjectName}>English</Text>
-    //                 <Text style={PAGESTYLE.subject}>Grammar</Text>
-    //             </View>
-    //         </View>
-    //         <View style={PAGESTYLE.timingMain}>
-    //             <Text style={PAGESTYLE.groupName}>Grouap A1</Text>
-    //             <Text style={PAGESTYLE.timing}>09:00 - 09:30</Text>
-    //         </View>
-    //     </View>
-    // </TouchableOpacity>
+   
 );
 
 const Pupillist = ({ item, onPress }) => (
@@ -113,21 +97,18 @@ const Pupillist = ({ item, onPress }) => (
                     return (
                         item._id == '3' ?
                             <View style={PAGESTYLE.rewardStar}>
-                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Bronze style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
                                 <View style={PAGESTYLE.rewardStar}>
-                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Silver style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
                                     <View style={PAGESTYLE.rewardStar}>
-                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Gold style={PAGESTYLE.rewardStartIcon} height={hp(2.02)} width={hp(2.11)} />
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                     </View>
@@ -141,34 +122,9 @@ const Pupillist = ({ item, onPress }) => (
         </View>
     </TouchableOpacity>
 );
-// const Pupillist = ({ style }) => (
-//     <View style={[PAGESTYLE.pupilData]}>
-//         <View style={PAGESTYLE.pupilProfile}>
-//             <View style={PAGESTYLE.pupilImage}></View>
-//             <Text style={PAGESTYLE.pupilName}>Janice Williamson</Text>
-//         </View>
-//         <View style={PAGESTYLE.groupColumnmain}>
-//             <View style={PAGESTYLE.groupColumn}>
-//                 <Text style={PAGESTYLE.pupilgroupName}>1A</Text>
-//             </View>
-//         </View>
-//         <View style={PAGESTYLE.perfomanceColumn}>
-//             <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
-//             <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
-//         </View>
-//         <View style={PAGESTYLE.rewardColumn}>
-//             <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-//             <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-//             <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View>
-//         </View>
-//         <TouchableOpacity style={PAGESTYLE.pupilDetailLink}>
-//             <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} />
-//         </TouchableOpacity>
-//     </View>
-// );
+
 const LessonandHomeworkPlannerDashboard = (props) => {
     const userAuthData = useSelector(state => {
-        // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
     const [isUploading, setUploading] = useState(false);
@@ -191,6 +147,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isLoading, setLoading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
+    const [isHide, action] = useState(true);
+    const [selectedId, setSelectedId] = useState(0);
+    const [dataOfSubView, setDataOfSubView] = useState([])
 
     let currentCount = 0
     useEffect(() => {
@@ -236,9 +195,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }, [])
 
     const refresh = () => {
-        // if(isDesignBuild)
-        //     return true
-
         Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
@@ -271,11 +227,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
@@ -391,22 +342,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.error(event);
         }
     };
-
-    const startLiveClassIOS = () => {
-
-    }
-
-    const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(0);
-    const [dataOfSubView, setDataOfSubView] = useState([])
-    const pupilRender = ({ item }) => {
-        return (
-            <Pupillist
-                item={item}
-                onPress={() => { setSelectedPupil(item); setPupilDetail(true) }}
-            />
-        );
-    };
+   
     const setData = (index) => {
         setSelectedId(index)
         setDataOfSubView(dashData[index])
@@ -475,12 +411,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                 <View style={{ width: isHide ? '93%' : '78%', backgroundColor: COLORS.backgroundColorCommon, }}>
                                     <Header onAlertPress={() => openNotification()} />
                                     <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center', }}>
-                                        <ScrollView style={STYLE.padLeftRight}>
+                                        <ScrollView style={STYLE.padLeftRight} nestedScrollEnabled={true}>
                                             <View style={PAGESTYLE.dashBoardBoxes}>
                                                 <TouchableOpacity style={PAGESTYLE.boxDash} onPress={() => initOneToOneCall(pupilData)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.greenBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Start a new {"\n"}call</Text>
-                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.DashboardCallIcon}></ImageBackground> */}
                                                         <StartNewCall style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
@@ -490,7 +425,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     onPress={() => setAddSubject(true)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.yellowBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>New lesson</Text>
-                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground> */}
                                                         <NewLesson style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
@@ -500,21 +434,18 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     onPress={() => setAddEvent(true)}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.purpleBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>New calendar {"\n"}entry</Text>
-                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.ImageIcon}></ImageBackground> */}
                                                         <NewCalendar style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                                 <TouchableOpacity onPress={() => { navigatePupilGroup() }} style={PAGESTYLE.boxDash}>
                                                     <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.blueBox]}>
                                                         <Text H3 style={PAGESTYLE.titleBox}>Add new pupil {"\n"}group</Text>
-                                                        {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.PupilGrpIcon}></ImageBackground> */}
                                                         <NewPupil style={PAGESTYLE.imageIcon} height={hp(11.86)} width={hp(12.94)} />
                                                     </View>
                                                 </TouchableOpacity>
                                             </View>
                                             <View style={PAGESTYLE.myDay}>
                                                 <View style={[STYLE.viewRow]}>
-                                                    {/* <Image style={PAGESTYLE.dayIcon} source={Images.Myday} /> */}
                                                     <MyDay style={PAGESTYLE.dayIcon} height={hp(4)} width={hp(4)} />
                                                     <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                                 </View>
@@ -525,7 +456,6 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                     </View>
                                                     <View>
                                                         <TouchableOpacity>
-                                                            {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                                             <MoreWhite style={PAGESTYLE.moreDashboard} height={hp(2.60)} width={hp(0.65)} />
                                                         </TouchableOpacity>
                                                     </View>
@@ -552,7 +482,8 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                 />
                                                             </SafeAreaView>
                                                             <View style={PAGESTYLE.rightTabContent}>
-                                                                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.scrollView}>
+                                                                
+                                                                <ScrollView nestedScrollEnabled={true} showsVerticalScrollIndicator={false} style={PAGESTYLE.scrollView}>
                                                                     <View style={PAGESTYLE.tabcontent}>
                                                                         <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                         <View style={PAGESTYLE.timedateGrp}>
@@ -631,21 +562,19 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                             }
                                                                         </View>
                                                                         <View style={PAGESTYLE.lessonstartButton}>
-                                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}
-                                                                                opacity={opacity}
-                                                                                onPress={() => setTeacherLessonDetail(true)}>
-                                                                                <Text style={STYLE.commonButtonBordered}>Edit Lesson</Text>
+
+                                                                            <TouchableOpacity style={PAGESTYLE.btnEditStyle} opacity={opacity} onPress={() => setTeacherLessonDetail(true)}>
+                                                                                <Text style={PAGESTYLE.txtEditTextStyle}>Edit Lesson</Text>
                                                                             </TouchableOpacity>
-                                                                            <TouchableOpacity
-                                                                                style={PAGESTYLE.buttonGrp}
-                                                                                onPress={() => { launchLiveClass() }}>
+
+                                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp} onPress={() => { launchLiveClass() }}>
                                                                                 {
                                                                                     isLoading ?
                                                                                         <ActivityIndicator
                                                                                             style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                             color={COLORS.buttonGreen} /> :
-                                                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Start Class</Text>
+                                                                                        <Text style={PAGESTYLE.txtStartClastButtonStyle}>Start Class</Text>
                                                                                 }
 
                                                                             </TouchableOpacity>
@@ -737,7 +666,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                         <TeacherLessonList navigation={props.navigation} />
                                         :
                                         selectedIndex == 3 ?
-                                            <PupilManagement navigation={props.navigation} tabs={pupilManagementselectedTab} />
+                                            <PupilManagement  navigation={props.navigation} tabs={pupilManagementselectedTab} />
                                             : selectedIndex == 5 ?
                                                 <TeacherSetting navigation={props.navigation} />
                                                 :

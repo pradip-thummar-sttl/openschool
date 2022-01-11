@@ -274,8 +274,8 @@ const TeacherLessonDetail = (props) => {
                                                     onAlertPress={() => { props.onAlertPress() }} />
                                     }
                                     
-                                    <View style={PAGESTYLE.whiteBg}>
-                                        <View style={PAGESTYLE.lessonPlanTop}>
+                                    <View style={[PAGESTYLE.whiteBg]}>
+                                        <View style={[PAGESTYLE.lessonPlanTop]}>
                                             <View style={PAGESTYLE.lessonPlanTab}>
                                                 <TouchableOpacity
                                                     style={PAGESTYLE.tabs}
@@ -298,7 +298,7 @@ const TeacherLessonDetail = (props) => {
                                             </View>
                                             {
                                                 tabIndex == 0 &&
-                                                <View style={PAGESTYLE.lessonstartButton}>
+                                                <View style={[PAGESTYLE.lessonstartButton]}>
                                                     <TouchableOpacity
                                                         style={PAGESTYLE.buttonGrp}
                                                         activeOpacity={opacity}

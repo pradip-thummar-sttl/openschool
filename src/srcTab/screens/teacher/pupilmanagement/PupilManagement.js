@@ -16,6 +16,7 @@ const PupilManagement = (props) => {
         <View style={PAGESTYLE.mainPage}>
             {isOverViewSelected ?
                 <PupiloverView
+                    navigation={props.navigation}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister', { userType: "Pupil" })}
                     onPupilClick={(item) => { setSelectedPupil(item); setOverViewSelected(false); setDetailSelected(true) }} tabs={props.tabs} />
                 :
@@ -23,7 +24,8 @@ const PupilManagement = (props) => {
                     <PupilProfileView
                         selectedPupil={selectedPupil}
                         navigateToBack={() => { setOverViewSelected(true); setDetailSelected(false) }}
-                        navigations={props} />
+                        navigations={props}
+                        />
                     :
                     null
             }

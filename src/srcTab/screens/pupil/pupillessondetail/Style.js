@@ -1406,10 +1406,10 @@ export default StyleSheet.create({
         paddingBottom: hp(1),
     },
     filterListWrap: {
-        width: hp(30.98),
+        width: Platform.OS === 'android' ? 200 : hp(30.98),
         right: 10,
-        top: hp(5.5),
-        position: 'absolute',
+        top:  Platform.OS === 'android' ? 0 : hp(5.5),
+        position: Platform.OS === 'android' ? 'relative' :  'absolute',
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
@@ -1417,6 +1417,7 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
+       
     },
     filterListText: {
         color: COLORS.darkGray,

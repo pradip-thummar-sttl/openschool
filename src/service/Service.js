@@ -24,7 +24,7 @@ export const Service = {
     },
 
     post: (data, endPoint, success, error) => {
-        console.log('-----Request----->', baseUrl + endPoint);
+        console.log('-----Request----->', baseUrl + endPoint, data);
         fetch(`${baseUrl}${endPoint}`, {
             method: 'POST',
             headers: {

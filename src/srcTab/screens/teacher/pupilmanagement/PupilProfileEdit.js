@@ -250,10 +250,10 @@ const PupilProfileEdit = (props) => {
                                 <View style={PAGESTYLE.managementBlockTop}>
                                     <ImageBackground style={PAGESTYLE.managementopImage}>
                                         <EditProfileTop_Tablet style={{ position: 'absolute' }} height={'100%'} width={'100%'} />
-                                        <View style={PAGESTYLE.thumbTopUser}>
+                                        <View style={[PAGESTYLE.thumbTopUser]}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
-                                                style={{ alignItems: 'center', }}
+                                                style={{ alignItems: 'center'}}
                                                 onPress={() => showActionChooser()}>
                                                 <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profileData.ProfilePicture : profileUri.uri }} />
                                                 {/* <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} /> */}

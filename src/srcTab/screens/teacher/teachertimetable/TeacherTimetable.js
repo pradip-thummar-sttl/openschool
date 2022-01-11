@@ -192,19 +192,21 @@ const TeacherTimeTable = (props) => {
             Filterby: filterBy,
             CurrentDate:currentDate
         }
-
+       
         console.log(`${EndPoints.GetTimeTable}/${User.user._id}`);
         Service.post(data, `${EndPoints.GetTimeTable}/${User.user._id}`, (res) => {
             setTimeTableLoading(false)
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
                 setTimeTableData(res.data)
+                console.log('----------------------------->>> data', res.data);
                 // dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('response of get all lesson error', err)
+            // setTimeTableLoading(false)
         })
 
 
@@ -226,6 +228,7 @@ const TeacherTimeTable = (props) => {
             {
                 isTeacherLessonDetail ?
                     <TLDetailEdit
+                        onAlertPress={() => openNotification()}
                         goBack={() => setTeacherLessonDetail(false)}
                         onRefresh={() => refresh()}
                         data={teacherDetailData} />
@@ -233,7 +236,8 @@ const TeacherTimeTable = (props) => {
                     isTeacherLessonAdd ?
                         <TLDetailAdd
                             goBack={() => setTeacherLessonAdd(false)}
-                            onRefresh={() => refresh()} />
+                            onRefresh={() => refresh()}
+                            onAlertPress={() => openNotification()}  />
                         :
                         <View style={{ width: isHide ? '100%' : '78%' }}>
                             <HeaderTT

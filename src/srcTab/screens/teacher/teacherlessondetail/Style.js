@@ -49,7 +49,7 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        paddingBottom: hp(2),
+        paddingBottom:Platform.OS === 'android' ? hp(1) :  hp(2),
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
@@ -94,7 +94,7 @@ export default StyleSheet.create({
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
-        marginBottom  : Platform.OS === 'android' ? 0 : 20
+        marginBottom  : 20
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -1340,14 +1340,14 @@ export default StyleSheet.create({
         flex: 1,
     },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
+        // paddingTop: hp(1),
+        // paddingLeft: hp(1.2),
+        // paddingRight: hp(1.2),
+        // paddingBottom: hp(1),
+        // position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        width: hp(20.98),
+        // top: hp(5.5),
+        // width: hp(20.98),
         right: 0,
         borderRadius: hp(1),
         shadowColor: COLORS.black,
@@ -1462,7 +1462,7 @@ export default StyleSheet.create({
         // flexDirection: 'row',
         // marginTop:hp(2),
         justifyContent: 'center',
-        marginVertical: hp(2),
+        // marginVertical: hp(2),
         // marginBottom : Platform.OS === 'android' ? 0 : 10
     },
 });

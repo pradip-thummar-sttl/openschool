@@ -665,5 +665,12 @@ export default StyleSheet.create({
         paddingBottom: hp(1.5),
         fontFamily: FONTS.fontRegular,
     },
+    fieldInputLabel1 : {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
+    },
+    
     
 });

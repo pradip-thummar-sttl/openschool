@@ -7,6 +7,8 @@ import FONTS from '../../../../utils/Fonts';
 import { opacity } from "../../../../utils/Constant";
 import { useState } from "react";
 import BackArrow from '../../../../svg/teacher/lessonhwplanner/ArrowBack'
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
+
 
 const HeaderPTInner = (props) => {
     const refRBSheet = useRef();
@@ -19,7 +21,7 @@ const HeaderPTInner = (props) => {
 
     useEffect(() => {
     }, [filterBy])
-
+    console.log('..................,,,,,,,', props);
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -33,7 +35,13 @@ const HeaderPTInner = (props) => {
                         <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
                 </View>
-
+                <View style={{flexDirection : 'row',right  : hp(6)}}>
+                <View>
+                    <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
+                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
+                        <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity
                         style={styles.notificationBar}
@@ -41,6 +49,7 @@ const HeaderPTInner = (props) => {
                         activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
+                </View>
                 </View>
 
             </View>
@@ -66,7 +75,7 @@ const HeaderPTInner = (props) => {
                                 onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Lessons & Homework</Text>
                             </TouchableOpacity>
-                           
+
                         </View>
                     </ScrollView>
                 </View>
@@ -141,4 +150,18 @@ const styles = StyleSheet.create({
     tabsTextSelected: {
         color: COLORS.buttonGreen,
     },
+    profileEdit : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        alignSelf: 'flex-end',
+        padding: hp(1.5),
+        borderRadius: hp(1),
+        marginRight : 10
+        // marginBottom: hp(1.32),
+    },
+    profileEditButton : {
+        width: hp(1.57),
+        height: hp(1.57),
+        resizeMode: 'contain',
+        alignSelf: 'center',
+    }
 });
