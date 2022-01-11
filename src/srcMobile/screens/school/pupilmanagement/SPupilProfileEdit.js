@@ -31,6 +31,7 @@ const SPupilProfileEdit = (props) => {
     const [isPFirstName, setPFirstName] = useState('');
     const [isPLastName, setPLastName] = useState('');
     const [isMobile, setMobile] = useState('');
+    const [email, setEmail] = useState('');
     const [isProfileUri, setProfileUri] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isSelectedDate, setSelectedDate] = useState('')
@@ -38,13 +39,14 @@ const SPupilProfileEdit = (props) => {
     const [isLoading, setLoading] = useState(false);
     const item = props.route.params.item;
     const navigateToBack = props.route.params.navigateToBack;
-    console.log('xyz----------',props)
+    console.log('xyz----------', props)
 
     useEffect(() => {
         setFirstName(item.FirstName);
         setLastName(item.LastName);
         setPFirstName(item.ParentFirstName);
         setPLastName(item.ParentLastName);
+        setEmail(item.Email);
         setSelectedDate(moment(item.Dob).format('DD/MM/yyyy'))
         setMobile(item.MobileNumber + '');
         getUserType();
@@ -119,7 +121,7 @@ const SPupilProfileEdit = (props) => {
         setDatePickerVisibility(false);
     };
     const validateFields = () => {
-       
+
         if (!isFirstName.trim()) {
             showMessage(MESSAGE.firstName)
             return false
@@ -139,17 +141,17 @@ const SPupilProfileEdit = (props) => {
             showMessage(MESSAGE.phone)
             return false
         }
-       
+
         saveProfile()
     }
     const saveProfile = () => {
-        
+
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
             FirstName: isFirstName,
             LastName: isLastName,
-            Email: item?.Email,
+            Email: email,
             UserTypeId: isUserType,
             Dob: moment(isSelectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
             IsInvited: true,
@@ -226,26 +228,24 @@ const SPupilProfileEdit = (props) => {
             <HeaderPMInnerEdit
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
-                OnSaveEdit={() => {validateFields()}}
+                OnSaveEdit={() => { validateFields() }}
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
-                    <View style={PAGESTYLE.mainContainerProfile}>
-                        <View style={[PAGESTYLE.profileImageArea, { backgroundColor: COLORS.white }]}>
-                            <TopBackImg style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.5)} />
 
-                            <View style={PAGESTYLE.profileOuter}>
-                                <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
-                                    <Image style={PAGESTYLE.profileImage}
-                                        source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedPupil?.ProfilePicture : isProfileUri.uri }} />
-                                    <View style={PAGESTYLE.EditIcnView}>
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
-                                    </View>
-                                </TouchableOpacity>
-
-                            </View>
+                    <View style={[PAGESTYLE.profileImageArea]}>
+                        <View style={PAGESTYLE.coverImage}>
+                            <TopBackImg  height={hp(13.8)} width={'100%'}  />
+                        </View>
+                        <View style={[PAGESTYLE.profileOuter]}>
+                            <Image style={PAGESTYLE.profileImage}
+                                source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedPupil?.ProfilePicture : isProfileUri.uri }} />
+                            <TouchableOpacity style={PAGESTYLE.editprofileStyl1}  activeOpacity={opacity} onPress={() => showActionChooser()}>
+                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                            </TouchableOpacity>
                         </View>
                     </View>
+
                     <View style={PAGESTYLE.mainDetailsForm}>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
@@ -355,11 +355,11 @@ const SPupilProfileEdit = (props) => {
                                 // returnKeyType={"next"}
                                 style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
                                 placeholder="Email"
-                                editable={false}
                                 autoCapitalize={'none'}
                                 maxLength={40}
-                                value={props?.selectedPupil?.Email}
+                                value={email}
                                 placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={email => setEmail(email)}
 
                             />
                         </View>
@@ -390,40 +390,7 @@ const SPupilProfileEdit = (props) => {
                         </View> */}
                     </View>
                     <View HR style={STYLE.hrCommon}></View>
-                    {/* <View style={PAGESTYLE.rewardSection}>
-                        <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
-                            <View style={PAGESTYLE.rewardStarMark}>
-                                <View style={PAGESTYLE.centerText}> */}
-                    {/* <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
-                    {/* <Text style={PAGESTYLE.starText}>Bronze stars</Text>
-                                </View>
-                                <View style={PAGESTYLE.centerStar}> */}
-                    {/* <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
-                    {/* <Text style={PAGESTYLE.starText}>Silver stars</Text>
-                                </View>
-                                <View style={PAGESTYLE.centerText}> */}
-                    {/* <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
-                    {/* <Text style={PAGESTYLE.starText}>Gold stars</Text>
-                                </View>
-                            </View>
-                        </View> */}
-                    {/* <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>What is the reward for?</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                multiline={true}
-                                autoCapitalize={'sentences'}
-                                numberOfLines={4}
-                                placeholder='Leave feedback here'
-                                style={PAGESTYLE.commonInputTextareaBoldGrey} />
-                        </View> */}
-                    {/* </View> */}
-                    {/* <View HR style={STYLE.hrCommon}></View> */}
-                    <View style={PAGESTYLE.pupilPerfomanceEdit}>
-                        <Text H2 style={PAGESTYLE.titlePerfomance}>Pupil’s performance</Text>
-                        {/* <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image> */}
-                    </View>
+
 
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
