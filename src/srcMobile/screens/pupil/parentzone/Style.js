@@ -113,6 +113,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.white,
         borderRadius: hp(100),
         resizeMode: 'cover',
+        backgroundColor : COLORS.lightGrayPupil
     },
     mainDetails: {
         marginTop: hp(2),

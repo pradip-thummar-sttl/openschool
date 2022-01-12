@@ -323,10 +323,9 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        // resizeMode: 'contain',
-        // backgroundColor: COLORS.greyplaceholder,
+       backgroundColor : COLORS.borderGrp,
         borderRadius: hp(1.25),
-        // backgroundColor:'red'
+     
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -840,7 +839,7 @@ export default StyleSheet.create({
     userStamp: {
         height: hp(3.64),
         width: hp(3.64),
-        backgroundColor: COLORS.lightGrayPupil,
+        backgroundColor: COLORS.borderGrp,
         borderRadius: hp(5),
         marginRight: hp(2.1),
         // position: 'absolute',

@@ -328,11 +328,11 @@ export default StyleSheet.create({
         position: 'absolute',
         top: hp(5.38),
         // backgroundColor: COLORS.white
-        backgroundColor : 'red',
+        // backgroundColor : 'red',
         // width : '100%',
         // height :hp(20)
         // height : hp(14),
-        backgroundColor  :'green'
+        // backgroundColor  :'green'
     },
     profileImage: {
         width: hp(13),

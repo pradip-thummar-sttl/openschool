@@ -20,7 +20,7 @@ export default class ParentZoneSwitch extends Component {
             childrenList: User.user.ChildrenList
         }
     }
-  
+
     launchPupil(item) {
         if (User.user._id == item._id) {
             this.props.navigation.replace('PupuilDashboard')
@@ -48,7 +48,7 @@ export default class ParentZoneSwitch extends Component {
             { cancelable: true }
         )
     }
-    
+
     render() {
         return (
             <View style={styles.container}>
@@ -70,7 +70,6 @@ export default class ParentZoneSwitch extends Component {
                         </TouchableOpacity>
                         <FlatList
                             data={this.state.childrenList}
-                         
                             showsHorizontalScrollIndicator={false}
                             showsVerticalScrollIndicator={false}
                             renderItem={({ item, index }) => (
@@ -80,14 +79,12 @@ export default class ParentZoneSwitch extends Component {
                                     <View style={styles.user}>
                                         <Image
                                             style={styles.userIcon}
-                                            // defaultSource={{ uri: 'https://www.pngaaa.com/detail/2189569' }}
-                                            source={{ uri: baseUrl + item.ProfilePicture }} 
-                                            />
+                                            source={{ uri: baseUrl + item.ProfilePicture }}
+                                             />
                                         <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
                                     </View>
                                 </TouchableOpacity>
                             )}
-                            
                             //Setting the number of column
                             keyExtractor={(item, index) => index.toString()}
                         />
@@ -150,8 +147,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: hp(1.5),
         borderRadius: hp(13.5/2),
-        // backgroundColor : 'grey'
-        backgroundColor : COLORS.menuLightFonts
+        backgroundColor : COLORS.lightGrayPupil
     },
     parentZone: {
         alignSelf: 'flex-start',
