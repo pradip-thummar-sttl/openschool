@@ -20,21 +20,26 @@ import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
 import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import TickMarkGrey from "../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 
+
+var pageNo = 1
+
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
         // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
     const [lessonData, setLessonData] = useState([])
-    const [allNewAndOldData, setAllNewAndOldData] = useState([])
     const [isLessonLoading, setLessonLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
     const [limit, setLimit] = useState('25')
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
 
-    let pageNo = 1
+    
     let currentCount = 0
     useEffect(() => {
+        pageNo = 1
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -75,24 +80,44 @@ const TeacherLessonList = (props) => {
         }
 
         Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
-            setLessonLoading(false)
+            // setLessonLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                if (allNewAndOldData.length) {
-                    if (res.data.length) {
-                        let array = []
-                        array.push(allNewAndOldData)
-                        array.push(res.data)
-                        setLessonData(array)
-                        setAllNewAndOldData(array)
+                // if (allNewAndOldData.length) {
+                //     if (res.data.length) {
+                //         let array = []
+                //         array.push(allNewAndOldData)
+                //         array.push(res.data)
+                //         setLessonData(array)
+                //         setAllNewAndOldData(array)
+                //     }
+                //     else {
+                //         setLessonData(allNewAndOldData)
+                //     }
+                // }
+                // else {
+                //     setLessonData(res.data)
+                //     // setAllNewAndOldData(res.data)
+                // }
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setLessonData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setLessonLoading(false)
                     }
                     else {
                         setLessonData(allNewAndOldData)
+                        setLessonLoading(false)
                     }
                 }
                 else {
                     setLessonData(res.data)
-                    // setAllNewAndOldData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setLessonLoading(false)
                 }
 
             } else {
@@ -103,12 +128,11 @@ const TeacherLessonList = (props) => {
         })
     }
 
-    const addMorePage = () => {
-        pageNo = pageNo + 1
 
-        if (lessonData.length >= Number(limit)) {
+    const addMorePage = () => {
+        if (lessonData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
             setTimeout(() => {
-                console.log('----pageno-----', pageNo)
                 fetchRecord('', '')
             }, 1000)
         }
