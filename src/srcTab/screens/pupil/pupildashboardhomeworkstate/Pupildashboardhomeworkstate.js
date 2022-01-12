@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import Sidebar from "../../../component/reusable/sidebar/Sidebar";
@@ -55,14 +54,8 @@ const PupuilDashboardHomeWorkState = (props) => {
                                         <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
-                                        {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
-                                        {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}>
-                                            <Text style={PAGESTYLE.date}>25</Text>
-                                            <Text style={PAGESTYLE.month}>Sept</Text>
-                                        </ImageBackground> */}
                                         <View>
                                             <TouchableOpacity>
-                                                {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>

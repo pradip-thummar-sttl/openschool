@@ -20,6 +20,7 @@ import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import NoPupil from '../../../../svg/emptystate/NoPupil';
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 import TeacheroverViewHeader from "./TeacheroverViewHeader";
+import { useFocusEffect } from "@react-navigation/native";
 
 const { CallModule } = NativeModules;
 
@@ -58,9 +59,21 @@ const TeacheroverView = (props) => {
         return true;
     }
 
-    useEffect(() => {
-        fetchRecord('', 'name')
+   
+
+    // Function triggers when screen gets focused or unfocused
+  useFocusEffect(
+    React.useCallback(() => {
+      // Do something when the screen is focused.
+      fetchRecord('', 'name')
+      return () => {
+     // Do something when the screen is unfocused
+        // alert('Home Screen was unfocused');
+      };
     }, [])
+  );
+
+ 
 
     const fetchRecord = (search, filter) => {
 

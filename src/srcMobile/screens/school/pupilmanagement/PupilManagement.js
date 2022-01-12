@@ -19,7 +19,10 @@ const PupilManagement = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} />
+                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} 
+                //   title={'Teacher Management'}
+                //   userType={'Teacher'}
+                />
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainer}>
                         {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}

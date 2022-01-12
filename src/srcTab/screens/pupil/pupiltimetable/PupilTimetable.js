@@ -23,62 +23,15 @@ const PupilTimetable = (props) => {
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
 
-    const timeTableData__ = [
-        {
-            Title: 'English - Grammer',
-            StartTime: '09:30',
-            EndTime: '10:30',
-            color: '',
-            Date: '2021-03-23T00:00:00.000Z'
-        },
-        {
-            Title: 'Drawing - Grammer',
-            StartTime: '01:30',
-            EndTime: '02:30',
-            color: '',
-            Date: '2021-03-23T00:00:00.000Z'
-        },
-        {
-            Title: 'Math - Grammer',
-            StartTime: '10:30',
-            EndTime: '11:00',
-            color: '',
-            Date: '2021-03-23T00:00:00.000Z'
-        },
-        {
-            Title: 'Science - Grammer',
-            StartTime: '09:00',
-            EndTime: '09:30',
-            color: '',
-            Date: '2021-03-23T00:00:00.000Z'
-        },
-        {
-            Title: 'English - Grammer',
-            StartTime: '10:00',
-            EndTime: '10:30',
-            color: '',
-            Date: '2021-03-24T00:00:00.000Z'
-        },
-        {
-            Title: 'English - Grammer',
-            StartTime: '09:00',
-            EndTime: '09:30',
-            Date: '2021-03-23T00:00:00.000Z'
-        },
-    ]
-
     const [isHide, action] = useState(true);
     const [scrollIndex, setScrollIndex] = useState(0);
     const scrollViewRef = useRef(null);
     const dispatch = useDispatch()
 
     const weekTimeTableDate = useSelector(state => {
-        // console.log('state of user',state)
         return state.AuthReducer.weekTimeTableData
     })
     useEffect(() => {
-        
-
         let data ={
             CurrentDate: moment().format('yyyy-MM-DD')
         }
@@ -143,20 +96,9 @@ const PupilTimetable = (props) => {
         }
     }
     useEffect(() => {
-        // const unsubscribe = props.navigation.addListener('focus', () => {
-        //     // The screen is focused
-        //     // Call any action
-            console.log('======================.=..........................======================');
             if (weekTimeTableDate != "") {
                 fetchRecord("","",weekTimeTableDate)
             }
-           
-        //   });
-      
-        //   // Return the function to unsubscribe from the event so it gets removed on unmount
-        //   return unsubscribe;
-        // fetchRecord("","",selectedDate.date)
-        
     }, [weekTimeTableDate])
 
     useEffect(() => {
@@ -213,14 +155,9 @@ const PupilTimetable = (props) => {
         props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
-    console.log('index of ============>', scrollIndex);
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={1}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
+           
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
                 <Header3
                     onAlertPress={() => { openNotification() }}

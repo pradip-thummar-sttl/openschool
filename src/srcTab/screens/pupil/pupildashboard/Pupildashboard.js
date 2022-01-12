@@ -51,11 +51,8 @@ const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
     const [isHide, action] = useState(true);
-    // const [selectedId, setSelectedId] = useState(null);
     const [selectedId, setSelectedId] = useState(0);
-    const [dashData, setdashData] = useState([])
     const [selectedIndex, setSelectedIndex] = useState(0);
-
 
     const [dataOfSubView, setDataOfSubView] = useState([])
     const [dataOfHWSubView, setDataOfHomeworkSubView] = useState([])
@@ -84,16 +81,12 @@ const PupuilDashboard = (props) => {
 
     let currentCount = 0
     useEffect(() => {
-
         getPupilAvtarList()
 
-
-        console.log('poarams', props.route.params);
         if (props.route.params && props.route.params.index == 2) {
             setSelectedIndex(2)
         }
         initApp(callBack => {
-            console.log('Pupil callBack', callBack);
             handleIncommingCall()
         });
 
@@ -104,6 +97,62 @@ const PupuilDashboard = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, []);
+
+    useEffect(() => {
+        onRefreshData();
+    }, [props])
+
+    const onRefreshData = () => {
+        setMyDayLoading(true);
+        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
+            if (res.flag === true) {
+                setMyDay(res.data)
+                setDataOfSubView(res.data[0])
+                setMyDayLoading(false)
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
+            }
+        }, (err) => {
+        })
+
+        setHomeworkLoading(true)
+        Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
+            if (res.flag === true) {
+                setPupilHomeworkList(res.data)
+                setDataOfHomeworkSubView(res.data[0])
+                setHomeworkLoading(false)
+            } else {
+                showMessage(res.message)
+                setHomeworkLoading(false)
+            }
+        }, (err) => {
+        })
+
+        Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
+            if (res.flag) {
+                res.data.forEach(element => {
+                    switch (element._id) {
+                        case '3':
+                            setBronze(element.count)
+                            break;
+                        case '6':
+                            setSilver(element.count)
+                            break;
+                        case '9':
+                            setGold(element.count)
+                            break;
+                        default:
+                            break;
+                    }
+                });
+            } else {
+                showMessage(res.message)
+                setMyDayLoading(false)
+            }
+        }, (err) => {
+        })
+    }
 
     const handleBackButtonClick = () => {
 
@@ -116,6 +165,7 @@ const PupuilDashboard = (props) => {
             currentCount += 1;
             ToastAndroid.show('Press BACK again to quit the App', ToastAndroid.SHORT)
         }
+
         setTimeout(() => {
             currentCount = 0;
         }, 2000);
@@ -156,61 +206,6 @@ const PupuilDashboard = (props) => {
         }
     }
 
-    useEffect(() => {
-
-        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of my day', res)
-            if (res.flag === true) {
-                setMyDay(res.data)
-                setDataOfSubView(res.data[0])
-                setMyDayLoading(false)
-            } else {
-                showMessage(res.message)
-                setMyDayLoading(false)
-            }
-        }, (err) => {
-        })
-
-        Service.get(`${EndPoints.GetHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of pupil homework list', res)
-            if (res.flag === true) {
-                setPupilHomeworkList(res.data)
-                setDataOfHomeworkSubView(res.data[0])
-                setHomeworkLoading(false)
-            } else {
-                showMessage(res.message)
-                setHomeworkLoading(false)
-            }
-        }, (err) => {
-        })
-
-        Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of my day', res)
-            if (res.flag) {
-                res.data.forEach(element => {
-                    switch (element._id) {
-                        case '3':
-                            setBronze(element.count)
-                            break;
-                        case '6':
-                            setSilver(element.count)
-                            break;
-                        case '9':
-                            setGold(element.count)
-                            break;
-                        default:
-                            break;
-                    }
-                });
-            } else {
-                showMessage(res.message)
-                setMyDayLoading(false)
-            }
-        }, (err) => {
-        })
-    }, [])
-
-
     const getPupilAvtarList = () => {
 
         let allAvatrData = []
@@ -218,7 +213,6 @@ const PupuilDashboard = (props) => {
         Service.get(EndPoints.GetAllAvtar, (res) => {
 
             if (res.flag === true) {
-                console.log('------get Avatar---------', res)
                 res.data.map((item) => {
                     if (item.Type === "hair") {
                         allAvatrData = item.imglist
@@ -228,7 +222,6 @@ const PupuilDashboard = (props) => {
 
             Service.get(`${EndPoints.PupilGetAvatar}/${User.user.UserDetialId}`, (res) => {
                 if (res.flag === true) {
-                    console.log('------get pupilAvatar---------', res.data)
                     allAvatrData.map((data, index) => {
                         if (data._id === res.data[1]._id) {
                             setAvtarIndex(index)
@@ -248,11 +241,7 @@ const PupuilDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
+
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
@@ -309,9 +298,6 @@ const PupuilDashboard = (props) => {
             console.error(e);
         }
     };
-
-    const startLiveClassIOS = () => {
-    }
 
     const markAsAbsent = () => {
         let data = { "Absent": true }
@@ -409,10 +395,11 @@ const PupuilDashboard = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage} >
-            {selectedIndex != 5 ?
+
+            {selectedIndex != 5 &&
                 <Sidebarpupil hide={() => action(!isHide)}
                     moduleIndex={selectedIndex}
-                    navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0); getPupilAvtarList() }}
+                    navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0); getPupilAvtarList(); onRefreshData(); }}
                     navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
                     onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
@@ -420,39 +407,25 @@ const PupuilDashboard = (props) => {
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
                     navigateUser={() => { setPupilLessonDetail(false); props.navigation.replace('Users'); setSelectedIndex(5) }}
                 />
-                : null
             }
             {
                 isPupilLessonDetail ?
-                    <PupilLessonDetail
-                        goBack={() => setPupilLessonDetail(false)}
-                        onRefresh={() => null}
-                        data={dataOfHWSubView} />
+                    <PupilLessonDetail goBack={() => setPupilLessonDetail(false)} onRefresh={() => null} data={dataOfHWSubView} />
                     :
                     isHWSubmitted ?
-                        <PupilHomeWorkSubmitted
-                            goBack={() => setHWSubmitted(false)}
-                            item={hwData}
-                            onAlertPress={() => props.onAlertPress()} />
+                        <PupilHomeWorkSubmitted goBack={() => setHWSubmitted(false)} item={hwData} onAlertPress={() => props.onAlertPress()} />
                         :
                         isHWMarked ?
-                            <PupilHomeWorkMarked
-                                goBack={() => setHWMArked(false)}
-                                item={hwData}
-                                onAlertPress={() => props.onAlertPress()} />
+                            <PupilHomeWorkMarked goBack={() => setHWMArked(false)} item={hwData} onAlertPress={() => props.onAlertPress()} />
                             :
                             isHWDetail ?
-                                <PupilHomeWorkDetail
-                                    goBack={() => setHWDetail(false)}
-                                    item={hwData}
-                                    onAlertPress={() => props.onAlertPress()} />
+                                <PupilHomeWorkDetail goBack={() => setHWDetail(false)} item={hwData} onAlertPress={() => props.onAlertPress()} />
                                 :
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
                                         <ScrollView showsVerticalScrollIndicator={false}>
                                             <Header onAlertPress={() => { openNotification() }} onNotification={() => openNotification()} />
                                             <View style={STYLE.padLeftRight}>
-                                                {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />
                                                 <View style={PAGESTYLE.dashboardOrangeBox}>
                                                     <View style={PAGESTYLE.orangeBoxTop}>
@@ -461,17 +434,14 @@ const PupuilDashboard = (props) => {
                                                                 <Text H3 style={PAGESTYLE.dayTitle}>My Classes</Text>
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
-                                                                {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}> */}
                                                                 <PupilCalendar style={[PAGESTYLE.datePositionBg]} height={81} width={102} />
                                                                 <View style={[PAGESTYLE.datePositionBg]}>
                                                                     <Text style={PAGESTYLE.today}>Today</Text>
                                                                     <Text style={PAGESTYLE.datemonth}>{moment().format('D')} {moment().format('MMM')}</Text>
                                                                 </View>
 
-                                                                {/* </ImageBackground> */}
                                                                 <View>
                                                                     <TouchableOpacity>
-                                                                        {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                                                         <More style={PAGESTYLE.moreDashboard} height={28} width={5} />
                                                                     </TouchableOpacity>
                                                                 </View>
@@ -486,7 +456,6 @@ const PupuilDashboard = (props) => {
                                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                     color={COLORS.yellowDark} />
                                                                 :
-
                                                                 <View style={STYLE.viewRow}>
                                                                     {
                                                                         myDay.length > 0 ?
@@ -614,9 +583,6 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                             </>
                                                                             :
-                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            // </View>
                                                                             <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                                                     }
                                                                 </View>
@@ -626,7 +592,6 @@ const PupuilDashboard = (props) => {
                                                 </View>
 
                                                 <View style={PAGESTYLE.dashboardPurpleBox}>
-                                                    {/* <Image source={Images.PupilHomeworkTableTopBg} style={PAGESTYLE.pupilHomeWorkGridTopBg} /> */}
                                                     <MyHomeworkIllus style={PAGESTYLE.pupilHomeWorkGridTopBg} width={hp(46.87)} height={hp(14.41)} />
                                                     <View style={PAGESTYLE.purpleBoxTop}>
                                                         <View style={PAGESTYLE.myDayPurple}>
@@ -634,13 +599,10 @@ const PupuilDashboard = (props) => {
                                                                 <Text H3 style={PAGESTYLE.dayTitle}>My Homework</Text>
                                                             </View>
                                                             <View style={[PAGESTYLE.rightContent]}>
-                                                                {/* <Image source={Images.HomeworkBook} style={[PAGESTYLE.bookPositionBg]} /> */}
                                                                 <HomeworkBook style={[PAGESTYLE.bookPositionBg]} height={hp(14.84)} width={hp(17.123)} />
                                                                 <View>
                                                                     <TouchableOpacity>
                                                                         <More style={PAGESTYLE.moreDashboard} height={28} width={5} />
-
-                                                                        {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                                                     </TouchableOpacity>
                                                                 </View>
                                                             </View>
@@ -727,10 +689,10 @@ const PupuilDashboard = (props) => {
 
                                                     </View>
                                                 </View>
+
                                                 <View style={PAGESTYLE.achivementWrap}>
                                                     <View style={PAGESTYLE.achivementBox}>
                                                         <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : hp(38.8)} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
-                                                        {/* <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} /> */}
                                                         <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                                         <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                                         <View style={PAGESTYLE.rewardStarMark}>
@@ -759,16 +721,15 @@ const PupuilDashboard = (props) => {
                                                             </View>
                                                         </View>
                                                         <View style={PAGESTYLE.lessonstartButtonTroffy}>
-                                                            {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity> */}
-                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonGreenDashboardSide}>edit avatar</Text></TouchableOpacity>
+                                                            <TouchableOpacity style={PAGESTYLE.buttonGrp}>
+                                                                <Text style={STYLE.commonButtonGreenDashboardSide}>edit avatar</Text>
+                                                            </TouchableOpacity>
                                                         </View>
                                                     </View>
                                                     {pupilAvatarList.length ?
                                                         <View style={PAGESTYLE.achivementRobot}>
-                                                            {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
-                                                            {/* <RobotAvtar style={PAGESTYLE.cartoon} height={hp(45.18)} width={hp(67.51)} /> */}
                                                             {avatarListIndex == 0 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10,alignSelf: 'center',left:wp(21)}} ></Image>
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10, alignSelf: 'center', left: wp(21) }} ></Image>
                                                                 : null}
                                                             {avatarListIndex == 1 ?
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10 }} ></Image>

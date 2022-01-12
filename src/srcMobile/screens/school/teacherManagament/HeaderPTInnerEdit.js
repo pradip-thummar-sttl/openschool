@@ -43,7 +43,7 @@ const HeaderPTInnerEdit = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>Add New Teacher</Text>
+                        <Text style={styles.mainTitle}>Edit Teacher</Text>
                     </View>
                 </View>
 

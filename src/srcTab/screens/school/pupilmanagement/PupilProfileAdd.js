@@ -188,14 +188,12 @@ const PupilProfileAdd = (props) => {
             if (res.code == 200) {
                 setLoading(false)
                 showMessage(MESSAGE.inviteSent)
-                console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
         })
 
     }

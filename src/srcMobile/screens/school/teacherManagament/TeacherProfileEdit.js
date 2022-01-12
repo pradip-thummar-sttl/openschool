@@ -153,7 +153,6 @@ const TeacherProfileEdit = (props) => {
         }
 
         let data = new FormData();
-
         data.append('file', {
             uri: isProfileUri.uri,
             name: isProfileUri.fileName,
