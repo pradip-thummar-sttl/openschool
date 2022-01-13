@@ -590,12 +590,11 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 .translationYBy(-1 * ((float) rlHeader.getHeight()))
                 .translationY(0)
                 .setDuration(getActivity().getResources().getInteger(android.R.integer.config_mediumAnimTime));
-
         startTimerToHideLayout();
     }
 
     public void startTimerToHideLayout() {
-        cTimer = new CountDownTimer(3000,1000) {
+        cTimer = new CountDownTimer(6000,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // Display Data by Every Ten Second
