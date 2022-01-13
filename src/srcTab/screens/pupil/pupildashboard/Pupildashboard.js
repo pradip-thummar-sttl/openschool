@@ -471,22 +471,18 @@ const PupuilDashboard = (props) => {
                                                                                     />
                                                                                 </SafeAreaView>
                                                                                 <View style={PAGESTYLE.rightTabContent}>
-                                                                                    {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <View style={PAGESTYLE.tabcontent}>
                                                                                         <Text numberOfLines={1} h2 style={PAGESTYLE.titleTab}>{dataOfSubView.LessonTopic}</Text>
                                                                                         <View style={PAGESTYLE.timedateGrp}>
                                                                                             <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                                                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                                             </View>
                                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                                                                                                {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
                                                                                                 <Clock style={PAGESTYLE.timeIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                                             </View>
                                                                                             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                                {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                                                                                                 <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                 <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.GroupName}</Text>
                                                                                             </View>
@@ -507,10 +503,6 @@ const PupuilDashboard = (props) => {
                                                                                         </View>
                                                                                         <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                                         <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                                                            {/* <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                                                <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                                                <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
-                                                                                            </TouchableOpacity> */}
                                                                                             {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
                                                                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                                                                     <Text style={PAGESTYLE.requireText}>Attachment(s)</Text>
@@ -532,10 +524,8 @@ const PupuilDashboard = (props) => {
                                                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                                                                             color={COLORS.blueBorder} />
                                                                                                                         :
-                                                                                                                        // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
                                                                                                                         <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                                                                                                     }
-                                                                                                                    {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                                                                 </View>
                                                                                                             </TouchableOpacity>
                                                                                                         )}
@@ -554,7 +544,6 @@ const PupuilDashboard = (props) => {
                                                                                                 style={{ width: '100%' }}
                                                                                                 renderItem={({ item, index }) => (
                                                                                                     <View style={PAGESTYLE.lessonPoints}>
-                                                                                                        {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
                                                                                                         <CheckedBlue style={PAGESTYLE.checkIcon} width={hp(1.7)} height={hp(1.7)} />
                                                                                                         <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                                                                                     </View>
@@ -564,17 +553,16 @@ const PupuilDashboard = (props) => {
                                                                                             />
                                                                                         </View>
                                                                                         <View style={PAGESTYLE.lessonstartButton}>
-                                                                                            <TouchableOpacity onPress={() => markAsAbsent()} style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text></TouchableOpacity>
-                                                                                            <TouchableOpacity
-                                                                                                style={PAGESTYLE.buttonGrp}
-                                                                                                onPress={() => { launchLiveClass() }}>
+                                                                                            <TouchableOpacity onPress={() => markAsAbsent()} style={PAGESTYLE.buttonGrp}>
+                                                                                                <Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text>
+                                                                                            </TouchableOpacity>
+
+                                                                                            <TouchableOpacity style={PAGESTYLE.buttonView} onPress={() => { launchLiveClass() }}>
                                                                                                 {
                                                                                                     isLoading ?
-                                                                                                        <ActivityIndicator
-                                                                                                            style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
-                                                                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                            color={COLORS.white} /> :
-                                                                                                        <Text style={STYLE.commonButtonGreenDashboardSide}>Join Class</Text>
+                                                                                                        <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                                                                                                        :
+                                                                                                        <Text style={PAGESTYLE.txtJointClass}>Join Class</Text>
                                                                                                 }
 
                                                                                             </TouchableOpacity>

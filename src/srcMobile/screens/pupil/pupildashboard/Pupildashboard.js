@@ -226,20 +226,14 @@ const PupuilDashboard = (props) => {
     }
 
     const launchLiveClass = () => {
-        console.log('data of sub view', dataOfSubView)
+
         if (isRunningFromVirtualDevice) {
 
             // Do Nothing
         } else {
-            // if (Platform.OS == 'android') {
-            // startLiveClassAndroid()
-            // } else {
-            //     startLiveClassIOS()
-            // }
             setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
             if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
-                // showMessage('time to start')
                 let data = { "Absent": false }
                 Service.post(data, `${EndPoints.LessonCheck}/${dataOfSubView._id}/${User.user.UserDetialId}`, (res) => {
                     setLoading(false)
@@ -435,8 +429,6 @@ const PupuilDashboard = (props) => {
                                     </View>
                                     <View style={[PAGESTYLE.rightContent]}>
                                         <MyClassIllus width={hp(40)} height={hp(10)} style={PAGESTYLE.pupilGridTopBg} />
-                                        {/* <Image source={Images.PupilDashTopBg} style={PAGESTYLE.pupilGridTopBg} /> */}
-                                        {/* <ImageBackground source={Images.CalenderBg} style={[PAGESTYLE.datePositionBg]}></ImageBackground> */}
                                         <View style={[PAGESTYLE.datePositionBg]}>
                                             <MyDayCalendar width={hp(12.95)} height={hp(10.22)} style={[PAGESTYLE.datePositionBgIcon]} />
                                             <Text style={PAGESTYLE.date}>Today</Text>
@@ -445,7 +437,6 @@ const PupuilDashboard = (props) => {
                                         <View>
                                             <TouchableOpacity>
                                                 <MoreWhite width={hp(0.7)} height={hp(2.5)} style={PAGESTYLE.moreDashboard} />
-                                                {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
                                             </TouchableOpacity>
                                         </View>
                                     </View>
@@ -493,7 +484,6 @@ const PupuilDashboard = (props) => {
                                                                 <TouchableOpacity activeOpacity={1}>
 
                                                                     <View style={PAGESTYLE.rightTabContent}>
-                                                                        {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                         <View style={PAGESTYLE.tabcontent}>
                                                                             <Text h2 style={PAGESTYLE.titleTab}>{dataOfSubView.SubjectName}</Text>
                                                                             <Text h3 style={PAGESTYLE.subTitleTab}>{dataOfSubView.LessonTopic}</Text>
@@ -501,17 +491,14 @@ const PupuilDashboard = (props) => {
                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
                                                                                     <CalenderIconSmall width={hp(1.69)} height={hp(1.69)} style={PAGESTYLE.calIcon} />
-                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{moment(dataOfSubView.Date).format('DD/MM/yyyy')}</Text>
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
                                                                                     <Clock width={hp(1.6)} height={hp(1.6)} style={PAGESTYLE.timeIcon} />
-                                                                                    {/* <Image style={PAGESTYLE.timeIcon} source={Images.Clock} /> */}
                                                                                     <Text style={PAGESTYLE.datetimeText}>{dataOfSubView.StartTime} - {dataOfSubView.EndTime}</Text>
                                                                                 </View>
                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                                                                                     <Group width={hp(1.79)} height={hp(1.67)} style={PAGESTYLE.calIcon} />
-                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                                                                                     <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, PAGESTYLE.grpElipsis]}>{dataOfSubView.GroupName}</Text>
                                                                                 </View>
                                                                             </View>
@@ -532,13 +519,6 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
                                                                                 <Text style={PAGESTYLE.lessondesciption}>{dataOfSubView.LessonDescription}</Text>
                                                                                 <View style={PAGESTYLE.attchmentSectionwithLink}>
-                                                                                    {/* <TouchableOpacity style={PAGESTYLE.attachment}>
-                                                                                        <Image style={PAGESTYLE.attachmentIcon} source={Images.AttachmentIcon} />
-                                                                                        <Text style={PAGESTYLE.attachmentText}>{dataOfSubView.MaterialList.length} Attachment(s)</Text>
-                                                                                    </TouchableOpacity>
-                                                                                    <TouchableOpacity>
-                                                                                        <Text style={PAGESTYLE.linkText}>see more</Text>
-                                                                                    </TouchableOpacity> */}
                                                                                     {dataOfSubView.MaterialList && dataOfSubView.MaterialList.length > 0 ?
                                                                                         <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                                                             <Text style={{ ...PAGESTYLE.requireText, marginBottom: 20, }}>Attachment(s)</Text>
@@ -591,22 +571,19 @@ const PupuilDashboard = (props) => {
                                                                                     />
                                                                                 </View>
                                                                             </ScrollView>
+
                                                                             <View style={PAGESTYLE.lessonstartButton}>
                                                                                 <View style={{ width: '48%', }}>
                                                                                     <TouchableOpacity onPress={() => { markAsAbsent() }} style={{ ...STYLE.commonButtonBordered, width: '100%' }}>
                                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
+
                                                                                 <View style={{ width: '48%', }}>
-                                                                                    <TouchableOpacity
-                                                                                        style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', }}
-                                                                                        onPress={() => { launchLiveClass() }}>
+                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', height:hp(5) }} onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
-                                                                                                <ActivityIndicator
-                                                                                                    style={{ ...PAGESTYLE.buttonGrp }}
-                                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                                    color={COLORS.white} /> :
+                                                                                                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> :
                                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, }}>Join Class</Text>
                                                                                         }
 
@@ -620,9 +597,6 @@ const PupuilDashboard = (props) => {
                                                         </RBSheet>
                                                     </>
                                                     :
-                                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                    // </View>
                                                     <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLesson1} title2={MESSAGE.noLesson2} />
                                             }
                                         </View>

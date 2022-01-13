@@ -1372,8 +1372,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     if ([self.users indexOfObject:user] != NSNotFound) {
       return;
     }
-//    [self.users addObject:user];
-//    [self.opponentsCollectionView reloadData];
+   [self.users addObject:user];
+   [self.opponentsCollectionView reloadData];
   }
  
   
