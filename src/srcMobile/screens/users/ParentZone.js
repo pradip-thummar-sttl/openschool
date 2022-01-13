@@ -23,27 +23,18 @@ export default class Users extends Component {
                             activeOpacity={opacity}
                             onPress={() => this.props.navigation.navigate('ParentZonemain')}>
                             <View style={styles.user}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.userOne} /> */}
                                 <Text style={styles.text}>Reuel Pardesi</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={styles.user}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.userTwo} /> */}
                                 <Text style={styles.text}>Elysian Pardesi</Text>
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={styles.user}>
-                                {/* <Image
-                                    style={styles.userIcon}
-                                    source={Images.addUser} /> */}
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>

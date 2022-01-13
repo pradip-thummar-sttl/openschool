@@ -71,15 +71,14 @@ export default class ParentZoneSwitch extends Component {
                 <View style={{ flex: 1, justifyContent: 'center', }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.props.navigation.replace('PupilRegister')}>
+                        
+                        <TouchableOpacity activeOpacity={opacity} onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
-                                <AddNewPupil style={styles.userIcon} width={hp(20.10)}
-                                    height={hp(20.10)} />
+                                <AddNewPupil style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
+
                         <View>
                             <FlatList
                                 data={this.state.childrenList}
@@ -98,7 +97,6 @@ export default class ParentZoneSwitch extends Component {
                                         </View>
                                     </TouchableOpacity>
                                 )}
-                                //Setting the number of column
                                 horizontal
                                 keyExtractor={(item, index) => index.toString()}
                             />
@@ -160,7 +158,6 @@ const styles = StyleSheet.create({
     userIcon: {
         width: hp(20.10),
         height: hp(20.10),
-        // resizeMode: "auto",
         alignSelf: 'center',
         marginBottom: hp(2),
         borderRadius: hp(20.10 / 2),
