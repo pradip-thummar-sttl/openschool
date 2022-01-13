@@ -1,13 +1,10 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity,  } from "react-native";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { View, StyleSheet, Text, TouchableOpacity, ActivityIndicator, } from "react-native";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-// import Images from '../../../../utils/Images';
 import Modal from 'react-native-modal';
-// import DateTimePicker from '@react-native-community/datetimepicker';
 import { opacity, showMessage } from "../../../../utils/Constant";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
@@ -17,32 +14,27 @@ import { EndPoints } from "../../../../service/EndPoints";
 import DocumentPicker from "react-native-document-picker";
 import { User } from "../../../../utils/Model";
 import MESSAGE from "../../../../utils/Messages";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const MPopupdataSecondCSVUpload = (props) => {
     const isFromDashboard = props.isFromDashboard
     console.log('isFromDashboard', isFromDashboard);
 
     const [isModalVisible, setModalVisible] = useState();
+    const [isLoader, setLoader] = useState(false);
+
     const [csv, setCSV] = useState(null)
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
     };
 
     const addCSV = () => {
-        console.log('hihihihihihi')
         try {
-            DocumentPicker.pick({
-                type: [DocumentPicker.types.xlsx,],
-            }).then((results) => {
-                console.log('results', results);
-                // setCSV(results)
+            DocumentPicker.pick({ type: [DocumentPicker.types.xlsx,], }).then((results) => {
                 uploadProfile(results)
             });
 
         } catch (err) {
             if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
             } else {
                 throw err;
             }
@@ -50,7 +42,7 @@ const MPopupdataSecondCSVUpload = (props) => {
     }
 
     const uploadProfile = (csv) => {
-        
+        setLoader(true);
         let data = new FormData();
         let url;
 
@@ -60,12 +52,7 @@ const MPopupdataSecondCSVUpload = (props) => {
             url = `${EndPoints.PupilUpload}/${User.user.UserDetialId}`
         }
 
-        data.append('file', {
-            uri: csv.uri,
-            name: csv.name,
-            type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        });
-
+        data.append('file', { uri: csv.uri, name: csv.name, type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
         Service.postFormData(data, url, (res) => {
             if (res.code == 200) {
                 showMessage(MESSAGE.inviteSent)
@@ -73,38 +60,47 @@ const MPopupdataSecondCSVUpload = (props) => {
             } else {
                 showMessage(res.message)
             }
+            setLoader(false);
         }, (err) => {
+            setLoader(false);
             console.log('response of get all lesson error', err)
         })
-
     }
-
-
+    
     return (
         <View>
-            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}> 
-               <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)}/> 
+            <TouchableOpacity style={styles.entryData} activeOpacity={opacity} onPress={toggleModal}>
+                <ImportCSV style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                 <Text style={styles.entryTitle}>Import From CSV</Text>
-            </TouchableOpacity> 
-            
+            </TouchableOpacity>
+
             <Modal isVisible={isModalVisible}>
                 <View style={styles.popupLarge}>
                     <Text h2 style={[styles.titleTab, STYLE.centerText]}>Upload CSV</Text>
-                    
+
                     <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    
+
                     <View style={styles.popupCard}>
                         <TouchableOpacity style={styles.upload} onPress={() => addCSV()}>
-                                <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
-                                <Text style={styles.labelUpload}>Click here to select source</Text>
+                            <UploadCSV style={styles.createGrpImage} height={43.57} width={52.91} />
+                            <Text style={styles.labelUpload}>Click here to select source</Text>
                         </TouchableOpacity>
                     </View>
-                    
                 </View>
+
+                {
+                    isLoader &&
+                    <ActivityIndicator
+                        style={{ width: '100%', height: '50%', borderRadius: hp(1), backgroundColor: 'rgba(0, 0, 0, 0.5)', position: 'absolute' }}
+                        size={'large'}
+                        color={COLORS.yellowDark} />
+
+                }
+
             </Modal>
-         </View>
+        </View>
     );
 }
 export default MPopupdataSecondCSVUpload;
@@ -232,13 +228,13 @@ const styles = StyleSheet.create({
     entryData: {
         // marginRight: 30,
         alignItems: 'center',
-        marginBottom:hp(5.14),
+        marginBottom: hp(5.14),
     },
     entryIcon: {
         resizeMode: 'contain',
         marginBottom: hp(2.6),
-        justifyContent:'center',
-        alignItems:'center',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     upload: {
         width: '100%',

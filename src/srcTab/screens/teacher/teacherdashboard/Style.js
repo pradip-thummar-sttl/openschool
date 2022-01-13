@@ -2,6 +2,7 @@ import { Dimensions, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 const { width, height } = Dimensions.get('window');
 
@@ -366,13 +367,14 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     lessonstartButton: {
+        width:'100%',
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
+        justifyContent:'space-around',
+        alignItems:'center',
+        alignSelf:'center',
     },
-    buttonGrp: {
-        marginLeft: hp(2.21),
-    },
+
+    
     pupilTable: {
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -524,5 +526,53 @@ export default StyleSheet.create({
     },
     scrollView: {
         height: hp(67.44),
+    },
+
+    uploadVideoStl:{ width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.3);', position: 'absolute', justifyContent: 'center', alignItems:'center' },
+    uploadVideoInnerStl:{width: '80%',borderRadius: hp(1),backgroundColor:COLORS.white, padding:10},
+    uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
+
+    buttonGrp: {
+        width: '30%',
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: 6,
+        overflow: 'hidden',
+        alignItems: 'center',
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+    },
+    txtStartClastButtonStyle: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        textAlign: 'center',
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+
+    btnEditStyle: {
+        width: '65%',
+        backgroundColor: COLORS.white,
+        borderRadius: 6,
+        overflow: 'hidden',
+        alignItems: 'center',
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+    },
+    txtEditTextStyle: {
+        backgroundColor: COLORS.transparent,
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        textAlign: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
 });

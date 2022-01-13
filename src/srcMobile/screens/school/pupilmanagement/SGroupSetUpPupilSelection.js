@@ -51,11 +51,15 @@ const SGroupSetUpPupilSelection = (props) => {
         loadTeacher()
         setPupilLoading(true)
 
-        Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+        if (props.route.params.groupData) {
+            let previoslySelectedData = props.route.params.groupData
+            setSelectedPupils(previoslySelectedData)
+        }
+
+        Service.get(`${EndPoints.pupilbyclasssetup}/${User.user.UserDetialId}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)
-                console.log('----set pupil------', res.data)
                 setPupilsClone(res.data)
             } else {
                 showMessage(res.message)
@@ -63,23 +67,31 @@ const SGroupSetUpPupilSelection = (props) => {
         }, (err) => {
             setPupilLoading(false)
             console.log('error of GetPupilByTeacherId', err)
-
         })
 
     }, [])
 
     const loadTeacher = () => {
-        console.log('User.user.UserDetialId', User.user.UserDetialId);
         const data = {
             Searchby: "",
             Filterby: ""
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+            console.log('response of load response', res)
             if (res.code == 200) {
                 setTeachers(res.data)
                 // setTeacherClone(res.data)
+
+                if (props.route.params.teacherId) {
+                    let teacherData = []
+                    res.data.map((item) => {
+                        if (item.TeacherId === props.route.params.teacherId) {
+                            teacherData.push(item)
+                        }
+                    })
+                    setSelectedTeacher(teacherData)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -170,6 +182,10 @@ const SGroupSetUpPupilSelection = (props) => {
                 reset()
                 // loadGroup()
                 showMessage(MESSAGE.classSetup)
+                setTimeout(() => {
+                    props.route.params.onRefresh();
+                    props.navigation.goBack()
+                }, 1000)
             } else {
                 showMessage(res.message)
             }
@@ -179,7 +195,7 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', selectedPupils, pupils);
+        // console.log('isSelected', selectedPupils, pupils);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item.PupilId !== pupils[_index].PupilId);
             setSelectedPupils(newList)
@@ -189,7 +205,10 @@ const SGroupSetUpPupilSelection = (props) => {
     }
 
     const isPupilChecked = (_index) => {
-        console.log('selectedPupils', selectedPupils, _index);
+        // console.log('selectedPupils', selectedPupils, _index);
+
+        console.log('----selectedTeacher-------', selectedTeacher)
+
         if (selectedPupils.length > 0) {
             if (selectedPupils.some(ele => ele.PupilId == pupils[_index].PupilId)) {
                 return true
@@ -310,24 +329,15 @@ const SGroupSetUpPupilSelection = (props) => {
         );
     };
 
+
     return (
         <SafeAreaView style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.white }}>
             <TouchableOpacity
                 activeOpacity={opacity}
                 onPress={() => { props.route.params.onRefresh(); props.navigation.goBack() }}>
-                {/* <Image style={PAGESTYLE.arrow} source={Images.backArrow} /> */}
                 <BackArrow style={PAGESTYLE.backArrow} height={hp(2.34)} width={hp(2.34)} />
-
             </TouchableOpacity>
-            {/* <TextInput
-                returnKeyType={"done"}
-                style={PAGESTYLE.input1}
-                placeholder="Enter group name"
-                autoCapitalize={'sentences'}
-                maxLength={40}
-                placeholderTextColor={COLORS.darkGrayIntro}
-                value={groupName}
-                onChangeText={groupName => { setGroupName(groupName) }} /> */}
+          
             {teacherDropDown()}
             <View style={STYLE.hrCommon}></View>
             <View style={PAGESTYLE.left1}>

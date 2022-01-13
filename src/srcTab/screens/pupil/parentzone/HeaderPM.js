@@ -59,7 +59,7 @@ const HeaderPM = (props) => {
                         <Menu>
                             <MenuTrigger style={PAGESTYLE.filterGroup}>
                             {/* childrenList.length == 0 ? Images.userparent :  */}
-                                <Image source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
+                                <Image source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ backgroundColor : COLORS.borderGrp,width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
                                 <Text style={PAGESTYLE.selectDropList} numberOfLines={1} ellipsizeMode='tail'>{childrenList.length == 0 ? '' : childrenList[selectedPupilIndex].FirstName + ' ' + childrenList[selectedPupilIndex].LastName}</Text>
                                 {/* <Image style={PAGESTYLE.dropArrow} source={Images.DropArrow} /> */}
                                 <ArrowDown style={PAGESTYLE.dropArrow} height={hp(0.95)} width={hp(1.51)} />
@@ -71,7 +71,7 @@ const HeaderPM = (props) => {
                                             activeOpacity={opacity}
                                             onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                             <View style={PAGESTYLE.filterList}>
-                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
+                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), backgroundColor : COLORS.borderGrp,}} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                         </TouchableOpacity>

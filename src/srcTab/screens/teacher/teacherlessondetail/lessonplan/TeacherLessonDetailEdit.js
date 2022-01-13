@@ -45,6 +45,7 @@ import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import Modal from 'react-native-modal';
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -443,7 +444,7 @@ const TLDetailEdit = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%' }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(1), }}>
+                        <View style={{ margin: hp(1),justifyContent : 'center' }}>
                             {/* <Text style={{ fontSize: hp(2), paddingRight: hp(6.5) }}>{item.ItemName}</Text> */}
                             <TextInput
                                 style={{ width: '90%', height: 41, fontSize: hp(1.70), }}
@@ -520,7 +521,9 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', }}
                         renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
+                            <View style={[PAGESTYLE.alignRow,{
+                                width : '33.33%',marginHorizontal  : 3
+                           }]}>
                                 <CheckBox
                                     style={{ ...PAGESTYLE.checkMarkTool }}
                                     boxType={'square'}
@@ -945,6 +948,7 @@ const TLDetailEdit = (props) => {
                             lessonData={lessonData}
                             navigateToBack={() => {
                                 props.onRefresh();
+                                console.log('props from teacherlesson detail screen', props);
                                 props.goBack()
                             }}
                             onAlertPress={() => { props.onAlertPress() }}
@@ -1080,10 +1084,10 @@ const TLDetailEdit = (props) => {
                                             materialArr.length != 0 &&
                                             materialArr.map((item, index) => {
                                                 return (
-                                                    <View style={PAGESTYLE.fileRender}>
-                                                        <Text numberOfLines={1} style={PAGESTYLE.fileName}>{item.originalname}</Text>
+                                                    <View style={[PAGESTYLE.fileRender]}>
+                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName]}>{item.originalname}</Text>
                                                         {item &&
-                                                            <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={PAGESTYLE.RenderDownload}>
+                                                            <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload]}>
                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                             </TouchableOpacity>
                                                         }
@@ -1092,7 +1096,7 @@ const TLDetailEdit = (props) => {
                                                 )
                                             })
                                         }
-
+                                            {/* item.uri &&  */}
                                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.buttonGrp}

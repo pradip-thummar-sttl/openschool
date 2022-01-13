@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -30,6 +30,7 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
+    console.log('===========',selectedIndex);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -82,7 +83,9 @@ const Header = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1,
+                        paddingVertical : Platform.OS === 'android' ? 3 : 0,   
+                        height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -91,13 +94,16 @@ const Header = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', }}>
-                    <Menu style={{ marginLeft: 10 }}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Menu style={{marginLeft: 10}}>
+                        <MenuTrigger style={{alignItems : 'center',justifyContent : 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                        <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
+                        </MenuTrigger>
+                        <MenuOptions style={[styles.filterListWrap]}>
+                            <MenuOption style={[styles.borderList]}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
+                                  
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
@@ -116,12 +122,7 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
-                                        {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -131,12 +132,7 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
-                                        {selectedIndex == 2 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
@@ -146,25 +142,18 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
-                                        {selectedIndex == 3 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
-                                            :
-                                            null
-                                        }
+                                        {selectedIndex == 3 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
-                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                    
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
                 </TouchableOpacity>
@@ -242,7 +231,7 @@ const styles = StyleSheet.create({
         right: hp(1.43),
     },
     commonButtonBorderedheader: {
-        backgroundColor: COLORS.transparent,
+        // backgroundColor: 'red',
         color: COLORS.darkGrayIntro,
         borderRadius: hp(1),
         overflow: 'hidden',
@@ -269,7 +258,7 @@ const styles = StyleSheet.create({
         width: hp(1.74),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.30),
+        right: hp(1.10), //hp(1.10)
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -308,23 +297,8 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
-    // filterListWrap: {
-    //     paddingTop: hp(1),
-    //     paddingLeft: hp(1.2),
-    //     paddingRight: hp(1.2),
-    //     paddingBottom: hp(1),
-    //     position: 'absolute',
-    //     backgroundColor: COLORS.white,
-    //     top: hp(5.5),
-    //     width: hp(30.98),
-    //     borderRadius: hp(1),
-    //     shadowColor: COLORS.black,
-    //     shadowOffset: { width: 0, height: hp(1), },
-    //     shadowOpacity: 0.05,
-    //     shadowRadius: hp(1),
-    // },
+    
     filterListWrap: {
-        width: hp(25.98),
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
@@ -332,8 +306,6 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        position: 'absolute',
-        top: hp(6),
     },
     checkMark: {
         width: hp(1.48),

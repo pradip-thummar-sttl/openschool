@@ -369,7 +369,7 @@ const PopupdataSecond = (props) => {
                                                     style={styles.commonInputTextarea}
                                                     onChangeText={notes => setnote(notes)} />
                                             </View>
-                                            <View style={[styles.copyInputParent, styles.colorPicker]}>
+                                            <View style={[styles.copyInputParent, styles.colorPicker,]}>
                                                 <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
@@ -394,7 +394,7 @@ const PopupdataSecond = (props) => {
                                                 :
                                                 <TouchableOpacity
                                                     onPress={isFieldsValidated}
-                                                    style={styles.buttonGrp}
+                                                    style={[styles.buttonGrp]}
                                                     activeOpacity={opacity}>
                                                     {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
                                                     <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
@@ -414,7 +414,7 @@ const PopupdataSecond = (props) => {
 
                         {
                             isColorDropOpen ?
-                                <View style={styles.colorDropView}>
+                                <View style={[styles.colorDropView]}>
                                     <FlatList
                                         data={colorArr}
                                         renderItem={({ item, index }) => {
@@ -668,7 +668,7 @@ const styles = StyleSheet.create({
     },
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 200, width: 150, borderRadius: 10, backgroundColor: COLORS.white, right: 15, bottom: 80, padding: 15, borderColor: COLORS.dashboardBorder, borderWidth: 1.5 },
     // colorButton: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 10 },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(2.6), bottom: hp(19.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: Platform.OS === 'android' ? hp(25) : hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(2.6), bottom: hp(19.5), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorDropView2: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(0), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1.30) },
     timeField: {

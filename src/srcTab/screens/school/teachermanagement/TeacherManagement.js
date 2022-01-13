@@ -13,6 +13,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import TeacherProfileView from "./TeacherProfileView";
 import TeacherProfileAdd from "./TeacherProfileAdd";
+import TeacherProfileEdit from "./TeacherProfileEdit";
 import MESSAGE from "../../../../utils/Messages";
 import { FlatList } from "react-native-gesture-handler";
 import FONTS from "../../../../utils/Fonts";
@@ -57,6 +58,8 @@ const TeacherManagement = (props) => {
 
     const [isTeacherDetail, setTeacherDetail] = useState(false)
     const [isTeacherAdd, setTeacherAdd] = useState(false)
+    const [isTeacherEdit, setTeacherAddEdit] = useState(false)
+
     const [teacherDetailData, setTeacherDetailData] = useState({})
     const [isHide, action] = useState(true);
     const [teacherData, setTeacherData] = useState([])
@@ -74,22 +77,17 @@ const TeacherManagement = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             setDataLoading(false)
             if (res.code == 200) {
-                // console.log('response of get all lesson event:', res)
-                setTeacherData(res.data)
-                // dispatch(setCalendarEventData(res.data))
+                setTeacherData(res.data);
             } else {
-                showMessage(res.message)
+                showMessage(res.message);
             }
         }, (err) => {
             setDataLoading(false)
             console.log('response of get all lesson error', err)
         })
-
-
     }
 
     const refresh = () => {
@@ -98,88 +96,97 @@ const TeacherManagement = (props) => {
 
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
+            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }} />
         );
     };
+
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
-        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+        props.navigation.openDrawer()
+    }
+
+    const onEditClick = () => {
+        setTeacherAddEdit(true);
+        setTeacherDetail(false);
+    }
+    const onRefress = () => {
+        setTeacherAddEdit(false);
+        fetchRecord('', '')
     }
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
-                    :
-                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
+                {
+                    isTeacherDetail ? <TeacherProfileView onNavigation={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)}
+                     onEditTeacherProfile={() => onEditClick()} />
                         :
-                        <>
-                            <HeaderTM
-                                onAlertPress={() => { openNotification() }}
-                                onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                                refreshList={() => refresh()}
-                                navigateToAddTeacher={() => setTeacherAdd(true)}
-                                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                        isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => {setTeacherAdd(false);onRefress()}} openNotification={() => { openNotification() }} />
+                            :
+                            isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => onRefress()} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />
+                                :
+                                <>
+                                    <HeaderTM
+                                        onAlertPress={() => { openNotification() }}
+                                        onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                                        onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                                        onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                                        onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                        refreshList={() => refresh()}
+                                        navigateToAddTeacher={() => setTeacherAdd(true)}
+                                        onFilter={(filterBy) => fetchRecord('', filterBy)} />
 
-                            <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
-                                {isDataLoading ?
-                                    <ActivityIndicator
-                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                        color={COLORS.blueButton} />
-                                    :
-                                    teacherData.length > 0 ?
-                                        <View>
-                                            <View style={PAGESTYLE.pupilTable}>
-                                                <View style={{ width: '3%' }}>
-                                                </View>
-                                                <View style={{ width: '5%' }}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>
-                                                </View>
-                                                <View style={{ width: '20%', }}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
-                                                </View>
-                                                <View style={{ width: '13%', }}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
-                                                </View>
-                                                <View style={{ width: '25%',alignItems: 'center',marginRight: hp(4), }}>
-                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
-                                                    <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
-                                                        <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                                    <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
+                                        {isDataLoading ?
+                                            <ActivityIndicator
+                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                color={COLORS.blueButton} />
+                                            :
+                                            teacherData.length > 0 ?
+                                                <View>
+                                                    <View style={PAGESTYLE.pupilTable}>
+                                                        <View style={{ width: '3%' }}>
+                                                        </View>
+                                                        <View style={{ width: '5%' }}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Title</Text>
+                                                        </View>
+                                                        <View style={{ width: '20%', }}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Name</Text>
+                                                        </View>
+                                                        <View style={{ width: '13%', }}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
+                                                        </View>
+                                                        <View style={{ width: '25%', alignItems: 'center', marginRight: hp(4), }}>
+                                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
+                                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Homework</Text>
+                                                            </View>
+                                                        </View>
+                                                        <View style={{ width: '25%' }}>
+                                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle]}>Contact</Text>
+                                                        </View>
+                                                    </View>
+                                                    <View style={PAGESTYLE.pupilTabledata}>
+                                                        <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
+                                                            <FlatList
+                                                                data={teacherData}
+                                                                renderItem={pupilRender}
+                                                                style={PAGESTYLE.pupilListing}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={null}
+                                                                showsVerticalScrollIndicator={false}
+                                                                nestedScrollEnabled
+                                                            />
+                                                        </SafeAreaView>
                                                     </View>
                                                 </View>
-                                                <View style={{ width: '25%' }}>
-                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle]}>Contact</Text>
-                                                </View>
-                                            </View>
-                                            <View style={PAGESTYLE.pupilTabledata}>
-                                                <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                                                    <FlatList
-                                                        data={teacherData}
-                                                        renderItem={pupilRender}
-                                                        style={PAGESTYLE.pupilListing}
-                                                        keyExtractor={(item) => item.id}
-                                                        extraData={null}
-                                                        showsVerticalScrollIndicator={false}
-                                                        nestedScrollEnabled
-                                                    />
-                                                </SafeAreaView>
-                                            </View>
-                                        </View>
-                                        :
-
-                                        // <View>
-                                        //     <Text style={{ height: 50, fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                        // </View>
-                                        <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
-                                }
-                            </View>
-                        </>
+                                                :
+                                                <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.noTeacher1} title2={MESSAGE.noTeacher2} />
+                                        }
+                                    </View>
+                                </>
                 }
             </View>
         </View >

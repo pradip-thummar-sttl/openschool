@@ -67,6 +67,9 @@ import SchoolNewMessage from '../screens/school/globalmessage/SchoolNewMessage';
 import SchoolSetting from '../screens/school/setting/SchoolSetting';
 import TeacherManagement from '../screens/school/teachermanagement/TeacherManagement';
 
+import PupilProfileEdit from '../screens/teacher/pupilmanagement/PupilProfileEdit';
+
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -111,7 +114,6 @@ function ScreenStack() {
                 <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
                 <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
                 <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
-                {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
                 <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
                 <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
                 <Stack.Screen name="TLDetail" component={TLDetail} />
@@ -135,6 +137,7 @@ function ScreenStack() {
                 <Stack.Screen name="PupiloverView" component={PupiloverView} />
                 <Stack.Screen name="PupilManagement" component={PupilManagement} />
                 <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
+                <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
                 <Stack.Screen name="ParentZoneProfileEdit" component={ParentZoneProfileEdit} />
                 <Stack.Screen name="ParentZoneSwitch" component={ParentZoneSwitch} />
                 <Stack.Screen name="ParentZoneSchoolDetails" component={ParentZoneSchoolDetails} />
@@ -163,7 +166,7 @@ function ScreenStack() {
 function MyDrawer() {
     return (
         <Drawer.Navigator
-            drawerContent={props => <NotificationDrawer {...props} />}
+        drawerContent={props => <NotificationDrawer {...props} />}
             drawerPosition='right'
             headerMode='none'
             drawerStyle={STYLE.drawerWidth} >

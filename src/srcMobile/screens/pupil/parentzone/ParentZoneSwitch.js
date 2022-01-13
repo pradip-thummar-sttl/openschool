@@ -79,7 +79,8 @@ export default class ParentZoneSwitch extends Component {
                                     <View style={styles.user}>
                                         <Image
                                             style={styles.userIcon}
-                                            source={{ uri: baseUrl + item.ProfilePicture }} />
+                                            source={{ uri: baseUrl + item.ProfilePicture }}
+                                             />
                                         <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
                                     </View>
                                 </TouchableOpacity>
@@ -146,6 +147,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: hp(1.5),
         borderRadius: hp(13.5/2),
+        backgroundColor : COLORS.lightGrayPupil
     },
     parentZone: {
         alignSelf: 'flex-start',

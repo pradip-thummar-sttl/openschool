@@ -390,7 +390,7 @@ const PopupdataSecondPupil = (props) => {
                                             return (
                                                 <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                                     <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                                    <Text>{item.EventType}</Text>
+                                                    <Text style={{paddingStart : 10}}>{item.EventType}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }}
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
         marginBottom:hp(2)
     },
     buttonGrp: {
-        position: 'relative',
+        // position: 'relative',
         alignItems: 'center',
         flexDirection: 'row',
     },
@@ -474,7 +474,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         left: hp(1.7),
-        top: 'auto',
+        top: Platform.OS === 'android' ? 12 : 'auto',
         zIndex: 9,
     },
     popupCustomButton: {
@@ -663,9 +663,9 @@ const styles = StyleSheet.create({
     },
     // colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84),borderColor: COLORS.borderGrp, borderWidth: 1, },
     // colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
-    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
+    colorDropView: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(29.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: 15, bottom: hp(10.41), padding: hp(1.84), borderColor: COLORS.borderGrp, borderWidth: 1, },
     colorDropView1: { position: "absolute", alignSelf: 'center', height: 'auto', width: hp(19.53), borderRadius: hp(1.23), backgroundColor: COLORS.white, right: hp(0), bottom: hp(6), padding: hp(0.5), borderColor: COLORS.borderGrp, borderWidth: 1, },
-    colorButton: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: hp(1.30) },
+    colorButton: { flexDirection: 'row', alignItems: 'center', paddingVertical: hp(1.30) },
     timeField: {
         flex: 0.20
     },

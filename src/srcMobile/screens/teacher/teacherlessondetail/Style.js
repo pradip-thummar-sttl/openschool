@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -173,7 +173,8 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: hp(1.6),
+        marginBottom: Platform.OS === 'android' ?  hp(2) :  hp(1.6),
+        // backgroundColor : 'red'
       
     },
     lessonPoints: {
@@ -190,7 +191,7 @@ export default StyleSheet.create({
     checkIcon: {
         width: hp(1.7),
         resizeMode: 'contain',
-        top: hp(0.2),
+        top: hp(0.1),
     },
     lessonPointText: {
         fontSize: hp(1.85),
@@ -296,12 +297,13 @@ export default StyleSheet.create({
     checkBoxLabelLine: {
         flexDirection: 'row',
         width: 'auto',
-        textAlignVertical : "bottom",
-        justifyContent: 'flex-start',
-        alignItems : 'center',
+        // textAlignVertical : "bottom",
+        // justifyContent: 'flex-start',
+        // alignItems : 'center',
         // paddingBottom: hp(1.1),
         // marginBottom: hp(1.2),
-        paddingVertical : 5,
+        // paddingVertical : 5,
+       
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -312,10 +314,12 @@ export default StyleSheet.create({
         // top: hp(0.8),
         textAlignVertical: "bottom",
         
+        
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.8),
-        paddingRight: hp(2),
-        width: '90%',
+        paddingRight : Platform.OS === 'android'  ?hp(3)  :hp(3.5),
+        // paddingRight: hp(2),
+       width : Platform.OS === 'android' ? hp(20) : hp(20)
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -331,10 +335,8 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        // resizeMode: 'contain',
-        // backgroundColor: COLORS.greyplaceholder,
         borderRadius: hp(1.25),
-        // backgroundColor:'red'
+        backgroundColor : COLORS.borderGrp
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -1283,11 +1285,15 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         right: hp(1),
+        // top : Platform.OS === 'android' ? hp(1.5) : 0,
+        // backgroundColor : 'red'
+       
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2.5),
         height: hp(2.5),
+       
     },
     fileBoxGrpWrap: {
         marginBottom: hp(-1.5)

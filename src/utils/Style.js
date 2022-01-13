@@ -152,6 +152,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
+        marginBottom : 10
     },
     commonButtonBordered: {
         backgroundColor: COLORS.transparent,
@@ -316,7 +317,6 @@ export default StyleSheet.create({
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
         height: hp(6),
-        backgroundColor: COLORS.backgroundColorCommon,
         textAlignVertical: 'center',
         paddingLeft: hp(2),
         paddingRight: hp('2.0%'),
@@ -328,5 +328,29 @@ export default StyleSheet.create({
     common: {
         flexDirection: 'row',
         alignItems: 'center',
-    }
+    },
+
+    btnEditView: {
+        width:hp(17),
+        height:hp(5),
+        marginRight:hp(2),
+        marginTop:hp(2),
+        backgroundColor: COLORS.buttonGreen,
+        borderRadius: hp('1.3%'),
+        alignItems: 'center',
+        justifyContent:'center',
+        fontFamily: FONTS.fontBold,
+    },
+    
+    txtEditView: {
+        color: COLORS.white,
+        fontSize: hp(1.7),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
 });

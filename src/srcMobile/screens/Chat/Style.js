@@ -52,7 +52,7 @@ export default StyleSheet.create({
 
     //
     views: {
-        flexDirection: 'row',
+        flex: 1
     },
     leftView: {
         marginLeft: hp(2),
@@ -102,20 +102,23 @@ export default StyleSheet.create({
     rightView: {
         // backgroundColor:'red',
         width: '100%',
-        height: '71%',
+        height: '100%',
     },
     mesagesView: {
         width: '100%',
         height: '100%',
         paddingHorizontal: hp(2),
-        marginBottom: hp(1),
     },
     textView: {
-        width: '100%',
-        height: hp(12),
-        borderTopWidth: 1,
-        borderTopColor: COLORS.videoLinkBorder,
+        width: '95%',
+        height: 90,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
+        position: 'absolute',
+        bottom: 20,
+        alignSelf: 'center'
     },
     messageCell: {
         flexDirection: 'row',
@@ -129,7 +132,7 @@ export default StyleSheet.create({
         width: hp(4),
         height: hp(4),
         borderRadius: hp(4 / 2),
-        backgroundColor: COLORS.lightGray
+        backgroundColor: COLORS.lightGrey
     },
     userNameText: {
         fontFamily: FONTS.fontSemiBold,
@@ -142,20 +145,20 @@ export default StyleSheet.create({
         paddingRight: 15,
     },
     input: {
-        width: '100%',
-        height: hp(12),
-        fontSize: hp(1.72),
-        fontFamily:FONTS.fontRegular,
-        padding: hp(1.5),
-        paddingTop: hp(1.5),
+        width: '95%',
+        height: '100%',
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontSemiBold,
+        marginHorizontal: Platform.OS == 'android' ? hp(1) : hp(2),
+        textAlignVertical: 'top',
+        paddingVertical: 10,
     },
     buttonView:{
         position:'absolute',
         right:hp(2),
-        paddingBottom: hp(2),
         alignItems: 'flex-end',
         height: '100%',
-        flexDirection:'row'
+        justifyContent: 'center',
     },
     btn:{
         // backgroundColor:'yellow',

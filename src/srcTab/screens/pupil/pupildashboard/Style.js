@@ -111,6 +111,7 @@ export default StyleSheet.create({
         marginTop: 7,
     },
     whiteBoard: {
+        width:'100%',
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
         marginTop: hp(1.30),

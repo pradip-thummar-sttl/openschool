@@ -80,7 +80,11 @@ const PupiloverView = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => fetchRecord('', '') })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
+    }
+
+    const onRefresh = () => {
+        fetchRecord('', '')
     }
 
     return (
@@ -94,7 +98,8 @@ const PupiloverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, '')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    // navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
+                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister', { userType: "Pupil" })}
                     onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
@@ -110,7 +115,7 @@ const PupiloverView = (props) => {
                                     pupilData.length > 0 ?
                                         pupilData.map((item, index) => {
                                             return (
-                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item })}>
+                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item, onGoBack: () => onRefresh() })}>
                                                     <View style={[PAGESTYLE.pupilData]}>
                                                         <View style={PAGESTYLE.pupilProfile}>
                                                             <View style={PAGESTYLE.rowProfile}>

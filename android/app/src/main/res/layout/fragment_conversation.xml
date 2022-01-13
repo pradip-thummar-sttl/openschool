@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragmentOpponents"
     style="@style/MatchParent"
-    android:background="@color/white">
+    android:background="@color/black">
 
     <TextView
         android:id="@+id/opponentName"
@@ -26,7 +26,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/grid_opponents"
             style="@style/MatchParent"
-            android:background="@color/white"
+            android:background="@color/black"
             tools:listitem="@layout/list_item_opponent_from_call" />
 
         <FrameLayout

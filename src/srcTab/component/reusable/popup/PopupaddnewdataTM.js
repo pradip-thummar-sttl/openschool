@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import COLORS from "../../../../utils/Colors";
@@ -18,6 +18,8 @@ import NewLesson from "../../../../svg/teacher/timetable/NewLesson";
 import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 import ImportIndividual from "../../../../svg/school/teachermanagment/ImportIndividual";
 import PopupdataSecondCSVUpload from "./PopupdataSecondCSVUpload";
+import PopStyle from '../popup/newPupilAndTeacherAddPopupStyle'
+
 const PopupaddnewdataTM = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
 
@@ -52,31 +54,26 @@ const PopupaddnewdataTM = (props) => {
                 style={styles.buttonGroup}
                 activeOpacity={opacity}
                 onPress={toggleModal}>
-                {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                 <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                 <Text style={styles.commonButtonGreenheader}>Add Teacher</Text>
             </TouchableOpacity>
+            
             <Modal isVisible={isModalVisible}>
-                <View style={styles.popupLarge}>
-                    <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                        {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
-                        <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                <View style={PopStyle.popupLarge}>
+                    <TouchableOpacity style={PopStyle.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
+                        <CloseBlack style={PopStyle.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
-                    <View style={styles.popupContent}>
-                        <View style={styles.tabcontent}>
-                            <View style={styles.beforeBorder}>
-                                <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Teaching Staff</Text>
-                                <View style={styles.entryContentMain}>
-                                    <PopupdataSecondCSVUpload userType={'Teacher'} />
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        style={styles.entryData}
-                                        onPress={() => { setModalVisible(false); props.navigateToAddTeacher() }}>
-                                        {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
-                                        <ImportIndividual style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                                        <Text style={styles.entryTitle}>Add Mnually</Text>
-                                    </TouchableOpacity>
-                                </View>
+                    <View style={PopStyle.beforeBorder}>
+                        <Text h2 style={PopStyle.titleTab}>Add Teaching Staff</Text>
+                        <View style={PopStyle.entryContentMain}>
+                            <View style={PopStyle.btnSelectionView}>
+                                <PopupdataSecondCSVUpload userType={'Teacher'} />
+                            </View>
+                            <View style={PopStyle.btnSelectionView}>
+                                <TouchableOpacity activeOpacity={opacity} style={PopStyle.entryData} onPress={() => { setModalVisible(false); props.navigateToAddTeacher() }}>
+                                    <ImportIndividual style={PopStyle.entryIcon} height={hp(11.19)} width={hp(11.19)} />
+                                    <Text style={PopStyle.entryTitle}>Add Mnually</Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -120,14 +117,14 @@ const styles = StyleSheet.create({
         // marginRight: hp(-4.23),
     },
     entryData: {
-        marginLeft: 30,
+        marginLeft:   Platform.OS === 'android' ? 20  : 30,
         alignItems: 'center',
     },
     entryIcon: {
         width: hp(11.19),
         height: hp(11.19),
         resizeMode: 'contain',
-        marginBottom: hp(2.6),
+        marginBottom:  Platform.OS === 'android' ? 0 : hp(2.6),
     },
     entryTitle: {
         fontSize: hp(1.56),
@@ -135,6 +132,8 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+        right : Platform.OS === 'android' ? hp(3) : 0,
+        bottom : Platform.OS === 'android' ? hp(1.5) : 0
     },
     buttonGroup: {
         position: 'relative',

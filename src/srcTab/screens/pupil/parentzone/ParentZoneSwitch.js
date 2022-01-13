@@ -164,6 +164,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginBottom: hp(2),
         borderRadius: hp(20.10 / 2),
+        backgroundColor : COLORS.borderGrp
     },
     topBg: {
         width: '100%',

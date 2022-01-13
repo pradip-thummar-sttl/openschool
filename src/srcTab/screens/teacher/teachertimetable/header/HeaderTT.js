@@ -101,7 +101,7 @@ const HeaderTT = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <TouchableOpacity style={styles.buttonGroup}>
+                <TouchableOpacity style={[styles.buttonGroup]}>
                     <Menu style={styles.filterGroup}>
                         <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
@@ -263,19 +263,20 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
     },
     filterListWrap: {
-        paddingTop: hp(1),
-        paddingLeft: hp(1.2),
-        paddingRight: hp(1.2),
-        paddingBottom: hp(1),
-        position: 'absolute',
+        paddingTop: Platform.OS === 'android' ? 0 : hp(1),
+        paddingLeft: Platform.OS === 'android' ? 0 : hp(1.2),
+        paddingRight:Platform.OS === 'android' ? 0 : hp(1.2),
+        paddingBottom:Platform.OS === 'android' ? 0 : hp(1),
+        // position: 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        width: hp(30.98),
+        top:Platform.OS === 'android' ? 0 : hp(5.5),
+        // width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
+      
     },
     checkMark: {
         width: hp(1.48),

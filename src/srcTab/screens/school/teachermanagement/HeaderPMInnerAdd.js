@@ -2,24 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
-// import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import { opacity } from "../../../../utils/Constant";
-import { useLinkProps } from "@react-navigation/native";
-import { useState } from "react";
-import RBSheet from "react-native-raw-bottom-sheet";
-import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 const HeaderPMInnerAdd = (props) => {
-
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -27,7 +14,6 @@ const HeaderPMInnerAdd = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
-                        {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity>
                     <View>
@@ -37,9 +23,9 @@ const HeaderPMInnerAdd = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity
+                        onPress={() => props.openNotification() }
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                 </View>

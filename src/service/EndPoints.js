@@ -47,7 +47,10 @@ export const EndPoints = {
     UpdateParent: 'updateparent',
     SaveLessonByPupil: 'savelessionbypupil',
     GetPupilRewards: 'getpupilrewards',
-
+    GetAllAvtar : 'getallavatar',
+    UpdateAvtar : 'updateavatar',
+    PupilGetAvatar :'pupilgetavatar',
+    TeacherProfileEdit: 'teacherupdate',
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",
 
@@ -71,15 +74,15 @@ export const EndPoints = {
     PupilUpload: 'pupilupload',
     TeacherUpload: 'teacherupload',
     Pupil: 'pupil',
+    PupilUpdate: 'pupilupdate',
     Teacher: 'teacher',
+    TeacherUpdate: 'teacherupdate',
     Title: 'title',
     TeachingYear: 'teachingyear',
     ClassSetup: 'classsetup',
 
-    //
     SaveLessionRecord:"lessionrecord",
-
-    //
     getAllNotifications : 'getnotifocation',
-    deleteNotification : 'notificationdelete'
+    deleteNotification : 'notificationdelete',
+    pupilbyclasssetup:"pupilbyclasssetup",
 }

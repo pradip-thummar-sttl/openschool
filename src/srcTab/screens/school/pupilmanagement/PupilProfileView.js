@@ -34,7 +34,7 @@ const PupilProfileView = (props) => {
     const [tabSelected, setTabSelected] = useState(0);
 
     const item = props.selectedPupil;
-    console.log('item', item);
+
     const [chartData, setChartData] = useState([])
     const [joinedLesson, setJoinedLesson] = useState(0)
     const [submittedHomework, setSubmittedHomework] = useState(0)
@@ -53,11 +53,10 @@ const PupilProfileView = (props) => {
 
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per == null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.purpleDark,
                     backgroundColor: COLORS.lightPurple
                 }]
@@ -74,16 +73,17 @@ const PupilProfileView = (props) => {
 
     const getHomeworkData = (lessonData) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
-            console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 let per = res.data.percentage
+
                 let data = {
-                    value: per != 'null' ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
+                    value: per === null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
                     backgroundColor: COLORS.lightYellow
                 }
                 setSubmittedHomework(res.data.total)
                 lessonData.push(data)
+
                 setChartData(lessonData)
             } else {
                 showMessage(res.message)
@@ -95,135 +95,133 @@ const PupilProfileView = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage1}>
-            {!isLessonDetail ?
+            {!isLessonDetail &&
                 <HeaderPMInner
-                    navigateToBack={() => props.navigateToBack()} 
+                    navigateToBack={() => props.navigateToBack()}
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
                     pupilName={item.FirstName + ' ' + item.LastName} />
-                :
-                null
             }
-            {
-                tabSelected === 0 ?
-                    <View style={{ width: isHide ? '100%' : '100%', }}>
-                        <View style={PAGESTYLE.whiteBg}>
-                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
-                                <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.managementBlockTop}>
-                                        {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                        <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
-                                                source={{ uri: baseUrl + item.ProfilePicture }} />
-                                        </View>
-                                        {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                        {/* </ImageBackground> */}
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.FirstName} {item.LastName}</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
-                                            <Text style={PAGESTYLE.userName}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
-                                        </View>
-                                        <View>
-                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Unique I.D (auto-generated)</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.UniqueNumber}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Parent name</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.ParentFirstName} {item.ParentLastName}</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Parent Email</Text>
-                                            <Text style={{...PAGESTYLE.userName, width: '80%'}}>{item.Email}</Text>
-                                        </View>
-                                        <View>
-                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Parent Tel.</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.MobileNumber}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Assigned To</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Status</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.Active ? 'Active' : 'Inactive'}</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.rateAnnotationBlock}>
-                                    <View style={PAGESTYLE.ratingBlock}>
-                                        {/* <Text style={PAGESTYLE.ratingTitle}>Teacher Insights</Text> */}
-                                        <View style={PAGESTYLE.achivementBox}>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{joinedLesson}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Attended Lessons</Text>
+            <View style={{ flex: 1 }}>
+                {
+                    tabSelected === 0 ?
+                        <View style={{ width: isHide ? '100%' : '100%', }}>
+                            <View style={PAGESTYLE.whiteBg}>
+                                <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
+                                    <View style={PAGESTYLE.managementDetail}>
+
+                                        <View style={PAGESTYLE.secondHeader}>
+                                            <View style={{ height: '100%', overflow: 'hidden', width: '100%', position: 'absolute' }}>
+                                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} />
                                             </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{submittedHomework}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
+                                            <View style={PAGESTYLE.thumbTopUser}>
+                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
+                                                    source={{ uri: baseUrl + item.ProfilePicture }} />
                                             </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{missedLesson}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Missed Lessons</Text>
-                                            </View>
-                                            
+                                            <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>
+                                                <Text style={STYLE.txtEditView}>Edit Profile</Text>
+                                            </TouchableOpacity>
                                         </View>
-                                    </View>
-                                </View>
-                                <Text style={PAGESTYLE.ratingTitle}>Pupil's Performance</Text>
-                                <View style={PAGESTYLE.graphBlock}>
-                                    <View style={PAGESTYLE.graphBox}>
-                                        <View style={PAGESTYLE.generalRow}>
-                                            <View style={PAGESTYLE.chartBlock}>
-                                                {/* <Image source={Images.chartImg} style={PAGESTYLE.mngmntchartImg} /> */}
-                                                <ActivityRings
-                                                    data={chartData}
-                                                    config={activityConfig} />
+
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.FirstName} {item.LastName}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
+                                                <Text style={PAGESTYLE.userName}>{moment(item.Dob).format('DD/MM/yyyy')}</Text>
                                             </View>
                                             <View>
-                                                <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
-                                                <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
-                                                    <Image style={PAGESTYLE.purpleMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Unique I.D (auto-generated)</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.UniqueNumber}</Text>
+                                            </View>
+                                        </View>
+
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Parent name</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.ParentFirstName} {item.ParentLastName}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Parent Email</Text>
+                                                <Text style={{ ...PAGESTYLE.userName, width: '80%' }}>{item.Email}</Text>
+                                            </View>
+                                            <View>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Parent Tel.</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.MobileNumber}</Text>
+                                            </View>
+                                        </View>
+
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Assigned To</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Status</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.Active ? 'Active' : 'Inactive'}</Text>
+                                            </View>
+                                        </View>
+
+                                    </View>
+                                    <View style={PAGESTYLE.rateAnnotationBlock}>
+                                        <View style={PAGESTYLE.ratingBlock}>
+                                            {/* <Text style={PAGESTYLE.ratingTitle}>Teacher Insights</Text> */}
+                                            <View style={PAGESTYLE.achivementBox}>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{joinedLesson}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Attended Lessons</Text>
                                                 </View>
-                                                <View style={PAGESTYLE.generalRow}>
-                                                    <Image style={PAGESTYLE.orangeMark} />
-                                                    <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{submittedHomework}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{missedLesson}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Missed Lessons</Text>
+                                                </View>
+
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <Text style={PAGESTYLE.ratingTitle}>Pupil's Performance</Text>
+                                    <View style={PAGESTYLE.graphBlock}>
+                                        <View style={PAGESTYLE.graphBox}>
+                                            <View style={PAGESTYLE.generalRow}>
+                                                <View style={PAGESTYLE.chartBlock}>
+                                                    {console.log("chartData 3------>", chartData)}
+                                                    <ActivityRings data={chartData} config={activityConfig} />
+                                                </View>
+                                                <View>
+                                                    <Text style={PAGESTYLE.graphChartText}>Pupils are engaged and using the app and submitting home work on time. </Text>
+                                                    <View style={[PAGESTYLE.generalRow, PAGESTYLE.listBottomSpace]}>
+                                                        <Image style={PAGESTYLE.purpleMark} />
+                                                        <Text style={PAGESTYLE.labelMark}>Pupil engagement over last month</Text>
+                                                    </View>
+                                                    <View style={PAGESTYLE.generalRow}>
+                                                        <Image style={PAGESTYLE.orangeMark} />
+                                                        <Text style={PAGESTYLE.labelMark}>Pupil effort over last month</Text>
+                                                    </View>
                                                 </View>
                                             </View>
                                         </View>
-                                        {/* <Image source={Images.graphImg} style={PAGESTYLE.mngmntgraphImg} /> */}
-                                    </View>
-                                    <View>
+                                        <View>
 
+                                        </View>
                                     </View>
-                                </View>
-                            </KeyboardAwareScrollView>
-                        </View>
-                    </View>
-                    :
-                    tabSelected === 1 ?
-                        <View style={{ width: isHide ? '100%' : '100%', }}>
-
-                            <PupilChat tabs={tabSelected} data={item} />
+                                </KeyboardAwareScrollView>
+                            </View>
                         </View>
                         :
-                        <LessonList
-                            data={item}
-                            setLessonDetail={(flag) => setLessonDetail(flag)} />
-            }
-
+                        tabSelected === 1 ?
+                            <PupilChat tabs={tabSelected} data={item} />
+                            :
+                            <LessonList
+                                data={item}
+                                setLessonDetail={(flag) => setLessonDetail(flag)} />
+                }
+            </View>
         </View>
     );
 }

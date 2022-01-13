@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 import {
     Menu,
     MenuOptions,
@@ -40,19 +41,35 @@ const HeaderPMInner = (props) => {
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
-                    </TouchableOpacity> 
+                    </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>{props.pupilName}</Text>
                     </View>
                 </View>
 
-                <View style={styles.headerRight}>
-                    <TouchableOpacity
-                        style={styles.notificationBar}
-                        activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    </TouchableOpacity>
+                <View style={{ flexDirection: 'row' }}>
+                    <View>
+                    <TouchableOpacity activeOpacity={opacity}
+                            onPress={() => props.onEditPress()} 
+                            style={{
+                                backgroundColor: COLORS.dashboardGreenButton,
+
+                                padding: hp(1.5),
+                                borderRadius: hp(1),
+
+                                marginHorizontal: 5,
+
+                            }}>
+                            <EditWhite style={{
+                                width: hp(1.77),
+                                height: hp(1.77),
+                                resizeMode: 'contain',
+                                alignSelf: 'center',
+                            }} height={hp(1.77)} width={hp(1.77)} />
+                        </TouchableOpacity>
+                    </View>
+                 
+
                 </View>
             </View>
             <View style={styles.whiteBg}>
@@ -62,25 +79,25 @@ const HeaderPMInner = (props) => {
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(0), props.tabIndex(0)}}>
+                                onPress={() => { setSelectedTab(0), props.tabIndex(0) }}>
                                 <Text style={[styles.tabsText, tabIndex == 0 ? styles.tabsTextSelected : null]}>Pupil profile</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(1),props.tabIndex(1)}}>
+                                onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
                                 <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>parent chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(2),props.tabIndex(2)}}>
+                                onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Pupil chat</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
-                                onPress={() => {setSelectedTab(3),props.tabIndex(3)}}>
+                                onPress={() => { setSelectedTab(3), props.tabIndex(3) }}>
                                 <Text style={[styles.tabsText, tabIndex == 3 ? styles.tabsTextSelected : null]}>School chat</Text>
                             </TouchableOpacity>
                         </View>
@@ -102,7 +119,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         paddingTop: Platform.OS == 'android' ? hp(2) : hp(4),
-        paddingBottom: hp(2),
+        paddingBottom: Platform.OS == 'android' ? hp(1) : hp(2),
         // paddingtop : Platform.OS === 'android' ? 0 : hp(2)
     },
     headerMain: {

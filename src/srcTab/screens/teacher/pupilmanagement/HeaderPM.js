@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -18,6 +18,8 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
+import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -27,7 +29,7 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-
+    console.log('99999999999999999',props);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -51,8 +53,8 @@ const HeaderPM = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity style={styles.notificationBar}
-                        onPress={() => null}
+                    <TouchableOpacity style={{}}
+                        onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
@@ -92,12 +94,17 @@ const HeaderPM = (props) => {
                                         :
                                         null
                                 }}>
+                                {isSearchActive ?
+                                    <CloseBlack height={20} width={20} />
+                                    :
+                                    <SearchBlue height={20} width={20} />
+                                }
                                 {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                                     source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ width: '100%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: Platform.OS === 'android' ? 2 : 0 }}
                                 placeholder="Search subject, class, etc"
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 onChangeText={keyword => {
@@ -109,9 +116,9 @@ const HeaderPM = (props) => {
                             <TouchableOpacity
                                 style={styles.buttonGroup}
                                 activeOpacity={opacity}
-                                onPress={()=> props.navigateToAddNewUser()}>
+                                onPress={() => props.navigateToAddNewUser()}>
                                 {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
-                                <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)}/>
+                                <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
                             </TouchableOpacity>
                         </View>

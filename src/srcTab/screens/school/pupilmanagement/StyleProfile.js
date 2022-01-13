@@ -190,8 +190,10 @@ export default StyleSheet.create({
         // flex:1,
     },
     managementBlockTop: {
-        flexDirection: 'row',
-        height: hp(12.5),
+        height:hp(12.5),
+        position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center'
     },
     commonInput: {
         color: COLORS.darkGrayIntro,
@@ -266,9 +268,12 @@ export default StyleSheet.create({
     },
     managementopImage: {
         width: '100%',
-        height: hp(14.06),
-        resizeMode: 'contain',
-        position: 'relative',
+        top: 0,
+        resizeMode: 'cover',
+        // width: '100%',
+        // height: hp(14.06),
+        // resizeMode: 'contain',
+        // position: 'relative',
     },
     thumbTopUser: {
         width: hp(12.5),
@@ -276,7 +281,7 @@ export default StyleSheet.create({
         borderRadius: 96,
         borderColor: COLORS.white,
         borderWidth: 3,
-        backgroundColor: '#ECEDF0',
+        // backgroundColor: '#ECEDF0',
         position: 'absolute',
         left: hp(5),
         bottom: hp(-4),
@@ -550,17 +555,7 @@ export default StyleSheet.create({
     insightMain: {
         fontSize: 20,
         fontFamily: FONTS.fontBold,
-    }, pzEditIcon: {
-        width: hp(2.58),
-        height: hp(2.58),
-        resizeMode: 'contain',
-        position: 'absolute',
-        left: hp(4.8),
-        bottom: hp(-0.6),
-        borderRadius: hp(1.065),
-        borderColor: COLORS.greyInsightLable,
-        backgroundColor : 'white'
-    },
+    }, 
     topBannerParent: {
         paddingHorizontal: 6,
         position: 'absolute',
@@ -585,6 +580,7 @@ export default StyleSheet.create({
     },
     dropDownFormInput: {
         width: hp(38.4),
+        marginRight: hp(2.5),
     },
     dropDownFormInput1: {
         width: '60%',
@@ -684,5 +680,69 @@ export default StyleSheet.create({
         paddingLeft: hp('2.0%'),
         paddingRight: hp('2.0%'),
         alignSelf: 'center',
+    },
+
+     // updates
+     pzEditIcon: {
+        width: hp(1.7),
+        height: hp(1.7),
+        resizeMode: 'contain',
+    },
+    editprofileStyl: {
+        width: hp(2),
+        height: hp(2),
+        padding:hp(1.7),
+        position: 'absolute',
+        left: hp(4),
+        bottom: hp(0),
+        zIndex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: hp(100),
+        backgroundColor: COLORS.white,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
+    },
+     TeacherProfileMainView:{
+        width: hp(13),
+        height:hp(13),
+        borderRadius: 96,
+        borderColor:COLORS.white,
+        borderWidth: 3,
+        backgroundColor:'#ECEDF0',
+        position:'absolute',
+        left:hp(8),
+        bottom:Platform.OS == 'ios' ? hp(-8) : hp(-9),
+    },
+    btnSendView:{
+        width: wp(12),
+        height: hp(5),
+        right:hp(1),
+        top:hp(4.7),
+        bottom:hp(5),
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: COLORS.buttonGreen,
+        backgroundColor: COLORS.buttonGreen,
+        justifyContent:'center',
+        alignItems:'center',
+        position:'absolute'
+    },
+    btnSendTextView:{
+        fontFamily: FONTS.fontBold,
+        color: COLORS.white,
+        fontSize: 12,
+        lineHeight: 37.5,
+        textTransform: 'uppercase',
+        textAlign: 'center',
+        overflow: 'hidden',
+        borderColor: COLORS.buttonGreen,
+    },
+     // updates
+     secondHeader:{
+        height:hp(12.5),
+        position: 'relative',
+        alignItems:'flex-end',
+        justifyContent:'center',
     },
 });

@@ -7,25 +7,12 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
-// import Images from "../../../../utils/Images";
 import { User } from "../../../../utils/Model";
-import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './StyleProfile';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
-import HeaderPMInner from './HeaderPMInner';
 import moment from 'moment';
-import Chat from "../../Chat/Chat";
-import ActivityRings from "react-native-activity-rings";
 import MESSAGE from "../../../../utils/Messages";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
-import BronzeFill from "../../../../svg/teacher/pupilmanagement/StarBronze_Fill";
-import Bronze from "../../../../svg/teacher/pupilmanagement/StarBronze";
-import SilverFill from "../../../../svg/teacher/pupilmanagement/StartSilver_Fill";
-import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
-import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
-import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
-import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import HeaderPMInnerAdd from "./HeaderPMInnerAdd";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
@@ -33,6 +20,7 @@ import { launchCamera, launchImageLibrary } from "react-native-image-picker/src"
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
+import { showMessageWithCallBack } from "../../../../utils/Constant";
 
 const PupilProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -89,7 +77,6 @@ const PupilProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -130,7 +117,11 @@ const PupilProfileAdd = (props) => {
         } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
-        } else if (!parentFirstName.trim()) {
+        }else if (!selectedTeacher.length) {
+            showMessage(MESSAGE.selectTeacher)
+            return false
+        } 
+        else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
         } else if (!parentLastName.trim()) {
@@ -139,7 +130,7 @@ const PupilProfileAdd = (props) => {
         } else if (!email.trim() || !emailValidate(email)) {
             showMessage(MESSAGE.email)
             return false
-        } else if (!mobile.trim()) {
+        } else if (!mobile.trim() && mobile.length < 5 && mobile.length > 16) {
             showMessage(MESSAGE.phone)
             return false
         }
@@ -148,7 +139,6 @@ const PupilProfileAdd = (props) => {
     }
 
     const saveProfile = () => {
-        // setLoading(true)
 
         let data = {
             SchoolId: User.user.UserDetialId,
@@ -164,8 +154,6 @@ const PupilProfileAdd = (props) => {
             IsInvited: 'false',
             Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
         }
-
-        console.log('data', data);
 
         Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
@@ -184,8 +172,13 @@ const PupilProfileAdd = (props) => {
     const uploadProfile = (pupilId) => {
         if (!profileUri) {
             setLoading(false)
-            showMessage(MESSAGE.inviteSent)
-            return
+            resetFeilds()
+            // showMessage(MESSAGE.inviteSent)
+            // return
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigateToBack()
+                
+            });
         }
 
         let data = new FormData();
@@ -201,14 +194,12 @@ const PupilProfileAdd = (props) => {
             if (res.code == 200) {
                 setLoading(false)
                 showMessage(MESSAGE.inviteSent)
-                console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
         })
 
     }
@@ -269,7 +260,6 @@ const PupilProfileAdd = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -285,9 +275,21 @@ const PupilProfileAdd = (props) => {
         setMobile('')
     }
 
+    const onDataPicker =()=>{
+        return(
+            <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="date"
+                maximumDate={new Date()}
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+            />
+        )
+    }
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
+                openNotification = {() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 
@@ -295,34 +297,29 @@ const PupilProfileAdd = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
-                            <View style={PAGESTYLE.managementBlockTop}>
-                                {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                <View style={PAGESTYLE.thumbTopUser}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}
-
-                                    >
-                                        <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
-                                            source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.30)} height={hp(2.30)} />
+                        <View style={[PAGESTYLE.managementBlockTop]}>
+                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
+                                <View style={PAGESTYLE.TeacherProfileMainView}>
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
+                                        <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
+                                            source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
+                                            <View style={PAGESTYLE.editprofileStyl}>
+                                            <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                                            </View>
                                     </TouchableOpacity>
                                 </View>
 
-                                <View style={PAGESTYLE.topBannerParent}>
+                                <View style={PAGESTYLE.btnSendView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.topBannerBtn1}>Send Invite</Text>
+                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                                {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                {/* </ImageBackground> */}
+                               
                             </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
+                           
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
                                 <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>First Name</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
@@ -364,7 +361,7 @@ const PupilProfileAdd = (props) => {
                                     <Text style={PAGESTYLE.fieldInputLabel}>Date of Birth</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TouchableOpacity onPress={() => showDatePicker()}>
-                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
+                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row',height: hp(6), }]}>
                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
                                                 <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
@@ -451,13 +448,7 @@ const PupilProfileAdd = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <DateTimePickerModal
-                            isVisible={isDatePickerVisible}
-                            mode="date"
-                            maximumDate={new Date()}
-                            onConfirm={handleConfirm}
-                            onCancel={hideDatePicker}
-                        />
+                       {onDataPicker()}
                     </KeyboardAwareScrollView>
                 </View>
             </View>

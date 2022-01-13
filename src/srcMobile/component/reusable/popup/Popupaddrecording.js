@@ -17,6 +17,7 @@ import ScreenVoice from "../../../../svg/teacher/lessonhwplanner/ScreenVoice";
 import CameraOnly from "../../../../svg/teacher/lessonhwplanner/CameraOnly";
 import PlayBlue from "../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const Popupaddrecording = (props) => {
     const refRBSheet = useRef();
     const [isModalVisible, setModalVisible] = useState(false);
@@ -67,7 +68,7 @@ const Popupaddrecording = (props) => {
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStartScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginRight: 5 }}>
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording }}>
                             <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
                         </TouchableOpacity>
                         :
@@ -84,37 +85,30 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => refRBSheet.current.open()}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording]}>
-                        {/* <Image source={Images.RecordIcon} style={styles.recordingLinkIcon} /> */}
-                        <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
+                        style={[styles.recordLinkBlock, styles.topSpaceRecording]} >
+                        <Recording style={[styles.recordingLinkIcon]} height={hp(2.34)} width={hp(2.34)} />
                         <Text style={styles.recordLinkText}>Add Recording</Text>
                     </TouchableOpacity>
                     :
-                    <TouchableOpacity
+                    <TouchableOpacity onPress={() => { setLoader(true); Download(props.recordingArr[0], (res) => { setLoader(false) }) }}
                         activeOpacity={opacity}
-                        onPress={() => {
-                            setLoader(true); Download(props.recordingArr[0], (res) => {
-                                setLoader(false)
-                                // setMateIndex(-1)
-                            })
-                        }}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]}>
-                            <View style={{flexDirection:'row'}}>
-                        {isMatLoading ?
-                            <ActivityIndicator
-                                style={{ ...styles.recordingLinkIcon }}
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.blueBorder} />
-                            :
-                            // <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} />
-                            <PlayBlue style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
-                        }
-                        {/* <Image source={Images.PlayIcon} style={styles.recordingLinkIcon} /> */}
-                        {/* <Text style={styles.recordLinkText}>{!props.recordingArr[0].originalname ? props.recordingArr[0].fileName : props.recordingArr[0].originalname}</Text> */}
-                        <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
+                        <View style={{width:'100%', flexDirection: 'row'}}>
+                            {
+                                isMatLoading ?
+                                    <ActivityIndicator
+                                        style={{ ...styles.recordingLinkIcon }}
+                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                        color={COLORS.blueBorder} />
+                                    :
+                                    <PlayBlue style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
+                            }
+                            <Text numberOfLines={2} ellipsizeMode='tail' style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         </View>
-                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }}>
-                            <CloseBlack height={hp(2.94)} width={hp(2.94)} />
+
+                        <TouchableOpacity onPress={() => { props.onRemoveRecording() }}
+                            style={[styles.cancelButton, { width: hp(5)}]}>
+                            <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                     </TouchableOpacity>
             }
@@ -134,29 +128,19 @@ const Popupaddrecording = (props) => {
                 }}
             >
                 <View style={styles.popupLarge}>
-                    {/* <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
-                        <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} />
-                    </TouchableOpacity> */}
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
-                                    {/* <TouchableOpacity style={styles.entryData}
-                                        onPress={() => { refRBSheet.current.close(); props.onScreeCamera() }}>
-                                        <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-camera2.png')} />
-                                        <Text style={styles.entryTitle}>Screen + Camera</Text>
-                                    </TouchableOpacity> */}
-                                    <TouchableOpacity style={styles.entryData}
-                                        onPress={() => { refRBSheet.current.close(); props.onScreeVoice() }}>
-                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/screen-voice2.png')} /> */}
+
+                                    <TouchableOpacity style={styles.entryData} onPress={() => { refRBSheet.current.close(); props.onScreeVoice() }}>
                                         <ScreenVoice style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Screen + Voice</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.entryData}
                                         onPress={() => { onCameraOnly() }}>
-                                        {/* <Image style={styles.entryIcon} source={require('../../../../assets/images/camera-only2.png')} /> */}
                                         <CameraOnly style={styles.entryIcon} height={hp(11.19)} width={hp(11.19)} />
                                         <Text style={styles.entryTitle}>Camera only</Text>
                                     </TouchableOpacity>
@@ -175,9 +159,11 @@ export default Popupaddrecording;
 const styles = StyleSheet.create({
     cancelButton: {
         position: 'absolute',
-        right: hp(1.5),
+        right: hp(1),
         zIndex: 9,
-        top: hp(1),
+        // paddingHorizontal  :5,
+        // backgroundColor : 'red'
+        // top: hp(1),
     },
     popupLarge: {
         backgroundColor: COLORS.white,
@@ -219,6 +205,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         textAlign: 'center',
         textTransform: 'uppercase',
+
     },
     recordLinkBlock: {
         width: Platform.OS == 'android' ? 185 : hp(23.5),
@@ -230,6 +217,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
+
     },
     recordLinkBlock2: {
         width: '100%',
@@ -239,19 +227,17 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
-        alignItems: 'center',
+        // alignItems: 'center',
+
     },
     recordLinkBlock1: {
-        width: wp(70),
         padding: hp(1.43),
-        paddingTop: hp(0.8),
-        paddingBottom: hp(0.8),
         borderWidth: 1,
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent:'space-between'
+        justifyContent: 'space-between',
     },
     topSpaceRecording: {
         marginTop: hp(1.401),
@@ -259,7 +245,7 @@ const styles = StyleSheet.create({
     recordingLinkIcon: {
         width: hp(2.34),
         resizeMode: 'contain',
-        alignSelf:'center'
+        alignSelf: 'center',
     },
     recordLinkText: {
         fontSize: Platform.OS == 'android' ? 14 : hp(1.85),
@@ -267,6 +253,8 @@ const styles = StyleSheet.create({
         top: Platform.OS == 'android' ? hp(0.2) : hp(0),
         color: COLORS.darkGray,
         marginLeft: hp(1.3),
+        // backgroundColor : 'red',
+        width: hp(35),
         textTransform: 'uppercase',
     },
 });
