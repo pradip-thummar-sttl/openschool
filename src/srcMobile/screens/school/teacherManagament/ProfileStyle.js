@@ -330,7 +330,7 @@ export default StyleSheet.create({
         width: hp(13),
         height: hp(13),
         borderRadius: hp(13/2),
-        backgroundColor: COLORS.lightGrey
+        backgroundColor: COLORS.borderGrp
         // resizeMode: 'contain',
     },
     mainDetails: {

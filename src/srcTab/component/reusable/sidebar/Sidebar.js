@@ -311,6 +311,7 @@ const styles = StyleSheet.create({
         height: hp(4.16),
         // resizeMode: 'contain',
         borderRadius: hp(4.16),
+        backgroundColor : COLORS.borderGrp
     },
     profileTitleBottom: {
         fontSize: hp(2.0),

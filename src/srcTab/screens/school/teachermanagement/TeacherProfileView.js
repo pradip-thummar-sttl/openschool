@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import LessonList from "./lessonlist/LessonList";
 import TeacherChat from "./teacherchat/TeacherChat";
+import COLORS from "../../../../utils/Colors";
 
 const TeacherProfileView = (props) => {
     const [isHide, action] = useState(true);
@@ -65,7 +66,7 @@ const TeacherProfileView = (props) => {
                                             <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} /> 
                                         </View>
                                         <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
                                                 source={{ uri: baseUrl + item.ProfilePicture }} />
                                         </View>
                                         <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>  

@@ -336,6 +336,7 @@ export default StyleSheet.create({
         height: hp(13),
         borderRadius: hp(13 / 2),
         // resizeMode: 'contain',
+        backgroundColor : COLORS.borderGrp
     },
     mainDetails: {
         marginTop: hp(8.75),

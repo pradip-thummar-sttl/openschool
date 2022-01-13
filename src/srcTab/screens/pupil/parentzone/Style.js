@@ -1257,7 +1257,7 @@ export default StyleSheet.create({
         position: 'absolute',
         // left: 78,
         left: Platform.OS === 'android' ? hp(30) : 78,
-        borderColor: COLORS.white,
+        borderColor: COLORS.borderGrp,
         borderWidth: 4,
         backgroundColor: COLORS.greyBack,
         top: Platform.OS === 'android' ? hp(2) : 32

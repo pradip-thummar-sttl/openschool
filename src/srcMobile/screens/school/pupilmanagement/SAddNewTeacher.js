@@ -25,6 +25,7 @@ import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
+import Styles from "../../../../srcTab/screens/teacher/GlobalMessage/Styles";
 
 // import { EndPoints } from "../../../../service/EndPoints";
 // import { Service } from "../../../../service/Service";
@@ -33,6 +34,7 @@ import moment from "moment";
 const { CallModule } = NativeModules;
 
 const SAddNewTeacher = (props) => {
+    console.log(']]]]]]]]]]]0000000',props);
     const item = props.route.params.item;
 
     const [isHide, action] = useState(true);
@@ -53,7 +55,12 @@ const SAddNewTeacher = (props) => {
     const [isLoading, setLoading] = useState(false)
 
     const myref = useRef(null);
-    
+    const t1 = useRef(null);
+    const t2 = useRef(null);
+    const t3 = useRef(null);
+    const t4 = useRef(null);
+    const t5 = useRef(null);
+    const t6 = useRef(null);
 
     const activityConfig = {
         width: 200,
@@ -189,7 +196,8 @@ const SAddNewTeacher = (props) => {
         if (!profileUri) {
             setLoading(false)
             showMessage(MESSAGE.inviteSent)
-            return
+            //return
+            props.navigation.goBack()
         }
 
         let data = new FormData();
@@ -205,6 +213,7 @@ const SAddNewTeacher = (props) => {
             if (res.code == 200) {
                 setLoading(false)
                 showMessage(MESSAGE.inviteSent)
+                // props.navigation.goBack()
                 console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
@@ -266,7 +275,7 @@ const SAddNewTeacher = (props) => {
 
     const teacherDropDown = () => {
         return (
-            <View style={PAGESTYLE.dropDownFormInput}>
+            <View style={[PAGESTYLE.dropDownFormInput, { marginBottom: hp(2) }]}>
                 <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[STYLE.commonInputGrayBack, STYLE.common]}>
@@ -292,7 +301,7 @@ const SAddNewTeacher = (props) => {
             <AddNewTeacherHeader
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
-                OnSaveEdit={() => validateFields()}
+                OnSaveEdit={() => {validateFields()}}
 
             />
             <View style={PAGESTYLE.MainProfile}>
@@ -322,7 +331,9 @@ const SAddNewTeacher = (props) => {
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
                             <TextInput
+                                ref={t1}
                                 returnKeyType={"next"}
+                                onSubmitEditing={() => { t2.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="First Name"
                                 autoCapitalize={'none'}
@@ -335,7 +346,9 @@ const SAddNewTeacher = (props) => {
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
                             <TextInput
+                                ref={t2}
                                 returnKeyType={"next"}
+                                onSubmitEditing={() => { t3.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
                                 placeholder="Last Name"
                                 autoCapitalize={'none'}
@@ -347,63 +360,29 @@ const SAddNewTeacher = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                            <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
-                                <TouchableOpacity onPress={() => showDatePicker()}>
-                                    <View style={[PAGESTYLE.commonInput, { flexDirection: 'row' }]}>
-                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                                        <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
-                                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
-                                    </View>
-                                </TouchableOpacity>
-                            </View>
-
-                            {/* <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                placeholder="Email"
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={selectedDate}
-                                placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={firstName => setSelectedDate(firstName)}
-                            /> */}
-                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                            {/* <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}> */}
+                            <TouchableOpacity onPress={() => showDatePicker()}>
+                                <View style={[styles.commonInputGrayBack, { flexDirection: 'row' }]}>
+                                    <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
+                                    <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
+                                    <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                                </View>
+                            </TouchableOpacity>
+                            
                         </View>
                         <View>
                             {teacherDropDown()}
                         </View>
-                        <View style={PAGESTYLE.fieldDetailsForm}>
-                            <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                placeholder="Unique I.D (auto-generated)"
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={""}
-                                placeholderTextColor={COLORS.menuLightFonts} />
-                        </View>
-                        <View style={PAGESTYLE.fieldDetailsForm}>
-                            <Text LABLE style={PAGESTYLE.labelForm}>Assigned Teacher</Text>
-                            <TextInput
-                                returnKeyType={"next"}
-                                style={STYLE.commonInputGrayBack}
-                                placeholder="Unique I.D (auto-generated)"
-                                autoCapitalize={'none'}
-                                maxLength={40}
-                                value={assignedTeacher}
-                                placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={firstName => setAssignedTeacher(firstName)}
-                            />
-                        </View>
-                        <View HR style={STYLE.hrCommon}></View>
+                       
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
                             <TextInput
+                                ref={t3}
                                 returnKeyType={"next"}
+                                onSubmitEditing={() => { t4.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
-                                placeholder="First Name"
+                                placeholder="Parent's First Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={parentFirstName}
@@ -414,9 +393,11 @@ const SAddNewTeacher = (props) => {
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's Last Name</Text>
                             <TextInput
+                                ref={t4}
                                 returnKeyType={"next"}
+                                onSubmitEditing={() => { t5.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
-                                placeholder="Last Name"
+                                placeholder="Parent's Last Name"
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={parentLastName}
@@ -427,64 +408,66 @@ const SAddNewTeacher = (props) => {
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
                             <TextInput
+                                ref={t5}
                                 returnKeyType={"next"}
+                                onSubmitEditing={() => { t6.current.focus(); }}
                                 style={STYLE.commonInputGrayBack}
-                                placeholder="Last Name"
+                                placeholder="Email"
                                 autoCapitalize={'none'}
                                 maxLength={40}
                                 value={email}
                                 placeholderTextColor={COLORS.menuLightFonts}
-                                onChangeText={firstName => setEmail(firstName)}
+                                onChangeText={email => setEmail(email)}
                             />
                         </View>
-                        {/* <View style={PAGESTYLE.fieldDetails}>
-                            <Text LABLE style={PAGESTYLE.label}>Notes</Text>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Mobile Number</Text>
                             <TextInput
-                                returnKeyType={"next"}
-                                multiline={true}
-                                autoCapitalize={'sentences'}
-                                numberOfLines={4}
-                                placeholder='Write something about your pupil here…'
-                                style={PAGESTYLE.commonInputTextareaBoldGrey} />
-                        </View> */}
-                    </View>
-                    {/* <View HR style={STYLE.hrCommon}></View> */}
-
-                    <View HR style={STYLE.hrCommon}></View>
-                    <View style={PAGESTYLE.pupilPerfomanceEdit}>
-                        <Text H2 style={PAGESTYLE.titlePerfomance}>Teacher Insights</Text>
-                        {/* <Image style={PAGESTYLE.pupilEditGraph} source={Images.pupilEditGrpahImage}></Image> */}
-                        <View style={PAGESTYLE.performancePArent}>
-                            <ActivityRings
-                                data={chartData}
-                                config={activityConfig} />
-
-                            <View style={{ flexDirection: 'row', height: 50 }}>
-                                <View style={PAGESTYLE.colorLeftParent}>
-                                    <View style={PAGESTYLE.colorSquare} />
-                                    <Text style={PAGESTYLE.introText}>{`Engagement over${'\n'}last month`}</Text>
-                                </View>
-                                <View style={PAGESTYLE.colorRightParent}>
-                                    <View style={PAGESTYLE.colorSquareRight} />
-                                    <Text style={PAGESTYLE.introText}>{`Effort over last${'\n'}month`}</Text>
-                                </View>
-                            </View>
-                            <View HR style={STYLE.hrCommon}></View>
-                            <Text style={PAGESTYLE.bottomText}>Based on { }'s engagement and effort, he is doing well and is excelling. He is also very eager to learn and perticularly interested in Mathematics and Science subjects.</Text>
+                                ref={t6}
+                                returnKeyType={"done"}
+                                style={STYLE.commonInputGrayBack}
+                                autoCapitalize={false}
+                                keyboardType={'phone-pad'}
+                                maxLength={40}
+                                value={mobile}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={number => setMobile(number)}
+                            />
                         </View>
+                      
                     </View>
-               
+                    
+
                     <DateTimePickerModal
-                            isVisible={isDatePickerVisible}
-                            mode="date"
-                            maximumDate={new Date()}
-                            onConfirm={handleConfirm}
-                            onCancel={hideDatePicker}
-                        />
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        maximumDate={new Date()}
+                        onConfirm={handleConfirm}
+                        onCancel={hideDatePicker}
+                    />
                 </ScrollView>
             </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    commonInputGrayBack: {
+        color: COLORS.darkGray,
+        fontSize: hp('1.8%'),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp('1.0%'),
+        lineHeight: hp(2.3),
+        height: hp(6),
+        textAlignVertical: 'center',
+        paddingLeft: hp(2),
+        paddingRight: hp('2.0%'),
+        fontFamily: FONTS.fontRegular,
+
+
+
+    },
+})
 
 export default SAddNewTeacher;

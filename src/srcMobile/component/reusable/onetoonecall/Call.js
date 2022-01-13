@@ -160,7 +160,7 @@ const Call = (props) => {
                 <View style={Style.pupilProfile}>
                     <View style={Style.rowProfile}>
                         <Image style={Style.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                        <Text numberOfLines={1} style={[Style.pupilName, {}]}>{item.FirstName} {item.LastName}</Text>
+                        <Text numberOfLines={1} style={[Style.pupilName]}>{item.FirstName} {item.LastName}</Text>
                     </View>
                 </View>
             </View>

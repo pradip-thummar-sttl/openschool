@@ -287,12 +287,14 @@ const styles = StyleSheet.create({
         height: hp(3.81),
         borderRadius: hp(3.81 / 2),
         marginRight: hp(1.5),
+        backgroundColor : COLORS.lightGrayPupil
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
         marginRight: hp(1),
-        borderRadius: hp(3.81 / 2)
+        borderRadius: hp(3.81 / 2),
+        backgroundColor : COLORS.lightGrayPupil
     },
     userparentInMenuAdd: {
         width: hp(1.47),

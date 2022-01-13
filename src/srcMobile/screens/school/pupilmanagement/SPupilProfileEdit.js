@@ -131,6 +131,9 @@ const SPupilProfileEdit = (props) => {
         } else if (!isSelectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
+        } else if (!selectedTeacher.length) {
+            showMessage(MESSAGE.selectTeacher)
+            return false
         } else if (!isPFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
@@ -228,18 +231,20 @@ const SPupilProfileEdit = (props) => {
             <HeaderPMInnerEdit
                 onAlertPress={() => props.navigation.openDrawer()}
                 OnSaveEdit={() => { validateFields() }}
+                navigateToBack={() => props.navigation.goBack()}
+               
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
 
                     <View style={[PAGESTYLE.profileImageArea]}>
                         <View style={PAGESTYLE.coverImage}>
-                            <TopBackImg  height={hp(13.8)} width={'100%'}  />
+                            <TopBackImg height={hp(13.8)} width={'100%'} />
                         </View>
                         <View style={[PAGESTYLE.profileOuter]}>
                             <Image style={PAGESTYLE.profileImage}
                                 source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedPupil?.ProfilePicture : isProfileUri.uri }} />
-                            <TouchableOpacity style={PAGESTYLE.editprofileStyl1}  activeOpacity={opacity} onPress={() => showActionChooser()}>
+                            <TouchableOpacity style={PAGESTYLE.editprofileStyl1} activeOpacity={opacity} onPress={() => showActionChooser()}>
                                 <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
                             </TouchableOpacity>
                         </View>
@@ -274,7 +279,7 @@ const SPupilProfileEdit = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                          
+
 
                             <TouchableOpacity onPress={() => showDatePicker()}>
                                 <View style={[STYLE.commonInputGrayBack, { flexDirection: 'row' }]}>
@@ -300,7 +305,7 @@ const SPupilProfileEdit = (props) => {
                             // onChangeText={firstName => set(firstName)}
                             />
                         </View>
-                    
+
                         <View HR style={STYLE.hrCommon}></View>
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
@@ -358,7 +363,7 @@ const SPupilProfileEdit = (props) => {
                                 onChangeText={lastName => setMobile(lastName)}
                             />
                         </View>
-                       
+
                     </View>
                     <View HR style={STYLE.hrCommon}></View>
 

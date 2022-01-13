@@ -115,7 +115,7 @@ const PupilProfileView = (props) => {
                                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} />
                                             </View>
                                             <View style={PAGESTYLE.thumbTopUser}>
-                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
                                                     source={{ uri: baseUrl + item.ProfilePicture }} />
                                             </View>
                                             <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>
