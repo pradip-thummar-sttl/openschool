@@ -24,17 +24,7 @@ const LessonandHomeworkPlanner = (props) => {
             />
         );
     };
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-            />
-        );
-    };
+   
     return (
         <View style={PAGESTYLE.mainPage}>
             <Sidebar
@@ -47,18 +37,12 @@ const LessonandHomeworkPlanner = (props) => {
                 <ScrollView showsVerticalScrollIndicator={false} style={STYLE.padLeftRight}>
                     <View style={PAGESTYLE.myDay}>
                         <View style={[STYLE.viewRow]}>
-                            {/* <Image style={PAGESTYLE.dayIcon} source={Images.DayIcon} /> */}
                             <Text H3 style={PAGESTYLE.dayTitle}>My Day</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
                             <View style={[PAGESTYLE.datePosition]}>
                                 <Text style={PAGESTYLE.date}>25</Text>
                                 <Text style={PAGESTYLE.month}>Sept</Text>
-                            </View>
-                            <View>
-                                <TouchableOpacity>
-                                    {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
-                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>
@@ -67,15 +51,9 @@ const LessonandHomeworkPlanner = (props) => {
                     </View>
                     <View style={[PAGESTYLE.myDay, PAGESTYLE.pupilBoard]}>
                         <View style={[STYLE.viewRow]}>
-                            {/* <Image style={PAGESTYLE.dayIcon} source={Images.PupilDashIcon} /> */}
                             <Text H3 style={PAGESTYLE.dayTitle}>My Pupils</Text>
                         </View>
                         <View style={[PAGESTYLE.rightContent]}>
-                            <View>
-                                <TouchableOpacity>
-                                    {/* <Image style={PAGESTYLE.moreDashboard} source={Images.MoreLinks} /> */}
-                                </TouchableOpacity>
-                            </View>
                         </View>
                     </View>
                     <View style={PAGESTYLE.whiteBoard}>
