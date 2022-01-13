@@ -85,7 +85,6 @@ export default class ParentZoneSwitch extends Component {
                                     </View>
                                 </TouchableOpacity>
                             )}
-                            //Setting the number of column
                             keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: hp(4.5),
         flex: 1,
-        marginBottom: 50,
+        marginBottom: hp(7),
     },
     user: {
         justifyContent: "center",
