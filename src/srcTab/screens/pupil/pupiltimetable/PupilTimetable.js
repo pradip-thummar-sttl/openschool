@@ -4,8 +4,6 @@ import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './Style';
 import { cellWidth, Lesson, opacity, Var } from "../../../../utils/Constant";
 import Popupdata from "../../../component/reusable/popup/Popupdata"
-import Popupdatasecond from "../../../component/reusable/popup/PopupdataSecond"
-import Sidebarpupil from "../../../component/reusable/sidebar/Sidebarpupil";
 import Header3 from '../../../component/reusable/header/bulck/Header3'
 import { useDispatch, useSelector } from "react-redux";
 import { Service } from "../../../../service/Service";
@@ -15,27 +13,29 @@ import COLORS from "../../../../utils/Colors";
 import { setCalendarEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
-// import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 import moment from "moment";
 
 const PupilTimetable = (props) => {
+    const _flatListRefrence = useRef(null);
+    const onViewRef = useRef((viewableItems) => {
+    })
+
     const days = ['', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
 
     const [isHide, action] = useState(true);
     const [scrollIndex, setScrollIndex] = useState(0);
-    const scrollViewRef = useRef(null);
     const dispatch = useDispatch()
 
     const weekTimeTableDate = useSelector(state => {
         return state.AuthReducer.weekTimeTableData
     })
     useEffect(() => {
-        let data ={
+        let data = {
             CurrentDate: moment().format('yyyy-MM-DD')
         }
-        Service.post(data,`${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
+        Service.post(data, `${EndPoints.AllEventHomworklessonpupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of calender event is:', res)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
@@ -95,19 +95,19 @@ const PupilTimetable = (props) => {
             );
         }
     }
+
     useEffect(() => {
-            if (weekTimeTableDate != "") {
-                fetchRecord("","",weekTimeTableDate)
-            }
+        if (weekTimeTableDate != "") {
+            fetchRecord("", "", weekTimeTableDate)
+        }
     }, [weekTimeTableDate])
 
     useEffect(() => {
         let time1 = moment().format('HH:mm')
         const timeSplit = time1.split(':')
-        console.log('times of ============>', timeSplit);
         const h = timeSplit[0]  //09:30
         const m = timeSplit[1]  //09:30
-        
+
         var index
         if (m >= 30) {
             index = ((h - 6) * 2) + 1
@@ -115,9 +115,7 @@ const PupilTimetable = (props) => {
             index = (h - 6) * 2
         }
 
-       setScrollIndex(index)
-       console.log('scrollviewref=====>', time[index]);
-
+        setScrollIndex(index)
         fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }, [])
 
@@ -125,19 +123,16 @@ const PupilTimetable = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
-            CurrentDate:currentDate
+            CurrentDate: currentDate
         }
         setTimeTableLoading(true)
         console.log('data', EndPoints.GetTimeTablePupil + '/' + User.user.UserDetialId);
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
-            console.log('response ===================> ', res)
 
             if (res.code == 200) {
-                console.log('response====================> ', res.data)
                 setTimeTableData(res.data)
-                // dispatch(setCalendarEventData(res.data))
             } else {
                 showMessage(res.message)
             }
@@ -146,28 +141,41 @@ const PupilTimetable = (props) => {
         })
     }
 
+    useEffect(() => {
+        onListAnimations();
+    }, [isTimeTableLoading])
+
+    const onListAnimations = () => {
+
+        setTimeout(() => {
+            {
+                if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current)
+                    _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
+            }
+        }, 1500)
+    }
+
     const refresh = () => {
-        fetchRecord('', '',moment().format('YYYY-MM-DD'))
+        fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
-        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
     return (
         <View style={PAGESTYLE.mainPage}>
-           
+
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
                 <Header3
                     onAlertPress={() => { openNotification() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy,moment().format('YYYY-MM-DD'))}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('YYYY-MM-DD'))}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
-                    refreshList={() => refresh()} 
-                    onFilter={(filter)=>fetchRecord(searchKeyword, filter,moment().format('YYYY-MM-DD'))} />
+                    refreshList={() => refresh()}
+                    onFilter={(filter) => fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD'))} />
 
                 <ScrollView style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
@@ -186,63 +194,29 @@ const PupilTimetable = (props) => {
                                     ))}
                                 </View>
 
-                                <FlatList 
-                                style={{ ...STYLE.padLeftRight, paddingLeft: 0}}
-                                horizontal={true}
-                                showsHorizontalScrollIndicator={false}
-                                initialScrollIndex={scrollIndex}
-                                onScrollToIndexFailed={0}
-                                data={time}
-                                renderItem={({item, index})=>(
-                                    <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
+                                <FlatList
+                                    ref={_flatListRefrence}
+                                    style={{ ...STYLE.padLeftRight, paddingLeft: 0 }}
+                                    horizontal={true}
+                                    showsHorizontalScrollIndicator={false}
+                                    data={time}
+                                    onViewableItemsChanged={onViewRef.current}
+                                    renderItem={({ item, index }) => (
+                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
                                             <Text style={{ ...PAGESTYLE.lable, }}>{item}</Text>
-
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, index)
-                                                        :
-                                                        null
-
-                                                ))}
+                                                    dayKey != 0 && setData(dayKey, index)))}
                                             </View>
                                         </View>
-                                )}
+                                    )}
                                 />
 
 
-                                {/* <ScrollView ref={scrollViewRef} showsVerticalScrollIndicator={false} style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
-                                    horizontal={true} 
-                                    // onScroll={(event)=>{
-                                    //     console.log('event of scroll=====>', event);
-                                    //     scrollViewRef.current.scrollTo({
-                                    //         x: event.nativeEvent.contentOffset.x/scrollIndex,
-                                    //         animated: true,
-                                    //     });
-                                    // }}
-                                    > */}
 
-                                    {/* {time.map((data, timneKey) => (
-                                        <View style={{ ...PAGESTYLE.spaceTop, width: cellWidth }}>
-                                            <Text style={{ ...PAGESTYLE.lable, }}>{data}</Text>
-
-                                            <View style={PAGESTYLE.timeLabel}>
-                                                {days.map((data, dayKey) => (
-                                                    dayKey != 0 ?
-                                                        setData(dayKey, timneKey)
-                                                        :
-                                                        null
-
-                                                ))}
-                                            </View>
-                                        </View>
-                                    ))}
-                                </ScrollView> */}
                             </View>
                             :
-                            // <View style={{ height: hp(13), justifyContent: 'center' }}>
-                            //     <Text style={{ alignItems: 'center', fontSize: hp(2.60), padding: hp(1.30), textAlign: 'center' }}>No data found!</Text>
-                            // </View>
+
                             <ScrollView>
                                 <EmptyStatePlaceHohder holderType={3} title1={MESSAGE.noTimetable1} title2={MESSAGE.noTimetable2} />
                             </ScrollView>
