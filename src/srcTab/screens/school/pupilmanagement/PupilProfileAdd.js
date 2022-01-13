@@ -20,6 +20,7 @@ import { launchCamera, launchImageLibrary } from "react-native-image-picker/src"
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
+import { showMessageWithCallBack } from "../../../../utils/Constant";
 
 const PupilProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -171,8 +172,13 @@ const PupilProfileAdd = (props) => {
     const uploadProfile = (pupilId) => {
         if (!profileUri) {
             setLoading(false)
-            showMessage(MESSAGE.inviteSent)
-            return
+            resetFeilds()
+            // showMessage(MESSAGE.inviteSent)
+            // return
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigateToBack()
+                
+            });
         }
 
         let data = new FormData();

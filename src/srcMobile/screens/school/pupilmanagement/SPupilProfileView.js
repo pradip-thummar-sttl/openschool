@@ -167,7 +167,7 @@ const SPupilProfileView = (props) => {
                         <ScrollView style={PAGESTYLE.scrollViewCommon} showsVerticalScrollIndicator={false}>
                             
                             <View style={PAGESTYLE.mainContainerProfile}>
-                                <View style={PAGESTYLE.profileImageArea}>
+                                <View style={[PAGESTYLE.profileImageArea]}>
                                     <EditProfileTop_Mobile style={PAGESTYLE.coverImage} width={'100%'} height={hp(13.8)} />
                                     <View style={PAGESTYLE.profileOuter}>
                                         <Image style={PAGESTYLE.profileImage} source={{ uri: baseUrl + item.ProfilePicture }} />

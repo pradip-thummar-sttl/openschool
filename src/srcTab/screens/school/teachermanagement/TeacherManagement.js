@@ -122,7 +122,7 @@ const TeacherManagement = (props) => {
                     isTeacherDetail ? <TeacherProfileView onNavigation={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)}
                      onEditTeacherProfile={() => onEditClick()} />
                         :
-                        isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} openNotification={() => { openNotification() }} />
+                        isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => {setTeacherAdd(false);onRefress()}} openNotification={() => { openNotification() }} />
                             :
                             isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => onRefress()} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />
                                 :
