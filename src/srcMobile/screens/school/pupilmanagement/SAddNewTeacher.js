@@ -301,7 +301,7 @@ const SAddNewTeacher = (props) => {
             <AddNewTeacherHeader
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
-                OnSaveEdit={() => validateFields()}
+                OnSaveEdit={() => {validateFields()}}
 
             />
             <View style={PAGESTYLE.MainProfile}>

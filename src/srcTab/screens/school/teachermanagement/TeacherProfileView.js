@@ -13,6 +13,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
 import LessonList from "./lessonlist/LessonList";
 import TeacherChat from "./teacherchat/TeacherChat";
+import COLORS from "../../../../utils/Colors";
 
 const TeacherProfileView = (props) => {
     const [isHide, action] = useState(true);
