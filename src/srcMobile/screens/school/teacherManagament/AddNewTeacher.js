@@ -29,6 +29,7 @@ import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileTopBg_Mobile";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { showMessageWithCallBack } from "../../../../utils/Constant";
 
 
 const AddNewTeacher = (props) => {
@@ -158,8 +159,11 @@ const AddNewTeacher = (props) => {
         if (!profileUri) {
             setLoading(false)
             resetFeilds()
-            showMessage(MESSAGE.inviteSent)
-            return
+            // showMessage(MESSAGE.inviteSent)
+            // return
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigation.goBack()
+            });
         }
 
         let data = new FormData();

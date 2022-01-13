@@ -205,7 +205,7 @@ export default StyleSheet.create({
         borderRadius: 96,
         borderColor:COLORS.white,
         borderWidth: 3,
-        backgroundColor:'#ECEDF0',
+        // backgroundColor:'#ECEDF0',
         position:'absolute',
         left:hp(5),
         bottom:hp(-4),

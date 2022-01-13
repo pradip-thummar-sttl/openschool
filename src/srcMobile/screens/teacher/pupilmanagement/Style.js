@@ -329,7 +329,7 @@ export default StyleSheet.create({
         borderColor: COLORS.white,
         position: 'absolute',
         top: hp(7.38),
-        backgroundColor: COLORS.white
+        // backgroundColor: COLORS.white
     },
     profileImage: {
         width: hp(13),

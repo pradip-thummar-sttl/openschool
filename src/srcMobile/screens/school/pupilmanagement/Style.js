@@ -378,7 +378,7 @@ export default StyleSheet.create({
         borderColor:COLORS.borderGrp,
     },
     mainDetails: {
-        marginTop: hp(8.75),
+        marginTop: hp(4),
         paddingHorizontal: hp(2),
     },
     mainDetailsForm: {
