@@ -1350,8 +1350,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)addToCollectionUserWithID:(NSNumber *)userID {
   
-  QBUUser *user = [self userWithID:userID];
+  
   if (_isTeacher) {
+    QBUUser *user = [self userWithID:userID];
     if ([self.users indexOfObject:user] != NSNotFound) {
       return;
     }
@@ -1369,11 +1370,16 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
   }else{
-    if ([self.users indexOfObject:user] != NSNotFound) {
-      return;
-    }
-   [self.users addObject:user];
-   [self.opponentsCollectionView reloadData];
+
+    self.users = [[NSMutableArray alloc]init];
+    QBUUser *user = [self userWithID:[NSNumber numberWithInteger:[_teacherQBUserID integerValue]]];
+//    if ([self.users indexOfObject:user] != NSNotFound) {
+//      return;
+//    }
+    
+    [self.users addObject:user];
+    [self.opponentsCollectionView reloadData];
+
   }
  
   
