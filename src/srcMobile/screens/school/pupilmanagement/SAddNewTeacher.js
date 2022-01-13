@@ -18,7 +18,7 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 // import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import MESSAGE from "../../../../utils/Messages";
-import { baseUrl, emailValidate, opacity, showMessage } from "../../../../utils/Constant";
+import { baseUrl, emailValidate, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import { User } from "../../../../utils/Model";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
@@ -101,14 +101,19 @@ const SAddNewTeacher = (props) => {
     const validateFields = () => {
         if (!firstName.trim()) {
             showMessage(MESSAGE.firstName)
-            return false
+            return false;
         } else if (!lastName.trim()) {
             showMessage(MESSAGE.lastName)
             return false
         } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
-            return false
-        } else if (!parentFirstName.trim()) {
+            return false;
+        } 
+        else if (!selectedTeacher.length) {
+            showMessage(MESSAGE.selectTeacher)
+            return false;
+            
+        }else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
         } else if (!parentLastName.trim()) {
@@ -195,9 +200,10 @@ const SAddNewTeacher = (props) => {
     const uploadProfile = (pupilId) => {
         if (!profileUri) {
             setLoading(false)
-            showMessage(MESSAGE.inviteSent)
             //return
-            props.navigation.goBack()
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigation.goBack()
+            });
         }
 
         let data = new FormData();
@@ -276,7 +282,7 @@ const SAddNewTeacher = (props) => {
     const teacherDropDown = () => {
         return (
             <View style={[PAGESTYLE.dropDownFormInput, { marginBottom: hp(2) }]}>
-                <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
+                <Text style={[PAGESTYLE.fieldInputLabel,{ paddingLeft: hp(1.5),}]}>Assigned Teacher</Text>
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[STYLE.commonInputGrayBack, STYLE.common]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>

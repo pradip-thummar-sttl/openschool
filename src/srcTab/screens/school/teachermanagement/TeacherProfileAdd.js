@@ -31,6 +31,7 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import { showMessageWithCallBack } from "../../../../utils/Constant";
 
 const TeacherProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -157,8 +158,11 @@ const TeacherProfileAdd = (props) => {
         if (!profileUri) {
             setLoading(false)
             resetFeilds()
-            showMessage(MESSAGE.inviteSent)
-            return
+            // showMessage(MESSAGE.inviteSent)
+            // return
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigateToBack()
+            });
         }
 
         let data = new FormData();

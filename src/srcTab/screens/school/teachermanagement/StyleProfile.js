@@ -322,7 +322,7 @@ export default StyleSheet.create({
         borderRadius: hp(6.5),
         borderColor:COLORS.white,
         borderWidth: 3,
-        backgroundColor:'#ECEDF0',
+        // backgroundColor:'#ECEDF0',
         position:'absolute',
         left:hp(8),
         bottom:hp(-5),

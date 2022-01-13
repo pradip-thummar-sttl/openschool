@@ -1,6 +1,7 @@
 package com.openschool.activity;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -51,6 +52,10 @@ public class PollingActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_polling);
+
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if(tabletSize)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         addVerb();
         initData();

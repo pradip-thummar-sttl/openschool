@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.media.MediaScannerConnection;
 import android.media.projection.MediaProjectionManager;
 import android.net.Uri;
@@ -159,6 +160,10 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         starterIntent = getIntent();
+
+        boolean tabletSize = getResources().getBoolean(R.bool.isTablet);
+        if(tabletSize)
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         parseIntentExtras();
 

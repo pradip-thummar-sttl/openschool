@@ -169,7 +169,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   QBUUser *user = [QBUUser user];
   user.ID = self.currentUserID.integerValue;
   user.fullName = self.currentName;
-  user.login=@"stud29@silvertouch.com";
+  user.login=@"teacher7@silvertouch.com";
   user.password=@"Admin@123";
   [Profile synchronizeUser:user];
   
@@ -240,9 +240,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         self.users = [[NSMutableArray alloc]init];
         for (int i=0; i<=_selectedUsers.count-1; i++) {
           QBUUser *user = _selectedUsers[i];
-          if (user.ID == [_teacherQBUserID integerValue]) {
+          if (user.ID == [_currentUserID integerValue]) {
             [self.users addObject:user];
-            return;
+//            return;
           }
         }
       }
@@ -287,31 +287,47 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   //
   __weak __typeof(self)weakSelf = self;
   Profile *profile = [[Profile alloc]init];
-  [QBRequest logInWithUserLogin:profile.login
-                       password:profile.password
-                   successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
-      
-      __typeof(weakSelf)strongSelf = weakSelf;
-      
-      [user setPassword:profile.password];
-      [Profile synchronizeUser:user];
-      
-      if ([user.fullName isEqualToString: profile.fullName] == NO) {
-          [strongSelf updateFullName:profile.fullName login:profile.login];
-      } else {
-          [strongSelf connectToChat:user];
-      }
-      
+  [QBRequest signUp:user successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+    __typeof(weakSelf)strongSelf = weakSelf;
+    NSLog(@"%@=========>%@", response, user);
+    [user setPassword:profile.password];
+    [Profile synchronizeUser:user];
+
+    if ([user.fullName isEqualToString: profile.fullName] == NO) {
+        [strongSelf updateFullName:profile.fullName login:profile.login];
+    } else {
+        [strongSelf connectToChat:user];
+    }
+
   } errorBlock:^(QBResponse * _Nonnull response) {
-//      __typeof(weakSelf)strongSelf = weakSelf;
-      
-//          [strongSelf handleError:response.error.error];
-      if (response.status == QBResponseStatusCodeUnAuthorized) {
-          // Clean profile
-          [Profile clearProfile];
-//              [strongSelf defaultConfiguration];
-      }
+    NSLog(@"%@=========>", response);
+    [QBRequest logInWithUserLogin:profile.login
+                         password:profile.password
+                     successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+
+        __typeof(weakSelf)strongSelf = weakSelf;
+
+        [user setPassword:profile.password];
+        [Profile synchronizeUser:user];
+
+        if ([user.fullName isEqualToString: profile.fullName] == NO) {
+            [strongSelf updateFullName:profile.fullName login:profile.login];
+        } else {
+            [strongSelf connectToChat:user];
+        }
+
+    } errorBlock:^(QBResponse * _Nonnull response) {
+  //      __typeof(weakSelf)strongSelf = weakSelf;
+
+  //          [strongSelf handleError:response.error.error];
+        if (response.status == QBResponseStatusCodeUnAuthorized) {
+            // Clean profile
+            [Profile clearProfile];
+  //              [strongSelf defaultConfiguration];
+        }
+    }];
   }];
+ 
 }
 
 
@@ -612,18 +628,18 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     
     
   }];
-//  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
-//
-////      weakSelf.muteAudio ^= 1;
-////    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
-////        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
-////                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
-////              fromViewController:self];
-////        [SVProgressHUD dismiss];
-////        return;
-////    }
-//    if (weakSelf.users.count >= 1) {
-//        // Creating private chat.
+  [self.toolbar addButton:[QBButtonsFactory chatButton] action: ^(UIButton *sender) {
+
+//      weakSelf.muteAudio ^= 1;
+//    if (Reachability.instance.networkStatus == NetworkStatusNotReachable) {
+//        [self showAlertWithTitle:NSLocalizedString(@"No Internet Connection", nil)
+//                         message:NSLocalizedString(@"Make sure your device is connected to the internet", nil)
+//              fromViewController:self];
+//        [SVProgressHUD dismiss];
+//        return;
+//    }
+    if (weakSelf.users.count >= 1) {
+        // Creating private chat.
 //        [SVProgressHUD show];
 //        [weakSelf.chatManager.storage updateUsers:weakSelf.users];
 //
@@ -639,25 +655,30 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //            [SVProgressHUD showSuccessWithStatus:NSLocalizedString(@"STR_DIALOG_CREATED", nil)];
 //            NSString *message = [weakSelf systemMessageWithChatName:weakSelf.titlee];
 //
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-//        ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-//        chatController.dialogID = createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
-//        chatController.currentUserID = self.currentUserID;
-//        chatController.currentUserName=self.currentName;
-//        [weakSelf presentViewController:chatController animated:false completion:nil];
-//
-////            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
-////              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-////              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-////              chatController.dialogID = createdDialog.ID;
-////              [weakSelf presentViewController:chatController animated:false completion:nil];
-////
-////            }];
+//        [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+//            [self openNewDialog:createdDialog];
+          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+          ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+          chatController.currentUserID = weakSelf.currentUserID;
+          chatController.currentUserName=weakSelf.currentName;
+          [weakSelf presentViewController:chatController animated:false completion:nil];
 //        }];
-//    }
+
+       
+
+//            [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
+//              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+//              ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
+//              chatController.dialogID = createdDialog.ID;
+//              [weakSelf presentViewController:chatController animated:false completion:nil];
 //
-//
-//  }];
+//            }];
+//        }];
+    }
+
+
+  }];
     
 //    if (_conferenceType > 0) {
 ////      [self.toolbar addButton:[QBButtonsFactory decline] action: ^(UIButton *sender) {
@@ -1329,8 +1350,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)addToCollectionUserWithID:(NSNumber *)userID {
   
-  QBUUser *user = [self userWithID:userID];
+  
   if (_isTeacher) {
+    QBUUser *user = [self userWithID:userID];
     if ([self.users indexOfObject:user] != NSNotFound) {
       return;
     }
@@ -1348,11 +1370,16 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     }];
     
   }else{
-    if ([self.users indexOfObject:user] != NSNotFound) {
-      return;
-    }
+
+    self.users = [[NSMutableArray alloc]init];
+    QBUUser *user = [self userWithID:[NSNumber numberWithInteger:[_teacherQBUserID integerValue]]];
+//    if ([self.users indexOfObject:user] != NSNotFound) {
+//      return;
+//    }
+    
     [self.users addObject:user];
     [self.opponentsCollectionView reloadData];
+
   }
  
   

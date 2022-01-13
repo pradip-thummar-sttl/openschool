@@ -611,7 +611,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.lightGray,
-        paddingBottom: hp(1),
+        paddingBottom: hp(0.5),
     },
     dropDown1: {
         flexDirection: 'row',

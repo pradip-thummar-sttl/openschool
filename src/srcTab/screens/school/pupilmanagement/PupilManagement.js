@@ -144,7 +144,7 @@ const PupilManagement = (props) => {
                     <PupilProfileView selectedPupil={selectedItem} navigateToBack={() => setPupilProfile(false)} onEditTeacherProfile={() => onEditClick()} />
                     :
                     isPupilAdd ?
-                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => setPupilAdd(false)} />
+                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => {setPupilAdd(false);onRefress()}} />
                         :
                         isPupilEdit ?
                             <PupilProfileEdit navigateToBack={() => onRefress()} 
