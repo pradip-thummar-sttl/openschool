@@ -36,7 +36,7 @@ const TeacherLessonList = (props) => {
     const [pagination, setPaginationData] = useState([])
     const [allNewAndOldData, setAllNewAndOldData] = useState([])
 
-    
+
     let currentCount = 0
     useEffect(() => {
         pageNo = 1
@@ -130,6 +130,7 @@ const TeacherLessonList = (props) => {
 
 
     const addMorePage = () => {
+        console.log('-----lesson data length---', lessonData.length)
         if (lessonData.length != pagination.TotalCount) {
             pageNo = pageNo + 1
             setTimeout(() => {

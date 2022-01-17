@@ -21,6 +21,8 @@ import NoPupil from '../../../../svg/emptystate/NoPupil';
 import PupilProfileView from './PupilProfileView';
 import PupilProfileAdd from './PupilProfileAdd';
 
+var pageNo = 1;
+
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
         activeOpacity={opacity}
@@ -97,21 +99,49 @@ const PupilManagement = (props) => {
     const [isPupilAdd, setPupilAdd] = useState(false);
     const [selectedItem, setSelectedItem] = useState({});
 
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
+    const [limit, setLimit] = useState('25')
+
     useEffect(() => {
+        pageNo = 1;
         fetchRecord('', 'name')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
-        // let data = {
-        //     Searchby: searchBy,
-        //     Filterby: filterBy,
-        // }
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
+        }
 
-        let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
+        // let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
-                setLoading(false)
-                setPupilData(res.data)
+                // setLoading(false)
+                // setPupilData(res.data)
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setPupilData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setLoading(false)
+                    }
+                    else {
+                        setPupilData(allNewAndOldData)
+                        setLoading(false)
+                    }
+                }
+                else {
+                    setPupilData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setLoading(false)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -131,6 +161,16 @@ const PupilManagement = (props) => {
         // })
     }
 
+    const addMorePage = () => {
+        console.log('-----lesson data length---', pupilData.length)
+        if (pupilData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
+            setTimeout(() => {
+                fetchRecord('', '')
+            }, 1000)
+        }
+    }
+
     const refresh = () => {
         console.log('refreshed');
         fetchRecord('', '')
@@ -138,13 +178,13 @@ const PupilManagement = (props) => {
 
     const pupilRender = ({ item }) => {
         return (
-            <Pupillist item={item} onPupilClick={() => { setPupilProfile(true); setSelectedItem(item) }}/>
+            <Pupillist item={item} onPupilClick={() => { setPupilProfile(true); setSelectedItem(item) }} />
         );
     };
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
     return (
@@ -194,7 +234,7 @@ const PupilManagement = (props) => {
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
                                                     </View>
 
-                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22,{alignItems : 'center'}]}>
+                                                    <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22, { alignItems: 'center' }]}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                                                     </View>
                                                     <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
@@ -222,6 +262,8 @@ const PupilManagement = (props) => {
                                                         showsVerticalScrollIndicator={false}
                                                         nestedScrollEnabled
                                                         style={{ height: '85%' }}
+                                                        onEndReachedThreshold={0.5}
+                                                        onEndReached={() => addMorePage()}
                                                     />
                                                 </View>
                                             </>

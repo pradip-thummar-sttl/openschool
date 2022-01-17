@@ -17,6 +17,8 @@ import MESSAGE from "../../../../utils/Messages";
 import { FlatList } from "react-native-gesture-handler";
 import FONTS from "../../../../utils/Fonts";
 
+var pageNo = 1;
+
 const Pupillist = (props) => (
     <TouchableOpacity onPress={() => { props.onPress() }}>
         <View style={[PAGESTYLE.pupilData]}>
@@ -64,7 +66,14 @@ const TeacherManagement = (props) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
 
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
+    const [limit, setLimit] = useState('25')
+
+
     useEffect(() => {
+        pageNo = 1;
         fetchRecord('', '')
     }, [])
 
@@ -73,14 +82,35 @@ const TeacherManagement = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
         }
 
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            setDataLoading(false)
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
-                setTeacherData(res.data)
+                // setTeacherData(res.data)
                 // dispatch(setCalendarEventData(res.data))
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setTeacherData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setDataLoading(false)
+                    }
+                    else {
+                        setTeacherData(allNewAndOldData)
+                        setDataLoading(false)
+                    }
+                }
+                else {
+                    setTeacherData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setDataLoading(false)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -92,27 +122,36 @@ const TeacherManagement = (props) => {
 
     }
 
+    const addMorePage = () => {
+        console.log('-----lesson data length---', teacherData.length)
+        if (teacherData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
+            setTimeout(() => {
+                fetchRecord('', '')
+            }, 1000)
+        }
+    }
+
     const refresh = () => {
         fetchRecord('', '')
     }
 
     const pupilRender = ({ item }) => {
-        console.log('props ->>>>>>> 100', props)
         return (
-            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }}/>
+            <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }} />
         );
     };
 
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
     }
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
-                {isTeacherDetail ? <TeacherProfileView onNavigation ={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
+                {isTeacherDetail ? <TeacherProfileView onNavigation={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} />
                     :
                     isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
                         :
@@ -147,7 +186,7 @@ const TeacherManagement = (props) => {
                                                 <View style={{ width: '13%', }}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Teaching Year</Text>
                                                 </View>
-                                                <View style={{ width: '25%',alignItems: 'center',marginRight: hp(4), }}>
+                                                <View style={{ width: '25%', alignItems: 'center', marginRight: hp(4), }}>
                                                     <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,]}>Scheduled Activity</Text>
                                                     <View style={PAGESTYLE.pupilTableHeadingsubMain}>
                                                         <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Lessons</Text>
@@ -168,6 +207,8 @@ const TeacherManagement = (props) => {
                                                         extraData={null}
                                                         showsVerticalScrollIndicator={false}
                                                         nestedScrollEnabled
+                                                        onEndReachedThreshold={0.5}
+                                                        onEndReached={() => addMorePage()}
                                                     />
                                                 </SafeAreaView>
                                             </View>
