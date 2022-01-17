@@ -74,7 +74,7 @@ export default class ParentZoneSwitch extends Component {
                         
                         <TouchableOpacity activeOpacity={opacity} onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
-                                <AddNewPupil style={styles.userIcon} width={hp(20.10)} height={hp(20.10)} />
+                                <AddNewPupil style={styles.userIconforAddSser} width={hp(20.10)} height={hp(20.10)} />
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
@@ -154,6 +154,13 @@ const styles = StyleSheet.create({
         marginLeft: hp(5),
         marginRight: hp(5),
         width: hp(21),
+    },
+    userIconforAddSser: {
+        width: hp(20.10),
+        height: hp(20.10),
+        alignSelf: 'center',
+        marginBottom: hp(2),
+        borderRadius: hp(20.10 / 2),
     },
     userIcon: {
         width: hp(20.10),
