@@ -16,11 +16,11 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* OpenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OpenSchoolTests.m */; };
-		3273E59A278EABB500986019 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3273E599278EABB500986019 /* DialogTableViewCell.m */; };
 		540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C803CDC5ED40679094DFEC /* Poppins-Italic.ttf */; };
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */; };
+		881D592B27957C9B0023FCB0 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */; };
 		8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824A6BC2768ACE200C6E695 /* PollVC.m */; };
 		882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA01B266A1DB3000B9813 /* CallPermissions.m */; };
 		882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA01E266A1DD7000B9813 /* Call.storyboard */; };
@@ -214,12 +214,12 @@
 		238E08FDBAEC4DCB9F7938CE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* OpenSchool-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenSchool-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* OpenSchool-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenSchool-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3273E598278EABB500986019 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-master/sample-conference-videochat/sample-conference-videochat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
-		3273E599278EABB500986019 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-master/sample-conference-videochat/sample-conference-videochat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		881D592927957C9B0023FCB0 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
+		881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		8824A6BB2768ACE200C6E695 /* PollVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollVC.h; sourceTree = "<group>"; };
 		8824A6BC2768ACE200C6E695 /* PollVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollVC.m; sourceTree = "<group>"; };
 		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1584,8 +1584,8 @@
 			children = (
 				8840693E2775AE090053E668 /* DialogCell.h */,
 				8840693C2775AE090053E668 /* DialogCell.m */,
-				3273E598278EABB500986019 /* DialogTableViewCell.h */,
-				3273E599278EABB500986019 /* DialogTableViewCell.m */,
+				881D592927957C9B0023FCB0 /* DialogTableViewCell.h */,
+				881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */,
 				8840693F2775AE090053E668 /* TitleView.h */,
 				884069412775AE090053E668 /* TitleView.m */,
 			);
@@ -2010,7 +2010,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
-				3273E59A278EABB500986019 /* DialogTableViewCell.m in Sources */,
+				881D592B27957C9B0023FCB0 /* DialogTableViewCell.m in Sources */,
 				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
 				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
 				884068312775A24C0053E668 /* MenuAction.m in Sources */,

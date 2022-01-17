@@ -80,6 +80,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 @property (weak, nonatomic) IBOutlet QBToolBar *toolbar;
 @property (strong, nonatomic) ToolBar *ttoolbar;
 @property (strong, nonatomic) NSMutableArray *users;
+@property (strong, nonatomic) NSMutableArray *userEmojiArr;
 
 @property (strong, nonatomic) QBRTCCameraCapture *cameraCapture;
 @property (strong, nonatomic) NSMutableDictionary *videoViews;
@@ -232,10 +233,13 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   self.endCallButton.layer.cornerRadius = 10;
     // creating session
     self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_dialogID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
-    
+  self.userEmojiArr=[[NSMutableArray alloc]init];
     if (_conferenceType > 0) {
       if (_isTeacher) {
         self.users = [_selectedUsers mutableCopy];
+        for (int i=0; i<=_selectedUsers.count-1; i++) {
+          [self.userEmojiArr addObject:@""];
+        }
       }else{
         self.users = [[NSMutableArray alloc]init];
         for (int i=0; i<=_selectedUsers.count-1; i++) {
@@ -1357,6 +1361,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       return;
     }
     [self.users insertObject:user atIndex:0];
+    [self.userEmojiArr insertObject:@"" atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     
     __weak __typeof(self)weakSelf = self;
@@ -1372,12 +1377,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   }else{
 
     self.users = [[NSMutableArray alloc]init];
+    self.userEmojiArr = [[NSMutableArray alloc]init];
     QBUUser *user = [self userWithID:[NSNumber numberWithInteger:[_teacherQBUserID integerValue]]];
 //    if ([self.users indexOfObject:user] != NSNotFound) {
 //      return;
 //    }
     
     [self.users addObject:user];
+    [self.userEmojiArr addObject:@""];
     [self.opponentsCollectionView reloadData];
 
   }
