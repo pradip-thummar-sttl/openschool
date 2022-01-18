@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wpm-Ud-a52">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wpm-Ud-a52">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,7 +60,7 @@
                                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vI2-xq-eEs">
-                                                    <rect key="frame" x="8" y="8" width="38.5" height="14"/>
+                                                    <rect key="frame" x="8" y="21" width="38.5" height="14"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="249" text="User 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u6X-FX-CXC">
                                                             <rect key="frame" x="4" y="0.0" width="30.5" height="14"/>
@@ -135,6 +135,7 @@
                                             <constraint firstItem="Fqb-zF-Vtq" firstAttribute="centerX" secondItem="15q-h1-Vu7" secondAttribute="centerX" id="06C-d5-x2M"/>
                                             <constraint firstItem="HTv-bT-QBz" firstAttribute="leading" secondItem="dMc-NP-8wD" secondAttribute="leading" id="2Xe-m4-Bw2"/>
                                             <constraint firstAttribute="trailing" secondItem="xRx-qY-Pyw" secondAttribute="trailing" id="4V0-z7-AeL"/>
+                                            <constraint firstItem="Fqb-zF-Vtq" firstAttribute="centerY" secondItem="vI2-xq-eEs" secondAttribute="centerY" id="BjU-gw-vUw"/>
                                             <constraint firstItem="HTv-bT-QBz" firstAttribute="top" secondItem="dMc-NP-8wD" secondAttribute="top" id="EcC-yj-Lta"/>
                                             <constraint firstItem="xRx-qY-Pyw" firstAttribute="leading" secondItem="dMc-NP-8wD" secondAttribute="leading" id="Hdb-HN-FIl"/>
                                             <constraint firstAttribute="bottom" secondItem="HTv-bT-QBz" secondAttribute="bottom" id="MLG-pF-g9O"/>
@@ -142,7 +143,6 @@
                                             <constraint firstItem="xRx-qY-Pyw" firstAttribute="top" secondItem="15q-h1-Vu7" secondAttribute="bottom" constant="8" id="OHP-gE-epb"/>
                                             <constraint firstItem="Fqb-zF-Vtq" firstAttribute="top" secondItem="dMc-NP-8wD" secondAttribute="topMargin" constant="5" id="ZdT-r2-nSJ"/>
                                             <constraint firstAttribute="bottom" secondItem="xRx-qY-Pyw" secondAttribute="bottom" id="brw-xT-weQ"/>
-                                            <constraint firstAttribute="topMargin" secondItem="vI2-xq-eEs" secondAttribute="top" id="fix-nd-4gS"/>
                                             <constraint firstAttribute="trailing" secondItem="HTv-bT-QBz" secondAttribute="trailing" id="gBN-1z-XhZ"/>
                                             <constraint firstAttribute="leadingMargin" secondItem="vI2-xq-eEs" secondAttribute="leading" id="gcd-GK-JS8"/>
                                             <constraint firstItem="eBL-me-Q8f" firstAttribute="centerY" secondItem="15q-h1-Vu7" secondAttribute="centerY" id="m8m-Ca-b50"/>

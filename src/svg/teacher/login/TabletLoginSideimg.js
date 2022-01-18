@@ -1,16 +1,17 @@
 import * as React from "react"
-import Svg, { G, Path, Circle, Rect, Ellipse } from "react-native-svg"
+import Svg, { G, Path, Circle, Rect, Ellipse ,Text} from "react-native-svg"
 
 function TabletLoginSideimg(props) {
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       width={props.width}
-      preserveAspectRatio="xMinYMin slice" 
+      preserveAspectRatio="xMinYMin slice"
       height={props.height}
       viewBox="0 0 515.864 768"
       {...props}
     >
+    
       <G transform="translate(149.854 174.019)">
         <Path fill="#ffd719" d="M-147.922-174.019h512v768h-512z" />
         <Path

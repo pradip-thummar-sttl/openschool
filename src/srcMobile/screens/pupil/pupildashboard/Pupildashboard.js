@@ -580,7 +580,7 @@ const PupuilDashboard = (props) => {
                                                                                 </View>
 
                                                                                 <View style={{ width: '48%', }}>
-                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', height:hp(5) }} onPress={() => { launchLiveClass() }}>
+                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', height:Platform.OS === 'android' ? hp(6) : hp(5) }} onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
                                                                                                 <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> :
@@ -773,7 +773,7 @@ const PupuilDashboard = (props) => {
                                     {/* <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[2].Images }} />
                                     <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[3].Images }} /> */}
                                     {avatarListIndex == 0 ?
-                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-2), zIndex: 10, left: hp(8.5), alignSelf: 'center' }} ></Image>
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, left:Platform.OS === 'android' ? hp(11) : hp(8.5), alignSelf: 'center' }} ></Image>
                                         : null}
                                     {avatarListIndex == 1 ?
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-6), zIndex: 10, alignSelf: 'center' }} ></Image>

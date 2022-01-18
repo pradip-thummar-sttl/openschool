@@ -32,6 +32,7 @@ import { launchCamera, launchImageLibrary } from "react-native-image-picker/src"
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import { showMessageWithCallBack } from "../../../../utils/Constant";
+import FONTS from "../../../../utils/Fonts";
 
 const TeacherProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -256,9 +257,9 @@ const TeacherProfileAdd = (props) => {
                         <FlatList
                             data={teachingYear}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular }} value={item} text={item.Title}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -278,9 +279,9 @@ const TeacherProfileAdd = (props) => {
                         <FlatList
                             data={titles}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular}} value={item} text={item.Title}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>
