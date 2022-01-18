@@ -13,6 +13,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import TeacherProfileView from "./TeacherProfileView";
 import TeacherProfileAdd from "./TeacherProfileAdd";
+import TeacherProfileEdit from "./TeacherProfileEdit";
 import MESSAGE from "../../../../utils/Messages";
 import { FlatList } from "react-native-gesture-handler";
 import FONTS from "../../../../utils/Fonts";
@@ -59,6 +60,8 @@ const TeacherManagement = (props) => {
 
     const [isTeacherDetail, setTeacherDetail] = useState(false)
     const [isTeacherAdd, setTeacherAdd] = useState(false)
+    const [isTeacherEdit, setTeacherAddEdit] = useState(false)
+
     const [teacherDetailData, setTeacherDetailData] = useState({})
     const [isHide, action] = useState(true);
     const [teacherData, setTeacherData] = useState([])
@@ -85,7 +88,6 @@ const TeacherManagement = (props) => {
             page: String(pageNo),
             limit: limit
         }
-
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
                 // console.log('response of get all lesson event:', res)
@@ -112,14 +114,12 @@ const TeacherManagement = (props) => {
                     setDataLoading(false)
                 }
             } else {
-                showMessage(res.message)
+                showMessage(res.message);
             }
         }, (err) => {
             setDataLoading(false)
             console.log('response of get all lesson error', err)
         })
-
-
     }
 
     const addMorePage = () => {
@@ -148,6 +148,15 @@ const TeacherManagement = (props) => {
         props.navigation.openDrawer()
     }
 
+    const onEditClick = () => {
+        setTeacherAddEdit(true);
+        setTeacherDetail(false);
+    }
+    const onRefress = () => {
+        setTeacherAddEdit(false);
+        fetchRecord('', '')
+    }
+
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             <View style={{ width: isHide ? '100%' : '78%' }}>
@@ -155,16 +164,20 @@ const TeacherManagement = (props) => {
                     :
                     isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
                         :
-                        <>
-                            <HeaderTM
-                                onAlertPress={() => { openNotification() }}
-                                onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
-                                onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                                onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                                onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                                refreshList={() => refresh()}
-                                navigateToAddTeacher={() => setTeacherAdd(true)}
-                                onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                        isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => {setTeacherAdd(false);onRefress()}} openNotification={() => { openNotification() }} />
+                            :
+                            isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => onRefress()} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />
+                                :
+                                <>
+                                    <HeaderTM
+                                        onAlertPress={() => { openNotification() }}
+                                        onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
+                                        onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+                                        onSearch={() => fetchRecord(searchKeyword, filterBy)}
+                                        onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                                        refreshList={() => refresh()}
+                                        navigateToAddTeacher={() => setTeacherAdd(true)}
+                                        onFilter={(filterBy) => fetchRecord('', filterBy)} />
 
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isDataLoading ?

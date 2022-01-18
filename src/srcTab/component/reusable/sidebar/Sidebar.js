@@ -2,14 +2,10 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
-import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-// import Images from '../../../../utils/Images';
 import { baseUrl, opacity } from "../../../../utils/Constant";
-import Users from "../../../screens/users/Users";
 import { User } from "../../../../utils/Model";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import Ic_calendar from "../../../../svg/sidebar/Ic_calendar";
 import Ic_LessonPlanner from "../../../../svg/sidebar/Ic_LessonPlanner";
 import Ic_PupilManagement from "../../../../svg/sidebar/Ic_PupilManagement";
@@ -24,14 +20,6 @@ import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
-    // const [moduleIndex, setSelectedIndex] = useState(0);
-    // const isHide = () => {
-    //     action(!isSmall)
-    //     props.hide();
-    // }
-
-    console.log('props', props);
-
     const toggleAnimation = (flag) => {
 
         if (flag && isSmall) {
@@ -55,15 +43,12 @@ const Sidebar = (props) => {
             });
         }
     }
-
     const animatedStyle = {
         width: animationValue,
     }
-
     const navigateSidebarIndex = (index) => {
         props.navigateToTimetable()
     }
-
     const showActionChooser = () => {
         Alert.alert(
             '',
@@ -326,6 +311,7 @@ const styles = StyleSheet.create({
         height: hp(4.16),
         // resizeMode: 'contain',
         borderRadius: hp(4.16),
+        backgroundColor : COLORS.borderGrp
     },
     profileTitleBottom: {
         fontSize: hp(2.0),

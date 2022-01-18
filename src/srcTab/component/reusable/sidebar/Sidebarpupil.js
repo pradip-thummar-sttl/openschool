@@ -23,11 +23,6 @@ import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [animationValue, setAnimationValue] = useState(new Animated.Value(hp(9.50)));
-    // const isHide = () => {
-    //     action(!isSmall)
-    //     props.hide();
-    // }
-
     const toggleAnimation = (flag) => {
 
         if (flag && isSmall) {
@@ -83,14 +78,10 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
                     <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
-                    {/* { uri: baseUrl + User.user.ProfilePicture } */}
                     {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
-                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:hp(15)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
                                 <Text numberOfLines={1} style={[styles.profileTitle, { width: hp(15) }]}>MYED Open School</Text>
                             </View>
                     }
@@ -98,87 +89,49 @@ const Sidebar = (props) => {
                 <View style={styles.mainMenu}>
 
                     <TouchableOpacity onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.Dashboard}
-                        /> */}
                         <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.navigateToTimetable(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.Teacher}
-                        /> */}
                         <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onLessonAndHomework(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.MyLessons}
-                        /> */}
                         <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
-                    {/* <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}> */}
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.MyAchievements}
-                        /> */}
                         <Ic_Achievement style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onAvatar(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.MyAvatar}
-                        /> */}
                         <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onParentZone(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.OpenSchool}
-                        /> */}
-                        {/* open school icon add karvano che */}
-                        {/* <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} /> */}
                         <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { showActionChooser(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
-                        {/* <Image
-                            style={styles.menuIcon}
-                            source={Images.logout}
-                        /> */}
                         <Logout style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
-
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
@@ -186,7 +139,6 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.cartoon}>
-                    {/* <Image source={Images.cartoon} style={styles.cartoonIcon} /> */}
                     {/* cartoon icon add karvano che */}
                 </View>
                 <TouchableOpacity onPress={() => { props.onSetting(); toggleAnimation(true) }} style={[styles.userInfo, styles.userInfobottom]}>
@@ -199,7 +151,6 @@ const Sidebar = (props) => {
                                 </View>
                                 <TouchableOpacity style={styles.moreMenu}>
                                     <More style={styles.moreIcon} width={hp(3)} height={5} />
-                                    {/* <Image style={styles.moreIcon} source={Images.SidebarMore} /> */}
                                 </TouchableOpacity>
                             </>
                     }
@@ -299,6 +250,7 @@ const styles = StyleSheet.create({
         height: hp(4.16),
         // resizeMode: 'contain',
         borderRadius: hp(4.16),
+        backgroundColor : COLORS.borderGrp
     },
     profileTitleBottom: {
         fontSize: hp(1.82),

@@ -34,7 +34,7 @@ const PupilProfileView = (props) => {
     const [tabSelected, setTabSelected] = useState(0);
 
     const item = props.selectedPupil;
-    
+
     const [chartData, setChartData] = useState([])
     const [joinedLesson, setJoinedLesson] = useState(0)
     const [submittedHomework, setSubmittedHomework] = useState(0)
@@ -75,7 +75,7 @@ const PupilProfileView = (props) => {
         Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
             if (res.flag) {
                 let per = res.data.percentage
-                
+
                 let data = {
                     value: per === null ? 0.0001 : per != 0 ? (per / 100) : 0.0001,       // To make value between 0 to 1
                     color: COLORS.yellowDark,
@@ -109,18 +109,20 @@ const PupilProfileView = (props) => {
                             <View style={PAGESTYLE.whiteBg}>
                                 <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                                     <View style={PAGESTYLE.managementDetail}>
-                                        <View style={PAGESTYLE.managementBlockTop}>
-                                            {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                            <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
+
+                                        <View style={PAGESTYLE.secondHeader}>
+                                            <View style={{ height: '100%', overflow: 'hidden', width: '100%', position: 'absolute' }}>
+                                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} />
+                                            </View>
                                             <View style={PAGESTYLE.thumbTopUser}>
-                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
                                                     source={{ uri: baseUrl + item.ProfilePicture }} />
                                             </View>
-                                            {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                            {/* </ImageBackground> */}
+                                            <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>
+                                                <Text style={STYLE.txtEditView}>Edit Profile</Text>
+                                            </TouchableOpacity>
                                         </View>
+
                                         <View style={PAGESTYLE.managementNameSec}>
                                             <View style={PAGESTYLE.nameSmlBlock}>
                                                 <Text style={PAGESTYLE.userLabel}>Pupil name</Text>
@@ -135,6 +137,7 @@ const PupilProfileView = (props) => {
                                                 <Text style={PAGESTYLE.userName}>{item.UniqueNumber}</Text>
                                             </View>
                                         </View>
+
                                         <View style={PAGESTYLE.managementNameSec}>
                                             <View style={PAGESTYLE.nameSmlBlock}>
                                                 <Text style={PAGESTYLE.userLabel}>Parent name</Text>
@@ -149,6 +152,7 @@ const PupilProfileView = (props) => {
                                                 <Text style={PAGESTYLE.userName}>{item.MobileNumber}</Text>
                                             </View>
                                         </View>
+
                                         <View style={PAGESTYLE.managementNameSec}>
                                             <View style={PAGESTYLE.nameSmlBlock}>
                                                 <Text style={PAGESTYLE.userLabel}>Assigned To</Text>
@@ -159,6 +163,7 @@ const PupilProfileView = (props) => {
                                                 <Text style={PAGESTYLE.userName}>{item.Active ? 'Active' : 'Inactive'}</Text>
                                             </View>
                                         </View>
+
                                     </View>
                                     <View style={PAGESTYLE.rateAnnotationBlock}>
                                         <View style={PAGESTYLE.ratingBlock}>

@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 import {
     Menu,
     MenuOptions,
@@ -27,10 +28,11 @@ const HeaderPMInner = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
 
+
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-
+    console.log('props can get here......',props);
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -43,18 +45,29 @@ const HeaderPMInner = (props) => {
                     <View>
                         <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
+                    {/* <View>
+                        <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
+
+                            <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
+                        </TouchableOpacity>
+                    </View> */}
                 </View>
 
-                {/* {tabIndex == 0 &&
-                    <View style={styles.headerRight}>
+                <View>
+                    <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
+                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
+                        <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
+                    </TouchableOpacity>
+                </View>
+                    {/* <View style={styles.headerRight}>
                         <TouchableOpacity
                         style={styles.editButton}
                             activeOpacity={opacity}
                             onPress={() => props.navigateToPupilProfileEdit()}>
                             <Ic_Edit style={styles.massagesIcon}width={hp(2.5)} height={hp(2.5)}/>
                         </TouchableOpacity>
-                    </View>
-                } */}
+                    </View> */}
+                
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
         width: hp(2.8),
         height: hp(2.8),
         resizeMode: 'contain',
-       
+
     },
     whiteBg: {
         paddingLeft: hp(2.46),
@@ -151,13 +164,27 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         right: 10,
     },
-    editButton:{
-        borderRadius:10,
-        height:hp(4.20),
-        width:hp(4.20),
-         borderWidth:1,
-         borderColor:COLORS.borderGrp,
-         alignItems:'center',
-         justifyContent:'center'
+    editButton: {
+        borderRadius: 10,
+        height: hp(4.20),
+        width: hp(4.20),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    profileEdit: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        alignSelf: 'flex-end',
+        padding: hp(1.5),
+        borderRadius: hp(1),
+        marginRight: 10
+        // marginBottom: hp(1.32),
+    },
+    profileEditButton: {
+        width: hp(1.57),
+        height: hp(1.57),
+        resizeMode: 'contain',
+        alignSelf: 'center',
     }
 });

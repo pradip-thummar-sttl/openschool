@@ -114,7 +114,6 @@ function ScreenStack() {
                 <Stack.Screen name="TeacherLessonList" component={TeacherLessonList} />
                 <Stack.Screen name="TeacherLessonDetail" component={TeacherLessonDetail} />
                 <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
-                {/* <Stack.Screen name="PupilLessonEmpty" component={PupilLessonEmpty} /> */}
                 <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
                 <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
                 <Stack.Screen name="TLDetail" component={TLDetail} />

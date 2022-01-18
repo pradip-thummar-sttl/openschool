@@ -335,10 +335,8 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        // resizeMode: 'contain',
-        // backgroundColor: COLORS.greyplaceholder,
         borderRadius: hp(1.25),
-        // backgroundColor:'red'
+        backgroundColor : COLORS.borderGrp
     },
     toggleGrp: {
         flexDirection: 'row',

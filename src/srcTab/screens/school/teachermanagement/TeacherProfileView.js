@@ -5,46 +5,25 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-// import Images from "../../../../utils/Images";
-import { User } from "../../../../utils/Model";
 import STYLE from '../../../../utils/Style';
 import PAGESTYLE from './StyleProfile';
-import Sidebar from "../../../component/reusable/sidebar/Sidebar";
 import HeaderPMInner from './HeaderPMInner';
-import moment from 'moment';
-import Chat from "../../Chat/Chat";
-import ActivityRings from "react-native-activity-rings";
-import MESSAGE from "../../../../utils/Messages";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
-import BronzeFill from "../../../../svg/teacher/pupilmanagement/StarBronze_Fill";
-import Bronze from "../../../../svg/teacher/pupilmanagement/StarBronze";
-import SilverFill from "../../../../svg/teacher/pupilmanagement/StartSilver_Fill";
-import Silver from "../../../../svg/teacher/pupilmanagement/StartSilver";
-import GoldFill from "../../../../svg/teacher/pupilmanagement/StarGold_Fill";
-import Gold from "../../../../svg/teacher/pupilmanagement/StarGold";
-import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import LessonList from "./lessonlist/LessonList";
 import TeacherChat from "./teacherchat/TeacherChat";
-import { isTablet } from "react-native-device-info";
+import COLORS from "../../../../utils/Colors";
 
 const TeacherProfileView = (props) => {
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
     const item = props.selectedTeacher;
-    const [chartData, setChartData] = useState([])
     const [isLessonDetail, setLessonDetail] = useState(false);
     const [teacherCountData, setTeacherCountData] = useState([])
     const [isSearch, setSearch] = useState('')
     const [isFilter, setFilter] = useState('')
-
-    const activityConfig = {
-        width: 300,
-        height: 300
-    };
 
     useEffect(() => {
         console.log(`${EndPoints.TeacherDetails}/${item.TeacherId}`);
@@ -80,21 +59,19 @@ const TeacherProfileView = (props) => {
                 tabSelected === 0 ?
                     <View style={{ width: isHide ? '100%' : '100%', }}>
                         <View style={PAGESTYLE.whiteBg}>
-                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
+                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '99%' }}>
                                 <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.managementBlockTop}>
-                                        {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                        <View style={{ height: hp(14.6), overflow: 'hidden', width: '100%', position: 'absolute', top: 0 }}>
-                                            <TopBackImg style={PAGESTYLE.managementopImage} height={Platform.OS == 'android' && isTablet() ? hp(20.7) : '100%'} width={'100%'} />
+                                    <View style={PAGESTYLE.secondHeader}>
+                                        <View style={{ height: '100%', overflow: 'hidden', width: '100%', position: 'absolute'}}>
+                                            <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} /> 
                                         </View>
                                         <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
                                                 source={{ uri: baseUrl + item.ProfilePicture }} />
                                         </View>
-                                        {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> 
-                                        </ImageBackground> */}
+                                        <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>  
+                                                <Text style={STYLE.txtEditView}>Edit Profile</Text>
+                                        </TouchableOpacity> 
                                     </View>
                                     <View style={PAGESTYLE.managementNameSec}>
                                         <View style={PAGESTYLE.nameSmlBlock}>

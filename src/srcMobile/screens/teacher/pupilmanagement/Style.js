@@ -329,13 +329,14 @@ export default StyleSheet.create({
         borderColor: COLORS.white,
         position: 'absolute',
         top: hp(7.38),
-        backgroundColor: COLORS.white
+        // backgroundColor: COLORS.white
     },
     profileImage: {
         width: hp(13),
         height: hp(13),
         borderRadius: hp(13 / 2),
         // resizeMode: 'contain',
+        backgroundColor : COLORS.borderGrp
     },
     mainDetails: {
         marginTop: hp(8.75),

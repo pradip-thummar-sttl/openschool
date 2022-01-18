@@ -132,7 +132,7 @@ export default StyleSheet.create({
         width: hp(4),
         height: hp(4),
         borderRadius: hp(4 / 2),
-        backgroundColor: COLORS.lightGray
+        backgroundColor: COLORS.lightGrey
     },
     userNameText: {
         fontFamily: FONTS.fontSemiBold,

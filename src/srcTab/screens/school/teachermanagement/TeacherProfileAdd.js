@@ -31,6 +31,7 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import { showMessageWithCallBack } from "../../../../utils/Constant";
 
 const TeacherProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -51,12 +52,15 @@ const TeacherProfileAdd = (props) => {
 
     useEffect(() => {
         loadTeachingYear()
-
         loadTitle()
-
         getUserType()
     }, [])
 
+    // const openNotification = () => {
+    //     Var.isCalender = false
+    //     BadgeIcon.isBadge = false
+    //     props.navigation.openDrawer() 
+    // }
     const loadTeachingYear = () => {
         Service.get(`${EndPoints.TeachingYear}`, (res) => {
             console.log('response of GetSubjectBySchoolId response', res)
@@ -88,7 +92,7 @@ const TeacherProfileAdd = (props) => {
             if (res.flag) {
                 var userData = res.data
                 userData.map((item) => {
-                    if (item.Name === 'Pupil') {
+                    if (item.Name === 'Teacher') {
                         setUserType(item._id)
                     }
                 })
@@ -154,8 +158,11 @@ const TeacherProfileAdd = (props) => {
         if (!profileUri) {
             setLoading(false)
             resetFeilds()
-            showMessage(MESSAGE.inviteSent)
-            return
+            // showMessage(MESSAGE.inviteSent)
+            // return
+            showMessageWithCallBack(MESSAGE.inviteSent, () => {
+                props.navigateToBack()
+            });
         }
 
         let data = new FormData();
@@ -171,14 +178,12 @@ const TeacherProfileAdd = (props) => {
                 setLoading(false)
                 resetFeilds()
                 showMessage(MESSAGE.inviteSent)
-                console.log('response of save lesson', res)
             } else {
                 showMessage(res.message)
                 setLoading(false)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
         })
 
     }
@@ -245,7 +250,6 @@ const TeacherProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedYear([...selectedYear, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedYear.length > 0 ? selectedYear[selectedYear.length - 1].Title : 'Select a Year'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -268,7 +272,6 @@ const TeacherProfileAdd = (props) => {
                 <Menu onSelect={(item) => setSelectedTitle([...selectedTitle, item])}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTitle.length > 0 ? selectedTitle[selectedTitle.length - 1].Title : 'Select a Title'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
@@ -287,6 +290,7 @@ const TeacherProfileAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
+                openNotification = {() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 
@@ -294,31 +298,28 @@ const TeacherProfileAdd = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
-                            <View style={PAGESTYLE.managementBlockTop}>
-                                {/* <ImageBackground style={PAGESTYLE.managementopImage} > */}
-                                <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
-                                <View style={PAGESTYLE.thumbTopUser}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => showActionChooser()}>
+                            <View style={[PAGESTYLE.managementBlockTop]}>
+                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
+                                <View style={PAGESTYLE.TeacherProfileMainView}>
+                                    <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                        <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(2.90)} height={hp(2.90)} />
+                                            <View style={PAGESTYLE.editprofileStyl}>
+                                            <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                                            </View>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={PAGESTYLE.topBannerParent}>
+
+                                <View style={PAGESTYLE.btnSendView}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.topBannerBtn1}>Send Invite</Text>
+                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                                {/* <TouchableOpacity>
-                                                <Text style={[STYLE.commonButtonGreen, PAGESTYLE.topBannerBtn]}>Edit Profile</Text>
-                                            </TouchableOpacity> */}
-                                {/* </ImageBackground> */}
                             </View>
-                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: 50 }]}>
+
+                            <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
                                 <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                     {yearDropDown()}
                                 </View>

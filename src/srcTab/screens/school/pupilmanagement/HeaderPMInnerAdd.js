@@ -19,7 +19,7 @@ import PopupdataSecond from "../../../component/reusable/popup/PopupdataSecond";
 import BackArrow from "../../../../svg/common/BackArrow";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 const HeaderPMInnerAdd = (props) => {
-
+    console.log('1111',props);
     return (
         <View style={styles.headerMain}>
             <View style={[styles.headerMaintop]}>
@@ -37,6 +37,7 @@ const HeaderPMInnerAdd = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity
+                    onPress={() => props.openNotification()}
                         style={styles.notificationBar}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}

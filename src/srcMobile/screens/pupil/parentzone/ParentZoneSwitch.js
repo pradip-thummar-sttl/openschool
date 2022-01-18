@@ -60,14 +60,14 @@ export default class ParentZoneSwitch extends Component {
                 <View style={{ flex: 1 }}>
                     <Text style={styles.titleText}>Who will be learning today?</Text>
                     <View style={styles.userMain}>
-                        <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => this.props.navigation.replace('PupilRegister')}>
+                       
+                        <TouchableOpacity activeOpacity={opacity} onPress={() => this.props.navigation.replace('PupilRegister')}>
                             <View style={styles.user}>
-                                    <AddNewPupil style={styles.userIcon} height={hp(13.5)} width={hp(13.5)} />
+                                    <AddNewPupil style={styles.userIconbg} height={hp(13.5)} width={hp(13.5)} />
                                 <Text style={styles.text}>Add new user</Text>
                             </View>
                         </TouchableOpacity>
+                       
                         <FlatList
                             data={this.state.childrenList}
                             showsHorizontalScrollIndicator={false}
@@ -79,12 +79,12 @@ export default class ParentZoneSwitch extends Component {
                                     <View style={styles.user}>
                                         <Image
                                             style={styles.userIcon}
-                                            source={{ uri: baseUrl + item.ProfilePicture }} />
+                                            source={{ uri: baseUrl + item.ProfilePicture }}
+                                             />
                                         <Text style={styles.text}>{item.FirstName} {item.LastName}</Text>
                                     </View>
                                 </TouchableOpacity>
                             )}
-                            //Setting the number of column
                             keyExtractor={(item, index) => index.toString()}
                         />
                     </View>
@@ -132,20 +132,28 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: hp(4.5),
         flex: 1,
-        marginBottom: 50,
+        marginBottom: hp(7),
     },
     user: {
         justifyContent: "center",
         textAlign: 'center',
         marginBottom: hp(2),
     },
-    userIcon: {
+    userIconbg: {
         width: hp(13.5),
         height: hp(13.5),
-        // resizeMode: "contain",
         alignSelf: 'center',
         marginBottom: hp(1.5),
         borderRadius: hp(13.5/2),
+        borderBottomColor : COLORS.lightGrayPupil
+    },
+    userIcon: {
+        width: hp(13.5),
+        height: hp(13.5),
+        alignSelf: 'center',
+        marginBottom: hp(1.5),
+        borderRadius: hp(13.5/2),
+        backgroundColor : COLORS.lightGrayPupil
     },
     parentZone: {
         alignSelf: 'flex-start',

@@ -146,7 +146,7 @@ const PupilProfileView = (props) => {
                                     <View style={PAGESTYLE.managementBlockTop}>
                                         <TopBackImg style={PAGESTYLE.managementopImage} width={'100%'} />
                                         <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 }}
+                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
                                                 source={{ uri: baseUrl + props.selectedPupil.ProfilePicture }} />
                                         </View>
                                     </View>

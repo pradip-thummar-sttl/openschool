@@ -605,6 +605,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
+        top : 6
     },
     buttonGrp: {
         width:hp(18),

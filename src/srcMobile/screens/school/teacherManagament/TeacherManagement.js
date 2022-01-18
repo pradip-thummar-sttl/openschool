@@ -24,6 +24,8 @@ import AddWhite from '../../../../svg/teacher/timetable/Add_White';
 import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
 import FilterBlack from '../../../../svg/teacher/timetable/Filter_Black';
 import HeaderTM from './HeaderTM';
+import { useFocusEffect } from '@react-navigation/native';
+
 var moment = require('moment');
 
 var pageNo = 1
@@ -41,6 +43,7 @@ const TeacherManagement = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, []);
+
 
     const handleBackButtonClick = () => {
 
@@ -75,6 +78,9 @@ const TeacherManagement = (props) => {
     const [isLoading, setLoading] = useState(false)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [messageData, setMessageData] = useState([])
+
+
+  
 
     const MessageList = ({ item }) => {
         return (
@@ -113,9 +119,20 @@ const TeacherManagement = (props) => {
     //     fetchRecord('', )
     // }, [])
 
-    useEffect(() => {
-        fetchRecord('', '')
-    }, [filterBy])
+    useFocusEffect(
+        React.useCallback(() => {
+          // Do something when the screen is focused.
+          fetchRecord('', '')
+          return () => {
+         // Do something when the screen is unfocused
+            // alert('Home Screen was unfocused');
+          };
+        }, [filterBy])
+      );
+
+    // useEffect(() => {
+    //     fetchRecord('', '')
+    // }, [filterBy])
 
     const fetchRecord = (searchby, filterBy) => {
         setLoading(true)
@@ -189,7 +206,6 @@ const TeacherManagement = (props) => {
 
     return (
         <View>
-
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
                 openCsv={() => { }}

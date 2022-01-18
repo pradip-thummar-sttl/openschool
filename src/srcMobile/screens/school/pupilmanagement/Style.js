@@ -310,21 +310,29 @@ export default StyleSheet.create({
         resizeMode: 'contain',
     },
     profileImageArea: {
+        height:hp(20),
         alignItems: 'center',
-        backgroundColor:'#90daff'
+        // backgroundColor:'#90daff',
+        // backgroundColor : 'red'
     },
     coverImage: {
         width: '100%',
         height: hp(13.8),
         resizeMode: 'contain',
+        backgroundColor:'#90daff'
     },
     profileOuter: {
         borderRadius: hp(100),
         borderWidth: 1,
         borderColor: COLORS.white,
         position: 'absolute',
-        top: hp(7.38),
-        backgroundColor: COLORS.white
+        top: hp(5.38),
+        // backgroundColor: COLORS.white
+        // backgroundColor : 'red',
+        // width : '100%',
+        // height :hp(20)
+        // height : hp(14),
+        // backgroundColor  :'green'
     },
     profileImage: {
         width: hp(13),
@@ -333,6 +341,21 @@ export default StyleSheet.create({
         backgroundColor:COLORS.borderGrp,
         borderWidth:5,
         borderColor:COLORS.white
+    },
+    editprofileStyl1: {
+        width: hp(2),
+        height: hp(2),
+        padding:hp(1.7),
+        position: 'absolute',
+        left: hp(4.5),
+        bottom: hp(-1),
+        zIndex:1,
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius: hp(100),
+        backgroundColor: COLORS.white,
+        borderColor: COLORS.editBorder,
+        borderWidth: 1,
     },
     pzEditIcon: {
         width: hp(2.58),
@@ -355,11 +378,11 @@ export default StyleSheet.create({
         borderColor:COLORS.borderGrp,
     },
     mainDetails: {
-        marginTop: hp(8.75),
+        marginTop: hp(4),
         paddingHorizontal: hp(2),
     },
     mainDetailsForm: {
-        marginTop: hp(10),
+        marginTop: Platform.OS === 'android' ? hp(3) : hp(10),
         paddingHorizontal: hp(2),
     },
     fieldDetails: {
@@ -665,5 +688,12 @@ export default StyleSheet.create({
         paddingBottom: hp(1.5),
         fontFamily: FONTS.fontRegular,
     },
+    fieldInputLabel1 : {
+        fontFamily: FONTS.fontRegular,
+        fontSize: hp(1.82),
+        color: COLORS.lightGray,
+        paddingBottom: hp(1),
+    },
+    
     
 });

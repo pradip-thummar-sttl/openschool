@@ -111,6 +111,7 @@ export default StyleSheet.create({
         marginTop: 7,
     },
     whiteBoard: {
+        width:'100%',
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
         marginTop: hp(1.30),
@@ -604,5 +605,36 @@ export default StyleSheet.create({
     },
     centerText:{
         alignItems:'center',
+    },
+
+    // new update
+    buttonView: {
+        width:wp(12),
+        height:hp(5),
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(3.125),
+        paddingRight: hp(3.125),
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        borderColor: COLORS.dashboardGreenButton,
+        marginBottom : 10
+    },
+    txtJointClass: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
 });
