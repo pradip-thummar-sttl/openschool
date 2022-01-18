@@ -28,9 +28,14 @@ import { useFocusEffect } from '@react-navigation/native';
 
 var moment = require('moment');
 
+var pageNo = 1
 const TeacherManagement = (props) => {
+
+
     let currentCount = 0
+
     useEffect(() => {
+        pageNo = 1
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -64,6 +69,10 @@ const TeacherManagement = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('')
     const [keyword, setKeyword] = useState('')
+    const [limit, setLimit] = useState('25')
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
 
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
@@ -129,15 +138,37 @@ const TeacherManagement = (props) => {
         setLoading(true)
         let data = {
             Searchby: searchby,
-            Filterby: filterBy
+            Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
         }
 
         console.log(`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, data);
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            setLoading(false)
+            // setLoading(false)
             if (res.code == 200) {
                 console.log('response of get all lesson', res)
-                setMessageData(res.data)
+                // setMessageData(res.data)
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setMessageData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setLoading(false)
+                    }
+                    else {
+                        setMessageData(allNewAndOldData)
+                        setLoading(false)
+                    }
+                }
+                else {
+                    setMessageData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setLoading(false)
+                }
             } else {
                 showMessage(res.message)
             }
@@ -145,6 +176,16 @@ const TeacherManagement = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
+
+    const addMorePage = () => {
+        if (messageData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
+            setTimeout(() => {
+                fetchRecord('', '')
+            }, 1000)
+        }
+    }
+
 
     const refresh = () => {
         if (isSearchActive) {
@@ -161,13 +202,13 @@ const TeacherManagement = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
-    
+
 
     return (
         <View>
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
-                openCsv={()=>{}}
+                openCsv={() => { }}
                 navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                 onSearch={() => fetchRecord(searchKeyword, filterBy)}
@@ -176,8 +217,8 @@ const TeacherManagement = (props) => {
                 refreshList={() => refresh()}
                 title={'Teacher Management'}
                 userType={'Teacher'}
-                onFilter={(filterBy) => fetchRecord('', filterBy)} 
-                onNotification={()=> openNotification()} />
+                onFilter={(filterBy) => fetchRecord('', filterBy)}
+                onNotification={() => openNotification()} />
 
             {/* {searchHeader()} */}
             {isLoading ?
@@ -193,7 +234,10 @@ const TeacherManagement = (props) => {
                         renderItem={messageRender}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
-                        showsVerticalScrollIndicator={false} />
+                        showsVerticalScrollIndicator={false}
+                        onEndReachedThreshold={0}
+                        onEndReached={() => addMorePage()}
+                    />
                     :
                     // <View style={{ height: 100, justifyContent: 'center' }}>
                     //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>

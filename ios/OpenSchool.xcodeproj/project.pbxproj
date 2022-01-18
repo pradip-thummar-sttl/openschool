@@ -20,6 +20,7 @@
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */; };
+		881D592B27957C9B0023FCB0 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */; };
 		8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824A6BC2768ACE200C6E695 /* PollVC.m */; };
 		882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA01B266A1DB3000B9813 /* CallPermissions.m */; };
 		882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA01E266A1DD7000B9813 /* Call.storyboard */; };
@@ -180,6 +181,7 @@
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
 		DB01CB6E85DE81B7E47A0B5F /* libPods-OpenSchool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */; };
+		E709346A2796A157006655AF /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E70934692796A157006655AF /* DialogTableViewCell.m */; };
 		E74D156627158F4A000F6E89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74D156527158F4A000F6E89 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -218,6 +220,8 @@
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		881D592927957C9B0023FCB0 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
+		881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		8824A6BB2768ACE200C6E695 /* PollVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollVC.h; sourceTree = "<group>"; };
 		8824A6BC2768ACE200C6E695 /* PollVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollVC.m; sourceTree = "<group>"; };
 		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -513,6 +517,8 @@
 		8B09862127952FF400E5FAFF /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = files/DialogTableViewCell.m; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		E70934682796A157006655AF /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../../../Downloads/untitled folder/DialogTableViewCell.h"; sourceTree = "<group>"; };
+		E70934692796A157006655AF /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../../../Downloads/untitled folder/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		E74D156527158F4A000F6E89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -2102,6 +2108,7 @@
 				883F562A276C5029009CD7A9 /* VideoFormat.m in Sources */,
 				8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */,
 				884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */,
+				E709346A2796A157006655AF /* DialogTableViewCell.m in Sources */,
 				8840691D2775AAD00053E668 /* AttachmentDownloadManager.m in Sources */,
 				882EA0CE266A229A000B9813 /* CheckView.m in Sources */,
 			);

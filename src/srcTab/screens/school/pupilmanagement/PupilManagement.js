@@ -22,6 +22,8 @@ import PupilProfileView from './PupilProfileView';
 import PupilProfileAdd from './PupilProfileAdd';
 import PupilProfileEdit from './PupilProfileEdit';
 
+var pageNo = 1;
+
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
         activeOpacity={opacity}
@@ -99,23 +101,81 @@ const PupilManagement = (props) => {
     const [isPupilEdit, setPupilEdit] = useState(false)
     const [selectedItem, setSelectedItem] = useState({});
 
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
+    const [limit, setLimit] = useState('25')
+
     useEffect(() => {
+        pageNo = 1;
         fetchRecord('', 'name')
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+            page: String(pageNo),
+            limit: limit
+        }
 
-        let data = { "Searchby": searchBy, "Filterby": filterBy, "page": "1", "limit": "100" }
+        // let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
-                setLoading(false)
-                setPupilData(res.data)
+                // setLoading(false)
+                // setPupilData(res.data)
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setPupilData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setLoading(false)
+                    }
+                    else {
+                        setPupilData(allNewAndOldData)
+                        setLoading(false)
+                    }
+                }
+                else {
+                    setPupilData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setLoading(false)
+                }
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             console.log('error of absent check', err);
         })
+
+        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
+        //     if (res.flag) {
+        //         setPupilData(res.data)
+        //         setLoading(false)
+        //     } else {
+        //         showMessage(res.message)
+        //     }
+        // }, (err) => {
+        //     console.log('Err of all pupil by teacher', err)
+        // })
+    }
+
+    const addMorePage = () => {
+        console.log('-----lesson data length---', pupilData.length)
+        if (pupilData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
+            setTimeout(() => {
+                fetchRecord('', '')
+            }, 1000)
+        }
+    }
+
+    const refresh = () => {
+        console.log('refreshed');
+        fetchRecord('', '')
     }
 
     const pupilRender = ({ item }) => {
@@ -127,6 +187,7 @@ const PupilManagement = (props) => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
+        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
 
     const onEditClick = () => {
@@ -203,24 +264,26 @@ const PupilManagement = (props) => {
                                                                 </View>
                                                             </View>
                                                         </View>
-                                                        <View style={PAGESTYLE.pupilTabledata}>
-                                                            <FlatList
-                                                                data={pupilData}
-                                                                renderItem={pupilRender}
-                                                                keyExtractor={(item) => item.id}
-                                                                extraData={selectedId}
-                                                                showsVerticalScrollIndicator={false}
-                                                                nestedScrollEnabled
-                                                                style={{ height: '85%' }}
-                                                            />
-                                                        </View>
-                                                    </>
-                                                    :
-                                                    <View style={PAGESTYLE.mainContainer}>
-                                                        <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
-                                                        <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                                                        <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                                                    </View>
+                                                <View style={PAGESTYLE.pupilTabledata}>
+                                                    <FlatList
+                                                        data={pupilData}
+                                                        renderItem={pupilRender}
+                                                        keyExtractor={(item) => item.id}
+                                                        extraData={selectedId}
+                                                        showsVerticalScrollIndicator={false}
+                                                        nestedScrollEnabled
+                                                        style={{ height: '85%' }}
+                                                        onEndReachedThreshold={0.5}
+                                                        onEndReached={() => addMorePage()}
+                                                    />
+                                                </View>
+                                            </>
+                                            :
+                                            <View style={PAGESTYLE.mainContainer}>
+                                                <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
+                                                <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                                <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                                            </View>
                                         }
                                     </View>
                                     :
