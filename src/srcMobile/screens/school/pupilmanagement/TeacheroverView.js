@@ -20,9 +20,12 @@ import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import NoPupil from '../../../../svg/emptystate/NoPupil';
 import MPopupdataSecondCSVUpload from "../../../component/reusable/popup/MPopupdataSecondCSVUpload";
 import TeacheroverViewHeader from "./TeacheroverViewHeader";
+import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
+import MESSAGE from '../../../../utils/Messages';
 import { useFocusEffect } from "@react-navigation/native";
 
 const { CallModule } = NativeModules;
+var pageNo = 1
 
 const TeacheroverView = (props) => {
     const [isLoading, setLoading] = useState(true);
@@ -30,9 +33,16 @@ const TeacheroverView = (props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isCsvPopup, setCsvPopup] = useState(false)
+    const [limit, setLimit] = useState('25')
+    const [selectedId, setSelectedId] = useState(null);
+    const [pagination, setPaginationData] = useState([])
+    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+
 
     let currentCount = 0
+
     useEffect(() => {
+        pageNo = 1
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
         }
@@ -78,11 +88,39 @@ const TeacheroverView = (props) => {
     const fetchRecord = (search, filter) => {
 
         setLoading(true)
-        let data = { Searchby: search, Filterby: filter, page: "1", limit: "100" }
+        // let data = { Searchby: search, Filterby: filter, page: "1", limit: "100" }
+
+        let data = {
+            Searchby: search,
+            Filterby: filter,
+            page: String(pageNo),
+            limit: limit
+        }
+
+
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
-                setLoading(false)
-                setPupilData(res.data)
+                setPaginationData(res.pagination)
+                if (allNewAndOldData.length > 0) {
+                    if (res.data) {
+                        let newData = []
+                        newData = res.data
+                        let newArray = [...allNewAndOldData, ...newData]
+                        setPupilData(newArray)
+                        setAllNewAndOldData(newArray)
+                        setLoading(false)
+                    }
+                    else {
+                        setPupilData(allNewAndOldData)
+                        setLoading(false)
+                    }
+                }
+                else {
+                    setPupilData(res.data)
+                    setAllNewAndOldData(res.data)
+                    setLoading(false)
+                }
+
             } else {
                 showMessage(res.message)
             }
@@ -91,10 +129,72 @@ const TeacheroverView = (props) => {
         })
     }
 
+    const addMorePage = () => {
+        if (pupilData.length != pagination.TotalCount) {
+            pageNo = pageNo + 1
+            setTimeout(() => {
+                fetchRecord('', 'name')
+            }, 1000)
+        }
+    }
+
     const openNotification = () => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', 'name') })
     }
+
+    const messageRender = ({ item, index }) => {
+        return (
+            <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
+                <View style={[PAGESTYLE.pupilData,]}>
+                    <View style={PAGESTYLE.pupilProfile}>
+                        <View style={PAGESTYLE.rowProfile}>
+                            <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                            <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                        </View>
+                        <View style={PAGESTYLE.groupPupil}>
+                            <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
+                        </View>
+                    </View>
+                    <View style={PAGESTYLE.rewardColumn}>
+                        {item.RewardsList.map((item, index) => {
+                            return (
+                                item._id == '3' ?
+                                    <View style={PAGESTYLE.rewardStar}>
+                                        {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                        <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                    </View>
+                                    :
+                                    item._id == '6' ?
+                                        <View style={PAGESTYLE.rewardStar}>
+                                            {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                            <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                        </View>
+                                        :
+                                        item._id == '9' ?
+                                            <View style={PAGESTYLE.rewardStar}>
+                                                {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                            </View>
+                                            :
+                                            null
+                            )
+                        })}
+                        {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
+                    </View>
+                    <View style={PAGESTYLE.pupilDetailLink}>
+                        {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                        <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
+                    </View>
+                </View>
+            </TouchableOpacity>
+        )
+    };
 
     return (
         <View>
@@ -113,81 +213,113 @@ const TeacheroverView = (props) => {
                     onNotification={() => openNotification()}
                 />
                 {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} 
-                    style={PAGESTYLE.mainPage} 
-                    contentContainerStyle={{ paddingBottom: 10 }} 
-                    >
-                        <View style={PAGESTYLE.mainContainer}>
-                            {
-                                isLoading ?
-                                    <ActivityIndicator
-                                        style={{ margin: 20 }}
-                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                        color={COLORS.yellowDark} />
-                                    :
-                                    pupilData.length > 0 ?
-                                        pupilData.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
-                                                    <View style={[PAGESTYLE.pupilData,]}>
-                                                        <View style={PAGESTYLE.pupilProfile}>
-                                                            <View style={PAGESTYLE.rowProfile}>
-                                                                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
-                                                            </View>
-                                                            <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
-                                                            </View>
-                                                        </View>
-                                                        <View style={PAGESTYLE.rewardColumn}>
-                                                            {item.RewardsList.map((item, index) => {
-                                                                return (
-                                                                    item._id == '3' ?
-                                                                        <View style={PAGESTYLE.rewardStar}>
-                                                                            {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                            <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                                                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                                                        </View>
-                                                                        :
-                                                                        item._id == '6' ?
-                                                                            <View style={PAGESTYLE.rewardStar}>
-                                                                                {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                                <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                                                                <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                                                            </View>
-                                                                            :
-                                                                            item._id == '9' ?
-                                                                                <View style={PAGESTYLE.rewardStar}>
-                                                                                    {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                                    <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                                                                    <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                                                                </View>
-                                                                                :
-                                                                                null
-                                                                )
-                                                            })}
-                                                            {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
-                                                        <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
-                                                        </View>
-                                                        <View style={PAGESTYLE.pupilDetailLink}>
-                                                            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                                                            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
-                                                        </View>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            )
-                                        })
-                                        :
-                                        <View style={PAGESTYLE.mainContainer}>
-                                            <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
-                                            <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                                            <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                                        </View>
+                    // <ScrollView showsVerticalScrollIndicator={false}
+                    //     style={PAGESTYLE.mainPage}
+                    //     contentContainerStyle={{ paddingBottom: 10 }}
+                    //     onScroll={({ nativeEvent }) => {
+                    //         if (isCloseToBottom(nativeEvent)) {
+                    //             isApiCall = true;
+                    //             
+                    //         }
+                    //     }}
+                    //     scrollEventThrottle={400}
+                    // >
+                    //     <View style={PAGESTYLE.mainContainer}>
+                    //         {
+                    //             isLoading ?
+                    //                 <ActivityIndicator
+                    //                     style={{ margin: 20 }}
+                    //                     size={Platform.OS == 'ios' ? 'large' : 'small'}
+                    //                     color={COLORS.yellowDark} />
+                    //                 :
+                    //                 pupilData.length > 0 ?
+                    //                     pupilData.map((item, index) => {
+                    //                         return (
+                    //                             <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
+                    //                                 <View style={[PAGESTYLE.pupilData,]}>
+                    //                                     <View style={PAGESTYLE.pupilProfile}>
+                    //                                         <View style={PAGESTYLE.rowProfile}>
+                    //                                             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                    //                                             <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                    //                                         </View>
+                    //                                         <View style={PAGESTYLE.groupPupil}>
+                    //                                             <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
+                    //                                         </View>
+                    //                                     </View>
+                    //                                     <View style={PAGESTYLE.rewardColumn}>
+                    //                                         {item.RewardsList.map((item, index) => {
+                    //                                             return (
+                    //                                                 item._id == '3' ?
+                    //                                                     <View style={PAGESTYLE.rewardStar}>
+                    //                                                         {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                    //                                                         <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                    //                                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                    //                                                     </View>
+                    //                                                     :
+                    //                                                     item._id == '6' ?
+                    //                                                         <View style={PAGESTYLE.rewardStar}>
+                    //                                                             {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                    //                                                             <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                    //                                                             <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                    //                                                         </View>
+                    //                                                         :
+                    //                                                         item._id == '9' ?
+                    //                                                             <View style={PAGESTYLE.rewardStar}>
+                    //                                                                 {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                    //                                                                 <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                    //                                                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                    //                                                             </View>
+                    //                                                             :
+                    //                                                             null
+                    //                                             )
+                    //                                         })}
+                    //                                         {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                    //                                     <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                    //                                     <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
+                    //                                     </View>
+                    //                                     <View style={PAGESTYLE.pupilDetailLink}>
+                    //                                         {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                    //                                         <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
+                    //                                     </View>
+                    //                                 </View>
+                    //                             </TouchableOpacity>
+                    //                         )
+                    //                     })
+                    //                     :
+                    //                     <View style={PAGESTYLE.mainContainer}>
+                    //                         <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
+                    //                         <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                    //                         <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                    //                     </View>
 
-                            }
-                        </View>
-                    </ScrollView>
+                    //         }
+                    //     </View>
+                    // </ScrollView>
+                    isLoading ?
+                        <ActivityIndicator
+                            style={{ margin: 20 }}
+                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                            color={COLORS.yellowDark} />
+                        :
+                        pupilData.length > 0 ?
+                            <View style={[PAGESTYLE.mainContainer, { height: '76%' }]}>
+                                <FlatList
+                                    // style={[PAGESTYLE.mainContainer]}
+                                    data={pupilData}
+                                    renderItem={messageRender}
+                                    keyExtractor={(item) => item.id}
+                                    extraData={selectedId}
+                                    showsVerticalScrollIndicator={false}
+                                    onEndReachedThreshold={0}
+                                    onEndReached={() => addMorePage()}
+                                />
+                            </View>
+                            :
+                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                            // </View>
+                            <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
+
                     :
                     <GroupSetUp props={props} />
                 }
