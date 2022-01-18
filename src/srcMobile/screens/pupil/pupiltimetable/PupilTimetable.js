@@ -169,11 +169,20 @@ const PupilTimeTable = (props) => {
     const onListAnimations = () => {
 
         setTimeout(() => {
-            {
-                if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current)
+            if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
+                if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
             }
+            else {
+                _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                onNext();
+            }
         }, 1500)
+    }
+    const onNext = () => {
+        setTimeout(() => {
+            _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
+        }, 500)
     }
 
     const refresh = () => {
