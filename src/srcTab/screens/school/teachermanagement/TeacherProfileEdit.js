@@ -17,6 +17,7 @@ import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
+import FONTS from "../../../../utils/Fonts";
 
 const TeacherProfileEdit = (props) => {
     const [isFirstName, setFirstName] = useState('');
@@ -239,12 +240,12 @@ const TeacherProfileEdit = (props) => {
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
 
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14 } }}>
                         <FlatList
                             data={isListOfYear}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
-                            )} style={{ height: 190 }} />
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular,}} value={item} text={item.Title}></MenuOption>
+                            )} style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -260,13 +261,13 @@ const TeacherProfileEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{isTitle}</Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize:14, } }}>
                         <FlatList
                             data={isListOfTitle}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular}} value={item} text={item.Title}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>

@@ -21,6 +21,7 @@ import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
+import BackArrow from "../../../../svg/common/BackArrow";
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -34,6 +35,7 @@ const HeaderPM = (props) => {
     const [keyword, setKeyword] = useState('')
     const [childrenList, setChildrenList] = useState(props.data)
 
+    console.log('6666666666',props);
     useEffect(() => {
         setChildrenList(props.data);
     }, [props.data]);
@@ -50,16 +52,30 @@ const HeaderPM = (props) => {
 
     return (
         <View style={PAGESTYLE.headerBarMainWhite}>
+
             <View style={PAGESTYLE.headerMain}>
-                <Text style={PAGESTYLE.mainTitle}>Parent Zone</Text>
+                <View style={{ right:Platform.OS === 'android' ?  hp(10)  : hp(10)}}>
+                    <TouchableOpacity
+                        onPress={() => props.onReplace()}
+                        style={{ height: 20, width: 40, zIndex: 9, left: 0 }}>
+
+                        <BackArrow height={hp(2.67)} width={hp(2.33)}  />
+
+                    </TouchableOpacity>
+
+
+                </View>
+
+
+                <Text style={[PAGESTYLE.mainTitle, { left: Platform.OS === 'android' ? hp(-58) : hp(-40) }]}>Parent Zone</Text>
 
                 <View style={PAGESTYLE.headerRight}>
 
                     <View style={PAGESTYLE.filterListWrapNew}>
                         <Menu>
                             <MenuTrigger style={PAGESTYLE.filterGroup}>
-                            {/* childrenList.length == 0 ? Images.userparent :  */}
-                                <Image source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ backgroundColor : COLORS.borderGrp,width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
+                                {/* childrenList.length == 0 ? Images.userparent :  */}
+                                <Image source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} style={{ backgroundColor: COLORS.borderGrp, width: hp(3.5), height: hp(3.5), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), }} />
                                 <Text style={PAGESTYLE.selectDropList} numberOfLines={1} ellipsizeMode='tail'>{childrenList.length == 0 ? '' : childrenList[selectedPupilIndex].FirstName + ' ' + childrenList[selectedPupilIndex].LastName}</Text>
                                 {/* <Image style={PAGESTYLE.dropArrow} source={Images.DropArrow} /> */}
                                 <ArrowDown style={PAGESTYLE.dropArrow} height={hp(0.95)} width={hp(1.51)} />
@@ -71,7 +87,7 @@ const HeaderPM = (props) => {
                                             activeOpacity={opacity}
                                             onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                             <View style={PAGESTYLE.filterList}>
-                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), backgroundColor : COLORS.borderGrp,}} />
+                                                <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), backgroundColor: COLORS.borderGrp, }} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                         </TouchableOpacity>
@@ -98,9 +114,9 @@ const HeaderPM = (props) => {
                         {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={PAGESTYLE.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
 
                 </View>
@@ -155,13 +171,15 @@ const HeaderPM = (props) => {
                                 }}>
                                 {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                                     source={Images.SearchIcon} /> */}
-                                    <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                                <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
                             </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
-                                style={{ flex: 1, height: '100%',
-                                paddingVertical : Platform.OS === 'android' ? 2 : 0,
-                                paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{
+                                    flex: 1, height: '100%',
+                                    paddingVertical: Platform.OS === 'android' ? 2 : 0,
+                                    paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,
+                                }}
                                 placeholder="Search message"
                                 maxLength={50}
                                 placeholderTextColor={COLORS.menuLightFonts}
