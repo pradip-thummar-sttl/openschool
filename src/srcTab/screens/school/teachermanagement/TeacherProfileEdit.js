@@ -348,7 +348,7 @@ const TeacherProfileEdit = (props) => {
 
                                 <View>
                                     <View style={{ marginTop: hp(2) }}>
-                                        <Text style={PAGESTYLE.fieldInputLabel}>Uniquw I.D (Auto-generated)</Text>
+                                        <Text style={PAGESTYLE.fieldInputLabel}>Unique I.D (Auto-generated)</Text>
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                             <TextInput
                                                 ref={t1}

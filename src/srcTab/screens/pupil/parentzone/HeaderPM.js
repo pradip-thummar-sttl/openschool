@@ -54,7 +54,7 @@ const HeaderPM = (props) => {
         <View style={PAGESTYLE.headerBarMainWhite}>
 
             <View style={PAGESTYLE.headerMain}>
-                <View style={{ right:Platform.OS === 'android' ?  hp(10)  : hp(10)}}>
+                <View style={{ right:Platform.OS === 'android' ?  hp(8)  : hp(10)}}>
                     <TouchableOpacity
                         onPress={() => props.onReplace()}
                         style={{ height: 20, width: 40, zIndex: 9, left: 0 }}>

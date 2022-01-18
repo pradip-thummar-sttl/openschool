@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 // import { Alert, Image, Text, View } from "react-native";
 // import { FlatList, ScrollView, TextInput, TouchableOpacity } from "react-native-gesture-handler";
 // import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import FONTS from "../../../../utils/Fonts";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
@@ -256,13 +256,13 @@ const AddNewTeacher = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
                         <FlatList
                             data={teachingYear}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.Title}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -279,13 +279,13 @@ const AddNewTeacher = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
                         <FlatList
                             data={titles}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular,}} value={item} text={item.Title}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>
