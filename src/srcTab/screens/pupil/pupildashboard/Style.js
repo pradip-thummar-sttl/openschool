@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
@@ -541,6 +541,7 @@ export default StyleSheet.create({
         elevation: 1,
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
+        paddingTop : hp(3.8)
     },
     starCovertPoints:{
         fontSize: hp(3.125),
@@ -610,7 +611,7 @@ export default StyleSheet.create({
     // new update
     buttonView: {
         width:wp(12),
-        height:hp(5),
+        height:Platform.OS === 'android' ? hp(5.5) : hp(5),
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),

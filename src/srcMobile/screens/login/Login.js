@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, TouchableOpacity,Platform } from 'react-native';
 // import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -15,7 +15,7 @@ import { EndPoints } from '../../../service/EndPoints';
 import { connect } from 'react-redux';
 import { setUserAuthData } from '../../../actions/action';
 import MESSAGE from '../../../utils/Messages';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NotificationToken, User } from '../../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getModel, getSystemVersion, getBrand } from 'react-native-device-info';
@@ -24,6 +24,7 @@ import PupilMobileLoginSideimg from '../../../svg/teacher/login/PupilMobileLogin
 import TeacherMobileLoginSideimg from '../../../svg/teacher/login/TeacherMobileLoginSideimg';
 import ShowPassword from '../../../svg/teacher/login/ShowPassword';
 import HidePassword from '../../../svg/teacher/login/HidePassword';
+import BackArrow from '../../../svg/common/BackArrow';
 
 const { LoginModuleIos, LoginModule } = NativeModules;
 
@@ -304,11 +305,33 @@ class Login extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={[styles.lefImage, {backgroundColor: this.props.route.params.userType == 'Pupil' ? COLORS.lightBlueLogin: COLORS.lightOrangeLogin}]}>
+                <View style={[styles.lefImage, { backgroundColor: this.props.route.params.userType == 'Pupil' ? COLORS.lightBlueLogin : COLORS.lightOrangeLogin }]}>
                     {this.props.route.params.userType == 'Pupil' ?
-                        <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
+                        // <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
+                        <View >
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('Users')}
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 10 }}>
+                                {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Users')}> */}
+                                <BackArrow height={hp(2.34)} width={hp(2.34)} />
+                                {/* </TouchableOpacity> */}
+                            </TouchableOpacity>
+                            {/* <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} /> */}
+                            <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
+                        </View>
                         :
+                        <View >
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('Users')}
+                            style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 10 }}>
+                            {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Users')}> */}
+                            <BackArrow height={hp(2.34)} width={hp(2.34)} />
+                            {/* </TouchableOpacity> */}
+                        </TouchableOpacity>
+                        {/* <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} /> */}
                         <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
+                    </View>
+                        
                     }
                 </View>
                 <View style={styles.rightContent}>
@@ -382,9 +405,9 @@ class Login extends Component {
                             </View>
 
                             <View style={styles.loginButtonView}>
-                                
-                                <TouchableOpacity activeOpacity={opacity} style={STYLE.loginButtonView} 
-                                    onPress={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated()}}>
+
+                                <TouchableOpacity activeOpacity={opacity} style={STYLE.loginButtonView}
+                                    onPress={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated() }}>
                                     {
                                         this.state.isLoading ?
                                             <ActivityIndicator style={STYLE.loginButtonLoader} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />

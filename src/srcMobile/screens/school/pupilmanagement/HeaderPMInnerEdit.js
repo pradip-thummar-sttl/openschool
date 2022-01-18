@@ -47,7 +47,7 @@ const HeaderPMInner = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>
                     <View>
-                        <Text style={styles.mainTitle}>Editing Profile</Text>
+                        <Text style={styles.mainTitle}>Edit Pupil</Text>
                     </View>
                 </View>
 

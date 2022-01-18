@@ -46,6 +46,7 @@ import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import Modal from 'react-native-modal';
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+// import FONTS from "../../../../../utils/Fonts";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -447,7 +448,7 @@ const TLDetailEdit = (props) => {
                         <View style={{ margin: hp(1),justifyContent : 'center' }}>
                             {/* <Text style={{ fontSize: hp(2), paddingRight: hp(6.5) }}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={{ width: '90%', height: 41, fontSize: hp(1.70), }}
+                                style={{ width: '90%', height: 41, fontSize: hp(1.70), fontFamily : FONTS.fontRegular}}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
@@ -558,13 +559,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) , fontFamily: FONTS.fontRegular,}} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: hp(26) }} />
+                            style={{ height: hp(22) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -583,13 +584,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95),fontFamily: FONTS.fontRegular }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: hp(26) }} />
+                            style={{ height: hp(22) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -608,13 +609,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95),fontFamily: FONTS.fontRegular }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: hp(26) }} />
+                            style={{ height: hp(22) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -633,13 +634,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.60), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95) ,fontFamily: FONTS.fontRegular}} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: hp(26) }} />
+                            style={{ height: hp(22) }} />
                     </MenuOptions>
                 </Menu>
             </View>

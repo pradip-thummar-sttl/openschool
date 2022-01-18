@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
-        paddingVertical: 15,
+        paddingVertical:  Platform.OS == 'android' ? 10 : 15,
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,

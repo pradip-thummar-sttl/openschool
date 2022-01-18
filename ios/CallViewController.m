@@ -233,6 +233,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   self.endCallButton.layer.cornerRadius = 10;
     // creating session
     self.session = [[QBRTCConferenceClient instance] createSessionWithChatDialogID:_dialogID conferenceType:_conferenceType > 0 ? _conferenceType : QBRTCConferenceTypeVideo];
+  self.users = [[NSMutableArray alloc]init];
   self.userEmojiArr=[[NSMutableArray alloc]init];
     if (_conferenceType > 0) {
       if (_isTeacher) {
@@ -247,7 +248,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           if (user.ID == [_currentUserID integerValue]) {
             [self.users addObject:user];
             [self.userEmojiArr addObject:@""];
-//            return;
+////            return;
           }
         }
       }
@@ -1546,11 +1547,26 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 - (QBUUser *)userWithID:(NSNumber *)userID {
   
   QBUUser *user = [self.usersDataSource userWithID:userID.unsignedIntegerValue];
-  
-  if (!user) {
+  if (_isTeacher) {
+    for (int i=0; i<_selectedUsers.count; i++) {
+      QBUUser *usr = _selectedUsers[i];
+      if (usr.ID == userID.unsignedIntegerValue) {
+        user = [QBUUser user];
+        user.ID = userID.unsignedIntegerValue;
+        user.fullName = usr.fullName;
+      }
+    }
+  }
+  else
+  {
     user = [QBUUser user];
     user.ID = userID.unsignedIntegerValue;
   }
+  
+//  if (!user) {
+//    user = [QBUUser user];
+//    user.ID = userID.unsignedIntegerValue;
+//  }
   
   return user;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -532,7 +532,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', paddingHorizontal: hp(1.84), alignItems: 'center', paddingBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
+        flexDirection: 'row', paddingHorizontal: hp(1.84), alignItems: 'center',paddingTop : Platform.OS === 'android' ? 0 : hp(1.23), paddingBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

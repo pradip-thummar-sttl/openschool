@@ -43,6 +43,7 @@ const ParentZonemain = (props) => {
     const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
+    console.log('0000000',props);
 
     const messageRender = ({ item, index }) => {
         return (
@@ -93,7 +94,10 @@ const ParentZonemain = (props) => {
                     onSearchKeyword={(keyword) => setKeyword(keyword)}
                     onSearch={() => fetchRecord(keyword, '')}
                     onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', '')} />
+                    onFilter={(filterBy) => fetchRecord('', '')} 
+                    onReplace={() => props.navigation.replace('ParentZoneSwitch')}
+                    />
+                 
 
                 {isProfileEdit ?
                     <ParentZoneProfileEdit
