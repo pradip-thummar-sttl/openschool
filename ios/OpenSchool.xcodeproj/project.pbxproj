@@ -20,6 +20,7 @@
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		8813C39B27032E8100FD9E31 /* ScreenRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */; };
+		881D592B27957C9B0023FCB0 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */; };
 		8824A6BD2768ACE200C6E695 /* PollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 8824A6BC2768ACE200C6E695 /* PollVC.m */; };
 		882EA01C266A1DB3000B9813 /* CallPermissions.m in Sources */ = {isa = PBXBuildFile; fileRef = 882EA01B266A1DB3000B9813 /* CallPermissions.m */; };
 		882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 882EA01E266A1DD7000B9813 /* Call.storyboard */; };
@@ -218,6 +219,8 @@
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		881D592927957C9B0023FCB0 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
+		881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		8824A6BB2768ACE200C6E695 /* PollVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollVC.h; sourceTree = "<group>"; };
 		8824A6BC2768ACE200C6E695 /* PollVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollVC.m; sourceTree = "<group>"; };
 		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -2010,6 +2013,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
+				881D592B27957C9B0023FCB0 /* DialogTableViewCell.m in Sources */,
 				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
 				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
 				884068312775A24C0053E668 /* MenuAction.m in Sources */,
