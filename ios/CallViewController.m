@@ -246,6 +246,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           QBUUser *user = _selectedUsers[i];
           if (user.ID == [_currentUserID integerValue]) {
             [self.users addObject:user];
+            [self.userEmojiArr addObject:@""];
 //            return;
           }
         }
@@ -397,23 +398,37 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
 //    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
+        NSArray *items = [message componentsSeparatedByString:@"#@#"];
+        
         if (_isTeacher) {
           if (!_isTeacherReload) {
-            self.messages = message;
+            for (int i=0; i<self.users.count; i++) {
+              QBUUser *user = self.users[i];
+              if (user.ID == [items[1] integerValue]) {
+                self.userEmojiArr[i] = message;
+              }
+            }
+//            self.messages = message;
             [self.opponentsCollectionView reloadData];
             _isTeacherReload=false;
           }else {
-            self.messages = @"";
+//            self.messages = @"";
             [self.opponentsCollectionView reloadData];
             _isTeacherReload=false;
           }
         }else{
           if (!_isPupilReload) {
-            self.messages = message;
+//            for (int i=0; i<self.users.count; i++) {
+//              QBUUser *user = self.users[i];
+              if (_currentUserID == items[1] ) {
+                self.userEmojiArr[0] = message;
+              }
+//            }
+//            self.messages = message;
             [self.opponentsCollectionView reloadData];
             _isPupilReload=false;
           }else {
-            self.messages = @"";
+//            self.messages = @"";
             [self.opponentsCollectionView reloadData];
             _isPupilReload=false;
           }
@@ -942,22 +957,24 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 
   if(_isReaction){
-  if (![_messages isEqualToString:@""]) {
-    NSArray *items = [_messages componentsSeparatedByString:@"#@#"];
+  if (![self.userEmojiArr[indexPath.row] isEqualToString:@""]) {
+    NSArray *items = [self.userEmojiArr[indexPath.row] componentsSeparatedByString:@"#@#"];
     if (_isTeacher) {
-      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
-        reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]] ;
-      }else
-      {
-        reusableCell.emojiLbl.text=@"";
-      }
+      reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
+//      if (user.ID == [[items objectAtIndex:1] integerValue] ) {
+//        reusableCell.emojiLbl.text = [_pupilreactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]] ;
+//      }else
+//      {
+//        reusableCell.emojiLbl.text=@"";
+//      }
     }else{
+      reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
 //      if (_teacherQBUserID == [items objectAtIndex:1] ) {
-      if (!_isTeacher) {
-        reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
-      }else{
-        reusableCell.emojiLbl.text=@"";
-      }
+//      if (!_isTeacher) {
+//        reusableCell.emojiLbl.text = [_reactionUnicodeArr objectAtIndex:[[items objectAtIndex:0] integerValue]];
+//      }else{
+//        reusableCell.emojiLbl.text=@"";
+//      }
       
 //      }
 
