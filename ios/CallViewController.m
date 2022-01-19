@@ -403,18 +403,32 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
         
         if (_isTeacher) {
           if (!_isTeacherReload) {
+            int index = 0;
             for (int i=0; i<self.users.count; i++) {
               QBUUser *user = self.users[i];
               if (user.ID == [items[1] integerValue]) {
                 self.userEmojiArr[i] = message;
+                index=i;
               }
             }
 //            self.messages = message;
             [self.opponentsCollectionView reloadData];
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
+//            [self.opponentsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//            __weak __typeof(self)weakSelf = self;
+//
+//            [self.opponentsCollectionView performBatchUpdates:^{
+//
+//              [weakSelf.opponentsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//
+//            } completion:^(BOOL finished) {
+//
+////              [weakSelf refreshVideoViews];
+//            }];
             _isTeacherReload=false;
           }else {
 //            self.messages = @"";
-            [self.opponentsCollectionView reloadData];
+//            [self.opponentsCollectionView reloadData];
             _isTeacherReload=false;
           }
         }else{
@@ -426,11 +440,26 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
               }
 //            }
 //            self.messages = message;
+            
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
+//            [self.opponentsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//            __weak __typeof(self)weakSelf = self;
+//
+//            [self.opponentsCollectionView performBatchUpdates:^{
+//
+//              [weakSelf.opponentsCollectionView reloadItemsAtIndexPaths:@[indexPath]];
+//
+//            } completion:^(BOOL finished) {
+//
+////              [weakSelf refreshVideoViews];
+//            }];
+           
             [self.opponentsCollectionView reloadData];
+//            [self refreshVideoViews];
             _isPupilReload=false;
           }else {
 //            self.messages = @"";
-            [self.opponentsCollectionView reloadData];
+//            [self.opponentsCollectionView reloadData];
             _isPupilReload=false;
           }
         
@@ -1378,14 +1407,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     if ([self.users indexOfObject:user] != NSNotFound) {
       return;
     }
-    [self.users insertObject:user atIndex:0];
-    [self.userEmojiArr insertObject:@"" atIndex:0];
+//    [self.users insertObject:user atIndex:0];
+//    [self.userEmojiArr insertObject:@"" atIndex:0];
     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:0];
     
     __weak __typeof(self)weakSelf = self;
     [self.opponentsCollectionView performBatchUpdates:^{
       
-      [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
+//      [weakSelf.opponentsCollectionView insertItemsAtIndexPaths:@[indexPath]];
       
     } completion:^(BOOL finished) {
       
@@ -1418,13 +1447,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
     return;
   }
   NSIndexPath *indexPath = [NSIndexPath indexPathForItem:index inSection:0];
-  [self.users removeObject:user];
+//  [self.users removeObject:user];
   [self.videoViews removeObjectForKey:userID];
   
   __weak __typeof(self)weakSelf = self;
   [self.opponentsCollectionView performBatchUpdates:^{
     
     [weakSelf.opponentsCollectionView deleteItemsAtIndexPaths:@[indexPath]];
+//    [weakSelf.opponentsCollectionView reloadData];
     
   } completion:^(BOOL finished) {
     
