@@ -108,9 +108,18 @@ const Calendars = (props) => {
             </View>
             {isLoading == false ?
                 <Calendar
+                    theme={{
+                        arrowColor: 'grey',
+                        textDayFontFamily: FONTS.fontRegular,
+                        textMonthFontFamily: FONTS.fontRegular,
+                        textDayHeaderFontFamily: FONTS.fontRegular,
+                        textMonthFontWeight: '600',
+                        textMonthFontSize: 16,
+                        }}
                     style={styles.datepickerDrwaer}
                     minDate={new Date()}
                     firstDay={1}
+
                     dayComponent={({ date, state, marking }) => {
                         return (
                             // <View>
@@ -120,7 +129,7 @@ const Calendars = (props) => {
                                         date.dateString == moment(startDate).format('YYYY-MM-DD') || date.dateString == moment(endDate).format('YYYY-MM-DD') ?
                                             date.dateString == moment(startDate).format('YYYY-MM-DD') ?
                                                 <View style={styles.datemainView1}>
-                                                    < View style={styles.dateSubVIew1}>
+                                                    <View style={styles.dateSubVIew1}>
                                                         <Text style={{ fontSize: hp(1.82), textAlign: 'center', color: state === 'disabled' ? 'gray' : 'white' }}>{date.day}</Text>
                                                     </View>
                                                 </View>

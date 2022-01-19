@@ -92,7 +92,7 @@ const PupilProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }
-
+  
     return (
         <View style={PAGESTYLE.mainPage1}>
             {!isLessonDetail &&
