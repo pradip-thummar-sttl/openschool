@@ -631,7 +631,7 @@ understand</string>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Question" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BQ8-LM-joD">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write question here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="BQ8-LM-joD">
                                         <rect key="frame" x="26" y="26" width="334" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="334" id="UnS-bf-NoH"/>
@@ -646,7 +646,7 @@ understand</string>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Option" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wCD-5d-2wd">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wCD-5d-2wd">
                                         <rect key="frame" x="26" y="96" width="334" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="334" id="THP-Wz-i8y"/>
@@ -655,7 +655,7 @@ understand</string>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Option" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eOQ-qX-HTu">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your option" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eOQ-qX-HTu">
                                         <rect key="frame" x="26" y="134" width="334" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="334" id="NAP-DW-rsW"/>
