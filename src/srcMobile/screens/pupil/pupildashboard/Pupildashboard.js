@@ -574,16 +574,18 @@ const PupuilDashboard = (props) => {
 
                                                                             <View style={PAGESTYLE.lessonstartButton}>
                                                                                 <View style={{ width: '48%', }}>
-                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} style={{ ...STYLE.commonButtonBordered, width: '100%' }}>
+                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} 
+                                                                                    style={{ ...STYLE.commonButtonBordered, width: '100%',height:hp(6), justifyContent:'center', alignItems:'center' }}>
                                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
 
-                                                                                <View style={{ width: '48%', }}>
-                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, backgroundColor: COLORS.dashboardGreenButton, width: '100%', height:Platform.OS === 'android' ? hp(6) : hp(5) }} onPress={() => { launchLiveClass() }}>
+                                                                                <View style={{ width: '48%' }}>
+                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, 
+                                                                                    backgroundColor: COLORS.dashboardGreenButton, height:hp(6), justifyContent:'center', alignItems:'center',width: '100%'}} onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
-                                                                                                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} /> :
+                                                                                                <ActivityIndicator size={'small'} color={COLORS.white} /> :
                                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, }}>Join Class</Text>
                                                                                         }
 

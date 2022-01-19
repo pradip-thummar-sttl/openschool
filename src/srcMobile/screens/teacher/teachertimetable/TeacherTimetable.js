@@ -105,7 +105,7 @@ const TeacherTimeTable = (props) => {
             index = (h - 6) * 2
         }
 
-        setScrollIndex(index)
+        setScrollIndex(index);
         fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }, [])
 
@@ -146,15 +146,23 @@ const TeacherTimeTable = (props) => {
     const onListAnimations = () => {
 
         setTimeout(() => {
-            {
-                if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current)
+            if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
+                if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
+            }
+            else {
+                _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                onNext();
             }
         }, 1500)
     }
+    const onNext = () => {
+        setTimeout(() => {
+            _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
+        }, 500)
+    }
 
     const refresh = () => {
-        console.log('Refreshed');
         fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
     let currentCount = 0
