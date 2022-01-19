@@ -149,10 +149,10 @@ const TeacherTimeTable = (props) => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
                 if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
-            }
-            else {
-                _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
-                onNext();
+                else {
+                    _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                    onNext();
+                }
             }
         }, 1500)
     }
