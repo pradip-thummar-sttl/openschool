@@ -152,6 +152,8 @@ const PupilTimeTable = (props) => {
 
         Service.post(data, `${EndPoints.GetTimeTablePupil}/${User.user.UserDetialId}`, (res) => {
             setTimeTableLoading(false)
+
+            console.log("---------------> time table data -------->", res);
             if (res.code == 200) {
                 setTimeTableData(res.data)
             } else {
@@ -172,10 +174,10 @@ const PupilTimeTable = (props) => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
                 if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
-            }
-            else {
-                _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
-                onNext();
+                else {
+                    _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                    onNext();
+                }
             }
         }, 1500)
     }
