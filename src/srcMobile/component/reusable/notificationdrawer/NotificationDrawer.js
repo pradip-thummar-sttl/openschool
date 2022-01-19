@@ -85,8 +85,8 @@ const NotificationDrawer = (props) => {
     }
 
     const goBackPress = () => {
-        if(props && props.route &&props.route.params)
-             props.route.params.onGoBack()
+        if (props && props.route && props.route.params)
+            props.route.params.onGoBack()
 
         props.navigation.goBack()
     }
@@ -121,9 +121,18 @@ const NotificationDrawer = (props) => {
                         </TouchableOpacity>
                     </View>
                     <Calendar
+                        theme={{
+                            arrowColor: 'grey',
+                            textDayFontFamily: FONTS.fontRegular,
+                            textMonthFontFamily: FONTS.fontRegular,
+                            textDayHeaderFontFamily: FONTS.fontRegular,
+                            textMonthFontWeight: '600',
+                            textMonthFontSize: 16,
+                        }}
                         style={styles.datepickerDrwaer}
                         minDate={new Date()}
                         firstDay={1}
+
                         dayComponent={({ date, state, marking }) => {
                             return (
                                 <View>
