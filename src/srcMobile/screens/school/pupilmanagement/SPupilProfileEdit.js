@@ -349,7 +349,7 @@ const SPupilProfileEdit = (props) => {
                             />
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
-                            <Text LABLE style={PAGESTYLE.labelForm}>MobileNumber</Text>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Mobile Number</Text>
                             <TextInput
                                 // returnKeyType={"next"}
                                 style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}

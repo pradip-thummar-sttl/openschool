@@ -577,13 +577,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.6), } }}>
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.5) }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5),fontFamily: FONTS.fontRegular, }} value={item} text={item.SubjectName}></MenuOption>
                             )}
-                            style={{ height: hp(20) }} />
+                            style={{ height: hp(18) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -602,13 +602,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.5), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.5) }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5) ,fontFamily: FONTS.fontRegular, }} value={item} text={item.GroupName}></MenuOption>
                             )}
-                            style={{ height: hp(20) }} />
+                            style={{ height: hp(18) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -627,13 +627,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.5), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular,}} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: hp(20) }} />
+                            style={{ height: hp(18) }} />
                     </MenuOptions>
                 </Menu>
             </View>
@@ -652,13 +652,13 @@ const TLDetailEdit = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: hp(2.0), } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: hp(1.5), } }}>
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: 10,fontFamily: FONTS.fontRegular, }} value={item} text={item}></MenuOption>
                             )}
-                            style={{ height: hp(20) }} />
+                            style={{ height: hp(18) }} />
                     </MenuOptions>
                 </Menu>
             </View>

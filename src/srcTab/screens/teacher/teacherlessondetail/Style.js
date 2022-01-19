@@ -33,7 +33,7 @@ export default StyleSheet.create({
     },
     commonWidthSmall: {
         alignSelf: 'flex-end',
-        width: '60%'
+        width: Platform.OS === 'android' ? '70%' : '60%'
     },
     commonWidthlarge: {
         alignSelf: 'flex-end',

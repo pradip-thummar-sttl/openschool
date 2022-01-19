@@ -717,10 +717,10 @@ const PupuilDashboard = (props) => {
                                                     {pupilAvatarList.length ?
                                                         <View style={PAGESTYLE.achivementRobot}>
                                                             {avatarListIndex == 0 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10, alignSelf: 'center', left: wp(21) }} ></Image>
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ?  hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top:Platform.OS === 'android' ?  hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? wp(22.3) :  wp(19.7)}} ></Image>
                                                                 : null}
                                                             {avatarListIndex == 1 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10 }} ></Image>
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10 }} ></Image> 
                                                                 : null}
                                                             {avatarListIndex == 2 ?
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10, right: wp(21) }} ></Image>

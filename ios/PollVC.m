@@ -272,7 +272,7 @@ static NSString * const kChannelGuide = @"the_guide";
   [button addTarget:self
              action:@selector(deleteButtonClicked:)
    forControlEvents:UIControlEventTouchUpInside];
-  [button setImage:[UIImage imageNamed:@"record_off"] forState:UIControlStateNormal];
+  [button setImage:[UIImage imageNamed:@"cancel_ic"] forState:UIControlStateNormal];
   
   [self.addTextFieldView addSubview:button];
   

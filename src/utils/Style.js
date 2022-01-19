@@ -245,7 +245,7 @@ export default StyleSheet.create({
     hrCommon: {
         borderBottomWidth: 1,
         borderColor: COLORS.commonBorderColor,
-        width: '100%',
+        // width: '100%',
         marginVertical: 8 //marginTop : 10
     },
     centerText: {

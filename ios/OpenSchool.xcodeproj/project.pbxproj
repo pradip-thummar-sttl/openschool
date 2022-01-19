@@ -16,7 +16,6 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* OpenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OpenSchoolTests.m */; };
-		3273E59A278EABB500986019 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3273E599278EABB500986019 /* DialogTableViewCell.m */; };
 		540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C803CDC5ED40679094DFEC /* Poppins-Italic.ttf */; };
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -177,6 +176,7 @@
 		88BE3A70272FE11400A1693B /* PollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BE3A6F272FE11400A1693B /* PollViewController.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
 		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
+		8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8773182796EA4C00B07098 /* DialogTableViewCell.m */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
 		DB01CB6E85DE81B7E47A0B5F /* libPods-OpenSchool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */; };
@@ -214,12 +214,11 @@
 		238E08FDBAEC4DCB9F7938CE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* OpenSchool-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenSchool-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* OpenSchool-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenSchool-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3273E598278EABB500986019 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DialogTableViewCell.h; path = "../../../Downloads/quickblox-ios-sdk-master/sample-conference-videochat/sample-conference-videochat/Components/DialogsScreen/Views/DialogTableViewCell.h"; sourceTree = "<group>"; };
-		3273E599278EABB500986019 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-master/sample-conference-videochat/sample-conference-videochat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8813C39A27032E8100FD9E31 /* ScreenRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScreenRecorder.swift; sourceTree = "<group>"; };
+		881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = "../../../Downloads/quickblox-ios-sdk-2.17.10/sample-chat-obj-c/sample-chat/Components/DialogsScreen/Views/DialogTableViewCell.m"; sourceTree = "<group>"; };
 		8824A6BB2768ACE200C6E695 /* PollVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PollVC.h; sourceTree = "<group>"; };
 		8824A6BC2768ACE200C6E695 /* PollVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PollVC.m; sourceTree = "<group>"; };
 		882BE52026E8B1000080CF69 /* OpenSchool-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OpenSchool-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -511,6 +510,9 @@
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardVC.h; sourceTree = "<group>"; };
 		88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardVC.m; sourceTree = "<group>"; };
+		8B09862127952FF400E5FAFF /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = files/DialogTableViewCell.m; sourceTree = "<group>"; };
+		8B8773172796EA4C00B07098 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTableViewCell.h; sourceTree = "<group>"; };
+		8B8773182796EA4C00B07098 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTableViewCell.m; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
 		E74D156527158F4A000F6E89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				6A136D5C839E818A454BA226 /* Pods */,
 				02D630A5FFB54D2D913B18A9 /* Resources */,
+				8866A6ED2796D2D8001CBD4F /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1583,9 +1586,9 @@
 			isa = PBXGroup;
 			children = (
 				8840693E2775AE090053E668 /* DialogCell.h */,
+				8B8773172796EA4C00B07098 /* DialogTableViewCell.h */,
+				8B8773182796EA4C00B07098 /* DialogTableViewCell.m */,
 				8840693C2775AE090053E668 /* DialogCell.m */,
-				3273E598278EABB500986019 /* DialogTableViewCell.h */,
-				3273E599278EABB500986019 /* DialogTableViewCell.m */,
 				8840693F2775AE090053E668 /* TitleView.h */,
 				884069412775AE090053E668 /* TitleView.m */,
 			);
@@ -1599,6 +1602,15 @@
 				884069472775AE6D0053E668 /* RootParentVC.m */,
 			);
 			name = Auth;
+			sourceTree = "<group>";
+		};
+		8866A6ED2796D2D8001CBD4F /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				881D592A27957C9B0023FCB0 /* DialogTableViewCell.m */,
+				8B09862127952FF400E5FAFF /* DialogTableViewCell.m */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		888E884E26E7638600148085 /* ScreenRecorder */ = {
@@ -2010,7 +2022,6 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
-				3273E59A278EABB500986019 /* DialogTableViewCell.m in Sources */,
 				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
 				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
 				884068312775A24C0053E668 /* MenuAction.m in Sources */,
@@ -2102,6 +2113,7 @@
 				883F562A276C5029009CD7A9 /* VideoFormat.m in Sources */,
 				8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */,
 				884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */,
+				8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */,
 				8840691D2775AAD00053E668 /* AttachmentDownloadManager.m in Sources */,
 				882EA0CE266A229A000B9813 /* CheckView.m in Sources */,
 			);

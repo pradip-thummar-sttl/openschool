@@ -289,13 +289,13 @@ const SAddNewTeacher = (props) => {
                         {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
                         <FlatList
                             data={teachers}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>

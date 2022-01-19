@@ -1197,7 +1197,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         String message = getIOSEmojiMsg(msg);
         String tempIndex = message.replace("\"", "");
 
-        if (!isTeacher) {
+        if (!isTeacher && !msg.contains(currentUserID)) {
             int[] teacherEmojis = {0x1F44A, 0x1F44F, 0x263A, 0x1F496, 0x1F44B, 0x1F44D};
             tvTeacherEmoji.setText(getEmoticon(teacherEmojis[Integer.parseInt(tempIndex)]));
 

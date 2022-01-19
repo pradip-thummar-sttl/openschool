@@ -21,6 +21,7 @@ import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
 import { showMessageWithCallBack } from "../../../../utils/Constant";
+import FONTS from "../../../../utils/Fonts";
 
 const PupilProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -83,9 +84,9 @@ const PupilProfileAdd = (props) => {
                         <FlatList
                             data={teachers}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
                             )}
-                            style={{ height: 190 }} />
+                            style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
             </View>

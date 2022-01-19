@@ -547,19 +547,21 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                             </ScrollView>
                                                             <View style={PAGESTYLE.lessonstartButton}>
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginRight: 0 }}>
-                                                                    <TouchableOpacity
+                                                                    <TouchableOpacity style={{height:hp(3), justifyContent:'center', alignItems:'center',width: '100%'}}
                                                                         onPress={() => { refRBSheet.current.close(); props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': dataOfSubView }) }}>
-                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 2 }}>Edit Class</Text></TouchableOpacity>
+                                                                        <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, paddingVertical: 2 }}>Edit Class</Text>
+                                                                        </TouchableOpacity>
                                                                 </View>
+
                                                                 <View style={{ ...STYLE.commonButtonBordered, marginLeft: 10, backgroundColor: COLORS.dashboardGreenButton, }}>
-                                                                    <TouchableOpacity
+                                                                    <TouchableOpacity style={{height:hp(3), justifyContent:'center', alignItems:'center',width: '100%'}}
                                                                         onPress={() => { launchLiveClass() }}>
 
                                                                         {
                                                                             isLoading ?
                                                                                 <ActivityIndicator
-                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: Platform.OS == 'ios' ? 13 : 5 }}
-                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                    style={{ ...PAGESTYLE.buttonGrp, paddingVertical: 13 }}
+                                                                                    size={'small'}
                                                                                     color={COLORS.white} />
                                                                                 :
                                                                                 <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.white, paddingVertical: 2, }}>Start Class</Text>

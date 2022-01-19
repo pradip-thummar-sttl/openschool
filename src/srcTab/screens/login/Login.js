@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native';
+import { NativeModules, TouchableOpacity, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, Platform, KeyboardAvoidingView } from 'react-native';
 // import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -15,7 +15,7 @@ import { EndPoints } from '../../../service/EndPoints';
 import { connect } from 'react-redux';
 import { setUserAuthData } from '../../../actions/action';
 import MESSAGE from '../../../utils/Messages';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NotificationToken, User } from '../../../utils/Model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Base64 } from 'js-base64';
@@ -24,6 +24,7 @@ import TabletLoginSideimg from '../../../svg/teacher/login/TabletLoginSideimg';
 import TabletPupilLoginSideimg from '../../../svg/teacher/login/TabletPupilLoginSideimg';
 import ShowPassword from '../../../svg/teacher/login/ShowPassword';
 import HidePassword from '../../../svg/teacher/login/HidePassword';
+import BackArrow from '../../../svg/common/BackArrow';
 
 const { LoginModuleIos, LoginModule } = NativeModules;
 
@@ -403,25 +404,47 @@ class Login extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
+
                     {this.props.route.params.userType == 'Pupil' ?
-                        <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
+                        <View>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('Users')}
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: Platform.OS === 'android' ? 10 : 15 }}>
+
+                                <BackArrow height={hp(2.67)} width={hp(2.33)} />
+
+                            </TouchableOpacity>
+                            <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
+                        </View>
+
+
                         :
-                        <TabletLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
+                        <View>
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('Users')}
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: Platform.OS === 'android' ? 10 : 15 }}>
+
+                                <BackArrow height={hp(2.67)} width={hp(2.33)} />
+
+                            </TouchableOpacity>
+                            <TabletLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)}
+                            />
+                        </View>
                     }
                 </View>
                 <View style={styles.rightContent}>
                     {
                         Platform.OS == "ios" ?
                             <KeyboardAwareScrollView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
-                            {this.onChild()}
+                                {this.onChild()}
                             </KeyboardAwareScrollView>
                             :
                             <KeyboardAvoidingView contentContainerStyle={{ flex: 1, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
-                            {this.onChild()}
+                                {this.onChild()}
                             </KeyboardAvoidingView>
                     }
 
-            </View>
+                </View>
             </View >
         );
     }

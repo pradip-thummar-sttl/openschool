@@ -807,7 +807,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingTop: hp(1.95),
+        paddingTop: Platform.OS === 'android' ? hp(1.95) : hp(2.5),
     },
     mainTitle: {
         fontSize: hp(2.86),
