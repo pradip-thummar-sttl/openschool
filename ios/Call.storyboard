@@ -109,9 +109,10 @@
                                                         <action selector="didPressMuteButton:" destination="dMc-NP-8wD" eventType="touchUpInside" id="ifN-yn-ELo"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT7-9J-5Qn">
-                                                    <rect key="frame" x="13" y="137" width="0.0" height="0.0"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ffgfghhghhjhkj" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT7-9J-5Qn">
+                                                    <rect key="frame" x="13" y="106" width="110.5" height="20"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="KpF-U9-XhK"/>
                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="Ypm-XJ-ckd"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -148,8 +149,8 @@
                                             <constraint firstItem="eBL-me-Q8f" firstAttribute="centerY" secondItem="15q-h1-Vu7" secondAttribute="centerY" id="m8m-Ca-b50"/>
                                             <constraint firstItem="eBL-me-Q8f" firstAttribute="leading" secondItem="dMc-NP-8wD" secondAttribute="leadingMargin" id="oIO-zd-gSb"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="15q-h1-Vu7" secondAttribute="trailing" id="pnw-ho-LAK"/>
-                                            <constraint firstItem="xRx-qY-Pyw" firstAttribute="top" secondItem="bT7-9J-5Qn" secondAttribute="bottom" constant="2" id="qQp-ds-IhS"/>
                                             <constraint firstItem="bT7-9J-5Qn" firstAttribute="leading" secondItem="eBL-me-Q8f" secondAttribute="trailing" constant="5" id="ueW-pQ-dwQ"/>
+                                            <constraint firstItem="bT7-9J-5Qn" firstAttribute="centerY" secondItem="eBL-me-Q8f" secondAttribute="centerY" id="ycZ-Hx-r0d"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="addReactionBtn" destination="Fqb-zF-Vtq" id="rE7-A2-3IN"/>
