@@ -51,6 +51,7 @@ const NotificationDrawer = (props) => {
     const [notifications, setNotifications] = useState([])
     const dispatch = useDispatch()
     useEffect(() => {
+
         // month = moment().format('MM');
         // date = moment().format('DD');
         // year = moment().format('YYYY');
@@ -77,7 +78,7 @@ const NotificationDrawer = (props) => {
         }
 
     }, [isOpen])
-    
+
 
     getAllNotification = () => {
         console.log('user dtaaaa===>', User.user)
@@ -221,6 +222,14 @@ const NotificationDrawer = (props) => {
                     <View style={styles.datepickerDrwaer}>
                         {/* {Var.isCalender = false} */}
                         <Calendar
+                            theme={{
+                                arrowColor: 'grey',
+                                textDayFontFamily: FONTS.fontRegular,
+                                textMonthFontFamily: FONTS.fontRegular,
+                                textDayHeaderFontFamily: FONTS.fontRegular,
+                                textMonthFontWeight: 'bold',
+                                textMonthFontSize: 16,
+                            }}
                             ref={myRef}
                             minDate={new Date()}
                             firstDay={1}
@@ -471,7 +480,7 @@ const NotificationDrawer = (props) => {
                                     <View style={{ height: 100, justifyContent: 'center' }}>
                                         <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
                                     </View>
-                                    
+
                             }
 
                             {/* ≥ */}

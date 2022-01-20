@@ -140,7 +140,7 @@ static NSString * const kChannelGuide = @"the_guide";
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.font = [UIFont systemFontOfSize:15];
-    textField.placeholder = @"enter text";
+    textField.placeholder = @"Enter your option";
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.keyboardType = UIKeyboardTypeDefault;
     textField.returnKeyType = UIReturnKeyDone;
@@ -158,7 +158,7 @@ static NSString * const kChannelGuide = @"the_guide";
     [button addTarget:self
                action:@selector(deleteButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"record_off"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"cancel_ic"] forState:UIControlStateNormal];
     
     [self.addTextFieldView addSubview:button];
     
@@ -255,7 +255,7 @@ static NSString * const kChannelGuide = @"the_guide";
   UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
   textField.borderStyle = UITextBorderStyleRoundedRect;
   textField.font = [UIFont systemFontOfSize:15];
-  textField.placeholder = @"enter text";
+  textField.placeholder = @"Enter your option";
   textField.autocorrectionType = UITextAutocorrectionTypeNo;
   textField.keyboardType = UIKeyboardTypeDefault;
   textField.returnKeyType = UIReturnKeyDone;
