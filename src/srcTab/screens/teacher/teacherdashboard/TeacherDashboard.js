@@ -227,14 +227,16 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         if (isRunningFromVirtualDevice) {
             // Do Nothing
         } else {
-            setLoading(true)
             let currentTime = moment(Date()).format('HH:mm')
-            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {
-                // showMessage('time to start')
-                let data = {
-                    LessonStart: true,
-                    LessonEnd: false
-                }
+            console.log("currentTime =-=-=-=-=-=-=->",currentTime);
+            console.log("dataOfSubView.StartTime =-=-=-=-=-=-=->",dataOfSubView.StartTime);
+
+            console.log("currentTime =-=-=-=-=-=-=->",currentTime);
+            console.log("dataOfSubView.EndTime =-=-=-=-=-=-=->",dataOfSubView.EndTime);
+            setLoading(true)
+            
+            if (currentTime >= dataOfSubView.StartTime && currentTime <= dataOfSubView.EndTime) {    
+                let data = { LessonStart: true, LessonEnd: false}
                 Service.post(data, `${EndPoints.LessionStartEnd}/${dataOfSubView._id}`, (res) => {
                     setLoading(false)
                     if (res.flag) {
