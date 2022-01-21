@@ -155,7 +155,6 @@ const SAddNewTeacher = (props) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
                 uploadProfile(res.data._id)
-                // setTeachers(res.data)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -166,15 +165,10 @@ const SAddNewTeacher = (props) => {
         })
     }
     const loadTeacher = () => {
-        const data = {
-            Searchby: "",
-            Filterby: ""
-        }
 
-        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+        Service.get(`${EndPoints.Teacherdownbyschoolid}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
-                setTeachers(res.data)
+                setTeachers(res.data);
             } else {
                 showMessage(res.message)
             }
@@ -286,7 +280,6 @@ const SAddNewTeacher = (props) => {
                 <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
                     <MenuTrigger style={[STYLE.commonInputGrayBack, STYLE.common]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
@@ -314,15 +307,9 @@ const SAddNewTeacher = (props) => {
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
-                            {/* <Image style={PAGESTYLE.coverImage} source={Images.Coverback}></Image> */}
                             <TopBackImg style={PAGESTYLE.coverImage} height={hp(13.8)} width={'100%'} />
 
                             <View style={PAGESTYLE.profileOuter}>
-                                {/* <Image style={PAGESTYLE.profileImage}></Image>
-                                <TouchableOpacity style={PAGESTYLE.editProfileMain}> */}
-                                {/* <Image style={PAGESTYLE.editProfileIcon} source={Images.Edit} /> */}
-                                {/* </TouchableOpacity> */}
-
                                 <Image style={PAGESTYLE.profileImage}
                                     source={{ uri: !profileUri || !profileUri.uri ? baseUrl : profileUri.uri }} />
                                 <TouchableOpacity activeOpacity={opacity}
@@ -366,7 +353,6 @@ const SAddNewTeacher = (props) => {
                         </View>
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-                            {/* <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}> */}
                             <TouchableOpacity onPress={() => showDatePicker()}>
                                 <View style={[styles.commonInputGrayBack, { flexDirection: 'row' }]}>
                                     <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />

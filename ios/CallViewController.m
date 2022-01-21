@@ -167,12 +167,12 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  QBUUser *user = [QBUUser user];
-  user.ID = self.currentUserID.integerValue;
-  user.fullName = self.currentName;
-  user.login=@"teacher7@silvertouch.com";
-  user.password=@"Admin@123";
-  [Profile synchronizeUser:user];
+  // QBUUser *user = [QBUUser user];
+  // user.ID = self.currentUserID.integerValue;
+  // user.fullName = self.currentName;
+  // user.login=@"teacher7@silvertouch.com";
+  // user.password=@"Admin@123";
+  // [Profile synchronizeUser:user];
   
   
   
@@ -291,48 +291,48 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   [self.opponentsCollectionView addGestureRecognizer:tap];
   
   //
-  __weak __typeof(self)weakSelf = self;
-  Profile *profile = [[Profile alloc]init];
-  [QBRequest signUp:user successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
-    __typeof(weakSelf)strongSelf = weakSelf;
-    NSLog(@"%@=========>%@", response, user);
-    [user setPassword:profile.password];
-    [Profile synchronizeUser:user];
+  // __weak __typeof(self)weakSelf = self;
+  // Profile *profile = [[Profile alloc]init];
+  // [QBRequest signUp:user successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+  //   __typeof(weakSelf)strongSelf = weakSelf;
+  //   NSLog(@"%@=========>%@", response, user);
+  //   [user setPassword:profile.password];
+  //   [Profile synchronizeUser:user];
 
-    if ([user.fullName isEqualToString: profile.fullName] == NO) {
-        [strongSelf updateFullName:profile.fullName login:profile.login];
-    } else {
-        [strongSelf connectToChat:user];
-    }
+  //   if ([user.fullName isEqualToString: profile.fullName] == NO) {
+  //       [strongSelf updateFullName:profile.fullName login:profile.login];
+  //   } else {
+  //       [strongSelf connectToChat:user];
+  //   }
 
-  } errorBlock:^(QBResponse * _Nonnull response) {
-    NSLog(@"%@=========>", response);
-    [QBRequest logInWithUserLogin:profile.login
-                         password:profile.password
-                     successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
+  // } errorBlock:^(QBResponse * _Nonnull response) {
+  //   NSLog(@"%@=========>", response);
+  //   [QBRequest logInWithUserLogin:profile.login
+  //                        password:profile.password
+  //                    successBlock:^(QBResponse * _Nonnull response, QBUUser * _Nonnull user) {
 
-        __typeof(weakSelf)strongSelf = weakSelf;
+  //       __typeof(weakSelf)strongSelf = weakSelf;
 
-        [user setPassword:profile.password];
-        [Profile synchronizeUser:user];
+  //       [user setPassword:profile.password];
+  //       [Profile synchronizeUser:user];
 
-        if ([user.fullName isEqualToString: profile.fullName] == NO) {
-            [strongSelf updateFullName:profile.fullName login:profile.login];
-        } else {
-            [strongSelf connectToChat:user];
-        }
+  //       if ([user.fullName isEqualToString: profile.fullName] == NO) {
+  //           [strongSelf updateFullName:profile.fullName login:profile.login];
+  //       } else {
+  //           [strongSelf connectToChat:user];
+  //       }
 
-    } errorBlock:^(QBResponse * _Nonnull response) {
-  //      __typeof(weakSelf)strongSelf = weakSelf;
+  //   } errorBlock:^(QBResponse * _Nonnull response) {
+  // //      __typeof(weakSelf)strongSelf = weakSelf;
 
-  //          [strongSelf handleError:response.error.error];
-        if (response.status == QBResponseStatusCodeUnAuthorized) {
-            // Clean profile
-            [Profile clearProfile];
-  //              [strongSelf defaultConfiguration];
-        }
-    }];
-  }];
+  // //          [strongSelf handleError:response.error.error];
+  //       if (response.status == QBResponseStatusCodeUnAuthorized) {
+  //           // Clean profile
+  //           [Profile clearProfile];
+  // //              [strongSelf defaultConfiguration];
+  //       }
+  //   }];
+  // }];
  
 }
 
@@ -1662,7 +1662,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row != 0) {
       _isTeacherReload=true;
-      NSString *str = [NSString stringWithFormat:@"%ld#@#%@", indexPath.row-1,_selectedId];
+      NSString *str = [NSString stringWithFormat:@"%ld#@#%@#@#%@", indexPath.row-1,_selectedId,_currentUserID];
         [self submitUpdate:str forEntry:kEntryEarth toChannel:_selectedChannel];
 //      [self.opponentsCollectionView reloadData];
     }
