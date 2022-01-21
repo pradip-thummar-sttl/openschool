@@ -198,6 +198,16 @@ const TeacherTimeTable = (props) => {
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
 
+    const setBg = (days, data) => {
+
+        if (data == "" || data == null || !data)
+            return null
+        else if (days[new Date().getDay()] == data)
+            return COLORS.daySelect
+        else
+            return null
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.white }}>
@@ -224,7 +234,8 @@ const TeacherTimeTable = (props) => {
                             <View style={{ ...PAGESTYLE.mainPage, marginTop: -30 }}>
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data, index) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, height: 66, }}>
+                                        <View style={{ ...PAGESTYLE.dayLeft, 
+                                        backgroundColor: setBg(days, data), borderColor: COLORS.videoLinkBorder, height: 66, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}

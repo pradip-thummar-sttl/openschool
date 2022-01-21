@@ -181,6 +181,7 @@ const PupilTimeTable = (props) => {
             }
         }, 1500)
     }
+
     const onNext = () => {
         setTimeout(() => {
             _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
@@ -190,11 +191,21 @@ const PupilTimeTable = (props) => {
     const refresh = () => {
         fetchRecord('', '', moment().format('YYYY-MM-DD'))
     }
+
     const openNotification = () => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
 
+    const setBg = (days, data) => {
+
+        if (data == "" || data == null || !data)
+            return null
+        else if (days[new Date().getDay()] == data)
+            return COLORS.daySelect
+        else
+            return null
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.backgroundColorCommon }}>
@@ -209,7 +220,7 @@ const PupilTimeTable = (props) => {
                     refreshList={() => refresh()}
                     onNotification={() => openNotification()}
                     onFilterBy={(filter) => { fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD')) }} />
-               
+
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?
                         <ActivityIndicator
@@ -221,15 +232,19 @@ const PupilTimeTable = (props) => {
                             <View style={{ ...PAGESTYLE.mainPage, marginTop: -30 }}>
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data, index) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, height: 66, }}>
+                                        <View style={{
+                                            ...PAGESTYLE.dayLeft,
+                                            backgroundColor: setBg(days, data),
+                                            borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, height: 66,
+                                        }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
                                 </View>
 
                                 <FlatList
-                                ref={_flatListRefrence}
-                                onViewableItemsChanged={onViewRef.current}
+                                    ref={_flatListRefrence}
+                                    onViewableItemsChanged={onViewRef.current}
                                     style={{ ...STYLE.padLeftRight, paddingLeft: 0, }}
                                     horizontal={true}
                                     showsHorizontalScrollIndicator={false}
@@ -240,7 +255,7 @@ const PupilTimeTable = (props) => {
 
                                             <View style={PAGESTYLE.timeLabel}>
                                                 {days.map((data, dayKey) => (
-                                                    dayKey != 0 &&setData(dayKey, index)))}
+                                                    dayKey != 0 && setData(dayKey, index)))}
                                             </View>
                                         </View>
                                     )}

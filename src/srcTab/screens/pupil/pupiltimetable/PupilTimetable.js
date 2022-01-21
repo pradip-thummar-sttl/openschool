@@ -172,6 +172,16 @@ const PupilTimetable = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
     }
+    const setBg = (days, data) => {
+
+        if (data == "" || data == null || !data)
+            return null
+        else if (days[new Date().getDay()] == data)
+            return COLORS.daySelect
+        else
+            return null
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
 
@@ -197,7 +207,7 @@ const PupilTimetable = (props) => {
                             <View style={PAGESTYLE.mainPage1}>
                                 <View>
                                     {days.map((data, index) => (
-                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: days[new Date().getDay()] == data ? COLORS.daySelect : null, borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
+                                        <View style={{ ...PAGESTYLE.dayLeft, backgroundColor: setBg(), borderRightWidth: index == 0 ? 0 : 1, borderColor: COLORS.videoLinkBorder, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
