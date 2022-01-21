@@ -508,12 +508,13 @@ const styles = StyleSheet.create({
         left: hp(1.7),
         top: 'auto',
         zIndex: 9,
+        alignSelf : 'center'
     },
     popupCustomButton: {
         paddingLeft: hp(4.42),
         paddingRight: hp(3.125),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
     },
     commonInputTextarea: {
         height: hp(5.20),

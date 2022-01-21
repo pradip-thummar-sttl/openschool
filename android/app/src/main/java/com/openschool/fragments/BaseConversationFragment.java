@@ -339,8 +339,8 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     @Override
-    public void onEmojiItemClick(String channel, String message) {
-        sendEmoji(channel, message, currentUserID);
+    public void onEmojiItemClick(String channel, String message, Integer item) {
+        sendEmoji(channel, message, currentUserID, item);
     }
 
     private void adjustOpponentAudio(int userID, boolean isAudioEnabled) {
@@ -717,9 +717,9 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
 
-        icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID));
-        icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID));
-        icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID));
+        icPEmoji1.setOnClickListener(v -> sendEmoji(channels.get(0), "0", currentUserID, null));
+        icPEmoji2.setOnClickListener(v -> sendEmoji(channels.get(0), "1", currentUserID, null));
+        icPEmoji3.setOnClickListener(v -> sendEmoji(channels.get(0), "2", currentUserID, null));
     }
 
     protected void actionButtonsEnabled(boolean inability) {
@@ -1224,8 +1224,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         return new String(Character.toChars(originalUnicode));
     }
 
-    protected void sendEmoji(String channel, String message, String currentUserID) {
-        System.out.println("KDKDKD: channel send" + channel);
+    protected void sendEmoji(String channel, String message, String currentUserID, Integer pupilId) {
 
         _frEmojiAnimationView.setVisibility(View.VISIBLE);
 
@@ -1251,7 +1250,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         hostActivity.getPubNub()
                 .publish()
                 .channel(channel)
-                .message(isTeacher ? message : message + "#@#" + currentUserID)
+                .message(isTeacher ? message + "#@#" + pupilId + "#@#" + currentUserID : message + "#@#" + currentUserID)
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {

@@ -19,6 +19,7 @@ import MESSAGE from "../../../../utils/Messages";
 var moment = require('moment');
 
 const MessageList = (props) => {
+    console.log('in parent main zone main', props);
     return (
         <View style={{ marginHorizontal: 10 }}>
             <View style={PAGESTYLE.feeds} onPress={(null)}>
@@ -53,6 +54,7 @@ const ParentZonemain = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
+    
 
     const messageRender = ({ item, index }) => {
         return (
@@ -61,7 +63,7 @@ const ParentZonemain = (props) => {
                 navigateToDetail={() => { }} />
         );
     };
-
+    
     useEffect(() => {
         fetchRecord('', filterBy)
     }, [filterBy])
@@ -103,6 +105,7 @@ const ParentZonemain = (props) => {
                 <HeaderPM
                     onSwitchPupil={(pupilData) => setPupilIndex(pupilData)}
                     data={pupilData}
+                    onNotification={() => props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })}
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
