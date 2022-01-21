@@ -16,6 +16,7 @@ import { showMessage } from "../../../../utils/Constant";
 
 const ParentZonePerformance = (props) => {
     const item = props.data;
+    console.log('........>>>>',item);
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
     const [chartData, setChartData] = useState([])

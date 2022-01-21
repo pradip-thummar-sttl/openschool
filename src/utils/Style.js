@@ -145,14 +145,15 @@ export default StyleSheet.create({
         textAlign: 'center',
         paddingLeft: hp(3.125),
         paddingRight: hp(3.125),
-        paddingTop: hp(1.21),
-        paddingBottom: hp(1.21),
+        // paddingTop: hp(1.21),
+        // paddingBottom: hp(1.21),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
-        marginBottom : 10
+        // marginBottom : 10,
+        paddingVertical : Platform.OS === 'android' ? 10 : 15
     },
     commonButtonBordered: {
         backgroundColor: COLORS.transparent,

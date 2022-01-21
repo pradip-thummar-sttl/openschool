@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -42,7 +42,7 @@ const HeaderPM = (props) => {
     useEffect(() => {
         setChildrenList(props.data);
     }, [props.data]);
-
+    // console.log('222222',props);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -56,7 +56,7 @@ const HeaderPM = (props) => {
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
-
+console.log('------->>>><_______________',props);
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -74,7 +74,7 @@ const HeaderPM = (props) => {
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
-                                        onPress={() => { props.onSwitchPupil(item); setSelectedPupilIndex(index) }}>
+                                        onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
                                                 <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
@@ -98,7 +98,7 @@ const HeaderPM = (props) => {
                                         <View style={styles.filterListSub}>
                                             <View style={styles.userparentInMenuAddmain}>
                                                 {/* <Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /> */}
-                                                <AddWhite style={styles.userparentInMenuAdd} height={hp(1.47)} width={hp(1.47)} />
+                                                <AddWhite style={[styles.userparentInMenuAdd]} height={hp(2.47)} width={hp(2.47)} />
                                                 </View>
                                             <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>ADD NEW USER</Text>
                                         </View>
@@ -154,7 +154,7 @@ const HeaderPM = (props) => {
                                 {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                                 <FilterBlack style={styles.searchMenu}height={15} width={15} />
                                 </MenuTrigger>
-                            <MenuOptions style={[styles.filterCard, styles.dateFilter]}>
+                            <MenuOptions  style={[styles.filterCard, styles.dateFilter]} >
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -300,6 +300,7 @@ const styles = StyleSheet.create({
         width: hp(1.47),
         height: hp(1.47),
         resizeMode: 'contain',
+       
     },
     userparentInMenuAddmain: {
         width: hp(3.81),
@@ -571,8 +572,8 @@ const styles = StyleSheet.create({
     },
     filterCard: {
         backgroundColor: COLORS.white,
-        position: 'absolute',
-        top: 50,
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
+        top: Platform.OS === 'android' ? 0 :50,
         right: 0,
         width: 238,
         padding: 10,
@@ -582,6 +583,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.16,
         shadowRadius: 6,
         borderRadius: 6,
+        // marginTop  :30
     },
     dateFilter: {
         width: 180,
