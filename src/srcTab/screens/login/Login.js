@@ -572,7 +572,7 @@ const styles = StyleSheet.create({
         width: '80%',
     },
     bottomLoginIntro: {
-        top: hp('15%'),
+        top: Platform.OS === 'android' ? hp('3%') : hp('15%'),
         paddingLeft: hp('7%'),
         paddingRight: hp('7%'),
     },

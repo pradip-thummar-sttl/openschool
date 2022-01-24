@@ -31,8 +31,11 @@ const ParentChat = (props) => {
     const [placeholder, setPlaceHolder] = useState('');
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
+        getTeacherData()
+    }, [props])
 
+    const getTeacherData = () => {
         Service.get(`${EndPoints.GetTeachersList}/${props.data.Pupilid}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
@@ -43,7 +46,7 @@ const ParentChat = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }, [])
+    }
 
     const handleMessage = event => {
         // var mesage = messages
@@ -151,7 +154,7 @@ const ParentChat = (props) => {
                                         activeOpacity={opacity}
                                         onPress={() => setSelectedTeacherIndex(index)}>
                                         <View style={{ ...Styles.checkBoxLabelNone }}>
-                                            <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupil} />
+                                            <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupilTab} />
                                             <Text style={{ ...Styles.teachers, fontFamily: selectedTeacherIndex == index ? FONTS.fontSemiBold : FONTS.fontRegular }}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                         </View>
                                     </TouchableOpacity>
