@@ -165,6 +165,13 @@ export default StyleSheet.create({
         backgroundColor: COLORS.lightGrey,
         borderRadius: 20,
     },
+    userIconPupilMobile: {
+        width: hp(2.5),
+        height: hp(2.5),
+        // resizeMode: 'contain',
+        backgroundColor: COLORS.lightGrey,
+        borderRadius: 20,
+    },
     checkBoxLabelNone: {
         flexDirection: 'row',
         marginRight: 10,

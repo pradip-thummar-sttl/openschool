@@ -31,8 +31,11 @@ const ParentChat = (props) => {
     const [placeholder, setPlaceHolder] = useState('');
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
+        getTeacherData()
+    }, [props])
 
+    const getTeacherData = () => {
         Service.get(`${EndPoints.GetTeachersList}/${props.data.Pupilid}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
@@ -43,7 +46,7 @@ const ParentChat = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }, [])
+    }
 
     const handleMessage = event => {
         // var mesage = messages
@@ -141,7 +144,22 @@ const ParentChat = (props) => {
                                     <Text style={Styles.headText}>Telephone no:</Text>
                                     <Text style={Styles.subText}>{teacherData[selectedTeacherIndex].TeacherMobileNumber ? teacherData[selectedTeacherIndex].TeacherMobileNumber : '-'}</Text>
                                 </View>
+                            </View>
+                        </View>
 
+                        <View style={[Styles.rightView, { width: hp(86) }]}>
+                            <View style={{ flexDirection: 'row', width: '100%', }}>
+                                <Text style={Styles.teachers}>Chat with:</Text>
+                                {teacherData.map((item, index) => (
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => setSelectedTeacherIndex(index)}>
+                                        <View style={{ ...Styles.checkBoxLabelNone }}>
+                                            <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupilTab} />
+                                            <Text style={{ ...Styles.teachers, fontFamily: selectedTeacherIndex == index ? FONTS.fontSemiBold : FONTS.fontRegular }}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                ))}
                             </View>
 
                             <View style={[Styles.rightView]}>
@@ -211,7 +229,6 @@ const ParentChat = (props) => {
                 }
             </View>
         </View>
-
     )
 }
 

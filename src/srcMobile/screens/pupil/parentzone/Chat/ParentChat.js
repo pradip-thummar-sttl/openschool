@@ -111,7 +111,7 @@ const ParentChat = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => setSelectedTeacherIndex(index)}>
                                 <View style={{ ...Styles.checkBoxLabelNone }}>
-                                    <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupil} />
+                                    <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupilMobile} />
                                     <Text style={{ ...Styles.teachers, fontFamily: selectedTeacherIndex == index ? FONTS.fontSemiBold : FONTS.fontRegular }}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                             </TouchableOpacity>

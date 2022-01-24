@@ -176,6 +176,13 @@ export default StyleSheet.create({
         backgroundColor: COLORS.borderGrp,
         borderRadius: 20,
     },
+    userIconPupilTab: {
+        width: hp(2.5),
+        height: hp(2.5),
+        // resizeMode: 'contain',
+        backgroundColor: COLORS.borderGrp,
+        borderRadius: 20,
+    },
     checkBoxLabelNone: {
         flexDirection: 'row',
         marginRight: 10,
