@@ -145,22 +145,6 @@ const ParentChat = (props) => {
                                     <Text style={Styles.subText}>{teacherData[selectedTeacherIndex].TeacherMobileNumber ? teacherData[selectedTeacherIndex].TeacherMobileNumber : '-'}</Text>
                                 </View>
                             </View>
-                        </View>
-
-                        <View style={[Styles.rightView, { width: hp(86) }]}>
-                            <View style={{ flexDirection: 'row', width: '100%', }}>
-                                <Text style={Styles.teachers}>Chat with:</Text>
-                                {teacherData.map((item, index) => (
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}
-                                        onPress={() => setSelectedTeacherIndex(index)}>
-                                        <View style={{ ...Styles.checkBoxLabelNone }}>
-                                            <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupilTab} />
-                                            <Text style={{ ...Styles.teachers, fontFamily: selectedTeacherIndex == index ? FONTS.fontSemiBold : FONTS.fontRegular }}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
-                                        </View>
-                                    </TouchableOpacity>
-                                ))}
-                            </View>
 
                             <View style={[Styles.rightView]}>
                                 <View style={{ flexDirection: 'row', width: '100%', }}>
@@ -229,6 +213,7 @@ const ParentChat = (props) => {
                 }
             </View>
         </View>
+
     )
 }
 

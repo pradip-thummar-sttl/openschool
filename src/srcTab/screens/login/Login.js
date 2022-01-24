@@ -409,7 +409,7 @@ class Login extends Component {
                         <View>
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('Users')}
-                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 15 }}>
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 30, zIndex: 9, left: Platform.OS === 'android' ? 15 : 30 }}>
                             <BackArrow height={hp(2.67)} width={hp(2.33)} />
                             </TouchableOpacity>
                             <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} />
@@ -420,7 +420,7 @@ class Login extends Component {
                         <View>
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('Users')}
-                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left:  15 }}>
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 30, zIndex: 9, left: Platform.OS === 'android' ? 15 : 30 }}>
 
                                 <BackArrow height={hp(2.67)} width={hp(2.33)} />
 
