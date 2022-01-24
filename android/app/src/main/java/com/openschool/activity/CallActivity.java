@@ -638,7 +638,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         if (mUri != null) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 String path = getRealPath(this.getContentResolver(), mUri, null);
-                _callback.invoke(null,path);
+                _callback.invoke(null,"file://"+path);
             } else {
                 _callback.invoke(null, "file://"+mUri.getPath());
             }
