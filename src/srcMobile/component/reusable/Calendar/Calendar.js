@@ -113,7 +113,7 @@ const Calendars = (props) => {
                         textDayFontFamily: FONTS.fontRegular,
                         textMonthFontFamily: FONTS.fontRegular,
                         textDayHeaderFontFamily: FONTS.fontRegular,
-                        textMonthFontWeight: '600',
+                        textMonthFontWeight: 'bold',
                         textMonthFontSize: 16,
                         }}
                     style={styles.datepickerDrwaer}

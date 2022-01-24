@@ -31,8 +31,13 @@ const ParentChat = (props) => {
     const [placeholder, setPlaceHolder] = useState('Enter message');
 
     useEffect(() => {
-        setLoading(true)
+        setLoading(true);
+        getTeacherData();
+    }, [props])
 
+
+
+    const getTeacherData = () => {
         Service.get(`${EndPoints.GetTeachersList}/${props.data.Pupilid}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
@@ -43,7 +48,7 @@ const ParentChat = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-    }, [])
+    }
 
     const handleMessage = event => {
         // var mesage = messages

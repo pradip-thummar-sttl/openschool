@@ -13,8 +13,8 @@ function AddWhite(props) {
       <Path
         data-name="add"
         d="M4.914 10.915V7.486H1.486a1.286 1.286 0 110-2.571h3.428V1.486a1.286 1.286 0 112.571 0v3.428h3.429a1.286 1.286 0 010 2.571H7.486v3.429a1.286 1.286 0 01-2.571 0z"
-        fill="#fff"
-        stroke="#fff"
+        fill="#6aa84f"
+        stroke="#6aa84f"
         strokeWidth={0.4}
       />
     </Svg>

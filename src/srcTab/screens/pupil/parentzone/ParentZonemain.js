@@ -89,6 +89,7 @@ const ParentZonemain = (props) => {
                 <HeaderPM
                     onSwitchPupil={(pupilData) => { setPupilIndex(pupilData)}}
                     data={pupilData}
+                    onNotification={() => props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     onSearchKeyword={(keyword) => setKeyword(keyword)}

@@ -15,7 +15,7 @@ import EditProfileTop_Mobile from "../../../../svg/pupil/parentzone/EditProfileT
 import EditWhite from "../../../../svg/pupil/parentzone/EditWhite";
 
 const PupilProfileView = (props) => {
-    console.log('props.data', props.data);
+    console.log('PupilProfileView ->>>>> props.data', props.data);
     // const item = props.route.params.item;
     const [isHide, action] = useState(true);
     

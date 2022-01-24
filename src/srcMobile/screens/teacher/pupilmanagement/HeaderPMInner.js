@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -47,23 +47,19 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 {tabIndex == 0 ?
-                    <View style={styles.headerRight}>
+                    <View style={[styles.headerRight,{right : Platform.OS === 'android' ? 10 : 15}]}>
                         <TouchableOpacity
-                            activeOpacity={opacity}
-                            onPress={() => props.navigateToPupilProfileEdit()}>
-                            {/* <Image style={styles.massagesIcon} source={Images.MobileEditIcon} /> */}
+                            activeOpacity={opacity}>
                             <View style={{
                                 flexDirection: 'row',
                                 alignItems: 'center',
                             }}>
                                 <TouchableOpacity activeOpacity={opacity}
-                                    // onPress={() => props.navigateToEdit()}
+                                    onPress={() => props.navigateToPupilProfileEdit()}
                                     style={{
                                         backgroundColor: COLORS.dashboardGreenButton,
-                                        // alignSelf: 'flex-end',
                                         padding: hp(1.5),
                                         borderRadius: hp(1),
-                                        // marginBottom: hp(1.32),
                                         marginHorizontal: 5
                                     }}>
                                     <EditWhite style={{

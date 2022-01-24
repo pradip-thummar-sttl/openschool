@@ -56,7 +56,6 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         this.isTeacher = isTeacher;
         itemWidth = width;
         itemHeight = height;
-        Log.d(TAG, "item width=" + itemWidth + ", item height=" + itemHeight);
     }
 
     public void setAdapterListener(OnAdapterEventListener adapterListener) {
@@ -144,12 +143,6 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
             holder.toggleButton.setChecked(false);
         }
 
-//        float scale = context.getResources().getDisplayMetrics().density;
-//        int dpAsPixels = (int) (85 * scale + 0.5f);
-//        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-//        params.setMargins(0, 0, 0, opponents.size() - 1 == position ? dpAsPixels : 0);
-//        holder.parentLayout.setLayoutParams(params);
-
         if (session.getMediaStreamManager() != null) {
             holder.toggleButton.setChecked(session.getMediaStreamManager().getAudioTrack(userID).enabled());
         }
@@ -189,42 +182,42 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "0");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "0", getItem(vh.getAdapterPosition()));
             }
         });
         ImageView iv2 = popupView.findViewById(R.id.iv2);
         iv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "1");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "1", getItem(vh.getAdapterPosition()));
             }
         });
         ImageView iv3 = popupView.findViewById(R.id.iv3);
         iv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "2");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "2", getItem(vh.getAdapterPosition()));
             }
         });
         ImageView iv4 = popupView.findViewById(R.id.iv4);
         iv4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "3");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "3", getItem(vh.getAdapterPosition()));
             }
         });
         ImageView iv5 = popupView.findViewById(R.id.iv5);
         iv5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "4");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "4", getItem(vh.getAdapterPosition()));
             }
         });
         ImageView iv6 = popupView.findViewById(R.id.iv6);
         iv6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "5");
+                adapterListener.onEmojiItemClick(opponents.get(vh.getAdapterPosition()).getCustomData(), "5", getItem(vh.getAdapterPosition()));
             }
         });
     }
@@ -239,7 +232,7 @@ public class OpponentsFromCallAdapter extends RecyclerView.Adapter<OpponentsFrom
 
         void onToggleButtonItemClick(int position, boolean isChecked);
 
-        void onEmojiItemClick(String channel, String message);
+        void onEmojiItemClick(String channel, String message, Integer item);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

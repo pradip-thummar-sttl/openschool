@@ -59,8 +59,8 @@ const PupilProfileAdd = (props) => {
             Filterby: ""
         }
 
-        Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of GetSubjectBySchoolId response', res)
+        // Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
+        Service.get(`${EndPoints.Teacherdownbyschoolid}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
                 setTeachers(res.data)
             } else {
@@ -118,10 +118,10 @@ const PupilProfileAdd = (props) => {
         } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
-        }else if (!selectedTeacher.length) {
+        } else if (!selectedTeacher.length) {
             showMessage(MESSAGE.selectTeacher)
             return false
-        } 
+        }
         else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
@@ -178,7 +178,7 @@ const PupilProfileAdd = (props) => {
             // return
             showMessageWithCallBack(MESSAGE.inviteSent, () => {
                 props.navigateToBack()
-                
+
             });
         }
 
@@ -276,8 +276,8 @@ const PupilProfileAdd = (props) => {
         setMobile('')
     }
 
-    const onDataPicker =()=>{
-        return(
+    const onDataPicker = () => {
+        return (
             <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="date"
@@ -290,7 +290,7 @@ const PupilProfileAdd = (props) => {
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInnerAdd
-                openNotification = {() => props.openNotification()}
+                openNotification={() => props.openNotification()}
                 navigateToBack={() => props.navigateToBack()}
                 tabIndex={(index) => { setTabSelected(index) }} />
 
@@ -298,15 +298,15 @@ const PupilProfileAdd = (props) => {
                 <View style={PAGESTYLE.whiteBg}>
                     <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '94%' }}>
                         <View style={PAGESTYLE.managementDetail}>
-                        <View style={[PAGESTYLE.managementBlockTop]}>
+                            <View style={[PAGESTYLE.managementBlockTop]}>
                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
                                 <View style={PAGESTYLE.TeacherProfileMainView}>
                                     <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
-                                        <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey ,width: '100%', borderRadius: 100 }}
+                                        <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey, width: '100%', borderRadius: 100 }}
                                             source={{ uri: !profileUri.uri ? baseUrl : profileUri.uri }} />
-                                            <View style={PAGESTYLE.editprofileStyl}>
+                                        <View style={PAGESTYLE.editprofileStyl}>
                                             <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
-                                            </View>
+                                        </View>
                                     </TouchableOpacity>
                                 </View>
 
@@ -317,9 +317,9 @@ const PupilProfileAdd = (props) => {
                                         <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
                                     </TouchableOpacity>
                                 </View>
-                               
+
                             </View>
-                           
+
                             <View style={[PAGESTYLE.loginAccountForm, PAGESTYLE.formSpace, { marginTop: hp(10) }]}>
                                 <View>
                                     <Text style={PAGESTYLE.fieldInputLabel}>First Name</Text>
@@ -362,7 +362,7 @@ const PupilProfileAdd = (props) => {
                                     <Text style={PAGESTYLE.fieldInputLabel}>Date of Birth</Text>
                                     <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                         <TouchableOpacity onPress={() => showDatePicker()}>
-                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row',height: hp(6), }]}>
+                                            <View style={[PAGESTYLE.commonInput, { flexDirection: 'row', height: hp(6), }]}>
                                                 <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                 <Text style={PAGESTYLE.dateTimetextdummy}>{selectedDate ? selectedDate : 'Select Date'}</Text>
                                                 <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
@@ -449,7 +449,7 @@ const PupilProfileAdd = (props) => {
                                 </View>
                             </View>
                         </View>
-                       {onDataPicker()}
+                        {onDataPicker()}
                     </KeyboardAwareScrollView>
                 </View>
             </View>

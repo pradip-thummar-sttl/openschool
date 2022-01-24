@@ -85,4 +85,5 @@ export const EndPoints = {
     getAllNotifications : 'getnotifocation',
     deleteNotification : 'notificationdelete',
     pupilbyclasssetup:"pupilbyclasssetup",
+    Teacherdownbyschoolid:"teacherdownbyschoolid",
 }

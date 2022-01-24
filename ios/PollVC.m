@@ -66,11 +66,12 @@ static NSString * const kChannelGuide = @"the_guide";
          forControlEvents:UIControlEventTouchUpInside];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         button.layer.cornerRadius=10;
-        button.layer.borderColor=[UIColor darkGrayColor].CGColor;
+        button.layer.borderColor=[UIColor grayColor].CGColor;
         button.layer.borderWidth = 1;
+        [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
         [button setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [button setTitle:listItems[i] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, _xPupilHeight, self.pupilQuestionTxt.frame.size.width, 40.0);
+        button.frame = CGRectMake(0, _xPupilHeight, self.pupilOptionView.frame.size.width, 40.0);
         [self.pupilOptionView addSubview:button];
         [_pupiloptionArr addObject:button];
         _xPupilHeight = _xPupilHeight+40+5;
@@ -95,7 +96,7 @@ static NSString * const kChannelGuide = @"the_guide";
     // Pass the selected object to the new view controller.
 }
 */
--(void) selectOption:(UIButton*)sender{
+-(void)selectOption:(UIButton*)sender{
  
   for (int i=0; i<_pupiloptionArr.count; i++) {
     UIButton *btn = _pupiloptionArr[i];
@@ -108,7 +109,7 @@ static NSString * const kChannelGuide = @"the_guide";
   
 }
 
--(void) setOptionButon:(NSArray*)list{
+-(void)setOptionButon:(NSArray*)list{
   
   for (int i=0; i<list.count; i++) {
     if (i==0) {
@@ -120,6 +121,7 @@ static NSString * const kChannelGuide = @"the_guide";
                  action:@selector(selectOption:)
        forControlEvents:UIControlEventTouchUpInside];
       [button setTitle:list[i] forState:UIControlStateNormal];
+      [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
       button.frame = CGRectMake(0, _xPupilHeight, self.pupilOptionView.frame.size.width, 40.0);
       [self.pupilOptionView addSubview:button];
       _xPupilHeight = _xPupilHeight+40+5;
@@ -140,7 +142,7 @@ static NSString * const kChannelGuide = @"the_guide";
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.font = [UIFont systemFontOfSize:15];
-    textField.placeholder = @"enter text";
+    textField.placeholder = @"Enter your option";
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.keyboardType = UIKeyboardTypeDefault;
     textField.returnKeyType = UIReturnKeyDone;
@@ -158,7 +160,7 @@ static NSString * const kChannelGuide = @"the_guide";
     [button addTarget:self
                action:@selector(deleteButtonClicked:)
      forControlEvents:UIControlEventTouchUpInside];
-    [button setImage:[UIImage imageNamed:@"record_off"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"cancel_ic"] forState:UIControlStateNormal];
     
     [self.addTextFieldView addSubview:button];
     
@@ -255,7 +257,7 @@ static NSString * const kChannelGuide = @"the_guide";
   UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
   textField.borderStyle = UITextBorderStyleRoundedRect;
   textField.font = [UIFont systemFontOfSize:15];
-  textField.placeholder = @"enter text";
+  textField.placeholder = @"Enter your option";
   textField.autocorrectionType = UITextAutocorrectionTypeNo;
   textField.keyboardType = UIKeyboardTypeDefault;
   textField.returnKeyType = UIReturnKeyDone;

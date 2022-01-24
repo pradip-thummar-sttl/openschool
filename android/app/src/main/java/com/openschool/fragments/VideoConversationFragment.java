@@ -244,8 +244,6 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
 
             @Override
             public void message(PubNub pubnub, PNMessageResult message) {
-//                handleNewMessage(message);
-                //handle incomming message from here
                 System.out.println("pubNub ------->" + message);
                 try {
                     String msgReceived = message.getMessage().toString();
