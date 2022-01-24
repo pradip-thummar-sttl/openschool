@@ -361,7 +361,7 @@ const PopupdataSecondPupil = (props) => {
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
 
                                         </TouchableOpacity>
-                                        <View style={styles.lessonstartButton}>
+                                        <View style={[styles.lessonstartButton]}>
                                             <TouchableOpacity
                                                 onPress={isFieldsValidated}
                                                 style={styles.buttonGrp}
@@ -468,20 +468,26 @@ const styles = StyleSheet.create({
         // position: 'relative',
         alignItems: 'center',
         flexDirection: 'row',
+        justifyContent : 'center',
+        // marginVertical : 10
+        
     },
     checkWhiteIcon: {
         width: hp(1.48),
         resizeMode: 'contain',
         position: 'absolute',
         left: hp(1.7),
-        top: Platform.OS === 'android' ? 12 : 'auto',
+        // top: Platform.OS === 'android' ? 15 : 'auto',
         zIndex: 9,
+        alignSelf : 'center',
+        // backgroundColor : 'red',
+        
     },
     popupCustomButton: {
         paddingLeft: hp(4.42),
         paddingRight: hp(3.125),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
     },
     calIcon: {
         resizeMode: 'contain',

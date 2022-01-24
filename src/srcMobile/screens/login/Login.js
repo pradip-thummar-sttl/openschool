@@ -307,28 +307,21 @@ class Login extends Component {
             <View style={styles.container}>
                 <View style={[styles.lefImage, { backgroundColor: this.props.route.params.userType == 'Pupil' ? COLORS.lightBlueLogin : COLORS.lightOrangeLogin }]}>
                     {this.props.route.params.userType == 'Pupil' ?
-                        // <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         <View >
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('Users')}
-                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 10 }}>
-                                {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Users')}> */}
+                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 15 }}>
                                 <BackArrow height={hp(2.34)} width={hp(2.34)} />
-                                {/* </TouchableOpacity> */}
                             </TouchableOpacity>
-                            {/* <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} /> */}
                             <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         </View>
                         :
                         <View >
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Users')}
-                            style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 10 }}>
-                            {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Users')}> */}
+                            style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 15 }}>
                             <BackArrow height={hp(2.34)} width={hp(2.34)} />
-                            {/* </TouchableOpacity> */}
                         </TouchableOpacity>
-                        {/* <TabletPupilLoginSideimg style={styles.image} height={hp(102)} width={hp(67.2)} /> */}
                         <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                     </View>
                         
