@@ -100,7 +100,7 @@ const ParentChat = (props) => {
     }, [teacherData]);
 
     return (
-        <View style={{ height: '100%', width: '100%' }}>
+        <View style={{ height: '100%', width: '100%',paddingHorizontal : 10 }}>
 
             {!isLoading ?
                 <View style={{ flex: 1, }}>

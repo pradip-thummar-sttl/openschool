@@ -126,7 +126,8 @@ export default StyleSheet.create({
         // position: 'absolute',
         // bottom: 10,
         position: 'absolute',
-        bottom: 0,
+        bottom: 15,
+        borderRadius : 10,
         // zIndex: 100
     },
     messageCell: {
