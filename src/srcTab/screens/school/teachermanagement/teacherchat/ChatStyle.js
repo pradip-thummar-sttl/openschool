@@ -158,7 +158,6 @@ export default StyleSheet.create({
     buttonView: {
         height: '100%',
         right: 0,
-        backgroundColor: '#012233',
         justifyContent: 'center',
         position: 'absolute',
     },
