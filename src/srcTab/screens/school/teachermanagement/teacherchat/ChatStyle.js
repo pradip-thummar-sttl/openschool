@@ -121,7 +121,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.greyBack,
         position: 'absolute',
         alignSelf: 'center',
-        bottom: 10,
+        bottom: Platform.OS === 'android' ? 10 : 20,
         // bottom:0,
     },
     messageCell: {

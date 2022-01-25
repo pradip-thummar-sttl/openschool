@@ -124,7 +124,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.greyBack,
         // justifyContent: 'center',
         // position: 'absolute',
-        bottom: 10,
+        bottom: Platform.OS === 'android' ? 10 : 20,
         position: 'absolute',
         borderRadius : 10
         // bottom: 0,
