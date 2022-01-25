@@ -118,16 +118,16 @@ export default StyleSheet.create({
     },
     textView: {
         width: '100%',
-        height: hp(8),
+        height: hp(10),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         // position: 'absolute',
-        // bottom: 10,
+        bottom: 10,
         position: 'absolute',
-        bottom: 15,
-        borderRadius : 10,
+        borderRadius : 10
+        // bottom: 0,
         // zIndex: 100
     },
     messageCell: {

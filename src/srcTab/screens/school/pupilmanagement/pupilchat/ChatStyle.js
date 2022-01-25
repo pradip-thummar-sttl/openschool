@@ -145,7 +145,7 @@ export default StyleSheet.create({
     },
     input: {
         width: '100%',
-        height: '100%',
+        // height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
         marginHorizontal:wp(1.5),
