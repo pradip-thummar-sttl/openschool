@@ -9,7 +9,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatVC : UIViewController
+@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSArray *channels;
+@property (weak, nonatomic) IBOutlet UITextView *messageTxtView;
+@property (weak, nonatomic) IBOutlet UITableView *messageTableView;
+
+- (IBAction)onSendButtonPressed:(id)sender;
 
 @end
 
