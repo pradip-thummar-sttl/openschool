@@ -133,9 +133,9 @@ export default StyleSheet.create({
         marginLeft: wp(1)
     },
     roundImage: {
-        width: wp(5),
-        height: wp(5),
-        borderRadius: wp(5 / 2),
+        width: wp(3),
+        height: wp(3),
+        borderRadius: wp(3 / 2),
         backgroundColor: COLORS.lightGray
     },
     userNameText: {

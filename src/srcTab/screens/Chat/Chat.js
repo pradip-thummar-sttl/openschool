@@ -55,14 +55,14 @@ const Chat = (props) => {
         addMessage([])
         props.tabs === 1 ? setChannels(channel1) : props.tabs === 2 ? setChannels(channel2) : setChannels(channel3);
     }, [props.tabs])
-
+    const reveresed = [...messages].reverse()
     const handleMessage = event => {
         // var mesage = messages
         const message = event.message;
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
         }
     };
 
@@ -185,7 +185,7 @@ const Chat = (props) => {
 
                         <View style={Styles.mesagesView}>
                             <FlatList
-                                data={messages}
+                                data={reveresed}
                                 inverted={true}
                                 renderItem={({ item, index }) => {
                                     return (

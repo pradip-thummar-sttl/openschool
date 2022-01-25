@@ -172,7 +172,7 @@ export default StyleSheet.create({
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
         backgroundColor: COLORS.borderGrp,
         borderRadius: 20,
     },

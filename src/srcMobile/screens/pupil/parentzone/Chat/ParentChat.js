@@ -59,7 +59,7 @@ const ParentChat = (props) => {
             addMessage(messages => [...messages, event]);
         }
     };
-
+    const reveresed = [...messages].reverse();
     const sendMessage = message => {
         if (message.trim().length == 0) {
             return
@@ -127,7 +127,8 @@ const ParentChat = (props) => {
                             <View style={{ height: '100%', }} >
                                 <View style={Styles.mesagesView}>
                                     <FlatList
-                                        data={messages}
+                                        data={reveresed}
+                                        inverted={true}
                                         renderItem={({ item, index }) => {
                                             return (
                                                 <View style={Styles.messageCell}>

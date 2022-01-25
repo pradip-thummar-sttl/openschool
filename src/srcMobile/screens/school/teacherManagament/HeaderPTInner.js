@@ -163,5 +163,7 @@ const styles = StyleSheet.create({
         height: hp(1.57),
         resizeMode: 'contain',
         alignSelf: 'center',
-    }
+    },
+    
+   
 });

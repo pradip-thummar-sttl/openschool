@@ -29,6 +29,7 @@ const ParentChat = (props) => {
     const [messages, addMessage] = useState([]);
     const [message, setMessage] = useState('');
     const [placeholder, setPlaceHolder] = useState('');
+   
 
     useEffect(() => {
         setLoading(true);
@@ -54,10 +55,14 @@ const ParentChat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
+           
         }
+    
+       
     };
-
+   
+    console.log('messages12345',messages);
     const sendMessage = message => {
         if (message.trim().length == 0) {
             return
@@ -72,7 +77,7 @@ const ParentChat = (props) => {
                 .catch((msg) => console.log(msg));
         }
     };
-
+   const reveresed = [...messages].reverse()
     useEffect(() => {
         if (channels.length == 0) {
             return
@@ -168,9 +173,9 @@ const ParentChat = (props) => {
 
                                     <View style={[Styles.mesagesView, { width: '100%', }]}>
                                         <FlatList
-                                            data={messages}
+                                            data={reveresed}
                                             showsVerticalScrollIndicator={false}
-                                            inverted={true}
+                                            inverted={true} 
                                             style={{ marginBottom: 120, marginHorizontal: 15 }}
                                             renderItem={({ item, index }) => {
                                                 return (
