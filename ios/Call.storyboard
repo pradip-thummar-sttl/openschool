@@ -16,6 +16,62 @@
         </array>
     </customFonts>
     <scenes>
+        <!--ChatVC-->
+        <scene sceneID="QCE-iM-P03">
+            <objects>
+                <viewController storyboardIdentifier="ChatVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JBC-Uh-dkj" customClass="ChatVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IBc-7R-73U"/>
+                        <viewControllerLayoutGuide type="bottom" id="ETV-oO-yp3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uVS-0i-fVR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAx-6n-Xml">
+                                <rect key="frame" x="0.0" y="607" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="exn-4Q-R5y">
+                                        <rect key="frame" x="315" y="0.0" width="60" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="s9S-ty-Mfg"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="send"/>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter Message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mjp-vh-nZb">
+                                        <rect key="frame" x="10" y="5" width="295" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="exn-4Q-R5y" secondAttribute="bottom" id="7iH-t3-IkI"/>
+                                    <constraint firstAttribute="bottom" secondItem="mjp-vh-nZb" secondAttribute="bottom" constant="5" id="IhI-tw-wn5"/>
+                                    <constraint firstAttribute="trailing" secondItem="exn-4Q-R5y" secondAttribute="trailing" id="Knr-Y3-mYE"/>
+                                    <constraint firstItem="mjp-vh-nZb" firstAttribute="top" secondItem="sAx-6n-Xml" secondAttribute="top" constant="5" id="P7T-m9-nbt"/>
+                                    <constraint firstAttribute="height" constant="60" id="WYU-ar-dKH"/>
+                                    <constraint firstItem="mjp-vh-nZb" firstAttribute="leading" secondItem="sAx-6n-Xml" secondAttribute="leading" constant="10" id="iQp-1p-G4U"/>
+                                    <constraint firstItem="exn-4Q-R5y" firstAttribute="leading" secondItem="mjp-vh-nZb" secondAttribute="trailing" constant="10" id="l4h-Rv-I2D"/>
+                                    <constraint firstItem="exn-4Q-R5y" firstAttribute="top" secondItem="sAx-6n-Xml" secondAttribute="top" id="lGq-Fg-TdU"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="sAx-6n-Xml" firstAttribute="leading" secondItem="uVS-0i-fVR" secondAttribute="leading" id="LUu-gY-LW9"/>
+                            <constraint firstAttribute="trailing" secondItem="sAx-6n-Xml" secondAttribute="trailing" id="QXV-Bc-d5S"/>
+                            <constraint firstItem="ETV-oO-yp3" firstAttribute="top" secondItem="sAx-6n-Xml" secondAttribute="bottom" id="cyh-n6-eCF"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="15F-FV-d14" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="469.60000000000002" y="133.5832083958021"/>
+        </scene>
         <!--Call View Controller-->
         <scene sceneID="8UH-wZ-IcA">
             <objects>
@@ -1176,6 +1232,7 @@ understand</string>
         <image name="dont_understand" width="38" height="43.5"/>
         <image name="more" width="6" height="21"/>
         <image name="rise_hand" width="30" height="41"/>
+        <image name="send" width="27" height="26"/>
         <image name="thumb" width="44" height="38"/>
         <image name="toggle-off" width="28" height="17"/>
         <systemColor name="labelColor">
