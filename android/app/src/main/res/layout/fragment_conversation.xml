@@ -114,11 +114,19 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/btnMenu"
+            android:layout_toLeftOf="@+id/btnChat"
             android:background="@drawable/shape_round_red"
             android:text="END"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnChat"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/btnMenu"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_chat" />
 
         <ImageView
             android:id="@+id/btnMenu"
