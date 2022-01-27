@@ -21,7 +21,7 @@ const HeaderPTInner = (props) => {
 
     useEffect(() => {
     }, [filterBy])
-    console.log('..................,,,,,,,', props);
+    
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -35,14 +35,14 @@ const HeaderPTInner = (props) => {
                         <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
                 </View>
-                <View style={{flexDirection : 'row',right  : hp(6)}}>
-                <View>
+                <View style={{flexDirection : 'row',right : 70}}>
+                <View style={{paddingHorizontal: 3}}>
                     <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
                         {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
                         <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
                     </TouchableOpacity>
                 </View>
-                <View style={styles.headerRight}>
+                <View style={{paddingHorizontal: 3}}>
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onNotification()}
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
         width: '100%',
         zIndex: 1,
     },
+   
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         padding: hp(1.5),
         borderRadius: hp(1),
-        marginRight : 10
+        // marginRight : 10
         // marginBottom: hp(1.32),
     },
     profileEditButton : {
@@ -163,5 +164,7 @@ const styles = StyleSheet.create({
         height: hp(1.57),
         resizeMode: 'contain',
         alignSelf: 'center',
-    }
+    },
+    
+   
 });

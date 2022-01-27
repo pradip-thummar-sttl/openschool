@@ -36,9 +36,10 @@ const PupilChat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
         }
     };
+    const reveresed = [...messages].reverse()
 
     const sendMessage = message => {
         if (message.trim().length == 0) {
@@ -98,7 +99,7 @@ const PupilChat = (props) => {
 
                                 <View style={[Styles.mesagesView,{  }]}>
                                     <FlatList
-                                        data={messages}
+                                        data={reveresed}
                                         showsVerticalScrollIndicator={false}
                                         inverted={true}
                                         style={{ marginBottom: 120 }}
@@ -114,7 +115,7 @@ const PupilChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: '100%', bottom : 18 }]}>
+                                <View style={[Styles.textView, { width: '100%' }]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}

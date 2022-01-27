@@ -36,10 +36,10 @@ const TeacherChat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
         }
     };
-
+    const reveresed = [...messages].reverse()
     const sendMessage = message => {
         if (message.trim().length == 0) {
             return
@@ -98,7 +98,7 @@ const TeacherChat = (props) => {
                                 <View style={[Styles.mesagesView, {}]}>
                                     <FlatList
                                         style={{ flex: 1, marginBottom: 120 }}
-                                        data={messages}
+                                        data={reveresed}
                                         inverted={true}
                                         showsVerticalScrollIndicator={false}
                                         renderItem={({ item, index }) => {

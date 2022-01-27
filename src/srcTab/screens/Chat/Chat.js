@@ -55,14 +55,14 @@ const Chat = (props) => {
         addMessage([])
         props.tabs === 1 ? setChannels(channel1) : props.tabs === 2 ? setChannels(channel2) : setChannels(channel3);
     }, [props.tabs])
-
+    const reveresed = [...messages].reverse()
     const handleMessage = event => {
         // var mesage = messages
         const message = event.message;
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
         }
     };
 
@@ -111,7 +111,7 @@ const Chat = (props) => {
 
     return (
 
-        <View style={{ height: '100%'}}>
+        <View style={{ height: '100%', }}>
             {/* <ChatHeader /> */}
             {/* tabs */}
             {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
@@ -176,16 +176,16 @@ const Chat = (props) => {
                         : null
                 }
 
-                <View style={[Styles.rightView, { width: props.tabs === 1 ? hp(76) : wp(85), height: '100%', }]}>
+                <View style={[Styles.rightView,]}>
                     <KeyboardAwareScrollView enableOnAndroid={true}
                         extraScrollHeight={90}
                         scrollEnabled
-                        contentContainerStyle={{height: '100%'}}
+                        contentContainerStyle={{flex: 1}}
                         enableAutomaticScroll={(Platform.OS === 'ios')} >
 
                         <View style={Styles.mesagesView}>
                             <FlatList
-                                data={messages}
+                                data={reveresed}
                                 inverted={true}
                                 renderItem={({ item, index }) => {
                                     return (
@@ -215,7 +215,7 @@ const Chat = (props) => {
                             }
                         </ScrollView> */}
                         </View>
-                        <View style={[Styles.textView, { width: props.tabs === 1 ? hp(76) : wp(85) }]}>
+                        <View style={[Styles.textView,]}>
                             <TextInput
                                 style={Styles.input}
                                 multiline={true}

@@ -53,15 +53,15 @@ export default StyleSheet.create({
     //
     views: {
         flexDirection: 'row',
-        backgroundColor: COLORS.white
+        flex: 1,
     },
     leftView: {
-        marginLeft: hp(2),
-        marginTop: hp(2),
-        width: hp(40),
-        height: wp(55),
+        width: '30%',
+        height: '97%',
+        marginStart: 10,
         borderRadius: 10,
         borderWidth: 1,
+        alignSelf: 'center',
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.white
     },
@@ -101,27 +101,25 @@ export default StyleSheet.create({
         fontSize: hp(2.2)
     },
     rightView: {
-        // backgroundColor:'red',
-        marginLeft: hp(2),
-        marginTop: hp(2),
-        width: wp(80),
-        height: hp(90),
+        width: '70%',
+        height: '97%',
+        alignSelf: 'center'
     },
     mesagesView: {
-        width: '125%',
-        height: hp(50),
+        width: '100%',
+        height: '100%',
         marginBottom: wp(3),
     },
     textView: {
-        width: '120%',
-        height: hp(12),
+        width: '95%',
+        height: 100,
+        alignSelf: 'center',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
-        backgroundColor: COLORS.greyBack,
-        // position:'absolute',
-        // bottom:0
-        // bottom:0,
+        backgroundColor: COLORS.white,
+        position: 'absolute',
+        bottom:0,
     },
     messageCell: {
         flexDirection: 'row',
@@ -146,36 +144,42 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        width: '85%',
-        height: '100%',
-        fontSize:hp(1.8),
-        fontFamily:FONTS.fontSemiBold,
-        marginHorizontal:wp(1.5),
-        // marginVertical:hp(1),  
+        width: '100%',
+        // height: '100%',
+        fontSize: hp(1.8),
+        fontFamily: FONTS.fontSemiBold,
+        marginHorizontal: wp(1.5),
     },
-    buttonView:{
-        position:'absolute',
-        right:hp(2),
+    buttonView: {
+        position: 'absolute',
+        right: hp(2),
         // bottom:wp(2),
         alignItems: 'center',
         height: '100%',
-        flexDirection:'row'
+        flexDirection: 'row'
     },
-    btn:{
+    btn: {
         // backgroundColor:'yellow',
-        width:hp(2.5),
-        height:hp(2.5),
-        marginHorizontal:wp(2.5)
+        width: hp(2.5),
+        height: hp(2.5),
+        marginHorizontal: wp(2.5)
     },
-    timeText:{
-        color:COLORS.menuLightFonts,
-        marginTop:wp(1),
-        fontSize:hp(1.2)
+    timeText: {
+        color: COLORS.menuLightFonts,
+        marginTop: wp(1),
+        fontSize: hp(1.2)
     },
     userIconPupil: {
         width: hp(2.5),
         height: hp(2.5),
-        resizeMode: 'contain',
+        // resizeMode: 'contain',
+        backgroundColor: COLORS.borderGrp,
+        borderRadius: 20,
+    },
+    userIconPupilTab: {
+        width: hp(2.5),
+        height: hp(2.5),
+        // resizeMode: 'contain',
         backgroundColor: COLORS.borderGrp,
         borderRadius: 20,
     },

@@ -49,7 +49,7 @@ const Header = (props) => {
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
-                    <Text style={styles.mainTitle}>Lesson & homework planner</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.mainTitle}>Lesson &  homework planner</Text>
                 </View>
 
                 <View style={styles.headerRight}>
@@ -205,6 +205,8 @@ const styles = StyleSheet.create({
     mainTitle: {
         fontSize: hp(2.21),
         fontFamily: FONTS.fontSemiBold,
+        width : '80%',
+        // backgroundColor  :'red'
     },
     date: {
         fontSize: hp(2.86),

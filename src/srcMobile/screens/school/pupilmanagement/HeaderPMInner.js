@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -32,7 +32,7 @@ const HeaderPMInner = (props) => {
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    console.log('props can get here......',props);
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -53,7 +53,7 @@ const HeaderPMInner = (props) => {
                     </View> */}
                 </View>
 
-                <View>
+                <View style={{right : Platform.OS === 'android' ? 0 : 15}}>
                     <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
                         {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
                         <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />

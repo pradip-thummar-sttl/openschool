@@ -54,14 +54,15 @@ export default StyleSheet.create({
     views: {
         flexDirection: 'row',
         borderTopWidth: 1,
-        borderColor: COLORS.borderGrp
-
+        borderColor: COLORS.borderGrp,
+        flex: 1,
+        width : '100%'
     },
     leftView: {
         marginLeft: hp(2),
-        marginTop: hp(2),
-        width: hp(40),
-        height: wp(60),
+        width: '30%',
+        height: '97%',
+        alignSelf: 'center',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -104,9 +105,10 @@ export default StyleSheet.create({
     },
     rightView: {
         // backgroundColor:'red',
-        marginLeft: hp(2),
-        width: hp(76),
-        height: '100%'
+        flex : 1,
+      
+        height: '100%',
+        paddingHorizontal : 20
     },
     mesagesView: {
         width: '105%',
@@ -117,6 +119,7 @@ export default StyleSheet.create({
     textView: {
         width: '100%',
         height: 100,
+        alignSelf: 'center',
         borderRadius: 10,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
@@ -133,9 +136,9 @@ export default StyleSheet.create({
         marginLeft: wp(1)
     },
     roundImage: {
-        width: wp(5),
-        height: wp(5),
-        borderRadius: wp(5 / 2),
+        width: wp(3),
+        height: wp(3),
+        borderRadius: wp(3 / 2),
         backgroundColor: COLORS.lightGray
     },
     userNameText: {
@@ -148,17 +151,17 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        width: '85%',
-        height: '100%',
+        width: '100%',
+        // height: '100%',
         fontSize: hp(2.2),
         fontFamily: FONTS.fontSemiBold,
         marginHorizontal: wp(1.5),
     },
     buttonView: {
+        height: '100%',
+        right: 0,
+        justifyContent: 'center',
         position: 'absolute',
-        right: hp(2),
-        bottom: wp(2),
-        flexDirection: 'row'
     },
     btn: {
         // backgroundColor:'yellow',

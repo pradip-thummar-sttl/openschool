@@ -207,7 +207,7 @@ const HeaderTM = (props) => {
                     {/*  */}
                 </View>
                 <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
-                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
+                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)}  />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
@@ -403,7 +403,7 @@ const styles = StyleSheet.create({
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
-        color: COLORS.white,
+        
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
@@ -424,6 +424,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: hp(1.8),
         zIndex: 9,
+        color: COLORS.white,
     },
     iconTop: {
         top: hp(4.2),
