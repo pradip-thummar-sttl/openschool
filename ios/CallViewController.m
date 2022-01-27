@@ -710,7 +710,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //            [self openNewDialog:createdDialog];
 //          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
           ChatVC *chatController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"ChatVC"];
-          chatController.channels = weakSelf.channels;
+          chatController.channels = weakSelf.dialogID;
       chatController.currentUserName = weakSelf.currentName;
       chatController.currentUserId = weakSelf.currentUserID;
 //          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";

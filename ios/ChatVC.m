@@ -30,7 +30,7 @@ static NSString * const kChannelGuide = @"the_guide";
   self.pubnub = [PubNub clientWithConfiguration:pnconfig];
   
   [self.pubnub addListener:self];
-  [self.pubnub subscribeToChannels: self.channels withPresence:YES];
+  [self.pubnub subscribeToChannels: @[self.channels] withPresence:YES];
   
   self.messageTxtView.layer.cornerRadius = 10;
 //  [self.messageTxtView setBackgroundColor:[UIColor grayColor]];
@@ -58,7 +58,7 @@ static NSString * const kChannelGuide = @"the_guide";
 
 - (IBAction)onSendButtonPressed:(id)sender {
   NSString *str = [NSString stringWithFormat:@"%@###%@###%@",_messageTxtView.text, self.currentUserName,self.currentUserId];
-  [self.pubnub publish: str toChannel:self.channels[_channels.count - 1]
+  [self.pubnub publish: str toChannel:self.channels
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
 //        NSString *text = kEntryEarth;
