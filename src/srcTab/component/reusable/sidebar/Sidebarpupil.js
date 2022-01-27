@@ -83,7 +83,7 @@ const Sidebar = (props) => {
                           isSmall ? 
                             <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                             :
-                            <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                            <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
                         
                     }
                 </TouchableOpacity>
@@ -241,6 +241,14 @@ const styles = StyleSheet.create({
         height: 40,
         resizeMode: 'contain',
         borderRadius: hp(100),
+    },
+    headerProfilesidebar: {
+        width: 200,
+        height: 50,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        // marginHorizontal : 3
     },
     userInfobottom: {
         position: 'absolute',

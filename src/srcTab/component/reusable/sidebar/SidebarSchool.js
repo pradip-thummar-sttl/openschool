@@ -102,7 +102,7 @@ const SidebarSchool = (props) => {
                 {  isSmall ? 
                     <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                     :
-                    <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                    <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
                 }
                    {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
                     {/* {
@@ -331,6 +331,14 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         resizeMode: 'contain',
+    },
+    headerProfilesidebar: {
+        width: 200,
+        height: 50,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        // marginHorizontal : 3
     },
     userInfobottomMain: {
         position: 'absolute',
