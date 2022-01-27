@@ -311,23 +311,6 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         }
     }
 
-//    private void showNotificationPopUp(final int text, final boolean show) {
-//        runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                if (show) {
-//                    ((TextView) connectionView.findViewById(R.id.notification)).setText(text);
-//                    if (connectionView.getParent() == null) {
-//                        ((ViewGroup) CallActivity.this.findViewById(R.id.fragment_container)).addView(connectionView);
-//                    }
-//                } else {
-//                    ((ViewGroup) CallActivity.this.findViewById(R.id.fragment_container)).removeView(connectionView);
-//                }
-//            }
-//        });
-//
-//    }
-
     private void initWiFiManagerListener() {
         networkConnectionChecker = new NetworkConnectionChecker(getApplication());
     }
@@ -449,10 +432,6 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             System.out.println("KDKD: " + mUri);
         } else {
-//            File path = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/OpenSchool");
-//            Uri uri = Uri.parse(path.toString());
-//            System.out.println(uri);
-//            mUri = uri;
             refreshGalleryFile();
         }
     }
@@ -599,6 +578,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         bundle.putString(Consts.EXTRA_TEACHER_USER_ID, teacherQBUserID);
         bundle.putString(Consts.TITLE, title);
         bundle.putStringArrayList(Consts.EXTRA_CHANNELS, channelList);
+        bundle.putString(Consts.EXTRA_DIALOG_ID, dialogID);
 
         BaseConversationFragment conversationFragment = BaseConversationFragment.newInstance(
                 isVideoCall
@@ -606,6 +586,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
                         : new AudioConversationFragment());
         conversationFragment.setArguments(bundle);
         FragmentExecuotr.addFragment(getSupportFragmentManager(), R.id.fragment_container, conversationFragment, conversationFragment.getClass().getSimpleName());
+
     }
 
 

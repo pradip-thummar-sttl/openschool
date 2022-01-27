@@ -191,6 +191,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation group: 'com.pubnub', name: 'pubnub-gson', version: 'v6.0.0'
 
     implementation "com.quickblox:quickblox-android-sdk-conference:3.9.11"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'

@@ -42,6 +42,7 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.openschool.R;
 import com.openschool.activity.CallActivity;
+import com.openschool.activity.GroupChatActivity;
 import com.openschool.activity.PollingActivity;
 import com.openschool.activity.WhiteBoardActivity;
 import com.openschool.adapter.OpponentsFromCallAdapter;
@@ -69,6 +70,7 @@ import org.webrtc.CameraVideoCapturer;
 import org.webrtc.RendererCommon;
 import org.webrtc.SurfaceViewRenderer;
 
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -93,6 +95,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private static final int SMALL_CELLS_AMOUNT = 8;
     private static final int LARGE_CELLS_AMOUNT = 12;
 
+    protected String currentDialogId;
     protected WebRtcSessionManager sessionManager;
     protected ConferenceSession currentSession;
     protected ArrayList<QBUser> opponents = new ArrayList<>();
@@ -132,7 +135,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     private TextView _txtEmojiAnim;
 
 //    private RelativeLayout _headerClip;
-    private ImageView btnMenu;
+    private ImageView btnMenu, btnChat;
     private LinearLayout llShare;
     private LinearLayout llPupilEmoji;
     protected ConversationFragmentCallbackListener conversationFragmentCallbackListener;
@@ -204,6 +207,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         title = this.getArguments().getString(Consts.TITLE);
         channels = this.getArguments().getStringArrayList(Consts.EXTRA_CHANNELS);
         sessionManager = WebRtcSessionManager.getInstance(getActivity());
+        currentDialogId = this.getArguments().getString(Consts.EXTRA_DIALOG_ID);
 
         System.out.println("KDKD: opponents " + opponents + " " + teacherQBUserID);
         currentSession = sessionManager.getCurrentSession();
@@ -471,6 +475,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         micToggleCall = (ToggleButton) view.findViewById(R.id.toggle_mic);
         handUpCall = (TextView) view.findViewById(R.id.button_hangup_call);
         btnMenu = (ImageView) view.findViewById(R.id.btnMenu);
+        btnChat = (ImageView) view.findViewById(R.id.btnChat);
         tvTeacherEmoji = (TextView) view.findViewById(R.id.tvTeacherEmoji);
         tvTitle = (TextView) view.findViewById(R.id.tvTitle);
         button_screen_sharing = (ImageView) view.findViewById(R.id.button_screen_sharing);
@@ -703,11 +708,20 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//
                 showBottomSheetDialog();
             }
         });
 
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), GroupChatActivity.class);
+                intent.putExtra("CURRENT_ID", currentUserID);
+                intent.putExtra("CURRENT_NAME", currentName);
+                intent.putExtra("DIALOG_ID", currentDialogId);
+                startActivity(intent);
+            }
+        });
 
 
         button_screen_sharing.setOnClickListener(v -> {
