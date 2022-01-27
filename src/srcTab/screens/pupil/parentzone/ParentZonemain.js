@@ -43,7 +43,7 @@ const ParentZonemain = (props) => {
     const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
-    console.log('0000000',props);
+    console.log('0000000', props);
 
     const messageRender = ({ item, index }) => {
         return (
@@ -87,92 +87,94 @@ const ParentZonemain = (props) => {
             {/* <Sidebar hide={() => action(!isHide)} /> */}
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
                 <HeaderPM
-                    onSwitchPupil={(pupilData) => { setPupilIndex(pupilData)}}
+                    onSwitchPupil={(pupilData) => { setPupilIndex(pupilData) }}
                     data={pupilData}
-                    onNotification={() => props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })}
+                    onNotification={() => props.navigation.navigate('NotificationDrawer', { onGoBack: () => { } })}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
                     onSearchKeyword={(keyword) => setKeyword(keyword)}
                     onSearch={() => fetchRecord(keyword, '')}
                     onClearSearch={() => { setKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', '')} 
+                    onFilter={(filterBy) => fetchRecord('', '')}
                     onReplace={() => props.navigation.replace('ParentZoneSwitch')}
-                    />
-                 
+                />
 
-                {isProfileEdit ?
-                    <ParentZoneProfileEdit
-                        data={pupilData[pupilIndex]}
-                        navigateToProfile={() => { setProfileEdit(false); setPupilData(User.user.ChildrenList) }} />
-                    :
-                    selectedTabIndex == 0 ?
-                        <View style={PAGESTYLE.plainBg}>
-                            <ScrollView style={PAGESTYLE.flexDiv} showsVerticalScrollIndicator={false}>
-                                <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.table}>
-                                        <View style={PAGESTYLE.pupilTable}>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
-                                            </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
+
+                <View style={{ flex: 1 }}>
+                    {isProfileEdit ?
+                        <ParentZoneProfileEdit
+                            data={pupilData[pupilIndex]}
+                            navigateToProfile={() => { setProfileEdit(false); setPupilData(User.user.ChildrenList) }} />
+                        :
+                        selectedTabIndex == 0 ?
+                            <View style={PAGESTYLE.plainBg}>
+                                <ScrollView style={PAGESTYLE.flexDiv} showsVerticalScrollIndicator={false}>
+                                    <View style={PAGESTYLE.managementDetail}>
+                                        <View style={PAGESTYLE.table}>
+                                            <View style={PAGESTYLE.pupilTable}>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
+                                                </View>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
+                                                </View>
+                                                <View>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, { marginLeft: -10 }]}>Date</Text>
+                                                </View>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
+                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
+                                                </View>
                                             </View>
                                             <View>
-                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,{marginLeft:-10}]}>Date</Text>
-                                            </View>
-                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
-                                            </View>
-                                        </View>
-                                        <View>
-                                            <SafeAreaView>
-                                                {isLoading ?
-                                                    <ActivityIndicator
-                                                        style={{ flex: 1 }}
-                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                        color={COLORS.yellowDark} />
-                                                    :
-                                                    messageData.length > 0 ?
-                                                        <FlatList
-                                                            style={{ marginTop: 10 }}
-                                                            data={messageData}
-                                                            renderItem={messageRender}
-                                                            keyExtractor={(item) => item.id}
-                                                            extraData={selectedId}
-                                                            showsVerticalScrollIndicator={false} />
+                                                <SafeAreaView>
+                                                    {isLoading ?
+                                                        <ActivityIndicator
+                                                            style={{ flex: 1 }}
+                                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                            color={COLORS.yellowDark} />
                                                         :
-                                                        // <View style={{ height: 100, justifyContent: 'center' }}>
-                                                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                        // </View>
-                                                        <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
-                                                }
-                                            </SafeAreaView>
+                                                        messageData.length > 0 ?
+                                                            <FlatList
+                                                                style={{ marginTop: 10 }}
+                                                                data={messageData}
+                                                                renderItem={messageRender}
+                                                                keyExtractor={(item) => item.id}
+                                                                extraData={selectedId}
+                                                                showsVerticalScrollIndicator={false} />
+                                                            :
+                                                            // <View style={{ height: 100, justifyContent: 'center' }}>
+                                                            //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
+                                                            // </View>
+                                                            <EmptyStatePlaceHohder holderType={2} title1={MESSAGE.noMessagePrent1} title2={MESSAGE.noMessagePrent2} />
+                                                    }
+                                                </SafeAreaView>
+                                            </View>
                                         </View>
                                     </View>
-                                </View>
-                            </ScrollView>
-                        </View>
-                        :
-                        selectedTabIndex == 1 ?
-                            <ParentZonePerformance
-                                data={pupilData[pupilIndex]} />
+                                </ScrollView>
+                            </View>
                             :
-                            selectedTabIndex == 2 ?
-                                <ParentChat
-                                    data={pupilData[pupilIndex]}
-                                    tabs={1} />
+                            selectedTabIndex == 1 ?
+                                <ParentZonePerformance
+                                    data={pupilData[pupilIndex]} />
                                 :
-                                selectedTabIndex == 3 ?
-                                    null
+                                selectedTabIndex == 2 ?
+                                    <ParentChat
+                                        data={pupilData[pupilIndex]}
+                                        tabs={1} />
                                     :
-                                    selectedTabIndex == 4 ?
-                                        <ParentZoneProfile
-                                            data={pupilData[pupilIndex]}
-                                            navigateToDetail={() => setProfileEdit(true)} />
+                                    selectedTabIndex == 3 ?
+                                        null
                                         :
-                                        <ParentZoneSchoolDetails
-                                            data={pupilData[pupilIndex]} />
-                }
+                                        selectedTabIndex == 4 ?
+                                            <ParentZoneProfile
+                                                data={pupilData[pupilIndex]}
+                                                navigateToDetail={() => setProfileEdit(true)} />
+                                            :
+                                            <ParentZoneSchoolDetails
+                                                data={pupilData[pupilIndex]} />
+                    }
+                </View>
             </View>
         </View>
     );

@@ -59,7 +59,7 @@ const ParentChat = (props) => {
             addMessage(messages => [...messages, event]);
         }
     };
-
+    const reveresed = [...messages].reverse();
     const sendMessage = message => {
         if (message.trim().length == 0) {
             return
@@ -100,7 +100,7 @@ const ParentChat = (props) => {
     }, [teacherData]);
 
     return (
-        <View style={{ height: '100%', width: '100%' }}>
+        <View style={{ height: '100%', width: '100%',paddingHorizontal : 10 }}>
 
             {!isLoading ?
                 <View style={{ flex: 1, }}>
@@ -111,7 +111,7 @@ const ParentChat = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => setSelectedTeacherIndex(index)}>
                                 <View style={{ ...Styles.checkBoxLabelNone }}>
-                                    <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupil} />
+                                    <Image source={{ uri: baseUrl + item.ProfilePicture }} style={Styles.userIconPupilMobile} />
                                     <Text style={{ ...Styles.teachers, fontFamily: selectedTeacherIndex == index ? FONTS.fontSemiBold : FONTS.fontRegular }}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                 </View>
                             </TouchableOpacity>
@@ -127,7 +127,8 @@ const ParentChat = (props) => {
                             <View style={{ height: '100%', }} >
                                 <View style={Styles.mesagesView}>
                                     <FlatList
-                                        data={messages}
+                                        data={reveresed}
+                                        inverted={true}
                                         renderItem={({ item, index }) => {
                                             return (
                                                 <View style={Styles.messageCell}>

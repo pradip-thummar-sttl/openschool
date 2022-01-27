@@ -78,22 +78,22 @@ const Message = (props) => {
             activeOpacity={opacity}
             onPress={() => { setSelectedItem(item.item); setAddMessage(true); }}>
             <View style={[PAGESTYLE.pupilData]}>
-                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn]}>
-                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,]}>{item.item.Title}</Text>
+                <View style={[PAGESTYLE.pupilProfileMessage]}>
+                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{ paddingStart : 20}]}>{item.item.Title}</Text>
                 </View>
 
-                <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn,{justifyContent : 'center'}]}>
-                    <Text style={[PAGESTYLE.pupilName, ]}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+                <View style={PAGESTYLE.pupilProfileDate}>
+                    <Text style={PAGESTYLE.pupilName}>{moment(item.item.CreatedDate).format('DD/MM/yyyy')}</Text>
                 </View>
                 {/* <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
                 <Text style={PAGESTYLE.pupilName}>{'group 1'}</Text>
             </View> */}
 
-                <View style={[PAGESTYLE.pupilProfile,{justifyContent : 'center',width: hp(28.80),}]}>
+                <View style={PAGESTYLE.pupilProfileStatus}>
                     <Text style={[PAGESTYLE.pupilName, item.item.Status == 'Draft' ? PAGESTYLE.noText : PAGESTYLE.yesText, ]}>{item.item.Status}</Text>
                 </View>
 
-                <View style={[PAGESTYLE.lastColumn]}>
+                <View style={[PAGESTYLE.lastColumnArrow]}>
                     {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
                     <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.51)} width={hp(1.51)} />
                 </View>
@@ -123,13 +123,13 @@ const Message = (props) => {
                                 :
                                 messageData.length > 0 ? <>
                                     <View style={[PAGESTYLE.pupilTable]}>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn,{justifyContent : 'center',alignItems : 'center'}]}>
+                                        <View style={PAGESTYLE.pupilTableHeadingMessage}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>MESSAGE TITLE</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain,{ justifyContent : 'center',alignItems : 'center'}, PAGESTYLE.secoundColumn]}>
+                                        <View style={PAGESTYLE.pupilTableHeadingDate}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>DATE</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn,{justifyContent : 'center',alignItems : 'center',marginLeft  : 10}]}>
+                                        <View style={PAGESTYLE.pupilTableHeadingStatus}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>STATUS</Text>
                                         </View>
                                     </View>
