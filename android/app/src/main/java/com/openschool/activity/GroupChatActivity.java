@@ -171,7 +171,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
                 String[] splitStr = msg.split("###");
 
-                ChatVO chatView = new ChatVO(messagePublisher, splitStr[1],  splitStr[0], dt);
+                ChatVO chatView = new ChatVO(messagePublisher, splitStr[2].equals(currentUserID)  ? "You" : splitStr[1],  splitStr[0], dt);
                 onUpdateMassageList(chatView);
             }
 
