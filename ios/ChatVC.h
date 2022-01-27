@@ -12,10 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSArray *channels;
-@property (weak, nonatomic) IBOutlet UITextView *messageTxtView;
+@property (strong, nonatomic) NSString *currentUserName;
+@property (strong, nonatomic) NSString *currentUserId;
+@property (weak, nonatomic) IBOutlet UITextField *messageTxtView;
 @property (weak, nonatomic) IBOutlet UITableView *messageTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstrain;
+@property (weak, nonatomic) IBOutlet UIView *tableSuperView;
 
 - (IBAction)onSendButtonPressed:(id)sender;
+- (IBAction)onBackPress:(id)sender;
+
 
 @end
 

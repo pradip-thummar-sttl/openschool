@@ -33,7 +33,7 @@ static NSString * const kChannelGuide = @"the_guide";
   [self.pubnub subscribeToChannels: self.channels withPresence:YES];
   
   self.messageTxtView.layer.cornerRadius = 10;
-  [self.messageTxtView setBackgroundColor:[UIColor grayColor]];
+//  [self.messageTxtView setBackgroundColor:[UIColor grayColor]];
   
   _chatHistory = [[NSMutableArray alloc]init];
   [self.messageTableView setDelegate:self];
@@ -52,21 +52,33 @@ static NSString * const kChannelGuide = @"the_guide";
 
 
 
+- (IBAction)onBackPress:(id)sender {
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)onSendButtonPressed:(id)sender {
-  [self.pubnub publish: _messageTxtView.text toChannel:self.channels[_channels.count - 1]
+  NSString *str = [NSString stringWithFormat:@"%@###%@###%@",_messageTxtView.text, self.currentUserName,self.currentUserId];
+  [self.pubnub publish: str toChannel:self.channels[_channels.count - 1]
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
 //        NSString *text = kEntryEarth;
 //        [self displayMessage:text asType:@"[PUBLISH: sent]"];
 //    [self dismissViewControllerAnimated:YES completion:nil];
+    self.messageTxtView.text = @"";
   }];
 }
 
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
 //    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
-  NSLog(@"message recieve and send %@", message);
-  [_chatHistory addObject:message];
+     NSDate *date= [NSDate date];
+     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+     [dateFormatter setDateFormat:@"dd,MMM yy hh:mm"];
+     
+     NSString *dateString = [dateFormatter stringFromDate:date];
+  NSLog(@"message recieve and send %@====>%@", message, dateString);
+  NSDictionary *dict = @{@"message":message, @"time":dateString};
+  [_chatHistory addObject:dict];
   [_messageTableView reloadData];
 }
 
@@ -112,9 +124,27 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
   MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chat"];
-  cell.blueView.layer.cornerRadius = 10;
-  [cell.messageLbl setText:_chatHistory[indexPath.row]];
+//  cell.blueView.layer.cornerRadius = 10;
+  NSDictionary *dict = _chatHistory[indexPath.row];
+  NSArray *items = [dict[@"message"] componentsSeparatedByString:@"###"];
+  [cell.messageLbl setText:items[0]];
+  if ([items[2] isEqualToString:self.currentUserId]) {
+    [cell.userNameLbl setText:@"You"];
+  }else{
+    [cell.userNameLbl setText:items[1]];
+  }
+  
+  [cell.dateTimeLbl setText:dict[@"time"]];
   return  cell;
+}
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+  if (tableView.contentSize.height <= self.tableSuperView.frame.size.height) {
+    [_tableHeightConstrain setConstant:tableView.contentSize.height+10];
+    [tableView layoutIfNeeded];
+  }else{
+    [_tableHeightConstrain setConstant:self.tableSuperView.frame.size.height];
+    [tableView layoutIfNeeded];
+  }
 }
 
 
