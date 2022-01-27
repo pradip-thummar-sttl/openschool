@@ -136,13 +136,14 @@ const Sidebar = (props) => {
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
                     <TouchableOpacity style={styles.userInfo}>
-                        <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
+                        {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} /> */}
+                         <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
                         {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                        <View style={styles.profileTextMain}>
+                        {/* <View style={styles.profileTextMain}>
                             {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
-                        </View>
+                            {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
+                        </View> */} 
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
                         <TouchableOpacity
@@ -244,13 +245,15 @@ const Sidebar = (props) => {
                 <View style={styles.sidebarHeader}>
                     <View style={[styles.sideBarAside]}>
                         <TouchableOpacity style={styles.userInfo}>
-                            <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
+
+                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                            {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
                             {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                            <View style={styles.profileTextMain}>
+                            {/* <View style={styles.profileTextMain}>
                                 {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                                <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
-                            </View>
+                                {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
+                            </View> */}  
                         </TouchableOpacity>
                         <View style={styles.mainMenu}>
 
@@ -336,13 +339,14 @@ const Sidebar = (props) => {
                 <View style={styles.sidebarHeader}>
                     <View style={[styles.sideBarAside]}>
                         <TouchableOpacity style={styles.userInfo}>
-                            <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
+                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                            {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
                             {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                            <View style={styles.profileTextMain}>
+                            {/* <View style={styles.profileTextMain}>
                                 {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
                             <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                                <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MYED Open School</Text>
-                            </View>
+                                {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
+                            </View> */} 
                         </TouchableOpacity>
                         <View style={styles.mainMenu}>
 
@@ -499,10 +503,12 @@ const styles = StyleSheet.create({
         width: hp(22),
     },
     headerProfile: {
-        width: hp(5.40),
-        height: hp(5.40),
+        width: 190,
+        height: 40,
         resizeMode: 'contain',
-        borderRadius: hp(100),
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        marginHorizontal : 5,
     },
     userInfobottom: {
         position: 'absolute',

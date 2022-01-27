@@ -78,12 +78,13 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
+                    {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
                     {
-                        isSmall ? null :
-                            <View style={styles.profileTextMain}>
-                                <Text numberOfLines={1} style={[styles.profileTitle, { width: hp(15) }]}>MYED Open School</Text>
-                            </View>
+                          isSmall ? 
+                            <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                            :
+                            <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                        
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
@@ -187,12 +188,19 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 20,
-        paddingBottom: 0,
-        paddingHorizontal: 10,
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(2.0),
+        paddingLeft: hp(1),
+        // alignSelf:'center'
     },
     profileTextMain: {
         paddingLeft: 15,
+    },
+    headerClosed: {
+        // backgroundColor: 'red',
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
     },
     profileTitle: {
         fontSize: hp(2.0),
@@ -280,5 +288,15 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         marginLeft: hp(4),
         right: 0,
+    },
+    headerProfile: {
+        width: 190,
+        height: 50,
+        // width: 50,
+        // height: 40,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        marginHorizontal : 3
     },
 });
