@@ -46,6 +46,7 @@ import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import RewardStarback from "../../../../svg/pupil/dashboard/RewardStarback";
 import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import Avatar from "../Avatar/Avatar";
+import AvtarBg from "../../../../svg/pupil/dashboard/AvtarBg";
 
 const { CallModule, CallModuleIos } = NativeModules
 
@@ -427,7 +428,7 @@ const PupuilDashboard = (props) => {
                                             <Header onAlertPress={() => { openNotification() }} onNotification={() => openNotification()} />
                                             <View style={STYLE.padLeftRight}>
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />
-                                                <View style={PAGESTYLE.dashboardOrangeBox}>
+                                                {/* <View style={PAGESTYLE.dashboardOrangeBox}>
                                                     <View style={PAGESTYLE.orangeBoxTop}>
                                                         <View style={PAGESTYLE.myDay}>
                                                             <View>
@@ -619,18 +620,15 @@ const PupuilDashboard = (props) => {
                                                                                     />
                                                                                 </SafeAreaView>
                                                                                 <View style={PAGESTYLE.rightTabContent}>
-                                                                                    {/* <View style={PAGESTYLE.arrowSelectedTab}></View> */}
                                                                                     <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.tabcontent}>
                                                                                         <View>
                                                                                             <Text numberOfLines={1} h2 style={[PAGESTYLE.titleTab]}>{dataOfHWSubView.LessonTopic}</Text>
                                                                                             <View style={PAGESTYLE.timedateGrp}>
                                                                                                 <View style={PAGESTYLE.dateWhiteBoard}>
-                                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.DueToday} /> */}
                                                                                                     <HWDueOrange style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                     <Text style={PAGESTYLE.datetimeText}>{moment(dataOfHWSubView.HomeWorkDate).format('DD/MM/yyyy')}</Text>
                                                                                                 </View>
                                                                                                 <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
-                                                                                                    {/* <Image style={PAGESTYLE.calIcon} source={Images.SubIcon} /> */}
                                                                                                     <Subject style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                                                                                     <Text style={PAGESTYLE.datetimeText}>{dataOfHWSubView.SubjectName}</Text>
                                                                                                 </View>
@@ -644,7 +642,6 @@ const PupuilDashboard = (props) => {
                                                                                                     style={{ width: '100%' }}
                                                                                                     renderItem={({ item, index }) => (
                                                                                                         <View style={[PAGESTYLE.lessonPoints, PAGESTYLE.lessonPointsBorder]}>
-                                                                                                            {/* <Image source={Images.CheckedSqure} style={PAGESTYLE.checkIconSquare} /> */}
                                                                                                             <CheckedBlue style={PAGESTYLE.checkIconSquare} width={15} height={15} />
 
                                                                                                             <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
@@ -654,7 +651,6 @@ const PupuilDashboard = (props) => {
                                                                                                 />
                                                                                             </View>
                                                                                             <View style={PAGESTYLE.lessonstartButton}>
-                                                                                                {/* <TouchableOpacity style={PAGESTYLE.buttonGrp}><Text style={STYLE.commonButtonBordered}>tertiary cta</Text></TouchableOpacity> */}
                                                                                                 <TouchableOpacity style={PAGESTYLE.buttonGrp}
                                                                                                     activeOpacity={opacity}
                                                                                                     onPress={() => { setSelectedIndex(2); getHomeWork() }}>
@@ -665,9 +661,6 @@ const PupuilDashboard = (props) => {
                                                                                     </ScrollView>
                                                                                 </View>
                                                                             </> :
-                                                                            // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                                            //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                                            // </View>
                                                                             <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                                                     }
 
@@ -676,11 +669,11 @@ const PupuilDashboard = (props) => {
                                                         </View>
 
                                                     </View>
-                                                </View>
+                                                </View>  */}
 
                                                 <View style={PAGESTYLE.achivementWrap}>
-                                                    <View style={PAGESTYLE.achivementBox}>
-                                                        <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : hp(38.8)} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
+                                                    <View style={[PAGESTYLE.achivementBox, { height: '100%', overflow: 'hidden' }]}>
+                                                        <RewardStarback width={"190%"} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
                                                         <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                                         <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                                         <View style={PAGESTYLE.rewardStarMark}>
@@ -715,28 +708,32 @@ const PupuilDashboard = (props) => {
                                                         </View>
                                                     </View>
                                                     {pupilAvatarList.length ?
-                                                        <View style={PAGESTYLE.achivementRobot}>
-                                                            {avatarListIndex == 0 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ?  hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top:Platform.OS === 'android' ?  hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? wp(22.3) :  wp(19.7)}} ></Image>
-                                                                : null}
-                                                            {avatarListIndex == 1 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(-4), zIndex: 10 }} ></Image> 
-                                                                : null}
-                                                            {avatarListIndex == 2 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10, right: wp(21) }} ></Image>
-                                                                : null}
-                                                            {avatarListIndex == 3 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
-                                                                : null}
-                                                            {avatarListIndex == 4 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
-                                                                : null}
-                                                            {avatarListIndex == 5 ?
-                                                                <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} ></Image>
-                                                                : null}
-                                                            <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain' }} ></Image>
-                                                            <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 20 }} ></Image>
-                                                            <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} ></Image>
+                                                        <View style={[PAGESTYLE.achivementRobot, { height: '100%', overflow: 'hidden' }]}>
+                                                            <AvtarBg width={"100%"} height={'100%'} position={"absolute"} style={{ bottom: 0 }} />
+                                                            <View style={{width:"100%", height:'100%', alignItems:'center', bottom:'-10%'}}>
+                                                                {avatarListIndex == 0 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? "37%" : "35.5%" }} ></Image>
+                                                                    : null}
+                                                                {avatarListIndex == 1 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} ></Image>
+                                                                    : null}
+                                                                {avatarListIndex == 2 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2%', zIndex: 10, right: "38%" }} ></Image>
+                                                                    : null}
+                                                                {avatarListIndex == 3 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
+                                                                    : null}
+                                                                {avatarListIndex == 4 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} ></Image>
+                                                                    : null}
+                                                                {avatarListIndex == 5 ?
+                                                                    <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} ></Image>
+                                                                    : null}
+
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain' }} ></Image>
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 20 }} ></Image>
+                                                                <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} ></Image>
+                                                            </View>
                                                         </View> : null}
                                                 </View>
                                             </View>

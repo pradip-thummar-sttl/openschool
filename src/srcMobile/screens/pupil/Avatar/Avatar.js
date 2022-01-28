@@ -410,8 +410,7 @@ const Avatar = (prop) => {
             }
 
             Service.post(data, `${EndPoints.UpdateAvtar}/${User.user.UserDetialId}`, (res) => {
-                console.log('-----------api response------------', res)
-                showMessage('Avtar Saved')
+                showMessage('Your avatar has been saved successfully')
             }, (err) => {
                 console.log('response of get all lesson error', err)
             })

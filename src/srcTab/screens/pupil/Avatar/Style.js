@@ -86,7 +86,7 @@ export default StyleSheet.create({
 
     // Right View
     borderView: {
-        width:Platform.OS === 'android' ?  hp(100) :  hp(70),
+        width:"100%",
         height: wp(60),
         borderWidth: 1,
         borderRadius: 10,

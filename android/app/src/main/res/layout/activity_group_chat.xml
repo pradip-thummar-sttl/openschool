@@ -46,21 +46,15 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/view"
+        app:layout_constraintBottom_toTopOf="@+id/layoutChatbox"
         app:layout_constraintTop_toBottomOf="@+id/headerView" />
 
-
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#e0e0e0"
-        app:layout_constraintBottom_toTopOf="@+id/layoutChatbox" />
 
     <RelativeLayout
         android:id="@+id/layoutChatbox"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -68,22 +62,21 @@
             android:id="@+id/edtText"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textCapSentences"
             android:layout_centerVertical="true"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
             android:layout_toStartOf="@+id/btnSend"
-            android:background="@android:color/transparent"
+            android:background="@drawable/shape_chat"
             android:hint="Say something..."
-            android:maxLines="6"
-            tools:ignore="Autofill" />
+            android:inputType="textCapSentences"
+            android:maxLines="6" />
 
         <ImageView
             android:id="@+id/btnSend"
-            android:layout_width="30dp"
+            android:layout_width="40dp"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="5dp"
-            android:padding="5dp"
+            android:padding="8dp"
             android:src="@drawable/icn_send" />
 
     </RelativeLayout>
