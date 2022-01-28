@@ -92,49 +92,49 @@ const Sidebar = (props) => {
                 <View style={styles.mainMenu}>
 
                     <TouchableOpacity onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}>
-                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.navigateToTimetable(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}>
-                        <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_calendar style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calendar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onLessonAndHomework(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}>
-                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>My Lessons</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}>
-                        <Ic_Achievement style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Achievement style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>My Achievements</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onAvatar(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}>
-                        <Ic_MyAvatar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_MyAvatar style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>My Avatar</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onParentZone(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
-                        <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { showActionChooser(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}>
-                        <Logout style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Logout style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: hp(1.5),
-        paddingBottom: hp(2.0),
+        paddingBottom: hp(1.5),
         paddingLeft: hp(1),
         // alignSelf:'center'
     },
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontRegular,
     },
     mainMenu: {
-        paddingTop: 40,
+        paddingTop: hp(4.5),
     },
     menuItem: {
         flexDirection: 'row',
@@ -237,6 +237,7 @@ const styles = StyleSheet.create({
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
         width: hp(22),
+        height : '100%'
     },
     headerProfile: {
         width: 40,
