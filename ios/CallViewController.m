@@ -10,6 +10,7 @@
 #import "CallViewController.h"
 #import "PollViewController.h"
 #import "Profile.h"
+#import "ChatVC.h"
 #import "PollVC.h"
 #import "ToolBar.h"
 #import "CustomButton.h"
@@ -399,6 +400,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
 //    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
       if (![message containsString:@"##@##"]) {
+        if ([message containsString:@"#@#"]) {
         NSArray *items = [message componentsSeparatedByString:@"#@#"];
         
         if (_isTeacher) {
@@ -464,7 +466,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           }
         
         }
-        
+        }
        
         
       }else{
@@ -706,11 +708,14 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //
 //        [weakSelf.chatManager sendAddingMessage:message action:DialogActionTypeCreate withUsers:createdDialog.occupantIDs toDialog:createdDialog completion:^(NSError * _Nullable error) {
 //            [self openNewDialog:createdDialog];
-          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
-          ChatViewController *chatController = [storyboard instantiateViewControllerWithIdentifier:@"ChatViewController"];
-          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
-          chatController.currentUserID = weakSelf.currentUserID;
-          chatController.currentUserName=weakSelf.currentName;
+//          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
+          ChatVC *chatController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"ChatVC"];
+          chatController.channels = weakSelf.dialogID;
+      chatController.currentUserName = weakSelf.currentName;
+      chatController.currentUserId = weakSelf.currentUserID;
+//          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
+//          chatController.currentUserID = weakSelf.currentUserID;
+//          chatController.currentUserName=weakSelf.currentName;
           [weakSelf presentViewController:chatController animated:false completion:nil];
 //        }];
 

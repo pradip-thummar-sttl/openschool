@@ -177,11 +177,11 @@ const CGRect kDefCircleDeclineRect = {0, 0, 44, 44};
 + (QBButton *)chatButton {
     
     QBButton *button = [self buttonWithFrame:kDefCircleDeclineRect
-                             backgroundColor:kDefDeclineColor
+                             backgroundColor:kDefBackgroundColor
                                selectedColor:kDefSelectedColor];
     
-    button.iconView = [self iconViewWithNormalImage:@"more"
-                                      selectedImage:@"more"];
+    button.iconView = [self iconViewWithNormalImage:@"message"
+                                      selectedImage:@"message"];
     return button;
 }
 
