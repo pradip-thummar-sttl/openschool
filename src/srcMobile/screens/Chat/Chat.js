@@ -45,7 +45,7 @@ const Chat = (props) => {
         { name: 'PUPIL CHAT', isSelected: false },
         { name: 'SCHOOL CHAT', isSelected: false }])
     const [placeholder, setPlaceHolder] = useState('');
-
+    const reveresed = [...messages].reverse()
     useEffect(() => {
         if (props.tabs === 1) {
             setPlaceHolder("Message " + props.data.ParentFirstName + ' ' + props.data.ParentLastName)
@@ -66,7 +66,7 @@ const Chat = (props) => {
         console.log('message', message);
         if (typeof message === 'string' || message.hasOwnProperty('text')) {
             // mesage.push(event)
-            addMessage(messages => [...messages, event].reverse());
+            addMessage(messages => [...messages, event]);
         }
     };
 
@@ -125,7 +125,7 @@ const Chat = (props) => {
                             <FlatList
                                 style={{ marginBottom: 120 }}
                                 inverted={true}
-                                data={messages}
+                                data={reveresed}
                                 renderItem={({ item, index }) => {
                                     return (
                                         <View style={Styles.messageCell}>

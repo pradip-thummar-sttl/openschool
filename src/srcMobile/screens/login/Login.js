@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, TouchableOpacity,Platform } from 'react-native';
+import { NativeModules, View, StyleSheet, Image, ImageBackground, TextInput, Text, ScrollView, Alert, Dimensions, ActivityIndicator, TouchableOpacity, Platform } from 'react-native';
 // import { ColorAndroid } from 'react-native/Libraries/StyleSheet/PlatformColorValueTypesAndroid';
 import useColorScheme from 'react-native/Libraries/Utilities/useColorScheme';
 import CheckBox from '@react-native-community/checkbox';
@@ -310,21 +310,21 @@ class Login extends Component {
                         <View >
                             <TouchableOpacity
                                 onPress={() => this.props.navigation.navigate('Users')}
-                                style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 15 }}>
+                                style={styles.pupilBackArrow}>
                                 <BackArrow height={hp(2.34)} width={hp(2.34)} />
                             </TouchableOpacity>
                             <PupilMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
                         </View>
                         :
                         <View >
-                        <TouchableOpacity
-                            onPress={() => this.props.navigation.navigate('Users')}
-                            style={{ position: 'absolute', height: 20, width: 40, top: Platform.OS === 'android' ? 15 : 35, zIndex: 9, left: 15 }}>
-                            <BackArrow height={hp(2.34)} width={hp(2.34)} />
-                        </TouchableOpacity>
-                        <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
-                    </View>
-                        
+                            <TouchableOpacity
+                                onPress={() => this.props.navigation.navigate('Users')}
+                                style={styles.pupilBackArrow}>
+                                <BackArrow height={hp(2.34)} width={hp(2.34)} />
+                            </TouchableOpacity>
+                            <TeacherMobileLoginSideimg style={styles.image} width={wp(100)} height={Platform.OS == "android" ? '107.5%' : '100%'} />
+                        </View>
+
                     }
                 </View>
                 <View style={styles.rightContent}>
@@ -587,4 +587,13 @@ const styles = StyleSheet.create({
         fontSize: hp(1.8),
         marginBottom: hp(0.8),
     },
+    pupilBackArrow:
+    {
+        position: 'absolute',
+        height: 20,
+        width: 40,
+        top: Platform.OS === 'android' ? 15 : 35,
+        zIndex: 9,
+        left: 15
+    }
 });

@@ -88,7 +88,7 @@ const Popupaddrecording = (props) => {
                     :
                     <TouchableOpacity  onPress={() => {Download(props.recordingArr[0], (res) => { }) }} activeOpacity={opacity}
                         style={[styles.recordLinkBlock1, styles.topSpaceRecording]} >
-                        <Text style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
+                        <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.recordLinkText]}>{props.recordingArr[0].originalname}</Text>
                         <TouchableOpacity style={[styles.cancelButton]} onPress={() => { props.onRemoveRecording() }}>
                             <CloseBlack style={[STYLE.cancelButtonIcon1]} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
@@ -102,7 +102,7 @@ const Popupaddrecording = (props) => {
                     <View style={styles.popupContent}>
                         <View style={styles.tabcontent}>
                             <View style={styles.beforeBorder}>
-                                <Text numberOfLines={2} ellipsizeMode='tail' h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
+                                <Text numberOfLines={1} ellipsizeMode='tail' h2 style={[styles.titleTab, STYLE.centerText]}>Add Recording</Text>
                                 <Text P style={[STYLE.popupText, STYLE.centerText]}>Record an instructional video for your pupils.</Text>
                                 <View style={styles.entryContentMain}>
                                     <TouchableOpacity onPress={() => { toggleModal(); props.onScreeVoice() }} style={styles.entryData}>
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     recordLinkBlock: {
         // width : Platform.OS === 'android' ? hp(50.15) : hp(20.15),
 
-        // width: hp(20.15),
+        width: hp(20.15),
         // height : Platform.OS === 'android' ? hp(20.15) : hp(5.20),
         height: hp(5.20),
         padding: hp(1.43),
@@ -201,7 +201,8 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         alignItems: 'center',
         flexDirection: 'row',
-        paddingEnd:  Platform.OS === 'android' ? 25  :55
+        paddingEnd:  Platform.OS === 'android' ? 25  :55,
+        // width: hp(20.15),
     },
     recordLinkBlock2: {
         width: '100%',
@@ -211,7 +212,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
-        alignItems: 'center',
+        // alignItems: 'center',
+        paddingStart : 10
 
     },
     topSpaceRecording: {
@@ -228,6 +230,7 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
+        paddingEnd : 10
        
 
 

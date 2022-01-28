@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../../utils/Fonts';
@@ -118,7 +118,7 @@ export default StyleSheet.create({
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
         position:'absolute',
-        bottom:0
+        bottom: 10
         // bottom:18,
     },
     messageCell: {
@@ -145,7 +145,7 @@ export default StyleSheet.create({
     },
     input: {
         width: '100%',
-        height: '100%',
+        // height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
         marginHorizontal:wp(1.5),

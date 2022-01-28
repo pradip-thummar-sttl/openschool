@@ -47,101 +47,100 @@ const TeacherProfileView = (props) => {
         <View style={PAGESTYLE.mainPage1}>
             {!isLessonDetail &&
                 <HeaderPMInner
-                    onSearch={(search, filter)=> {setSearch(search); setFilter(filter)}}
-                    navigateToBack={() => {props.navigateToBack()}} 
+                    onSearch={(search, filter) => { setSearch(search); setFilter(filter) }}
+                    navigateToBack={() => { props.navigateToBack() }}
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
                     pupilName={item.FirstName + ' ' + item.LastName}
                     onNotification={() => openNotification()} />
             }
 
-            {
-                tabSelected === 0 ?
-                    <View style={{ width: isHide ? '100%' : '100%', }}>
-                        <View style={PAGESTYLE.whiteBg}>
-                            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '99%' }}>
-                                <View style={PAGESTYLE.managementDetail}>
-                                    <View style={PAGESTYLE.secondHeader}>
-                                        <View style={{ height: '100%', overflow: 'hidden', width: '100%', position: 'absolute'}}>
-                                            <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} /> 
-                                        </View>
-                                        <View style={PAGESTYLE.thumbTopUser}>
-                                            <Image style={{ height: '100%', width: '100%', borderRadius: 100 ,backgroundColor : COLORS.borderGrp}}
-                                                source={{ uri: baseUrl + item.ProfilePicture }} />
-                                        </View>
-                                        <TouchableOpacity style={STYLE.btnEditView} onPress={()=> props.onEditTeacherProfile()}>  
-                                                <Text style={STYLE.txtEditView}>Edit Profile</Text>
-                                        </TouchableOpacity> 
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Teacher name</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.FirstName} {item.LastName}</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Teaching Year</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.TeachingYear}</Text>
-                                        </View>
-                                        <View>
-                                            <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Unique I.D (auto-generated)</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.UniqueNumber}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={PAGESTYLE.managementNameSec}>
-                                        <View style={PAGESTYLE.nameSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Email</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.Email}</Text>
-                                        </View>
-                                        <View style={PAGESTYLE.dateSmlBlock}>
-                                            <Text style={PAGESTYLE.userLabel}>Status</Text>
-                                            <Text style={PAGESTYLE.userName}>{item.Active ? 'Active' : 'Inactive'}</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <View style={PAGESTYLE.rateAnnotationBlock}>
-                                    <View style={PAGESTYLE.ratingBlock}>
-                                        <Text style={PAGESTYLE.ratingTitle}>Teacher Insights</Text>
-                                        <View style={PAGESTYLE.achivementBox}>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.ScheduledLesson}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Scheduled Lessons</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSet}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Homework Set</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.ActivePupile}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Active Pupils</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.PreviousLesson}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Previous Lessons</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSubmited}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
-                                            </View>
-                                            <View style={PAGESTYLE.insightBox}>
-                                                <Text style={PAGESTYLE.insightMain}>{teacherCountData.InActivePupile}</Text>
-                                                <Text style={PAGESTYLE.insightLabel}>Inactive Pupils</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                </View>
-                               
-                            </KeyboardAwareScrollView>
-                        </View>
-                    </View>
-                    :
-                    tabSelected === 1 ?
+            <View style={{ flex: 1 }}>
+                {
+                    tabSelected === 0 ?
                         <View style={{ width: isHide ? '100%' : '100%', }}>
-                            <TeacherChat tabs={tabSelected} data={item} />
+                            <View style={PAGESTYLE.whiteBg}>
+                                <KeyboardAwareScrollView showsVerticalScrollIndicator={false} style={{ height: '99%' }}>
+                                    <View style={PAGESTYLE.managementDetail}>
+                                        <View style={PAGESTYLE.secondHeader}>
+                                            <View style={{ height: '100%', overflow: 'hidden', width: '100%', position: 'absolute' }}>
+                                                <TopBackImg style={PAGESTYLE.managementopImage} height={hp(21)} width={'100%'} />
+                                            </View>
+                                            <View style={PAGESTYLE.thumbTopUser}>
+                                                <Image style={{ height: '100%', width: '100%', borderRadius: 100, backgroundColor: COLORS.borderGrp }}
+                                                    source={{ uri: baseUrl + item.ProfilePicture }} />
+                                            </View>
+                                            <TouchableOpacity style={STYLE.btnEditView} onPress={() => props.onEditTeacherProfile()}>
+                                                <Text style={STYLE.txtEditView}>Edit Profile</Text>
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Teacher name</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.FirstName} {item.LastName}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Teaching Year</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.TeachingYear}</Text>
+                                            </View>
+                                            <View>
+                                                <Text numberOfLines={1} style={[PAGESTYLE.userLabel,]}>Unique I.D (auto-generated)</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.UniqueNumber}</Text>
+                                            </View>
+                                        </View>
+                                        <View style={PAGESTYLE.managementNameSec}>
+                                            <View style={PAGESTYLE.nameSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Email</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.Email}</Text>
+                                            </View>
+                                            <View style={PAGESTYLE.dateSmlBlock}>
+                                                <Text style={PAGESTYLE.userLabel}>Status</Text>
+                                                <Text style={PAGESTYLE.userName}>{item.Active ? 'Active' : 'Inactive'}</Text>
+                                            </View>
+                                        </View>
+                                    </View>
+                                    <View style={PAGESTYLE.rateAnnotationBlock}>
+                                        <View style={PAGESTYLE.ratingBlock}>
+                                            <Text style={PAGESTYLE.ratingTitle}>Teacher Insights</Text>
+                                            <View style={PAGESTYLE.achivementBox}>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.ScheduledLesson}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Scheduled Lessons</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSet}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Homework Set</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.ActivePupile}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Active Pupils</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.PreviousLesson}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Previous Lessons</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.HomeworkSubmited}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Homework Submitted</Text>
+                                                </View>
+                                                <View style={PAGESTYLE.insightBox}>
+                                                    <Text style={PAGESTYLE.insightMain}>{teacherCountData.InActivePupile}</Text>
+                                                    <Text style={PAGESTYLE.insightLabel}>Inactive Pupils</Text>
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </View>
+
+                                </KeyboardAwareScrollView>
+                            </View>
                         </View>
                         :
-                        <LessonList data={item} search={isSearch} filter={isFilter} onNotification={()=> openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
-            }
-
+                        tabSelected === 1 ?
+                            <TeacherChat tabs={tabSelected} data={item} />
+                            :
+                            <LessonList data={item} search={isSearch} filter={isFilter} onNotification={() => openNotification()} setLessonDetail={(flag) => setLessonDetail(flag)} />
+                }
+            </View>
         </View>
     );
 }

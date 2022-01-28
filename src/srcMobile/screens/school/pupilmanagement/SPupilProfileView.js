@@ -20,6 +20,7 @@ const { CallModule } = NativeModules;
 
 const SPupilProfileView = (props) => {
     const item = props.route.params.item;
+    
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 

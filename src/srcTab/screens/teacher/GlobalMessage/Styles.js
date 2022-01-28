@@ -555,7 +555,7 @@ export default StyleSheet.create({
         lineHeight: hp(4.60),
         marginTop:wp(2),
         paddingVertical: 10,
-        backgroundColor: COLORS.greyBack
+        backgroundColor: COLORS.greyBack,
     },
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -567,7 +567,34 @@ export default StyleSheet.create({
         width: hp(15.80),
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
+       
     },
+  
+    pupilTableHeadingMessage : {
+            width: "40%",
+            fontFamily: FONTS.fontRegular,
+            color: COLORS.menuLightFonts,
+            marginHorizontal : 10,
+            justifyContent : 'center',
+            alignItems : 'center'
+    },
+    pupilTableHeadingDate : {
+        width: "22%",
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        marginHorizontal : 10,
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
+    pupilTableHeadingStatus : {
+        width: "22%",
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        marginHorizontal : 10,
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
+
     tabpupil2: {
         width: hp(17.97),
     },
@@ -626,6 +653,33 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         // justifyContent : 'center'
+    },
+    pupilProfileMessage : {
+        width:'40%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal : 10,
+      
+    },
+    pupilProfileDate : {
+        width:'22%',
+        flexDirection: 'row',
+        justifyContent : 'center',
+        alignItems: 'center',
+        marginHorizontal : 10,
+    },
+    pupilProfileStatus : {
+        width:'22%',
+        flexDirection: 'row',
+        justifyContent : 'center',
+        alignItems: 'center',
+        marginHorizontal : 10,
+    },
+    lastColumnArrow : {
+        width : '10%',
+        paddingHorizontal :10,
+        justifyContent : 'center',
+        alignItems :'center'
     },
     groupColumnmain: {
         width: hp(17.97),
@@ -693,6 +747,7 @@ export default StyleSheet.create({
         fontSize: hp(2.22),
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGray,
+       
     },
     pupilgroupName: {
         fontSize: hp(1.82),
@@ -713,7 +768,7 @@ export default StyleSheet.create({
     firstColumn: {
         paddingLeft: hp(4.5),
         width: Platform.OS === 'android' ?  hp(75.55) : hp(30),
-        // backgroundColor : 'red'
+        backgroundColor : 'red'
     },
     secoundColumn: {
         width: hp(30),

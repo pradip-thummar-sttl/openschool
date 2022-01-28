@@ -118,15 +118,16 @@ export default StyleSheet.create({
     },
     textView: {
         width: '100%',
-        height: hp(8),
+        height: hp(10),
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         backgroundColor: COLORS.greyBack,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         // position: 'absolute',
-        // bottom: 10,
+        bottom: Platform.OS === 'android' ? 10 : 20,
         position: 'absolute',
-        bottom: 0,
+        borderRadius : 10
+        // bottom: 0,
         // zIndex: 100
     },
     messageCell: {
@@ -162,6 +163,13 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         resizeMode: 'contain',
+        backgroundColor: COLORS.lightGrey,
+        borderRadius: 20,
+    },
+    userIconPupilMobile: {
+        width: hp(2.5),
+        height: hp(2.5),
+        // resizeMode: 'contain',
         backgroundColor: COLORS.lightGrey,
         borderRadius: 20,
     },

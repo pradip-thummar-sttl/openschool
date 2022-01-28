@@ -559,6 +559,32 @@ export default StyleSheet.create({
         paddingVertical: 10,
         backgroundColor: COLORS.greyBack
     },
+
+    pupilTableHeadingMessage : {
+        width: "40%",
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        marginHorizontal : 10,
+        justifyContent : 'center',
+        alignItems : 'center'
+},
+    pupilTableHeadingDate : {
+    width: "22%",
+    fontFamily: FONTS.fontRegular,
+    color: COLORS.menuLightFonts,
+    marginHorizontal : 10,
+    justifyContent : 'center',
+    alignItems : 'center'
+},
+    pupilTableHeadingStatus : {
+    width: "22%",
+    fontFamily: FONTS.fontRegular,
+    color: COLORS.menuLightFonts,
+    marginHorizontal : 10,
+    justifyContent : 'center',
+    alignItems : 'center'
+},
+
     pupilDashboard: {
         paddingLeft: hp(3.125),
         paddingTop: hp(2.21),
@@ -622,6 +648,33 @@ export default StyleSheet.create({
         borderRadius: hp(2.0),
         marginBottom:wp(1),
         marginHorizontal:hp(2),
+    },
+    pupilProfileMessage : {
+        width:'40%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginHorizontal : 10,
+      
+    },
+    pupilProfileDate : {
+        width:'22%',
+        flexDirection: 'row',
+        justifyContent : 'center',
+        alignItems: 'center',
+        marginHorizontal : 10,
+    },
+    pupilProfileStatus : {
+        width:'22%',
+        flexDirection: 'row',
+        justifyContent : 'center',
+        alignItems: 'center',
+        marginHorizontal : 10,
+    },
+    lastColumnArrow : {
+        width : '10%',
+        paddingHorizontal :10,
+        justifyContent : 'center',
+        alignItems :'center'
     },
     pupilProfile: {
         width: hp(15.80),

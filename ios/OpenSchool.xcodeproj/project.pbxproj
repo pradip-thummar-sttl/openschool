@@ -16,6 +16,8 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* OpenSchoolTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* OpenSchoolTests.m */; };
+		32471AA5279FD06E00442F90 /* ChatVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 32471AA4279FD06E00442F90 /* ChatVC.m */; };
+		32B3954D27A0089800F9B79C /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 32B3954C27A0089800F9B79C /* MessageCell.m */; };
 		540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C803CDC5ED40679094DFEC /* Poppins-Italic.ttf */; };
 		6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5987D201010499FA5C00400 /* Poppins-Light.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -214,6 +216,10 @@
 		238E08FDBAEC4DCB9F7938CE /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-SemiBold.ttf"; path = "../assets/fonts/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* OpenSchool-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenSchool-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* OpenSchool-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OpenSchool-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		32471AA3279FD06E00442F90 /* ChatVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatVC.h; sourceTree = "<group>"; };
+		32471AA4279FD06E00442F90 /* ChatVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatVC.m; sourceTree = "<group>"; };
+		32B3954B27A0089700F9B79C /* MessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
+		32B3954C27A0089800F9B79C /* MessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Regular.ttf"; path = "../assets/fonts/Poppins-Regular.ttf"; sourceTree = "<group>"; };
 		63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Bold.ttf"; path = "../assets/fonts/Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = OpenSchool/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -756,6 +762,10 @@
 				88BE3A6F272FE11400A1693B /* PollViewController.m */,
 				8824A6BB2768ACE200C6E695 /* PollVC.h */,
 				8824A6BC2768ACE200C6E695 /* PollVC.m */,
+				32471AA3279FD06E00442F90 /* ChatVC.h */,
+				32471AA4279FD06E00442F90 /* ChatVC.m */,
+				32B3954B27A0089700F9B79C /* MessageCell.h */,
+				32B3954C27A0089800F9B79C /* MessageCell.m */,
 			);
 			name = CallViewController;
 			sourceTree = "<group>";
@@ -2021,6 +2031,7 @@
 				884069082775AA0A0053E668 /* NSString+Chat.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				884069022775AA0A0053E668 /* UIImage+Cropper.m in Sources */,
+				32471AA5279FD06E00442F90 /* ChatVC.m in Sources */,
 				882EA0A2266A2173000B9813 /* SVRadialGradientLayer.m in Sources */,
 				884069102775AA7F0053E668 /* ChatResources.m in Sources */,
 				884069062775AA0A0053E668 /* NSDate+Chat.m in Sources */,
@@ -2114,6 +2125,7 @@
 				8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */,
 				884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */,
 				8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */,
+				32B3954D27A0089800F9B79C /* MessageCell.m in Sources */,
 				8840691D2775AAD00053E668 /* AttachmentDownloadManager.m in Sources */,
 				882EA0CE266A229A000B9813 /* CheckView.m in Sources */,
 			);
