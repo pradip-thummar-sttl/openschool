@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView } from 'react-native'
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Platform } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 // import Images from '../../../../utils/Images'
 // import Images from '../../../../../srcmobile/utils/Images'
@@ -62,8 +62,6 @@ const Avatar = () => {
     const [gold, setGold] = useState(0)
 
     useEffect(() => {
-
-        console.log('-----User------', User)
 
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -396,8 +394,7 @@ const Avatar = () => {
             }
 
             Service.post(data, `${EndPoints.UpdateAvtar}/${User.user.UserDetialId}`, (res) => {
-                console.log('-----------api response------------', res)
-                showMessage('Avtar Saved')
+                showMessage('Your avatar has been saved successfully')
 
             }, (err) => {
                 console.log('response of get all lesson error', err)
@@ -411,14 +408,12 @@ const Avatar = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
-        // prop.navigation.navigate('NotificationDrawer',{ onGoBack: () => refresh() })
     }
     return (
         <ScrollView>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
-                {/* LeftView */}
-                <View style={Styles.leftView}>
+                <View style={[Styles.leftView, {width:'35%'}]}>
                     <View style={Styles.starView}>
                         <View style={Styles.yellowView}>
                             <Text style={Styles.subText}>Your stars convert to</Text>
@@ -446,13 +441,13 @@ const Avatar = () => {
                         <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
                             {/* Avatar editing View */}
                             {currentSelectedHair == 0 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: hp(9.5) }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%": "25%" }} ></Image>
                                 : null}
                             {currentSelectedHair == 1 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: hp(0), zIndex: 10 }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "2%", zIndex: 10 }} ></Image>
                                 : null}
                             {currentSelectedHair == 2 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: hp(13) }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(4.8), zIndex: 10, right: '30%' }} ></Image>
                                 : null}
                             {currentSelectedHair == 3 ?
                                 <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(1.3), zIndex: 10, }} ></Image>
@@ -469,11 +464,9 @@ const Avatar = () => {
                         </View> : null}
                 </View>
 
-                {/* Right View */}
-                <View style={[Styles.rightView]}>
+                <View style={[Styles.rightView,{width:'65%'}]}>
                     <View style={Styles.borderView}>
-                        {/* Tabs */}
-                        {isLoading == false ?
+                        {isLoading == false &&
                             <View style={Styles.tabView}>
                                 {
                                     stateOptions.map((item, index) => {
@@ -484,31 +477,33 @@ const Avatar = () => {
                                         )
                                     })
                                 }
-                            </View> : null}
-                        {isLoading == false ?
-                            <FlatList
-                                data={currentSelectedTab()}
-                                ListFooterComponent={
-                                    isLoading == false ?
-                                        <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }} onPress={() => saveMyAvtar()} >
-                                            <Text style={{
-                                                color: COLORS.white,
-                                                fontSize: hp(1.56),
-                                                textTransform: 'uppercase',
-                                                fontFamily: FONTS.fontBold,
-                                            }} >SAVE AVATAR</Text>
-                                        </TouchableOpacity> : null
-                                }
-                                renderItem={({ item, index }) => {
-                                    return (
-                                        <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
-                                            <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
-                                        </TouchableOpacity>
-                                    )
-                                }}
-                                numColumns={3}
-                            />
-                            : null}
+                            </View>}
+                        {isLoading == false &&
+                            <View style={{}}>
+                                <FlatList
+                                    data={currentSelectedTab()}
+                                    ListFooterComponent={
+                                        isLoading == false ?
+                                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }} onPress={() => saveMyAvtar()} >
+                                                <Text style={{
+                                                    color: COLORS.white,
+                                                    fontSize: hp(1.56),
+                                                    textTransform: 'uppercase',
+                                                    fontFamily: FONTS.fontBold,
+                                                }} >SAVE AVATAR</Text>
+                                            </TouchableOpacity> : null
+                                    }
+                                    renderItem={({ item, index }) => {
+                                        return (
+                                            <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
+                                                <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
+                                            </TouchableOpacity>
+                                        )
+                                    }}
+                                    numColumns={3}
+                                />
+                            </View>
+                        }
                     </View>
                 </View>
             </View>

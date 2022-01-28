@@ -515,7 +515,6 @@ export default StyleSheet.create({
         flexDirection: 'row',
         marginTop:hp(7.5),
         marginBottom:hp(7.5),
-        
         width:'100%',
         alignItems: 'center',
     },
