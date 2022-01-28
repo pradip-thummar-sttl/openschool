@@ -99,16 +99,29 @@ const SidebarSchool = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                   <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
+                {/* {  isSmall ? 
+                    <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                    :
+                    <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
+                } */}
+                <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                     {
                         isSmall ? null :
-                            <View style={styles.profileTextMain}>
+                            <View style={styles.profileTextMainTop}>
                                 {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                                 <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
-                                <Text numberOfLines={1} style={styles.profileTitle}>MYED Open School</Text>
+                                <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} /> 
                             </View>
                     }
+                   {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
+                    {/* {
+                        isSmall ? null :
+                            <View style={styles.profileTextMain}>
+                                 <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> 
+                                <Text numberOfLines={1} style={styles.profileTitle}>MyEd Open School</Text>
+                            </View>
+                    } */}
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
                     <TouchableOpacity
@@ -271,10 +284,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(1.5),
         paddingBottom: hp(2.0),
-        paddingLeft: hp(1.1),
+        paddingLeft: hp(1),
         // alignSelf:'center'
     },
-    profileTextMain: {
+    profileTextMainTop: {
+        paddingLeft: hp(0.8),
+    },
+    profileTextMain:{
         paddingLeft: hp(1.5),
     },
     profileTitle: {
@@ -315,10 +331,26 @@ const styles = StyleSheet.create({
         width: hp(22),
     },
     headerProfile: {
-        width: 40,
-        height: 40,
+        width: 190,
+        height: 50,
         resizeMode: 'contain',
-        borderRadius: hp(100),
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        marginHorizontal : 3,
+    },
+    headerClosed: {
+        // backgroundColor: 'blue',
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
+    },
+    headerProfilesidebar: {
+        width: 140,
+        height: 50,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        
     },
     userInfobottomMain: {
         position: 'absolute',

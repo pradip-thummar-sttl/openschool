@@ -78,11 +78,14 @@ const Sidebar = (props) => {
         <View style={styles.sidebarHeader}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} />
+                    {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
+                    <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                     {
                         isSmall ? null :
-                            <View style={styles.profileTextMain}>
-                                <Text numberOfLines={1} style={[styles.profileTitle, { width: hp(15) }]}>MYED Open School</Text>
+                            <View style={styles.profileTextMainTop}>
+                                {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                                <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} /> 
                             </View>
                     }
                 </TouchableOpacity>
@@ -187,12 +190,19 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 20,
-        paddingBottom: 0,
-        paddingHorizontal: 10,
+        paddingTop: hp(1.5),
+        paddingBottom: hp(2.0),
+        paddingLeft: hp(1),
+        // alignSelf:'center'
     },
     profileTextMain: {
-        paddingLeft: 15,
+        paddingLeft: hp(1.5),
+    },
+    headerClosed: {
+        // backgroundColor: 'red',
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
     },
     profileTitle: {
         fontSize: hp(2.0),
@@ -234,6 +244,18 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         borderRadius: hp(100),
     },
+    headerProfilesidebar: {
+        width: 140,
+        height: 50,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        
+    },
+
+profileTextMainTop: {
+    paddingLeft: hp(0.8),
+},
     userInfobottom: {
         position: 'absolute',
         bottom: 0,
@@ -280,5 +302,15 @@ const styles = StyleSheet.create({
         // position: 'absolute',
         marginLeft: hp(4),
         right: 0,
+    },
+    headerProfile: {
+        width: 190,
+        height: 50,
+        // width: 50,
+        // height: 40,
+        resizeMode: 'contain',
+        // borderRadius: hp(100),
+        // backgroundColor : 'red',
+        marginHorizontal : 3
     },
 });
