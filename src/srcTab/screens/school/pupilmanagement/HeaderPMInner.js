@@ -71,12 +71,12 @@ const HeaderPMInner = (props) => {
                                 onPress={() => { setSelectedTab(1), props.tabIndex(1) }}>
                                 <Text style={[styles.tabsText, tabIndex == 1 ? styles.tabsTextSelected : null]}>Parent Chat</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 style={styles.tabs}
                                 activeOpacity={opacity}
                                 onPress={() => { setSelectedTab(2), props.tabIndex(2) }}>
                                 <Text style={[styles.tabsText, tabIndex == 2 ? styles.tabsTextSelected : null]}>Lesson {'&'} Homework</Text>
-                            </TouchableOpacity>
+                            </TouchableOpacity> */}
                         </View>
                     </ScrollView>
                 </View>
