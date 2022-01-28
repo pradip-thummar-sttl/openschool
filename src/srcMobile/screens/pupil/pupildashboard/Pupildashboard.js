@@ -40,6 +40,7 @@ import RobotAvtar from "../../../../svg/pupil/dashboard/RobotAvtar";
 import BronzeStar from "../../../../svg/pupil/dashboard/BronzeStar";
 import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
+import { GetImage } from "../../../../utils/ImageUtils";
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -719,9 +720,7 @@ const PupuilDashboard = (props) => {
                                                             </ScrollView>
                                                         </RBSheet>
                                                     </> :
-                                                    // <View style={{ height: 100, width: '100%', justifyContent: 'center' }}>
-                                                    //     <Text style={{ alignItems: 'center', width: '100%', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                                    // </View>
+                                                   
                                                     <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                             }
                                         </View>
@@ -732,27 +731,24 @@ const PupuilDashboard = (props) => {
 
                         <View style={PAGESTYLE.achivementWrap}>
                             <View style={PAGESTYLE.achivementBox}>
-                                <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} />
-                                {/* <Image source={Images.RewardStar} style={PAGESTYLE.rewardStar} /> */}
+                                {/* <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} /> */}
+                                <Image style={{ width: '100%', height: hp(10)}} source={GetImage.ImageReward} />
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                 <View style={PAGESTYLE.paddingDiv}>
                                     <View style={PAGESTYLE.rewardStarMark}>
                                         <View style={PAGESTYLE.centerText}>
                                             <BronzeStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
-                                            {/* <ImageBackground source={Images.BronzeStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                             <Text style={PAGESTYLE.starSelectedText}>{bronze}</Text>
                                             <Text style={PAGESTYLE.starText}>Bronze stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerStar}>
                                             <SilverStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
-                                            {/* <ImageBackground source={Images.SilverStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                             <Text style={PAGESTYLE.starSelectedText}>{silver}</Text>
                                             <Text style={PAGESTYLE.starText}>Silver stars</Text>
                                         </View>
                                         <View style={PAGESTYLE.centerText}>
                                             <GoldStar width={hp(4.94)} height={hp(4.68)} style={[PAGESTYLE.starSelected]} />
-                                            {/* <ImageBackground source={Images.GoldStarFill} style={[PAGESTYLE.starSelected]}></ImageBackground> */}
                                             <Text style={PAGESTYLE.starSelectedText}>{gold}</Text>
                                             <Text style={PAGESTYLE.starText}>Gold stars</Text>
                                         </View>
@@ -768,20 +764,15 @@ const PupuilDashboard = (props) => {
                             </View>
                             {pupilAvatarList.length ?
                                 <View style={PAGESTYLE.achivementRobot}>
-                                    {/* <RobotAvtar style={PAGESTYLE.cartoon} height={hp(35.71)} width={hp(41.25)} /> */}
-                                    {/* <Image source={Images.Robot} style={PAGESTYLE.cartoon} /> */}
-                                    {/* <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[0].Images }} />
-                                    <Image style={{ height: hp(3), width: hp(3), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[1].Images }} /> */}
-                                    {/* <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[2].Images }} />
-                                    <Image style={{ height: hp(25), width: hp(25), resizeMode: 'contain', }} source={{ uri: baseUrl + pupilAvatarList[3].Images }} /> */}
+                                    
                                     {avatarListIndex == 0 ?
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, left:Platform.OS === 'android' ? hp(11) : hp(8.5), alignSelf: 'center' }} ></Image>
                                         : null}
                                     {avatarListIndex == 1 ?
-                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-6), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-5.5), zIndex: 10, alignSelf: 'center' }} ></Image>
                                         : null}
                                     {avatarListIndex == 2 ?
-                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, alignSelf: 'center', right: hp(8.5) }} ></Image>
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, alignSelf: 'center', right: Platform.OS === 'android' ? '30%' : '27%' }} ></Image>
                                         : null}
                                     {avatarListIndex == 3 ?
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-5), zIndex: 10, alignSelf: 'center' }} ></Image>
@@ -790,7 +781,7 @@ const PupuilDashboard = (props) => {
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(19), height: hp(19), resizeMode: 'contain', position: 'absolute', top: hp(-5), zIndex: 10, alignSelf: 'center' }} ></Image>
                                         : null}
                                     {avatarListIndex == 5 ?
-                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(16), height: hp(16), resizeMode: 'contain', position: 'absolute', top: hp(-7), zIndex: 10, alignSelf: 'center' }} ></Image>
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(16), height: hp(16), resizeMode: 'contain', position: 'absolute', top: '-25%', zIndex: 10, alignSelf: 'center' }} ></Image>
                                         : null}
                                     <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(20), height: hp(35), resizeMode: 'contain', alignSelf: 'center' }} ></Image>
                                     <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(4), zIndex: 20, alignSelf: 'center' }} ></Image>
