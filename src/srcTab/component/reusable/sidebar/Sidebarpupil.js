@@ -79,12 +79,14 @@ const Sidebar = (props) => {
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                     {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
+                    <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                     {
-                          isSmall ? 
-                            <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
-                            :
-                            <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
-                        
+                        isSmall ? null :
+                            <View style={styles.profileTextMainTop}>
+                                {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                                <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} /> 
+                            </View>
                     }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
@@ -188,13 +190,13 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        // paddingTop: hp(1.5),
-        // paddingBottom: hp(2.0),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(2.0),
         paddingLeft: hp(1),
         // alignSelf:'center'
     },
     profileTextMain: {
-        paddingLeft: 15,
+        paddingLeft: hp(1.5),
     },
     headerClosed: {
         // backgroundColor: 'red',
@@ -243,13 +245,17 @@ const styles = StyleSheet.create({
         borderRadius: hp(100),
     },
     headerProfilesidebar: {
-        width: 200,
+        width: 140,
         height: 50,
         resizeMode: 'contain',
         // borderRadius: hp(100),
         // backgroundColor : 'red',
-        // marginHorizontal : 3
+        
     },
+
+profileTextMainTop: {
+    paddingLeft: hp(0.8),
+},
     userInfobottom: {
         position: 'absolute',
         bottom: 0,

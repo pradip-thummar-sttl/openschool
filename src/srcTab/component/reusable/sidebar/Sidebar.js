@@ -74,15 +74,18 @@ const Sidebar = (props) => {
     }
 
     return (
-        <View style={styles.sidebarHeader}>
+        <View style={styles.sidebarHeader}> 
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                    {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                {  isSmall ? 
-                    <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
-                    :
-                    <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
-                }
+                <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                    {
+                        isSmall ? null :
+                            <View style={styles.profileTextMainTop}>
+                                {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                                <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
+                                <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} /> 
+                            </View>
+                    }
                 </TouchableOpacity>
                 <View style={styles.mainMenu}>
                     <TouchableOpacity
@@ -236,24 +239,27 @@ const styles = StyleSheet.create({
     userInfo: {
         flexDirection: 'row',
         alignItems: 'center',
-        // paddingTop: hp(1.5),
-        // paddingBottom: hp(2.0),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(2.0),
         paddingLeft: hp(1),
         // alignSelf:'center'
     },
     headerProfilesidebar: {
-        width: 200,
+        width: 140,
         height: 50,
         resizeMode: 'contain',
         // borderRadius: hp(100),
         // backgroundColor : 'red',
-        // marginHorizontal : 3
+        
     },
     headerClosed: {
         // backgroundColor: 'red',
         width: 50,
         height: 50,
         resizeMode: 'contain',
+    },
+    profileTextMainTop: {
+        paddingLeft: hp(0.8),
     },
     profileTextMain: {
         paddingLeft: hp(1.5),

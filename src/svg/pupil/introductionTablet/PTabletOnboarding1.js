@@ -137,6 +137,7 @@ function PTabletOnboarding1(props) {
                   rx={4.896}
                   ry={5.441}
                   transform="translate(9.793 3.264)"
+                  fill = '#000'
                 />
               </G>
               <G data-name="Group 1823" transform="translate(67.426 46.794)">
@@ -153,6 +154,7 @@ function PTabletOnboarding1(props) {
                   cy={5.441}
                   r={5.441}
                   transform="translate(8.705 3.264)"
+                  fill = '#000'
                 />
               </G>
             </G>

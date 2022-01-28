@@ -135,15 +135,11 @@ const Sidebar = (props) => {
         User.user.UserType == 'Teacher' ?
             <View style={styles.sidebarHeader}>
                 <View style={[styles.sideBarAside]}>
-                    <TouchableOpacity style={styles.userInfo}>
-                        {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} /> */}
-                         <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
-                        {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                        {/* <View style={styles.profileTextMain}>
-                            {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                            {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
-                        </View> */} 
+                    <TouchableOpacity style={styles.userInfoLogo}>
+                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                        <View style={styles.profileTextMain}>
+                            <Image style={styles.headerProfileText} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} />
+                        </View>
                     </TouchableOpacity>
                     <View style={styles.mainMenu}>
                         <TouchableOpacity
@@ -244,17 +240,12 @@ const Sidebar = (props) => {
             : User.user.UserType == 'School' ?
                 <View style={styles.sidebarHeader}>
                     <View style={[styles.sideBarAside]}>
-                        <TouchableOpacity style={styles.userInfo}>
-
-                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
-                            {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
-                            {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                            {/* <View style={styles.profileTextMain}>
-                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                                {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
-                            </View> */}  
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.userInfoLogo}>
+                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                        <View style={styles.profileTextMain}>
+                            <Image style={styles.headerProfileText} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} />
+                        </View>
+                    </TouchableOpacity>
                         <View style={styles.mainMenu}>
 
                             <TouchableOpacity onPress={() => { props.navigation.replace('SchoolDashBoard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
@@ -338,16 +329,12 @@ const Sidebar = (props) => {
                 :
                 <View style={styles.sidebarHeader}>
                     <View style={[styles.sideBarAside]}>
-                        <TouchableOpacity style={styles.userInfo}>
-                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogo.png")} /> 
-                            {/* <TopLogo style={styles.headerProfile} width={hp(5.40)} height={hp(5.40)} />
-                            {/* <Image style={styles.headerProfile} source={Images.proffileLogo} /> */}
-                            {/* <View style={styles.profileTextMain}>
-                                {/* <Text numberOfLines={1} style={[styles.profileTitle,{width:wp(55)}]}>{User.user.FirstName} {User.user.LastName}</Text>
-                            <Text numberOfLines={1} style={[styles.profileDesi,{width:wp(55)}]}>{User.user.UserType}</Text> */}
-                                {/* <Text numberOfLines={1} style={[styles.profileTitle, { width: wp(40) }]}>MyEd Open School</Text>
-                            </View> */} 
-                        </TouchableOpacity>
+                    <TouchableOpacity style={styles.userInfoLogo}>
+                        <Image style={styles.headerProfile} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                        <View style={styles.profileTextMain}>
+                            <Image style={styles.headerProfileText} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} />
+                        </View>
+                    </TouchableOpacity>
                         <View style={styles.mainMenu}>
 
                             <TouchableOpacity onPress={() => { props.navigation.replace('PupuilDashboard'); setSelectedModule(0); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 0 ? styles.menuItemSelected : null]}>
@@ -462,9 +449,21 @@ const styles = StyleSheet.create({
         paddingBottom: hp(2.0),
         paddingLeft: hp(1),
     },
+    userInfoLogo: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingTop: hp(2),
+        paddingBottom: hp(2.0),
+        paddingLeft: hp(1.5),
+    },
     profileTextMain: {
         paddingLeft: hp(1.5),
-        width: hp(19.53),
+
+    },
+    headerProfileText: {
+        width: 140,
+        height: 50,
+        resizeMode: 'contain',
     },
     profileTitle: {
         fontSize: hp(1.82),
@@ -503,12 +502,12 @@ const styles = StyleSheet.create({
         width: hp(22),
     },
     headerProfile: {
-        width: 190,
-        height: 40,
+        width: 50,
+        height: 50,
         resizeMode: 'contain',
         // borderRadius: hp(100),
-        // backgroundColor : 'red',
-        marginHorizontal : 5,
+
+
     },
     userInfobottom: {
         position: 'absolute',
@@ -524,7 +523,7 @@ const styles = StyleSheet.create({
         width: hp(4.2),
         height: hp(4.2),
         borderRadius: hp(4.2 / 2),
-        backgroundColor : COLORS.lightGrayPupil
+        backgroundColor: COLORS.lightGrayPupil
     },
     profileTitleBottom: {
         fontSize: hp(2.0),
