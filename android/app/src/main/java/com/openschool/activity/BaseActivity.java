@@ -9,15 +9,7 @@ import android.widget.Toast;
 
 import androidx.annotation.StringRes;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.openschool.MainApplication;
-import com.openschool.manager.ChatHelper;
-import com.openschool.manager.DialogsManager;
 import com.openschool.util.QBResRequestExecutor;
-import com.openschool.utils.ErrorUtils;
-import com.openschool.utils.SharedPrefsHelper;
-import com.openschool.utils.qb.QBDialogsHolder;
-import com.openschool.utils.qb.QBUsersHolder;
 
 /**
  * QuickBlox team
@@ -25,14 +17,9 @@ import com.openschool.utils.qb.QBUsersHolder;
 public abstract class BaseActivity extends CoreBaseActivity {
 
 //    SharedPrefsHelper sharedPrefsHelper;
+    private ProgressDialog progressDialog;
 //    protected GooglePlayServicesHelper googlePlayServicesHelper;
     protected QBResRequestExecutor requestExecutor;
-
-    private static final String TAG = BaseActivity.class.getSimpleName();
-    private static final String DUMMY_VALUE = "dummy_value";
-
-    private ProgressDialog progressDialog = null;
-    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,55 +88,12 @@ public abstract class BaseActivity extends CoreBaseActivity {
         }
     }
 
-    protected SharedPrefsHelper getSharedPrefsHelper() {
-        return ((MainApplication) getApplicationContext()).getSharedPrefsHelper();
-    }
-
-    protected QBUsersHolder getQBUsersHolder() {
-        return ((MainApplication) getApplicationContext()).getQBUsersHolder();
-    }
-
-    protected QBDialogsHolder getQBDialogsHolder() {
-        return ((MainApplication) getApplicationContext()).getQBDialogsHolder();
-    }
-
-    protected ChatHelper getChatHelper() {
-        return ((MainApplication) getApplicationContext()).getChatHelper();
-    }
-
-    protected DialogsManager getDialogsManager() {
-        return ((MainApplication) getApplicationContext()).getDialogsManager();
-    }
-
-//    protected abstract View getSnackbarAnchorView();
-
-    protected boolean isProgressDialogShowing() {
-        if (progressDialog != null) {
-            return progressDialog.isShowing();
-        } else {
-            return false;
-        }
-    }
-
     protected void showErrorSnackbar(@StringRes int resId, Exception e,
                                      View.OnClickListener clickListener) {
+        if (getSnackbarAnchorView() != null) {
             Toast.makeText(this, "Retry", Toast.LENGTH_SHORT).show();
-    }
-
-    protected void showInfoSnackbar(String message, @StringRes int actionLabel, View.OnClickListener clickListener) {
-        View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
-        if (rootView != null) {
-            snackbar = ErrorUtils.showInfoSnackbar(getApplicationContext(), rootView, message, actionLabel, clickListener);
         }
     }
 
-    protected void hideSnackbar() {
-        if (snackbar != null && snackbar.isShown()) {
-            snackbar.dismiss();
-        }
-    }
-
-    public void onResumeFinished() {
-        // Need to Override onResumeFinished() method in nested classes if we need to handle returning from background in Activity
-    }
+    protected abstract View getSnackbarAnchorView();
 }

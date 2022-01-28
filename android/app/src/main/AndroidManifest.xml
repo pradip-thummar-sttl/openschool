@@ -25,15 +25,16 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.GroupChatActivity"
+            android:exported="false" />
         <!-- Change the value to true to enable pop-up for in foreground on receiving remote notifications (for prevent duplicating while showing local notifications set this to false) -->
         <meta-data
             android:name="com.dieam.reactnativepushnotification.notification_foreground"
-            android:value="false" />
-        <!-- Change the resource name to your App's accent color - or any other color you want -->
+            android:value="false" /> <!-- Change the resource name to your App's accent color - or any other color you want -->
         <meta-data
             android:name="com.dieam.reactnativepushnotification.notification_color"
             android:resource="@color/white" /> <!-- or @android:color/{name} to use a standard color -->
-
         <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
         <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
         <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
@@ -52,12 +53,8 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".activity.PollingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.WhiteBoardActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity.PollingActivity" />
+        <activity android:name=".activity.WhiteBoardActivity" />
         <activity
             android:name=".MainActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
@@ -70,17 +67,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.CallActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".activity.CallActivity" />
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
-        <activity
-            android:name=".activity.ChatActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustResize" />
-        <service android:name=".services.CallService"
-            android:foregroundServiceType="mediaProjection" />
-
     </application>
 
 </manifest>

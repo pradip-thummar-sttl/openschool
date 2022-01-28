@@ -9,12 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -24,20 +18,15 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.openschool.R;
-import com.quickblox.videochat.webrtc.QBRTCMediaConfig;
 
 public class ScreenShareFragment extends BaseToolBarFragment {
-    private static final String TAG = ScreenShareFragment.class.getSimpleName();
 
+    public static final String TAG = ScreenShareFragment.class.getSimpleName();
     private OnSharingEvents onSharingEvents;
-
-    public static ScreenShareFragment newInstance() {
-        return new ScreenShareFragment();
-    }
 
     @Override
     int getFragmentLayout() {
-        return R.layout.fragment_screensharing;
+        return R.layout.fragment_pager;
     }
 
     @Nullable
@@ -45,62 +34,39 @@ public class ScreenShareFragment extends BaseToolBarFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
-        if (view != null) {
-//            ToggleButton micToggle = view.findViewById(R.id.tb_switch_mic);
-//            ToggleButton cameraToggle = view.findViewById(R.id.tb_switch_cam);
-//            ToggleButton endCallToggle = view.findViewById(R.id.tb_end_call);
-            ImageView shareScreenToggle = view.findViewById(R.id.button_screen_sharing);
-            LinearLayout llCamara = view.findViewById(R.id.llCamara);
-            LinearLayout llMic = view.findViewById(R.id.llMic);
-            LinearLayout llVideo = view.findViewById(R.id.llVideo);
-            LinearLayout llBoard = view.findViewById(R.id.llBoard);
-            TextView tvShare = view.findViewById(R.id.tvShare);
-//            ToggleButton swapCamToggle = view.findViewById(R.id.tb_swap_cam);
+        MyAdapter adapter = new MyAdapter(getChildFragmentManager());
 
-            llCamara.setVisibility(View.GONE);
-            llMic.setVisibility(View.GONE);
-            llVideo.setVisibility(View.GONE);
-            llBoard.setVisibility(View.GONE);
-            tvShare.setText("STOP");
-
-//            shareScreenToggle.setChecked(false);
-//            shareScreenToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                @Override
-//                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                    Log.d(TAG, "Stop Screen Sharing");
-//                    if (onSharingEvents != null) {
-//                        onSharingEvents.onStopPreview();
-//                    }
-//                }
-//            });
-
-            shareScreenToggle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onSharingEvents != null) {
-                        onSharingEvents.onStopPreview();
-                    }
-                }
-            });
-        }
-
-        ImagesAdapter adapter = new ImagesAdapter(getChildFragmentManager());
         ViewPager pager = (ViewPager) view.findViewById(R.id.pager);
         pager.setAdapter(adapter);
 
-        QBRTCMediaConfig.setVideoWidth(QBRTCMediaConfig.VideoQuality.HD_VIDEO.width);
-        QBRTCMediaConfig.setVideoHeight(QBRTCMediaConfig.VideoQuality.HD_VIDEO.height);
+        toolbar.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.white));
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.screen_share_fragment, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.stop_screen_share:
+                Log.d(TAG, "stop_screen_share");
+                if (onSharingEvents != null) {
+                    onSharingEvents.onStopPreview();
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            onSharingEvents = (OnSharingEvents) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement OnSharingEvents");
-        }
+        onSharingEvents = (OnSharingEvents) context;
     }
 
     @Override
@@ -109,12 +75,20 @@ public class ScreenShareFragment extends BaseToolBarFragment {
         onSharingEvents = null;
     }
 
-    public static class ImagesAdapter extends FragmentPagerAdapter {
-        private static final int NUM_ITEMS = 1;
+    public interface OnSharingEvents {
+        void onStopPreview();
+    }
 
-        private int[] images = {R.drawable.pres_img/*, R.drawable.p2p, R.drawable.group_call, R.drawable.opponents*/};
+    public static ScreenShareFragment newIntstance() {
+        return new ScreenShareFragment();
+    }
 
-        ImagesAdapter(FragmentManager fm) {
+    public static class MyAdapter extends FragmentPagerAdapter {
+        private static final int NUM_ITEMS = 4;
+
+        private int[] images = {R.drawable.pres_img, R.drawable.p2p, R.drawable.group_call, R.drawable.opponents};
+
+        public MyAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -127,10 +101,5 @@ public class ScreenShareFragment extends BaseToolBarFragment {
         public Fragment getItem(int position) {
             return PreviewFragment.newInstance(images[position]);
         }
-    }
-
-    public interface OnSharingEvents {
-
-        void onStopPreview();
     }
 }

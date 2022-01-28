@@ -202,11 +202,15 @@
     <TextView
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/shape_green_poll_button"
+        android:gravity="center"
+        android:text="SUBMIT YOUR ANSWER"
         android:textColor="@color/white"
-        android:background="@drawable/shape_poll_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:text="Create a Poll" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

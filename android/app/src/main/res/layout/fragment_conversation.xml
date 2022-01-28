@@ -122,9 +122,8 @@
 
         <ImageView
             android:id="@+id/btnChat"
-            android:layout_width="25dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
             android:layout_toLeftOf="@+id/btnMenu"
             android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_chat" />
