@@ -1716,12 +1716,14 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   if (!self.isRecording) {
     self.isRecording = true;
     [self.screenRecordingButton setTitle:@"STOP SCREEN RECORDING" forState:UIControlStateNormal];
+    [self.screenRecordingButton.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
     [[ScreenRecorder shareInstance] startRecordingWithErrorHandler:^(NSError * error) {
       NSLog(@"error of recording %@", error);
     }];
   }else{
     self.isRecording = false;
     [self.screenRecordingButton setTitle:@"START SCREEN RECORDING" forState:UIControlStateNormal];
+    [self.screenRecordingButton.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
     [[ScreenRecorder shareInstance]stoprecordingWithErrorHandler:^(NSError * error, NSURL * url) {
            NSLog(@"stop recording Error %@", url);
       self.recordUrl = [NSString stringWithFormat:@"%@", url];
@@ -1741,6 +1743,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   if (_isMutedFlag) {
     _isMutedFlag=false;
     [_muteAllButton setTitle:@"Unmute All" forState:UIControlStateNormal];
+    [self.muteAllButton.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
     for (int i=0; i<self.users.count; i++) {
       QBUUser *user = self.users[i];
       QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
@@ -1751,6 +1754,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
   }else{
     _isMutedFlag=true;
     [_muteAllButton setTitle:@"Mute All" forState:UIControlStateNormal];
+    [self.muteAllButton.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
     for (int i=0; i<self.users.count; i++) {
       QBUUser *user = self.users[i];
       QBRTCAudioTrack *audioTrack = [self.session remoteAudioTrackWithUserID:@(user.ID)];
@@ -1764,10 +1768,11 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 - (IBAction)onReactionSwitchPressed:(id)sender {
   
   if(_isReaction){
-    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
   }
   else{
-    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+//    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   
   _isReaction = !_isReaction;
