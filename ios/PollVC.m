@@ -65,6 +65,7 @@ static NSString * const kChannelGuide = @"the_guide";
                    action:@selector(selectOption:)
          forControlEvents:UIControlEventTouchUpInside];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
         button.layer.cornerRadius=10;
         button.layer.borderColor=[UIColor grayColor].CGColor;
         button.layer.borderWidth = 1;
@@ -121,6 +122,7 @@ static NSString * const kChannelGuide = @"the_guide";
                  action:@selector(selectOption:)
        forControlEvents:UIControlEventTouchUpInside];
       [button setTitle:list[i] forState:UIControlStateNormal];
+      [button.titleLabel setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
       [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
       button.frame = CGRectMake(0, _xPupilHeight, self.pupilOptionView.frame.size.width, 40.0);
       [self.pupilOptionView addSubview:button];
@@ -141,8 +143,9 @@ static NSString * const kChannelGuide = @"the_guide";
     UITextField *txt = _optionArr[i];
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
-    textField.font = [UIFont systemFontOfSize:15];
+//    textField.font = [UIFont systemFontOfSize:15];
     textField.placeholder = @"Enter your option";
+    [textField setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.keyboardType = UIKeyboardTypeDefault;
     textField.returnKeyType = UIReturnKeyDone;
@@ -256,8 +259,9 @@ static NSString * const kChannelGuide = @"the_guide";
   
   UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(0, _xHeight, self.addTextFieldView.frame.size.width-40, 40)];
   textField.borderStyle = UITextBorderStyleRoundedRect;
-  textField.font = [UIFont systemFontOfSize:15];
+//  textField.font = [UIFont systemFontOfSize:15];
   textField.placeholder = @"Enter your option";
+  [textField setFont:[UIFont fontWithName:@"Poppins-Regular" size:15.0]];
   textField.autocorrectionType = UITextAutocorrectionTypeNo;
   textField.keyboardType = UIKeyboardTypeDefault;
   textField.returnKeyType = UIReturnKeyDone;
