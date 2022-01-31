@@ -425,11 +425,11 @@ const PupuilDashboard = (props) => {
                                 :
                                 selectedIndex == 0 ?
                                     <View style={{ width: isHide ? '94%' : '78%' }}>
-                                        <ScrollView showsVerticalScrollIndicator={false}>
+                                        <ScrollView showsVerticalScrollIndicator={false} style={{height:'100%'}}>
                                             <Header onAlertPress={() => { openNotification() }} onNotification={() => openNotification()} />
                                             <View style={STYLE.padLeftRight}>
                                                 <MyClassIllus style={PAGESTYLE.pupilGridTopBg} width={hp(40.49)} height={hp(10.67)} />
-                                                {/* <View style={PAGESTYLE.dashboardOrangeBox}>
+                                                <View style={PAGESTYLE.dashboardOrangeBox}>
                                                     <View style={PAGESTYLE.orangeBoxTop}>
                                                         <View style={PAGESTYLE.myDay}>
                                                             <View>
@@ -670,16 +670,15 @@ const PupuilDashboard = (props) => {
                                                         </View>
 
                                                     </View>
-                                                </View>  */}
+                                                </View>
 
                                                 <View style={PAGESTYLE.achivementWrap}>
                                                     <View style={[PAGESTYLE.achivementBox, { height: '100%', overflow: 'hidden' }]}>
-                                                        {/* <RewardStarback width={"190%"} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} /> */}
-                                                        <Image style={{ width: '115%', height: '30%', top: '-9%' }} source={GetImage.ImageReward} />
+                                                        <Image style={{ width: '100%', height: hp(13), top: '-9%' }} source={GetImage.ImageReward} />
 
                                                         <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                                         <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
-                                                        <View style={PAGESTYLE.rewardStarMark}>
+                                                        <View style={[PAGESTYLE.rewardStarMark,{ paddingLeft: hp(1.95),paddingRight: hp(1.95),}]}>
                                                             <View style={PAGESTYLE.centerText}>
                                                                 <BronzeStar style={[PAGESTYLE.starSelected]} height={hp(4.94)} width={hp(4.94)} />
                                                                 <View style={[PAGESTYLE.starSelected, { position: 'absolute' }]}>
@@ -710,22 +709,26 @@ const PupuilDashboard = (props) => {
                                                             </TouchableOpacity>
                                                         </View>
                                                     </View>
-                                                    {pupilAvatarList.length &&
-                                                        <View style={[PAGESTYLE.achivementRobot, { height: '100%', overflow: 'hidden' }]}>
-                                                            <AvtarBg width={"100%"} height={'100%'} position={"absolute"} style={{ bottom: 0 }} />
+                                                    {pupilAvatarList.length ?
+                                                        <View style={[PAGESTYLE.achivementRobot, { height: Platform.OS == "ios" ? hp(52) : hp(55), overflow: 'hidden' }]}>
+
+                                                            <AvtarBg width={"100%"} height={hp(55)} position={"absolute"} style={{ bottom: 0 }} />
+
                                                             <View style={{ width: "100%", height: '100%', alignItems: 'center', bottom: Platform.OS == "ios" ? '-15%' : '-18%' }}>
-                                                                {avatarListIndex == 0 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? "37%" : "35.5%" }} ></Image>}
-                                                                {avatarListIndex == 1 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} />}
-                                                                {avatarListIndex == 2 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2%', zIndex: 10, right: "38%" }} />}
-                                                                {avatarListIndex == 3 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
-                                                                {avatarListIndex == 4 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
-                                                                {avatarListIndex == 5 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} />}
+                                                                {avatarListIndex == 0 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? "37%" : "35.5%" }} ></Image>}
+                                                                {avatarListIndex == 1 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} />}
+                                                                {avatarListIndex == 2 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2%', zIndex: 10, right: "38%" }} />}
+                                                                {avatarListIndex == 3 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
+                                                                {avatarListIndex == 4 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
+                                                                {avatarListIndex == 5 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} />}
 
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain' }} />
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 20 }} />
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} />
+                                                           
                                                             </View>
                                                         </View>
+                                                        : null
                                                     }
                                                 </View>
                                             </View>
