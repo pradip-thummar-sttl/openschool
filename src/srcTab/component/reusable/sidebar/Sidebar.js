@@ -96,7 +96,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         /> */}
-                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
@@ -106,7 +106,7 @@ const Sidebar = (props) => {
                         style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
                         onPress={() => { navigateSidebarIndex(); toggleAnimation(true) }}>
-                        <Ic_calendar style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_calendar style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>My Calender</Text>
@@ -120,7 +120,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         /> */}
-                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_LessonPlanner style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -135,7 +135,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         /> */}
-                        <Ic_PupilManagement style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_PupilManagement style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -150,7 +150,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.Parents}
                         /> */}
-                        <Ic_parents style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_parents style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -166,7 +166,7 @@ const Sidebar = (props) => {
                             source={Images.Faqs}
                         />
                          */}
-                        <Ic_Faq style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -182,7 +182,7 @@ const Sidebar = (props) => {
                             style={styles.menuIcon}
                             source={Images.logout}
                         /> */}
-                        <Logout style={styles.menuIcon} width={hp(3.25)} height={hp(3.25)} />
+                        <Logout style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: hp(1.5),
-        paddingBottom: hp(2.0),
+        paddingBottom: hp(1.5),
         paddingLeft: hp(1),
         // alignSelf:'center'
     },
@@ -296,6 +296,7 @@ const styles = StyleSheet.create({
     },
     menuText: {
         fontSize: hp(1.8),
+        height: '100%',
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
@@ -335,8 +336,6 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     menuIcon: {
-        width: hp(3.25),
-        height: hp(3.25)
     },
     moreIcon: {
         width: hp(3),

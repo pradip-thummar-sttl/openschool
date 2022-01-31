@@ -75,7 +75,7 @@ const Popupaddrecording = (props) => {
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStopScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginLeft: 5 }}>
+                            style={{ ...styles.recordLinkBlock2Stop, ...styles.topSpaceRecording, marginLeft: 5 }}>
                             <Text style={styles.recordLinkText}>Stop Recording</Text>
                         </TouchableOpacity>
                     }
@@ -103,7 +103,7 @@ const Popupaddrecording = (props) => {
                                     :
                                     <PlayBlue style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
                             }
-                            <Text numberOfLines={2} ellipsizeMode='tail' style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
+                            <Text numberOfLines={1} ellipsizeMode='tail' style={styles.recordLinkText}>{props.recordingArr[0].originalname}</Text>
                         </View>
 
                         <TouchableOpacity onPress={() => { props.onRemoveRecording() }}
@@ -220,7 +220,18 @@ const styles = StyleSheet.create({
 
     },
     recordLinkBlock2: {
-        width: '100%',
+        width: '95%',
+        paddingHorizontal: 5,
+        paddingTop: hp(0.8),
+        paddingBottom: hp(0.8),
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
+        borderRadius: hp(1),
+        // alignItems: 'center',
+
+    },
+    recordLinkBlock2Stop: {
+        width: '50%',
         paddingHorizontal: 5,
         paddingTop: hp(0.8),
         paddingBottom: hp(0.8),

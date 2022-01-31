@@ -58,7 +58,7 @@ export default class Splash extends Component {
                     onBuffer={this.onBuffer}                // Callback when remote video is buffering
                     onError={this.videoError}
                     onEnd={() => { this.launchNextScreen() }}
-                    // resizeMode={'cover'}
+                    resizeMode={'cover'}
                     style={styles.backgroundVideo} />
             </View>
         );
