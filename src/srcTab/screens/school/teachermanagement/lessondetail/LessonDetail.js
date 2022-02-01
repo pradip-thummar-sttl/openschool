@@ -148,8 +148,8 @@ const LessonDetail = (props) => {
             if (element.uri) {
                 data.append('recording', {
                     uri: element.uri,
-                    // name: element.fileName,
-                    name: 'MY_RECORDING.mp4',
+                    name: element.fileName,
+                    // name: 'MY_RECORDING.mp4',
                     type: element.type
                 });
             }

@@ -173,7 +173,7 @@ const HeaderTM = (props) => {
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
-                        placeholder="Search subject, topic name etc"
+                        placeholder="Search name"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {props.onSearchKeyword(keyword);}} />
 

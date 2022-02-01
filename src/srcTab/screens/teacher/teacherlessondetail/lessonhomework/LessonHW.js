@@ -288,6 +288,7 @@ const TLHomeWork = (props) => {
                 }
                 arr.push(obj)
                 setRecordingArr(arr)
+                Addhomework.RecordingArr = arr
                 setScreenVoiceSelected(false)
                 setRecordingName("")
                 toggleModal()
@@ -358,6 +359,7 @@ const TLHomeWork = (props) => {
             }
             arr.push(obj)
             setRecordingArr(arr)
+            Addhomework.RecordingArr = arr
             setRecordingName("")
             toggleModal()
 
@@ -418,6 +420,7 @@ const TLHomeWork = (props) => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
+        Addhomework.RecordingArr = arr
     }
 
 
