@@ -76,16 +76,18 @@ const TeacherLessonList = (props) => {
 
     }, [])
 
+    const refresh = () => {
+        pageNo = 1;
+        setSearchKeyword("")
+        fetchRecord(1, "", filterBy);
+    }
+
     const addMorePage = () => {
         if (DataArr.length > limit - 1) {
             setLessonLoading(true)
             pageNo = pageNo + 1
             setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1500)
         }
-    }
-
-    const refresh = () => {
-        fetchRecord(pageNo, '', '');
     }
 
     const fetchRecord = (pNo, searchBy, filterBy) => {

@@ -21,6 +21,8 @@ import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
 var moment = require('moment');
 
 var pageNo = 1;
+var limit = 10;
+var DataArr = [];
 
 const Pupillist = (props, { style }) => (
     <TouchableOpacity
@@ -56,32 +58,16 @@ const Pupillist = (props, { style }) => (
         </View>
     </TouchableOpacity>
 );
-// (props?.item?.LiveSession ? (props.item.LiveSession).toString() : ''
 
 const TeacherLessonList = (props) => {
-    const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(null);
     const [isAddSubject, setAddSubject] = useState(false)
     const [isTLDetail, setTLDetail] = useState(false)
     const [data, setItem] = useState([])
+    const [isLessonLoading, setLessonLoading] = useState(true)
+    const [searchKeyword, setSearchKeyword] = useState('')
+    const [filterBy, setFilterBy] = useState('Date')
 
-    const [pagination, setPaginationData] = useState([])
-    const [allNewAndOldData, setAllNewAndOldData] = useState([])
-
-    const [limit, setLimit] = useState('25')
-
-
-
-    const renderItem = ({ item }) => {
-        const backgroundColor = item.id === selectedId ? COLORS.selectedDashboard : COLORS.white;
-        return (
-            <Item
-                item={item}
-                onPress={() => setSelectedId(item.id)}
-                style={{ backgroundColor }}
-            />
-        );
-    };
     const pupilRender = ({ item }) => {
         return (
             <Pupillist
@@ -91,133 +77,77 @@ const TeacherLessonList = (props) => {
         );
     };
 
-    const [lessonData, setLessonData] = useState([])
-    const [isLessonLoading, setLessonLoading] = useState(true)
-    const [searchKeyword, setSearchKeyword] = useState('')
-    const [filterBy, setFilterBy] = useState('')
-
-
-
-
     useEffect(() => {
-        pageNo = 1;
-        fetchRecord('', '')
+        fetchRecord(pageNo, searchKeyword, filterBy);
+        return () => { DataArr = []; }
     }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
-        setLessonLoading(true)
-        let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
-            page: String(pageNo),
-            limit: limit
-        }
-
-        console.log('this is filters data', data)
-
-        Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
-            if (res.code == 200) {
-                console.log('response of get all lesson', res.data.length, '---', allNewAndOldData)
-                // setLessonData(res.data)
-                setPaginationData(res.pagination)
-                if (allNewAndOldData.length > 0) {
-                    if (res.data) {
-                        let newData = []
-                        newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setLessonData(newArray)
-                        setAllNewAndOldData(newArray)
-                        setLessonLoading(false)
-                    }
-                    else {
-                        setLessonData(allNewAndOldData)
-                        setLessonLoading(false)
-                    }
-                }
-                else {
-                    setLessonData(res.data)
-                    setAllNewAndOldData(res.data)
-                    setLessonLoading(false)
-                }
-
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('response of get all lesson error', err)
-        })
+    const refresh = () => {
+        pageNo = 1;
+        setSearchKeyword("")
+        fetchRecord(1, "", filterBy);
     }
 
     const addMorePage = () => {
-        console.log('-----lesson data length---', lessonData.length)
-        if (lessonData.length != pagination.TotalCount) {
+        if (DataArr.length > limit - 1) {
+            setLessonLoading(true)
             pageNo = pageNo + 1
-            setTimeout(() => {
-                fetchRecord('', '')
-            }, 1000)
+            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1500)
         }
     }
 
-    const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
+    const fetchRecord = (pNo, searchBy, filterBy) => {
+        setLessonLoading(true)
+        let data = { Searchby: searchBy, Filterby: filterBy, page: String(pNo), limit: limit }
+
+        Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
+            if (res.code == 200) {
+                if (res.data && pNo == 1) {
+                    DataArr = [];
+                    DataArr = res.data;
+                }
+                else if (res.data) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        DataArr.push(res.data[i]);
+                    }
+                }
+                setLessonLoading(false)
+            } else {
+                setLessonLoading(false)
+                showMessage(res.message)
+            }
+        }, (err) => {
+            setLessonLoading(false)
+            console.log('response of get all lesson error', err)
+        })
     }
 
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
-        // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
-
 
     const renderList = () => {
         return (
-            <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.backgroundColorCommon }}>
+            <View style={{ width: '100%', backgroundColor: COLORS.backgroundColorCommon }}>
+
                 <Header
                     onAlertPress={() => openNotification()}
                     navigateToAddSubject={() => { setAddSubject(true) }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)} />
+                    onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}
+                    onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
+                    onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }} />
 
-                {/* <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}> */}
                 <View style={PAGESTYLE.whiteBg}>
-                    {/* <View style={PAGESTYLE.pupilTable}>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Subject</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.secoundColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Lesson Topic</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Date</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Group</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Live Lesson</Text>
-                            </View>
-                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Published</Text>
-                            </View>
-                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
-                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Homework</Text>
-                            </View>
-                        </View> */}
+
                     <View style={{ height: '100%', width: '100%' }}>
                         <SafeAreaView style={PAGESTYLE.pupilTabledataflatlist}>
-                            {isLessonLoading ?
-                                <ActivityIndicator
-                                    style={{ flex: 1 }}
-                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                    color={COLORS.yellowDark} />
-                                :
-                                lessonData.length > 0 ?
+                            {
+                                DataArr.length > 0 &&
                                     <FlatList
-                                        data={lessonData}
+                                        data={DataArr}
                                         renderItem={pupilRender}
                                         keyExtractor={(item) => item.id}
                                         extraData={selectedId}
@@ -254,11 +184,17 @@ const TeacherLessonList = (props) => {
                                             )
                                         }}
                                     />
-                                    :
-                                    // <View style={{ height: 100, justifyContent: 'center' }}>
-                                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                                    // </View>
-                                    <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+                            }
+
+                            {
+                                DataArr.length == 0 && !isLessonLoading && <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+                            }
+                            {isLessonLoading &&
+                                <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                                    <ActivityIndicator
+                                        size={'large'}
+                                        color={COLORS.yellowDark} />
+                                </View>
                             }
                         </SafeAreaView>
                     </View>
