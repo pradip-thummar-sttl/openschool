@@ -23,6 +23,8 @@ import SearchBlue from '../../../../svg/teacher/timetable/Search_Blue';
 import AddWhite from '../../../../svg/teacher/timetable/Add_White';
 import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
 import { BadgeIcon, User } from "../../../../utils/Model";
+import FilterBlack from '../../../../svg/teacher/timetable/Filter_Black';
+import TickMarkBlue from '../../../../svg/teacher/dashboard/TickMark_Blue';
 
 var moment = require('moment');
 
@@ -77,7 +79,7 @@ const SchoolMessage = (props) => {
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
-                        placeholder="Search subject, topic name etc"
+                        placeholder="Search message"
                         placeholderTextColor={COLORS.menuLightFonts}
                         multiline={false}
                         onChangeText={keyword => { setKeyword(keyword) }} />
@@ -85,8 +87,8 @@ const SchoolMessage = (props) => {
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
-                                {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
-                                </MenuTrigger>
+                                <FilterBlack style={PAGESTYLE.searchMenu} height={15} width={15} />
+                            </MenuTrigger>
                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                 <MenuOption style={PAGESTYLE.borderList}>
                                     <TouchableOpacity
@@ -94,11 +96,11 @@ const SchoolMessage = (props) => {
                                         onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Title</Text>
-                                            {/* {selectedIndex == 0 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 0 ?
+                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -108,11 +110,25 @@ const SchoolMessage = (props) => {
                                         onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
                                         <View style={PAGESTYLE.filterList}>
                                             <Text style={PAGESTYLE.filterListText}>Date</Text>
-                                            {/* {selectedIndex == 1 ?
-                                                <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
+                                            {selectedIndex == 1 ?
+                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                                 :
                                                 null
-                                            } */}
+                                            }
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={PAGESTYLE.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setFilterBy('Status'); setSelectedIndex(2) }}>
+                                        <View style={PAGESTYLE.filterList}>
+                                            <Text style={PAGESTYLE.filterListText}>Status</Text>
+                                            {selectedIndex == 2 ?
+                                                <TickMarkBlue style={PAGESTYLE.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                :
+                                                null
+                                            }
                                         </View>
                                     </TouchableOpacity>
                                 </MenuOption>
@@ -136,7 +152,7 @@ const SchoolMessage = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const textInput = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [filterBy, setFilterBy] = useState('')
     const [keyword, setKeyword] = useState('')
 
     const [selectedId, setSelectedId] = useState(null);

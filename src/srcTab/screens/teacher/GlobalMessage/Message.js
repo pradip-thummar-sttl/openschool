@@ -25,7 +25,7 @@ const Message = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const textInput = useRef(null);
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [filterBy, setFilterBy] = useState('')
     const [keyword, setKeyword] = useState('')
     const [isAddMessage, setAddMessage] = useState(false)
     const [selectedItem, setSelectedItem] = useState()

@@ -88,7 +88,7 @@ const HeaderWhitepupilMessage = (props) => {
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingVertical: 3, paddingHorizontal: 10, 
                         fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
-                        placeholder="Search Messages"
+                        placeholder="Search messages"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
@@ -113,7 +113,7 @@ const HeaderWhitepupilMessage = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                    onPress={() => { setFilterBy(''); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                     </View>
