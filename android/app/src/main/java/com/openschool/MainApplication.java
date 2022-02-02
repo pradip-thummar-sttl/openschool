@@ -22,10 +22,10 @@ import java.util.List;
 
 public class MainApplication extends Application implements ReactApplication {
 
-    static final String APPLICATION_ID = "90905";
-    static final String AUTH_KEY = "h-ykAkyXnJkRNWD";
-    static final String AUTH_SECRET = "n-BAzvbxcR5ggrj";
-    static final String ACCOUNT_KEY = "2xYap5od8h1GCfgxCJ6B";
+    static final String APPLICATION_ID = "95414";
+    static final String AUTH_KEY = "uPG6Dq6YBwQ7wW8";
+    static final String AUTH_SECRET = "K8durVEgnGTNcM4";
+    static final String ACCOUNT_KEY = "gNaxUx3UNTZJ6RxeYy2U";
 //    static final String JANUS_URL = "wss://janus.quickblox.com:8989/";
     static final String JANUS_URL = "wss://groupcallsdemo.quickblox.com/";
 
