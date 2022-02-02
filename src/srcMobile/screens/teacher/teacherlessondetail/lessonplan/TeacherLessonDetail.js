@@ -52,15 +52,19 @@ const TLDetail = (props) => {
                                 </View>
                             </View>
                         </View>
-                        <View style={PAGESTYLE.dateWhiteBoard}>
-                            <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={PAGESTYLE.subjectDateTime}>
-                                <View style={PAGESTYLE.alignRow}>
-                                    <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
-                                    <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
+                        {props.lessonData.StartTime ?
+                            <View style={PAGESTYLE.dateWhiteBoard}>
+                                <Text style={PAGESTYLE.subjectText}>Time</Text>
+                                <View style={PAGESTYLE.subjectDateTime}>
+                                    <View style={PAGESTYLE.alignRow}>
+                                        <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
+                                        <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
+                                    </View>
                                 </View>
                             </View>
-                        </View>
+                            :
+                            null
+                            }
                     </View>
                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
                         <Text style={PAGESTYLE.subjectText}>Participants</Text>
@@ -77,12 +81,12 @@ const TLDetail = (props) => {
                     </View>
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={STYLE.hrCommon}></View>
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
+                        {props.lessonData?.CheckList?.length >0  && <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>}
                         <FlatList
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
-                                <View style={[PAGESTYLE.checkBoxLabelLine,{paddingVertical  :5}]}>
+                                <View style={[PAGESTYLE.checkBoxLabelLine, { paddingVertical: 5 }]}>
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text numberOfLines={1} style={[PAGESTYLE.lessonPointText, { width: wp(82) }]}>{item.ItemName}</Text>
                                 </View>
@@ -135,13 +139,15 @@ const TLDetail = (props) => {
                                 data={props.lessonData.MaterialList}
                                 style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                                 renderItem={({ item, index }) => (
-                                    <TouchableOpacity onPress={() => {setLoader(true); setMateIndex(index); Download(item, (res) => {
-                                        setLoader(false)
-                                        setMateIndex(-1)
-                                    })}} style={PAGESTYLE.fileGrp}>
+                                    <TouchableOpacity onPress={() => {
+                                        setLoader(true); setMateIndex(index); Download(item, (res) => {
+                                            setLoader(false)
+                                            setMateIndex(-1)
+                                        })
+                                    }} style={PAGESTYLE.fileGrp}>
                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(70) }]}>{item.originalname}</Text>
                                         <View style={PAGESTYLE.downloaBtn}>
-                                            {(isMatLoading && index == mateIndex)?
+                                            {(isMatLoading && index == mateIndex) ?
                                                 <ActivityIndicator
                                                     style={{ ...PAGESTYLE.downloadIcon }}
                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -163,9 +169,11 @@ const TLDetail = (props) => {
                             <TouchableOpacity
                                 style={[PAGESTYLE.videoLinkBlock]}
                                 activeOpacity={opacity}
-                                onPress={() => {setRecordLoader(true); Download(props.lessonData.RecordingList[0], (res) => {
-                                    setRecordLoader(false)
-                                })}}>
+                                onPress={() => {
+                                    setRecordLoader(true); Download(props.lessonData.RecordingList[0], (res) => {
+                                        setRecordLoader(false)
+                                    })
+                                }}>
                                 {isRecordLoading ?
                                     <ActivityIndicator
                                         style={{ ...PAGESTYLE.videoLinkIcon }}
