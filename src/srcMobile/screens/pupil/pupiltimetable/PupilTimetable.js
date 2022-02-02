@@ -172,12 +172,12 @@ const PupilTimeTable = (props) => {
 
         setTimeout(() => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
-                if (scrollIndex < 20)
+                // if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
-                else {
-                    _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
-                    onNext();
-                }
+                // else {
+                //     _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                //     onNext();
+                // }
             }
         }, 1500)
     }
@@ -196,6 +196,10 @@ const PupilTimeTable = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
+
+    const getItemLayout = (data, index) => (
+        { length: cellWidth, offset: cellWidth * index, index }
+    )
 
     const setBg = (days, data) => {
 
@@ -259,6 +263,10 @@ const PupilTimeTable = (props) => {
                                             </View>
                                         </View>
                                     )}
+                                    getItemLayout={getItemLayout}
+                                    onScrollToIndexFailed={info => {
+                                        console.log('failedInfo', info);
+                                    }}
                                 />
 
                             </View>

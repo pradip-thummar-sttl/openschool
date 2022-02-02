@@ -244,6 +244,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         paddingLeft: Platform.OS === 'ios'? hp(1):hp(2),
         paddingRight: hp(2),
+        textAlignVertical: 'center'
     },
     checkBoxLabelTextSubmit: {
         lineHeight: hp(2.4),
@@ -252,11 +253,9 @@ export default StyleSheet.create({
         paddingLeft: hp(1.5),
     },
     checkMark: {
-        width:Platform.OS === 'android' ? hp(3)  : hp(1.84),
-        height: hp(1.84),
-        top: hp(0.35),
-        fontFamily: FONTS.fontBold,
-        
+        width: hp(1.48),
+        resizeMode: 'contain',
+        right: 5
     },
     toggleGrp: {
         flexDirection: 'row',

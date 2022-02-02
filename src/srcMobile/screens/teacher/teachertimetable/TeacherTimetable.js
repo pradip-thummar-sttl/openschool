@@ -128,7 +128,7 @@ const TeacherTimeTable = (props) => {
             console.log('response of get all lesson error', err)
         })
         Service.get(`${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
-            setTimeTableLoading(false)
+            // setTimeTableLoading(false)
             if (res.code == 200) {
                 dispatch(setCalendarEventData(res.data))
             } else {
@@ -144,15 +144,14 @@ const TeacherTimeTable = (props) => {
     }, [isTimeTableLoading])
 
     const onListAnimations = () => {
-
         setTimeout(() => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
-                if (scrollIndex < 20)
+                // if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
-                else {
-                    _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
-                    onNext();
-                }
+                // else {
+                //     _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                //     onNext();
+                // }
             }
         }, 1500)
     }
@@ -208,6 +207,10 @@ const TeacherTimeTable = (props) => {
             return null
     }
 
+    const getItemLayout = (data, index) => (
+        { length: cellWidth, offset: cellWidth * index, index }
+    )
+
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%', backgroundColor: COLORS.white }}>
@@ -235,7 +238,7 @@ const TeacherTimeTable = (props) => {
                                 <View style={PAGESTYLE.days}>
                                     {days.map((data, index) => (
                                         <View style={{ ...PAGESTYLE.dayLeft, 
-                                        backgroundColor: setBg(days, data), borderColor: COLORS.videoLinkBorder, height: 66, }}>
+                                        backgroundColor: setBg(days, data), borderColor: COLORS.videoLinkBorder, borderRightWidth: index == 0 ? 0 : 1, height: 66, }}>
                                             <Text style={PAGESTYLE.lableDay}>{data}</Text>
                                         </View>
                                     ))}
@@ -257,6 +260,10 @@ const TeacherTimeTable = (props) => {
                                             </View>
                                         </View>
                                     )}
+                                    getItemLayout={getItemLayout}
+                                    onScrollToIndexFailed={info => {
+                                        console.log('failedInfo', info);
+                                    }}
                                 />
 
                             </View>

@@ -149,12 +149,12 @@ const PupilTimetable = (props) => {
 
         setTimeout(() => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
-                if (scrollIndex < 20)
+                // if (scrollIndex < 20)
                     _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
-                else {
-                    _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
-                    onNext();
-                }
+                // else {
+                //     _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
+                //     onNext();
+                // }
             }
         }, 1500)
     }
@@ -181,6 +181,10 @@ const PupilTimetable = (props) => {
         else
             return null
     }
+
+    const getItemLayout = (data, index) => (
+        { length: cellWidth, offset: cellWidth * index, index }
+    )
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -229,6 +233,10 @@ const PupilTimetable = (props) => {
                                             </View>
                                         </View>
                                     )}
+                                    getItemLayout={getItemLayout}
+                                    onScrollToIndexFailed={info => {
+                                        console.log('failedInfo', info);
+                                    }}
                                 />
 
 
