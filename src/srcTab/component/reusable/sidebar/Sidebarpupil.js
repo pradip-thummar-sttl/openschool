@@ -152,7 +152,8 @@ const Sidebar = (props) => {
                                 <View style={styles.profileTextMain}>
                                     <Text numberOfLines={1} style={[styles.profileTitleBottom, { width: hp(12) }]}>{User.user.FirstName} {User.user.LastName}</Text>
                                 </View>
-                                <TouchableOpacity style={styles.moreMenu}>
+                                <TouchableOpacity style={styles.moreMenu}
+                                    onPress={() => props.onSetting()}>
                                     <More style={styles.moreIcon} width={hp(3)} height={5} />
                                 </TouchableOpacity>
                             </>

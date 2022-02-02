@@ -729,7 +729,7 @@ const PupuilDashboard = (props) => {
                             </View>
                         </View>
 
-                        <View style={PAGESTYLE.achivementWrap}>
+                        <View style={[PAGESTYLE.achivementWrap,{paddingBottom:hp(5)}]}>
                             <View style={PAGESTYLE.achivementBox}>
                                 {/* <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} /> */}
                                 <Image style={{ width: '100%', height: hp(10)}} source={GetImage.ImageReward} />

@@ -569,7 +569,6 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontFamily: FONTS.fontSemiBold,
         // paddingHorizontal : 10,
-        textAlignVertical: "bottom"
         // alignContent : 'center',
         // alignItems : 'flex-start',
         // justifyContent : 'center'

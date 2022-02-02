@@ -38,10 +38,11 @@ static void InitializeFlipper(UIApplication *application) {
 const NSTimeInterval kQBAnswerTimeInterval = 60.0f;
 const NSTimeInterval kQBDialingTimeInterval = 5.0f;
 
-const NSUInteger kApplicationID = 90905;
-NSString *const kAuthKey        = @"h-ykAkyXnJkRNWD";
-NSString *const kAuthSecret     = @"n-BAzvbxcR5ggrj";
-NSString *const kAccountKey     = @"2xYap5od8h1GCfgxCJ6B";
+const NSUInteger kApplicationID = 95414;
+NSString *const kAuthKey        = @"uPG6Dq6YBwQ7wW8";
+NSString *const kAuthSecret     = @"K8durVEgnGTNcM4";
+NSString *const kAccountKey     = @"gNaxUx3UNTZJ6RxeYy2U";
+
 
 @implementation AppDelegate
 

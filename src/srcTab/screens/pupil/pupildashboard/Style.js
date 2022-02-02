@@ -538,8 +538,7 @@ export default StyleSheet.create({
         shadowOpacity: 0.08,
         shadowRadius: 10,
         elevation: 1,
-        paddingLeft: hp(1.95),
-        paddingRight: hp(1.95),
+       
         paddingTop : hp(3.8)
     },
     starCovertPoints:{

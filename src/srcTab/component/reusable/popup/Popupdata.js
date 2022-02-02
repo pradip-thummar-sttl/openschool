@@ -227,7 +227,7 @@ const Popupdata = (props) => {
                 </View>
             </TouchableOpacity>
 
-            <Modal isVisible={isModalVisible} style={{ height: wp(55)}}>
+            <Modal isVisible={isModalVisible} style={{ height: wp(55) }}>
                 <ScrollView >
 
                     <View style={styles.popupCard}>
@@ -271,7 +271,7 @@ const Popupdata = (props) => {
                                         </View>
                                         <Text style={styles.lessondesciption}>{props.data.LessonDescription}</Text>
                                         <View style={styles.attchmentSectionwithLink}>
-                                           
+
                                             {props.data.MaterialList && props.data.MaterialList.length > 0 ?
                                                 <View style={styles.fileBoxGrpWrap}>
                                                     <Text style={styles.requireText}>Attachment(s)</Text>
@@ -307,8 +307,11 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                         <View style={styles.requirementofClass}>
-                                            <Text style={styles.requireText}>Items that your class will need</Text>
-                                            {props.data.CheckList &&
+                                            {props.data.CheckList && props.data.CheckList.length ?
+                                                <Text style={styles.requireText}>Items that your class will need</Text> : null
+                                            }
+
+                                            {props.data.CheckList ?
                                                 props.data.CheckList.map((data, index) => (
                                                     <View style={styles.lessonPoints}>
                                                         {/* <Image source={Images.CheckIcon} style={styles.checkIcon} /> */}
@@ -316,13 +319,15 @@ const Popupdata = (props) => {
                                                         <Text style={styles.lessonPointText}>{data.ItemName}</Text>
                                                     </View>
                                                 ))
+                                                :
+                                                null
                                             }
                                         </View>
                                         <View style={styles.uploadCalendar}>
                                             <TouchableOpacity>
                                                 <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                             </TouchableOpacity>
-                                         
+
                                             <View style={styles.lessonstartButton}>
                                                 {!props.isPupil && props.data.Type == Lesson ?
                                                     <TouchableOpacity
@@ -385,13 +390,13 @@ const Popupdata = (props) => {
                 </ScrollView>
 
                 <Modal transparent={true} visible={isUploading}>
-                <View style={styles.uploadVideoStl}>
-                    <View style={styles.uploadVideoInnerStl}>
-                        <ActivityIndicator style={{ margin: 20 }} size={'large'} color={COLORS.yellowDark} />
-                        <Text style={styles.uploadVideoTextStl}>{"Just a minute \n We are uploading a recorded video..."}</Text>
+                    <View style={styles.uploadVideoStl}>
+                        <View style={styles.uploadVideoInnerStl}>
+                            <ActivityIndicator style={{ margin: 20 }} size={'large'} color={COLORS.yellowDark} />
+                            <Text style={styles.uploadVideoTextStl}>{"Just a minute \n We are uploading a recorded video..."}</Text>
+                        </View>
                     </View>
-                </View>
-            </Modal>
+                </Modal>
 
             </Modal>
         </View>
@@ -458,7 +463,7 @@ const styles = StyleSheet.create({
         marginRight: hp(3.25),
     },
     datetimeText: {
-        width:hp(13),
+        width: hp(13),
         fontSize: hp(1.82),
         lineHeight: hp(2.60),
         marginLeft: hp(0.9),
@@ -608,11 +613,11 @@ const styles = StyleSheet.create({
         top : 6
     },
     buttonGrp: {
-        width:hp(18),
+        width: hp(18),
         marginLeft: hp(1),
     },
     buttonGrp1: {
-        width:hp(32),
+        width: hp(32),
         marginLeft: hp(1),
     },
     calIcon: {
@@ -638,7 +643,7 @@ const styles = StyleSheet.create({
     },
 
     commonButtonBordered: {
-        width:hp(32),
+        width: hp(32),
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
         fontSize: hp(1.56),
@@ -648,16 +653,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: hp(1.21),
         paddingBottom: hp(1.21),
-        
+
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
     },
-    uploadVideoStl:{ width: '50%', height: '100%',alignSelf:'center', 
-    position: 'absolute', justifyContent: 'center', alignItems:'center' },
-    uploadVideoInnerStl:{width: '80%',borderRadius: hp(1),backgroundColor:COLORS.white, padding:10, borderColor:COLORS.darkGray, borderWidth:hp(0.1)},
-    uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
+    uploadVideoStl: {
+        width: '50%', height: '100%', alignSelf: 'center',
+        position: 'absolute', justifyContent: 'center', alignItems: 'center'
+    },
+    uploadVideoInnerStl: { width: '80%', borderRadius: hp(1), backgroundColor: COLORS.white, padding: 10, borderColor: COLORS.darkGray, borderWidth: hp(0.1) },
+    uploadVideoTextStl: { textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom: hp(2) },
 
 });

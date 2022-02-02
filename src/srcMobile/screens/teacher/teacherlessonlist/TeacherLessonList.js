@@ -21,23 +21,23 @@ import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import TickMarkGrey from "../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 
 
-var pageNo = 1
+var pageNo = 1;
+var limit = 25;
+var DataArr = [];
 
 const TeacherLessonList = (props) => {
     const userAuthData = useSelector(state => {
-        // console.log('state of user',state)
         return state.AuthReducer.userAuthData
     })
-    const [lessonData, setLessonData] = useState([])
     const [isLessonLoading, setLessonLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
-    const [filterBy, setFilterBy] = useState('')
-    const [limit, setLimit] = useState('25')
-    const [pagination, setPaginationData] = useState([])
-    const [allNewAndOldData, setAllNewAndOldData] = useState([])
+    const [filterBy, setFilterBy] = useState('Date')
+    const [isHide, action] = useState(true);
+    const [selectedId, setSelectedId] = useState(0);
 
 
     let currentCount = 0
+
     useEffect(() => {
         pageNo = 1
         if (Platform.OS === "android") {
@@ -67,84 +67,54 @@ const TeacherLessonList = (props) => {
     }
 
     useEffect(() => {
-        fetchRecord('', '')
+        
+        fetchRecord(pageNo, searchKeyword, filterBy);
+
+        return () => {
+            DataArr = [];
+          }
+
     }, [])
 
-    const fetchRecord = (searchBy, filterBy) => {
-        setLessonLoading(true)
-        let data = {
-            Searchby: searchBy,
-            Filterby: filterBy,
-            page: String(pageNo),
-            limit: limit
+    const refresh = () => {
+        pageNo = 1;
+        setSearchKeyword("")
+        fetchRecord(1, "", filterBy);
+    }
+
+    const addMorePage = () => {
+        if (DataArr.length > limit - 1) {
+            setLessonLoading(true)
+            pageNo = pageNo + 1
+            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1500)
         }
+    }
+
+    const fetchRecord = (pNo, searchBy, filterBy) => {
+        setLessonLoading(true)
+        let data = { Searchby: searchBy, Filterby: filterBy, page: String(pNo), limit: limit }
 
         Service.post(data, `${EndPoints.GetLessionById}/${User.user._id}`, (res) => {
-            // setLessonLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
-                // if (allNewAndOldData.length) {
-                //     if (res.data.length) {
-                //         let array = []
-                //         array.push(allNewAndOldData)
-                //         array.push(res.data)
-                //         setLessonData(array)
-                //         setAllNewAndOldData(array)
-                //     }
-                //     else {
-                //         setLessonData(allNewAndOldData)
-                //     }
-                // }
-                // else {
-                //     setLessonData(res.data)
-                //     // setAllNewAndOldData(res.data)
-                // }
-                setPaginationData(res.pagination)
-                if (allNewAndOldData.length > 0) {
-                    if (res.data) {
-                        let newData = []
-                        newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setLessonData(newArray)
-                        setAllNewAndOldData(newArray)
-                        setLessonLoading(false)
-                    }
-                    else {
-                        setLessonData(allNewAndOldData)
-                        setLessonLoading(false)
+                if (res.data && pNo == 1) {
+                    DataArr = [];
+                    DataArr = res.data;
+                }
+                else if (res.data) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        DataArr.push(res.data[i]);
                     }
                 }
-                else {
-                    setLessonData(res.data)
-                    setAllNewAndOldData(res.data)
-                    setLessonLoading(false)
-                }
-
+                setLessonLoading(false)
             } else {
+                setLessonLoading(false)
                 showMessage(res.message)
             }
         }, (err) => {
+            setLessonLoading(false)
             console.log('response of get all lesson error', err)
         })
     }
-
-
-    const addMorePage = () => {
-        console.log('-----lesson data length---', lessonData.length)
-        if (lessonData.length != pagination.TotalCount) {
-            pageNo = pageNo + 1
-            setTimeout(() => {
-                fetchRecord('', '')
-            }, 1000)
-        }
-    }
-
-    const refresh = () => {
-        console.log('refreshed');
-        fetchRecord('', '')
-    }
-    const [isHide, action] = useState(true);
-    const [selectedId, setSelectedId] = useState(0);
 
     const renderItem = ({ item, index }) => {
         return (
@@ -217,43 +187,41 @@ const TeacherLessonList = (props) => {
 
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
+                
                 <Header
                     onAlertPress={() => props.navigation.openDrawer()}
                     navigateToAddSubject={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)}
+                    onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}
+                    onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
+                    onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }}
                     onNotification={() => openNotification()} />
-                {isLessonLoading ?
-                    <ActivityIndicator
-                        style={{ margin: 20 }}
-                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                        color={COLORS.yellowDark} />
-                    :
-                    lessonData.length > 0 ?
-                        <FlatList
-                            style={{ paddingHorizontal: hp(1.84), marginBottom: hp(1.47) }}
-                            data={lessonData}
-                            renderItem={renderItem}
-                            keyExtractor={(item) => item.id}
-                            extraData={selectedId}
-                            showsVerticalScrollIndicator={false}
-                            onEndReachedThreshold={0}
-                            onEndReached={() => addMorePage()}
-                        />
-                        :
-                        // <View style={{ height: 100, justifyContent: 'center' }}>
-                        //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                        // </View>
-                        <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+
+
+                {DataArr.length > 0 &&
+                    <FlatList
+                        style={{ paddingHorizontal: hp(1.84), marginBottom: hp(1.47) }}
+                        data={DataArr}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        extraData={selectedId}
+                        showsVerticalScrollIndicator={false}
+                        onEndReachedThreshold={0}
+                        onEndReached={() => addMorePage()}
+                    />
+                }
+
+                {
+                    DataArr.length == 0 && !isLessonLoading && <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHW1} title2={MESSAGE.noLessonHW2} />
+                }
+
+                {isLessonLoading &&
+                    <View style={{ width: '100%', height: '100%', position: 'absolute',alignItems:'center', justifyContent:'center' }}>
+                        <ActivityIndicator
+                            size={'large'}
+                            color={COLORS.yellowDark} />
+                    </View>
                 }
             </View>
         </View>

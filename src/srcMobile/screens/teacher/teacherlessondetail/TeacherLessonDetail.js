@@ -148,8 +148,8 @@ const TeacherLessonDetail = (props) => {
 
                 data.append('recording', {
                     uri: element.uri,
-                    // name: element.fileName,
-                    name: 'MY_RECORDING.mp4',
+                    name: element.fileName,
+                    // name: 'MY_RECORDING.mp4',
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }

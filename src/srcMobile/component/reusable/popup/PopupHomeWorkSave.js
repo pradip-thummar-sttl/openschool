@@ -8,6 +8,7 @@ import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import BackArrow from "../../../../svg/common/BackArrow";
+import HWSubmitBg from "../../../../svg/teacher/lessonhwplanner/HWSubmitBg";
 
 const PopupHomeWorkSave = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -44,7 +45,7 @@ const PopupHomeWorkSave = (props) => {
 
                     </TouchableOpacity>
                     {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
-                    <BackArrow style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
+                    <HWSubmitBg style={STYLE.popupBack} height={55} width={'100%'} />
 
                     <View style={styles.userProfile}>
                         {/* <Image style={styles.userProfileimage} source={require('../../../../assets/images/userProfilePopup.png')} /> */}

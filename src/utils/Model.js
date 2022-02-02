@@ -15,10 +15,10 @@ export var Addhomework={
     RecordingArr: [],
 }
 export const appSettings = {
-    appId: '90905',
-    authKey: 'h-ykAkyXnJkRNWD',
-    authSecret: 'n-BAzvbxcR5ggrj',
-    accountKey: '2xYap5od8h1GCfgxCJ6B'
+    appId: '95414',
+    authKey: 'uPG6Dq6YBwQ7wW8',
+    authSecret: 'K8durVEgnGTNcM4',
+    accountKey: 'gNaxUx3UNTZJ6RxeYy2U'
   };
 
 export var NotificationToken = {
