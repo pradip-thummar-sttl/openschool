@@ -140,6 +140,7 @@ const PupilProfileAdd = (props) => {
     }
 
     const saveProfile = () => {
+        setLoading(true)
 
         let data = {
             SchoolId: User.user.UserDetialId,
@@ -155,7 +156,6 @@ const PupilProfileAdd = (props) => {
             IsInvited: 'false',
             Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
         }
-
         Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
@@ -314,7 +314,16 @@ const PupilProfileAdd = (props) => {
                                     <TouchableOpacity
                                         activeOpacity={opacity}
                                         onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
+
+                                        {isLoading ?
+                                            <ActivityIndicator
+                                                style={PAGESTYLE.commonButtonGreen}
+                                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                color={COLORS.white} />
+                                            :
+                                            <Text style={PAGESTYLE.btnSendTextView}>Send Invite</Text>
+
+                                        }
                                     </TouchableOpacity>
                                 </View>
 

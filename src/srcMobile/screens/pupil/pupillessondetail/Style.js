@@ -213,7 +213,7 @@ export default StyleSheet.create({
         width: 'auto',
         // paddingBottom: hp(1.5),
         // marginBottom: hp(1.5),
-        marginTop:hp(2.5),
+        marginTop: hp(2.5),
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
@@ -225,12 +225,12 @@ export default StyleSheet.create({
         paddingLeft: hp(1.30),
         paddingRight: hp(1.30),
         paddingTop: hp(2.60),
-        marginBottom:hp(1)
+        marginBottom: hp(1)
     },
     uploadBoardBlock: {
         backgroundColor: COLORS.greyBack,
         width: '100%',
-        alignItems:'center',
+        alignItems: 'center',
         borderRadius: 10,
         padding: 15,
         borderColor: COLORS.blueBorder,
@@ -276,7 +276,7 @@ export default StyleSheet.create({
     checkMark: {
         width: hp(1.84),
         height: hp(1.84),
-        top : Platform.OS === 'android' ? 3 : 4,
+        top: Platform.OS === 'android' ? 3 : 4,
         // top: 3,
         left: 3,
         fontFamily: FONTS.fontBold,
@@ -1267,8 +1267,8 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         // lineHeight: hp(3.6),
         paddingLeft: hp(0.91),
-    
-        
+
+
     },
     bookMarkLabel: {
         width: hp(1.81),
@@ -1317,7 +1317,7 @@ export default StyleSheet.create({
         height: hp(2.47),
         backgroundColor: COLORS.lightGrayPupil,
         borderRadius: hp(100),
-       
+
     },
     dueVideoUserSpace: {
         paddingLeft: hp(1.04),
@@ -1418,6 +1418,25 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         width: '100%',
     },
+    commonButtonSubmitHomework: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.5),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        // textAlign: 'center',
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(3.125),
+        paddingTop: hp(1.6),
+        paddingBottom: hp(1.6),
+        height: hp(5.41),
+        // alignSelf: 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        width: '100%',
+    },
     rightSideBar: {
         paddingTop: hp(3.5),
     },
@@ -1441,6 +1460,12 @@ export default StyleSheet.create({
     },
     fullButton: {
         width: '100%',
+    },
+    fullButtonHomework: {
+        color: COLORS.white,
+        fontSize: hp(1.5),
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     fullButtonMain: {
         backgroundColor: COLORS.whiteBg,
@@ -1478,6 +1503,34 @@ export default StyleSheet.create({
         borderRadius: 8,
         overflow: 'hidden',
         paddingVertical: Platform.OS == 'android' ? 0 : 10,
+    },
+    fixedButtonHomework: {
+        width: '50%',
+        height: 45,
+        // textAlign: 'center',
+        // paddingLeft: hp(1),
+        // paddingRight: hp(1),
+        // backgroundColor: COLORS.transparent,
+        // color: COLORS.dashboardGreenButton,
+        textTransform: 'uppercase',
+        // textAlignVertical: 'center',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        // alignSelf: 'center',
+        borderColor: COLORS.dashboardGreenButton,
+        borderRadius: 8,
+        overflow: 'hidden',
+        // paddingVertical: Platform.OS == 'android' ? 0 : 10,
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        marginLeft: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    homeworkText: {
+        color: COLORS.white,
+        fontFamily: FONTS.fontBold,
+        textTransform: 'uppercase',
     },
     filterbarMain: {
         flexDirection: 'row',

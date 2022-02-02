@@ -24,9 +24,9 @@ const HeaderHW = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
                     </TouchableOpacity> {props.SubjectName} - <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text></Text>
                 <View style={styles.headerRight}>
-                    <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
+                    <Popuphomework updateFlag={props.updateFlag} hwBtnName={props.hwBtnName} isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
                     <TouchableOpacity
-                        style={styles.notificationBar}
+                        style={[styles.notificationBar]}
                         onPress={() => props.onAlertPress()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}

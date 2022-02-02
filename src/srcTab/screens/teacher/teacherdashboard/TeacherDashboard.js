@@ -573,9 +573,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                                                 {
                                                                                     isLoading ?
                                                                                         <ActivityIndicator
-                                                                                            style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
+                                                                                            // style={{ ...PAGESTYLE.buttonGrp, right: 30 }}
                                                                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                            color={COLORS.buttonGreen} /> :
+                                                                                            color={COLORS.white} /> :
                                                                                         <Text style={PAGESTYLE.txtStartClastButtonStyle}>Start Class</Text>
                                                                                 }
 

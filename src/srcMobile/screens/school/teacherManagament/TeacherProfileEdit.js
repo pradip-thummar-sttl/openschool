@@ -117,6 +117,7 @@ const TeacherProfileEdit = (props) => {
     }
 
     const saveProfile = () => {
+        setLoading(true)
         let data = {
             SchoolId: User.user.UserDetialId,
             Title: getSelectTitle(),
@@ -130,7 +131,7 @@ const TeacherProfileEdit = (props) => {
             IsInvited: 'true',
             CreatedBy: User.user.UserDetialId,
         }
-
+       
         Service.post(data, `${EndPoints.TeacherProfileEdit}/${item?.TeacherId}`, (res) => {
             if (res.code == 200) {
                 uploadProfile(res.data._id)
@@ -272,6 +273,7 @@ const TeacherProfileEdit = (props) => {
                 navigateToBack={() => props.navigation.goBack()}
                 onSavePressed={() => validateFields()}
                 openNotification={() => props.openNotification()}
+                isLoading = {isLoading}
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>

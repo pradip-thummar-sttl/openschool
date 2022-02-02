@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image,ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -51,11 +51,15 @@ const HeaderPMInnerEdit = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={() => props.onPressSave()} style={styles.buttonGroup}>
-                        {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../assets/images/checkIcon2.png')} /> */}
-                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
-
-                        <Text style={styles.commonButtonGreenheader}></Text>
+                    <TouchableOpacity onPress={() => props.onPressSave()} style={[styles.buttonGroup,styles.commonButtonGreenheader]}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                         <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                           // {/* <Text style={styles.commonButtonGreenheader}></Text> */}
+                         }       
                     </TouchableOpacity>
                 </View>
             </View>
@@ -81,7 +85,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingTop: Platform.OS == 'android' ? 0: hp(2),
+        paddingTop: Platform.OS == 'android' ? 0 : hp(2),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
@@ -138,8 +142,8 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.52),
-        left: hp(1.8),
+        // top: hp(1.52),
+        // left: hp(1.8),
         zIndex: 9,
     },
     commonButtonGreenheader: {
@@ -149,13 +153,13 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(2),
-        height: hp(5.20),
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        height: 40,
+        width : 40,
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
+        justifyContent : 'center',
+        alignItems : 'center'
     },
 });

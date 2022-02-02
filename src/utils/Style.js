@@ -135,7 +135,9 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+        
     },
+   
     commonButtonGreenDashboardSide: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
@@ -148,6 +150,28 @@ export default StyleSheet.create({
         // paddingTop: hp(1.21),
         // paddingBottom: hp(1.21),
         alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        borderWidth: 1,
+        borderColor: COLORS.dashboardGreenButton,
+        // marginBottom : 10,
+        paddingVertical : Platform.OS === 'android' ? 10 : 15
+    },
+    commonButtonGreenDashboardSideSetHomework: {
+        width  :200,
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        // textAlign: 'center',
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(3.125),
+        justifyContent : 'center',
+        alignItems : 'center',
+        // paddingTop: hp(1.21),
+        // paddingBottom: hp(1.21),
+        // alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
@@ -203,10 +227,22 @@ export default StyleSheet.create({
         position: 'absolute',
         right: hp(1.21),
         zIndex: 9,
+      },
+    cancelButtonHomework: {
+        position: 'absolute',
+        right: hp(1.21),
+        zIndex: 9,
+        width : 20,
+        height : 30
     },
     cancelButtonIcon: {
         width: hp(2.94),
         top: 10,
+        resizeMode: 'contain',
+    },
+    cancelButtonMarkIcon: {
+        width: hp(2.94),
+        // top: 10,
         resizeMode: 'contain',
     },
     cancelButtonIcon1: {

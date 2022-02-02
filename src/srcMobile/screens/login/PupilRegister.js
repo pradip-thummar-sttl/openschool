@@ -405,7 +405,14 @@ class PupilRegister extends Component {
 
                                 <View style={[styles.loginButtonView,{marginTop:20}]}>
                                     <TouchableOpacity style={STYLE.loginButtonView}  activeOpacity={opacity} onPress={() => { this.isFieldsValidated() }}>
-                                        <Text style={STYLE.loginButtonText}>Create my account</Text>
+                                       
+                                    {this.isLoading ?
+                                        <ActivityIndicator
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.white} />
+                                        :
+                                         <Text style={STYLE.loginButtonText}>Create my account</Text>
+                                    }
                                     </TouchableOpacity>
                                 </View>
 

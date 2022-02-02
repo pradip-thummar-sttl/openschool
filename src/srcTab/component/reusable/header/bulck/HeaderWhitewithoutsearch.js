@@ -22,7 +22,7 @@ const HeaderWhite = (props) => {
             <View style={styles.headerMain}>
                 <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}>
                     {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+                    <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
 
                 </TouchableOpacity><Text style={styles.date}>{props.title}</Text></Text>
                 <View style={styles.headerRight}>
@@ -30,15 +30,23 @@ const HeaderWhite = (props) => {
                         <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onSeeHomeworkPress()} style={styles.buttonGroup}>
-                        <Text style={styles.commonButtonGreenheader}>see homework</Text>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                // style={STYLE.commonButtonGreen}
+                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <Text style={styles.commonButtonGreenheader}>see homework</Text>
+                        }
+                     
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -124,8 +132,22 @@ const styles = StyleSheet.create({
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
-        alignItems: 'center',
         marginRight: hp(1.69),
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        height: hp(5.30),
+        width : 145,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginHorizontal : 8
     },
     filterIcon: {
         width: hp(1.74),
@@ -135,21 +157,12 @@ const styles = StyleSheet.create({
         top: hp(1.19),
     },
     commonButtonGreenheader: {
-        backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(3.125),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
-        height: hp(5.20),
-        alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        marginLeft: hp(2),
     },
     commonButtonGreenheaderwithicon: {
         backgroundColor: COLORS.dashboardGreenButton,

@@ -738,6 +738,22 @@ export default StyleSheet.create({
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
     },
+    commonButtonGreen: {
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white,
+        fontSize: hp('2.4%'),
+        fontWeight: '800',
+        borderRadius: hp('1.3%'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(10),
+        paddingRight: hp(10),
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
      // updates
      secondHeader:{
         height:hp(12.5),

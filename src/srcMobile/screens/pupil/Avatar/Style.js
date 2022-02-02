@@ -11,6 +11,17 @@ export default StyleSheet.create({
         // height: hp(67),
         // padding: hp(2),
     },
+    saveMyAvtarBtn: {
+        width: wp(40),
+        height: hp(6),
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 15,
+        marginTop: 15,
+        alignSelf: 'center'
+    },
     leftView: {
         paddingHorizontal: hp(1.5)
     },
@@ -111,7 +122,7 @@ export default StyleSheet.create({
     itemBtn: {
         width: hp(12),
         height: hp(12),
-        margin:10,
+        margin: 10,
         borderRadius: 10,
         backgroundColor: 'orange',
         alignItems: 'center',

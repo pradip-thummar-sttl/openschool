@@ -24,6 +24,7 @@ import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
+import { ActivityIndicator } from "react-native";
 
 const PopupdataSecondPupil = (props) => {
     const [isModalVisible, setModalVisible] = useState(false);
@@ -347,7 +348,7 @@ const PopupdataSecondPupil = (props) => {
                                                 <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                    <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
+                                                        <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
 
                                                         {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     </View>
@@ -364,12 +365,22 @@ const PopupdataSecondPupil = (props) => {
                                         <View style={[styles.lessonstartButton]}>
                                             <TouchableOpacity
                                                 onPress={isFieldsValidated}
-                                                style={styles.buttonGrp}
+                                                style={[styles.buttonGrp,styles.saveEntryTextBtnn]}
                                                 activeOpacity={opacity}>
-                                                {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
-                                                <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        // style={STYLE.commonButtonGreen}
+                                                        size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
+                                                    <>
+                                                        <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
 
-                                                <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
+                                                        <Text style={[styles.popupCustomButton]}>save entry</Text>
+                                                    </>
+                                                }
+                                                {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
+
                                             </TouchableOpacity>
 
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
@@ -390,7 +401,7 @@ const PopupdataSecondPupil = (props) => {
                                             return (
                                                 <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
                                                     <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                                    <Text style={{paddingStart : 10}}>{item.EventType}</Text>
+                                                    <Text style={{ paddingStart: 10 }}>{item.EventType}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }}
@@ -462,15 +473,27 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginBottom:hp(2)
+        marginBottom: hp(2)
     },
     buttonGrp: {
         // position: 'relative',
         alignItems: 'center',
         flexDirection: 'row',
-        justifyContent : 'center',
+        justifyContent: 'center',
         // marginVertical : 10
-        
+
+    },
+    saveEntryTextBtnn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        height: hp(5.20),
+        width : 128,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
     },
     checkWhiteIcon: {
         width: hp(1.48),
@@ -479,15 +502,19 @@ const styles = StyleSheet.create({
         left: hp(1.7),
         // top: Platform.OS === 'android' ? 15 : 'auto',
         zIndex: 9,
-        alignSelf : 'center',
+        alignSelf: 'center',
         // backgroundColor : 'red',
-        
+
     },
     popupCustomButton: {
         paddingLeft: hp(4.42),
         paddingRight: hp(3.125),
-        // paddingTop: hp(1.5),
-        // paddingBottom: hp(1.5),
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     calIcon: {
         resizeMode: 'contain',
@@ -504,7 +531,7 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         // paddingTop: hp(1.5),
         // paddingBottom: hp(1.5),
-        paddingVertical : hp(1),
+        paddingVertical: hp(1),
         paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
@@ -704,4 +731,4 @@ const styles = StyleSheet.create({
         right: hp(1.6),
         alignSelf: 'center'
     },
-}); 
+});

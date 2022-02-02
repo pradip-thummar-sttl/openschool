@@ -55,6 +55,7 @@ const PupilHomeWorkDetail = (props) => {
         }
         console.log(isSubmitPopup);
         setSubmitPopup(true)
+        setLoading(true)
     }
 
     const onSubmitHomework = () => {
@@ -143,7 +144,8 @@ const PupilHomeWorkDetail = (props) => {
                     onAlertPress={() => props.onAlertPress()}
                     goBack={() => props.goBack()}
                     onSubmitHomework={() => isFieldsValidated()}
-                    title={item.LessonTopic} />
+                    title={item.LessonTopic}
+                    isLoading={isLoading} />
                 <View style={PAGESTYLE.containerWrap}>
                     <View style={PAGESTYLE.teacherDetailLeft}>
 

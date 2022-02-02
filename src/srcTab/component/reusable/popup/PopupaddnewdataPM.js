@@ -64,7 +64,7 @@ const PopupaddnewdataPM = (props) => {
                             <View style={PopStyle.btnSelectionView}>
                                 <TouchableOpacity activeOpacity={opacity} style={PopStyle.entryData} onPress={() => { setModalVisible(false); props.navigateToAddPupil() }}>
                                     <ImportIndividual style={PopStyle.entryIcon} height={hp(11.19)} width={hp(11.19)} />
-                                    <Text style={PopStyle.entryTitle}>Add Mnually</Text>
+                                    <Text style={PopStyle.entryTitle}>Add Manually</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>

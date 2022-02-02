@@ -133,6 +133,7 @@ const PupilProfileEdit = (props) => {
         saveProfile()
     }
     const saveProfile = () => {
+        setLoading(true)
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
@@ -233,8 +234,15 @@ const PupilProfileEdit = (props) => {
                                 </View>
 
                                 <View style={PAGESTYLE.btnSendView}>
-                                    <TouchableOpacity style={PAGESTYLE.btnInnerSendView} activeOpacity={opacity} onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.btnSendTextView}>Save</Text>
+                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView,{justifyContent : 'center',alignItems : 'center'}]}
+                                     activeOpacity={opacity} onPress={() => { validateFields() }}>
+                                    {isLoading ?
+                                            <ActivityIndicator
+                                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                color={COLORS.white} />
+                                            :
+                                            <Text style={PAGESTYLE.btnSendTextView}>Save</Text>
+                                        } 
                                     </TouchableOpacity>
                                 </View>
                             </View>

@@ -124,7 +124,7 @@ class Login extends Component {
                     }
                 })
 
-                
+
                 var data = {
                     FirstName: firstName,
                     LastName: lastName,
@@ -366,11 +366,11 @@ class Login extends Component {
                                             {/* <Image
                                                 style={styles.password}
                                                 source={this.state.isPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
-                                                 {
-                                                    this.state.isPasswordHide?
+                                            {
+                                                this.state.isPasswordHide ?
                                                     <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                    :<HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                }
+                                                    : <HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -397,11 +397,11 @@ class Login extends Component {
                                             {/* <Image
                                                 style={styles.password}
                                                 source={this.state.iscPasswordHide ? Images.ShowPassword : Images.HidePassword} /> */}
-                                                {
-                                                    this.state.iscPasswordHide?
+                                            {
+                                                this.state.iscPasswordHide ?
                                                     <ShowPassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                    :<HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
-                                                }
+                                                    : <HidePassword style={styles.password} height={hp(1.69)} width={hp(2.47)} />
+                                            }
                                         </TouchableOpacity>
                                     </View>
                                 </View>
@@ -416,11 +416,11 @@ class Login extends Component {
                                             this.isFieldsValidated()
 
                                     }}
-                                    style={{}}
-                                    >
+                                    style={styles.createAccountBtnn}
+                                >
                                     {this.state.isLoading ?
                                         <ActivityIndicator
-                                            style={styles.commonButtonGreen}
+                                            // style={styles.commonButtonGreen}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.white} />
                                         :
@@ -432,7 +432,7 @@ class Login extends Component {
                         </View>
                         <View style={styles.bottomLoginIntro}>
                             <Text style={STYLE.commonFonts}>Our Terms &amp; Conditions and Privacy Policy</Text>
-                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity style={{top : Platform.OS === 'android' ? 6 : 0}}><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity style={{top : Platform.OS === 'android' ? 6 : 0}}><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
+                            <Text style={STYLE.commonFontsPuple}>By clicking ‘Login to continue’, I agree to <TouchableOpacity style={{ top: Platform.OS === 'android' ? 6 : 0 }}><Text style={styles.commonFontsPupleUnderline}>MyEd’s Terms</Text></TouchableOpacity>, and <TouchableOpacity style={{ top: Platform.OS === 'android' ? 6 : 0 }}><Text style={styles.commonFontsPupleUnderline}>Privacy Policy</Text></TouchableOpacity></Text>
                         </View>
                     </KeyboardAwareScrollView>
                 </View>
@@ -455,6 +455,26 @@ function mapDispatchToProps(dispatch) {
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
 const styles = StyleSheet.create({
+    createAccountBtnn: {
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white, fontWeight: '800',
+        borderRadius: hp('1.3'),
+        overflow: 'hidden',
+        textAlign: 'center',
+        alignSelf: 'flex-start',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+        width: Platform.OS === 'android' ? 200 : 250,
+        // width: 250,
+        // height: 55,
+        height: Platform.OS === 'android' ? 50 : 55,
+        // paddingVertical: 15,
+        fontSize: Platform.OS === 'android' ? hp('1.96') : hp('1.86'),
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     container: {
         flex: 1,
         flexDirection: 'row',
@@ -541,7 +561,7 @@ const styles = StyleSheet.create({
     loginButtonView: {
         marginTop: hp('3.0%'),
         width: '100%',
-        alignContent:'flex-start',
+        alignContent: 'flex-start',
     },
     bottomLoginIntro: {
         marginTop: 50,
@@ -567,21 +587,13 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
     },
     commonButtonGreen: {
-        backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
-        fontSize:Platform.OS === 'android' ?  hp('1.96') :  hp('1.86'),
         fontWeight: '800',
-        borderRadius: hp('1.3'),
         overflow: 'hidden',
         textAlign: 'center',
-        alignSelf: 'flex-start',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        width :  Platform.OS === 'android' ? 200 : 250,
-        // width: 250,
-        // height: 55,
-        height :  Platform.OS === 'android' ? 50 : 55,
-        paddingVertical: 15
+        fontSize: Platform.OS === 'android' ? hp('1.96') : hp('1.86'),
     },
     getStartText: {
         fontFamily: FONTS.fontRegular,

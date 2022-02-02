@@ -27,7 +27,7 @@ const HeaderHW = (props) => {
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    <Popuphomework hwBtnName={props.hwBtnName}  isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
+                    <Popuphomework hwBtnName={props.hwBtnName} isHomeworkLoading={props.isHomeworkLoading} isHomeworkLoading={props.isHomeworkLoading} onOpenPopup={() => props.onOpenPopup()} isVisible={props.isVisible} onClose={() => props.onClose()} setHomework={() => props.setHomework()} />
                 </View>
             </View>
         </View>

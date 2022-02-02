@@ -38,18 +38,18 @@ const PupilLessonDetailInternal = (props) => {
 
 
     useEffect(() => {
-        if (Platform.OS==="android") {
+        if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
+        }
         return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
+            BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
-      }, [props.navigation]);
+    }, [props.navigation]);
 
-      const handleBackButtonClick=()=> {
+    const handleBackButtonClick = () => {
         props.navigation.goBack()
         return true;
-      }
+    }
 
     const refresh = () => {
         Service.get(`${EndPoints.GetPupilLesson}/${item._id}/${User.user.UserDetialId}`, (res) => {
@@ -97,7 +97,7 @@ const PupilLessonDetailInternal = (props) => {
         }
         Service.post(data, `${EndPoints.SaveLessonByPupil}/${item._id}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
-                let temp = {...item, SaveLesson: flag}
+                let temp = { ...item, SaveLesson: flag }
 
                 console.log('temp', temp);
                 setItem(temp)
@@ -147,13 +147,15 @@ const PupilLessonDetailInternal = (props) => {
                                     item != undefined && item.MaterialList.length > 0 ?
                                         item.MaterialList.map((obj, index) => {
                                             return (
-                                                <TouchableOpacity onPress={() => {setLoader(true); setMateIndex(index);Download(obj,(res)=>{
-                                                    setLoader(false)
-                                                    setMateIndex(-1)
-                                                })}} style={[PAGESTYLE.fileGrp,{alignItems : 'center'}]}>
-                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName,{width:wp(75)}]}>{obj.originalname}</Text>
-                                                    <View  style={[PAGESTYLE.downloaBtn,{alignItems :'center',justifyContent : 'center'}]}>
-                                                    {(isMatLoading && index==mateIndex) ?
+                                                <TouchableOpacity onPress={() => {
+                                                    setLoader(true); setMateIndex(index); Download(obj, (res) => {
+                                                        setLoader(false)
+                                                        setMateIndex(-1)
+                                                    })
+                                                }} style={[PAGESTYLE.fileGrp, { alignItems: 'center' }]}>
+                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: wp(75) }]}>{obj.originalname}</Text>
+                                                    <View style={[PAGESTYLE.downloaBtn, { alignItems: 'center', justifyContent: 'center' }]}>
+                                                        {(isMatLoading && index == mateIndex) ?
                                                             <ActivityIndicator
                                                                 style={{ ...PAGESTYLE.downloadIcon }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -189,7 +191,7 @@ const PupilLessonDetailInternal = (props) => {
                                                 style={PAGESTYLE.fileGrp}
                                                 onPress={() => props.navigation.navigate('WorkSpace', { id: item.LessonId, isWorkspace: false, item: item.WorkSpacelist, tappedItem: index })}>
                                                 <Text style={PAGESTYLE.fileName}>Workspace {index + 1}</Text>
-                                                <WorkSpaceMore width= {hp(2.27)} height={hp(0.58)} style={PAGESTYLE.moreIcon} />
+                                                <WorkSpaceMore width={hp(2.27)} height={hp(0.58)} style={PAGESTYLE.moreIcon} />
                                                 {/* <Image source={require('../../../../../assets/images/moreNew2.png')} style={PAGESTYLE.moreIcon} /> */}
                                             </TouchableOpacity>
                                         )
@@ -214,16 +216,16 @@ const PupilLessonDetailInternal = (props) => {
                     onOpenWorkSpacePress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}
                     onSeeHomeworkPress={() => null} />
                 <View style={{ height: '93%', paddingBottom: 30 }}>
-                {item.RecordingList.length == 0 ?
-                            // <VideoBanner width={'100%'} height={hp(25.86)} style={PAGESTYLE.largeVideo} />
-                            // <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
-                            null
-                            :
-                    <View style={PAGESTYLE.largeVideoBlock}>
-                       
+                    {item.RecordingList.length == 0 ?
+                        // <VideoBanner width={'100%'} height={hp(25.86)} style={PAGESTYLE.largeVideo} />
+                        // <Image source={Images.videoBanner} style={PAGESTYLE.largeVideo} />
+                        null
+                        :
+                        <View style={PAGESTYLE.largeVideoBlock}>
+
                             <View style={{ height: '100%', justifyContent: 'center' }}>
                                 <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
-                                // hideShutterView={true}
+                                    // hideShutterView={true}
                                     resizeMode={'contain'}
                                     style={PAGESTYLE.largeVideo1}
                                     controls={true}
@@ -239,10 +241,10 @@ const PupilLessonDetailInternal = (props) => {
                                     null
                                 }
                             </View>
-                       
-                    </View>
-                     }
-                    <ScrollView style={{ top: 0,marginBottom:5 }} showsVerticalScrollIndicator={false}>
+
+                        </View>
+                    }
+                    <ScrollView style={{ top: 0, marginBottom: 5 }} showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.videoTitleLine}>
                             <View>
                                 <Text style={PAGESTYLE.videoMainTitle}>{item.LessonTopic}</Text>
@@ -250,9 +252,9 @@ const PupilLessonDetailInternal = (props) => {
                             </View>
                         </View>
                         <View style={PAGESTYLE.bookmarkuserNameMain}>
-                            <View style={[PAGESTYLE.userNameMain,{alignItems : 'center'}]}>
+                            <View style={[PAGESTYLE.userNameMain, { alignItems: 'center' }]}>
                                 <Image style={PAGESTYLE.userMainThumb} source={{ uri: baseUrl + item.TeacherProfile }}></Image>
-                                <Text style={[PAGESTYLE.mainNameText,{textAlign : 'center'}]}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
+                                <Text style={[PAGESTYLE.mainNameText, { textAlign: 'center' }]}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                             </View>
                             <TouchableOpacity activeOpacity={opacity}
                                 onPress={() => saveLesson(item.SaveLesson ? false : true)}>
@@ -260,14 +262,14 @@ const PupilLessonDetailInternal = (props) => {
                                     <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
                                     {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} /> */}
                                     {
-                                        item.SaveLesson?
-                                        <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
-                                        :<BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)}/>
+                                        item.SaveLesson ?
+                                            <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
+                                            : <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.12)} width={hp(1.81)} />
                                     }
                                 </View>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ paddingBottom: hp(12)}}>
+                        <View style={{ paddingBottom: hp(12) }}>
                             <Accordion
                                 activeSections={activeSections}
                                 sections={NEW}
@@ -287,19 +289,23 @@ const PupilLessonDetailInternal = (props) => {
                         onPress={() => props.navigation.navigate('WorkSpace', { onGoBack: () => refresh(), id: item.LessonId, isWorkspace: true })}>
                         <Text style={{ ...PAGESTYLE.fixedButton, marginRight: 10 }}>open workspace</Text>
                     </TouchableOpacity>
-                    {isHomeworkLoading ?
-                        <ActivityIndicator
-                            style={{ ...PAGESTYLE.fixedButton, backgroundColor: COLORS.dashboardGreenButton, width: '50%', marginLeft: 10 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
-                        :
-                        <TouchableOpacity
-                            style={{ width: '50%' }}
-                            activeOpacity={opacity}
-                            onPress={() => getHomeWork()}>
-                            <Text style={{ ...PAGESTYLE.fixedButton, backgroundColor: COLORS.dashboardGreenButton, color: COLORS.white, marginLeft: 10 }}>see homework</Text>
-                        </TouchableOpacity>
-                    }
+
+                    <TouchableOpacity
+                        style={{ ...PAGESTYLE.fixedButtonHomework }}
+                        activeOpacity={opacity}
+                        onPress={() => getHomeWork()}>
+                        {isHomeworkLoading ?
+                            <ActivityIndicator
+                                // style={{ ...PAGESTYLE.fixedButton, backgroundColor: COLORS.dashboardGreenButton, width: '50%', marginLeft: 10 }}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+
+
+                            <Text style={{...PAGESTYLE.homeworkText}} >see homework</Text>
+                        }
+                    </TouchableOpacity>
+
                 </View>
             </View>
         </View>

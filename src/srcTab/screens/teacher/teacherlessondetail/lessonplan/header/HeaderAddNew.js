@@ -22,28 +22,39 @@ const HeaderAddNew = (props) => {
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity> Add New Lesson
                 </Text> */}
-                 <View style={{flexDirection : 'row',justifyContent : 'center',alignItems : 'center'}}>
-            <TouchableOpacity  activeOpacity={opacity} onPress={() => props.navigateToBack()}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableOpacity activeOpacity={opacity} onPress={() => props.navigateToBack()}>
                         <BackArrow style={styles.arrow} height={hp(2.57)} width={hp(2.23)} />
                     </TouchableOpacity>
-                <Text style={styles.mainTitle}>Add New Lesson</Text>
-                  
-            </View>
+                    <Text style={styles.mainTitle}>Add New Lesson</Text>
+
+                </View>
                 <View style={styles.headerRight}>
-                    {
-                    props.isLoading ?
-                        <ActivityIndicator style={styles.commonButtonGreenheaderwithouticon} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
-                        :
-                        <TouchableOpacity style={[styles.buttonGroup,{justifyContent : 'center'}]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
-                            <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
-                            <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
-                        </TouchableOpacity>
-                    }
+
+                    <TouchableOpacity style={[styles.buttonGroup,styles.saveLessonBtn]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
+                        {
+                            props.isLoading ?
+                                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                             :
+                                <>
+                                    <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                    <Text style={styles.saveLessonBtntext}>Save Lesson</Text>
+                                </>
+                        }
+                    </TouchableOpacity>
+
+                    {/* // <ActivityIndicator style={styles.commonButtonGreenheaderwithouticon} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+
+                            // <TouchableOpacity style={[styles.buttonGroup, { justifyContent: 'center' }]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
+                            //     <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                            //     <Text style={styles.commonButtonGreenheaderwithicon}>Save Lesson</Text>
+                            // </TouchableOpacity> */}
+
                     <TouchableOpacity style={styles.notificationBar} onPress={() => props.onAlertPress()} activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
-                    }
+                            BadgeIcon.isBadge && <View style={STYLE.redDot}></View>
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -134,6 +145,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: hp(1.69),
     },
+    saveLessonBtn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        width : 140,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
     filterIcon: {
         width: hp(1.74),
         resizeMode: 'contain',
@@ -171,6 +198,14 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    saveLessonBtntext: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },

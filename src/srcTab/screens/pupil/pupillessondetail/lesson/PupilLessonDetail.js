@@ -142,7 +142,8 @@ const PupilLessonDetailInternal = (props) => {
                         <PupilHomeWorkSubmitted
                             goBack={() => setHWSubmitted(false)}
                             item={hwData}
-                            onAlertPress={() => props.onAlertPress()} />
+                            onAlertPress={() => props.onAlertPress()} 
+                            onLoading={isHomeworkLoading} />
                         :
                         isHWMarked ?
                             <PupilHomeWorkMarked

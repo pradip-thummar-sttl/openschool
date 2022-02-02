@@ -37,6 +37,7 @@ const SPupilProfileEdit = (props) => {
     const [isSelectedDate, setSelectedDate] = useState('')
     const [isUserType, setUserType] = useState('')
     const [isLoading, setLoading] = useState(false);
+    const [selectedTeacher, setSelectedTeacher] = useState()
     const item = props.route.params.item;
     const navigateToBack = props.route.params.navigateToBack;
     console.log('xyz----------', props)
@@ -131,9 +132,6 @@ const SPupilProfileEdit = (props) => {
         } else if (!isSelectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false
-        } else if (!selectedTeacher.length) {
-            showMessage(MESSAGE.selectTeacher)
-            return false
         } else if (!isPFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
@@ -148,7 +146,7 @@ const SPupilProfileEdit = (props) => {
         saveProfile()
     }
     const saveProfile = () => {
-
+        setLoading(true)
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
@@ -232,6 +230,7 @@ const SPupilProfileEdit = (props) => {
                 onAlertPress={() => props.navigation.openDrawer()}
                 OnSaveEdit={() => { validateFields() }}
                 navigateToBack={() => props.navigation.goBack()}
+                isLoading={isLoading}
                
             />
             <View style={PAGESTYLE.MainProfile}>

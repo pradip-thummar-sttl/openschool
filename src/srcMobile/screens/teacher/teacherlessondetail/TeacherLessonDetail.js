@@ -241,6 +241,7 @@ const TeacherLessonDetail = (props) => {
                                     onAlertPress={() => props.navigation.openDrawer()}
                                     navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}
                                     onNotification = {() => props.navigation.navigate('NotificationDrawer')}
+                                    isHomeworkLoading={isHomeworkLoading}
                                     />
                                 : tabIndex == 1 ?
                                     <HeaderHW
@@ -270,7 +271,7 @@ const TeacherLessonDetail = (props) => {
                                                 style={PAGESTYLE.tabs}
                                                 activeOpacity={opacity}
                                                 onPress={() => setSelectedTab(0)}>
-                                                <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson plan</Text>
+                                                <Text style={[PAGESTYLE.tabsText, tabIndex == 0 ? PAGESTYLE.tabsTextSelected : null]}>lesson splan</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.tabs}

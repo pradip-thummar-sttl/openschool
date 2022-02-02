@@ -53,21 +53,19 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    {props.isLoading ?
-                        <TouchableOpacity style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onPressSave()} style={[styles.buttonGroup,styles.commonButtonGreenheader]}>
+                        {props.isLoading ?
                             <ActivityIndicator
-                                style={[styles.addIcon1, styles.iconTop]}
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
-                            <Text style={styles.commonButtonGreenheader}></Text>
-                        </TouchableOpacity>
-                        :
-                        <TouchableOpacity onPress={() => props.onPressSave()} style={styles.buttonGroup}>
-                            {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                            {/* <CheckedBlue style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} /> */}
-                            <Ic_CheckWhite style={[styles.addIcon, styles.iconTop]} width={hp(1.55)} height={hp(1.55)} />
-                            <Text style={styles.commonButtonGreenheader}></Text>
-                        </TouchableOpacity>}
+                            :
+                            <>
+                                <Ic_CheckWhite style={[styles.addIcon, styles.iconTop]} width={hp(1.55)} height={hp(1.55)} />
+                                
+                            </>
+                        }
+                    </TouchableOpacity>
+
                 </View>
             </View>
         </View>
@@ -85,7 +83,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2),
         paddingRight: hp(2),
         paddingBottom: hp(1.23),
-        paddingTop:Platform.OS == 'android' ? 0 : hp(2.3),
+        paddingTop: Platform.OS == 'android' ? 0 : hp(2.3),
     },
     headerMain: {
         shadowColor: COLORS.black,
@@ -149,7 +147,7 @@ const styles = StyleSheet.create({
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.52),
+        // top: hp(1.52),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -159,9 +157,12 @@ const styles = StyleSheet.create({
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(2),
+        // textAlign: 'center',
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(2),
+        justifyContent : 'center',
+        alignItems : 'center',
+        width : hp(5.20),
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),

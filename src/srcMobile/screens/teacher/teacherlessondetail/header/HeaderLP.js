@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, Platform } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, Platform,activit } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import FONTS from '../../../../../utils/Fonts';
@@ -29,10 +29,22 @@ const HeaderLP = (props) => {
                 <View style={styles.headerRight}>
                     <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
+                        style={[styles.profileEdit,styles.commonButtonGreenheader]}>
+                        {props.isHomeworkLoading ?
+                            <ActivityIndicator
+                                // style={STYLE.commonButtonGreen}
+                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <EditWhite style={styles.profileeditButton} height={hp(1.77)} width={hp(1.77)} />
+                        }
+                    </TouchableOpacity>
+                       {/* <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => props.navigateToEdit()}
                         style={styles.profileEdit}>
                         <EditWhite style={styles.profileeditButton} height={hp(1.57)} width={hp(1.57)} />
-                    </TouchableOpacity>
-                    
+                    </TouchableOpacity> */}
+
                 </View>
             </View>
         </View>
@@ -80,7 +92,7 @@ const styles = StyleSheet.create({
         padding: hp(1.5),
         borderRadius: hp(1),
         // marginBottom: hp(1.32),
-        marginHorizontal  : 5
+        marginHorizontal: 5
     },
     filterbarMain: {
         flexDirection: 'row',
@@ -145,10 +157,12 @@ const styles = StyleSheet.create({
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(3.125),
+       justifyContent : 'center',
+       alignItems : 'center',
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(3.125),
         paddingTop: hp(1.4),
+        width : 35,
         paddingBottom: hp(1.4),
         height: hp(5.20),
         alignSelf: 'center',

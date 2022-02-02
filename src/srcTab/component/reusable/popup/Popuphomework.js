@@ -20,10 +20,17 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={() => props.onOpenPopup()} style={styles.buttonGroup}>
-                {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text>
+            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup,styles.setHomeworkBtnn, {width: props.updateFlag ? 170 : 145}]}>
+                  {props.isHomeworkLoading ?
+                    <ActivityIndicator
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.dashboardGreenButton} />
+                    :
+                    <>
+                        <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                        <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text>
+                    </>
+                }
             </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupCard}>
@@ -40,7 +47,7 @@ const Popuphomework = (props) => {
                         <TouchableOpacity onPress={() => props.setHomework()}>
                             {props.isHomeworkLoading ?
                                 <ActivityIndicator
-                                    style={{ alignSelf:'center' }}
+                                    style={{ alignSelf: 'center' }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                     color={COLORS.dashboardGreenButton} />
                                 :
@@ -109,6 +116,23 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: hp(1.69),
+        
+    },
+    setHomeworkBtnn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        // width : 170,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center'
     },
     addIcon: {
         width: hp(1.55),
@@ -118,18 +142,10 @@ const styles = StyleSheet.create({
         zIndex: 9,
     },
     commonButtonGreenheader: {
-        backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
-        // height: 40,
-        paddingTop: hp(1.3),
-        paddingBottom: hp(1.3),
-        alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },

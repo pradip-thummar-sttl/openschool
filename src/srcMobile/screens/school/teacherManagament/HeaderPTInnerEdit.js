@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image,ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -31,7 +31,7 @@ const HeaderPTInnerEdit = (props) => {
     useEffect(() => {
         // props.onFilter(filterBy)
     }, [filterBy])
-    console.log('=======',props);
+    console.log('=======', props);
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -48,10 +48,19 @@ const HeaderPTInnerEdit = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={() => props.onSavePressed()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onSavePressed()} style={[styles.buttonGroup,styles.commonButtonGreenheader]}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                // style={STYLE.commonButtonGreen}
+                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <>
+                                <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                                <Text></Text>
+                            </>
+                        }
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                        <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                        <Text style={styles.commonButtonGreenheader}></Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -143,9 +152,10 @@ const styles = StyleSheet.create({
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(3.125),
-        paddingRight: hp(2),
+        // paddingLeft: hp(3.125),
+        // paddingRight: hp(2),
         height: hp(5.20),
+        width : 42,
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',

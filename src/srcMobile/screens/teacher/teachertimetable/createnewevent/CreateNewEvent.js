@@ -289,21 +289,30 @@ const CreateNewEvent = (props) => {
                                     <Text h2 style={styles.titleTab}>Add a calendar entry</Text>
                                     <View style={styles.uploadCalendar}>
                                         <View style={styles.lessonstartButton}>
-                                            {isLoading ?
+                                            {/* {!isLoading ?
                                                 <ActivityIndicator
                                                     style={{ ...styles.buttonGrp, right: 30 }}
                                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                     color={COLORS.buttonGreen} />
-                                                :
-                                                <TouchableOpacity
-                                                    onPress={isFieldsValidated}
-                                                    style={[styles.buttonGrp, styles.newCheckButton]}
-                                                    activeOpacity={opacity}>
-                                                    {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} /> */}
+                                                : */}
+                                            <TouchableOpacity
+                                                onPress={isFieldsValidated}
+                                                style={[styles.buttonGrp, styles.commonButtonGreenheader]}
+                                                activeOpacity={opacity}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        // style={STYLE.commonButtonGreen}
+                                                        size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
                                                     <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
-                                                    {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
-                                                </TouchableOpacity>
-                                            }
+                                                }
+
+                                                {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} /> */}
+                                                {/* <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} /> */}
+                                                {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
+                                            </TouchableOpacity>
+
 
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
@@ -463,7 +472,7 @@ const styles = StyleSheet.create({
         width: '100%',
         marginTop: Platform.OS == 'android' ? hp(-1) : hp(3),
     },
-    beforeBorder: {
+     beforeBorder: {
         padding: hp(1.95),
         paddingBottom: hp(0.5),
     },
@@ -490,6 +499,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         right: 0
+    },
+    commonButtonGreenheader : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        justifyContent : 'center',
+        alignItems:'center',
+        width : 42,
+        height: hp(5.20),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     buttonGrp: {
         position: 'relative',
@@ -548,7 +573,7 @@ const styles = StyleSheet.create({
         // alignContent : 'center',
         // alignItems : 'flex-start',
         // justifyContent : 'center'
-       
+
 
     },
     field: {

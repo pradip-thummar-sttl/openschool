@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+// import PAGESTYLE from '../../../'
+
 
 import {
     Menu,
@@ -24,18 +26,26 @@ const NewMessageHeader = (props) => {
                     {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                     <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
 
-                    </TouchableOpacity> {'New Message'}</Text>
+                </TouchableOpacity> {'New Message'}</Text>
                 <View style={styles.headerRight}>
                     {props.status == 'Sent' ?
                         null
                         :
-                        <TouchableOpacity onPress={() => props.onSent()} style={styles.buttonGroup}>
-                            {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                            <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
-                            <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
+                        <TouchableOpacity onPress={() => props.onSent()} style={[styles.buttonGroup,styles.sendMessageBtn]}>
+                            {props.isLoading ?
+                                <ActivityIndicator
+                                    // style={STYLE.commonButtonGreen}
+                                    size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                    color={COLORS.white} />
+                                :
+                                <>
+                                    <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                    <Text style={styles.commonButtonGreenheaderwithicon}>SEND MESSAGE</Text>
+                                </>
+                            }
                         </TouchableOpacity>
                     }
-                    <TouchableOpacity onPress={() => { props.onAlertPress()}} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => { props.onAlertPress() }} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         {/* <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
@@ -156,15 +166,25 @@ const styles = StyleSheet.create({
         marginLeft: hp(2),
     },
     commonButtonGreenheaderwithicon: {
+       
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    sendMessageBtn: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
         textAlign: 'center',
+        justifyContent : 'center',
+        alignItems : 'center',
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
+        width : 140,
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',

@@ -365,10 +365,12 @@ class Login extends Component {
                                     :
                                     this.isFieldsValidated()
 
-                            }}>
+                            }}
+                            style={styles.LoginBtnText}
+                            >
                             {this.state.isLoading ?
                                 <ActivityIndicator
-                                    style={STYLE.commonButtonGreen}
+                                    // style={STYLE.commonButtonGreen}
                                     size={Platform.OS == 'ios' ? 'small' : 'small'}
                                     color={COLORS.white} />
                                 :
@@ -591,25 +593,30 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
     },
     commonButtonGreen: {
-        backgroundColor: COLORS.buttonGreen,
         color: COLORS.white,
         fontSize: hp('1.56%'),
+        borderRadius: hp(1),
         fontWeight: '800',
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    LoginBtnText : {
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white,
+        fontSize: hp(1.56),
         borderRadius: hp('1.3%'),
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(2),
-        paddingRight: hp(2),
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
-        alignSelf: 'center',
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 50, },
-        shadowOpacity: 0.16,
-        shadowRadius: 13,
-        elevation: 4,
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        height: hp(5.40),
+        width : 150,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center',
+        alignSelf : 'center'
     },
     getStartText: {
         fontFamily: FONTS.fontRegular,

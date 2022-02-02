@@ -20,10 +20,21 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={() => props.onOpenPopup()} style={styles.buttonGroup}>
+            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup, styles.commonButtonGreenheader]}>
+                {props.isHomeworkLoading ?
+                    <ActivityIndicator
+                        // style={{ alignSelf: 'center' }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.white} />
+                    :
+                    <>
+                        <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                        <Text style={styles.setText}>{props.hwBtnName}</Text>
+                    </>
+                }
                 {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
-                <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text>
+                {/* <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
+                <Text style={styles.commonButtonGreenheader}>{props.hwBtnName}</Text> */}
             </TouchableOpacity>
             <Modal isVisible={props.isVisible}>
                 <View style={styles.popupCard}>
@@ -37,14 +48,14 @@ const Popuphomework = (props) => {
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>You are setting homework for this class</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing set homework the pupils in this class will be notified. You can edit this class homework at any time. </Text>
-                        <TouchableOpacity onPress={() => props.setHomework()}>
+                        <TouchableOpacity onPress={() => props.setHomework()} style={STYLE.commonButtonGreenDashboardSideSetHomework}>
                             {props.isHomeworkLoading ?
                                 <ActivityIndicator
-                                    style={{ alignSelf: 'center' }}
+                                    // style={{ alignSelf: 'center' }}
                                     size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                    color={COLORS.dashboardGreenButton} />
+                                    color={COLORS.white} />
                                 :
-                                <Text style={STYLE.commonButtonGreenDashboardSide}>ok, set homework</Text>
+                                <Text style={styles.setHomeworkPupil}>ok, set homework</Text>
                             }
                         </TouchableOpacity>
                     </View>
@@ -56,6 +67,13 @@ const Popuphomework = (props) => {
 export default Popuphomework;
 
 const styles = StyleSheet.create({
+    setHomeworkPupil: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        overflow: 'hidden',
+        fontFamily: FONTS.fontBold,
+        textTransform: 'uppercase',
+    },
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
@@ -82,6 +100,16 @@ const styles = StyleSheet.create({
         height: 55,
         alignSelf: 'center',
         resizeMode: 'contain',
+    },
+    setText: {
+        marginStart: 20,
+        // marginEnd : 10,
+        overflow: 'hidden',
+        color: COLORS.white,
+        fontFamily: FONTS.fontBold,
+        fontSize: 14,
+        textTransform: 'uppercase',
+        // backgroundColor :'red'
     },
     commonInputTextarea: {
         width: hp(36.97),
@@ -123,6 +151,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: hp(1.8),
         zIndex: 9,
+        // paddingLeft : hp(1),
+        // paddingRight: hp(0.5)
+
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
@@ -131,9 +162,13 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(4),
-        paddingRight: hp(2),
+        // paddingLeft: hp(4),
+        // paddingRight: hp(2),
+
+        width: 100,
         height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingTop: 9,
         paddingBottom: 9,
         alignSelf: 'center',

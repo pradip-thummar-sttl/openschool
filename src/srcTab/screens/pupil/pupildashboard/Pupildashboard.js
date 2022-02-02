@@ -710,22 +710,22 @@ const PupuilDashboard = (props) => {
                                                             </TouchableOpacity>
                                                         </View>
                                                     </View>
-                                                    {pupilAvatarList.length &&
+                                                    {pupilAvatarList.length ?
                                                         <View style={[PAGESTYLE.achivementRobot, { height: '100%', overflow: 'hidden' }]}>
                                                             <AvtarBg width={"100%"} height={'100%'} position={"absolute"} style={{ bottom: 0 }} />
                                                             <View style={{ width: "100%", height: '100%', alignItems: 'center', bottom: Platform.OS == "ios" ? '-15%' : '-18%' }}>
-                                                                {avatarListIndex == 0 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? "37%" : "35.5%" }} ></Image>}
-                                                                {avatarListIndex == 1 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} />}
-                                                                {avatarListIndex == 2 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2%', zIndex: 10, right: "38%" }} />}
-                                                                {avatarListIndex == 3 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
-                                                                {avatarListIndex == 4 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
-                                                                {avatarListIndex == 5 &&<Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} />}
+                                                                {avatarListIndex == 0 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-3) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? "37%" : "35.5%" }} /> : null}
+                                                                {avatarListIndex == 1 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} /> : null}
+                                                                {avatarListIndex == 2 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2%', zIndex: 10, right: "38%" }} /> : null}
+                                                                {avatarListIndex == 3 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} /> : null}
+                                                                {avatarListIndex == 4 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} /> : null}
+                                                                {avatarListIndex == 5 ? <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} /> : null}
 
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[0].Images }} style={{ width: hp(25), height: hp(50), resizeMode: 'contain' }} />
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[2].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(9), zIndex: 20 }} />
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} />
                                                             </View>
-                                                        </View>
+                                                        </View> : null
                                                     }
                                                 </View>
                                             </View>
