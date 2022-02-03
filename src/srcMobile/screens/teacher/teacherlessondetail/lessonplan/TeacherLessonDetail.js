@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -18,7 +17,6 @@ import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 
 const TLDetail = (props) => {
-    console.log('props', props);
     const [isMatLoading, setLoader] = useState(false)
     const [isRecordLoading, setRecordLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)

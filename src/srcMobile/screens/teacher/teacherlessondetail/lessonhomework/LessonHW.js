@@ -169,8 +169,6 @@ const TLHomeWork = (props) => {
     }
 
     const startRecording = async () => {
-        // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
 
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
@@ -220,12 +218,7 @@ const TLHomeWork = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                // let obj = {
-                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                //     originalname: 'MY_RECORDING.mp4',
-                //     fileName: 'MY_RECORDING.mp4',
-                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                // }
+                
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -241,57 +234,11 @@ const TLHomeWork = (props) => {
                 console.log('url', url);
             }
         } else {
-            // setRecordingStarted(false)
-            // toggleModal()
             showMessage('Please provide recording name proper')
         }
     }
 
 
-    // const stopRecording = async () => {
-    //     var arr = []
-    //     const res = await RecordScreen.stopRecording().catch((error) => {
-    //         setRecordingStarted(false)
-    //         console.warn(error)
-    //     });
-    //     if (res) {
-    //         setRecordingStarted(false)
-    //         const url = res.result.outputURL;
-    //         let ext = url.split('.');
-    //         let obj = {
-    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
-    //             originalname: 'MY_RECORDING.mp4',
-    //             fileName: 'MY_RECORDING.mp4',
-    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-    //         }
-    //         arr.push(obj)
-    //         setRecordingArr(arr)
-    //         setScreenVoiceSelected(false)
-    //         Addhomework.RecordingArr = arr
-
-    //         console.log('url', url);
-    //     }
-    // }
-
-    // const onCameraOnly = () => {
-    //     var arr = [...recordingArr]
-    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-    //         // setResponse(response);
-    //         if (response.errorCode) {
-    //             showMessage(response.errorCode)
-    //         } else if (response.didCancel) {
-    //         } else {
-    //             console.log('response', response);
-    //             arr.push(response)
-
-    //             setRecordingArr(arr)
-    //             Addhomework.RecordingArr = arr
-    //         }
-
-    //     })
-    //     setAddRecording(false)
-
-    // }
 
     const onCameraOnly = () => {
 
@@ -373,7 +320,7 @@ const TLHomeWork = (props) => {
 
         let temp = [...itemCheckList, {
             ItemName: newItem,
-            IsCheck: false
+            IsCheck: true
         }]
         setItemCheckList(temp)
         Addhomework.CheckList = temp
@@ -392,9 +339,7 @@ const TLHomeWork = (props) => {
             <View style={[PAGESTYLE.requirementofClass, PAGESTYLE.blockSpaceBottom]}>
                 <View style={PAGESTYLE.hrCommon}></View>
                 {
-                    itemCheckList.length == 0 ?
-                        <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
-                        : null
+                    itemCheckList.length == 0 && <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>No item added</Text>
                 }
                 <FlatList
                     data={itemCheckList}
@@ -403,7 +348,7 @@ const TLHomeWork = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 0 : 7}]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,]}
+                                style={PAGESTYLE.selectMark}
                                 value={item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -414,30 +359,19 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            {/* <Text numberOfLines={1} style={[PAGESTYLE.checkBoxLabelText, { width: wp(75) }]}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={PAGESTYLE.checkBoxLabelText}
+                                style={PAGESTYLE.txtLable}
+                                maxLength={40}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
+                                
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
                                 onPress={() => { removeCheckListItem(index) }}>
-                                {/* <Image style={PAGESTYLE.userIcon1} source={Images.PopupCloseIcon} /> */}
                                 <CloseBlack style={PAGESTYLE.userIcon1} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
                         </View>
-                        // <View style={{ margin: 8, }}>
-                        //     <Text style={{ fontSize: 22, paddingRight: 50 }}>{item.ItemName}</Text>
-                        //     <TouchableOpacity
-                        //         style={PAGESTYLE.userIcon1Parent}
-                        //         activeOpacity={opacity}
-                        //         onPress={() => { removeCheckListItem(index) }}>
-                        //         <Image
-                        //             style={PAGESTYLE.userIcon1}
-                        //             source={Images.PopupCloseIcon} />
-                        //     </TouchableOpacity>
-                        // </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
                 />

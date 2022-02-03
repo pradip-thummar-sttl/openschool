@@ -699,16 +699,16 @@ const TLDetailAdd = (props) => {
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
-        } else if (!selectedFromTime) {
+        } else if (!selectedFromTime && IsDeliveredLive != "") {    
             showMessage(MESSAGE.fromTime)
             return false;
-        } else if (!selectedToTime) {
+        } else if (!selectedToTime && IsDeliveredLive != "") {    
             showMessage(MESSAGE.toTime)
             return false;
-        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {    
             showMessage(MESSAGE.invalidTo)
             return false
-        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {    
             showMessage(MESSAGE.invalidFrom)
             return false
         } else if (!selectedParticipants) {
@@ -870,10 +870,18 @@ const TLDetailAdd = (props) => {
     }
 
     const toggleModal = () => {
-        console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
+
+    const onSetDeliverLiveLesson = (isOn) => {
+
+        if (!isOn) {
+            setSelectedFromTime("");
+            setSelectedToTime("");
+        }
+        setDeliveredLive(isOn)
+    }
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
@@ -927,8 +935,6 @@ const TLDetailAdd = (props) => {
                             isLoading={isLoading}
                             navigateToBack={() => {
                                 props.goBack()
-                                // props.route.params.onGoBack();
-                                // props.navigation.goBack()
                             }}
                             saveLesson={() => { getDataFromQuickBloxAndroid() }}
                             onAlertPress={() => { props.onAlertPress() }} />
@@ -963,7 +969,7 @@ const TLDetailAdd = (props) => {
                                         {/*  */}
                                         <View style={PAGESTYLE.toggleGrp}>
                                             <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => onSetDeliverLiveLesson(isOn)} />
                                         </View>
 
                                         <View style={PAGESTYLE.timedateGrp}>
@@ -1033,10 +1039,7 @@ const TLDetailAdd = (props) => {
                                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                                 <View style={[STYLE.hrCommon, PAGESTYLE.commonWidth]}></View>
                                             </View>
-                                            {/* <View style={PAGESTYLE.toggleGrp}>
-                                                <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                            </View> */}
+                                            
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />

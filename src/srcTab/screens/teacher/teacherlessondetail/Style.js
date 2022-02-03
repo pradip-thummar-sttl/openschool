@@ -81,6 +81,7 @@ export default StyleSheet.create({
         color: COLORS.buttonGreen,
     },
     timedateGrp: {
+       
         flexDirection: 'row',
         marginBottom: hp(3.90),
     },
@@ -1459,10 +1460,16 @@ export default StyleSheet.create({
     buttonGrp: {
         position: 'relative',
         alignItems: 'center',
-        // flexDirection: 'row',
-        // marginTop:hp(2),
         justifyContent: 'center',
-        // marginVertical: hp(2),
         marginBottom :  10
+    },
+
+    // New -----------------------------------
+
+    dateLable: {
+        width:hp(30),
+    },
+    TimeLable: {
+        width:hp(30),
     },
 });

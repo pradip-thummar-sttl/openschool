@@ -86,7 +86,6 @@ const TLHomeWork = (props) => {
     useEffect(() => {
 
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
-            console.log('response of homework by lesson id', res)
 
             if (res.flag) {
                 Addhomework.IsIncluded = res.data.IsIncluded
@@ -132,7 +131,6 @@ const TLHomeWork = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         var d = moment(date).format('DD/MM/yyyy')
         setSelectedDate(d)
         hideDatePicker();
@@ -140,7 +138,6 @@ const TLHomeWork = (props) => {
     };
 
     const addMaterial = () => {
-        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -181,7 +178,6 @@ const TLHomeWork = (props) => {
     }
 
     const onCheckList = (index) => {
-        console.log('!itemCheckList[index].IsCheck', );
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
@@ -238,30 +234,6 @@ const TLHomeWork = (props) => {
         }
     }
 
-    // const stopRecording = async () => {
-    //     var arr = []
-    //     const res = await RecordScreen.stopRecording().catch((error) => {
-    //         setRecordingStarted(false)
-    //         console.warn(error)
-    //     });
-    //     if (res) {
-    //         setRecordingStarted(false)
-    //         const url = res.result.outputURL;
-    //         let ext = url.split('.');
-    //         let obj = {
-    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
-    //             originalname: 'MY_RECORDING.mp4',
-    //             fileName: 'MY_RECORDING.mp4',
-    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-    //         }
-    //         arr.push(obj)
-    //         setRecordingArr(arr)
-    //         setScreenVoiceSelected(false)
-    //         Addhomework.RecordingArr = arr
-
-    //         console.log('url', url);
-    //     }
-    // }
     const stopRecording = async () => {
         if (recordingName.length > 0) {
 
@@ -274,12 +246,6 @@ const TLHomeWork = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                // let obj = {
-                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                //     originalname: 'MY_RECORDING.mp4',
-                //     fileName: 'MY_RECORDING.mp4',
-                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                // }
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -295,32 +261,10 @@ const TLHomeWork = (props) => {
                 console.log('url', url);
             }
         } else {
-            // setRecordingStarted(false)
-            // toggleModal()
             showMessage('Please provide recording name proper')
         }
     }
 
-
-    // const onCameraOnly = () => {
-    //     var arr = [...recordingArr]
-    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-    //         // setResponse(response);
-    //         if (response.errorCode) {
-    //             showMessage(response.errorCode)
-    //         } else if (response.didCancel) {
-    //         } else {
-    //             console.log('response', response);
-    //             arr.push(response)
-
-    //             setRecordingArr(arr)
-    //             Addhomework.RecordingArr = arr
-    //         }
-
-    //     })
-    //     setAddRecording(false)
-
-    // }
 
     const onCameraOnly = () => {
 
@@ -403,7 +347,7 @@ const TLHomeWork = (props) => {
 
         let temp = [...itemCheckList, {
             ItemName: newItem,
-            IsCheck: false
+            IsCheck: true
         }]
         setItemCheckList(temp)
         Addhomework.CheckList = temp
@@ -447,18 +391,20 @@ const TLHomeWork = (props) => {
                                 onTintColor={COLORS.dashboardPupilBlue}
                                 tintColor={COLORS.dashboardPupilBlue}
                                 onChange={() => onCheckList(index)}
-
                             />
+
                             <TextInput
                                 style={[PAGESTYLE.checkBoxLabelText]}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
+
                             <TouchableOpacity
                                 style={[PAGESTYLE.userIcon1Parent]}
                                 activeOpacity={opacity}
                                 onPress={() =>  { removeCheckListItem(index) }}>
                                 <CloseBlack style={[PAGESTYLE.userIcon1]} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
+
                         </View>
                     )}
                     keyExtractor={(item, index) => index.toString()}
@@ -595,8 +541,6 @@ const TLHomeWork = (props) => {
                                     {
                                         itemCheckListView()
                                     }
-
-
                                 </View>
 
                             </View>

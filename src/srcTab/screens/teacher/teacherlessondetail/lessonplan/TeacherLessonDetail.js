@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageB
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -24,7 +23,6 @@ const TLDetail = (props) => {
     const [mateIndex, setMateIndex] = useState(-1)
     const [isMatLoading, setLoader] = useState(false)
 
-    console.log('props', props.lessonData._id);
     return (
         <View style={PAGESTYLE.whiteBg}>
             <View style={PAGESTYLE.containerWrap}>
@@ -44,43 +42,31 @@ const TLDetail = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.timedateGrp}>
-                        <View style={PAGESTYLE.dateWhiteBoard}>
+                        <View style={PAGESTYLE.dateLable}>
                             <Text style={PAGESTYLE.subjectText}>Date</Text>
                             <View style={PAGESTYLE.alignRow}>
-                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.CalenderIconSmall} /> */}
                                 <Calender style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text style={PAGESTYLE.datetimeText}>{moment(props.lessonData.Date).format('DD/MM/yyyy')}</Text>
                             </View>
 
                         </View>
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                            <Text style={PAGESTYLE.subjectText}>Time</Text>
-                            <View style={PAGESTYLE.alignRow}>
-                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
-                                <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
-                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
-                            </View>
-                        </View>
-                        {/* <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                            <Text style={PAGESTYLE.subjectText}>Live Lesson</Text>
-                            <View style={PAGESTYLE.alignRow}> */}
-                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
-                                {/* <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
-                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
-                            </View>
-                        </View> */}
-                        {/* <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.time]}>
-                            <Text style={PAGESTYLE.subjectText}>Publish Lesson</Text>
-                            <View style={PAGESTYLE.alignRow}> */}
-                                {/* <Image style={PAGESTYLE.timeIconNoInput} source={Images.Clock} /> */}
-                                {/* <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
-                                <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
-                            </View>
-                        </View> */}
-                        <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.grp]}>
+                        {
+                            props.lessonData.StartTime ?
+                                <View style={PAGESTYLE.TimeLable}>
+                                    <Text style={PAGESTYLE.subjectText}>Time</Text>
+                                    <View style={PAGESTYLE.alignRow}>
+                                        <Clock style={PAGESTYLE.timeIconNoInput} height={hp(1.76)} width={hp(1.76)} />
+                                        <Text style={PAGESTYLE.datetimeText}>{props.lessonData.StartTime} - {props.lessonData.EndTime}</Text>
+                                    </View>
+                                </View>
+                                :
+                                null
+                        }
+
+
+                        <View style={PAGESTYLE.dateLable}>
                             <Text style={PAGESTYLE.subjectText}>Participants</Text>
                             <View style={PAGESTYLE.alignRow}>
-                                {/* <Image style={PAGESTYLE.calIconNoInput} source={Images.Group} /> */}
                                 <Participants style={PAGESTYLE.calIconNoInput} height={hp(1.76)} width={hp(1.76)} />
                                 <Text numberOfLines={1} style={[PAGESTYLE.datetimeText, { width: hp(20) }]}>{props.lessonData.GroupName}</Text>
                             </View>
@@ -90,9 +76,9 @@ const TLDetail = (props) => {
                         <Text style={PAGESTYLE.lessonTitleWithoutTextArea}>Lesson Description</Text>
                         <Text style={PAGESTYLE.lessonText}>{props.lessonData.LessonDescription}</Text>
                     </View>
+
                     {props.lessonData.RecordingName ?
                         <TouchableOpacity style={[PAGESTYLE.videoLinkBlock, PAGESTYLE.videoLinkBlockSpaceTop]}>
-                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                             <PlayBlue style={PAGESTYLE.videoLinkIcon} height={hp(2.38)} width={hp(2.38)} />
                             <Text style={PAGESTYLE.videoLinkText}>{props.lessonData.RecordingName}</Text>
                         </TouchableOpacity>
@@ -101,15 +87,13 @@ const TLDetail = (props) => {
                     }
                     <View style={PAGESTYLE.requirementofClass}>
                         <View style={PAGESTYLE.hrTagMIddleReverse}>
-                            <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>
-                            <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthSmall]}></View>
+                        {props.lessonData?.CheckList?.length >0  && <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Items your class may need</Text>}
                         </View>
                         <FlatList
                             data={props.lessonData.CheckList}
                             style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                             renderItem={({ item, index }) => (
-                                <View style={[PAGESTYLE.checkBoxLabelLine,{paddingVertical : 12}]}>
-                                    {/* <Image source={Images.CheckIcon} style={PAGESTYLE.checkIcon} /> */}
+                                <View style={[PAGESTYLE.checkBoxLabelLine, { paddingVertical: 12 }]}>
                                     <TickMarkBlue style={PAGESTYLE.checkIcon} height={hp(1.7)} width={hp(1.7)} />
                                     <Text style={PAGESTYLE.lessonPointText}>{item.ItemName}</Text>
                                 </View>

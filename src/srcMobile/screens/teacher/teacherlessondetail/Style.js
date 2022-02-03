@@ -173,9 +173,9 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         lineHeight: hp(2.6),
         color: COLORS.darkGray,
-        marginBottom: Platform.OS === 'android' ?  hp(2) :  hp(1.6),
+        marginBottom: Platform.OS === 'android' ? hp(2) : hp(1.6),
         // backgroundColor : 'red'
-      
+
     },
     lessonPoints: {
         flexDirection: 'row',
@@ -201,7 +201,7 @@ export default StyleSheet.create({
         marginLeft: hp(1),
     },
     requirementofClass: {
-     marginVertical  : 10
+        marginVertical: 10
     },
     videoLinkBlock: {
         width: '100%',
@@ -303,23 +303,30 @@ export default StyleSheet.create({
         // paddingBottom: hp(1.1),
         // marginBottom: hp(1.2),
         // paddingVertical : 5,
-       
+
         borderBottomWidth: 1,
         borderBottomColor: COLORS.videoLinkBorder,
     },
+
+    selectMark: {
+    },
+    txtLable: {
+        lineHeight: hp(3.1),
+        width: '80%',
+        fontSize: hp(1.6),
+        textAlignVertical: "bottom",
+        fontFamily: FONTS.fontRegular,
+        
+    },
+
     checkBoxLabelText: {
         lineHeight: hp(3.1),
         fontSize: hp(1.87),
-      
-        // top: hp(0.8),
         textAlignVertical: "bottom",
-        
-        
         fontFamily: FONTS.fontRegular,
         paddingLeft: hp(1.8),
-        paddingRight : Platform.OS === 'android'  ?hp(3)  :hp(3.5),
-        // paddingRight: hp(2),
-       width : Platform.OS === 'android' ? hp(20) : hp(20)
+        paddingRight: Platform.OS === 'android' ? hp(3) : hp(3.5),
+        width: Platform.OS === 'android' ? hp(20) : hp(20)
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -336,7 +343,7 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         borderRadius: hp(1.25),
-        backgroundColor : COLORS.borderGrp
+        backgroundColor: COLORS.borderGrp
     },
     toggleGrp: {
         flexDirection: 'row',
@@ -392,9 +399,9 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
-        
+
     },
-    RenderDownload:{width:wp(12), height:hp(5), justifyContent:'center', padding:hp(1), alignItems:'flex-end'},
+    RenderDownload: { width: wp(12), height: hp(5), justifyContent: 'center', padding: hp(1), alignItems: 'flex-end' },
     fileGrp: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -407,7 +414,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(0.8),
         marginBottom: hp(1.04),
-        
+
     },
     downloadIcon: {
         width: hp(2.01),
@@ -639,7 +646,7 @@ export default StyleSheet.create({
         width: '47.2%',
         marginRight: hp(2.1),
     },
- 
+
     dueDateWrap: {
         borderRightWidth: 2,
         borderRightColor: COLORS.commonBorderColor,
@@ -803,7 +810,7 @@ export default StyleSheet.create({
     pupilDetaillinkIcon: {
         width: hp(1),
         resizeMode: 'contain',
-      
+
     },
     pupilImage: {
         width: hp(3.7),
@@ -1105,9 +1112,6 @@ export default StyleSheet.create({
         padding: 0,
         width: 20,
         height: 20,
-        left: 2,
-        // textAlignVertical : "bottom",
-        // top: hp(0.52),
     },
     borderRight: {
         borderRightWidth: 1,
@@ -1287,13 +1291,13 @@ export default StyleSheet.create({
         right: hp(1),
         // top : Platform.OS === 'android' ? hp(1.5) : 0,
         // backgroundColor : 'red'
-       
+
     },
     userIcon1: {
         position: 'absolute',
         width: hp(2.5),
         height: hp(2.5),
-       
+
     },
     fileBoxGrpWrap: {
         marginBottom: hp(-1.5)

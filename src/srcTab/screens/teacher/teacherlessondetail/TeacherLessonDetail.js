@@ -14,7 +14,6 @@ import HeaderHWS from "./header/HeaderHWS";
 import { Service } from "../../../../service/Service";
 import { Addhomework, User } from "../../../../utils/Model";
 import { EndPoints } from "../../../../service/EndPoints";
-// import Images from '../../../../utils/Images';
 import {
     Menu,
     MenuOptions,
@@ -255,7 +254,7 @@ const TeacherLessonDetail = (props) => {
                                             :
                                             tabIndex == 1 ?
                                                 <HeaderHW
-                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
+                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set'}
                                                     SubjectName={lessonData.SubjectName}
                                                     date={lessonData.Date}
                                                     setHomework={() => onAddHomework()}

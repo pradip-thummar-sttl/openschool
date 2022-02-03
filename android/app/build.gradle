@@ -132,6 +132,11 @@ android {
     }
 
     defaultConfig {
+
+//        configurations.all {
+//            resolutionStrategy { force 'androidx.core:core-ktx:2.7.0' }
+//        }
+
         applicationId "com.openschool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion

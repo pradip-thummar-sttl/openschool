@@ -621,7 +621,6 @@ const TLDetailAdd = (props) => {
                     });
                 } else {
                     Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
-                        console.log('eventId--------------------', ID);
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -629,7 +628,6 @@ const TLDetailAdd = (props) => {
                             showMessage('Sorry, we are unable to add lesson!')
                         }
                     }, (error) => {
-                        console.log('event error--------------------', error);
                     });
                 }
             } catch (e) {
@@ -823,7 +821,7 @@ const TLDetailAdd = (props) => {
 
         if (!isOn) {
             setSelectedFromTime("");
-            setSelectedToTime("");ß
+            setSelectedToTime("");
         }
         setDeliveredLive(isOn)
     }

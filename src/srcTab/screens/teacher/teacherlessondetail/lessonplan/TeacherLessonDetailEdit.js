@@ -318,10 +318,6 @@ const TLDetailEdit = (props) => {
 
             }
         }
-
-
-        // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
     }
 
     const stopRecording = async () => {
@@ -336,12 +332,6 @@ const TLDetailEdit = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                // let obj = {
-                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                //     originalname: 'MY_RECORDING.mp4',
-                //     fileName: 'MY_RECORDING.mp4',
-                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                // }
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -356,30 +346,9 @@ const TLDetailEdit = (props) => {
                 console.log('url', url);
             }
         } else {
-            // setRecordingStarted(false)
-            // toggleModal()
             showMessage('Please provide recording name proper')
         }
     }
-
-    // const onCameraOnly = () => {
-    //     var arr = []
-    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-    //         // setResponse(response);
-    //         if (response.errorCode) {
-    //             showMessage(response.errorCode)
-    //         } else if (response.didCancel) {
-    //         } else {
-    //             console.log('response', response);
-    //             arr.push(response)
-
-    //             setRecordingArr(arr)
-    //         }
-
-    //     })
-    //     setAddRecording(false)
-
-    // }
 
     const onCameraOnly = () => {
 
@@ -480,10 +449,6 @@ const TLDetailEdit = (props) => {
                         <Text style={{ paddingVertical: 8, fontSize: hp(1.82) }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
             </View>
         );
     };
@@ -513,10 +478,6 @@ const TLDetailEdit = (props) => {
                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add Pupils</Text>
                     <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthlarge]}></View>
                 </View>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
                 {filteredPupils.length > 0 ?
                     <FlatList
                         data={filteredPupils}
@@ -657,16 +618,16 @@ const TLDetailEdit = (props) => {
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
-        } else if (!selectedFromTime) {
+        } else if (!selectedFromTime && IsDeliveredLive != "") {    
             showMessage(MESSAGE.fromTime)
             return false;
-        } else if (!selectedToTime) {
+        } else if (!selectedToTime && IsDeliveredLive != "") {
             showMessage(MESSAGE.toTime)
             return false;
-        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {    
             showMessage(MESSAGE.invalidTo)
             return false
-        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {    
             showMessage(MESSAGE.invalidFrom)
             return false
         } else if (!selectedParticipants) {
@@ -703,7 +664,6 @@ const TLDetailEdit = (props) => {
                 names.push(pupil.FirstName + " " + pupil.LastName)
             });
 
-            console.log('user ids', userIDs)
             try {
                 if (Platform.OS == 'android') {
                     DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
@@ -717,7 +677,6 @@ const TLDetailEdit = (props) => {
                     });
                 } else {
                     Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
-                        console.log('eventId--------------------', ID);
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -725,7 +684,6 @@ const TLDetailEdit = (props) => {
                             showMessage('Sorry, we are unable to add lesson!')
                         }
                     }, (error) => {
-                        console.log('event error--------------------', error);
                     });
                 }
             }
@@ -757,7 +715,6 @@ const TLDetailEdit = (props) => {
             QBDilogID: ID
         }
 
-        console.log('postData', data);
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
                 uploadMatirial(res.data._id)
@@ -931,14 +888,17 @@ const TLDetailEdit = (props) => {
             </Modal>
         )
     }
+
+    const onSetDeliverLiveLesson = (isOn) => {
+
+        if (!isOn) {
+            setSelectedFromTime("");
+            setSelectedToTime("");
+        }
+        setDeliveredLive(isOn)
+    }
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             {
                 isVideoGallery ?
                     <TLVideoGallery goBack={() => setVideoGallery(false)} />
@@ -949,7 +909,6 @@ const TLDetailEdit = (props) => {
                             lessonData={lessonData}
                             navigateToBack={() => {
                                 props.onRefresh();
-                                console.log('props from teacherlesson detail screen', props);
                                 props.goBack()
                             }}
                             onAlertPress={() => { props.onAlertPress() }}
@@ -985,7 +944,7 @@ const TLDetailEdit = (props) => {
 
                                         <View style={PAGESTYLE.toggleGrp}>
                                             <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                            <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => onSetDeliverLiveLesson(isOn)} />
                                         </View>
 
                                         <View style={PAGESTYLE.timedateGrp}>
@@ -1052,10 +1011,7 @@ const TLDetailEdit = (props) => {
                                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                                 <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthClassSetting]}></View>
                                             </View>
-                                            {/* <View style={PAGESTYLE.toggleGrp}>
-                                                <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                                <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                            </View> */}
+                                          
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />

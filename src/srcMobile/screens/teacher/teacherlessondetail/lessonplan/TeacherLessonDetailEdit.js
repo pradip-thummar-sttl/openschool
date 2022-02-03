@@ -122,7 +122,6 @@ const TLDetailEdit = (props) => {
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             if (res.code == 200) {
-                console.log('res.data', res.data);
                 setSubjects(res.data)
                 res.data.forEach(element => {
                     if (element._id == lessonData.SubjectId) {
@@ -142,7 +141,8 @@ const TLDetailEdit = (props) => {
                 setParticipants(res.data)
                 res.data.forEach(element => {
                     if (element._id == lessonData.PupilGroupId) {
-                        setSelectedParticipants(element)
+                        setSelectedParticipants(element);
+                        showRemainingPupils(element);
                         return;
                     }
                 });
@@ -167,13 +167,15 @@ const TLDetailEdit = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
+
+        
     }, [])
 
     const refreshCheckBox = (pupils) => {
+
         let newData = []
         pupils.forEach(pupil => {
             let flag = false
-            console.log('selectedPupils', tempPupil.length);
             tempPupil.forEach(selectedPupil => {
                 if (selectedPupil._id == pupil._id) {
                     flag = true
@@ -405,11 +407,13 @@ const TLDetailEdit = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(2) }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(0.5),alignItems : 'center',justifyContent : 'center',  borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                        <View style={{ margin: hp(0.5), alignItems: 'center', justifyContent: 'center', borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             {/* <Text style={{ fontSize: hp(1.85), paddingRight: hp(5) }}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={{ width: '90%', height: 41,textAlignVertical  :'bottom',
-                                 fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
+                                style={{
+                                    width: '90%', height: 41, textAlignVertical: 'bottom',
+                                    fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85)
+                                }}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
@@ -456,6 +460,7 @@ const TLDetailEdit = (props) => {
             let flag = false
             item.PupilList.forEach(ele2 => {
                 console.log(ele1.PupilId + '==' + ele2.PupilId);
+                
                 if (ele1.PupilId == ele2.PupilId) {
                     flag = true
                 }
@@ -472,16 +477,12 @@ const TLDetailEdit = (props) => {
             <View style={[PAGESTYLE.checkBoxGrpWrap, PAGESTYLE.blockSpaceBottom]}>
                 <View style={STYLE.hrCommon}></View>
                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Add pupils</Text>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
                 {filteredPupils.length > 0 ?
                     <FlatList
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', marginTop: 5, paddingStart: 5, bottom: 20 }}
                         renderItem={({ item, index }) => (
-                            <View style={[PAGESTYLE.alignRow,{width : '33.33%'}]}>
+                            <View style={[PAGESTYLE.alignRow, { width: '33.33%' }]}>
                                 <CheckBox
                                     style={[PAGESTYLE.checkMark]}
                                     boxType={'square'}
@@ -520,7 +521,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.5),fontFamily: FONTS.fontRegular, }} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5), fontFamily: FONTS.fontRegular, }} value={item} text={item.SubjectName}></MenuOption>
                             )}
                             style={{ height: hp(18) }} />
                     </MenuOptions>
@@ -533,23 +534,25 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
+
                 <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                        {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                         <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2, { width: wp(22) }]}>{selectedParticipants ? selectedParticipants.GroupName : 'Select'}</Text>
-                        {/* <Image style={PAGESTYLE.dropDownArrowdatetime} source={Images.DropArrow} /> */}
+                        <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2, { width: wp(22) }]}>
+                            {selectedParticipants ? selectedParticipants.GroupName : 'Select'}
+                        </Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: hp(1.5), } }}>
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.5) ,fontFamily: FONTS.fontRegular, }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.5), fontFamily: FONTS.fontRegular, }} value={item} text={item.GroupName}></MenuOption>
                             )}
                             style={{ height: hp(18) }} />
                     </MenuOptions>
                 </Menu>
+
             </View>
         );
     };
@@ -570,7 +573,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular,}} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item}></MenuOption>
                             )}
                             style={{ height: hp(18) }} />
                     </MenuOptions>
@@ -595,7 +598,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10,fontFamily: FONTS.fontRegular, }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item}></MenuOption>
                             )}
                             style={{ height: hp(18) }} />
                     </MenuOptions>
@@ -891,7 +894,7 @@ const TLDetailEdit = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-          
+
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
                 <HeaderUpdate
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -937,31 +940,24 @@ const TLDetailEdit = (props) => {
                                     <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.timeField]}>
                                         <Text style={PAGESTYLE.subjectText}>Date</Text>
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
-                                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                             <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <View style={PAGESTYLE.subjectDateTime}>
                                                 <TouchableOpacity onPress={() => showDatePicker()}>
                                                     <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 </TouchableOpacity>
-                                                {/* <Image style={PAGESTYLE.dropDownArrowdatetime2} source={Images.DropArrow} /> */}
                                                 <ArrowDown style={PAGESTYLE.dropDownArrowdatetime2} height={hp(1.51)} width={hp(1.51)} />
                                             </View>
                                         </View>
                                     </View>
-
                                     {participantsDropDown()}
-
                                 </View>
                                 {
-                                    IsDeliveredLive ?
-                                        <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
-                                            {fromTimeDropDown()}
-
-                                            {toTimeDropDown()}
-                                        </View> : null
+                                    IsDeliveredLive &&
+                                    <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
+                                        {fromTimeDropDown()}
+                                        {toTimeDropDown()}
+                                    </View>
                                 }
-
-
 
                                 <View style={PAGESTYLE.lessonDesc}>
                                     <Text style={PAGESTYLE.lessonTitle}>Lesson Description</Text>
@@ -996,10 +992,6 @@ const TLDetailEdit = (props) => {
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
                                     <View style={STYLE.hrCommon}></View>
                                     <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
-                                    {/* <View style={PAGESTYLE.toggleGrp}>
-                                        <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
-                                    </View> */}
                                     <View style={PAGESTYLE.toggleGrp}>
                                         <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                         <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
@@ -1017,22 +1009,21 @@ const TLDetailEdit = (props) => {
                                 </View>
                                 <View style={PAGESTYLE.uploadBlock}>
                                     <TouchableOpacity onPress={() => addMaterial()} >
-                                        {/* <Image source={Images.MobileUpload} style={PAGESTYLE.mobileUploadLink} /> */}
                                         <UploadMaterial style={PAGESTYLE.mobileUploadLink} height={50} width={'100%'} />
                                     </TouchableOpacity>
                                 </View>
                                 {
-                                      materialArr.length != 0 && materialArr.map((item, index) => {
+                                    materialArr.length != 0 && materialArr.map((item, index) => {
                                         return (
                                             <View style={PAGESTYLE.fileRender}>
                                                 <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.originalname}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload, { marginLeft: hp(0.4) }]}>
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>
                                             </View>
                                         )
                                     })
-                                   
+
                                 }
 
                                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
@@ -1047,7 +1038,6 @@ const TLDetailEdit = (props) => {
                                     <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                         <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                         <View style={PAGESTYLE.videoLinkBlock}>
-                                            {/* <Image source={Images.PlayIcon} style={PAGESTYLE.videoLinkIcon} /> */}
                                             <DownloadSVG style={PAGESTYLE.videoLinkIcon} height={hp(2.01)} width={hp(2.01)} />
                                             <Text style={PAGESTYLE.videoLinkText}>{lessonData.RecordedLessonName}</Text>
                                         </View>
@@ -1062,7 +1052,6 @@ const TLDetailEdit = (props) => {
                                         <View style={PAGESTYLE.fileGrp}>
                                             <Text style={PAGESTYLE.fileName}>{lessonData.ChatTranscript}</Text>
                                             <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
-                                                {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                 <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
                                             </TouchableOpacity>
                                         </View>
@@ -1070,7 +1059,7 @@ const TLDetailEdit = (props) => {
                                     :
                                     null
                                 }
-                              
+
                             </View>
                         </View>
                     </ScrollView>

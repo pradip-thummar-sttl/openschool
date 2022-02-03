@@ -30,6 +30,9 @@ import TLVideoGallery from "../teacherlessondetail/lessonplan/TeacherLessonVideo
 import moment from "moment";
 
 const TeacherLessonDetail = (props) => {
+
+    console.log("=-=-=-=-=--->>>>", props.route.params.data);
+
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
     const [lessonData, setLessonData] = useState(props.route.params.data);
