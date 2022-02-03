@@ -38,6 +38,13 @@ static NSString * const kChannelGuide = @"the_guide";
   _chatHistory = [[NSMutableArray alloc]init];
   [self.messageTableView setDelegate:self];
   [self.messageTableView setDataSource:self];
+  
+  if (_isPupil) {
+    [_messageTxtView setHidden:false];
+    [_sendButton setHidden:false];
+    [_onlyTeacherLabel setHidden:true];
+  }
+  
 }
 
 /*
@@ -71,15 +78,37 @@ static NSString * const kChannelGuide = @"the_guide";
 
 - (void)displayMessage:(NSString *)message asType:(NSString *)type {
 //    NSDictionary *updateEntry = @{ kUpdateEntryType: type, kUpdateEntryMessage: message };
-     NSDate *date= [NSDate date];
-     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-     [dateFormatter setDateFormat:@"dd,MMM yy hh:mm"];
-     
-     NSString *dateString = [dateFormatter stringFromDate:date];
-  NSLog(@"message recieve and send %@====>%@", message, dateString);
-  NSDictionary *dict = @{@"message":message, @"time":dateString};
-  [_chatHistory addObject:dict];
-  [_messageTableView reloadData];
+  if ([message containsString:@"####"]) {
+    NSArray *items = [message componentsSeparatedByString:@"####"];
+    if (_isPupil) {
+      [_messageTxtView setHidden:false];
+      [_sendButton setHidden:false];
+      [_onlyTeacherLabel setHidden:true];
+    }else{
+    
+        if ([items[1] isEqualToString: @"YES"]) {
+          [_messageTxtView setHidden:true];
+          [_sendButton setHidden:true];
+          [_onlyTeacherLabel setHidden:false];
+        }else{
+          [_messageTxtView setHidden:false];
+          [_sendButton setHidden:false];
+          [_onlyTeacherLabel setHidden:true];
+        }
+    }
+    
+  }else{
+    NSDate *date= [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd,MMM yy hh:mm"];
+    
+    NSString *dateString = [dateFormatter stringFromDate:date];
+     NSLog(@"message recieve and send %@====>%@", message, dateString);
+     NSDictionary *dict = @{@"message":message, @"time":dateString};
+     [_chatHistory addObject:dict];
+     [_messageTableView reloadData];
+  }
+    
 }
 
 #pragma mark-pubnub

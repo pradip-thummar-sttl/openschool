@@ -18,6 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITableView *messageTableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableHeightConstrain;
 @property (weak, nonatomic) IBOutlet UIView *tableSuperView;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UILabel *onlyTeacherLabel;
+
+
+@property (nonatomic) BOOL isPupil;
 
 - (IBAction)onSendButtonPressed:(id)sender;
 - (IBAction)onBackPress:(id)sender;

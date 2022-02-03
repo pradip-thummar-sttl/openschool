@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Image, Text, View } from "react-native";
+import { Image, Text, View,ActivityIndicator } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
@@ -36,6 +36,7 @@ const PupilProfileView = (props) => {
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
+    const [isLoading, setLoading] = useState(false)
 
     const activityConfig = {
         width: 300,
@@ -96,7 +97,7 @@ const PupilProfileView = (props) => {
             Feedback: feedBack,
             CreatedBy: User.user._id
         }
-
+        setLoading(true)
         Service.post(data, `${EndPoints.AddInstantReward}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -105,6 +106,7 @@ const PupilProfileView = (props) => {
                 setGold(false)
                 setFeedback('')
                 showMessage(MESSAGE.rewarded)
+                setLoading(false)
             } else {
                 showMessage(res.message)
             }
@@ -219,9 +221,15 @@ const PupilProfileView = (props) => {
                                                     <TouchableOpacity
                                                         activeOpacity={opacity}
                                                         onPress={() => setInstantRewards()}>
-                                                        <View>
-                                                            <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
-                                                        </View>
+                                                        {isLoading ?
+                                                            <ActivityIndicator
+                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                color={COLORS.white} />
+                                                            :
+                                                            <View>
+                                                                <Ic_CheckWhite style={PAGESTYLE.tickLayout} height={15} width={15} />
+                                                            </View>
+                                                        }   
                                                     </TouchableOpacity>
                                                 </View>
                                             </View>

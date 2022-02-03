@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
@@ -35,7 +35,7 @@ const HeaderPTInner = (props) => {
                         <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
                 </View>
-                <View style={{flexDirection : 'row',right : 70}}>
+                <View style={{flexDirection : 'row',right :Platform.OS === 'android'? 60 : 70}}>
                 <View style={{paddingHorizontal: 3}}>
                     <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
                         {/* <Image  style={PAGESTYLE.profileeditButton} /> */}

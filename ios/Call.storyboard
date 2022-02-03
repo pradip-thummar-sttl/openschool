@@ -54,15 +54,23 @@
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Only Teacher can send messages" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-pP-Foc">
+                                        <rect key="frame" x="41.5" y="18" width="292" height="24"/>
+                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <color key="highlightedColor" red="0.83921568629999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="exn-4Q-R5y" secondAttribute="trailing" id="Knr-Y3-mYE"/>
+                                    <constraint firstItem="IWY-pP-Foc" firstAttribute="centerY" secondItem="sAx-6n-Xml" secondAttribute="centerY" id="Vvj-zS-O26"/>
                                     <constraint firstAttribute="height" constant="60" id="WYU-ar-dKH"/>
                                     <constraint firstItem="5gn-pL-UyY" firstAttribute="leading" secondItem="sAx-6n-Xml" secondAttribute="leading" constant="10" id="b3G-Or-AIN"/>
                                     <constraint firstItem="exn-4Q-R5y" firstAttribute="leading" secondItem="5gn-pL-UyY" secondAttribute="trailing" constant="5" id="dtx-cd-lvF"/>
                                     <constraint firstItem="exn-4Q-R5y" firstAttribute="centerY" secondItem="5gn-pL-UyY" secondAttribute="centerY" id="fXg-gQ-kaq"/>
                                     <constraint firstItem="5gn-pL-UyY" firstAttribute="top" secondItem="sAx-6n-Xml" secondAttribute="top" constant="5" id="hWC-2X-HN6"/>
+                                    <constraint firstItem="IWY-pP-Foc" firstAttribute="centerX" secondItem="sAx-6n-Xml" secondAttribute="centerX" id="hc1-5j-Kat"/>
                                     <constraint firstAttribute="bottom" secondItem="5gn-pL-UyY" secondAttribute="bottom" constant="13" id="sph-tZ-DVq"/>
                                 </constraints>
                             </view>
@@ -206,6 +214,8 @@
                     <connections>
                         <outlet property="messageTableView" destination="eZD-mR-zgn" id="oHb-MZ-UDf"/>
                         <outlet property="messageTxtView" destination="5gn-pL-UyY" id="u1Z-bd-ZT8"/>
+                        <outlet property="onlyTeacherLabel" destination="IWY-pP-Foc" id="3bZ-Rk-ou6"/>
+                        <outlet property="sendButton" destination="exn-4Q-R5y" id="jQJ-Kw-Kvl"/>
                         <outlet property="tableHeightConstrain" destination="gIN-wg-nLd" id="hqi-mL-rjT"/>
                         <outlet property="tableSuperView" destination="4qt-Cp-SET" id="fiV-gl-wqD"/>
                     </connections>

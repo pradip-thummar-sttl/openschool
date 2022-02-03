@@ -53,7 +53,7 @@ const GroupSetUpPupilSelection = (props) => {
             setPupilLoading(false)
             if (res.code == 200) {
 
-                console.log('------set pupil-------',res.data)
+                console.log('------set pupil-------', res.data)
                 setPupils(res.data)
                 setPupilsClone(res.data)
 
@@ -75,6 +75,7 @@ const GroupSetUpPupilSelection = (props) => {
     }, [])
 
     const saveGroup = () => {
+       
         if (groupName.trim().length == 0) {
             showMessage(MESSAGE.groupName)
             return
@@ -105,7 +106,7 @@ const GroupSetUpPupilSelection = (props) => {
                 PupilList: list
             }
         }
-
+        
         Service.post(data, url, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
@@ -244,6 +245,12 @@ const GroupSetUpPupilSelection = (props) => {
                 <View style={{ ...PAGESTYLE.buttonParent1, backgroundColor: COLORS.dashboardGreenButton, }}>
                     <TouchableOpacity
                         onPress={() => { saveGroup() }}>
+                        {/* {isPupilLoading ?
+                            <ActivityIndicator
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                        } */}
                         <Text style={PAGESTYLE.button1}>Assign Group</Text>
                     </TouchableOpacity>
                 </View>

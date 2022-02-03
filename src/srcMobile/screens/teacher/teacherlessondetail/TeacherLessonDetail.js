@@ -258,6 +258,7 @@ const TeacherLessonDetail = (props) => {
                                         isVisible={isVisiblePopup}
                                         onOpenPopup={() => isFiedlsValidated()}
                                         isHomeworkLoading={isHomeworkLoading}
+                                        updateFlag={updateFlag}
                                     />
                                     :
                                     <HeaderHWS
