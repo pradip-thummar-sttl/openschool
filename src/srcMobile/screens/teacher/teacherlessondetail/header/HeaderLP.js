@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView, Platform,activit } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, SafeAreaView,ActivityIndicator, Platform,activit } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import FONTS from '../../../../../utils/Fonts';
@@ -30,14 +30,13 @@ const HeaderLP = (props) => {
                     <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
                         style={[styles.profileEdit,styles.commonButtonGreenheader]}>
-                        {props.isHomeworkLoading ?
+                        {/* {props.isHomeworkLoading ?
                             <ActivityIndicator
                                 // style={STYLE.commonButtonGreen}
                                 size={Platform.OS == 'ios' ? 'small' : 'small'}
                                 color={COLORS.white} />
-                            :
+                            : */}
                             <EditWhite style={styles.profileeditButton} height={hp(1.77)} width={hp(1.77)} />
-                        }
                     </TouchableOpacity>
                        {/* <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
@@ -162,9 +161,9 @@ const styles = StyleSheet.create({
         // paddingLeft: hp(3.125),
         // paddingRight: hp(3.125),
         paddingTop: hp(1.4),
-        width : 35,
+        width : hp(5.10),
         paddingBottom: hp(1.4),
-        height: hp(5.20),
+        height: hp(5.10),
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,

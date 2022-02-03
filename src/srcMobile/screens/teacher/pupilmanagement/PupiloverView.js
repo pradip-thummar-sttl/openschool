@@ -89,7 +89,7 @@ const PupiloverView = (props) => {
 
     return (
         <View>
-            <View style={{ width: isHide ? '100%' : '100%' }}>
+            <View style={{ height: '100%', width: isHide ? '100%' : '100%' }}>
                 <HeaderPM
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
@@ -102,83 +102,86 @@ const PupiloverView = (props) => {
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister', { userType: "Pupil" })}
                     onNotification={() => openNotification()}
                 />
-                {selectedTabIndex == 0 ?
-                    <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
-                        <View style={PAGESTYLE.mainContainer}>
-                            {
-                                isLoading ?
-                                    <ActivityIndicator
-                                        style={{ margin: 20 }}
-                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                        color={COLORS.yellowDark} />
-                                    :
-                                    pupilData.length > 0 ?
-                                        pupilData.map((item, index) => {
-                                            return (
-                                                <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item, onGoBack: () => onRefresh() })}>
-                                                    <View style={[PAGESTYLE.pupilData]}>
-                                                        <View style={PAGESTYLE.pupilProfile}>
-                                                            <View style={PAGESTYLE.rowProfile}>
-                                                                <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+
+                <View style={{ flex: 1}}>
+                    {selectedTabIndex == 0 ?
+                        <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.mainPage}>
+                            <View style={PAGESTYLE.mainContainer}>
+                                {
+                                    isLoading ?
+                                        <ActivityIndicator
+                                            style={{ margin: 20 }}
+                                            size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                            color={COLORS.yellowDark} />
+                                        :
+                                        pupilData.length > 0 ?
+                                            pupilData.map((item, index) => {
+                                                return (
+                                                    <TouchableOpacity onPress={() => props.navigation.navigate('PupilProfileView', { item: item, onGoBack: () => onRefresh() })}>
+                                                        <View style={[PAGESTYLE.pupilData]}>
+                                                            <View style={PAGESTYLE.pupilProfile}>
+                                                                <View style={PAGESTYLE.rowProfile}>
+                                                                    <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
+                                                                </View>
+                                                                <View style={PAGESTYLE.groupPupil}>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                                                                </View>
                                                             </View>
-                                                            <View style={PAGESTYLE.groupPupil}>
-                                                                <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
-                                                            </View>
-                                                        </View>
-                                                        <View style={PAGESTYLE.rewardColumn}>
-                                                            {item.RewardsList.map((item, index) => {
-                                                                return (
-                                                                    item._id == '3' ?
-                                                                        <View style={PAGESTYLE.rewardStar}>
-                                                                            {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                            <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
-                                                                            <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
-                                                                        </View>
-                                                                        :
-                                                                        item._id == '6' ?
+                                                            <View style={PAGESTYLE.rewardColumn}>
+                                                                {item.RewardsList.map((item, index) => {
+                                                                    return (
+                                                                        item._id == '3' ?
                                                                             <View style={PAGESTYLE.rewardStar}>
-                                                                                {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                                <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                                                                {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                                <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                                                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                             </View>
                                                                             :
-                                                                            item._id == '9' ?
+                                                                            item._id == '6' ?
                                                                                 <View style={PAGESTYLE.rewardStar}>
-                                                                                    {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
-                                                                                    <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                                                                    {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                                    <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                                                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                                                                 </View>
                                                                                 :
-                                                                                null
-                                                                )
-                                                            })}
-                                                            {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
+                                                                                item._id == '9' ?
+                                                                                    <View style={PAGESTYLE.rewardStar}>
+                                                                                        {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
+                                                                                        <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
+                                                                                        <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
+                                                                                    </View>
+                                                                                    :
+                                                                                    null
+                                                                    )
+                                                                })}
+                                                                {/* <View style={PAGESTYLE.rewardStar}><Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                                                         <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
+                                                            </View>
+                                                            <View style={PAGESTYLE.pupilDetailLink}>
+                                                                {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
+                                                                <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
+                                                            </View>
                                                         </View>
-                                                        <View style={PAGESTYLE.pupilDetailLink}>
-                                                            {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
-                                                            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} height={hp(1.5)} width={hp(1.5)} />
-                                                        </View>
-                                                    </View>
-                                                </TouchableOpacity>
-                                            )
-                                        })
-                                        :
-                                        <View style={PAGESTYLE.mainContainer}>
-                                            {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
-                                            <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
-                                            <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                                            <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                                        </View>
+                                                    </TouchableOpacity>
+                                                )
+                                            })
+                                            :
+                                            <View style={PAGESTYLE.mainContainer}>
+                                                {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
+                                                <NoPupil style={PAGESTYLE.noDataImage} height={hp(22)} width={hp(22)} />
+                                                <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                                <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
+                                            </View>
 
-                            }
-                        </View>
-                    </ScrollView>
-                    :
-                    <GroupSetUp props={props} />
-                }
+                                }
+                            </View>
+                        </ScrollView>
+                        :
+                        <GroupSetUp props={props} />
+                    }
+                </View>
             </View>
         </View>
     );

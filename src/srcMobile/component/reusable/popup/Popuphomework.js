@@ -20,7 +20,8 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup, styles.commonButtonGreenheader]}>
+            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup, styles.commonButtonGreenheader,
+             {width: props.updateFlag ? 100 : 70}]}>
                 {props.isHomeworkLoading ?
                     <ActivityIndicator
                         // style={{ alignSelf: 'center' }}
