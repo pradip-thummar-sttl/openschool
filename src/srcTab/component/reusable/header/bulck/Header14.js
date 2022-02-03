@@ -21,27 +21,37 @@ const HeaderWhite = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
-            <Text style={styles.mainTitle}><TouchableOpacity onPress={()=>props.goBack()}>
-                {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
-                <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+                <Text style={styles.mainTitle}><TouchableOpacity onPress={() => props.goBack()}>
+                    {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                    <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
 
                 </TouchableOpacity> {props.title}</Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={()=>props.onSubmitHomework()} style={styles.buttonGroup}>
+                    <TouchableOpacity onPress={() => props.onSubmitHomework()} style={styles.buttonGroup}>
                         {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                        <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
-                        <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                style={STYLE.commonButtonGreen}
+                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <>
+                                <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
+                            </>
+                        }
+
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>props.onAlertPress()} style={styles.notificationBar}>
+                    <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
-            </View>           
+            </View>
         </View>
     );
 }
@@ -239,7 +249,7 @@ const styles = StyleSheet.create({
     },
     flexEnd: {
         alignSelf: 'flex-end',
-        flexDirection:'row',
+        flexDirection: 'row',
     },
     arrow: {
         width: hp(2.34),

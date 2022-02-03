@@ -27,7 +27,7 @@ const SchoolNewMessage = (props) => {
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState('');
 
-    const [isLoading, setLoading] = useState(true)
+    const [isLoading, setLoading] = useState(false)
     const [parentsData, setPatrentsData] = useState([])
     const [selectedParents, setSelectedParents] = useState([])
 
@@ -150,6 +150,7 @@ const SchoolNewMessage = (props) => {
         }
 
         console.log('postData', data);
+        setLoading(true)
 
         Service.post(data, status == 'Draft' ? `${EndPoints.UpdateGlobalMessaging}` : `${EndPoints.GlobalMessaging}`, (res) => {
             if (res.code == 200) {
@@ -218,7 +219,8 @@ const SchoolNewMessage = (props) => {
             <NewMessageHeader
                 onSent={() => saveMessage('Sent')}
                 onGoback={() => props.goBack()}
-                status={status} />
+                status={status}
+                isLoading={isLoading} />
             
                 <KeyboardAvoidingView
                     behavior={Platform.OS === "ios" ? "padding" : "height"}

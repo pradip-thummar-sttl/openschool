@@ -30,7 +30,7 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
-    console.log('===========',selectedIndex);
+    console.log('===========', selectedIndex);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -55,9 +55,9 @@ const Header = (props) => {
                         activeOpacity={opacity}>
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -83,9 +83,11 @@ const Header = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1,
-                        paddingVertical : Platform.OS === 'android' ? 3 : 0,   
-                        height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{
+                            flex: 1,
+                            paddingVertical: Platform.OS === 'android' ? 3 : 0,
+                            height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,
+                        }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -95,15 +97,15 @@ const Header = (props) => {
                         }} />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Menu style={{marginLeft: 10}}>
-                        <MenuTrigger style={{alignItems : 'center',justifyContent : 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
-                        <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
+                    <Menu style={{ marginLeft: 10 }}>
+                        <MenuTrigger style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                            <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
                         </MenuTrigger>
                         <MenuOptions style={[styles.filterListWrap]}>
                             <MenuOption style={[styles.borderList]}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                  
+
                                     onPress={() => { setFilterBy('Subject'); setSelectedIndex(0) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Subject</Text>
@@ -142,20 +144,23 @@ const Header = (props) => {
                                     onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
-                                        {selectedIndex == 3 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                        {selectedIndex == 3 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    
+
                 </View>
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                    <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+                        
+                    <>
+                        <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
+                        <Text style={styles.commonButtonGreenheader}>Add Subject</Text>
+                    </>
                 </TouchableOpacity>
             </View>
         </View>
@@ -297,7 +302,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         flex: 1,
     },
-    
+
     filterListWrap: {
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,

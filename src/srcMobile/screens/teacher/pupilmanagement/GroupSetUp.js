@@ -94,8 +94,8 @@ const GroupSetUp = (props) => {
                     <Text style={PAGESTYLE.newGroupLbl}>create new group</Text>
                 </View>
             </TouchableOpacity>
-
-            <View style={PAGESTYLE.right}>
+            
+            <View style={[PAGESTYLE.right]}>
                 {isGroupLoading ?
                     <ActivityIndicator
                         size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -113,6 +113,7 @@ const GroupSetUp = (props) => {
                         <EmptyStatePlaceHohder holderType={4} title1={MESSAGE.noGroup1} title2={MESSAGE.noGroup2} />
                 }
             </View>
+            
         </SafeAreaView>
     );
 }

@@ -109,7 +109,7 @@ const ParentZoneProfileEdit = (props) => {
     }
 
     const saveProfile = () => {
-        // setLoading(true)
+        setLoading(true)
 
         let data = {
             FirstName: firstName,
@@ -277,7 +277,7 @@ const ParentZoneProfileEdit = (props) => {
                                         <View style={PAGESTYLE.thumbTopUser}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
-                                                style={{alignItems: 'center',}}
+                                                style={{ alignItems: 'center', }}
                                                 onPress={() => showActionChooser()}>
                                                 <Image style={PAGESTYLE.thumbTopUser1} source={{ uri: !profileUri.uri ? baseUrl + profile : profileUri.uri }} />
                                                 {/* <Image style={PAGESTYLE.pzEditIcon} source={Images.editIcon} /> */}
@@ -287,8 +287,15 @@ const ParentZoneProfileEdit = (props) => {
                                         <View style={PAGESTYLE.topBannerParent}>
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
-                                                onPress={() => { validateFields() }}>
-                                                <Text style={PAGESTYLE.topBannerBtn1}>Save Profile</Text>
+                                                onPress={() => { validateFields() }}
+                                                style={PAGESTYLE.saveParentZoneProfileTextBtn}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
+                                                    <Text style={PAGESTYLE.saveParentzonePupilProfile}>Save Profile</Text>
+                                                }
                                             </TouchableOpacity>
                                         </View>
                                     </ImageBackground>

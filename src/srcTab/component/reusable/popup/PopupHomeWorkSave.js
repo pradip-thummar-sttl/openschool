@@ -31,10 +31,10 @@ const PopupHomeWorkSave = (props) => {
     return (
         <View>
             {!props.isMarked && props.isSubmitted ?
-                <TouchableOpacity onPress={toggleModal} style={styles.buttonGroup}>
+                <TouchableOpacity onPress={toggleModal} style={[styles.buttonGroup, styles.markHomeworkBtn, { marginHorizontal: 10 }]}>
                     {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
                     <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                    <Text style={styles.commonButtonGreenheader}>mark homework</Text>
+                    <Text style={styles.markHomeworktext}>mark homework</Text>
                 </TouchableOpacity>
                 :
                 null
@@ -52,17 +52,18 @@ const PopupHomeWorkSave = (props) => {
                         <Text style={styles.popupTitle}>You are saving feedback to your pupil</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>By pressing save pupil will be notified. You can edit your feedback at any time. </Text>
 
-                        {props.isLoading ?
-                            <ActivityIndicator
-                                style={STYLE.commonButtonGreenDashboardSide}
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.white} />
-                            :
-                            <TouchableOpacity activeOpacity={opacity}
-                                onPress={() => { props.onSetHomework() }}>
-                                <Text style={STYLE.commonButtonGreenDashboardSide}>Save</Text>
-                            </TouchableOpacity>
-                        }
+                        <TouchableOpacity activeOpacity={opacity}
+                            onPress={() => { props.onSetHomework() }}
+                            style = {styles.markHomeworkBtnn}>
+                            {props.isLoading ?
+                                <ActivityIndicator
+                                    // style={STYLE.commonButtonGreenDashboardSide}
+                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                    color={COLORS.white} />
+                                :
+                                <Text style={styles.markHomeworkBtnnText}>Save</Text>
+                            }
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -72,6 +73,30 @@ const PopupHomeWorkSave = (props) => {
 export default PopupHomeWorkSave;
 
 const styles = StyleSheet.create({
+    markHomeworkBtnnText : {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    markHomeworkBtnn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        height: hp(5.20),
+        width : 100,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
     popupCard: {
         backgroundColor: COLORS.white,
         borderRadius: hp(1.3),
@@ -122,13 +147,13 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
         resizeMode: 'contain',
         position: 'absolute',
-        top: hp(1.52),
+        // top: hp(1.52),
         left: hp(1.8),
         zIndex: 9,
     },
@@ -145,6 +170,30 @@ const styles = StyleSheet.create({
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    markHomeworkBtn: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        width: 160,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    markHomeworktext: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
     },

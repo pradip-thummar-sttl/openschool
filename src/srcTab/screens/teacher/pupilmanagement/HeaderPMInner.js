@@ -47,30 +47,32 @@ const HeaderPMInner = (props) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row' }}>
-                    <View>
-                    <TouchableOpacity activeOpacity={opacity}
-                            onPress={() => props.onEditPress()} 
-                            style={{
-                                backgroundColor: COLORS.dashboardGreenButton,
+                {
+                    tabIndex == 0 ?
+                        <View style={{ flexDirection: 'row' }}>
+                            <View>
+                                <TouchableOpacity activeOpacity={opacity}
+                                    onPress={() => props.onEditPress()}
+                                    style={{
+                                        backgroundColor: COLORS.dashboardGreenButton,
+                                        padding: hp(1.5),
+                                        borderRadius: hp(1),
+                                        marginHorizontal: 5,
 
-                                padding: hp(1.5),
-                                borderRadius: hp(1),
+                                    }}>
+                                    <EditWhite style={{
+                                        width: hp(1.77),
+                                        height: hp(1.77),
+                                        resizeMode: 'contain',
+                                        alignSelf: 'center',
+                                    }} height={hp(1.77)} width={hp(1.77)} />
+                                </TouchableOpacity>
+                            </View>
 
-                                marginHorizontal: 5,
 
-                            }}>
-                            <EditWhite style={{
-                                width: hp(1.77),
-                                height: hp(1.77),
-                                resizeMode: 'contain',
-                                alignSelf: 'center',
-                            }} height={hp(1.77)} width={hp(1.77)} />
-                        </TouchableOpacity>
-                    </View>
-                 
-
-                </View>
+                        </View>
+                        : null
+                }
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>

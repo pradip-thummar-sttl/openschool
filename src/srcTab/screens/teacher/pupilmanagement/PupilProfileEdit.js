@@ -242,6 +242,7 @@ const PupilProfileEdit = (props) => {
                 <HeaderPMInnerEdit
                     onGoBack={() => props.navigation.goBack()}
                     onPressSave={() => saveProfile()}
+                    isLoading = {isLoading}
                 />
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>

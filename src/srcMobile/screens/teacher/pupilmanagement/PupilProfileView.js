@@ -32,7 +32,7 @@ const PupilProfileView = (props) => {
     const item = props.route.params.item;
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
-
+    const [isLoading, setLoading] = useState(false)
     const [isBronze, setBronze] = useState(false);
     const [isSilver, setSilver] = useState(false);
     const [isGold, setGold] = useState(false);
@@ -123,7 +123,7 @@ const PupilProfileView = (props) => {
             showMessage(MESSAGE.selectReward)
             return
         }
-
+      
         let data = {
             TeacherID: User.user._id,
             PupilID: item.PupilId,
@@ -131,7 +131,7 @@ const PupilProfileView = (props) => {
             Feedback: feedBack,
             CreatedBy: User.user._id
         }
-
+        setLoading(true)
         Service.post(data, `${EndPoints.AddInstantReward}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
@@ -140,6 +140,7 @@ const PupilProfileView = (props) => {
                 setGold(false)
                 setFeedback('')
                 showMessage(MESSAGE.rewarded)
+                setLoading(false)
             } else {
                 showMessage(res.message)
             }
@@ -211,10 +212,19 @@ const PupilProfileView = (props) => {
                                                 style={PAGESTYLE.tickLayoutPArent}
                                                 activeOpacity={opacity}
                                                 onPress={() => setInstantRewards()}>
-                                                <View>
-                                                    {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
-                                                    <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
-                                                </View>
+                                                {
+                                                    isLoading ?
+                                                        <ActivityIndicator
+                                                            size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                            color={COLORS.white}
+                                                        />
+                                                        :
+                                                        <View>
+                                                            {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
+                                                            <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
+                                                        </View>
+
+                                                }
                                             </TouchableOpacity>
                                         </View>
                                         <View style={PAGESTYLE.achivementBox}>

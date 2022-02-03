@@ -386,71 +386,96 @@ const PopupdataSecond = (props) => {
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
-                                            {isLoading ?
-                                                <ActivityIndicator
-                                                    style={{ ...styles.buttonGrp, right: 30 }}
-                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                    color={COLORS.buttonGreen} />
-                                                :
-                                                <TouchableOpacity
-                                                    onPress={isFieldsValidated}
-                                                    style={[styles.buttonGrp]}
-                                                    activeOpacity={opacity}>
-                                                    {/* <Image style={styles.checkWhiteIcon} source={require('../../../../assets/images/white-check-icon2.png')} /> */}
-                                                    <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
-                                                    <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
-                                                </TouchableOpacity>
-                                            }
+                                            <TouchableOpacity
+                                                onPress={isFieldsValidated}
+                                                style={[styles.buttonGrp,styles.saveEntryBtn]}
+                                                activeOpacity={opacity}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        // style={{ ...styles.buttonGrp, right: 30 }}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
+                                                    <>
+                                                     <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
+                                                     <Text style={styles.saveEntryBtntext}>save entry</Text>
+                                                    </>
+                                                }
+                                            </TouchableOpacity>
 
-                                            {/* <TouchableOpacity style={styles.buttonGrp}>
+                                        {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
                                                 <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text>
                                                 </TouchableOpacity> */}
-                                        </View>
                                     </View>
                                 </View>
                             </View>
                         </View>
-
-                        {
-                            isColorDropOpen ?
-                                <View style={[styles.colorDropView]}>
-                                    <FlatList
-                                        data={colorArr}
-                                        renderItem={({ item, index }) => {
-                                            return (
-                                                <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
-                                                    <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
-                                                    <Text style={{ justifyContent: 'center' }}>   {item.EventType}</Text>
-                                                </TouchableOpacity>
-                                            )
-                                        }}
-                                    />
-                                </View> : null
-                        }
                     </View>
-                    <DateTimePickerModal
-                        isVisible={isDatePickerVisible}
-                        mode="date"
-                        minimumDate={new Date()}
-                        onConfirm={handleConfirm}
-                        onCancel={hideDatePicker}
-                    />
 
-                    <DateTimePickerModal
-                        isVisible={isTimePickerVisible}
-                        mode="time"
-                        onConfirm={handleTimeConfirm}
-                        onCancel={hideTimePicker}
-                    />
-                </KeyboardAwareScrollView>
-            </Modal>
-        </View>
+                    {
+                        isColorDropOpen ?
+                            <View style={[styles.colorDropView]}>
+                                <FlatList
+                                    data={colorArr}
+                                    renderItem={({ item, index }) => {
+                                        return (
+                                            <TouchableOpacity onPress={() => { setSelectColorId(item._id); selectColor(item) }} style={styles.colorButton}>
+                                                <Image style={{ width: 30, height: 30, borderRadius: 5, backgroundColor: item.EventColor }} />
+                                                <Text style={{ justifyContent: 'center' }}>   {item.EventType}</Text>
+                                            </TouchableOpacity>
+                                        )
+                                    }}
+                                />
+                            </View> : null
+                    }
+                </View>
+                <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    minimumDate={new Date()}
+                    onConfirm={handleConfirm}
+                    onCancel={hideDatePicker}
+                />
+
+                <DateTimePickerModal
+                    isVisible={isTimePickerVisible}
+                    mode="time"
+                    onConfirm={handleTimeConfirm}
+                    onCancel={hideTimePicker}
+                />
+            </KeyboardAwareScrollView>
+        </Modal>
+        </View >
     );
 }
 export default PopupdataSecond;
 
 const styles = StyleSheet.create({
+    saveEntryBtntext: {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    saveEntryBtn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        width : 120,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
     cancelButton: {
         position: 'absolute',
         right: hp(1.5),
@@ -508,7 +533,7 @@ const styles = StyleSheet.create({
         left: hp(1.7),
         top: 'auto',
         zIndex: 9,
-        alignSelf : 'center'
+        alignSelf: 'center'
     },
     popupCustomButton: {
         paddingLeft: hp(4.42),

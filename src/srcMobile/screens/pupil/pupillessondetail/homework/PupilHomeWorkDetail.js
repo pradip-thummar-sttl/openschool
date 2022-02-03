@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
+import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView,ActivityIndicator, Platform, BackHandler } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
@@ -230,7 +230,18 @@ console.log('endpoint  url', `${EndPoints.PupilUploadHomework}/${item.HomeWorkId
                         </ScrollView>
                     </View>
                         <View style={[PAGESTYLE.fullButtonMain]}>
-                            <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.buttonGrp}><Text style={[PAGESTYLE.commonButtonGreenheaderFullWidth, PAGESTYLE.fullButton]}>submit homework</Text></TouchableOpacity>
+                            <TouchableOpacity onPress={() => setSubmitPopup(true)} style={PAGESTYLE.commonButtonSubmitHomework}>
+                            
+                                {isLoading ?
+                                    <ActivityIndicator
+                                        // style={PAGESTYLE.commonButtonGreenTeacher}
+                                        size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                        color={COLORS.white} />
+                                    :
+                                    <Text style={[PAGESTYLE.fullButtonHomework]}>submit homework</Text>
+                                
+                                }
+                            </TouchableOpacity>
                         </View>
                     </View>
                     {

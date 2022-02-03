@@ -19,7 +19,7 @@ const Popuphomework = (props) => {
         <View>
             <Modal isVisible={true}>
                 <View style={styles.popupCard}>
-                    <TouchableOpacity style={STYLE.cancelButton} onPress={() => { props.onPopupClosed(!isModalVisible); toggleModal() }}>
+                    <TouchableOpacity style={STYLE.cancelButtonHomework} onPress={() => { props.onPopupClosed(!isModalVisible); toggleModal() }}>
                         {/* <Image style={STYLE.cancelButtonIcon} source={require('../../../../assets/images/cancel2.png')} /> */}
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
@@ -29,16 +29,17 @@ const Popuphomework = (props) => {
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
 
-                        {props.isLoading ?
-                            <ActivityIndicator
-                                style={styles.commonButtonGreenDashboardSide}
-                                size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.white} />
-                            :
-                            <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
+                        <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}
+                            style={styles.commonButtonSubmitHomework}>
+                            {props.isLoading ?
+                                <ActivityIndicator
+                                    // style={styles.commonButtonGreenDashboardSide}
+                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                    color={COLORS.white} />
+                                :
                                 <Text style={styles.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
-                            </TouchableOpacity>
-                        }
+                            }
+                        </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
@@ -114,20 +115,23 @@ const styles = StyleSheet.create({
         zIndex: 9,
     },
     commonButtonGreenDashboardSide: {
-        backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.5),
-        borderRadius: hp(0.9),
         overflow: 'hidden',
-        textAlign: 'center',
-        paddingTop: hp(1.6),
-        paddingBottom: hp(1.6),
-        paddingLeft: hp(3.125),
-        paddingRight: hp(3.125),
-        alignSelf: 'center',
-        height: hp(5.41),
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
+    },
+    commonButtonSubmitHomework: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        width: 200,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: hp(5.41), textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+
     },
     popupTitle: {
         fontSize: wp(4.8),

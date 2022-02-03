@@ -132,7 +132,7 @@ const SAddNewTeacher = (props) => {
     }
 
     const saveProfile = () => {
-        // setLoading(true)
+        setLoading(true)
 
         let data = {
             SchoolId: User.user.UserDetialId,
@@ -301,6 +301,7 @@ const SAddNewTeacher = (props) => {
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
                 OnSaveEdit={() => {validateFields()}}
+                isLoading={isLoading}
 
             />
             <View style={PAGESTYLE.MainProfile}>

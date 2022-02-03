@@ -727,8 +727,7 @@ const PupuilDashboard = (props) => {
                                                                 <Image source={{ uri: baseUrl + pupilAvatarList[3].Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain', position: 'absolute', top: hp(16), zIndex: 20 }} />
                                                            
                                                             </View>
-                                                        </View>
-                                                        : null
+                                                        </View> : null
                                                     }
                                                 </View>
                                             </View>

@@ -297,14 +297,14 @@ const GroupSetUp = () => {
                         <View style={PAGESTYLE.bar2}></View>
                         <View style={{ flexDirection: 'row', justifyContent: 'flex-start' }}>
                             <TouchableOpacity
-                                style={PAGESTYLE.buttonParent}
+                                style={[PAGESTYLE.buttonParent, {backgroundColor: COLORS.dashboardGreenButton}]}
                                 onPress={() => { saveGroup() }}>
-                                <Text style={{ ...PAGESTYLE.button, color: COLORS.dashboardGreenButton }}>Assign Group</Text>
+                                <Text style={{ ...PAGESTYLE.button, color: COLORS.white }}>Assign Group</Text>
                             </TouchableOpacity>
                             <TouchableOpacity
-                                style={{ ...PAGESTYLE.buttonParent, backgroundColor: COLORS.dashboardGreenButton, }}
+                                style={{ ...PAGESTYLE.buttonParent}}
                                 onPress={() => { reset() }}>
-                                <Text style={PAGESTYLE.button}>Reset</Text>
+                                <Text style={[PAGESTYLE.button,{ color: COLORS.buttonGreen}]}>Reset</Text>
                             </TouchableOpacity>
                         </View>
                     </>

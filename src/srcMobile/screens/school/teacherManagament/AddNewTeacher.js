@@ -298,6 +298,7 @@ const AddNewTeacher = (props) => {
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
                 onSavePressed={() => validateFields()}
+                isLoading = {isLoading}
             />
             <View style={PAGESTYLE.MainProfile}>
                 <KeyboardAwareScrollView

@@ -233,6 +233,7 @@ class Login extends Component {
     };
 
     updateUserID(ID, resData, reqData) {
+        console.log('ID, resData, reqData', );
         if (ID && ID != '' && ID != null && ID != undefined) {
             console.log('QBUserId', ID, resData.RoomId);
 
@@ -403,7 +404,7 @@ class Login extends Component {
                                     onPress={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated() }}>
                                     {
                                         this.state.isLoading ?
-                                            <ActivityIndicator style={STYLE.loginButtonLoader} size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                                            <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
                                             :
                                             <Text style={STYLE.loginButtonText}>Login to Continue</Text>
                                     }

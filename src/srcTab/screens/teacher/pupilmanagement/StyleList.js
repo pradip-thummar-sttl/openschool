@@ -578,7 +578,8 @@ export default StyleSheet.create({
     nodataContent: {
         alignSelf: 'center',
         fontSize: 18,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily : FONTS.fontRegular
     },
 
 })

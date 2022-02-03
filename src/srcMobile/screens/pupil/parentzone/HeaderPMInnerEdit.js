@@ -52,7 +52,7 @@ const HeaderPMInner = (props) => {
                     {props.isLoading ?
                         <TouchableOpacity style={styles.buttonGroup}>
                             <ActivityIndicator
-                                style={[styles.addIcon1, styles.iconTop]}
+                                // style={[styles.addIcon1, styles.iconTop]}
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
                             <Text style={styles.commonButtonGreenheader}></Text>
@@ -160,7 +160,6 @@ const styles = StyleSheet.create({
         zIndex: 9,
     },
     commonButtonGreenheader: {
-        backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.46),
         borderRadius: hp(1),

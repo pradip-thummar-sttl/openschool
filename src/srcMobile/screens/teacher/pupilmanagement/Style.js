@@ -25,7 +25,7 @@ export default StyleSheet.create({
     right: {
         paddingTop: 10,
         paddingHorizontal: Platform.OS === 'ios' ? hp(1.5) : hp(0),
-        height: '82%',
+        flex: 1
     },
     pupilParent: {
         flexDirection: 'row',
@@ -209,7 +209,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.backgroundColorCommon,
     },
     mainPage1: {
-        height: '85%',
+        height: '100%',
         paddingHorizontal: hp(2),
         paddingVertical: hp(2),
         backgroundColor: COLORS.backgroundColorCommon,
@@ -238,7 +238,8 @@ export default StyleSheet.create({
     nodataContent: {
         alignSelf: 'center',
         fontSize: 18,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily : FONTS.fontRegular
     },
     pupilData: {
         flexDirection: 'row',

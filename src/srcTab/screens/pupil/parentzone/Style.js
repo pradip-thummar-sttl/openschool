@@ -17,6 +17,18 @@ export default StyleSheet.create({
         borderRightWidth: 1,
         paddingTop: 20
     },
+    saveParentZoneProfileTextBtn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        height: hp(5.20),
+        width : 120,
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
     middle: {
         flex: 0.48,
         flexDirection: 'column',
@@ -219,6 +231,14 @@ export default StyleSheet.create({
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
+    },
+    saveParentzonePupilProfile : {
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     topBannerParent: {
         paddingHorizontal: 10,

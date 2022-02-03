@@ -73,13 +73,13 @@ const TeacherProfileEdit = (props) => {
     }
 
     const validateFields = () => {
-       if (!isFirstName.trim()) {
+        if (!isFirstName.trim()) {
             showMessage(MESSAGE.firstName)
             return false
         } else if (!isLastName.trim()) {
             showMessage(MESSAGE.lastName)
             return false
-        } 
+        }
         saveProfile()
     }
 
@@ -119,6 +119,7 @@ const TeacherProfileEdit = (props) => {
     }
 
     const saveProfile = () => {
+        setLoading(true)
         let data = {
             SchoolId: User.user.UserDetialId,
             Title: getSelectTitle(),
@@ -149,7 +150,7 @@ const TeacherProfileEdit = (props) => {
         if (!isProfileUri) {
             setLoading(false)
             resetFeilds()
-            showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
+            showMessageWithCallBack(MESSAGE.updateTeacherProfile, () => {
                 props.navigateToBack();
             });
             return
@@ -167,7 +168,7 @@ const TeacherProfileEdit = (props) => {
             if (res.code == 200) {
                 setLoading(false)
                 resetFeilds()
-                showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
+                showMessageWithCallBack(MESSAGE.updateTeacherProfile, () => {
                     props.navigateToBack();
                 });
             } else {
@@ -244,7 +245,7 @@ const TeacherProfileEdit = (props) => {
                         <FlatList
                             data={isListOfYear}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular,}} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.Title}></MenuOption>
                             )} style={{ height: 130 }} />
                     </MenuOptions>
                 </Menu>
@@ -261,11 +262,11 @@ const TeacherProfileEdit = (props) => {
                         <Text style={PAGESTYLE.dateTimetextdummy}>{isTitle}</Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize:14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
                         <FlatList
                             data={isListOfTitle}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10 , fontFamily: FONTS.fontRegular}} value={item} text={item.Title}></MenuOption>
+                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular }} value={item} text={item.Title}></MenuOption>
                             )}
                             style={{ height: 130 }} />
                     </MenuOptions>
@@ -298,9 +299,16 @@ const TeacherProfileEdit = (props) => {
                                     </TouchableOpacity>
                                 </View>
 
-                                 <View style={PAGESTYLE.btnSendView}>
-                                    <TouchableOpacity style={PAGESTYLE.btnInnerSendView} activeOpacity={opacity} onPress={() => { validateFields() }}>
-                                        <Text style={PAGESTYLE.btnSendTextView}>Save</Text>
+                                <View style={PAGESTYLE.btnSendView}>
+                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView,{justifyContent:'center',alignItems : 'center'}]} activeOpacity={opacity} onPress={() => { validateFields() }}>
+                                        {isLoading ?
+                                            <ActivityIndicator
+                                                // style={PAGESTYLE.commonButtonGreenTeacher}
+                                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                                color={COLORS.white} />
+                                            :
+                                            <Text style={PAGESTYLE.btnSendTextView}>Save</Text>
+                                        }
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -385,7 +393,7 @@ const TeacherProfileEdit = (props) => {
                     </KeyboardAwareScrollView>
                 </View>
             </View>
-            
+
         </View>
     );
 }

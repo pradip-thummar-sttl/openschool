@@ -279,7 +279,7 @@ const CreateNewEventPupil = (props) => {
                     <View style={styles.tabcontent}>
                         <KeyboardAwareScrollView>
                             <View style={styles.beforeBorder}>
-                                <View style={[styles.titleSave,{marginTop : 10}]}>
+                                <View style={[styles.titleSave, { marginTop: 10 }]}>
                                     <View style={styles.title}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
@@ -291,21 +291,22 @@ const CreateNewEventPupil = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <View style={styles.lessonstartButton}>
-                                            {isLoading ?
-                                                <ActivityIndicator
-                                                    style={{ ...styles.buttonGrp, right: 30 }}
-                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                    color={COLORS.buttonGreen} />
-                                                :
-                                                <TouchableOpacity
-                                                    onPress={isFieldsValidated}
-                                                    style={[styles.buttonGrp, styles.newCheckButton]}
-                                                    activeOpacity={opacity}>
-                                                    <WhiteCheck style={[styles.checkWhiteIcon]} height={hp(1.58)} width={hp(1.80)} />
-                                                    {/* <Image style={[styles.checkWhiteIcon]} source={require('../../../../../assets/images/white-check-icon2.png')} /> */}
-                                                    {/* <Text style={[STYLE.commonButtonGreenDashboardSide, styles.popupCustomButton]}>save entry</Text> */}
-                                                </TouchableOpacity>
-                                            }
+
+                                            <TouchableOpacity
+                                                onPress={isFieldsValidated}
+                                                style={[styles.buttonGrp, styles.newCheckButton]}
+                                                activeOpacity={opacity}>
+                                                {isLoading ?
+                                                    <ActivityIndicator
+                                                        // style={styles.buttonGrp}
+                                                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                        color={COLORS.white} />
+                                                    :
+                                                  <WhiteCheck style={[styles.checkWhiteIcon]} height={hp(1.58)} width={hp(1.58)} />
+                                                 }           
+                                            </TouchableOpacity>
+                                            
+                                            
 
                                             {/* <TouchableOpacity style={styles.buttonGrp}>
                                                 <Image style={styles.checkWhiteIcon} source={Images.CheckIconWhite} />
@@ -512,9 +513,11 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         overflow: 'hidden',
         paddingTop: hp(1.7),
-        paddingLeft: hp(1.7),
-        paddingRight: hp(1.7),
+        // paddingLeft: hp(1.7),
+        // paddingRight: hp(1.7),
         paddingBottom: hp(1.7),
+        justifyContent : 'center',
+        alignItems : 'center'
     },
     checkWhiteIcon: {
         width: hp(1.48),

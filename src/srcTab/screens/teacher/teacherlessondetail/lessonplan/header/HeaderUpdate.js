@@ -32,21 +32,22 @@ const HeaderUpdate = (props) => {
                     <TouchableOpacity style={styles.buttonGroup}>
                         <Text style={styles.commonButtonGreenheader}>see homework</Text>
                     </TouchableOpacity>*/}
-                    {props.isLoading ?
-                        <ActivityIndicator
-                            style={styles.commonButtonGreenheaderwithouticon}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.white} />
-                        :
-                        <TouchableOpacity
-                            style={styles.buttonGroup}
-                            activeOpacity={opacity}
-                            onPress={() => props.saveLesson()}>
-                            {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                            <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
-                            <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
-                        </TouchableOpacity>
-                    }
+                    <TouchableOpacity
+                        style={[styles.buttonGroup,styles.updateLessonBtn]}
+                        activeOpacity={opacity}
+                        onPress={() => props.saveLesson()}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                // style={styles.commonButtonGreenheaderwithouticon}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            <>
+                                <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                <Text style={styles.commonButtonGreenheaderwithicon}>Update Lesson</Text>
+                            </>
+                        }
+                    </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.notificationBar}
                         onPress={() => props.onAlertPress()}
@@ -145,6 +146,22 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginRight: hp(1.69),
     },
+    updateLessonBtn : {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        paddingLeft: hp(4.175),
+        paddingRight: hp(2.50),
+        height: hp(5.20),
+        width : 145,
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center'
+    },
     filterIcon: {
         width: hp(1.74),
         resizeMode: 'contain',
@@ -170,21 +187,14 @@ const styles = StyleSheet.create({
         marginLeft: hp(2),
     },
     commonButtonGreenheaderwithicon: {
-        backgroundColor: COLORS.dashboardGreenButton,
-        color: COLORS.white,
-        fontSize: hp(1.56),
-        borderRadius: hp(1),
-        overflow: 'hidden',
-        textAlign: 'center',
-        paddingLeft: hp(4.175),
-        paddingRight: hp(2.50),
-        height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
-    },
+            color: COLORS.white,
+            fontSize: hp(1.56),
+            borderRadius: hp(1),
+            overflow: 'hidden',
+            textTransform: 'uppercase',
+            fontFamily: FONTS.fontBold,
+      },
+
     addIcon: {
         width: hp(1.55),
         resizeMode: 'contain',
