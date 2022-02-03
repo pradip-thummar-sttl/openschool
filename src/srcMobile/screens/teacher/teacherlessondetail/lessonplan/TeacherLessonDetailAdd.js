@@ -3,18 +3,14 @@ import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOp
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
-import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { showMessage, msgTopic, msgDescription, opacity, showMessageWithCallBack, isRunningFromVirtualDevice } from "../../../../../utils/Constant";
 import HeaderWhite from "../../../../component/reusable/header/HeaderWhite";
 import MESSAGE from "../../../../../utils/Messages";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderAddNew from "./header/HeaderAddNew";
-import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import {
     Menu,
@@ -68,8 +64,10 @@ const TLDetailAdd = (props) => {
     const [timeSlot, setTimeSlots] = useState(['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'])
 
     const [selectedSubject, setSelectedSubject] = useState('')
+
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
+
     const [selectedParticipants, setSelectedParticipants] = useState('')
     const [selectedPupils, setSelectedPupils] = useState('')
 
@@ -147,7 +145,6 @@ const TLDetailAdd = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -194,13 +191,6 @@ const TLDetailAdd = (props) => {
         console.log('hello material', array)
     }
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
-
-    const showTimepicker = () => {
-        showMode('time');
-    };
 
     const pushCheckListItem = () => {
         if (!newItem.trim()) {
@@ -303,6 +293,7 @@ const TLDetailAdd = (props) => {
 
 
     }
+
     const stopRecording = async () => {
         if (recordingName.length > 0) {
 
@@ -315,7 +306,7 @@ const TLDetailAdd = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-               
+
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -357,7 +348,6 @@ const TLDetailAdd = (props) => {
         setAddRecording(false)
     }
 
-
     const saveCameraData = () => {
 
         var arr = [...recordingArr]
@@ -384,19 +374,6 @@ const TLDetailAdd = (props) => {
 
     }
 
-
-
-    const isFieldsValidated = () => {
-        if (!lessonTopic.trim()) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!description.trim()) {
-            showMessage(MESSAGE.description);
-            return false;
-        }
-        return true;
-    }
-
     const editNewText = (text, index) => {
         let newArray = [...itemCheckList];
         newArray[index].ItemName = text
@@ -412,7 +389,7 @@ const TLDetailAdd = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%', bottom: hp(1), }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(0.5),justifyContent : 'center', paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
+                        <View style={{ margin: hp(0.5), justifyContent: 'center', paddingBottom: 8, borderBottomWidth: 1, borderBottomColor: COLORS.dashboardBorder, }}>
                             {/* <Text style={{ fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}>{item.ItemName}</Text> */}
                             <TextInput
                                 style={{ width: '90%', height: 41, fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.85) }}
@@ -612,44 +589,7 @@ const TLDetailAdd = (props) => {
         );
     };
 
-    const getDataFromQuickBloxAndroid = () => {
-        if (!selectedSubject) {
-            showMessage(MESSAGE.subject)
-            return false;
-        } else if (!lessonTopic.trim()) {
-            showMessage(MESSAGE.topic)
-            return false;
-        } else if (!selectedDate) {
-            showMessage(MESSAGE.date)
-            return false;
-        } else if (!selectedFromTime) {
-            showMessage(MESSAGE.fromTime)
-            return false;
-        } else if (!selectedToTime) {
-            showMessage(MESSAGE.toTime)
-            return false;
-        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
-            showMessage(MESSAGE.invalidTo)
-            return false
-        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
-            showMessage(MESSAGE.invalidFrom)
-            return false
-        } else if (!selectedParticipants) {
-            showMessage(MESSAGE.participants)
-            return false;
-        } else if (!description.trim()) {
-            showMessage(MESSAGE.description);
-            return false;
-        }
-        // else if (recordingArr.length == 0) {
-        //     showMessage(MESSAGE.recording);
-        //     return false;
-        // }
 
-        setLoading(true)
-
-        createQBDialog()
-    };
 
     const createQBDialog = () => {
         if (isRunningFromVirtualDevice) {
@@ -804,14 +744,13 @@ const TLDetailAdd = (props) => {
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
-    
+
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={PAGESTYLE.popupCard}>
                         <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={PAGESTYLE.popupContent}>
@@ -847,12 +786,56 @@ const TLDetailAdd = (props) => {
         )
     }
 
+    const getDataFromQuickBloxAndroid = () => {
+        if (!selectedSubject) {
+            showMessage(MESSAGE.subject)
+            return false;
+        } else if (!lessonTopic.trim()) {
+            showMessage(MESSAGE.topic)
+            return false;
+        } else if (!selectedDate) {
+            showMessage(MESSAGE.date)
+            return false;
+        } else if (!selectedFromTime && IsDeliveredLive != "") {
+            showMessage(MESSAGE.fromTime)
+            return false;
+        } else if (!selectedToTime && IsDeliveredLive != "") {
+            showMessage(MESSAGE.toTime)
+            return false;
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {
+            showMessage(MESSAGE.invalidTo)
+            return false
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {
+            showMessage(MESSAGE.invalidFrom)
+            return false
+        } else if (!selectedParticipants) {
+            showMessage(MESSAGE.participants)
+            return false;
+        } else if (!description.trim()) {
+            showMessage(MESSAGE.description);
+            return false;
+        }
+        setLoading(true)
+        createQBDialog()
+    };
+
+    const onSetDeliverLiveLesson = (isOn) => {
+
+        if (!isOn) {
+            setSelectedFromTime("");
+            setSelectedToTime("");ß
+        }
+        setDeliveredLive(isOn)
+    }
+
     return (
         <View style={PAGESTYLE.mainPage}>
-           
+
             <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '100%' }}>
-                <HeaderAddNew isLoading={isLoading} navigateToBack={() => { props.route.params.onGoBack(); props.navigation.goBack() }}saveLesson={() => { getDataFromQuickBloxAndroid() }} />
-                
+                <HeaderAddNew isLoading={isLoading}
+                    navigateToBack={() => { props.route.params.onGoBack(); props.navigation.goBack() }}
+                    saveLesson={() => { getDataFromQuickBloxAndroid() }} />
+
                 <KeyboardAwareScrollView>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={PAGESTYLE.containerWrap}>
@@ -880,7 +863,7 @@ const TLDetailAdd = (props) => {
 
                                 <View style={PAGESTYLE.toggleGrp}>
                                     <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => onSetDeliverLiveLesson(isOn)} />
                                 </View>
 
                                 <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
@@ -902,10 +885,10 @@ const TLDetailAdd = (props) => {
                                 </View>
                                 {
                                     IsDeliveredLive &&
-                                        <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
-                                            {fromTimeDropDown()}
-                                            {toTimeDropDown()}
-                                        </View>
+                                    <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
+                                        {fromTimeDropDown()}
+                                        {toTimeDropDown()}
+                                    </View>
                                 }
 
                                 <View style={PAGESTYLE.lessonDesc}>
@@ -964,7 +947,7 @@ const TLDetailAdd = (props) => {
                                         return (
                                             <View style={PAGESTYLE.fileRender}>
                                                 <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name}</Text>
-                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                <TouchableOpacity onPress={() => removeObject(index, item)} style={[PAGESTYLE.RenderDownload, { marginLeft: hp(0.4) }]}>
                                                     <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                 </TouchableOpacity>
                                             </View>

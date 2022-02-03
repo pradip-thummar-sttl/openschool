@@ -29,7 +29,6 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
-    console.log('===========',selectedIndex);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -49,7 +48,7 @@ const Header = (props) => {
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
                     <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
-                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.mainTitle}>Lesson &  homework planner</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.mainTitle}>Lesson & homework planner</Text>
                 </View>
 
                 <View style={styles.headerRight}>
@@ -132,7 +131,6 @@ const Header = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -175,9 +173,7 @@ const Header = (props) => {
                     style={styles.commonButtonGreenheader}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
-                    {/* <Text style={styles.commonButtonGreenheader}></Text> */}
                 </TouchableOpacity>
             </View>
         </View>

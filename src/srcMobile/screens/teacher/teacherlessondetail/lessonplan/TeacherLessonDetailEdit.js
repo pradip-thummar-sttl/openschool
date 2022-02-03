@@ -8,12 +8,9 @@ import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
-import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import moment from 'moment';
 import {
     Menu,
@@ -58,6 +55,7 @@ const TLDetailEdit = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     var tempPupil = [];
+
     useEffect(() => {
         if (itemCheckList.length == 0) {
             setItemCheckList(lessonData.CheckList)
@@ -201,7 +199,6 @@ const TLDetailEdit = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -262,19 +259,6 @@ const TLDetailEdit = (props) => {
     }
 
     const onScreeCamera = () => {
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
-        // setTimeout(() => {
-
-        //     RecordScreen.stopRecording().then((res) => {
-        //         if (res) {
-        //             console.log('response of recording', res)
-        //             const url = res.result.outputURL;
-        //         }
-        //     }).catch((error) =>
-        //         console.warn(error)
-        //     );
-
-        // }, 4000);
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
@@ -284,8 +268,6 @@ const TLDetailEdit = (props) => {
     }
 
     const startRecording = async () => {
-        // setRecordingStarted(true)
-        // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
             if (res === "granted") {
@@ -362,49 +344,6 @@ const TLDetailEdit = (props) => {
             showMessage('Please provide recording name proper')
         }
     }
-
-    // const stopRecording = async () => {
-    //     var arr = []
-    //     const res = await RecordScreen.stopRecording().catch((error) => {
-    //         setRecordingStarted(false)
-    //         console.warn(error)
-    //     });
-    //     if (res) {
-    //         setRecordingStarted(false)
-    //         const url = res.result.outputURL;
-    //         let ext = url.split('.');
-    //         let obj = {
-    //             uri: Platform.OS == 'android' ? 'file:///' + url : url,
-    //             originalname: 'MY_RECORDING.mp4',
-    //             fileName: 'MY_RECORDING.mp4',
-    //             type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-    //         }
-    //         arr.push(obj)
-    //         setRecordingArr(arr)
-    //         setScreenVoiceSelected(false)
-
-    //         console.log('url', url);
-    //     }
-    // }
-
-    // const onCameraOnly = () => {
-    //     var arr = []
-    //     launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
-    //         // setResponse(response);
-    //         if (response.errorCode) {
-    //             showMessage(response.errorCode)
-    //         } else if (response.didCancel) {
-    //         } else {
-    //             console.log('response', response);
-    //             arr.push(response)
-    //             setRecordingArr(arr)
-    //             toggleModal('isCamera')
-    //         }
-
-    //     })
-    //     setAddRecording(false)
-
-    // }
 
     const onCameraOnly = () => {
         var arr = []
@@ -675,16 +614,16 @@ const TLDetailEdit = (props) => {
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
-        } else if (!selectedFromTime) {
+        } else if (!selectedFromTime && IsDeliveredLive != "") {
             showMessage(MESSAGE.fromTime)
             return false;
-        } else if (!selectedToTime) {
+        } else if (!selectedToTime && IsDeliveredLive != "") {
             showMessage(MESSAGE.toTime)
             return false;
-        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime)) {
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {
             showMessage(MESSAGE.invalidTo)
             return false
-        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4) {
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {
             showMessage(MESSAGE.invalidFrom)
             return false
         } else if (!selectedParticipants) {
@@ -694,10 +633,6 @@ const TLDetailEdit = (props) => {
             showMessage(MESSAGE.description);
             return false;
         }
-        // else if (recordingArr.length == 0) {
-        //     showMessage(MESSAGE.recording);
-        //     return false;
-        // }
 
         setLoading(true)
 
@@ -725,7 +660,6 @@ const TLDetailEdit = (props) => {
             try {
                 if (Platform.OS == 'android') {
                     DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                        console.log('error:eventId', error, ID);
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -735,7 +669,6 @@ const TLDetailEdit = (props) => {
                     });
                 } else {
                     Dialog.qbCreateDialogtags(userIDs, userNames, names, (ID) => {
-                        console.log('eventId--------------------', ID);
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -743,7 +676,6 @@ const TLDetailEdit = (props) => {
                             showMessage('Sorry, we are unable to add lesson!')
                         }
                     }, (error) => {
-                        console.log('event error--------------------', error);
                     });
                 }
             }
@@ -775,7 +707,6 @@ const TLDetailEdit = (props) => {
             QBDilogID: ID
         }
 
-        console.log('postData', data);
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
                 uploadMatirial(res.data._id)
@@ -802,8 +733,6 @@ const TLDetailEdit = (props) => {
             }
         });
 
-        console.log('---recordingArr---', recordingArr)
-
         recordingArr.forEach(element => {
             if (element.uri) {
 
@@ -815,7 +744,6 @@ const TLDetailEdit = (props) => {
 
                 data.append('recording', {
                     uri: element.uri,
-                    // name: element.fileName,
                     name: `${recordingName}.mp4`,
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
@@ -841,14 +769,10 @@ const TLDetailEdit = (props) => {
         }
 
         console.log('KD', data._parts, lessionId, `${EndPoints.LessonMaterialUpload}${lessionId}`)
-        // setLoading(false)
-        // return;
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
-                console.log('response of save lesson', res)
-                // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
                     props.route.params.onGoBack();
                     props.navigation.goBack()
@@ -903,37 +827,18 @@ const TLDetailEdit = (props) => {
         var array = [...materialArr];
         array.splice(index1, 1);
         setMaterialArr(array)
-        console.log('hello material', array)
     }
     const removeRecording = () => {
         var arr = [...recordingArr]
         arr.splice(0, 1)
         setRecordingArr(arr)
-        console.log('==============================',arr);
     }
 
     const toggleModal = () => {
-
-        // console.log('currentRecordModeStatus', currentRecordModeStatus)
-
-        // if (currentRecordModeStatus === 'isScreen') {
-        //     console.log('------ifffff------')
-        //     setCurrentRecordMode(true)
-        // }
-        // else {
-        //     console.log('------else------')
-        //     setCurrentRecordMode(false)
-        // }
-
-        console.log('currentRecordMode', currentRecordMode)
-
-
-        console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
-
-
     };
+
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
@@ -973,6 +878,15 @@ const TLDetailEdit = (props) => {
                 </KeyboardAwareScrollView>
             </Modal>
         )
+    }
+
+    const onSetDeliverLiveLesson = (isOn) => {
+
+        if (!isOn) {
+            setSelectedFromTime("");
+            setSelectedToTime("");
+        }
+        setDeliveredLive(isOn)
     }
 
     return (
@@ -1016,7 +930,7 @@ const TLDetailEdit = (props) => {
 
                                 <View style={PAGESTYLE.toggleGrp}>
                                     <Text style={PAGESTYLE.toggleText}>Will this lesson be delivered live</Text>
-                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => setDeliveredLive(isOn)} />
+                                    <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsDeliveredLive} onToggle={isOn => onSetDeliverLiveLesson(isOn)} />
                                 </View>
 
                                 <View style={[PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow]}>
