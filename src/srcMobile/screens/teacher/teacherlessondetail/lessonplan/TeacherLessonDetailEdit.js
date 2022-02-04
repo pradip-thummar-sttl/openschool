@@ -70,6 +70,7 @@ const TLDetailEdit = (props) => {
         setSelectedToTime(lessonData.EndTime)
         setMaterialArr(lessonData.MaterialList)
         setRecordingArr(lessonData.RecordingList)
+        setSelectedPupils(lessonData.PupilList)
         tempPupil = lessonData.PupilList
     }, [lessonData])
 
@@ -93,7 +94,7 @@ const TLDetailEdit = (props) => {
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
-    const [selectedParticipants, setSelectedParticipants] = useState('')
+    const [selectedParticipants, setSelectedParticipants] = useState(null)
     const [selectedPupils, setSelectedPupils] = useState([])
 
     const [IsDeliveredLive, setDeliveredLive] = useState(false);
@@ -119,6 +120,13 @@ const TLDetailEdit = (props) => {
         props.navigation.goBack()
         return true;
     }
+
+    useEffect(() => {
+        if (selectedParticipants != null && selectedParticipants != undefined) {
+            getAllPupils()   
+        }
+    }, [selectedParticipants])
+
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             if (res.code == 200) {
@@ -142,7 +150,6 @@ const TLDetailEdit = (props) => {
                 res.data.forEach(element => {
                     if (element._id == lessonData.PupilGroupId) {
                         setSelectedParticipants(element);
-                        showRemainingPupils(element);
                         return;
                     }
                 });
@@ -151,8 +158,10 @@ const TLDetailEdit = (props) => {
             }
         }, (err) => {
             console.log('error of GetParticipants', err)
-        })
+        })        
+    }, [])
 
+    const getAllPupils = ()=> {
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             if (res.code == 200) {
                 let newData = []
@@ -167,13 +176,11 @@ const TLDetailEdit = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
-        
-    }, [])
+    }
 
     const refreshCheckBox = (pupils) => {
 
-        let newData = []
+        let newDataOfPupils = []
         pupils.forEach(pupil => {
             let flag = false
             tempPupil.forEach(selectedPupil => {
@@ -186,10 +193,10 @@ const TLDetailEdit = (props) => {
             } else {
                 pupil.isSelected = false
             }
-            newData.push(pupil)
+            newDataOfPupils.push(pupil)
         });
-        setPupils(newData)
-        setSelectedPupils(tempPupil)
+        setPupils(newDataOfPupils)
+        showRemainingPupils(newDataOfPupils, selectedParticipants);
     }
 
     const showDatePicker = () => {
@@ -453,8 +460,8 @@ const TLDetailEdit = (props) => {
         );
     };
 
-    const showRemainingPupils = (item) => {
-        setSelectedPupils([])
+    const showRemainingPupils = (pupils, item) => {
+        // setSelectedPupils([])
         let newArr = []
         pupils.forEach(ele1 => {
             let flag = false
@@ -535,7 +542,7 @@ const TLDetailEdit = (props) => {
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
 
-                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
+                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(pupils, item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                         <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2, { width: wp(22) }]}>
@@ -747,7 +754,8 @@ const TLDetailEdit = (props) => {
 
                 data.append('recording', {
                     uri: element.uri,
-                    name: `${recordingName}.mp4`,
+                    name: element.fileName,
+                    // name: 'MY_RECORDING.mp4',
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }
