@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginRight: hp(1.69),
+        // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
@@ -155,21 +155,13 @@ const styles = StyleSheet.create({
         // left: hp(1.8),
         zIndex: 9,
     },
-    commonButtonGreenheader: {
+    commonButtonGreenheader: { 
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
         borderRadius: hp(1),
-        overflow: 'hidden',
-        textAlign: 'center',
-        // paddingLeft: hp(2),
-        // paddingRight: hp(2),
-        width : 42,
         height: hp(5.20),
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
+        width: hp(5.20),
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 });

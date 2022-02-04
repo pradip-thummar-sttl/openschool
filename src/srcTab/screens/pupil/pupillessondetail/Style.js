@@ -915,7 +915,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         fontSize: hp(2.08),
         color: COLORS.darkGray,
-        marginBottom: hp(2.86),
+        marginBottom: hp(2),
     },
     videoWrap: {
         flexDirection: 'row',

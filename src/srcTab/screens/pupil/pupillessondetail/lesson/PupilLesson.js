@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView,ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
@@ -22,6 +22,10 @@ const PupilLesson = (props) => {
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
+            {
+                props.isLoading ? 
+                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} /> :
+                <>
             {currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?
                 <>
                     {currentWeekLesson.length > 0 ?
@@ -98,6 +102,8 @@ const PupilLesson = (props) => {
                 :
                 <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
+            </>
+        }
         </View>
 
 

@@ -477,6 +477,16 @@ export default StyleSheet.create({
         // position: 'absolute',
         alignSelf: 'flex-end',
     },
+    tickLayoutPArentClick: {
+        backgroundColor: COLORS.buttonGreen,
+        color: COLORS.white,
+        borderRadius: hp(1),
+        height: hp(5.20),
+        width: hp(5.20),
+        marginLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     titlePerfomance: {
         fontSize: hp(2),
         fontFamily: FONTS.fontSemiBold,

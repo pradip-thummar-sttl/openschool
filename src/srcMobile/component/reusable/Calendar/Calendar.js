@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, BackHandler } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, BackHandler ,ActivityIndicator} from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -211,7 +211,12 @@ const Calendars = (props) => {
                             </TouchableOpacity>
                         )
                     }}
-                /> : null}
+                /> :  
+                 <ActivityIndicator 
+                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                color={COLORS.yellowBorder} 
+                style={styles.calendarLoader} />
+                }
 
             <View style={{ paddingLeft: hp(1.97), marginTop: hp(6.0) }}>
                 <View style={styles.colorView}>
@@ -236,6 +241,10 @@ const Calendars = (props) => {
 const styles = StyleSheet.create({
     drawerMain: {
         flex: 1,
+    },
+    calendarLoader:{
+        width : '100%',
+        height : '40%',
     },
     drawerTitleMainDate: {
         borderBottomWidth: 1,

@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginRight: hp(1.69),
+       
     },
     addIcon: {
         width: hp(1.55),
