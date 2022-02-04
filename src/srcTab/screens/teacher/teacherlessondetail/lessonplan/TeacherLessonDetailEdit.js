@@ -79,6 +79,7 @@ const TLDetailEdit = (props) => {
         setSelectedToTime(lessonData.EndTime)
         setMaterialArr(lessonData.MaterialList)
         setRecordingArr(lessonData.RecordingList)
+        setSelectedPupils(lessonData.PupilList)
         tempPupil = lessonData.PupilList
     }, [lessonData])
 
@@ -102,7 +103,7 @@ const TLDetailEdit = (props) => {
     const [selectedSubject, setSelectedSubject] = useState('')
     const [selectedFromTime, setSelectedFromTime] = useState('')
     const [selectedToTime, setSelectedToTime] = useState('')
-    const [selectedParticipants, setSelectedParticipants] = useState('')
+    const [selectedParticipants, setSelectedParticipants] = useState(null)
     const [selectedPupils, setSelectedPupils] = useState([])
 
     const [IsDeliveredLive, setDeliveredLive] = useState(false);
@@ -129,6 +130,12 @@ const TLDetailEdit = (props) => {
         props.goBack()
         return true;
     }
+
+    useEffect(() => {
+        if (selectedParticipants != null && selectedParticipants != undefined) {
+            getAllPupils()   
+        }
+    }, [selectedParticipants])
 
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
@@ -164,6 +171,9 @@ const TLDetailEdit = (props) => {
             console.log('error of GetParticipants', err)
         })
 
+    }, [])
+
+    const getAllPupils = ()=> {
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             if (res.code == 200) {
                 let newData = []
@@ -178,11 +188,10 @@ const TLDetailEdit = (props) => {
         }, (err) => {
             console.log('error of GetPupilByTeacherId', err)
         })
-
-    }, [])
+    }
 
     const refreshCheckBox = (pupils) => {
-        let newData = []
+        let newDataOfPupils = []
         pupils.forEach(pupil => {
             let flag = false
             console.log('selectedPupils', tempPupil.length);
@@ -196,10 +205,10 @@ const TLDetailEdit = (props) => {
             } else {
                 pupil.isSelected = false
             }
-            newData.push(pupil)
+            newDataOfPupils.push(pupil)
         });
-        setPupils(newData)
-        setSelectedPupils(tempPupil)
+        setPupils(newDataOfPupils)
+        showRemainingPupils(newDataOfPupils, selectedParticipants);
     }
 
     const showDatePicker = () => {
@@ -454,7 +463,7 @@ const TLDetailEdit = (props) => {
     };
 
     const showRemainingPupils = (item) => {
-        setSelectedPupils([])
+        // setSelectedPupils([])
         let newArr = []
         pupils.forEach(ele1 => {
             let flag = false
@@ -537,7 +546,7 @@ const TLDetailEdit = (props) => {
         return (
             <View style={[PAGESTYLE.dateWhiteBoard, PAGESTYLE.participantsField]}>
                 <Text style={PAGESTYLE.subjectText}>Participants</Text>
-                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(item) }}>
+                <Menu onSelect={(item) => { setSelectedParticipants(item); showRemainingPupils(pupils, item) }}>
                     <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                         {/* <Image style={PAGESTYLE.calIcon} source={Images.Group} /> */}
                         <Participants style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
