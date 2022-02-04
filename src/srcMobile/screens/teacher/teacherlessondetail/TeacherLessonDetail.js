@@ -31,7 +31,6 @@ import moment from "moment";
 
 const TeacherLessonDetail = (props) => {
 
-    console.log("=-=-=-=-=--->>>>", props.route.params.data);
 
     const [isHide, action] = useState(true);
     const [tabIndex, setSelectedTab] = useState(0);
@@ -91,41 +90,50 @@ const TeacherLessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        console.log('add homework data', data)
+
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
-                console.log('res', res);
                 if (res.flag) {
-                    // setHomeworkLoading(false)
-                    // setVisiblePopup(false)
-                    // showMessage('Homework updated successfully')
-
-                    uploadMatirial(res.data._id)
+                    if (Addhomework.RemoveRecordingArr.length > 0 || Addhomework.RemoveMaterialArr.length > 0)
+                        onRemoveUnselectedFile(res.data._id)
+                    else
+                        uploadMatirial(res.data._id)
                 } else {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
                     showMessage(res.message)
                 }
             }, (err) => {
-                console.log('response of update homework err', err)
                 setHomeworkLoading(false)
                 setVisiblePopup(false)
             })
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
-                // setHomeworkLoading(false)
-                // setVisiblePopup(false)
-                // showMessage('Homework added successfully')
-                console.log('res First', res);
                 uploadMatirial(res.data._id)
             }, (err) => {
-                console.log('response of add homework err', err)
                 setHomeworkLoading(false)
                 setVisiblePopup(false)
 
             })
         }
     }
+    const onRemoveUnselectedFile = (lessionId) => {
+        let data = { "deletematerial": Addhomework.RemoveMaterialArr, "deleterecording": Addhomework.RemoveRecordingArr, "type": "H" }
+
+        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${lessonData._id}`, (res) => {
+            if (res.code == 200) {
+                uploadMatirial(lessionId);
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
+
 
     const uploadMatirial = (homeworkId) => {
         let data = new FormData();
@@ -223,12 +231,6 @@ const TeacherLessonDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.mainPage}>
-            {/* <Sidebar
-                moduleIndex={2}
-                hide={() => action(!isHide)}
-                navigateToDashboard={() => props.navigation.replace('TeacherDashboard')}
-                navigateToTimetable={() => props.navigation.replace('TeacherTimeTable')}
-                navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
             {
                 isScreenAndCameraRecording ?
                     <ScreenAndCameraRecording goBack={() => setScreenAndCameraRecording(false)} />
@@ -243,9 +245,9 @@ const TeacherLessonDetail = (props) => {
                                     navigateToBack={() => props.navigation.goBack()}
                                     onAlertPress={() => props.navigation.openDrawer()}
                                     navigateToEdit={() => props.navigation.navigate('TLDetailEdit', { onGoBack: () => { props.route.params.onGoBack(); props.navigation.goBack() }, 'data': lessonData })}
-                                    onNotification = {() => props.navigation.navigate('NotificationDrawer')}
+                                    onNotification={() => props.navigation.navigate('NotificationDrawer')}
                                     isHomeworkLoading={isHomeworkLoading}
-                                    />
+                                />
                                 : tabIndex == 1 ?
                                     <HeaderHW
                                         hwBtnName={updateFlag ? 'Update' : 'Set'}

@@ -79,6 +79,9 @@ const TLDetailEdit = (props) => {
     const [materialArr, setMaterialArr] = useState([])
     const [recordingArr, setRecordingArr] = useState([])
 
+    const [isRemoveRecordingArr, setRemoveRecordingArr] = useState([]);
+    const [isRemoveMaterialArr, setRemoveMaterialArr] = useState([]);
+
     const [newItem, setNewItem] = useState('');
     const [itemCheckList, setItemCheckList] = useState([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -123,7 +126,7 @@ const TLDetailEdit = (props) => {
 
     useEffect(() => {
         if (selectedParticipants != null && selectedParticipants != undefined) {
-            getAllPupils()   
+            getAllPupils()
         }
     }, [selectedParticipants])
 
@@ -158,10 +161,10 @@ const TLDetailEdit = (props) => {
             }
         }, (err) => {
             console.log('error of GetParticipants', err)
-        })        
+        })
     }, [])
 
-    const getAllPupils = ()=> {
+    const getAllPupils = () => {
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             if (res.code == 200) {
                 let newData = []
@@ -271,6 +274,7 @@ const TLDetailEdit = (props) => {
         setAddRecording(false)
         props.navigation.navigate('ScreenAndCameraRecording')
     }
+
     const onScreeVoice = () => {
         setAddRecording(false)
         setScreenVoiceSelected(true)
@@ -328,12 +332,6 @@ const TLDetailEdit = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                // let obj = {
-                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                //     originalname: 'MY_RECORDING.mp4',
-                //     fileName: 'MY_RECORDING.mp4',
-                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                // }
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -348,8 +346,6 @@ const TLDetailEdit = (props) => {
                 console.log('url', url);
             }
         } else {
-            // setRecordingStarted(false)
-            // toggleModal()
             showMessage('Please provide recording name proper')
         }
     }
@@ -452,10 +448,6 @@ const TLDetailEdit = (props) => {
                         <Text style={{ paddingVertical: 8, }}>ADD ITEM</Text>
                     </TouchableOpacity>
                 </View>
-                {/* <TouchableOpacity style={PAGESTYLE.addItem}>
-                    <Image source={Images.AddIcon} style={PAGESTYLE.addIcon} />
-                    <Text style={PAGESTYLE.addItemText}>Add another item</Text>
-                </TouchableOpacity> */}
             </View>
         );
     };
@@ -467,7 +459,7 @@ const TLDetailEdit = (props) => {
             let flag = false
             item.PupilList.forEach(ele2 => {
                 console.log(ele1.PupilId + '==' + ele2.PupilId);
-                
+
                 if (ele1.PupilId == ele2.PupilId) {
                     flag = true
                 }
@@ -614,6 +606,114 @@ const TLDetailEdit = (props) => {
         );
     };
 
+    const addMaterial = () => {
+        var arr = [...materialArr]
+        try {
+            DocumentPicker.pickMultiple({
+                type: [DocumentPicker.types.pdf,
+                DocumentPicker.types.doc,
+                DocumentPicker.types.xls,
+                DocumentPicker.types.images,
+                DocumentPicker.types.plainText],
+            }).then((results) => {
+                for (const res of results) {
+                    res.originalname = res.name
+                    console.log(
+                        res.uri,
+                        res.type, // mime type
+                        res.name,
+                        res.size
+                    );
+                    arr.push(res)
+
+                }
+                console.log('hello response arr', arr)
+                setMaterialArr(arr)
+            });
+
+        } catch (err) {
+            if (DocumentPicker.isCancel(err)) {
+                // User cancelled the picker, exit any dialogs or menus and move on
+            } else {
+                throw err;
+            }
+        }
+    }
+
+    const removeObject = (index1, item) => {
+        var array = [...materialArr];
+
+        var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
+        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, fname,]);
+
+        array.splice(index1, 1);
+        setMaterialArr(array)
+    }
+
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
+
+        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, fname,]);
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+    }
+
+    const toggleModal = () => {
+        setRecordingStarted(false)
+        setModalVisible(!isModalVisible);
+    };
+
+    const renderRecordingNamePopup = () => {
+        return (
+            <Modal isVisible={isModalVisible}>
+                <KeyboardAwareScrollView>
+                    <View style={PAGESTYLE.popupCard}>
+                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={() => toggleModal()}>
+                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
+                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
+                        </TouchableOpacity>
+                        <View style={PAGESTYLE.popupContent}>
+                            <View style={PAGESTYLE.tabcontent}>
+                                <View style={PAGESTYLE.beforeBorder}>
+                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
+                                    <View style={[PAGESTYLE.field, { width: wp(80) }]}>
+                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
+                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
+                                            <TextInput
+                                                multiline={false}
+                                                placeholder='Name of event'
+                                                value={recordingName}
+                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
+                                                placeholderTextColor={COLORS.popupPlaceHolder}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
+                                                onChangeText={eventName => setRecordingName(eventName)} />
+                                        </View>
+                                    </View>
+                                </View>
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
+                                style={PAGESTYLE.buttonGrp}
+                                activeOpacity={opacity}>
+                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                </KeyboardAwareScrollView>
+            </Modal>
+        )
+    }
+
+    const onSetDeliverLiveLesson = (isOn) => {
+
+        if (!isOn) {
+            setSelectedFromTime("");
+            setSelectedToTime("");
+        }
+        setDeliveredLive(isOn)
+    }
+
     const getDataFromQuickBloxAndroid = () => {
         if (!selectedSubject) {
             showMessage(MESSAGE.subject)
@@ -648,6 +748,7 @@ const TLDetailEdit = (props) => {
 
         createQBDialog()
     };
+
 
     const createQBDialog = () => {
         if (isRunningFromVirtualDevice) {
@@ -719,7 +820,10 @@ const TLDetailEdit = (props) => {
 
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
-                uploadMatirial(res.data._id)
+                if (isRemoveRecordingArr.length > 0 || isRemoveMaterialArr.length > 0)
+                    onRemoveUnselectedFile(res.data._id)
+                else
+                    uploadMatirial(res.data._id)
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -728,6 +832,23 @@ const TLDetailEdit = (props) => {
             setLoading(false)
             console.log('response of get all lesson error', err)
         })
+    }
+
+    const onRemoveUnselectedFile = (lessionId) => {
+        let data = { "deletematerial": isRemoveMaterialArr, "deleterecording": isRemoveRecordingArr, "type": "L" }
+
+        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${lessonData._id}`, (res) => {
+            if (res.code == 200) {
+                uploadMatirial(lessionId);
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
     }
 
     const uploadMatirial = (lessionId) => {
@@ -755,7 +876,6 @@ const TLDetailEdit = (props) => {
                 data.append('recording', {
                     uri: element.uri,
                     name: element.fileName,
-                    // name: 'MY_RECORDING.mp4',
                     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
                 });
             }
@@ -779,8 +899,6 @@ const TLDetailEdit = (props) => {
             return
         }
 
-        console.log('KD', data._parts, lessionId, `${EndPoints.LessonMaterialUpload}${lessionId}`)
-
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
@@ -799,107 +917,7 @@ const TLDetailEdit = (props) => {
 
     }
 
-    const addMaterial = () => {
-        console.log('hihihihihihi')
-        var arr = [...materialArr]
-        try {
-            DocumentPicker.pickMultiple({
-                type: [DocumentPicker.types.pdf,
-                DocumentPicker.types.doc,
-                DocumentPicker.types.xls,
-                DocumentPicker.types.images,
-                DocumentPicker.types.plainText],
-            }).then((results) => {
-                for (const res of results) {
-                    res.originalname = res.name
-                    console.log(
-                        res.uri,
-                        res.type, // mime type
-                        res.name,
-                        res.size
-                    );
-                    arr.push(res)
-
-                }
-                console.log('hello response arr', arr)
-                setMaterialArr(arr)
-            });
-
-        } catch (err) {
-            if (DocumentPicker.isCancel(err)) {
-                // User cancelled the picker, exit any dialogs or menus and move on
-            } else {
-                throw err;
-            }
-        }
-    }
-
-    const removeObject = (index1, item) => {
-        var array = [...materialArr];
-        array.splice(index1, 1);
-        setMaterialArr(array)
-    }
-    const removeRecording = () => {
-        var arr = [...recordingArr]
-        arr.splice(0, 1)
-        setRecordingArr(arr)
-    }
-
-    const toggleModal = () => {
-        setRecordingStarted(false)
-        setModalVisible(!isModalVisible);
-    };
-
-    const renderRecordingNamePopup = () => {
-        return (
-            <Modal isVisible={isModalVisible}>
-                <KeyboardAwareScrollView>
-                    <View style={PAGESTYLE.popupCard}>
-                        <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={() => toggleModal()}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
-                            <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
-                        </TouchableOpacity>
-                        <View style={PAGESTYLE.popupContent}>
-                            <View style={PAGESTYLE.tabcontent}>
-                                <View style={PAGESTYLE.beforeBorder}>
-                                    <Text h2 style={PAGESTYLE.titleTab}>Add a recording name</Text>
-                                    <View style={[PAGESTYLE.field, { width: wp(80) }]}>
-                                        <Text label style={STYLE.labelCommon}>For what recording is?</Text>
-                                        <View style={[PAGESTYLE.subjectDateTime, { height: 50, width: '100%' }]}>
-                                            <TextInput
-                                                multiline={false}
-                                                placeholder='Name of event'
-                                                value={recordingName}
-                                                placeholderStyle={PAGESTYLE.somePlaceholderStyle}
-                                                placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
-                                                onChangeText={eventName => setRecordingName(eventName)} />
-                                        </View>
-                                    </View>
-                                </View>
-                            </View>
-                            <TouchableOpacity
-                                onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
-                                style={PAGESTYLE.buttonGrp}
-                                activeOpacity={opacity}>
-                                <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </KeyboardAwareScrollView>
-            </Modal>
-        )
-    }
-
-    const onSetDeliverLiveLesson = (isOn) => {
-
-        if (!isOn) {
-            setSelectedFromTime("");
-            setSelectedToTime("");
-        }
-        setDeliveredLive(isOn)
-    }
-
+    console.log('-->>', isRemoveMaterialArr);
     return (
         <View style={PAGESTYLE.mainPage}>
 
@@ -994,7 +1012,6 @@ const TLDetailEdit = (props) => {
                                     onCameraOnly={() => onCameraOnly()} />
 
                                 {itemCheckListView()}
-
                                 {pupilListView()}
 
                                 <View style={[PAGESTYLE.toggleBoxGrpWrap, PAGESTYLE.spaceTop]}>
@@ -1072,6 +1089,7 @@ const TLDetailEdit = (props) => {
                         </View>
                     </ScrollView>
                     {renderRecordingNamePopup()}
+
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}
                         mode="date"
