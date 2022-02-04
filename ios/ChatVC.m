@@ -45,13 +45,13 @@ static NSString * const kChannelGuide = @"the_guide";
     [_onlyTeacherLabel setHidden:true];
   }else{
     if ([_openChat isEqualToString:@"YES"]) {
-      [_messageTxtView setHidden:true];
-      [_sendButton setHidden:true];
-      [_onlyTeacherLabel setHidden:false];
-    }else{
       [_messageTxtView setHidden:false];
       [_sendButton setHidden:false];
       [_onlyTeacherLabel setHidden:true];
+    }else{
+      [_messageTxtView setHidden:true];
+      [_sendButton setHidden:true];
+      [_onlyTeacherLabel setHidden:false];
     }
   }
   
@@ -97,13 +97,13 @@ static NSString * const kChannelGuide = @"the_guide";
     }else{
     
         if ([items[1] isEqualToString: @"YES"]) {
-          [_messageTxtView setHidden:true];
-          [_sendButton setHidden:true];
-          [_onlyTeacherLabel setHidden:false];
-        }else{
           [_messageTxtView setHidden:false];
           [_sendButton setHidden:false];
           [_onlyTeacherLabel setHidden:true];
+        }else{
+          [_messageTxtView setHidden:true];
+          [_sendButton setHidden:true];
+          [_onlyTeacherLabel setHidden:false];
         }
     }
     

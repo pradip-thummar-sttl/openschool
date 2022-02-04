@@ -179,7 +179,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   // [Profile synchronizeUser:user];
   
   
-  
+  [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
   
   self.chatManager = [ChatManager instance];
   self.recordUrl=@"";
@@ -476,9 +477,9 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
             NSArray *listItems = [message componentsSeparatedByString:@"####"];
             if (!_isTeacher) {
                 if ([listItems[1] isEqualToString: @"YES"]) {
-                  _isOpenToChat=false;
-                }else{
                   _isOpenToChat=true;
+                }else{
+                  _isOpenToChat=false;
                 }
             }
           }
@@ -733,7 +734,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       chatController.currentUserName = weakSelf.currentName;
       chatController.currentUserId = weakSelf.currentUserID;
       chatController.isPupil = weakSelf.isTeacher;
-      chatController.openChat = weakSelf.isOpenToChat?@"NO":@"YES";
+      chatController.openChat = weakSelf.isOpenToChat?@"YES":@"NO";
 //          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
 //          chatController.currentUserID = weakSelf.currentUserID;
 //          chatController.currentUserName=weakSelf.currentName;
@@ -1789,10 +1790,10 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 - (IBAction)onReactionSwitchPressed:(id)sender {
   
   if(_isReaction){
-    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   else{
-    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
 //    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   
@@ -1804,15 +1805,15 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 
 - (IBAction)onMessageSwitchPressed:(id)sender {
   if(_isMessage){
-    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   else{
-    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
+    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
 //    [_messageSwitch setBackgroundImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   
   _isMessage = !_isMessage;
-  NSString *str = [NSString stringWithFormat:@"CHAT_SETTING####%@",_isMessage ? @"NO" : @"YES"];
+  NSString *str = [NSString stringWithFormat:@"CHAT_SETTING####%@",_isMessage ? @"YES" : @"NO"];
 
   [self.pubnub publish: str toChannel:self.channels[_channels.count - 1]
         withCompletion:^(PNPublishStatus *status) {
