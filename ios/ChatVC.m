@@ -30,7 +30,7 @@ static NSString * const kChannelGuide = @"the_guide";
   self.pubnub = [PubNub clientWithConfiguration:pnconfig];
   
   [self.pubnub addListener:self];
-  [self.pubnub subscribeToChannels: @[self.channels] withPresence:YES];
+  [self.pubnub subscribeToChannels: @[self.channels, self.dialogId] withPresence:YES];
   
   self.messageTxtView.layer.cornerRadius = 10;
 //  [self.messageTxtView setBackgroundColor:[UIColor grayColor]];
@@ -43,6 +43,16 @@ static NSString * const kChannelGuide = @"the_guide";
     [_messageTxtView setHidden:false];
     [_sendButton setHidden:false];
     [_onlyTeacherLabel setHidden:true];
+  }else{
+    if ([_openChat isEqualToString:@"YES"]) {
+      [_messageTxtView setHidden:false];
+      [_sendButton setHidden:false];
+      [_onlyTeacherLabel setHidden:true];
+    }else{
+      [_messageTxtView setHidden:true];
+      [_sendButton setHidden:true];
+      [_onlyTeacherLabel setHidden:false];
+    }
   }
   
 }
@@ -65,7 +75,7 @@ static NSString * const kChannelGuide = @"the_guide";
 
 - (IBAction)onSendButtonPressed:(id)sender {
   NSString *str = [NSString stringWithFormat:@"%@###%@###%@",_messageTxtView.text, self.currentUserName,self.currentUserId];
-  [self.pubnub publish: str toChannel:self.channels
+  [self.pubnub publish: str toChannel:self.dialogId
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
 //        NSString *text = kEntryEarth;
@@ -87,13 +97,13 @@ static NSString * const kChannelGuide = @"the_guide";
     }else{
     
         if ([items[1] isEqualToString: @"YES"]) {
-          [_messageTxtView setHidden:true];
-          [_sendButton setHidden:true];
-          [_onlyTeacherLabel setHidden:false];
-        }else{
           [_messageTxtView setHidden:false];
           [_sendButton setHidden:false];
           [_onlyTeacherLabel setHidden:true];
+        }else{
+          [_messageTxtView setHidden:true];
+          [_sendButton setHidden:true];
+          [_onlyTeacherLabel setHidden:false];
         }
     }
     

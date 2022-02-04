@@ -101,6 +101,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 
 @property (assign, nonatomic) BOOL isReaction;
 @property (assign, nonatomic) BOOL isMessage;
+@property (assign, nonatomic) BOOL isOpenToChat;
 @property (assign, nonatomic) BOOL isBack;
 
 @property (strong, nonatomic) ZoomedView *zoomedView;
@@ -178,7 +179,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   // [Profile synchronizeUser:user];
   
   
-  
+  [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+  [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
   
   self.chatManager = [ChatManager instance];
   self.recordUrl=@"";
@@ -187,7 +189,8 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
   _isPupilReload=false;
   _isMutedFlag = true;
   _isReaction = true;
-  _isMessage=false;
+  _isMessage=true;
+  _isOpenToChat=true;
   _isBack=false;
   [_classSettingView setHidden:true];
   
@@ -469,26 +472,39 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
           }
         
         }
+        }else{
+          if ([message containsString:@"####"]) {
+            NSArray *listItems = [message componentsSeparatedByString:@"####"];
+            if (!_isTeacher) {
+                if ([listItems[1] isEqualToString: @"YES"]) {
+                  _isOpenToChat=true;
+                }else{
+                  _isOpenToChat=false;
+                }
+            }
+          }
+       
+        }
+      }else{
+       
+          NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
+          if (_isTeacher) {
+            self.pollMessage = message;
+            [self.opponentsCollectionView reloadData];
+          }else if (listItems.count > 2) {
+            PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
+            vc.channels = self.channels;
+            vc.ispupil = true;
+            vc.pollString = message;
+            vc.pupilId = _currentUserID;
+            [self presentViewController:vc animated:false completion:nil];
+          }else{
+            self.pollMessage = message;
+            [self.opponentsCollectionView reloadData];
+          }
         }
        
-        
-      }else{
-        NSArray *listItems = [message componentsSeparatedByString:@"##@##"];
-        if (_isTeacher) {
-          self.pollMessage = message;
-          [self.opponentsCollectionView reloadData];
-        }else if (listItems.count > 2) {
-          PollVC *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"PollVC"];
-          vc.channels = self.channels;
-          vc.ispupil = true;
-          vc.pollString = message;
-          vc.pupilId = _currentUserID;
-          [self presentViewController:vc animated:false completion:nil];
-        }else{
-          self.pollMessage = message;
-          [self.opponentsCollectionView reloadData];
-        }
-      }
+      
    
 //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
 //
@@ -713,10 +729,12 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
 //            [self openNewDialog:createdDialog];
 //          UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Chat" bundle:nil];
           ChatVC *chatController = [weakSelf.storyboard instantiateViewControllerWithIdentifier:@"ChatVC"];
-          chatController.channels = weakSelf.dialogID;
+          chatController.dialogId = weakSelf.dialogID;
+      chatController.channels = weakSelf.channels[weakSelf.channels.count-1];
       chatController.currentUserName = weakSelf.currentName;
       chatController.currentUserId = weakSelf.currentUserID;
       chatController.isPupil = weakSelf.isTeacher;
+      chatController.openChat = weakSelf.isOpenToChat?@"YES":@"NO";
 //          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
 //          chatController.currentUserID = weakSelf.currentUserID;
 //          chatController.currentUserName=weakSelf.currentName;
@@ -1772,7 +1790,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 - (IBAction)onReactionSwitchPressed:(id)sender {
   
   if(_isReaction){
-    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+    [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   else{
     [_reactionSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
@@ -1787,7 +1805,7 @@ static inline __kindof UIView *prepareSubview(UIView *view, Class subviewClass) 
 
 - (IBAction)onMessageSwitchPressed:(id)sender {
   if(_isMessage){
-    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
+    [_messageSwitch setImage:[UIImage imageNamed: @"toggle-off"] forState:UIControlStateNormal];
   }
   else{
     [_messageSwitch setImage:[UIImage imageNamed: @"toggle-on"] forState:UIControlStateNormal];
