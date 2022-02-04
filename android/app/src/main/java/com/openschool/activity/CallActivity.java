@@ -3,10 +3,12 @@ package com.openschool.activity;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
@@ -17,6 +19,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -39,11 +42,13 @@ import com.openschool.fragments.ConversationFragmentCallbackListener;
 import com.openschool.fragments.OnCallEventsController;
 import com.openschool.fragments.ScreenShareFragment;
 import com.openschool.fragments.VideoConversationFragment;
+import com.openschool.services.CallService;
 import com.openschool.util.Consts;
 import com.openschool.util.FragmentExecuotr;
 import com.openschool.util.NetworkConnectionChecker;
 import com.openschool.util.ParentActivityImpl;
 import com.openschool.util.WebRtcSessionManager;
+import com.openschool.utils.SettingsUtils;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.enums.PNLogVerbosity;
@@ -63,6 +68,7 @@ import com.quickblox.videochat.webrtc.QBRTCConfig;
 import com.quickblox.videochat.webrtc.QBRTCScreenCapturer;
 import com.quickblox.videochat.webrtc.QBRTCTypes;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
+import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
 import org.webrtc.CameraVideoCapturer;
 
@@ -71,6 +77,7 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -81,7 +88,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  */
 public class CallActivity extends BaseActivity implements QBRTCSessionStateCallback<ConferenceSession>, ConferenceSessionCallbacks,
         OnCallEventsController, ConversationFragmentCallbackListener, NetworkConnectionChecker.OnConnectivityChangedListener, ParentActivityImpl,
-        HBRecorderListener {
+        HBRecorderListener, ScreenShareFragment.OnSharingEvents {
 
     //    private static final String TAG = CallActivity.class.getSimpleName();
     private static final String TAG = "KDKDKD";
@@ -120,6 +127,10 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     private String title;
     private ArrayList<String> channelList;
     private static Callback _callback;
+    private static String currentDialogID;
+    private SharedPreferences settingsSharedPref;
+    private CallService callService;
+    private ServiceConnection callServiceConnection;
 
     private PubNub mPubNub; // a field of MainActivity.java
 
@@ -138,7 +149,9 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         intent.putExtra(Consts.TITLE, title);
         intent.putExtra(Consts.EXTRA_CHANNELS, (Serializable) channels);
 
+        currentDialogID = dialogID;
         context.startActivity(intent);
+        CallService.start(context, dialogID, title, dialogID, occupants, listenerRole);
     }
 
     @Override
@@ -331,19 +344,30 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         }
     }
 
-    @TargetApi(21)
     @Override
     public void onStartScreenSharing() {
+        System.out.println("KDKDKD =>: onStartScreenSharing onStartScreenSharing");
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             return;
         }
-        QBRTCScreenCapturer.requestPermissions(CallActivity.this);
+        System.out.println("KDKDKD =>: requestPermissions ");
+        QBRTCScreenCapturer.requestPermissions(this);
     }
 
     private void startScreenSharing(final Intent data) {
-        ScreenShareFragment screenShareFragment = ScreenShareFragment.newIntstance();
-        FragmentExecuotr.addFragmentWithBackStack(getSupportFragmentManager(), R.id.fragment_container, screenShareFragment, ScreenShareFragment.TAG);
-        currentSession.getMediaStreamManager().setVideoCapturer(new QBRTCScreenCapturer(data, null));
+        Fragment fragmentByTag = getSupportFragmentManager().findFragmentByTag(ScreenShareFragment.class.getSimpleName());
+        System.out.println("KDKDKD =>: startScreenSharing " + fragmentByTag);
+        if (!(fragmentByTag instanceof ScreenShareFragment)) {
+            ScreenShareFragment screenShareFragment = ScreenShareFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    screenShareFragment, ScreenShareFragment.class.getSimpleName())
+                    .commitAllowingStateLoss();
+
+//            FragmentExecuotr.addFragmentAtTop(getSupportFragmentManager(), R.id.fragment_container, screenShareFragment, ScreenShareFragment.class.getSimpleName());
+
+            callService.setVideoEnabled(true);
+            callService.startScreenSharing(data);
+        }
     }
 
     @Override
@@ -462,9 +486,18 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     @Override
     protected void onResume() {
         super.onResume();
+        settingsSharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        bindCallService();
+
         readyToSubscribe = true;
         subscribeToPublishersIfNeed();
         networkConnectionChecker.registerListener(this);
+    }
+
+    private void bindCallService() {
+        callServiceConnection = new CallServiceConnection();
+        Intent intent = new Intent(this, CallService.class);
+        bindService(intent, callServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     private void subscribeToPublishersIfNeed() {
@@ -677,6 +710,28 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     }
 
     @Override
+    public void onStopPreview() {
+        callService.stopScreenSharing();
+//        replaceConversationFragment();
+
+        System.out.println("KDKDKD: onStopPreview");
+        CallService.stop(this);
+        finish();
+//        startActivity(starterIntent);
+        start(this, dialogID, currentName, currentUserID, opponentsIdsList, opponentsList, asListenerRole, isTeacher, teacherQBUserID, title, channelList, _callback);
+    }
+
+    @Override
+    public boolean isScreenSharingState() {
+        return callService.isSharingScreenState();
+    }
+
+    @Override
+    public HashMap<Integer, QBRTCVideoTrack> getVideoTrackMap() {
+        return callService.getVideoTrackMap();
+    }
+
+    @Override
     public void onSetVideoEnabled(boolean isNeedEnableCam) {
         setVideoEnabled(isNeedEnableCam);
     }
@@ -783,6 +838,45 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
         }
     }
 
+    @Override
+    public void finish() {
+        String dialogID = currentDialogID;
+        if (callService != null) {
+            dialogID = callService.getDialogID();
+        }
+
+        Log.d(TAG, "finish CallActivity");
+        super.finish();
+    }
+
+    private void initScreen() {
+        SettingsUtils.setSettingsStrategy(settingsSharedPref, CallActivity.this);
+
+        WebRtcSessionManager sessionManager = WebRtcSessionManager.getInstance(CallActivity.this);
+        if (sessionManager.getCurrentSession() == null) {
+            //we have already currentSession == null, so it's no reason to do further initialization
+            finish();
+            return;
+        }
+        currentSession = sessionManager.getCurrentSession();
+        initListeners(currentSession);
+
+        if (callService.isSharingScreenState()) {
+            startScreenSharing(null);
+        }
+//        else {
+//            startConversationFragment();
+//        }
+    }
+
+    private void initListeners(ConferenceSession session) {
+        if (session != null) {
+            Log.d(TAG, "Init new ConferenceSession");
+            this.currentSession.addSessionCallbacksListener(CallActivity.this);
+            this.currentSession.addConferenceSessionListener(CallActivity.this);
+        }
+    }
+
     //////////////////////////////////////////   end   /////////////////////////////////////////////
 
     public interface OnChangeDynamicToggle {
@@ -790,7 +884,7 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     }
 
 
-    public interface CurrentCallStateCallback {
+    public static interface CurrentCallStateCallback {
         void onCallStarted();
     }
 
@@ -849,5 +943,42 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
     @Override
     public PubNub getPubNub() {
         return mPubNub;
+    }
+
+    private class CallServiceConnection implements ServiceConnection {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            CallService.stop(CallActivity.this);
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            CallService.CallServiceBinder binder = (CallService.CallServiceBinder) service;
+            callService = binder.getService();
+            if (callService.currentSessionExist()) {
+                currentDialogID = callService.getDialogID();
+                login();
+            } else {
+                //we have already currentSession == null, so it's no reason to do further initialization
+                CallService.stop(CallActivity.this);
+                finish();
+            }
+        }
+
+        private void login() {
+            initScreen();
+//            QBUser qbUser = getSharedPrefsHelper().getQbUser();
+//            QBUsers.signIn(qbUser).performAsync(new QBEntityCallback<QBUser>() {
+//                @Override
+//                public void onSuccess(QBUser qbUser, Bundle bundle) {
+//                    initScreen();
+//                }
+//
+//                @Override
+//                public void onError(QBResponseException e) {
+//                    finish();
+//                }
+//            });
+        }
     }
 }

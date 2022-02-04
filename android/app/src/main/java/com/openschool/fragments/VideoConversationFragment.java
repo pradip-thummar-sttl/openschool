@@ -255,6 +255,10 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
                         } else if (isTeacher && msgReceived.split("##@##").length <= 2) {
                             loadPollingAnswerForTeacher(msgReceived);
                         }
+                    } else if (msgReceived.contains("####")){
+                        if (!isTeacher && msgReceived.split("####").length > 1) {
+                            setPupilChatAccess(msgReceived.split("####")[1]);
+                        }
                     } else {
                         if (!isTeacher) {
                             setEmojiForPupil(msgReceived);

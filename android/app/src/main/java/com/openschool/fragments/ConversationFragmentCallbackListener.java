@@ -3,8 +3,11 @@ package com.openschool.fragments;
 import com.openschool.activity.CallActivity;
 import com.quickblox.conference.ConferenceSession;
 import com.quickblox.videochat.webrtc.callbacks.QBRTCSessionStateCallback;
+import com.quickblox.videochat.webrtc.view.QBRTCVideoTrack;
 
 import org.webrtc.CameraVideoCapturer;
+
+import java.util.HashMap;
 
 
 public interface ConversationFragmentCallbackListener {
@@ -28,6 +31,10 @@ public interface ConversationFragmentCallbackListener {
     void onSwitchAudio();
 
     void onLeaveCurrentSession();
+
+    boolean isScreenSharingState();
+
+    HashMap<Integer, QBRTCVideoTrack> getVideoTrackMap();
 
     void onStartScreenSharing();
 

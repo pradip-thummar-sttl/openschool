@@ -12,6 +12,11 @@ import com.facebook.soloader.SoLoader;
 import com.openschool.packages.CallPackage;
 import com.openschool.packages.DialogPackage;
 import com.openschool.packages.LoginPackage;
+import com.openschool.utils.SharedPrefsHelper;
+import com.openschool.utils.qb.QBDialogsHolder;
+import com.openschool.utils.qb.QBDialogsHolderImpl;
+import com.openschool.utils.qb.QBUsersHolder;
+import com.openschool.utils.qb.QBUsersHolderImpl;
 import com.quickblox.auth.session.QBSettings;
 import com.quickblox.conference.ConferenceConfig;
 import com.quickblox.core.LogLevel;
@@ -28,6 +33,10 @@ public class MainApplication extends Application implements ReactApplication {
     static final String ACCOUNT_KEY = "gNaxUx3UNTZJ6RxeYy2U";
 //    static final String JANUS_URL = "wss://janus.quickblox.com:8989/";
     static final String JANUS_URL = "wss://groupcallsdemo.quickblox.com/";
+
+    private SharedPrefsHelper sharedPrefsHelper;
+    private QBUsersHolder qbUsersHolder;
+    private QBDialogsHolder qbDialogsHolder;
 
     private final ReactNativeHost mReactNativeHost =
             new ReactNativeHost(this) {
@@ -71,6 +80,10 @@ public class MainApplication extends Application implements ReactApplication {
         QBSettings.getInstance().setLogLevel(LogLevel.DEBUG);
         QBRTCConfig.setDebugEnabled(true);
         ConferenceConfig.setUrl(JANUS_URL);
+
+        initSharedPreferences();
+        initUsersHolder();
+        initDialogsHolder();
     }
 
     /**
@@ -101,6 +114,36 @@ public class MainApplication extends Application implements ReactApplication {
             } catch (InvocationTargetException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void initSharedPreferences() {
+        sharedPrefsHelper = new SharedPrefsHelper(getApplicationContext());
+    }
+
+    public SharedPrefsHelper getSharedPrefsHelper() {
+        return sharedPrefsHelper;
+    }
+
+    private void initUsersHolder() {
+        qbUsersHolder = new QBUsersHolderImpl();
+    }
+
+    public QBUsersHolder getQBUsersHolder() {
+        return qbUsersHolder;
+    }
+
+    private void initDialogsHolder() {
+        qbDialogsHolder = new QBDialogsHolderImpl();
+    }
+
+    public QBDialogsHolder getQBDialogsHolder() {
+        return qbDialogsHolder;
+    }
+
+    private void checkAppCredentials() {
+        if (APPLICATION_ID.isEmpty() || AUTH_KEY.isEmpty() || AUTH_SECRET.isEmpty() || ACCOUNT_KEY.isEmpty()) {
+            throw new AssertionError(getString(R.string.error_qb_credentials_empty));
         }
     }
 }
