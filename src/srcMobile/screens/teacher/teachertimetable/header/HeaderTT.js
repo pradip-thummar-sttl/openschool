@@ -101,7 +101,7 @@ const HeaderTT = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                     <Menu>
-                        <MenuTrigger>
+                        <MenuTrigger style={{width : 20,height : 30,justifyContent : 'center'}}>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>

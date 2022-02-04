@@ -45,29 +45,18 @@ const HeaderPMInner = (props) => {
                     <View>
                         <Text numberOfLines={1} style={[styles.mainTitle, { width: wp(75) }]}>{props.name}</Text>
                     </View>
-                    {/* <View>
-                        <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
-
-                            <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
-                        </TouchableOpacity>
-                    </View> */}
                 </View>
-
-                <View style={{right : Platform.OS === 'android' ? 0 : 15}}>
-                    <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
-                        {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
-                        <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
-                    </TouchableOpacity>
-                </View>
-                    {/* <View style={styles.headerRight}>
-                        <TouchableOpacity
-                        style={styles.editButton}
-                            activeOpacity={opacity}
-                            onPress={() => props.navigateToPupilProfileEdit()}>
-                            <Ic_Edit style={styles.massagesIcon}width={hp(2.5)} height={hp(2.5)}/>
-                        </TouchableOpacity>
-                    </View> */}
-                
+                {
+                    tabIndex == 0 ?
+                        <View style={{ right: Platform.OS === 'android' ? 0 : 15 }}>
+                            <TouchableOpacity onPress={() => props.navigateToPupilProfileEdit()} style={styles.profileEdit}>
+                                {/* <Image  style={PAGESTYLE.profileeditButton} /> */}
+                                <EditWhite style={styles.profileEditButton} height={hp(2)} width={hp(2)} />
+                            </TouchableOpacity>
+                        </View>
+                        :
+                        null
+                }
             </View>
             <View style={styles.whiteBg}>
                 <View style={styles.lessonPlanTop}>
@@ -104,6 +93,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
         paddingBottom: 10,
+        height : 50
     },
     headerMain: {
         shadowColor: COLORS.black,
@@ -174,12 +164,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     profileEdit: {
-        backgroundColor: COLORS.dashboardGreenButton,
         alignSelf: 'flex-end',
-        padding: hp(1.5),
+         marginRight: 10,
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
         borderRadius: hp(1),
-        marginRight: 10
-        // marginBottom: hp(1.32),
+        height: hp(5.20),
+        width: hp(5.20),
+        alignItems: 'center',
+        justifyContent: 'center'
+
     },
     profileEditButton: {
         width: hp(1.57),

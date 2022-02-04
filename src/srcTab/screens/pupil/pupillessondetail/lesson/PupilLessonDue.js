@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground,ActivityIndicator, FlatList, SafeAreaView } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
@@ -18,7 +18,11 @@ const PupilLessonDue = (props) => {
     console.log('props of homework', props)
     return (
 
-        <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace]}>
+        <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace,{paddingTop : 0,paddingBottom : 0}]}>
+              {
+                props.isHomeworkLoading ? 
+                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} /> :
+                <>
             {props.DueHomeWork.length > 0 || props.SubmitHomeWork.length > 0 || props.MarkedHomeWork.length > 0 ?
                 <>
                     {props.DueHomeWork.length > 0 ?
@@ -53,7 +57,7 @@ const PupilLessonDue = (props) => {
                     }
                     {props.SubmitHomeWork.length > 0 ?
                         <>
-                            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Submitted homework</Text>
+                            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop,]}>Submitted homework</Text>
                             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                 {
                                     props.SubmitHomeWork.map((item) => {
@@ -112,6 +116,8 @@ const PupilLessonDue = (props) => {
                 :
                 <EmptyStatePlaceHohder holderType={1}  title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
             }
+             </>
+        }
         </View >
 
 

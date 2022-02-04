@@ -209,7 +209,7 @@ const PupilProfileView = (props) => {
                                         <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center' }}>
                                             <Text LABLE style={PAGESTYLE.label}>Instant rewards for homework</Text>
                                             <TouchableOpacity
-                                                style={PAGESTYLE.tickLayoutPArent}
+                                                style={PAGESTYLE.tickLayoutPArentClick}
                                                 activeOpacity={opacity}
                                                 onPress={() => setInstantRewards()}>
                                                 {
@@ -221,7 +221,7 @@ const PupilProfileView = (props) => {
                                                         :
                                                         <View>
                                                             {/* <Image style={PAGESTYLE.tickLayout} source={Images.CheckIconWhite} /> */}
-                                                            <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.7)} width={hp(1.7)} />
+                                                            <TickMarkWhite style={PAGESTYLE.tickLayout} height={hp(1.55)} width={hp(1.55)} />
                                                         </View>
 
                                                 }
