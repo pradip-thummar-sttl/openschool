@@ -25,7 +25,7 @@ const PupilLesson = (props) => {
             <ScrollView>
             {
                 props.isLoading ?
-                    <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} />
+                    <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} style={{ margin: 20 }} />
                     :
                     <>
                         {currentWeekLesson.length > 0 || lastWeekLesson.length > 0 ?

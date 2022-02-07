@@ -39,7 +39,7 @@ export default StyleSheet.create({
         // backgroundColor: COLORS.backgroundColorCommon,
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
-        // height: '100%',
+        height: '100%',
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -1457,7 +1457,7 @@ export default StyleSheet.create({
         paddingTop: hp(2),
         paddingBottom: hp(2),
         position: 'absolute',
-        bottom: 10,
+        bottom: 0,
         width: '100%',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),

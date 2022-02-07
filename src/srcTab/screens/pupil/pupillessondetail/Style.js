@@ -45,8 +45,6 @@ export default StyleSheet.create({
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: 0,
-        marginTop: 0,
     },
     tabs: {
         paddingRight: hp(3.90),
