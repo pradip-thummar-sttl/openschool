@@ -20,6 +20,12 @@ export default StyleSheet.create({
         alignSelf: 'center',
         backgroundColor: 'white',
     },
+    workSpaceSaved: {
+        height: '100%',
+        width: '100%',
+        alignSelf: 'center',
+        backgroundColor: 'white',
+    },
     smallVideoImg: {
         marginTop: hp(1),
         marginLeft: wp(1)
@@ -53,6 +59,13 @@ export default StyleSheet.create({
         height: hp(8),
         flexDirection: 'row',
         alignItems: "center"
+    },
+    fileGrpWorkspacee: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
     },
     fileGrp: {
         flexDirection: 'row',

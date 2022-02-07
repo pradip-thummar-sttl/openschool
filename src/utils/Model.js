@@ -13,6 +13,8 @@ export var Addhomework={
     CheckList: [],
     MaterialArr: [],
     RecordingArr: [],
+    RemoveRecordingArr:[],
+    RemoveMaterialArr:[],
 }
 export const appSettings = {
     appId: '95414',

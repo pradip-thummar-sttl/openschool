@@ -34,7 +34,6 @@ import Styles from "../../../../srcTab/screens/teacher/GlobalMessage/Styles";
 const { CallModule } = NativeModules;
 
 const SAddNewTeacher = (props) => {
-    console.log(']]]]]]]]]]]0000000',props);
     const item = props.route.params.item;
 
     const [isHide, action] = useState(true);

@@ -47,6 +47,8 @@ const PupilLessonDetail = (props) => {
 
     const [item, setItem] = useState([]);
     const initialRender = useRef(true);
+    const [isLoading,setLoading] = useState(false)
+    const [isHomeworkLoading,setHomeworkLoading] = useState(false)
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -101,6 +103,7 @@ const PupilLessonDetail = (props) => {
         }
 
         console.log('data', data);
+        setHomeworkLoading(true)
         Service.post(data, `${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of all pupil homework list', res)
             if (res.flag) {
@@ -121,6 +124,7 @@ const PupilLessonDetail = (props) => {
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)
+                setHomeworkLoading(false)
             } else {
                 console.log('else part')
             }
@@ -133,7 +137,7 @@ const PupilLessonDetail = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-
+        setLoading(true)
         console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
             console.log('Get All Pupil LessonList response', res)
@@ -152,6 +156,7 @@ const PupilLessonDetail = (props) => {
 
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
+            setLoading(false);
         }, (err) => {
 
         })
@@ -294,7 +299,9 @@ const PupilLessonDetail = (props) => {
                             <PupilLesson
                                 currentWeekLesson={currentWeekLesson}
                                 lastWeekLesson={lastWeekLesson}
-                                navigatePupilLessonDetailInternal={(item) => { setItem(item), setLessonDetail(true) }} />
+                                navigatePupilLessonDetailInternal={(item) => { setItem(item), setLessonDetail(true) }}
+                                isLoading={isLoading}
+                                 />
                             :
                             <PupilLessonDue
                                 DueHomeWork={DueHomeWork}
@@ -302,7 +309,9 @@ const PupilLessonDetail = (props) => {
                                 MarkedHomeWork={MarkedHomeWork}
                                 navigatePupilHomeWorkDetail={(item) => { setItem(item), setHomeworkDetail(true) }}
                                 navigatePupilHomeworkesubmited={(item) => { setItem(item), setHomeWorkSubmitted(true) }}
-                                navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }} />
+                                navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }} 
+                                isHomeworkLoading={isHomeworkLoading}
+                                />
                     }
                 </ScrollView>
 

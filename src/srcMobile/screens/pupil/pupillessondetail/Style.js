@@ -36,10 +36,10 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
     },
     commonBg: {
-        backgroundColor: COLORS.backgroundColorCommon,
+        // backgroundColor: COLORS.backgroundColorCommon,
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
-        height: '100%',
+        // height: '100%',
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -1350,6 +1350,10 @@ export default StyleSheet.create({
     },
     videoSliderSpace: {
         paddingTop: hp(2.46),
+        paddingLeft: hp(2),
+    },
+    videoSliderSpaceLH: {
+        // paddingTop: hp(2.46),
         paddingLeft: hp(2),
     },
     headerText: {

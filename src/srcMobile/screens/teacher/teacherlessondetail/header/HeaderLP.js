@@ -36,7 +36,7 @@ const HeaderLP = (props) => {
                                 size={Platform.OS == 'ios' ? 'small' : 'small'}
                                 color={COLORS.white} />
                             : */}
-                            <EditWhite style={styles.profileeditButton} height={hp(1.77)} width={hp(1.77)} />
+                            <EditWhite style={styles.profileeditButton} height={hp(2)} width={hp(2)} />
                     </TouchableOpacity>
                        {/* <TouchableOpacity activeOpacity={opacity}
                         onPress={() => props.navigateToEdit()}
@@ -80,15 +80,15 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
     },
     profileeditButton: {
-        width: hp(1.57),
-        height: hp(1.57),
-        resizeMode: 'contain',
-        alignSelf: 'center',
+        width: hp(1.55),
+        height: hp(1.55),
+        // resizeMode: 'contain',
+        // alignSelf: 'center',
     },
     profileEdit: {
         backgroundColor: COLORS.dashboardGreenButton,
         // alignSelf: 'flex-end',
-        padding: hp(1.5),
+        // padding: hp(1.5),
         borderRadius: hp(1),
         // marginBottom: hp(1.32),
         marginHorizontal: 5
@@ -151,23 +151,14 @@ const styles = StyleSheet.create({
         top: hp(1.19),
     },
     commonButtonGreenheader: {
-        backgroundColor: COLORS.dashboardGreenButton,
+       backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
         borderRadius: hp(1),
-        overflow: 'hidden',
-       justifyContent : 'center',
-       alignItems : 'center',
-        // paddingLeft: hp(3.125),
-        // paddingRight: hp(3.125),
-        paddingTop: hp(1.4),
-        width : hp(5.10),
-        paddingBottom: hp(1.4),
-        height: hp(5.10),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
-        marginLeft: hp(2),
+        height: hp(5.20),
+        width: hp(5.20),
+        marginLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     commonButtonGreenheaderwithicon: {
         backgroundColor: COLORS.dashboardGreenButton,
