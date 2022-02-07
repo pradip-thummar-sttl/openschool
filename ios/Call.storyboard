@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wpm-Ud-a52">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Wpm-Ud-a52">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -50,7 +50,7 @@
                                         </connections>
                                     </button>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Say something.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5gn-pL-UyY">
-                                        <rect key="frame" x="10" y="5" width="300" height="42"/>
+                                        <rect key="frame" x="64" y="5" width="246" height="42"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
@@ -60,17 +60,31 @@
                                         <nil key="textColor"/>
                                         <color key="highlightedColor" red="0.83921568629999999" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3wx-iv-Kbq">
+                                        <rect key="frame" x="9" y="1" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="azT-8N-Wyk"/>
+                                            <constraint firstAttribute="width" constant="50" id="xby-pd-c9Q"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" image="attachment_ic"/>
+                                        <connections>
+                                            <action selector="onAttachmentButtonpress:" destination="JBC-Uh-dkj" eventType="touchUpInside" id="WM3-a6-F87"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="exn-4Q-R5y" secondAttribute="trailing" id="Knr-Y3-mYE"/>
+                                    <constraint firstItem="5gn-pL-UyY" firstAttribute="leading" secondItem="3wx-iv-Kbq" secondAttribute="trailing" constant="5" id="VXn-UB-TLX"/>
                                     <constraint firstItem="IWY-pP-Foc" firstAttribute="centerY" secondItem="sAx-6n-Xml" secondAttribute="centerY" id="Vvj-zS-O26"/>
                                     <constraint firstAttribute="height" constant="60" id="WYU-ar-dKH"/>
-                                    <constraint firstItem="5gn-pL-UyY" firstAttribute="leading" secondItem="sAx-6n-Xml" secondAttribute="leading" constant="10" id="b3G-Or-AIN"/>
                                     <constraint firstItem="exn-4Q-R5y" firstAttribute="leading" secondItem="5gn-pL-UyY" secondAttribute="trailing" constant="5" id="dtx-cd-lvF"/>
                                     <constraint firstItem="exn-4Q-R5y" firstAttribute="centerY" secondItem="5gn-pL-UyY" secondAttribute="centerY" id="fXg-gQ-kaq"/>
                                     <constraint firstItem="5gn-pL-UyY" firstAttribute="top" secondItem="sAx-6n-Xml" secondAttribute="top" constant="5" id="hWC-2X-HN6"/>
                                     <constraint firstItem="IWY-pP-Foc" firstAttribute="centerX" secondItem="sAx-6n-Xml" secondAttribute="centerX" id="hc1-5j-Kat"/>
+                                    <constraint firstItem="3wx-iv-Kbq" firstAttribute="centerY" secondItem="5gn-pL-UyY" secondAttribute="centerY" id="n6R-DJ-iSj"/>
+                                    <constraint firstItem="3wx-iv-Kbq" firstAttribute="leading" secondItem="sAx-6n-Xml" secondAttribute="leading" constant="9" id="oNp-cB-PCZ"/>
                                     <constraint firstAttribute="bottom" secondItem="5gn-pL-UyY" secondAttribute="bottom" constant="13" id="sph-tZ-DVq"/>
                                 </constraints>
                             </view>
@@ -116,7 +130,7 @@
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chat" id="zfJ-4A-3Iw" customClass="MessageCell">
-                                                <rect key="frame" x="0.0" y="24.5" width="375" height="72"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="375" height="72"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zfJ-4A-3Iw" id="tZ0-VM-GZO">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="72"/>
@@ -387,7 +401,7 @@
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reactionCell" rowHeight="80" id="J8J-9m-8CY" customClass="ReactionTableViewCell">
-                                                <rect key="frame" x="0.0" y="24.5" width="100" height="80"/>
+                                                <rect key="frame" x="0.0" y="44.5" width="100" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J8J-9m-8CY" id="Rbi-Pz-WYa">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
@@ -1386,6 +1400,7 @@ understand</string>
     </scenes>
     <resources>
         <image name="addreaction" width="24" height="24"/>
+        <image name="attachment_ic" width="25" height="22"/>
         <image name="dont_understand" width="38" height="43.5"/>
         <image name="more" width="6" height="21"/>
         <image name="rise_hand" width="30" height="41"/>

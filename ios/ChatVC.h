@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) NSString *channels;
 @property (strong, nonatomic) NSString *dialogId;
@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (IBAction)onSendButtonPressed:(id)sender;
 - (IBAction)onBackPress:(id)sender;
+- (IBAction)onAttachmentButtonpress:(id)sender;
 
 
 @end

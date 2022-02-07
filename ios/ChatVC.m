@@ -67,7 +67,85 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 */
 
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
+    NSURL *chosenImageUrl = info[UIImagePickerControllerImageURL];
+  
+//    self.imageView.image = chosenImage;
+
+    [picker dismissViewControllerAnimated:YES completion:nil];
+  PNSendFileRequest *request = [PNSendFileRequest requestWithChannel:self.dialogId
+                                                             fileURL:chosenImageUrl];
+
+  [self.pubnub sendFileWithRequest:request completion:^(PNSendFileStatus *status) {
+      if (!status.isError) {
+          /**
+           * File upload successfully completed.
+           * Uploaded file information is available here:
+           *   status.data.fileIdentifier is the unique file identifier
+           *   status.data.fileName is the name used to store the file
+           *https://ps.pndsn.com
+           */
+        
+        NSURL *url = [self.pubnub downloadURLForFileWithName:status.data.fileName
+                                                       identifier:status.data.fileIdentifier
+                                                        inChannel:self.dialogId];
+        
+        NSString *urlstring = [NSString stringWithFormat:@"%@",url];
+        NSArray *items = [urlstring componentsSeparatedByString:@"?"];
+        NSString *originurl = [NSString stringWithFormat:@"https://ps.pndsn.com%@",items[0]];
+        
+        NSString *str = [NSString stringWithFormat:@"%@###%@###%@",originurl, self.currentUserName,self.currentUserId];
+        [self.pubnub publish: str toChannel:self.dialogId
+              withCompletion:^(PNPublishStatus *status) {
+          NSLog(@"print status %@", status);
+      //        NSString *text = kEntryEarth;
+      //        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      //    [self dismissViewControllerAnimated:YES completion:nil];
+          self.messageTxtView.text = @"";
+        }];
+        
+//        PNPublishFileMessageRequest *request = [PNPublishFileMessageRequest requestWithChannel:self.dialogId
+//                                                                                fileIdentifier:status.data.fileIdentifier
+//                                                                                          name:status.data.fileName];
+//
+//        [self.pubnub publishFileMessageWithRequest:request completion:^(PNPublishStatus *status) {
+//            if (!status.isError) {
+//                // File message successfully published.
+//
+//            } else {
+//                // Handle file message publish error. Check 'category' property to find out possible
+//                // issue because of which request did fail.
+//                //
+//                // Request can be resent using: [status retry];
+//            }
+//        }];
+        
+        
+        NSLog(@"true ghfgh");
+        
+      } else {
+          /**
+           * Handle send file error. Check the 'category' property for reasons
+           * why the request may have failed.
+           *
+           * Check 'status.data.fileUploaded' to determine whether to resend the
+           * request or if only file message publish should be called.
+           */
+        
+        NSLog(@"else ghfgh");
+      }
+  }];
+}
+
+- (IBAction)onAttachmentButtonpress:(id)sender {
+  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+      picker.delegate = self;
+      picker.allowsEditing = YES;
+      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+      [self presentViewController:picker animated:YES completion:nil];
+}
 
 - (IBAction)onBackPress:(id)sender {
   [self dismissViewControllerAnimated:YES completion:nil];
@@ -114,7 +192,8 @@ static NSString * const kChannelGuide = @"the_guide";
     
     NSString *dateString = [dateFormatter stringFromDate:date];
      NSLog(@"message recieve and send %@====>%@", message, dateString);
-     NSDictionary *dict = @{@"message":message, @"time":dateString};
+    NSString *files=[message containsString:@"https://"]?@"files":@"Text";
+     NSDictionary *dict = @{@"message":message, @"time":dateString, @""};
      [_chatHistory addObject:dict];
      [_messageTableView reloadData];
   }
