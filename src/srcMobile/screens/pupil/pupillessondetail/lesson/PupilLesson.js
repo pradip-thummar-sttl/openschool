@@ -33,14 +33,14 @@ const PupilLesson = (props) => {
                                 {currentWeekLesson.length > 0 ?
                                     <>
                                        
-                                        <Text style={[PAGESTYLE.videoCard,{height : hp(30)}]}>Lessons for Week beginning</Text>
+                                        <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons for Week beginning</Text>
                                         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                             {
                                                 currentWeekLesson.map((item) => {
 
                                                     return (
                                                         <TouchableOpacity
-                                                            style={PAGESTYLE.videoTitle}
+                                                            style={[PAGESTYLE.videoCard,{height : hp(30)}]}
                                                             onPress={() => props.navigatePupilLessonDetailInternal(item)}
                                                             activeOpacity={opacity}>
                                                             <View style={PAGESTYLE.videoCardThumb}>

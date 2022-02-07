@@ -60,7 +60,7 @@ const PupilLessonDue = (props) => {
                                 }
                                 {props.SubmitHomeWork.length > 0 ?
                                     <>
-                                        <Text style={[PAGESTYLE.videoTitle]}>Submitted homework</Text>
+                                        <Text style={[PAGESTYLE.videoTitle,{paddingTop : 10,paddingBottom : 10,marginBottom : 0}]}>Submitted homework</Text>
                                         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                             {
                                                 props.SubmitHomeWork.map((item) => {
@@ -90,7 +90,7 @@ const PupilLessonDue = (props) => {
                                 }
                                 {props.MarkedHomeWork.length > 0 ?
                                     <>
-                                        <Text style={[PAGESTYLE.videoTitle]}>Homework marked</Text>
+                                        <Text style={[PAGESTYLE.videoTitle,{paddingTop : 10,paddingBottom : 10,marginBottom : 0}]}>Homework marked</Text>
                                         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
 
                                             {
