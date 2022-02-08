@@ -60,6 +60,12 @@ const TLHomeWork = (props) => {
     const [checkVal, setcheckVal] = useState('false');
 
     useEffect(() => {
+        return () => {
+            _removeRecordingArr = [];
+            _removeMaterialArr = [];
+        };
+    })
+    useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
             if (res.flag) {
@@ -457,7 +463,10 @@ const TLHomeWork = (props) => {
     const removeRecording = () => {
         var arr = [...recordingArr]
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
-        _removeRecordingArr.push(fname);
+        var arr = fname.split("/")
+        _removeRecordingArr.push(arr[arr.length-1]);
+
+        // _removeRecordingArr.push(fname);
         Addhomework.RemoveRecordingArr = _removeRecordingArr;
         arr.splice(0, 1)
         setRecordingArr(arr)
