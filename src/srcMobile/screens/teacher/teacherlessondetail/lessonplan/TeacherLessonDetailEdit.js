@@ -639,12 +639,14 @@ const TLDetailEdit = (props) => {
             }
         }
     }
-
+s
     const removeObject = (index1, item) => {
         var array = [...materialArr];
 
         var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
-        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, fname,]);
+
+        var arr = fname.split("/")
+        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, arr[arr.length-1]]);
 
         array.splice(index1, 1);
         setMaterialArr(array)
@@ -670,7 +672,6 @@ const TLDetailEdit = (props) => {
                 <KeyboardAwareScrollView>
                     <View style={PAGESTYLE.popupCard}>
                         <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={() => toggleModal()}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={PAGESTYLE.popupContent}>
@@ -748,7 +749,6 @@ const TLDetailEdit = (props) => {
 
         createQBDialog()
     };
-
 
     const createQBDialog = () => {
         if (isRunningFromVirtualDevice) {
