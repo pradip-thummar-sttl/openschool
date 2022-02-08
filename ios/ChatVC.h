@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate>
 
 @property (strong, nonatomic) NSString *channels;
 @property (strong, nonatomic) NSString *dialogId;

@@ -8,6 +8,8 @@
 #import "ChatVC.h"
 #import <PubNub/PubNub.h>
 #import "MessageCell.h"
+#import "DocumentCell.h"
+#import "imageCell.h"
 
 static NSString * const kEntryEarth = @"Earth";
 static NSString * const kUpdateEntryMessage = @"entryMessage";
@@ -67,12 +69,62 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 */
 
+- (void)documentPicker:(UIDocumentPickerViewController *)controller didPickDocumentsAtURLs:(NSArray<NSURL *> *)urls{
+  NSLog(@"urls =======================>%@", urls);
+  PNSendFileRequest *request = [PNSendFileRequest requestWithChannel:self.dialogId
+                                                             fileURL:urls[0]];
+
+  [self.pubnub sendFileWithRequest:request completion:^(PNSendFileStatus *status) {
+      if (!status.isError) {
+          /**
+           * File upload successfully completed.
+           * Uploaded file information is available here:
+           *   status.data.fileIdentifier is the unique file identifier
+           *   status.data.fileName is the name used to store the file
+           *https://ps.pndsn.com
+           */
+        
+        NSURL *url = [self.pubnub downloadURLForFileWithName:status.data.fileName
+                                                       identifier:status.data.fileIdentifier
+                                                        inChannel:self.dialogId];
+        
+        NSString *urlstring = [NSString stringWithFormat:@"%@",url];
+        NSArray *items = [urlstring componentsSeparatedByString:@"?"];
+        NSString *originurl = [NSString stringWithFormat:@"https://ps.pndsn.com%@",items[0]];
+        
+        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###DOCUMENT",originurl, self.currentUserName,self.currentUserId];
+        [self.pubnub publish: str toChannel:self.dialogId
+              withCompletion:^(PNPublishStatus *status) {
+          NSLog(@"print status %@", status);
+      //        NSString *text = kEntryEarth;
+      //        [self displayMessage:text asType:@"[PUBLISH: sent]"];
+      //    [self dismissViewControllerAnimated:YES completion:nil];
+          self.messageTxtView.text = @"";
+        }];
+        NSLog(@"true ghfgh");
+        
+      } else {
+          /**
+           * Handle send file error. Check the 'category' property for reasons
+           * why the request may have failed.
+           *
+           * Check 'status.data.fileUploaded' to determine whether to resend the
+           * request or if only file message publish should be called.
+           */
+        
+        NSLog(@"else ghfgh");
+      }
+  }];
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     NSURL *chosenImageUrl = info[UIImagePickerControllerImageURL];
-  
+   NSString *type = info[UIImagePickerControllerMediaType];
 //    self.imageView.image = chosenImage;
-
+  NSArray *items = [type componentsSeparatedByString:@"."];
+  NSLog(@"item of third number %@",items[1]);
+  
     [picker dismissViewControllerAnimated:YES completion:nil];
   PNSendFileRequest *request = [PNSendFileRequest requestWithChannel:self.dialogId
                                                              fileURL:chosenImageUrl];
@@ -95,7 +147,7 @@ static NSString * const kChannelGuide = @"the_guide";
         NSArray *items = [urlstring componentsSeparatedByString:@"?"];
         NSString *originurl = [NSString stringWithFormat:@"https://ps.pndsn.com%@",items[0]];
         
-        NSString *str = [NSString stringWithFormat:@"%@###%@###%@",originurl, self.currentUserName,self.currentUserId];
+        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###%@",originurl, self.currentUserName,self.currentUserId,items[1]];
         [self.pubnub publish: str toChannel:self.dialogId
               withCompletion:^(PNPublishStatus *status) {
           NSLog(@"print status %@", status);
@@ -139,12 +191,76 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 
 - (IBAction)onAttachmentButtonpress:(id)sender {
-  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-      picker.delegate = self;
-      picker.allowsEditing = YES;
-      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+  
+  
+  UIAlertController * alertvc = [UIAlertController alertControllerWithTitle: @"Choose any one"
+                                   message: @"" preferredStyle: UIAlertControllerStyleActionSheet
+                                  ];
+    UIAlertAction * cameraaction = [UIAlertAction actionWithTitle: @ "Camera"
+                              style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                                NSLog(@ "camera Tapped");
+      
+                                  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                  picker.delegate = self;
+                                  picker.allowsEditing = YES;
+                                  picker.sourceType = UIImagePickerControllerSourceTypeCamera;
 
-      [self presentViewController:picker animated:YES completion:nil];
+                                  [self presentViewController:picker animated:YES completion:nil];
+                              }
+                             ];
+  UIAlertAction * photoaction = [UIAlertAction actionWithTitle: @ "Photos"
+                            style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                              NSLog(@ "photo Tapped");
+                                  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                  picker.delegate = self;
+                                  picker.allowsEditing = YES;
+                                  picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                  [self presentViewController:picker animated:YES completion:nil];
+                            }
+                           ];
+  UIAlertAction * videoaction = [UIAlertAction actionWithTitle: @ "Videos"
+                            style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                              NSLog(@ "Dismiss Tapped");
+                                  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                                  picker.delegate = self;
+                                  picker.allowsEditing = YES;
+                                  picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+                                  [self presentViewController:picker animated:YES completion:nil];
+                            }
+                           ];
+  UIAlertAction * documentaction = [UIAlertAction actionWithTitle: @ "Document"
+                            style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                              NSLog(@ "Dismiss Tapped");
+                                UIDocumentPickerViewController* picker =
+                                  [[UIDocumentPickerViewController alloc] initWithDocumentTypes:@[@"public.item"]
+                                                                                         inMode:UIDocumentPickerModeImport];
+                                picker.delegate=self;
+                                picker.modalPresentationStyle=UIModalPresentationFullScreen;
+                                [self presentViewController:picker animated:YES completion:nil];
+                            }
+                           ];
+  UIAlertAction * dismiss = [UIAlertAction actionWithTitle: @"Dismiss"
+                            style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                              NSLog(@ "Dismiss Tapped");
+                            }
+                           ];
+    [alertvc addAction: cameraaction];
+    [alertvc addAction: photoaction];
+    [alertvc addAction: videoaction];
+    [alertvc addAction: documentaction];
+    [alertvc addAction: dismiss];
+    [self presentViewController: alertvc animated: true completion: nil];
+  
+ 
+//
+////  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+//      picker.delegate = self;
+////      picker.allowsEditing = YES;
+////      picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//
+//      [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)onBackPress:(id)sender {
@@ -152,7 +268,7 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 
 - (IBAction)onSendButtonPressed:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"%@###%@###%@",_messageTxtView.text, self.currentUserName,self.currentUserId];
+  NSString *str = [NSString stringWithFormat:@"%@###%@###%@###TEXT",_messageTxtView.text, self.currentUserName,self.currentUserId];
   [self.pubnub publish: str toChannel:self.dialogId
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
@@ -191,9 +307,23 @@ static NSString * const kChannelGuide = @"the_guide";
     [dateFormatter setDateFormat:@"dd,MMM yy hh:mm"];
     
     NSString *dateString = [dateFormatter stringFromDate:date];
+    NSString *type;
      NSLog(@"message recieve and send %@====>%@", message, dateString);
-    NSString *files=[message containsString:@"https://"]?@"files":@"Text";
-     NSDictionary *dict = @{@"message":message, @"time":dateString, @""};
+    if ([message containsString:@"https://"]) {
+      NSArray *items = [message componentsSeparatedByString:@"###"];
+      NSLog(@"item of third number %@",items[3]);
+      if ([items[3] isEqualToString:@"DOCUMENT"]) {
+        type=@"Doc";
+      }else if ([items[3] isEqualToString:@"image"]){
+        type=@"Image";
+      }else{
+        type=@"Video";
+      }
+    }else{
+      type=@"Text";
+    }
+//    NSString *type=[message containsString:@"https://"]?@"files":@"Text";
+    NSDictionary *dict = @{@"message":message, @"time":dateString, @"type":type};
      [_chatHistory addObject:dict];
      [_messageTableView reloadData];
   }
@@ -241,19 +371,85 @@ static NSString * const kChannelGuide = @"the_guide";
   return self.chatHistory.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-  MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chat"];
-//  cell.blueView.layer.cornerRadius = 10;
+  
   NSDictionary *dict = _chatHistory[indexPath.row];
   NSArray *items = [dict[@"message"] componentsSeparatedByString:@"###"];
-  [cell.messageLbl setText:items[0]];
-  if ([items[2] isEqualToString:self.currentUserId]) {
-    [cell.userNameLbl setText:@"You"];
+  
+  if ([dict[@"type"] isEqualToString:@"Image"]) {
+    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
+  //  cell.blueView.layer.cornerRadius = 10;
+    
+//    [cell.messageLbl setText:items[0]];
+    if ([items[2] isEqualToString:self.currentUserId]) {
+      [cell.userLable setText:@"You"];
+    }else{
+      [cell.userLable setText:items[1]];
+    }
+    
+    [cell.dateLabel setText:dict[@"time"]];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
+            });
+      });
+    
+    
+    return  cell;
+  }else if([dict[@"type"] isEqualToString:@"Doc"]){
+    DocumentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"document"];
+  //  cell.blueView.layer.cornerRadius = 10;
+    
+//    [cell.messageLbl setText:items[0]];
+    if ([items[2] isEqualToString:self.currentUserId]) {
+      [cell.userLabel setText:@"You"];
+    }else{
+      [cell.userLabel setText:items[1]];
+    }
+    
+    [cell.dateLabel setText:dict[@"time"]];
+    NSArray *list = [items[0] componentsSeparatedByString:@"/"];
+    [cell.docName setText:list[list.count-1]];
+    return  cell;
+    
+  }else if([dict[@"type"] isEqualToString:@"Text"]) {
+    MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chat"];
+  //  cell.blueView.layer.cornerRadius = 10;
+    
+    [cell.messageLbl setText:items[0]];
+    if ([items[2] isEqualToString:self.currentUserId]) {
+      [cell.userNameLbl setText:@"You"];
+    }else{
+      [cell.userNameLbl setText:items[1]];
+    }
+    
+    [cell.dateTimeLbl setText:dict[@"time"]];
+    return  cell;
   }else{
-    [cell.userNameLbl setText:items[1]];
+    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
+  //  cell.blueView.layer.cornerRadius = 10;
+    
+//    [cell.messageLbl setText:items[0]];
+    if ([items[2] isEqualToString:self.currentUserId]) {
+      [cell.userLable setText:@"You"];
+    }else{
+      [cell.userLable setText:items[1]];
+    }
+    
+    [cell.dateLabel setText:dict[@"time"]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
+            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
+            });
+      });
+    return  cell;
   }
   
-  [cell.dateTimeLbl setText:dict[@"time"]];
-  return  cell;
+  
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (tableView.contentSize.height <= self.tableSuperView.frame.size.height) {
