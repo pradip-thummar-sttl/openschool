@@ -26,8 +26,9 @@ const HeaderWhite = (props) => {
 
                 </TouchableOpacity><Text style={styles.date}>{props.title}</Text></Text>
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={() => props.onOpenWorkSpacePress()} style={styles.buttonGrp}>
-                        <Text style={STYLE.commonButtonBorderedGreen}>open workspace</Text>
+                    <TouchableOpacity onPress={() => props.onOpenWorkSpacePress()} style={[styles.buttonGroup,{backgroundColor : COLORS.white,
+                    borderColor : COLORS.buttonGreen,borderWidth : 1}]}>
+                        <Text style={[styles.commonButtonGreenheader,{color : COLORS.buttonGreen}]}>open workspace</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onSeeHomeworkPress()} style={styles.buttonGroup}>
                         {props.isLoading ?
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
         backgroundColor: COLORS.white,
-        paddingTop: hp(2),
+        paddingTop:Platform.OS === 'android' ? hp(2) : hp(3),
         paddingBottom: hp(2),
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: 1,
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
     buttonGroup: {
         position: 'relative',
         flexDirection: 'row',
-        marginRight: hp(1.69),
+        marginRight: hp(1),
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
@@ -142,7 +143,27 @@ const styles = StyleSheet.create({
         // paddingLeft: hp(4.175),
         // paddingRight: hp(2.50),
         height: hp(5.30),
-        width : 145,
+        width : Platform.OS === 'android' ? hp(22) : hp(18),
+        paddingTop: hp(1.4),
+        paddingBottom: hp(1.4),
+        justifyContent : 'center',
+        alignItems : 'center',
+        marginHorizontal : 8,
+    },
+    buttonGrp : {
+        position: 'relative',
+        marginRight: hp(1.69),
+        backgroundColor: COLORS.white,
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        textAlign: 'center',
+        // paddingLeft: hp(4.175),
+        // paddingRight: hp(2.50),
+        borderColor : COLORS.buttonGreen,
+        height: hp(5.30),
+        width : 155,
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',

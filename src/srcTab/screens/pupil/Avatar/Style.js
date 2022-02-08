@@ -7,10 +7,11 @@ const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
     mainView: {
-        // flex:1,
+        flex:1,
         height: wp(67),
         padding: hp(2),
         flexDirection: 'row',
+        width : '100%'
     },
     leftView: {
         paddingHorizontal: hp(1.5)
@@ -19,7 +20,7 @@ export default StyleSheet.create({
         paddingHorizontal: hp(1.5)
     },
     starView: {
-        width: hp(45),
+        width: '100%',
         height: wp(20),
         borderRadius: 10,
         backgroundColor: 'white',

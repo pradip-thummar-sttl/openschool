@@ -288,13 +288,15 @@ const ParentZoneProfileEdit = (props) => {
                                             <TouchableOpacity
                                                 activeOpacity={opacity}
                                                 onPress={() => { validateFields() }}
-                                                style={PAGESTYLE.saveParentZoneProfileTextBtn}>
+                                                style={[PAGESTYLE.saveParentZoneProfileTextBtn,{width :Platform.OS == 'ios' ? 125 : 122,
+                                                height : Platform.OS == 'ios' ? 40 : 34
+                                                }]}>
                                                 {isLoading ?
                                                     <ActivityIndicator
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.white} />
                                                     :
-                                                    <Text style={PAGESTYLE.saveParentzonePupilProfile}>Save Profile</Text>
+                                                    <Text style={[PAGESTYLE.saveParentzonePupilProfile,{fontSize : 15,borderRadius : 8}]}>Save Profile</Text>
                                                 }
                                             </TouchableOpacity>
                                         </View>

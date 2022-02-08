@@ -254,7 +254,7 @@ const TeacherLessonDetail = (props) => {
                                             :
                                             tabIndex == 1 ?
                                                 <HeaderHW
-                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set'}
+                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                                     SubjectName={lessonData.SubjectName}
                                                     date={lessonData.Date}
                                                     setHomework={() => onAddHomework()}

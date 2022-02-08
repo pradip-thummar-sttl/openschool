@@ -410,7 +410,7 @@ const Avatar = () => {
         props.navigation.openDrawer()
     }
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{width : '100%'}}>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
                 <View style={[Styles.leftView, {width:'35%'}]}>

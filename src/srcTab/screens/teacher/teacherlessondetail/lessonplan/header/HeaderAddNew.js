@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Image, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../../utils/Colors";
 // import Images from '../../../../../../utils/Images';
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width : 140,
+        width :Platform.OS === 'ios' ? hp(17) : hp(17.5),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',
