@@ -6,6 +6,13 @@ import FONTS from '../../../../utils/Fonts';
 const { width, height } = Dimensions.get('window');
 
 export default StyleSheet.create({
+    checkMarkTab: {
+        width: hp(1.48),
+        resizeMode: 'contain',
+        position : 'absolute',
+        right : 0,
+        
+    },
     mainPage: {
         flexDirection: 'row',
         flex: 1,

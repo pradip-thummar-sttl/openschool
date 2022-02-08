@@ -22,6 +22,9 @@ import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 import Notification from "../../../../svg/teacher/dashboard/Notification";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import BackArrow from "../../../../svg/common/BackArrow";
+import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
@@ -35,7 +38,7 @@ const HeaderPM = (props) => {
     const [keyword, setKeyword] = useState('')
     const [childrenList, setChildrenList] = useState(props.data)
 
-    console.log('6666666666',props);
+
     useEffect(() => {
         setChildrenList(props.data);
     }, [props.data]);
@@ -54,12 +57,12 @@ const HeaderPM = (props) => {
         <View style={PAGESTYLE.headerBarMainWhite}>
 
             <View style={PAGESTYLE.headerMain}>
-                <View style={{ right:Platform.OS === 'android' ?  hp(8)  : hp(10)}}>
+                <View style={{ right: Platform.OS === 'android' ? hp(8) : hp(10) }}>
                     <TouchableOpacity
                         onPress={() => props.onReplace()}
                         style={{ height: 20, width: 40, zIndex: 9, left: 0 }}>
 
-                        <BackArrow height={hp(2.67)} width={hp(2.33)}  />
+                        <BackArrow height={hp(2.67)} width={hp(2.33)} />
 
                     </TouchableOpacity>
 
@@ -85,11 +88,19 @@ const HeaderPM = (props) => {
                                     <MenuOption style={PAGESTYLE.borderList}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
-                                            onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
+                                            onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}
+                                            style={{ justifyContent: 'center' }}
+                                        >
                                             <View style={PAGESTYLE.filterList}>
                                                 <Image source={{ uri: baseUrl + item.ProfilePicture }} style={{ width: hp(3.81), height: hp(3.81), borderRadius: hp(100), resizeMode: 'cover', marginRight: hp(1), backgroundColor: COLORS.borderGrp, }} />
                                                 <Text style={PAGESTYLE.filterListText}>{item.FirstName} {item.LastName}</Text>
                                             </View>
+                                            {index == selectedPupilIndex ?
+                                                // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                <Ic_BlueCheck style={PAGESTYLE.checkMarkTab} width={hp(1.48)} height={hp(1.48)} />
+                                                :
+                                                null
+                                            }
                                         </TouchableOpacity>
                                     </MenuOption>
                                 ))}
@@ -99,7 +110,7 @@ const HeaderPM = (props) => {
                                         onPress={() => props.navigateToAddNewUser()}>
                                         <View style={PAGESTYLE.filterList}>
                                             {/* <Image style={PAGESTYLE.addIcon} source={Images.AddIcon} /> */}
-                                            <AddWhite style={PAGESTYLE.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                            <AddWhite style={PAGESTYLE.addIcon} height={hp(1.55)} width={hp(1.55)} fill={true} />
                                             <Text style={PAGESTYLE.filterListTextAddUser}>add new user</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -111,7 +122,7 @@ const HeaderPM = (props) => {
                     </View>
 
                     <TouchableOpacity style={PAGESTYLE.notificationBar}
-                    onPress={() => props.onNotification()}
+                        onPress={() => props.onNotification()}
                     >
                         {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={PAGESTYLE.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
@@ -173,8 +184,13 @@ const HeaderPM = (props) => {
                                 }}>
                                 {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                                     source={Images.SearchIcon} /> */}
-                                <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
-                            </TouchableOpacity>
+                                    {
+                                isSearchActive ?
+                                    <CloseBlack height={20} width={20} />
+                                    :  <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+
+                                    }
+                              </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
                                 style={{
@@ -189,6 +205,46 @@ const HeaderPM = (props) => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
                                 }} />
+                            <Menu>
+                                <MenuTrigger>
+                                    {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                                    <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                                </MenuTrigger>
+                                <MenuOptions style={styles.filterCard} >
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Title'); setSelectedIndex(0) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Title</Text>
+                                                {selectedIndex == 0 ?
+                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    <Ic_BlueCheck style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Date</Text>
+                                                {selectedIndex == 1 ?
+                                                    <Ic_BlueCheck style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+
+                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                </MenuOptions>
+                            </Menu>
                         </View>
                     </View>
                     :
@@ -198,4 +254,50 @@ const HeaderPM = (props) => {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    searchMenu: {
+        height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
+    },
+    filterCard: {
+        backgroundColor: COLORS.white,
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
+        top: Platform.OS === 'android' ? 0 :50,
+        right: 0,
+        width: 200,
+        padding: 10,
+        paddingVertical: 5,
+        shadowColor: COLORS.SidebarHeaderShadow,
+        shadowOffset: { width: 0, height: 4, },
+        shadowOpacity: 0.16,
+        shadowRadius: 6,
+        borderRadius: 6,
+        // marginTop  :30
+    },
+    borderList: {
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderBottomWidth: hp(0.26),
+    },
+filterList: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 5,
+    flex: 1,
+},
+filterListText: {
+    color: COLORS.darkGray,
+    fontSize: hp(1.82),
+    fontFamily: FONTS.fontRegular,
+},
+filterListSub: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+},
+checkMark: {
+    width: hp(1.48),
+    resizeMode: 'contain',
+},
+})
 export default HeaderPM;

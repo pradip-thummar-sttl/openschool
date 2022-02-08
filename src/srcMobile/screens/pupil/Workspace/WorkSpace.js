@@ -191,9 +191,9 @@ const WorkSpace = (props) => {
                     </View>
                     :
                     <View style={PAGESTYLE.workSpaceSaved}>
-                        <View style={{ height: '86%' }}>
+                        <View style={{ marginBottom : 50,height :'100%'}}>
                             <Image
-                                style={{ height: '100%', width: '100%', resizeMode: 'contain', }}
+                                style={{ height: '100%', width: '100%', resizeMode: 'contain'}}
                                 source={{ uri: baseUrl + workspaceList[selectedWorkSpace].filename }} />
                         </View>
                         {/* <View style={[PAGESTYLE.bottomView, { marginTop: 45 }]}>
@@ -201,7 +201,10 @@ const WorkSpace = (props) => {
                         <ScrollView
                             style={{
                                 width: '100%',
-                                flex  : 1,
+                                // flex  : 1,
+                                height : 50,
+                                position : 'absolute',
+                                bottom : 0
                             }}
                             showsHorizontalScrollIndicator={false}
                             horizontal={true}>

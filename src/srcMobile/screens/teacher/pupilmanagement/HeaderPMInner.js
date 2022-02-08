@@ -47,7 +47,7 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 {tabIndex == 0 ?
-                    <View style={[styles.headerRight,{right : Platform.OS === 'android' ? 12 : 15}]}>
+                    <View style={[styles.headerRight,{right : Platform.OS === 'android' ? 12 : 20}]}>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={{

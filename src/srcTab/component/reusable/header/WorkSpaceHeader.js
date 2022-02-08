@@ -28,7 +28,7 @@ const WorkSpaceHeader = (props) => {
                     {
                         props.isLoading ?
                             <ActivityIndicator
-                                style={{ ...styles.buttonGroup }}
+                                style={styles.commonButtonGreenheader }
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.white} />
                             :
@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
         marginLeft: hp(2),
+        width : hp(21)
     },
     commonButtonGreenheaderwithicon: {
         backgroundColor: COLORS.dashboardGreenButton,

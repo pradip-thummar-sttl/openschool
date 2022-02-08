@@ -21,7 +21,8 @@ export default StyleSheet.create({
         backgroundColor: 'white',
     },
     workSpaceSaved: {
-        height: '100%',
+        // height: '100%',
+        flex : 1,
         width: '100%',
         alignSelf: 'center',
         backgroundColor: 'white',

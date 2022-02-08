@@ -373,7 +373,7 @@ const PupilLessonDetail = (props) => {
     }
 
     return (
-        <View style={[{backgroundColor:'black',flex  : 1}]}>
+        <View style={[{flex  : 1}]}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
