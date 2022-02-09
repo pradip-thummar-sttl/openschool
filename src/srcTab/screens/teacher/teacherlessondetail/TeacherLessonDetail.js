@@ -99,16 +99,14 @@ const TeacherLessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        console.log('add homework data', data)
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
-                console.log('res', res);
                 if (res.flag) {
-                    // setHomeworkLoading(false)
-                    // setVisiblePopup(false)
-                    // showMessage('Homework updated successfully')
-
-                    uploadMatirial(res.data._id)
+                    if (Addhomework.RemoveRecordingArr.length > 0 || Addhomework.RemoveMaterialArr.length > 0)
+                        onRemoveUnselectedFile(res.data._id)
+                    else
+                        uploadMatirial(res.data._id)
+                    // uploadMatirial(res.data._id)
                 } else {
                     setHomeworkLoading(false)
                     setVisiblePopup(false)
@@ -122,9 +120,6 @@ const TeacherLessonDetail = (props) => {
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
                 Addhomework.IsUpdate = true
-                // setHomeworkLoading(false)
-                // setVisiblePopup(false)
-                // showMessage('Homework added successfully')
                 uploadMatirial(res.data._id)
             }, (err) => {
                 console.log('response of add homework err', err)
@@ -133,6 +128,22 @@ const TeacherLessonDetail = (props) => {
 
             })
         }
+    }
+    const onRemoveUnselectedFile = (lessionId) => {
+        let data = { "deletematerial": Addhomework.RemoveMaterialArr, "deleterecording": Addhomework.RemoveRecordingArr, "type": "H" }
+
+        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${Addhomework.HwId}`, (res) => {
+            if (res.code == 200) {
+                uploadMatirial(lessionId);
+            } else {
+                showMessage(res.message)
+                setHomeworkLoading(false)
+            }
+        }, (err) => {
+            setHomeworkLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
     }
 
     const uploadMatirial = (homeworkId) => {
@@ -254,7 +265,7 @@ const TeacherLessonDetail = (props) => {
                                             :
                                             tabIndex == 1 ?
                                                 <HeaderHW
-                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set'}
+                                                    hwBtnName={updateFlag ? 'Update Homework' : 'Set Homework'}
                                                     SubjectName={lessonData.SubjectName}
                                                     date={lessonData.Date}
                                                     setHomework={() => onAddHomework()}

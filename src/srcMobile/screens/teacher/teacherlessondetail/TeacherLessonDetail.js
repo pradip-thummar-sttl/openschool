@@ -120,15 +120,15 @@ const TeacherLessonDetail = (props) => {
     const onRemoveUnselectedFile = (lessionId) => {
         let data = { "deletematerial": Addhomework.RemoveMaterialArr, "deleterecording": Addhomework.RemoveRecordingArr, "type": "H" }
 
-        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${lessonData._id}`, (res) => {
+        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${Addhomework.HwId}`, (res) => {
             if (res.code == 200) {
                 uploadMatirial(lessionId);
             } else {
                 showMessage(res.message)
-                setLoading(false)
+                setHomeworkLoading(false)
             }
         }, (err) => {
-            setLoading(false)
+            setHomeworkLoading(false)
             console.log('response of get all lesson error', err)
         })
 

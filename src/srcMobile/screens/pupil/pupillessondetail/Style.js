@@ -1455,7 +1455,7 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(2),
+        paddingBottom:Platform.OS === 'android' ? hp(2) : hp(8),
         position: 'absolute',
         bottom: 0,
         width: '100%',

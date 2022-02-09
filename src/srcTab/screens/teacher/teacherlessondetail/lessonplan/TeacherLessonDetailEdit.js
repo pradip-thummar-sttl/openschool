@@ -3,17 +3,13 @@ import { NativeModules, View, StyleSheet, Text, TextInput, Textarea, TouchableOp
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
 import ToggleSwitch from 'toggle-switch-react-native';
-import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { isRunningFromVirtualDevice, opacity, showMessage, showMessageWithCallBack } from "../../../../../utils/Constant";
 import Popupaddrecording from "../../../../component/reusable/popup/Popupaddrecording";
 import HeaderUpdate from "./header/HeaderUpdate";
-import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
 import moment from 'moment';
 import {
     Menu,
@@ -31,22 +27,18 @@ import DocumentPicker from 'react-native-document-picker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { launchCamera } from "react-native-image-picker";
-import { PanGestureHandler } from "react-native-gesture-handler";
 import TLVideoGallery from "./TeacherLessonVideoGallery";
 import RecordScreen from 'react-native-record-screen';
 
-import { PERMISSIONS, requestMultiple, check, request } from 'react-native-permissions';
+import { PERMISSIONS, check, request } from 'react-native-permissions';
 import ArrowDown from "../../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import Participants from "../../../../../svg/teacher/dashboard/Participants";
 import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
-import CloseIcon from "../../../../../svg/teacher/lessonhwplanner/CloseIcon";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import Modal from 'react-native-modal';
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
-// import FONTS from "../../../../../utils/Fonts";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -116,6 +108,8 @@ const TLDetailEdit = (props) => {
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
+    const [isRemoveRecordingArr, setRemoveRecordingArr] = useState([]);
+    const [isRemoveMaterialArr, setRemoveMaterialArr] = useState([]);
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -133,7 +127,7 @@ const TLDetailEdit = (props) => {
 
     useEffect(() => {
         if (selectedParticipants != null && selectedParticipants != undefined) {
-            getAllPupils()   
+            getAllPupils()
         }
     }, [selectedParticipants])
 
@@ -173,7 +167,7 @@ const TLDetailEdit = (props) => {
 
     }, [])
 
-    const getAllPupils = ()=> {
+    const getAllPupils = () => {
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             if (res.code == 200) {
                 let newData = []
@@ -329,35 +323,7 @@ const TLDetailEdit = (props) => {
         }
     }
 
-    const stopRecording = async () => {
-        if (recordingName.length > 0) {
 
-            var arr = []
-            const res = await RecordScreen.stopRecording().catch((error) => {
-                setRecordingStarted(false)
-                console.warn(error)
-            });
-            if (res) {
-                setRecordingStarted(false)
-                const url = res.result.outputURL;
-                let ext = url.split('.');
-                let obj = {
-                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                    originalname: `${recordingName}.mp4`,
-                    fileName: `${recordingName}.mp4`,
-                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-                }
-                arr.push(obj)
-                setRecordingArr(arr)
-                setScreenVoiceSelected(false)
-                setRecordingName("")
-                toggleModal()
-                console.log('url', url);
-            }
-        } else {
-            showMessage('Please provide recording name proper')
-        }
-    }
 
     const onCameraOnly = () => {
 
@@ -404,7 +370,6 @@ const TLDetailEdit = (props) => {
 
     }
 
-
     const editNewText = (text, index) => {
         let newArray = [...itemCheckList];
         newArray[index].ItemName = text
@@ -423,10 +388,10 @@ const TLDetailEdit = (props) => {
                     data={itemCheckList}
                     style={{ alignSelf: 'center', width: '100%' }}
                     renderItem={({ item, index }) => (
-                        <View style={{ margin: hp(1),justifyContent : 'center' }}>
+                        <View style={{ margin: hp(1), justifyContent: 'center' }}>
                             {/* <Text style={{ fontSize: hp(2), paddingRight: hp(6.5) }}>{item.ItemName}</Text> */}
                             <TextInput
-                                style={{ width: '90%', height: 41, fontSize: hp(1.70), fontFamily : FONTS.fontRegular}}
+                                style={{ width: '90%', height: 41, fontSize: hp(1.70), fontFamily: FONTS.fontRegular }}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
                             <TouchableOpacity
@@ -492,9 +457,9 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', }}
                         renderItem={({ item, index }) => (
-                            <View style={[PAGESTYLE.alignRow,{
-                                width : '33.33%',marginHorizontal  : 3
-                           }]}>
+                            <View style={[PAGESTYLE.alignRow, {
+                                width: '33.33%', marginHorizontal: 3
+                            }]}>
                                 <CheckBox
                                     style={{ ...PAGESTYLE.checkMarkTool }}
                                     boxType={'square'}
@@ -533,7 +498,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) , fontFamily: FONTS.fontRegular,}} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95), fontFamily: FONTS.fontRegular, }} value={item} text={item.SubjectName}></MenuOption>
                             )}
                             style={{ height: hp(22) }} />
                     </MenuOptions>
@@ -558,7 +523,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={participants}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95),fontFamily: FONTS.fontRegular }} value={item} text={item.GroupName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95), fontFamily: FONTS.fontRegular }} value={item} text={item.GroupName}></MenuOption>
                             )}
                             style={{ height: hp(22) }} />
                     </MenuOptions>
@@ -583,7 +548,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95),fontFamily: FONTS.fontRegular }} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95), fontFamily: FONTS.fontRegular }} value={item} text={item}></MenuOption>
                             )}
                             style={{ height: hp(22) }} />
                     </MenuOptions>
@@ -608,7 +573,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={timeSlot}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.95) ,fontFamily: FONTS.fontRegular}} value={item} text={item}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.95), fontFamily: FONTS.fontRegular }} value={item} text={item}></MenuOption>
                             )}
                             style={{ height: hp(22) }} />
                     </MenuOptions>
@@ -627,16 +592,16 @@ const TLDetailEdit = (props) => {
         } else if (!selectedDate) {
             showMessage(MESSAGE.date)
             return false;
-        } else if (!selectedFromTime && IsDeliveredLive != "") {    
+        } else if (!selectedFromTime && IsDeliveredLive != "") {
             showMessage(MESSAGE.fromTime)
             return false;
         } else if (!selectedToTime && IsDeliveredLive != "") {
             showMessage(MESSAGE.toTime)
             return false;
-        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {    
+        } else if (timeSlot.indexOf(selectedToTime) <= timeSlot.indexOf(selectedFromTime) && IsDeliveredLive != "") {
             showMessage(MESSAGE.invalidTo)
             return false
-        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {    
+        } else if (timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) > 4 && IsDeliveredLive != "") {
             showMessage(MESSAGE.invalidFrom)
             return false
         } else if (!selectedParticipants) {
@@ -726,7 +691,11 @@ const TLDetailEdit = (props) => {
 
         Service.post(data, `${EndPoints.LessonUpdate}${lessonData._id}`, (res) => {
             if (res.code == 200) {
-                uploadMatirial(res.data._id)
+                if (isRemoveRecordingArr.length > 0 || isRemoveMaterialArr.length > 0)
+                    onRemoveUnselectedFile(res.data._id)
+                else
+                    uploadMatirial(res.data._id)
+
             } else {
                 showMessage(res.message)
                 setLoading(false)
@@ -736,6 +705,24 @@ const TLDetailEdit = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
+
+    const onRemoveUnselectedFile = (lessionId) => {
+        let data = { "deletematerial": isRemoveMaterialArr, "deleterecording": isRemoveRecordingArr, "type": "L" }
+
+        Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${lessonData._id}`, (res) => {
+            if (res.code == 200) {
+                uploadMatirial(lessionId);
+            } else {
+                showMessage(res.message)
+                setLoading(false)
+            }
+        }, (err) => {
+            setLoading(false)
+            console.log('response of get all lesson error', err)
+        })
+
+    }
+
     const uploadMatirial = (lessionId) => {
         let data = new FormData();
 
@@ -839,30 +826,43 @@ const TLDetailEdit = (props) => {
             }
         }
     }
+
+    const removeObject = (index1, item) => {
+
+        var array = [...materialArr];
+
+        var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
+
+        var arr = fname.split("/")
+        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, arr[arr.length-1],]);
+
+        array.splice(index1, 1);
+        setMaterialArr(array)
+    }
+
     const removeRecording = () => {
+
         var arr = [...recordingArr]
+        var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
+        var currentName = fname.split("/")
+
+        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, currentName[currentName.length-1],]);
         arr.splice(0, 1)
         setRecordingArr(arr)
     }
 
-    const removeObject = (index1, item) => {
-        var array = [...materialArr];
-        array.splice(index1, 1);
-        setMaterialArr(array)
-        console.log('hello material', array)
-    }
     const toggleModal = () => {
         console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
+
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={PAGESTYLE.popupCard}>
                         <TouchableOpacity style={PAGESTYLE.cancelButton} onPress={toggleModal}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={PAGESTYLE.popupContent}>
@@ -885,7 +885,6 @@ const TLDetailEdit = (props) => {
                                 </View>
                             </View>
                             <TouchableOpacity
-                                // onPress={()=>{stopRecording()}}
                                 onPress={() => { currentRecordMode === 'isScreen' ? stopRecording() : saveCameraData() }}
                                 style={PAGESTYLE.buttonGrp}
                                 activeOpacity={opacity}>
@@ -898,6 +897,45 @@ const TLDetailEdit = (props) => {
         )
     }
 
+    const stopRecording = async () => {
+
+
+
+        if (recordingName.length > 0) {
+
+            console.log('1url', res);
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+
+                console.log("=-=->", error);
+            });
+
+            console.log('2url', res);
+
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+
+            }
+        } else {
+            showMessage('Please provide recording name proper')
+        }
+    }
+
     const onSetDeliverLiveLesson = (isOn) => {
 
         if (!isOn) {
@@ -906,6 +944,7 @@ const TLDetailEdit = (props) => {
         }
         setDeliveredLive(isOn)
     }
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {
@@ -994,10 +1033,7 @@ const TLDetailEdit = (props) => {
                                                 style={PAGESTYLE.commonInputTextareaNormal}
                                                 onChangeText={text => setDescription(text)} />
                                         </View>
-                                        {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                        </TouchableOpacity> */}
+
                                         <Popupaddrecording
                                             recordingArr={recordingArr}
                                             isVisible={isAddRecording}
@@ -1020,7 +1056,7 @@ const TLDetailEdit = (props) => {
                                                 <Text style={[PAGESTYLE.requireText, PAGESTYLE.subLineTitle]}>Class Settings</Text>
                                                 <View style={[STYLE.hrCommon, PAGESTYLE.commonWidthClassSetting]}></View>
                                             </View>
-                                          
+
                                             <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
@@ -1038,14 +1074,10 @@ const TLDetailEdit = (props) => {
                                         </View>
 
                                         <TouchableOpacity onPress={() => addMaterial()} style={[PAGESTYLE.uploadBlock]}>
-                                            {/* <Image source={Images.DropHolder} style={PAGESTYLE.grpThumbVideo} /> */}
                                             <UploadDoc style={PAGESTYLE.grpThumbVideo} width={hp(31.64)} height={hp(15.36)} />
                                             <Text style={{ position: 'absolute', bottom: 35, color: COLORS.lightGrey, fontWeight: 'bold' }}>Upload Material</Text>
                                         </TouchableOpacity>
-
-
                                         {
-
 
                                             materialArr.length != 0 &&
                                             materialArr.map((item, index) => {
@@ -1057,12 +1089,10 @@ const TLDetailEdit = (props) => {
                                                                 <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                             </TouchableOpacity>
                                                         }
-
                                                     </View>
                                                 )
                                             })
                                         }
-                                            {/* item.uri &&  */}
                                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.buttonGrp}
@@ -1089,7 +1119,6 @@ const TLDetailEdit = (props) => {
                                                 <View style={PAGESTYLE.fileGrp}>
                                                     <Text style={PAGESTYLE.fileName}>{lessonData.ChatTranscript}</Text>
                                                     <TouchableOpacity style={PAGESTYLE.closeNotificationbar}>
-                                                        {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                         <PlayBlue style={PAGESTYLE.downloadIcon} height={hp(2)} width={hp(2)} />
                                                     </TouchableOpacity>
                                                 </View>

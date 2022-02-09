@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../../utils/Colors";
@@ -20,7 +20,8 @@ const Popuphomework = (props) => {
     };
     return (
         <View>
-            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup,styles.setHomeworkBtnn, {width: props.updateFlag ? 170 : 145}]}>
+            <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup,styles.setHomeworkBtnn,
+                 {width: props.updateFlag ? hp(23): hp(20)}]}>
                   {props.isHomeworkLoading ?
                     <ActivityIndicator
                         size={Platform.OS == 'ios' ? 'large' : 'small'}

@@ -210,7 +210,7 @@ const WorkSpace = (props) => {
                                                 <TouchableOpacity
                                                     activeOpacity={opacity}
                                                     onPress={() => setSelectedWorkSpace(index)}>
-                                                    <View style={[PAGESTYLE.fileGrpWorkspacee, { height: 50, width: 150, paddingHorizontal: 0,marginHorizontal : 3}]}>
+                                                    <View style={[PAGESTYLE.fileGrpWorkspacee, { height: 50, width: 150,marginHorizontal : 3}]}>
                                                         <Text style={{ ...PAGESTYLE.fileName, fontWeight: selectedWorkSpace == index ? 'bold' : 'normal' }}>workSpace {index + 1}</Text>
                                                     </View>
                                                 </TouchableOpacity>
