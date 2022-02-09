@@ -216,6 +216,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     implementation 'com.pubnub:pubnub-gson:6.0.0'
+    implementation group: 'com.pubnub', name: 'pubnub-gson', version: 'v6.0.0'
 
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules

@@ -226,12 +226,6 @@ public class GroupChatActivity extends AppCompatActivity {
                         chatView = new ChatVO(messagePublisher, splitStr[2].equals(currentUserID)  ? "You" : splitStr[1],  splitStr[0], dt, splitStr[3],"","");
                     else {
                         chatView = new ChatVO(splitStr[4], splitStr[2].equals(currentUserID) ? "You" : splitStr[1], "", dt, splitStr[3], splitStr[0], "File");
-
-                        if(splitStr[2].equals(currentUserID))
-                        {
-//                            _progressBar.setVisibility(View.GONE);
-                            _btnAttachment.setVisibility(View.VISIBLE);
-                        }
                     }
                     onUpdateMassageList(chatView);
                 }
@@ -353,6 +347,12 @@ public class GroupChatActivity extends AppCompatActivity {
             public void run() {
                 _chatAdapter.notifyItemInserted(newIndex);
                 _recyclerView.smoothScrollToPosition(newIndex);
+
+                if(chatView.getName().equals("You") && chatView.getRowType().equals("DOCUMENT"))
+                {
+                    _progressBar.setVisibility(View.GONE);
+                    _btnAttachment.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
