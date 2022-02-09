@@ -326,7 +326,14 @@ static NSString * const kChannelGuide = @"the_guide";
       type=@"TEXT";
     }
 //    NSString *type=[message containsString:@"https://"]?@"files":@"Text";
-    NSDictionary *dict = @{@"message":message, @"time":dateString, @"type":type, @"identifier":items[4]};
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    [dict setObject:message forKey:@"message"];
+    [dict setObject:dateString forKey:@"time"];
+    [dict setObject:type forKey:@"type"];
+    [dict setObject:items[1] forKey:@"identifier"];
+    [dict setObject:@"false" forKey:@"isDownload"];
+    [dict setObject:@"" forKey:@"localUrl"];
+//    @{@"message":message, @"time":dateString, @"type":type, @"identifier":items[4], @"isDownload":@"false", @"loacalUrl":@""};
      [_chatHistory addObject:dict];
      [_messageTableView reloadData];
   }
@@ -420,6 +427,10 @@ static NSString * const kChannelGuide = @"the_guide";
     [cell.dateLabel setText:dict[@"time"]];
     NSArray *list = [items[0] componentsSeparatedByString:@"/"];
     [cell.docName setText:list[list.count-1]];
+    [cell.DownloadButton setTag:indexPath.row];
+    [cell.DownloadButton addTarget:self
+                            action:@selector(onTapDownload:)
+     forControlEvents:UIControlEventTouchUpInside];
     return  cell;
     
   }else {
@@ -460,6 +471,75 @@ static NSString * const kChannelGuide = @"the_guide";
   
   
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+  NSDictionary *dict = self.chatHistory[indexPath.row];
+  if ([dict[@"isDownload"] isEqualToString:@"false"]) {
+  if ([dict[@"type"] isEqualToString:@"FILE"]) {
+    NSArray *items = [dict[@"message"] componentsSeparatedByString:@"###"];
+    NSArray *itemss = [items[0] componentsSeparatedByString:@"/"];
+    DocumentCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    UIActivityIndicatorView  *iActivity=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+   
+//    iActivity.backgroundColor=[UIColor redColor];
+    [iActivity setFrame:cell.DownloadButton.frame];
+    [cell.DownloadButton setHidden:true];
+    
+    [cell.docView addSubview:iActivity];
+    [iActivity startAnimating];
+   [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+    PNDownloadFileRequest *request = [PNDownloadFileRequest requestWithChannel:self.dialogId
+                                                                    identifier:dict[@"identifier"]
+                                                                          name:itemss[itemss.count-1]];
+    
+
+    [self.pubnub downloadFileWithRequest:request
+                              completion:^(PNDownloadFileResult *result, PNErrorStatus *status) {
+
+        if (!status.isError) {
+            /**
+             * File successfully has been downloaded.
+             *   status.data.location - location where downloaded file can be found
+             *   status.data.temporary - whether file has been downloaded to temporary storage and
+             *                           will be removed on completion block return.
+             */
+          
+          [self.chatHistory[indexPath.row] setObject:@"true" forKey:@"isDownload"];
+          [self.chatHistory[indexPath.row] setObject:result.data.location forKey:@"localUrl"];
+          
+          NSLog(@" location of =====================>%@",self.chatHistory);
+          UIAlertController * alertvc = [UIAlertController alertControllerWithTitle: @"File download successfully see path"
+                                           message:[NSString stringWithFormat:@"%@", result.data.location]  preferredStyle: UIAlertControllerStyleActionSheet
+                                          ];
+           
+          UIAlertAction * dismiss = [UIAlertAction actionWithTitle: @"Dismiss"
+                                    style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
+                                      NSLog(@ "Dismiss Tapped");
+                                    }
+                                   ];
+          
+            [alertvc addAction: dismiss];
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [self presentViewController: alertvc animated: true completion: nil];
+           
+          });
+          [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+        } else {
+            /**
+             * Handle file download error. Check 'category' property to find out possible issue
+             * because of which request did fail.
+             *
+             * Request can be resent using: [status retry]
+             */
+          
+          NSLog(@"hjhjhjhjhjhj ==================>%@", status);
+        
+        }
+      [iActivity stopAnimating];
+      [iActivity setHidden:true];
+    }];
+  }
+  }
+}
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
   if (tableView.contentSize.height <= self.tableSuperView.frame.size.height) {
     [_tableHeightConstrain setConstant:tableView.contentSize.height+10];
@@ -469,6 +549,22 @@ static NSString * const kChannelGuide = @"the_guide";
     [tableView layoutIfNeeded];
   }
 }
+- (void)onTapDownload:(UIButton*)button
+   {
+     UIActivityIndicatorView  *iActivity=[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+     [iActivity startAnimating];
+     iActivity.backgroundColor=[UIColor redColor];
+     iActivity.frame=button.frame;
+     [button setHidden:true];
+     
+     
+     NSIndexPath *indexPath = [NSIndexPath indexPathForItem:button.tag inSection:0];
+    [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+     
+     
+     
+//      [iActivity stopAnimating];
+  }
 
 
 @end
