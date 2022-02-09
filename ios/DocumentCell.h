@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *docView;
 @property (weak, nonatomic) IBOutlet UIImageView *docImage;
 @property (weak, nonatomic) IBOutlet UILabel *docName;
+@property (weak, nonatomic) IBOutlet UIButton *DownloadButton;
 
 @end
 

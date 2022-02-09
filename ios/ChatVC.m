@@ -26,6 +26,9 @@ static NSString * const kChannelGuide = @"the_guide";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+  [_messageTableView registerNib:[UINib nibWithNibName:@"DocumentCell" bundle:nil] forCellReuseIdentifier:@"document"];
+
   PNConfiguration *pnconfig = [PNConfiguration configurationWithPublishKey:@"pub-c-bd967178-53ea-4b05-954a-2666bb3b6337"
                                                               subscribeKey:@"sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267"];
   pnconfig.uuid = @"myUniqueUUID";
@@ -92,7 +95,7 @@ static NSString * const kChannelGuide = @"the_guide";
         NSArray *items = [urlstring componentsSeparatedByString:@"?"];
         NSString *originurl = [NSString stringWithFormat:@"https://ps.pndsn.com%@",items[0]];
         
-        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###DOCUMENT",originurl, self.currentUserName,self.currentUserId];
+        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###FILE###%@",originurl, self.currentUserName,self.currentUserId, status.data.fileIdentifier];
         [self.pubnub publish: str toChannel:self.dialogId
               withCompletion:^(PNPublishStatus *status) {
           NSLog(@"print status %@", status);
@@ -120,10 +123,10 @@ static NSString * const kChannelGuide = @"the_guide";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
     NSURL *chosenImageUrl = info[UIImagePickerControllerImageURL];
-   NSString *type = info[UIImagePickerControllerMediaType];
+//   NSString *type = info[UIImagePickerControllerMediaType];
 //    self.imageView.image = chosenImage;
-  NSArray *items = [type componentsSeparatedByString:@"."];
-  NSLog(@"item of third number %@",items[1]);
+//  NSArray *items = [type componentsSeparatedByString:@"."];
+//  NSLog(@"item of third number %@",items[1]);
   
     [picker dismissViewControllerAnimated:YES completion:nil];
   PNSendFileRequest *request = [PNSendFileRequest requestWithChannel:self.dialogId
@@ -147,7 +150,7 @@ static NSString * const kChannelGuide = @"the_guide";
         NSArray *items = [urlstring componentsSeparatedByString:@"?"];
         NSString *originurl = [NSString stringWithFormat:@"https://ps.pndsn.com%@",items[0]];
         
-        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###%@",originurl, self.currentUserName,self.currentUserId,items[1]];
+        NSString *str = [NSString stringWithFormat:@"%@###%@###%@###FILE###%@",originurl, self.currentUserName,self.currentUserId, status.data.fileIdentifier];
         [self.pubnub publish: str toChannel:self.dialogId
               withCompletion:^(PNPublishStatus *status) {
           NSLog(@"print status %@", status);
@@ -268,7 +271,7 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 
 - (IBAction)onSendButtonPressed:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"%@###%@###%@###TEXT",_messageTxtView.text, self.currentUserName,self.currentUserId];
+  NSString *str = [NSString stringWithFormat:@"%@###%@###%@###TEXT###0",_messageTxtView.text, self.currentUserName,self.currentUserId];
   [self.pubnub publish: str toChannel:self.dialogId
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
@@ -309,21 +312,21 @@ static NSString * const kChannelGuide = @"the_guide";
     NSString *dateString = [dateFormatter stringFromDate:date];
     NSString *type;
      NSLog(@"message recieve and send %@====>%@", message, dateString);
-    if ([message containsString:@"https://"]) {
+//    if ([message containsString:@"https://"]) {
       NSArray *items = [message componentsSeparatedByString:@"###"];
       NSLog(@"item of third number %@",items[3]);
-      if ([items[3] isEqualToString:@"DOCUMENT"]) {
-        type=@"Doc";
-      }else if ([items[3] isEqualToString:@"image"]){
-        type=@"Image";
-      }else{
-        type=@"Video";
-      }
+      if ([items[3] isEqualToString:@"FILE"]) {
+        type=@"FILE";
+//      }else if ([items[3] isEqualToString:@"image"]){
+//        type=@"Image";
+//      }else{
+//        type=@"Video";
+//      }
     }else{
-      type=@"Text";
+      type=@"TEXT";
     }
 //    NSString *type=[message containsString:@"https://"]?@"files":@"Text";
-    NSDictionary *dict = @{@"message":message, @"time":dateString, @"type":type};
+    NSDictionary *dict = @{@"message":message, @"time":dateString, @"type":type, @"identifier":items[4]};
      [_chatHistory addObject:dict];
      [_messageTableView reloadData];
   }
@@ -375,31 +378,36 @@ static NSString * const kChannelGuide = @"the_guide";
   NSDictionary *dict = _chatHistory[indexPath.row];
   NSArray *items = [dict[@"message"] componentsSeparatedByString:@"###"];
   
-  if ([dict[@"type"] isEqualToString:@"Image"]) {
-    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
-  //  cell.blueView.layer.cornerRadius = 10;
-    
-//    [cell.messageLbl setText:items[0]];
-    if ([items[2] isEqualToString:self.currentUserId]) {
-      [cell.userLable setText:@"You"];
-    }else{
-      [cell.userLable setText:items[1]];
-    }
-    
-    [cell.dateLabel setText:dict[@"time"]];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
-            });
-      });
-    
-    
-    return  cell;
-  }else if([dict[@"type"] isEqualToString:@"Doc"]){
+  if ([dict[@"type"] isEqualToString:@"FILE"]) {
+//    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
+//  //  cell.blueView.layer.cornerRadius = 10;
+//
+////    [cell.messageLbl setText:items[0]];
+//    if ([items[2] isEqualToString:self.currentUserId]) {
+//      [cell.userLable setText:@"You"];
+//    }else{
+//      [cell.userLable setText:items[1]];
+//    }
+//
+//    [cell.dateLabel setText:dict[@"time"]];
+//
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
+//            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
+//            });
+//      });
+//
+//
+//    return  cell;
+//  }else if([dict[@"type"] isEqualToString:@"Doc"]){
     DocumentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"document"];
+//    if (cell == nil) {
+//      cell = [tableView registerNib:[UINib nibWithNibName:@"DocumentCell" bundle:nil] forCellReuseIdentifier:@"document"];
+//    }
+    
+//    [tableView dequeueReusableCellWithIdentifier:@"document"];
   //  cell.blueView.layer.cornerRadius = 10;
     
 //    [cell.messageLbl setText:items[0]];
@@ -414,7 +422,7 @@ static NSString * const kChannelGuide = @"the_guide";
     [cell.docName setText:list[list.count-1]];
     return  cell;
     
-  }else if([dict[@"type"] isEqualToString:@"Text"]) {
+  }else {
     MessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"chat"];
   //  cell.blueView.layer.cornerRadius = 10;
     
@@ -427,27 +435,28 @@ static NSString * const kChannelGuide = @"the_guide";
     
     [cell.dateTimeLbl setText:dict[@"time"]];
     return  cell;
-  }else{
-    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
-  //  cell.blueView.layer.cornerRadius = 10;
-    
-//    [cell.messageLbl setText:items[0]];
-    if ([items[2] isEqualToString:self.currentUserId]) {
-      [cell.userLable setText:@"You"];
-    }else{
-      [cell.userLable setText:items[1]];
-    }
-    
-    [cell.dateLabel setText:dict[@"time"]];
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
-            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
-            });
-      });
-    return  cell;
   }
+//  else{
+//    imageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"image"];
+//  //  cell.blueView.layer.cornerRadius = 10;
+//
+////    [cell.messageLbl setText:items[0]];
+//    if ([items[2] isEqualToString:self.currentUserId]) {
+//      [cell.userLable setText:@"You"];
+//    }else{
+//      [cell.userLable setText:items[1]];
+//    }
+//
+//    [cell.dateLabel setText:dict[@"time"]];
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//            NSURL *imageurl = [[NSURL alloc] initWithString:items[0]];
+//            NSData *imageData = [[NSData alloc] initWithContentsOfURL:imageurl];
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [[cell imageView] setImage:[UIImage imageWithData:imageData]];
+//            });
+//      });
+//    return  cell;
+//  }
   
   
 }
