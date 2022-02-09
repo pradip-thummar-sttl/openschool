@@ -829,20 +829,24 @@ public class CallActivity extends BaseActivity implements QBRTCSessionStateCallb
 
     private void initializePubNub() {
         // tag::KEYS-2[]
-        String pubKey = BuildConfig.PUB_KEY;
-        String subKey = BuildConfig.SUB_KEY;
-        // end::KEYS-2[]
+       try {
+           String pubKey = BuildConfig.PUB_KEY;
+           String subKey = BuildConfig.SUB_KEY;
+           // end::KEYS-2[]
 
-        // tag::INIT-1.2[]
+           // tag::INIT-1.2[]
 
-        PNConfiguration pnConfiguration = new PNConfiguration();
-        pnConfiguration.setPublishKey(pubKey);
-        pnConfiguration.setSubscribeKey(subKey);
-        pnConfiguration.setLogVerbosity(PNLogVerbosity.BODY);
-        pnConfiguration.setReconnectionPolicy(PNReconnectionPolicy.LINEAR);
-        pnConfiguration.setMaximumReconnectionRetries(10);
+           PNConfiguration pnConfiguration = new PNConfiguration("myUniqueUUID");
+           pnConfiguration.setPublishKey(pubKey);
+           pnConfiguration.setSubscribeKey(subKey);
+           pnConfiguration.setLogVerbosity(PNLogVerbosity.BODY);
+           pnConfiguration.setReconnectionPolicy(PNReconnectionPolicy.LINEAR);
+           pnConfiguration.setMaximumReconnectionRetries(10);
 
-        mPubNub = new PubNub(pnConfiguration);
+           mPubNub = new PubNub(pnConfiguration);
+       }catch (Exception e){
+           e.printStackTrace();
+       }
         // end::INIT-1.2[]
     }
 

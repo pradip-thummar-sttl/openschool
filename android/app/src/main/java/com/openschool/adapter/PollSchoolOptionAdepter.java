@@ -86,6 +86,7 @@ public class PollSchoolOptionAdepter extends RecyclerView.Adapter<PollSchoolOpti
             this.edtOption.addTextChangedListener(myCustomEditTextListener);
         }
     }
+
     public class MyCustomEditTextListener implements TextWatcher {
         private int position;
 
