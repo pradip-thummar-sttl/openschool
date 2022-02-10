@@ -86,4 +86,8 @@ export const EndPoints = {
     deleteNotification : 'notificationdelete',
     pupilbyclasssetup:"pupilbyclasssetup",
     Teacherdownbyschoolid:"teacherdownbyschoolid",
+
+    // common 
+    DeleteRecordingAndMaterial:"deleteuplodfile/",
+
 }

@@ -36,7 +36,7 @@ export default StyleSheet.create({
         borderBottomWidth: 1,
     },
     commonBg: {
-        backgroundColor: COLORS.backgroundColorCommon,
+        // backgroundColor: COLORS.backgroundColorCommon,
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
         height: '100%',
@@ -314,6 +314,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         marginBottom: hp(1.04),
+        marginTop: hp(1.04),
         height: hp(5),
     },
     downloadIcon: {
@@ -1352,6 +1353,10 @@ export default StyleSheet.create({
         paddingTop: hp(2.46),
         paddingLeft: hp(2),
     },
+    videoSliderSpaceLH: {
+        // paddingTop: hp(2.46),
+        paddingLeft: hp(2),
+    },
     headerText: {
         fontSize: hp(1.72),
         color: COLORS.darkGray,
@@ -1451,9 +1456,9 @@ export default StyleSheet.create({
         borderTopWidth: 1,
         borderColor: COLORS.borderGrp,
         paddingTop: hp(2),
-        paddingBottom: hp(2),
+        paddingBottom:Platform.OS === 'android' ? hp(2) : hp(8),
         position: 'absolute',
-        bottom: 10,
+        bottom: 0,
         width: '100%',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),

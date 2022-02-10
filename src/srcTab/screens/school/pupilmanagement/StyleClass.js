@@ -266,6 +266,17 @@ export default StyleSheet.create({
         alignSelf: 'center',
         borderColor: COLORS.dashboardGreenButton,
     },
+    buttonParentSchool: {
+        height: 41,
+        width: 144,
+        marginVertical: 15,
+        borderRadius: 6,
+        margin: 5,
+        borderWidth: 1,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        borderColor: COLORS.dashboardGreenButton,
+    },
     label: {
         fontSize: 14, 
         textAlign: 'center',

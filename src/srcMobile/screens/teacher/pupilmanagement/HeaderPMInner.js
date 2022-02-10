@@ -47,7 +47,7 @@ const HeaderPMInner = (props) => {
                 </View>
 
                 {tabIndex == 0 ?
-                    <View style={[styles.headerRight,{right : Platform.OS === 'android' ? 10 : 15}]}>
+                    <View style={[styles.headerRight,{right : Platform.OS === 'android' ? 12 : 20}]}>
                         <TouchableOpacity
                             activeOpacity={opacity}>
                             <View style={{
@@ -56,18 +56,14 @@ const HeaderPMInner = (props) => {
                             }}>
                                 <TouchableOpacity activeOpacity={opacity}
                                     onPress={() => props.navigateToPupilProfileEdit()}
-                                    style={{
-                                        backgroundColor: COLORS.dashboardGreenButton,
-                                        padding: hp(1.5),
-                                        borderRadius: hp(1),
-                                        marginHorizontal: 5
-                                    }}>
+                                    style={styles.commonButtonGreenheader }
+                                    >
                                     <EditWhite style={{
                                         width: hp(1.57),
                                         height: hp(1.57),
                                         resizeMode: 'contain',
                                         alignSelf: 'center',
-                                    }} height={hp(1.57)} width={hp(1.57)} />
+                                    }} height={hp(2)} width={hp(2)} />
                                 </TouchableOpacity>
 
                             </View>
@@ -115,6 +111,17 @@ const HeaderPMInner = (props) => {
 export default HeaderPMInner;
 
 const styles = StyleSheet.create({
+    commonButtonGreenheader: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        borderRadius: hp(1),
+        height: hp(5.20),
+        width: hp(5.20),
+        marginLeft: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
+
+    },
     headerMaintop: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -124,6 +131,8 @@ const styles = StyleSheet.create({
         paddingLeft: hp(2.46),
         paddingRight: hp(2),
         paddingBottom: 10,
+        height : 50,
+        // backgroundColor : 'red'
     },
     headerMain: {
         shadowColor: COLORS.black,

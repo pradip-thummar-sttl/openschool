@@ -470,7 +470,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width : 120,
+        width : Platform.OS === 'ios' ? hp(16) : hp(17),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',

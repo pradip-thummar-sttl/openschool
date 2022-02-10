@@ -52,6 +52,8 @@ const PupilLessonDetail = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
+    const [isLoading,setLoading] = useState(false)
+    const [isHomeworkLoading,setHomeworkLoading] = useState(false)
 
     let currentCount = 0
     useEffect(() => {
@@ -133,6 +135,7 @@ const PupilLessonDetail = (props) => {
         }
 
         console.log('data', data);
+        setHomeworkLoading(true)
         Service.post(data, `${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             if (res.flag) {
                 var due = []
@@ -151,6 +154,7 @@ const PupilLessonDetail = (props) => {
                 setDueHomeWork(due)
                 setSubmitHomeWork(submit)
                 setMarkedHomeWork(marked)
+                setHomeworkLoading(false)
             } else {
 
             }
@@ -164,7 +168,7 @@ const PupilLessonDetail = (props) => {
             Searchby: searchBy,
             Filterby: filterBy,
         }
-
+        setLoading(true)
         console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
             var startDate = moment().startOf('week');
@@ -182,6 +186,7 @@ const PupilLessonDetail = (props) => {
             console.log('current', current.length, "last", last.length);
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
+            setLoading(false)
         }, (err) => {
 
         })
@@ -368,16 +373,16 @@ const PupilLessonDetail = (props) => {
     }
 
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View style={[{flex  : 1}]}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{ backgroundColor: COLORS.white }}>
+            <View style={{ backgroundColor: COLORS.white ,height : '100%'}}>
                 <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
                 {searchHeader()}
-                <View style={PAGESTYLE.whiteBg1}>
+                <View style={[PAGESTYLE.whiteBg1,{}]}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
                             <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { setSearchActive(false); setLesson(true); getLessonData('', ''); }}>
@@ -389,15 +394,17 @@ const PupilLessonDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.teacherLessonGrid]}>
-                    <View >
+                <ScrollView showsVerticalScrollIndicator={false}  contentContainerStyle={[PAGESTYLE.teacherLessonGrid,{flex : 1}]}>
+                    {/* <View> */}
                         {
                             isLesson ?
 
                                 <PupilLesson
                                     currentWeekLesson={currentWeekLesson}
                                     lastWeekLesson={lastWeekLesson}
-                                    navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} />
+                                    navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} 
+                                    isLoading={isLoading}
+                                    />
                                 :
                                 <PupilLessonDue
                                     DueHomeWork={DueHomeWork}
@@ -405,16 +412,17 @@ const PupilLessonDetail = (props) => {
                                     MarkedHomeWork={MarkedHomeWork}
                                     navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
                                     navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} />
+                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} 
+                                    isHomeworkLoading={isHomeworkLoading}
+                                    />
                         }
-                    </View>
+                    {/* </View> */}
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}
                     {/* <PupilHomeWorkDetail /> */}
                     {/* <PupilHomeWorkSubmitted /> */}
                     {/* <PupilHomeWorkMarked /> */}
                 </ScrollView>
-
             </View>
         </View>
     );

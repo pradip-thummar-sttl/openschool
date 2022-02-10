@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View, Platform, BackHandler } from "react-native";
+import { Alert, Image, SafeAreaView, Text, TouchableOpacity, View, Platform, BackHandler,ScrollView } from "react-native";
 import WorkSpaceHeader from "../../../component/reusable/header/WorkSpaceHeader";
 import PAGESTYLE from './Style';
 import { SketchCanvas } from '@terrylinla/react-native-sketch-canvas';
@@ -10,7 +10,7 @@ import { User } from "../../../../utils/Model";
 import { getFileExtention } from "../../../../utils/Download";
 import { baseUrl, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
 import MESSAGE from "../../../../utils/Messages";
-import { ScrollView } from "react-native-gesture-handler";
+// import { ScrollView } from "react-native-gesture-handler";
 // import Images from "../../../../utils/Images";
 import EraseIcon from "../../../../svg/pupil/workspace/EraseIcon";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
@@ -18,6 +18,7 @@ import ClearIcon from "../../../../svg/pupil/workspace/ClearIcon";
 import SavedIcon from "../../../../svg/pupil/workspace/SavedIcon";
 import SaveIcon from "../../../../svg/pupil/workspace/SaveIcon";
 import UndoIcon from "../../../../svg/pupil/workspace/UndoIcon";
+import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 const WorkSpace = (props) => {
     const [pathCount, setPathCount] = useState(-1)
     const [workSpace, setWorkSpace] = useState([])
@@ -191,16 +192,16 @@ const WorkSpace = (props) => {
                         </View> */}
                     </View>
                     :
-                    <View style={PAGESTYLE.workSpaceViewSaved}>
-                        <View>
+                    <View style={[PAGESTYLE.workSpaceViewSaved,{height : '100%'}]}>
+                        <View style={{height :'83%'}}>
                             <Image
                                 style={{ height: '100%', width: '100%', resizeMode: 'contain', }}
                                 source={{ uri: baseUrl + workspaceList[selectedWorkSpace].filename }} />
                         </View>
-                        <View style={PAGESTYLE.bottomView}>
-                            <View style={PAGESTYLE.wsView}>
+                        {/* <View style={PAGESTYLE.bottomView}>
+                            <View style={[PAGESTYLE.wsView,{bottom :10,paddingBottom : 10,}]}> */}
                                 <ScrollView
-                                    style={{}}
+                                    style={{flex :1 , width: '100%'}}
                                     showsVerticalScrollIndicator={false}
                                     horizontal={true}>
                                     {
@@ -209,8 +210,8 @@ const WorkSpace = (props) => {
                                                 <TouchableOpacity
                                                     activeOpacity={opacity}
                                                     onPress={() => setSelectedWorkSpace(index)}>
-                                                    <View style={PAGESTYLE.fileGrp}>
-                                                        <Text style={{ ...PAGESTYLE.fileName, fontWeight: selectedWorkSpace == index ? 'bold' : 'normal' }}>Workspace {index + 1}</Text>
+                                                    <View style={[PAGESTYLE.fileGrpWorkspacee, { height: 50, width: 150,marginHorizontal : 3}]}>
+                                                        <Text style={{ ...PAGESTYLE.fileName, fontWeight: selectedWorkSpace == index ? 'bold' : 'normal' }}>workSpace {index + 1}</Text>
                                                     </View>
                                                 </TouchableOpacity>
                                             )
@@ -218,8 +219,8 @@ const WorkSpace = (props) => {
                                     }
                                 </ScrollView>
 
-                            </View>
-                        </View>
+                            {/* </View>
+                        </View> */}
                     </View>
             }
 

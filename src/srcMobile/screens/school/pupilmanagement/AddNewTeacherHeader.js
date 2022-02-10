@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image,ActivityIndicator } from "react-native";
+import { Alert, View, StyleSheet, TextInput, ScrollView, Text, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -52,7 +52,7 @@ const AddNewTeacherHeader = (props) => {
                 </View>
 
                 <View style={styles.headerRight}>
-                    <TouchableOpacity onPress={() => props.OnSaveEdit()} style={[styles.buttonGroup,styles.commonButtonGreenheader]}>
+                    <TouchableOpacity onPress={() => props.OnSaveEdit()} style={[styles.buttonGroup, styles.commonButtonGreenheader]}>
                         {props.isLoading ?
                             <ActivityIndicator
                                 // style={STYLE.commonButtonGreen}
@@ -61,7 +61,6 @@ const AddNewTeacherHeader = (props) => {
                             :
                             <>
                                 <WhiteCheck style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
-                                <Text ></Text>
                             </>
                         }
                         {/* <Image style={[styles.addIcon, styles.iconTop]} source={require('../../../../assets/images/checkIcon2.png')} /> */}
@@ -142,7 +141,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
-        marginRight: hp(1.69),
+        // marginRight: hp(1.69),
     },
     addIcon: {
         width: hp(1.55),
@@ -155,19 +154,10 @@ const styles = StyleSheet.create({
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
-        fontSize: hp(1.56),
         borderRadius: hp(1),
-        overflow: 'hidden',
-        textAlign: 'center',
-        // paddingLeft: hp(3.125),
-        // paddingRight: hp(2),
         height: hp(5.20),
-        width :42,
-        paddingTop: hp(1.4),
-        paddingBottom: hp(1.4),
-        alignSelf: 'center',
-        textTransform: 'uppercase',
-        fontFamily: FONTS.fontBold,
-        justifyContent : 'center'
+        width: hp(5.20),
+        alignItems: 'center',
+        justifyContent: 'center'
     },
 });

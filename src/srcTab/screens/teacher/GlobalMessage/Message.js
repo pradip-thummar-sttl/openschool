@@ -102,7 +102,7 @@ const Message = (props) => {
     );
 
     return (
-        <View style={{ width: '93%', }}>
+        <View style={{ flex :1  }}>
             <SafeAreaView style={{ backgroundColor: COLORS.white, flex: 1 }}>
                 {!isAddMessage ?
                     <>

@@ -79,15 +79,15 @@ const NewMessage = (props) => {
 
     const parentListView = () => {
         return (
-            <View style={{ marginBottom: 10, flexDirection: 'column', }}>
+            <View style={{ marginBottom: 10, flexDirection: 'column',width : '100%' }}>
                 <Text label style={Style.labelCommon}>Recipient</Text>
                 <FlatList
                     data={parentsData}
                     style={{ width: '100%', paddingStart: 5, }}
                     renderItem={({ item, index }) => (
-                        <View style={{ ...Styles.alignRow, marginTop: 10 }}>
+                        <View style={{ flexDirection : 'row', marginTop: 10 ,width : '50%'}}>
                             <CheckBox
-                                style={Styles.checkMark}
+                                // style={[{backgroundColor : 'red'}]}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -99,7 +99,7 @@ const NewMessage = (props) => {
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
-                            <Text style={Styles.checkBoxLabelText}>{item.ParentFirstName} {item.ParentLastName}</Text>
+                            <Text numberOfLines={1} style={[Styles.checkBoxLabelText,{paddingLeft : 0}]}>{item.ParentFirstName} {item.ParentLastName}</Text>
                         </View>
                     )}
                     numColumns={2}

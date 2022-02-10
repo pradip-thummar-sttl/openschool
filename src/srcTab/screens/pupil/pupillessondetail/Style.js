@@ -45,8 +45,6 @@ export default StyleSheet.create({
     lessonPlanTab: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        paddingTop: 0,
-        marginTop: 0,
     },
     tabs: {
         paddingRight: hp(3.90),
@@ -306,6 +304,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         marginBottom: hp(1.04),
+        marginTop: hp(1.04),
         height: hp(5),
     },
     downloadIcon: {
@@ -915,7 +914,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
         fontSize: hp(2.08),
         color: COLORS.darkGray,
-        marginBottom: hp(2.86),
+        marginBottom: hp(2),
     },
     videoWrap: {
         flexDirection: 'row',

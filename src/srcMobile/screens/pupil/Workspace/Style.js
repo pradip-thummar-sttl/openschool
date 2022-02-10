@@ -8,7 +8,7 @@ export default StyleSheet.create({
         paddingVertical: hp(2),
         paddingHorizontal: hp(2),
         backgroundColor: 'white',
-        height: '86.5%',
+        flex: 1,
         width: '100%',
         alignSelf: 'center',
         borderRadius: 8,
@@ -16,6 +16,13 @@ export default StyleSheet.create({
     },
     workSpaceViewSaved: {
         height: '80%',
+        width: '100%',
+        alignSelf: 'center',
+        backgroundColor: 'white',
+    },
+    workSpaceSaved: {
+        // height: '100%',
+        flex : 1,
         width: '100%',
         alignSelf: 'center',
         backgroundColor: 'white',
@@ -53,6 +60,13 @@ export default StyleSheet.create({
         height: hp(8),
         flexDirection: 'row',
         alignItems: "center"
+    },
+    fileGrpWorkspacee: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
     },
     fileGrp: {
         flexDirection: 'row',

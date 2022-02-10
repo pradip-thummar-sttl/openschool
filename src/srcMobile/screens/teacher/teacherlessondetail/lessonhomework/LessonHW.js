@@ -31,6 +31,11 @@ import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMat
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import Modal from 'react-native-modal';
 const TLHomeWork = (props) => {
+
+    var _removeRecordingArr = [];
+    var _removeMaterialArr = [];
+
+
     const textInput = useRef(null);
     const [materialArr, setMaterialArr] = useState([])
     const [isAddRecording, setAddRecording] = useState(false)
@@ -40,12 +45,9 @@ const TLHomeWork = (props) => {
     const [itemCheckList, setItemCheckList] = useState([]);
     const [newItem, setNewItem] = useState('');
 
-
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
 
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
     const [isMatLoading, setLoader] = useState(false)
@@ -58,7 +60,12 @@ const TLHomeWork = (props) => {
     const [checkVal, setcheckVal] = useState('false');
 
     useEffect(() => {
-        console.log('`${EndPoints.Homework}/${props.id}`', `${EndPoints.Homework}/${props.id}`);
+        return () => {
+            _removeRecordingArr = [];
+            _removeMaterialArr = [];
+        };
+    })
+    useEffect(() => {
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
             console.log('response of homework by lesson id', res)
             if (res.flag) {
@@ -145,12 +152,6 @@ const TLHomeWork = (props) => {
         }
     }
 
-    const removeObject = (index1, item) => {
-        var array = [...materialArr];
-        array.splice(index1, 1);
-        setMaterialArr(array)
-    }
-
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
         Addhomework.CheckList = itemCheckList
@@ -206,6 +207,7 @@ const TLHomeWork = (props) => {
             }
         }
     }
+    
     const stopRecording = async () => {
         if (recordingName.length > 0) {
 
@@ -218,7 +220,7 @@ const TLHomeWork = (props) => {
                 setRecordingStarted(false)
                 const url = res.result.outputURL;
                 let ext = url.split('.');
-                
+
                 let obj = {
                     uri: Platform.OS == 'android' ? 'file:///' + url : url,
                     originalname: `${recordingName}.mp4`,
@@ -238,8 +240,6 @@ const TLHomeWork = (props) => {
         }
     }
 
-
-
     const onCameraOnly = () => {
 
         launchCamera({ mediaType: 'video', videoQuality: 'low' }, (response) => {
@@ -258,7 +258,6 @@ const TLHomeWork = (props) => {
         setAddRecording(false)
 
     }
-
 
     const saveCameraData = () => {
 
@@ -291,14 +290,17 @@ const TLHomeWork = (props) => {
         setSwitch(isOn)
         Addhomework.IsIncluded = isOn
     }
+
     const setDesc = (text) => {
         setDescription(text)
         Addhomework.HomeworkDescription = text
     }
+
     const removeCheckListItem = (_index) => {
         const newList = itemCheckList.filter((item, index) => index !== _index);
         setItemCheckList(newList)
     }
+
     const pushCheckListItem = () => {
         if (!newItem.trim()) {
             showMessage(MESSAGE.addItem)
@@ -346,7 +348,7 @@ const TLHomeWork = (props) => {
                     extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : Platform.OS === 'android'  ? 0 : 7}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine, { alignItems: 'center', paddingVertical: Platform.OS === 'android' ? 0 : 7 }]}>
                             <CheckBox
                                 style={PAGESTYLE.selectMark}
                                 value={item.IsCheck}
@@ -364,7 +366,7 @@ const TLHomeWork = (props) => {
                                 maxLength={40}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
-                                
+
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -399,18 +401,12 @@ const TLHomeWork = (props) => {
         );
     };
 
-    const removeRecording = () => {
-        var arr = [...recordingArr]
-        arr.splice(0, 1)
-        setRecordingArr(arr)
-        Addhomework.RecordingArr = arr
-    }
-
     const toggleModal = () => {
         console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
+
     const renderRecordingNamePopup = () => {
         return (
             <Modal isVisible={isModalVisible}>
@@ -454,6 +450,29 @@ const TLHomeWork = (props) => {
     }
 
 
+    const removeObject = (index1, item) => {
+
+        var array = [...materialArr];
+        // var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
+        // _removeMaterialArr.push(fname);
+        // Addhomework.RemoveMaterialArr = _removeMaterialArr;
+        array.splice(index1, 1);
+        setMaterialArr(array)
+    }
+
+    const removeRecording = () => {
+        var arr = [...recordingArr]
+        var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
+        var arr = fname.split("/")
+        _removeRecordingArr.push(arr[arr.length-1]);
+
+        // _removeRecordingArr.push(fname);
+        Addhomework.RemoveRecordingArr = _removeRecordingArr;
+        arr.splice(0, 1)
+        setRecordingArr(arr)
+        Addhomework.RecordingArr = arr
+    }
+
     return (
 
         <KeyboardAwareScrollView>
@@ -465,9 +484,7 @@ const TLHomeWork = (props) => {
                                 <View style={PAGESTYLE.toggleBox}>
                                     <View style={PAGESTYLE.toggleGrpBox}>
                                         <Text style={PAGESTYLE.toggleText}>Include homework</Text>
-                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton}
-                                            isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)}
-                                        />
+                                        <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={isSwitch} color={COLORS.dashboardGreenButton} onToggle={isOn => switchOnOff(isOn)} />
                                     </View>
                                 </View>
                             </View>
@@ -540,7 +557,7 @@ const TLHomeWork = (props) => {
                                             <Text style={{ ...PAGESTYLE.fileName, width: wp(74) }} numberOfLines={1}>{item.name ? item.name : item.originalname}</Text>
                                             {
                                                 item.uri ?
-                                                    <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={[PAGESTYLE.RenderDownload,{marginLeft:hp(0.4)}]}>
+                                                    <TouchableOpacity onPress={() => item.uri && removeObject(index, item)} style={[PAGESTYLE.RenderDownload, { marginLeft: hp(0.4) }]}>
                                                         <CloseBlack style={PAGESTYLE.downloadIcon} height={hp(3)} width={hp(3)} />
                                                     </TouchableOpacity>
                                                     :

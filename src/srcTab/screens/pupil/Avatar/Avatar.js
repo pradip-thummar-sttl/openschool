@@ -30,7 +30,7 @@ const tabs = [
 
 const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
 
-const Avatar = () => {
+const Avatar = (props) => {
 
     const [stateOptions, setStateValues] = useState(tabs);
     const [currentSelected, setCurrentSelected] = useState('COLOUR');
@@ -410,7 +410,7 @@ const Avatar = () => {
         props.navigation.openDrawer()
     }
     return (
-        <ScrollView>
+        <ScrollView contentContainerStyle={{width : '100%'}}>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
                 <View style={[Styles.leftView, {width:'35%'}]}>

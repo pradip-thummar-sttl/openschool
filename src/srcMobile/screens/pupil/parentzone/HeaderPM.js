@@ -47,7 +47,7 @@ const HeaderPM = (props) => {
         if (!isSearchActive) {
             props.onClearSearch()
             setKeyword('')
-            // textInput.current.clear()
+            textInput.current.clear()
         } else {
             props.onSearch()
         }
@@ -126,10 +126,14 @@ console.log('------->>>><_______________',props);
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => {
+                                keyword ? 
                                 isSearchActive ?
                                     setSearchActive(false)
                                     :
                                     setSearchActive(true)
+
+                                   :
+                                   null 
                             }}>
                             {
                                 isSearchActive ?
@@ -154,7 +158,7 @@ console.log('------->>>><_______________',props);
                                 {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                                 <FilterBlack style={styles.searchMenu}height={15} width={15} />
                                 </MenuTrigger>
-                            <MenuOptions  style={[styles.filterCard, styles.dateFilter]} >
+                            <MenuOptions  style={[styles.filterCard]}>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -573,20 +577,16 @@ const styles = StyleSheet.create({
     filterCard: {
         backgroundColor: COLORS.white,
         position: Platform.OS === 'android' ? 'relative' : 'absolute',
-        top: Platform.OS === 'android' ? 0 :50,
+        top: Platform.OS === 'android' ? 0 : 50,
         right: 0,
-        width: 238,
+        width: 200,
         padding: 10,
-        paddingVertical: 0,
+        paddingVertical: 5,
         shadowColor: COLORS.SidebarHeaderShadow,
         shadowOffset: { width: 0, height: 4, },
         shadowOpacity: 0.16,
         shadowRadius: 6,
         borderRadius: 6,
         // marginTop  :30
-    },
-    dateFilter: {
-        width: 180,
-        top: 25,
     },
 });

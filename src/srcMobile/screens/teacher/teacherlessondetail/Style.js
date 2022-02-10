@@ -1152,6 +1152,14 @@ export default StyleSheet.create({
         top: hp(0.3),
         alignSelf: 'center',
     },
+    dropDownArrowdatetimeMobile: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.6),
+        // top: hp(0.3),
+        alignSelf: 'center',
+    },
     dropDownArrowdatetimehomeWork: {
         width: hp(1.51),
         resizeMode: 'contain',

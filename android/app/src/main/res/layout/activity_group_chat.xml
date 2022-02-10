@@ -58,17 +58,55 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <EditText
-            android:id="@+id/edtText"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
+            android:orientation="horizontal"
+            android:layout_marginStart="5dp"
             android:layout_toStartOf="@+id/btnSend"
-            android:background="@drawable/shape_chat"
-            android:hint="Say something..."
-            android:inputType="textCapSentences"
-            android:maxLines="6" />
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_chat_bg"
+            >
+
+            <EditText
+                android:id="@+id/edtText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:paddingHorizontal="5dp"
+                android:hint="Say something..."
+                android:background="@color/white"
+                android:inputType="textCapSentences"
+                android:maxLines="6" />
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <ImageView
+                    android:id="@+id/btnAttachment"
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/icn_attached" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:visibility="gone"
+                    android:layout_weight="1" />
+            </FrameLayout>
+
+
+
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/btnSend"

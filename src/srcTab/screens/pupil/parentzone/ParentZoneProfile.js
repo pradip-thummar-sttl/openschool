@@ -37,7 +37,7 @@ const ParentZoneProfile = (props) => {
                                         <TouchableOpacity
                                             activeOpacity={opacity}
                                             onPress={() => { props.navigateToDetail() }}>
-                                            <Text style={PAGESTYLE.topBannerBtn1}>Edit Profile</Text>
+                                            <Text style={[PAGESTYLE.topBannerBtn1,{fontSize : 15}]}>Edit Profile</Text>
                                         </TouchableOpacity>
                                     </View>
                                 </View>

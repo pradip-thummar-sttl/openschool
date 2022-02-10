@@ -8,7 +8,7 @@ export default StyleSheet.create({
         paddingVertical: hp(2),
         paddingHorizontal: hp(2),
         backgroundColor: 'white',
-        height: '86.5%',
+        flex: 1,
         width: '100%',
         alignSelf: 'center',
         borderRadius: 8,
@@ -50,13 +50,14 @@ export default StyleSheet.create({
     },
     wsView: {
         width: '100%',
-        height: hp(8),
+        height: hp(10),
         flexDirection: 'row',
         alignItems: "flex-start",
         borderTopWidth: 1,
         borderTopColor: COLORS.videoLinkBorder,
         paddingTop: 10,
-        paddingHorizontal: 10,
+
+        paddingHorizontal: 10
     },
     fileGrp: {
         flexDirection: 'row',
@@ -68,6 +69,13 @@ export default StyleSheet.create({
         paddingVertical: hp(1.23),
         borderRadius: 8,
         marginRight: 8,
+    },
+    fileGrpWorkspacee: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.videoLinkBorder,
     },
     fileName: {
         fontFamily: FONTS.fontRegular,
@@ -116,7 +124,7 @@ export default StyleSheet.create({
         marginLeft: 10,
     },
     functionText: {
-        color: COLORS.darkGray, 
+        color: COLORS.darkGray,
         fontSize: hp(1.56),
         fontFamily: FONTS.fontBold,
         textTransform: 'uppercase',

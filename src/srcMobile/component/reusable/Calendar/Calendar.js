@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, BackHandler } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, Image, Platform, BackHandler ,ActivityIndicator} from 'react-native';
 import { useSelector } from "react-redux";
 import moment from "moment";
 import { Calendar } from 'react-native-calendars';
@@ -40,7 +40,6 @@ const Calendars = (props) => {
         }
 
         if (User.user.UserType === "Teacher") {
-
             Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
                 if (res.code == 200) {
                     setDateApiData(res.data)
@@ -84,12 +83,14 @@ const Calendars = (props) => {
 
 
     const onDatePress = (date) => {
-        selectedDate.date = date.dateString
-        dispatch(setTimeTableWeekEventData(date.dateString))
-        setTimeout(() => {
-            props.navigation.goBack()
-            return true;
-        }, 500)
+        // selectedDate.date = date.dateString
+        // dispatch(setTimeTableWeekEventData(date.dateString))
+        // setTimeout(() => {
+        //     props.navigation.goBack()
+        //     return true;
+        // }, 1000)
+        props.route.params.onGoBack(date.dateString)
+        props.navigation.goBack()
     }
 
 
@@ -185,7 +186,6 @@ const Calendars = (props) => {
                                                 <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                     {
                                                         dateApiData[`${item}`].map((obj) => {
-                                                            console.log('uitem 2', dateApiData[`${item}`])
                                                             return (
                                                                 <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
                                                             )
@@ -211,7 +211,12 @@ const Calendars = (props) => {
                             </TouchableOpacity>
                         )
                     }}
-                /> : null}
+                /> :  
+                 <ActivityIndicator 
+                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                color={COLORS.yellowBorder} 
+                style={styles.calendarLoader} />
+                }
 
             <View style={{ paddingLeft: hp(1.97), marginTop: hp(6.0) }}>
                 <View style={styles.colorView}>
@@ -236,6 +241,10 @@ const Calendars = (props) => {
 const styles = StyleSheet.create({
     drawerMain: {
         flex: 1,
+    },
+    calendarLoader:{
+        width : '100%',
+        height : '40%',
     },
     drawerTitleMainDate: {
         borderBottomWidth: 1,

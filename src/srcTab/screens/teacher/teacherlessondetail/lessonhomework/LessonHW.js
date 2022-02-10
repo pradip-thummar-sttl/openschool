@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, TextInput, TouchableOpacity, H3, ScrollView, Im
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import PAGESTYLE from '../Style';
 import FONTS from '../../../../../utils/Fonts';
 import CheckBox from '@react-native-community/checkbox';
@@ -32,24 +31,9 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import Modal from 'react-native-modal';
 
-var checkItem = [
-    {
-        ItemName: "Watch The BBC Bitesize Video",
-        IsCheck: false
-    },
-    {
-        ItemName: "Write a list of all the everyday items that come from the Amazon Rainforest",
-        IsCheck: false
-    },
-    {
-        ItemName: "Write a short story about where those items come from in the the forest and what they mean to you.",
-        IsCheck: false
-    },
-    {
-        ItemName: "Take a photo of your work and upload here",
-        IsCheck: false
-    },
-]
+
+var _removeRecordingArr = [];
+var _removeMaterialArr = [];
 
 const TLHomeWork = (props) => {
     const textInput = useRef(null);
@@ -70,19 +54,24 @@ const TLHomeWork = (props) => {
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
 
-    // const [isLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
     const [isMatLoading, setLoader] = useState(false)
 
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [recordingName, setRecordingName] = useState('');
-    // const [isRecordLoading, setRecordLoader] = useState(false)
 
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
 
     const [checkVal, setcheckVal] = useState('false');
+
+    useEffect(() => {
+        return () => {
+            _removeRecordingArr = [];
+            _removeMaterialArr = [];
+        };
+    })
     useEffect(() => {
 
         Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
@@ -171,11 +160,7 @@ const TLHomeWork = (props) => {
         }
     }
 
-    const removeObject = (index1, item) => {
-        var array = [...materialArr];
-        array.splice(index1, 1);
-        setMaterialArr(array)
-    }
+
 
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
@@ -360,8 +345,29 @@ const TLHomeWork = (props) => {
         newArray[index].ItemName = text
         setItemCheckList(newArray)
     }
+    // const removeRecording = () => {
+    //     var arr = [...recordingArr]
+    //     arr.splice(0, 1)
+    //     setRecordingArr(arr)
+    //     Addhomework.RecordingArr = arr
+    // }
+
+    const removeObject = (index1, item) => {
+
+        var array = [...materialArr];
+        // var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
+        // _removeMaterialArr.push(fname);
+        // Addhomework.RemoveMaterialArr = _removeMaterialArr;
+        array.splice(index1, 1);
+        setMaterialArr(array)
+    }
+
     const removeRecording = () => {
         var arr = [...recordingArr]
+        var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
+        var currentName = fname.split("/");
+        _removeRecordingArr.push(currentName[currentName.length - 1]);
+        Addhomework.RemoveRecordingArr = _removeRecordingArr;
         arr.splice(0, 1)
         setRecordingArr(arr)
         Addhomework.RecordingArr = arr
@@ -380,9 +386,9 @@ const TLHomeWork = (props) => {
                     extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 20, marginTop: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical :Platform.OS === 'android' ? 0 : 10}]}>
+                        <View style={[PAGESTYLE.checkBoxLabelLine, { alignItems: 'center', paddingVertical: Platform.OS === 'android' ? 0 : 10 }]}>
                             <CheckBox
-                                style={[PAGESTYLE.checkMark,{justifyContent : 'center',alignItems  :'center',top: Platform.OS === 'android' ? 0 : 3}]}
+                                style={[PAGESTYLE.checkMark, { justifyContent: 'center', alignItems: 'center', top: Platform.OS === 'android' ? 0 : 3 }]}
                                 value={item.IsCheck}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 boxType={'square'}
@@ -401,7 +407,7 @@ const TLHomeWork = (props) => {
                             <TouchableOpacity
                                 style={[PAGESTYLE.userIcon1Parent]}
                                 activeOpacity={opacity}
-                                onPress={() =>  { removeCheckListItem(index) }}>
+                                onPress={() => { removeCheckListItem(index) }}>
                                 <CloseBlack style={[PAGESTYLE.userIcon1]} height={hp(2.5)} width={hp(2.5)} />
                             </TouchableOpacity>
 
@@ -496,18 +502,18 @@ const TLHomeWork = (props) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time]}>
+                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time,{width : hp(38)}]}>
                                     <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDownSmallWrapNormal]}>
                                         <View style={PAGESTYLE.dueDateWrap}>
                                             <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                         </View>
                                         <Calender style={PAGESTYLE.calIconHomeWork} height={hp(1.76)} width={hp(1.76)} />
-                                        <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
+                                        <TouchableOpacity onPress={() => showDatePicker()} style={[PAGESTYLE.subjectDateTimeHomework,{justifyContent : 'center'}]}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy2}>{selectDate}</Text>
                                             </View>
+                                        <ArrowDown style={[PAGESTYLE.dropDownArrowdatetimehomeWorkArrow]} height={hp(1.51)} width={hp(1.51)} />
                                         </TouchableOpacity>
-                                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetimehomeWork} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
                             </View>

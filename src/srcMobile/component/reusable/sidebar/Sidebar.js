@@ -25,8 +25,6 @@ import Teachers from "../../../../svg/sidebar/Teachers";
 import Pupils from "../../../../svg/sidebar/Pupils";
 import Messaging from "../../../../svg/sidebar/Messaging";
 
-
-
 const Sidebar = (props) => {
     const [isSmall, action] = useState(true);
     const [selectedModule, setSelectedModule] = useState(0);
@@ -35,13 +33,7 @@ const Sidebar = (props) => {
         props.navigateToTimetable()
         setSelectedIndex(1);
     }
-
-
-
-
     const appState = useRef(AppState.currentState);
-
-
     useEffect(() => {
         const subscription = AppState.addEventListener("change", nextAppState => {
             if (appState.current.match(/inactive|background/) && nextAppState === "active") {
@@ -54,12 +46,12 @@ const Sidebar = (props) => {
         });
 
         return () => {
-            subscription.remove();
+            if (subscription) {
+                subscription.remove();
+            }
         };
     }, []);
-
-
-
+    
     const showActionChooserTeacher = () => {
         Alert.alert(
             '',

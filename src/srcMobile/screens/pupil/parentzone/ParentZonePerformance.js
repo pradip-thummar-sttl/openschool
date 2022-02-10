@@ -16,7 +16,7 @@ import { showMessage } from "../../../../utils/Constant";
 
 const ParentZonePerformance = (props) => {
     const item = props.data;
-    console.log('?????????',props);
+    // console.log('?????????',props);
     console.log('........///////>>>>',item);
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
@@ -41,12 +41,17 @@ const ParentZonePerformance = (props) => {
         getLessonData()
     }, [])
 
+    React.useEffect(() => {
+        console.log('CALLED');
+        getLessonData()
+    }, [props.data]);
+
     useEffect(() => {
         console.log('chartData', chartData);
     }, [chartData])
 
     const getLessonData = () => {
-        Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
+        Service.get(`${EndPoints.GetCountLession}/${item.Pupilid}`, (res) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
@@ -64,7 +69,7 @@ const ParentZonePerformance = (props) => {
     }
 
     const getHomeworkData = (lessonData) => {
-        Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
+        Service.get(`${EndPoints.GetCountHomework}/${item.Pupilid}`, (res) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {
