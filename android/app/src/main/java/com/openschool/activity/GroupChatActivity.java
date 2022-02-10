@@ -135,6 +135,7 @@ public class GroupChatActivity extends AppCompatActivity {
         if (!isChatAccessGiven) {
             _edtText.setText("Only teacher can send messages");
             _edtText.setEnabled(false);
+            _btnAttachment.setVisibility(View.GONE);
         }
     }
 

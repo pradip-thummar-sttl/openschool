@@ -1305,7 +1305,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         hostActivity.getPubNub()
                 .publish()
                 .channel(channel)
-                .message("CHAT_SETTING####" + (isChatDisabled ? "YES" : "NO"))
+                .message("CHAT_SETTING####" + (!isChatDisabled ? "YES" : "NO"))
                 .async(new PNCallback<PNPublishResult>() {
                     @Override
                     public void onResponse(PNPublishResult result, PNStatus status) {
@@ -1328,7 +1328,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
 
         bottomSheetDialog.show();
 
-        if (isChatDisabled) {
+        if (!isChatDisabled) {
             switch1.setChecked(true);
         } else {
             switch1.setChecked(false);
@@ -1343,7 +1343,7 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if (isChecked) {
+                if (!isChatDisabled) {
                     isChatDisabled = true;
                 } else {
                     isChatDisabled = false;
