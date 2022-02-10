@@ -147,12 +147,14 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     protected boolean asListenerRole;
     protected boolean isTeacher;
     protected boolean isAllowPupilReactions = true;
+    protected boolean isChatDisabled = false;
     protected boolean isRecordingStarted;
     protected String currentUserID;
     protected String currentName;
     protected String teacherQBUserID;
     protected String title;
     private boolean isClicked = false;
+    private boolean isChatAccessGiven = true;
     private CountDownTimer cTimer;
 
     ParentActivityImpl hostActivity;
@@ -376,7 +378,10 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
     }
 
     private void startScreenSharing() {
-        conversationFragmentCallbackListener.onStartScreenSharing();
+        System.out.println("KDKDKD =>: conversationFragmentCallbackListener " + conversationFragmentCallbackListener);
+        if (conversationFragmentCallbackListener != null) {
+            conversationFragmentCallbackListener.onStartScreenSharing();
+        }
     }
 
     @Override
@@ -719,14 +724,15 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 intent.putExtra("CURRENT_ID", currentUserID);
                 intent.putExtra("CURRENT_NAME", currentName);
                 intent.putExtra("DIALOG_ID", currentDialogId);
+                intent.putExtra("CHAT_ACCESS", isChatAccessGiven);
                 startActivity(intent);
             }
         });
 
 
         button_screen_sharing.setOnClickListener(v -> {
-//            startScreenSharing()
-//            startActivityForResult(new Intent(getActivity(), PollingActivity.class), CallActivity.POLLING_REQUEST_CODE);
+            System.out.println("KDKDKD =>: on line 612");
+            startScreenSharing();
         });
 
         whiteboard.setOnClickListener(v -> startActivity(new Intent(getActivity(), WhiteBoardActivity.class)));
@@ -1163,6 +1169,13 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 .execute();
     }
 
+    protected void setPupilChatAccess(String message) {
+        message = message.replace("\"", "");
+        System.out.println("KDKD: message for pupil Chat Access " + message);
+
+        isChatAccessGiven = message.equals("YES") ? true : false;
+    }
+
     protected void loadPollingForPupil(String message) {
         message = message.replace("\"", "");
         System.out.println("KDKD: message for pupil " + message);
@@ -1287,6 +1300,20 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
                 });
     }
 
+    protected void sendChatAccess(String channel) {
+        System.out.println("KDKDKD: channel send Poll " + channel);
+        hostActivity.getPubNub()
+                .publish()
+                .channel(channel)
+                .message("CHAT_SETTING####" + (isChatDisabled ? "YES" : "NO"))
+                .async(new PNCallback<PNPublishResult>() {
+                    @Override
+                    public void onResponse(PNPublishResult result, PNStatus status) {
+                        System.out.println("KDKDKD: Sender Poll" + " " + status.getStatusCode());
+                    }
+                });
+    }
+
     private void showBottomSheetDialog() {
 
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(getActivity());
@@ -1295,16 +1322,35 @@ public abstract class BaseConversationFragment extends BaseToolBarFragment imple
         TextView txtSetupVoting = bottomSheetDialog.findViewById(R.id.txtSetupVoting);
         TextView txtMuteAll = bottomSheetDialog.findViewById(R.id.txtMuteAll);
         ImageView btnClose = bottomSheetDialog.findViewById(R.id.BtnClose);
+        SwitchCompat switch1 = bottomSheetDialog.findViewById(R.id.switch1);
         SwitchCompat switch2 = bottomSheetDialog.findViewById(R.id.switch2);
         ToggleButton toggle_recording_view = bottomSheetDialog.findViewById(R.id.toggle_recording_view);
 
         bottomSheetDialog.show();
+
+        if (isChatDisabled) {
+            switch1.setChecked(true);
+        } else {
+            switch1.setChecked(false);
+        }
 
         if (isAllowPupilReactions) {
             switch2.setChecked(true);
         } else {
             switch2.setChecked(false);
         }
+
+        switch1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    isChatDisabled = true;
+                } else {
+                    isChatDisabled = false;
+                }
+                sendChatAccess(channels.get(channels.size() - 1));
+            }
+        });
 
         switch2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

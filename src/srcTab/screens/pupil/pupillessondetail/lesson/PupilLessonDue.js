@@ -21,7 +21,7 @@ const PupilLessonDue = (props) => {
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace,{paddingTop : 0,paddingBottom : 0}]}>
               {
                 props.isHomeworkLoading ? 
-                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} /> :
+                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} style={{ margin: 20 }} /> :
                 <>
             {props.DueHomeWork.length > 0 || props.SubmitHomeWork.length > 0 || props.MarkedHomeWork.length > 0 ?
                 <>

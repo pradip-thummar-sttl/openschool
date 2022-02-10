@@ -22,7 +22,7 @@ const PupilLessonDue = (props) => {
             {
                 props.isHomeworkLoading ?
                 <View>
-                    <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} />
+                    <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} style={{ margin: 20 }} />
                     </View>
                     :
                     <>

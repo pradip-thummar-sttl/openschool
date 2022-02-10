@@ -39,7 +39,7 @@ export default StyleSheet.create({
         // backgroundColor: COLORS.backgroundColorCommon,
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
-        // height: '100%',
+        height: '100%',
     },
     lessonPlanTop: {
         flexDirection: 'row',
@@ -314,6 +314,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         marginBottom: hp(1.04),
+        marginTop: hp(1.04),
         height: hp(5),
     },
     downloadIcon: {
@@ -1457,7 +1458,7 @@ export default StyleSheet.create({
         paddingTop: hp(2),
         paddingBottom:Platform.OS === 'android' ? hp(2) : hp(8),
         position: 'absolute',
-        bottom: 10,
+        bottom: 0,
         width: '100%',
         paddingLeft: hp(1.95),
         paddingRight: hp(1.95),
