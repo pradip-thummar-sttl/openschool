@@ -23,5 +23,6 @@
     <color name="red">#FF0000</color>
     <color name="text_color_light_grey">#dedede</color>
     <color name="app_text_grey">#b4b6be</color>
+    <color name="file_grey">#E6E7EA</color>
     <color name="green">#00a36b</color>
 </resources>
