@@ -312,6 +312,10 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         top: hp(-0.5),
     },
+    downloadIconTab: {
+        width: hp(2.01),
+        resizeMode: 'contain',
+    },
     fileName: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.85),
@@ -1289,6 +1293,12 @@ export default StyleSheet.create({
     titleSpace: {
         marginBottom: hp(2.34),
     },
+    titleSpaceWorkspace: {
+        marginVertical: hp(1.95),
+        fontFamily: FONTS.fontSemiBold,
+        color: COLORS.darkGray,
+        fontSize: hp(2.08),
+    },
     lessonFeedDesc: {
         fontFamily: FONTS.fontSemiBold,
         fontSize: hp(1.82),
@@ -1407,8 +1417,8 @@ export default StyleSheet.create({
     filterListWrap: {
         width: Platform.OS === 'android' ? 200 : hp(30.98),
         right: 10,
-        top:  Platform.OS === 'android' ? 0 : hp(5.5),
-        position: Platform.OS === 'android' ? 'relative' :  'absolute',
+        top: Platform.OS === 'android' ? 0 : hp(5.5),
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         paddingHorizontal: 5,
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
@@ -1416,7 +1426,7 @@ export default StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-       
+
     },
     filterListText: {
         color: COLORS.darkGray,

@@ -139,7 +139,7 @@ const PupilHomeWorkDetail = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={PAGESTYLE.commonBg}>
+            <View style={[PAGESTYLE.commonBg,{flex:1}]}>
                 <Header14
                     onAlertPress={() => props.onAlertPress()}
                     goBack={() => props.goBack()}

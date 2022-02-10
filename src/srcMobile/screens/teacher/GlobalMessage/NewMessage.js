@@ -99,7 +99,7 @@ const NewMessage = (props) => {
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                             />
-                            <Text numberOfLines={1} style={[Styles.checkBoxLabelText,{paddingLeft : 0}]}>{item.ParentFirstName} {item.ParentLastName}</Text>
+                            <Text numberOfLines={1} style={[Styles.checkBoxLabelText,{paddingLeft :Platform.OS === 'android' ? 0 : 5}]}>{item.ParentFirstName} {item.ParentLastName}</Text>
                         </View>
                     )}
                     numColumns={2}

@@ -27,7 +27,7 @@ const Popuphomework = (props) => {
                         <CloseBlack style={STYLE.cancelButtonIcon}/>
                     </TouchableOpacity>
                     {/* source={require('../../../../assets/images/popup_back.png')} */}
-                    <ImageBackground  style={STYLE.popupBack} />
+                    <ImageBackground  style={STYLE.popupBack} height={hp(5)} width={hp(10)} />
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>

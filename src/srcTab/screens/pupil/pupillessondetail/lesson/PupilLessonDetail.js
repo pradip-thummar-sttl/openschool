@@ -142,7 +142,7 @@ const PupilLessonDetailInternal = (props) => {
                         <PupilHomeWorkSubmitted
                             goBack={() => setHWSubmitted(false)}
                             item={hwData}
-                            onAlertPress={() => props.onAlertPress()} 
+                            onAlertPress={() => props.onAlertPress()}
                             onLoading={isHomeworkLoading} />
                         :
                         isHWMarked ?
@@ -168,13 +168,13 @@ const PupilLessonDetailInternal = (props) => {
                                     <ScrollView>
                                         <View style={PAGESTYLE.containerWrap}>
                                             <View style={[PAGESTYLE.teacherDetailLeft, PAGESTYLE.borderRight]}>
-                                            {item.RecordingList.length == 0 ?
+                                                {item.RecordingList.length == 0 ?
                                                     // source={require('../../../../../assets/images/videoLarge2.png')} 
-                                                        // <Image style={PAGESTYLE.largeVideo} />
-                                                        null
-                                                        :
-                                                <View style={PAGESTYLE.largeVideoBlock}>
-                                                   
+                                                    // <Image style={PAGESTYLE.largeVideo} />
+                                                    null
+                                                    :
+                                                    <View style={PAGESTYLE.largeVideoBlock}>
+
                                                         <View style={{ height: '100%', width: '100%', justifyContent: 'center', backgroundColor: COLORS.blueBorder }}>
                                                             <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                                                 resizeMode={'contain'}
@@ -192,9 +192,9 @@ const PupilLessonDetailInternal = (props) => {
                                                                 null
                                                             }
                                                         </View>
-                                                   
-                                                </View>
-                                                 }
+
+                                                    </View>
+                                                }
                                                 <View style={{ marginStart: 10 }}>
                                                     <View style={PAGESTYLE.videoTitleLine}>
                                                         <View>
@@ -206,9 +206,9 @@ const PupilLessonDetailInternal = (props) => {
                                                             <View style={PAGESTYLE.bookMark}>
                                                                 {/* <Image source={item.SaveLesson ? Images.BookmarkIcon : Images.BookmarkIconOff} style={PAGESTYLE.bookMarkOn} /> */}
                                                                 {
-                                                                    item.SaveLesson?
-                                                                    <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} />:
-                                                                    <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} />
+                                                                    item.SaveLesson ?
+                                                                        <BookMarkOn style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} /> :
+                                                                        <BookMarkOff style={PAGESTYLE.bookMarkOn} height={hp(2.43)} width={hp(2.43)} />
                                                                 }
                                                                 <Text style={PAGESTYLE.saveBookMarkText}>{item.SaveLesson ? 'Saved!' : 'Save'}</Text>
                                                             </View>
@@ -219,6 +219,7 @@ const PupilLessonDetailInternal = (props) => {
                                                         <Text style={PAGESTYLE.mainNameText}>{item.TeacherFirstName} {item.TeacherLastName}</Text>
                                                     </View>
                                                     <View style={PAGESTYLE.lessonDesc}>
+                                                        <Text style={PAGESTYLE.requireText}>Description</Text>
                                                         <Text style={PAGESTYLE.lessonText}>{item.LessonDescription}</Text>
                                                     </View>
                                                 </View>
@@ -237,7 +238,7 @@ const PupilLessonDetailInternal = (props) => {
                                                                         })
                                                                     }} style={PAGESTYLE.fileGrp}>
                                                                         <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
-                                                                        <View style={PAGESTYLE.downloaBtn}>
+                                                                        <View style={[PAGESTYLE.downloaBtn, { justifyContent: 'center' }]}>
                                                                             {(isMatLoading && index == mateIndex) ?
                                                                                 <ActivityIndicator
                                                                                     style={{ ...PAGESTYLE.downloadIcon }}
@@ -245,8 +246,8 @@ const PupilLessonDetailInternal = (props) => {
                                                                                     color={COLORS.blueBorder} />
                                                                                 :
                                                                                 // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                                        <DownloadSVG style={PAGESTYLE.downloadIcon} height={hp(2.01)} width={hp(2.01)} />
-                                                                                
+                                                                                <DownloadSVG style={[PAGESTYLE.downloadIconTab]} height={hp(2.01)} width={hp(2.01)} />
+
                                                                             }
                                                                             {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
                                                                         </View>
@@ -265,7 +266,7 @@ const PupilLessonDetailInternal = (props) => {
 
                                                 </View> */}
                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
-                                                    <Text style={[PAGESTYLE.lightGreyText, PAGESTYLE.titleSpace]}> Saved workspaces</Text>
+                                                    <Text style={PAGESTYLE.titleSpaceWorkspace}> Saved workspaces</Text>
                                                     <ScrollView style={{ height: '50%' }} showsVerticalScrollIndicator={false}>
                                                         {
                                                             item.WorkSpacelist.length > 0 ?

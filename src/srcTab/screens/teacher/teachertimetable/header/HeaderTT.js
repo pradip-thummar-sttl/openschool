@@ -29,7 +29,6 @@ const HeaderTT = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('All')
     const [keyword, setKeyword] = useState('')
-    console.log('ppppppppppppppp filter by', props.filterBy);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()

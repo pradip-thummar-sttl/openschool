@@ -16,7 +16,7 @@ import PupilHomeWorkDetail from './homework/PupilHomeWorkDetail';
 import PupilHomeWorkSubmitted from './homework/PupilHomeWorkSubmitted';
 import PupilHomeWorkMarked from './homework/PupilHomeWorkMarked';
 import Header4 from '../../../component/reusable/header/bulck/Header4'
-import { Menu, MenuOptions,MenuOption,MenuTrigger,} from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger, } from 'react-native-popup-menu';
 import { Service } from "../../../../service/Service";
 import { EndPoints } from "../../../../service/EndPoints";
 import { BadgeIcon, User } from "../../../../utils/Model";
@@ -28,7 +28,6 @@ import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 const PupilLessonDetail = (props) => {
-    console.log('props of homework', props.navigation)
     const [isHide, action] = useState(true);
 
     const textInput = useRef(null);
@@ -47,8 +46,8 @@ const PupilLessonDetail = (props) => {
 
     const [item, setItem] = useState([]);
     const initialRender = useRef(true);
-    const [isLoading,setLoading] = useState(false)
-    const [isHomeworkLoading,setHomeworkLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
 
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
@@ -96,6 +95,7 @@ const PupilLessonDetail = (props) => {
         getHomeworkData('', '')
     }, [])
 
+   
     const getHomeworkData = (searchBy, filterBy) => {
         let data = {
             Searchby: searchBy,
@@ -177,7 +177,7 @@ const PupilLessonDetail = (props) => {
                                 :
                                 null
                         }}>
-                            {isSearchActive ?
+                        {isSearchActive ?
                             <CloseBlack height={18} width={18} />
                             :
                             <SearchBlue height={18} width={18} />
@@ -187,18 +187,21 @@ const PupilLessonDetail = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, 
-                       paddingVertical :  Platform.OS === 'android' ? 3 : 0
+                        style={{
+                            flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,
+                            paddingVertical: Platform.OS === 'android' ? 3 : 0
                         }}
                         placeholder="Search subject,topic name, etc"
                         maxLength={50}
-                        
+
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }} />
                 </View>
                 <View style={{ flexDirection: 'row', marginLeft: hp(1.8), }}>
                     <Menu style={PAGESTYLE.filterGroup}>
-                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text>
+                            <FilterBlack style={PAGESTYLE.filterIcon} width={hp(1.74)} height={hp(1.50)} />
+                        </MenuTrigger>
                         <MenuOptions style={PAGESTYLE.filterListWrap}>
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
@@ -208,7 +211,7 @@ const PupilLessonDetail = (props) => {
                                         <Text style={PAGESTYLE.filterListText}>Subject</Text>
                                         {selectedIndex == 0 ?
                                             // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)} />
                                             :
                                             null
                                         }
@@ -223,7 +226,7 @@ const PupilLessonDetail = (props) => {
                                         <Text style={PAGESTYLE.filterListText}>Date</Text>
                                         {selectedIndex == 1 ?
                                             // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)} />
                                             :
                                             null
                                         }
@@ -233,12 +236,12 @@ const PupilLessonDetail = (props) => {
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('LiveLesson'); setSelectedIndex(2) }}>
+                                    onPress={() => { setFilterBy('Live Lesson'); setSelectedIndex(2) }}>
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 2 ?
                                             // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)} />
                                             :
                                             null
                                         }
@@ -248,12 +251,12 @@ const PupilLessonDetail = (props) => {
                             <MenuOption style={PAGESTYLE.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { setFilterBy('PublishLesson'); setSelectedIndex(3) }}>
+                                    onPress={() => { setFilterBy('Publish Lesson'); setSelectedIndex(3) }}>
                                     <View style={PAGESTYLE.filterList}>
                                         <Text style={PAGESTYLE.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 3 ?
                                             // <Image source={Images.CheckIcon} style={PAGESTYLE.checkMark} />
-                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)}/>
+                                            <CheckedBlue style={PAGESTYLE.checkMark} width={hp(1.95)} height={hp(1.95)} />
                                             :
                                             null
                                         }
@@ -263,7 +266,6 @@ const PupilLessonDetail = (props) => {
                         </MenuOptions>
                     </Menu>
                     {/* <Image style={PAGESTYLE.filterIcon} source={Images.pupilFilter} /> */}
-                    <FilterBlack style={PAGESTYLE.filterIcon} width={hp(1.74)} height={hp(1.50)}/>
                 </View>
             </View>
         )
@@ -271,7 +273,7 @@ const PupilLessonDetail = (props) => {
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.openDrawer() 
+        props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
     const lessonRender = () => {
@@ -301,7 +303,7 @@ const PupilLessonDetail = (props) => {
                                 lastWeekLesson={lastWeekLesson}
                                 navigatePupilLessonDetailInternal={(item) => { setItem(item), setLessonDetail(true) }}
                                 isLoading={isLoading}
-                                 />
+                            />
                             :
                             <PupilLessonDue
                                 DueHomeWork={DueHomeWork}
@@ -309,16 +311,16 @@ const PupilLessonDetail = (props) => {
                                 MarkedHomeWork={MarkedHomeWork}
                                 navigatePupilHomeWorkDetail={(item) => { setItem(item), setHomeworkDetail(true) }}
                                 navigatePupilHomeworkesubmited={(item) => { setItem(item), setHomeWorkSubmitted(true) }}
-                                navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }} 
+                                navigatePupilHomeworkemarked={(item) => { setItem(item), setHomeWorkMarked(true) }}
                                 isHomeworkLoading={isHomeworkLoading}
-                                />
+                            />
                     }
                 </ScrollView>
 
             </View>
         )
     }
-    
+
     return (
         <View style={PAGESTYLE.mainPage}>
             {

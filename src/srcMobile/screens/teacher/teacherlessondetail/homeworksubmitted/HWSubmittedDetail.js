@@ -521,18 +521,20 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             style={PAGESTYLE.commonInputTextareaBoldGrey}
                                             onChangeText={feedback => setFeedback(feedback)} />
                                     </View>
-                                    <Popupaddrecording
-                                        recordingArr={recordingArr}
-                                        isVisible={isAddRecording}
-                                        isRecordingStarted={isRecordingStarted}
-                                        isScreenVoiceSelected={isScreenVoiceSelected}
-                                        onClose={() => setAddRecording(false)}
-                                        onScreeCamera={() => onScreeCamera()}
-                                        onScreeVoice={() => onScreeVoice()}
-                                        onRemoveRecording={() => removeRecording()}
-                                        onStartScrrenRecording={() => startRecording()}
-                                        onStopScrrenRecording={() => toggleModal()}
-                                        onCameraOnly={() => onCameraOnly()} />
+                                    {data.Marked ? null :
+                                        <Popupaddrecording
+                                            recordingArr={recordingArr}
+                                            isVisible={isAddRecording}
+                                            isRecordingStarted={isRecordingStarted}
+                                            isScreenVoiceSelected={isScreenVoiceSelected}
+                                            onClose={() => setAddRecording(false)}
+                                            onScreeCamera={() => onScreeCamera()}
+                                            onScreeVoice={() => onScreeVoice()}
+                                            onRemoveRecording={() => removeRecording()}
+                                            onStartScrrenRecording={() => startRecording()}
+                                            onStopScrrenRecording={() => toggleModal()}
+                                            onCameraOnly={() => onCameraOnly()} />
+                                    }
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

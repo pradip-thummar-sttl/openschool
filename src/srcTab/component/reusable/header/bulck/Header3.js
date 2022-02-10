@@ -21,13 +21,14 @@ import PopupdataSecond from "../../popup/PopupdataSecond";
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { BadgeIcon } from "../../../../../utils/Model";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from  "../../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const HeaderWhite = (props) => {
 
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [filterBy, setFilterBy] = useState('All')
     const [keyword, setKeyword] = useState('')
 
     useEffect(() => {
@@ -40,6 +41,10 @@ const HeaderWhite = (props) => {
         }
     }, [isSearchActive])
 
+    useEffect(() => {
+        props.onFilter(filterBy)
+    }, [filterBy])
+  
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -90,9 +95,11 @@ const HeaderWhite = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10,
-                        paddingVertical : Platform.OS === 'android' ? 3 : 0,
-                        fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{
+                            flex: 1, height: '100%', paddingHorizontal: 10,
+                            paddingVertical: Platform.OS === 'android' ? 3 : 0,
+                            fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,
+                        }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -103,38 +110,57 @@ const HeaderWhite = (props) => {
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
+                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                            <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)} />
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             {/* <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
                                     <Text style={styles.filterListText}>Subject</Text> */}
-                                    {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
-                                {/* </View>
+                            {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
+                            {/* </View>
                             </MenuOption> */}
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>{props.onFilter('')}}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>All</Text>
-                                </View>
+                                <TouchableOpacity onPress={() => { setSelectedIndex(0);setFilterBy('All') }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>All</Text>
+                                        {selectedIndex == 0 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>{props.onFilter('LiveLesson')}}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Live Lesson</Text>
-                                </View>
+                                <TouchableOpacity onPress={() => {setSelectedIndex(1);setFilterBy('Live Lesson')  }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 1 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>{props.onFilter('PublishLesson')}}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Publish Lesson</Text>
-                                </View>
+                                <TouchableOpacity onPress={() => { setSelectedIndex(2);setFilterBy('Publish Lesson')  }}>
+                                    <View style={styles.filterList}>
+                                        <Text style={styles.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 2 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
+                                    </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)}/>
 
                     {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
                 </TouchableOpacity>
@@ -265,16 +291,14 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
     },
     filterListWrap: {
-        // paddingTop: hp(1),
-        // paddingLeft: hp(1.2),
-        // paddingRight: hp(1.2),
-        // paddingBottom: hp(1),
-        paddingHorizontal : hp(1.2),
-        paddingVertical : hp(1),
-        position:Platform.OS === 'android' ? 'relative' : 'absolute',
+        paddingTop: Platform.OS === 'android' ? 0 : hp(1),
+        paddingLeft: hp(1.2),
+        paddingRight: hp(1.2),
+        paddingBottom: Platform.OS === 'android' ? 0 : hp(1),
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top: Platform.OS === 'android' ? 0 :hp(5.5),
-        width:  hp(30.98),
+        top: Platform.OS === 'android' ? 0 : hp(5.5),
+        width: Platform.OS === 'android' ? null : hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
