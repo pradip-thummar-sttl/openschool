@@ -65,6 +65,10 @@ const PupilTimetable = (props) => {
                 let subName = element.Type == Lesson ? element.SubjectName : element.EventType
                 let lessonTopic = element.Type == Lesson ? element.LessonTopic : element.EventLocation
 
+                if((startTime != null && startTime.trim().length == 0) || (endTime != null && endTime.trim().length == 0)){
+                    return;
+                }
+
                 if (time[timneKey].includes(startTime)) {
 
                     let st = Number(startTime.replace(':', ''));

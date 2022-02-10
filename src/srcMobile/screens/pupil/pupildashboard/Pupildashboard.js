@@ -41,6 +41,7 @@ import BronzeStar from "../../../../svg/pupil/dashboard/BronzeStar";
 import SilverStar from "../../../../svg/pupil/dashboard/SilverStar";
 import GoldStar from "../../../../svg/pupil/dashboard/GoldStar";
 import { GetImage } from "../../../../utils/ImageUtils";
+import AvtarBg from "../../../../svg/pupil/dashboard/AvtarBg";
 const { CallModule, CallModuleIos } = NativeModules
 
 const PupuilDashboard = (props) => {
@@ -765,6 +766,8 @@ const PupuilDashboard = (props) => {
                             {pupilAvatarList.length ?
                                 <View style={PAGESTYLE.achivementRobot}>
                                     
+                                    <AvtarBg width={"100%"} height={hp(30)} position={"absolute"} style={{ bottom: 0 }} />
+
                                     {avatarListIndex == 0 ?
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, left:Platform.OS === 'android' ? hp(11) : hp(8.5), alignSelf: 'center' }} ></Image>
                                         : null}

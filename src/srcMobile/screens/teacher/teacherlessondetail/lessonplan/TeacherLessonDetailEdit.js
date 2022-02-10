@@ -639,7 +639,7 @@ const TLDetailEdit = (props) => {
             }
         }
     }
-s
+
     const removeObject = (index1, item) => {
         var array = [...materialArr];
 

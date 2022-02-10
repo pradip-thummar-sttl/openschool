@@ -314,6 +314,7 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: hp(1),
         marginBottom: hp(1.04),
+        marginTop: hp(1.04),
         height: hp(5),
     },
     downloadIcon: {
