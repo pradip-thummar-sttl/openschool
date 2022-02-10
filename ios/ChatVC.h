@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UILabel *onlyTeacherLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
 
 @property (nonatomic) BOOL isPupil;
 

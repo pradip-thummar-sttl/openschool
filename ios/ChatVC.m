@@ -31,7 +31,7 @@ static NSString * const kChannelGuide = @"the_guide";
 
   PNConfiguration *pnconfig = [PNConfiguration configurationWithPublishKey:@"pub-c-bd967178-53ea-4b05-954a-2666bb3b6337"
                                                               subscribeKey:@"sub-c-3d3bcd76-c8e7-11eb-bdc5-4e51a9db8267"];
-  pnconfig.uuid = @"myUniqueUUID";
+  pnconfig.uuid = self.currentUserId;
   self.pubnub = [PubNub clientWithConfiguration:pnconfig];
   
   [self.pubnub addListener:self];
@@ -47,15 +47,18 @@ static NSString * const kChannelGuide = @"the_guide";
   if (_isPupil) {
     [_messageTxtView setHidden:false];
     [_sendButton setHidden:false];
+    [_attachmentButton setHidden:false];
     [_onlyTeacherLabel setHidden:true];
   }else{
     if ([_openChat isEqualToString:@"YES"]) {
       [_messageTxtView setHidden:false];
       [_sendButton setHidden:false];
+      [_attachmentButton setHidden:false];
       [_onlyTeacherLabel setHidden:true];
     }else{
       [_messageTxtView setHidden:true];
       [_sendButton setHidden:true];
+      [_attachmentButton setHidden:true];
       [_onlyTeacherLabel setHidden:false];
     }
   }
@@ -271,7 +274,7 @@ static NSString * const kChannelGuide = @"the_guide";
 }
 
 - (IBAction)onSendButtonPressed:(id)sender {
-  NSString *str = [NSString stringWithFormat:@"%@###%@###%@###TEXT###0",_messageTxtView.text, self.currentUserName,self.currentUserId];
+  NSString *str = [NSString stringWithFormat:@"%@###%@###%@###TEXT###-1",_messageTxtView.text, self.currentUserName,self.currentUserId];
   [self.pubnub publish: str toChannel:self.dialogId
         withCompletion:^(PNPublishStatus *status) {
     NSLog(@"print status %@", status);
@@ -290,16 +293,19 @@ static NSString * const kChannelGuide = @"the_guide";
     if (_isPupil) {
       [_messageTxtView setHidden:false];
       [_sendButton setHidden:false];
+      [_attachmentButton setHidden:false];
       [_onlyTeacherLabel setHidden:true];
     }else{
     
         if ([items[1] isEqualToString: @"YES"]) {
           [_messageTxtView setHidden:false];
           [_sendButton setHidden:false];
+          [_attachmentButton setHidden:false];
           [_onlyTeacherLabel setHidden:true];
         }else{
           [_messageTxtView setHidden:true];
           [_sendButton setHidden:true];
+          [_attachmentButton setHidden:true];
           [_onlyTeacherLabel setHidden:false];
         }
     }
@@ -330,7 +336,7 @@ static NSString * const kChannelGuide = @"the_guide";
     [dict setObject:message forKey:@"message"];
     [dict setObject:dateString forKey:@"time"];
     [dict setObject:type forKey:@"type"];
-    [dict setObject:items[1] forKey:@"identifier"];
+    [dict setObject:items[4] forKey:@"identifier"];
     [dict setObject:@"false" forKey:@"isDownload"];
     [dict setObject:@"" forKey:@"localUrl"];
 //    @{@"message":message, @"time":dateString, @"type":type, @"identifier":items[4], @"isDownload":@"false", @"loacalUrl":@""};
@@ -520,9 +526,10 @@ static NSString * const kChannelGuide = @"the_guide";
             [alertvc addAction: dismiss];
           dispatch_async(dispatch_get_main_queue(), ^{
             [self presentViewController: alertvc animated: true completion: nil];
+            [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
            
           });
-          [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
+          
         } else {
             /**
              * Handle file download error. Check 'category' property to find out possible issue
@@ -530,24 +537,30 @@ static NSString * const kChannelGuide = @"the_guide";
              *
              * Request can be resent using: [status retry]
              */
-          
+          [self.chatHistory[indexPath.row] setObject:@"false" forKey:@"isDownload"];
+          [cell.DownloadButton setHidden:false];
           NSLog(@"hjhjhjhjhjhj ==================>%@", status);
+          [self.messageTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:NO];
         
         }
       [iActivity stopAnimating];
       [iActivity setHidden:true];
+     
     }];
   }
   }
 }
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-  if (tableView.contentSize.height <= self.tableSuperView.frame.size.height) {
-    [_tableHeightConstrain setConstant:tableView.contentSize.height+10];
-    [tableView layoutIfNeeded];
-  }else{
-    [_tableHeightConstrain setConstant:self.tableSuperView.frame.size.height];
-    [tableView layoutIfNeeded];
-  }
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (tableView.contentSize.height <= self.tableSuperView.frame.size.height) {
+        [self.tableHeightConstrain setConstant:tableView.contentSize.height+10];
+        [tableView layoutIfNeeded];
+      }else{
+        [self.tableHeightConstrain setConstant:self.tableSuperView.frame.size.height];
+        [tableView layoutIfNeeded];
+      }
+    });
+ 
 }
 - (void)onTapDownload:(UIButton*)button
    {
