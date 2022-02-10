@@ -253,7 +253,8 @@ public class VideoConversationFragment extends BaseConversationFragment implemen
             public void message(PubNub pubnub, PNMessageResult message) {
                 System.out.println("pubNub ------->" + message);
                 try {
-                    String msgReceived = message.toString();
+//                    String msgReceived = message.toString();
+                    String msgReceived = message.getMessage().getAsString();
                     System.out.println("KDKDKD: Receiver " + msgReceived);
 
                     if (msgReceived.contains("##@##")){

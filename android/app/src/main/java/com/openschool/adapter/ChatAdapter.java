@@ -79,11 +79,12 @@ public class ChatAdapter extends RecyclerView.Adapter {
             ((SimpleViewHolder) holder).txtMsgTime.setText(obj.getDate());
         } else {
             ((DocumentViewHolder) holder).txtName.setText(obj.getName());
+            ((DocumentViewHolder) holder).txtFileName.setText(obj.getFileName());
             ((DocumentViewHolder) holder).txtMsgTime.setText(obj.getDate());
             ((DocumentViewHolder) holder).btnDownload.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onclick.onDownload(obj.getId());
+                    onclick.onDownload(obj.getUrl());
                 }
             });
         }
@@ -99,7 +100,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         String type = threadList.get(position).getRowType();
         if ( type.equals("TEXT")) {
             return 0;
-        } else if (type.equals("DOCUMENT")) {
+        } else if (type.equals("FILE")) {
             return 1;
         }
         return -1;

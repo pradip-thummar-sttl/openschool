@@ -1,22 +1,27 @@
 package com.openschool.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.openschool.BuildConfig;
 import com.openschool.Model.ChatVO;
 import com.openschool.R;
 import com.openschool.adapter.ChatAdapter;
-import com.openschool.adapter.PollSchoolOptionAdepter;
 import com.pubnub.api.PNConfiguration;
 import com.pubnub.api.PubNub;
 import com.pubnub.api.PubNubException;
@@ -26,7 +31,6 @@ import com.pubnub.api.enums.PNLogVerbosity;
 import com.pubnub.api.enums.PNReconnectionPolicy;
 import com.pubnub.api.models.consumer.PNPublishResult;
 import com.pubnub.api.models.consumer.PNStatus;
-import com.pubnub.api.models.consumer.files.PNDownloadFileResult;
 import com.pubnub.api.models.consumer.files.PNFileUploadResult;
 import com.pubnub.api.models.consumer.files.PNFileUrlResult;
 import com.pubnub.api.models.consumer.objects_api.channel.PNChannelMetadataResult;
@@ -40,6 +44,7 @@ import com.pubnub.api.models.consumer.pubsub.message_actions.PNMessageActionResu
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -72,6 +77,7 @@ public class GroupChatActivity extends AppCompatActivity {
         initChat();
         onGetChatHitory();
     }
+
     private void onVerbSet() {
         _progressBar = (ProgressBar) findViewById(R.id.progressBar);
         _edtText = (EditText) findViewById(R.id.edtText);
@@ -81,7 +87,7 @@ public class GroupChatActivity extends AppCompatActivity {
         _recyclerView = (RecyclerView) findViewById(R.id.recyclerChat);
         _chatAdapter = new ChatAdapter(_chatList, new ChatAdapter.Onclick() {
             @Override
-            public void onDownload(String value) {
+            public void onDownload(String url) {
 
 //                pubnub.getFile()
 //                        .channel("my_channel")
@@ -94,13 +100,27 @@ public class GroupChatActivity extends AppCompatActivity {
 //                                    System.out.println("getFile fileName: " + result.getFileName());
 //                                    System.out.println("getFile byteStream: " + result.getByteStream());
 //                                }
-//                                System.out.println("getFile status code: " + status.getStatusCode());
+//                                System.out.println("getFileonDownload status code: " + status.getStatusCode());
 //                            }
 //                        });
+
+                System.out.println("KDKDKD: value " + url);
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getPath() + "/OpenSchool/" + getFileName(url));
+
+                Uri uri = Uri.parse(url);
+                DownloadManager.Request request = new DownloadManager.Request(uri);
+                request.setTitle(getFileName(url));
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+                request.setDestinationUri(Uri.fromFile(file));
+
+                DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                long reference = manager.enqueue(request);
+                System.out.println("KDKDKD: reference " + reference);
             }
         });
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,true);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, true);
         _recyclerView.setLayoutManager(mLayoutManager);
         _recyclerView.setItemAnimator(new DefaultItemAnimator());
         _recyclerView.setAdapter(_chatAdapter);
@@ -115,6 +135,7 @@ public class GroupChatActivity extends AppCompatActivity {
         if (!isChatAccessGiven) {
             _edtText.setText("Only teacher can send messages");
             _edtText.setEnabled(false);
+            _btnAttachment.setVisibility(View.GONE);
         }
     }
 
@@ -133,7 +154,7 @@ public class GroupChatActivity extends AppCompatActivity {
         _btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -153,16 +174,18 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void initChat() {
 
         try {
             String pubKey = BuildConfig.PUB_KEY;
             String subKey = BuildConfig.SUB_KEY;
             PNConfiguration pnConfiguration = null;
-            pnConfiguration = new PNConfiguration("myUniqueUUID");
+            pnConfiguration = new PNConfiguration(currentUserID);
             pnConfiguration.setPublishKey(pubKey);
             pnConfiguration.setSubscribeKey(subKey);
-            pnConfiguration.setUuid("myUniqueUUID");
+            pnConfiguration.setUuid(currentUserID);
 
             pnConfiguration.setLogVerbosity(PNLogVerbosity.BODY);
             pnConfiguration.setReconnectionPolicy(PNReconnectionPolicy.LINEAR);
@@ -228,10 +251,10 @@ public class GroupChatActivity extends AppCompatActivity {
                     String[] splitStr = msg.split("###");
 
                     ChatVO chatView;
-                    if(splitStr[3].equals("TEXT"))
-                        chatView = new ChatVO(messagePublisher, splitStr[2].equals(currentUserID)  ? "You" : splitStr[1],  splitStr[0], dt, splitStr[3],"","");
+                    if (splitStr[3].equals("TEXT"))
+                        chatView = new ChatVO(messagePublisher, splitStr[2].equals(currentUserID) ? "You" : splitStr[1], splitStr[0], dt, splitStr[3], "", "");
                     else {
-                        chatView = new ChatVO(splitStr[4], splitStr[2].equals(currentUserID) ? "You" : splitStr[1], "", dt, splitStr[3], splitStr[0], "File");
+                        chatView = new ChatVO(splitStr[4], splitStr[2].equals(currentUserID) ? "You" : splitStr[1], "", dt, splitStr[3], splitStr[0], getFileName(splitStr[0]));
                     }
                     onUpdateMassageList(chatView);
                 }
@@ -295,7 +318,10 @@ public class GroupChatActivity extends AppCompatActivity {
 
                 @Override
                 public void file(@NotNull PubNub pubnub, @NotNull PNFileEventResult pnFileEventResult) {
-                    onSendAttachment(pnFileEventResult.getFile().getUrl(), pnFileEventResult.getFile().getId());
+                    if(pnFileEventResult.getPublisher().equals(currentUserID))
+                    {
+                        onSendAttachment(pnFileEventResult.getFile().getUrl(), pnFileEventResult.getFile().getId());
+                    }
                 }
 
             });
@@ -322,9 +348,10 @@ public class GroupChatActivity extends AppCompatActivity {
 
     }
 
-    private void onSendAttachment(String url, String id){
+    private void onSendAttachment(String url, String id) {
 
-        String msg = url +"###"+ currentUserName +"###"+currentUserID + "###" + "DOCUMENT" + "###" + id;
+        String msg = url + "###" + currentUserName + "###" + currentUserID + "###" + "FILE" + "###" + id;
+        System.out.println("KDKD: msg " + msg);
         pubnub.publish().message(msg).channel(currentDialogId).async(new PNCallback<PNPublishResult>() {
             @Override
             public void onResponse(PNPublishResult result, PNStatus status) {
@@ -333,8 +360,8 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
-    private void onSendMsg(){
-        String msg = _edtText.getText().toString() +"###"+ currentUserName +"###"+currentUserID + "###TEXT";
+    private void onSendMsg() {
+        String msg = _edtText.getText().toString() + "###" + currentUserName + "###" + currentUserID + "###TEXT"+"###-1";
         pubnub.publish().message(msg).channel(currentDialogId).async(new PNCallback<PNPublishResult>() {
             @Override
             public void onResponse(PNPublishResult result, PNStatus status) {
@@ -346,7 +373,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private void onUpdateMassageList(ChatVO chatView) {
 
         int newIndex = 0;
-        _chatList.add(newIndex,chatView);
+        _chatList.add(newIndex, chatView);
 
         runOnUiThread(new Runnable() {
             @Override
@@ -354,8 +381,7 @@ public class GroupChatActivity extends AppCompatActivity {
                 _chatAdapter.notifyItemInserted(newIndex);
                 _recyclerView.smoothScrollToPosition(newIndex);
 
-                if(chatView.getName().equals("You") && chatView.getRowType().equals("DOCUMENT"))
-                {
+                if (chatView.getName().equals("You") && chatView.getRowType().equals("FILE")) {
                     _progressBar.setVisibility(View.GONE);
                     _btnAttachment.setVisibility(View.VISIBLE);
                 }
@@ -363,7 +389,7 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
-    public static String getDateFormate(long milliSeconds, String dateFormat){
+    public static String getDateFormate(long milliSeconds, String dateFormat) {
         // Create a DateFormatter object for displaying date in specified format.
         SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
 
@@ -395,12 +421,12 @@ public class GroupChatActivity extends AppCompatActivity {
     private void onSendAttachment(Intent data) {
         try {
 
+            String fileName = getFileName(data.getData());
             InputStream in = this.getContentResolver().openInputStream(data.getData());
 
             pubnub.sendFile().channel(currentDialogId)
-                    .fileName("Screenshot 2022-02-08 at 2.45.41 PM.png")
+                    .fileName(fileName)
                     .inputStream(in)
-                    .message("Look at this photo!")
                     .async(new PNCallback<PNFileUploadResult>() {
                         @Override
                         public void onResponse(PNFileUploadResult result, PNStatus status) {
@@ -417,8 +443,7 @@ public class GroupChatActivity extends AppCompatActivity {
                         }
                     });
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -441,7 +466,39 @@ public class GroupChatActivity extends AppCompatActivity {
                 });
     }
 
-    private String getExtn (String someFilepath){
+    private String getExtn(String someFilepath) {
         return someFilepath.substring(someFilepath.lastIndexOf("."));
+    }
+
+    private String getFileName(String someFilepath) {
+        return someFilepath.substring(someFilepath.lastIndexOf("/") + 1);
+    }
+
+    public String getFileName(Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } finally {
+                cursor.close();
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf('/');
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void onBackPressed() {
+        pubnub.unsubscribe();
+        finish();
     }
 }

@@ -80,5 +80,6 @@
     <color name="grey_transparent_10">#10606060</color>
 
     <color name="app_text_grey">#b4b6be</color>
+    <color name="file_grey">#E6E7EA</color>
     <color name="green">#00a36b</color>
 </resources>
