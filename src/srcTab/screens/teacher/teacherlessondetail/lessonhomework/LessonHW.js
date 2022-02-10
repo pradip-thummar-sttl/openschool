@@ -502,18 +502,18 @@ const TLHomeWork = (props) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time]}>
+                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time,{width : hp(38)}]}>
                                     <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDownSmallWrapNormal]}>
                                         <View style={PAGESTYLE.dueDateWrap}>
                                             <Text style={PAGESTYLE.dueDateText}>Due Date</Text>
                                         </View>
                                         <Calender style={PAGESTYLE.calIconHomeWork} height={hp(1.76)} width={hp(1.76)} />
-                                        <TouchableOpacity onPress={() => showDatePicker()} style={PAGESTYLE.subjectDateTimeHomework}>
+                                        <TouchableOpacity onPress={() => showDatePicker()} style={[PAGESTYLE.subjectDateTimeHomework,{justifyContent : 'center'}]}>
                                             <View>
                                                 <Text style={PAGESTYLE.dateTimetextdummy2}>{selectDate}</Text>
                                             </View>
+                                        <ArrowDown style={[PAGESTYLE.dropDownArrowdatetimehomeWorkArrow]} height={hp(1.51)} width={hp(1.51)} />
                                         </TouchableOpacity>
-                                        <ArrowDown style={PAGESTYLE.dropDownArrowdatetimehomeWork} height={hp(1.51)} width={hp(1.51)} />
                                     </View>
                                 </View>
                             </View>

@@ -65,6 +65,7 @@ public class GroupChatActivity extends AppCompatActivity {
     private String currentUserID;
     private String currentUserName;
     private String currentDialogId;
+    private boolean isChatAccessGiven;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,8 +129,13 @@ public class GroupChatActivity extends AppCompatActivity {
         currentUserID = intent.getStringExtra("CURRENT_ID");
         currentUserName = intent.getStringExtra("CURRENT_NAME");
         currentDialogId = intent.getStringExtra("DIALOG_ID");
+        
+        isChatAccessGiven = intent.getBooleanExtra("CHAT_ACCESS", true);
 
-
+        if (!isChatAccessGiven) {
+            _edtText.setText("Only teacher can send messages");
+            _edtText.setEnabled(false);
+        }
     }
 
     private void onSetEvent() {

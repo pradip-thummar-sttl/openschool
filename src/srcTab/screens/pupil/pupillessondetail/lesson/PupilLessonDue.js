@@ -21,13 +21,13 @@ const PupilLessonDue = (props) => {
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace,{paddingTop : 0,paddingBottom : 0}]}>
               {
                 props.isHomeworkLoading ? 
-                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} /> :
+                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin} style={{ margin: 20 }} /> :
                 <>
             {props.DueHomeWork.length > 0 || props.SubmitHomeWork.length > 0 || props.MarkedHomeWork.length > 0 ?
                 <>
                     {props.DueHomeWork.length > 0 ?
                         <>
-                            <Text style={PAGESTYLE.videoTitle}>Homework due</Text>
+                            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Homework due</Text>
                             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
 
                                 {
@@ -57,7 +57,7 @@ const PupilLessonDue = (props) => {
                     }
                     {props.SubmitHomeWork.length > 0 ?
                         <>
-                            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop,]}>Submitted homework</Text>
+                            <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Submitted homework</Text>
                             <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                 {
                                     props.SubmitHomeWork.map((item) => {

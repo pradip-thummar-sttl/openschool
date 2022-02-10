@@ -359,7 +359,9 @@ const TeacherLessonDetail = (props) => {
                                                     </View>
                                                     <TouchableOpacity style={PAGESTYLE.buttonGroup}>
                                                         <Menu style={PAGESTYLE.filterGroup}>
-                                                            <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                                                            <MenuTrigger style={{justifyContent : 'center'}}><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text>
+                                                                    <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                                                                    </MenuTrigger>
                                                             <MenuOptions style={PAGESTYLE.filterListWrap}>
                                                                 <MenuOption style={PAGESTYLE.borderList}>
                                                                     <TouchableOpacity
@@ -394,7 +396,6 @@ const TeacherLessonDetail = (props) => {
                                                             </MenuOptions>
                                                         </Menu>
                                                         {/* <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} /> */}
-                                                        <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                                     </TouchableOpacity>
                                                 </View>
                                             }

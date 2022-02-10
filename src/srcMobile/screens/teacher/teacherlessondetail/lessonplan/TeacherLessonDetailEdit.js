@@ -481,7 +481,7 @@ const TLDetailEdit = (props) => {
                         data={filteredPupils}
                         style={{ alignSelf: 'center', width: '100%', marginTop: 5, paddingStart: 5, bottom: 20 }}
                         renderItem={({ item, index }) => (
-                            <View style={[PAGESTYLE.alignRow, { width: '33.33%' }]}>
+                            <View style={[PAGESTYLE.alignRow, { width: '50%' }]}>
                                 <CheckBox
                                     style={[PAGESTYLE.checkMark]}
                                     boxType={'square'}
@@ -493,7 +493,7 @@ const TLDetailEdit = (props) => {
                                     value={isPupilChecked(index)}
                                     onValueChange={(newValue) => pushPupilItem(newValue, index)}
                                 />
-                                <Text style={[PAGESTYLE.checkBoxLabelText]}>{item.FirstName} {item.LastName}</Text>
+                                <Text numberOfLines={1}  style={[PAGESTYLE.checkBoxLabelText]}>{item.FirstName} {item.LastName}</Text>
                             </View>
                         )}
                         numColumns={2}
@@ -968,10 +968,10 @@ const TLDetailEdit = (props) => {
                                         <View style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDownSmallWrap]}>
                                             <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <View style={PAGESTYLE.subjectDateTime}>
-                                                <TouchableOpacity onPress={() => showDatePicker()}>
-                                                    <Text style={PAGESTYLE.dateTimetextdummy2}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                <TouchableOpacity onPress={() => showDatePicker()} style={{justifyContent : 'center'}}>
+                                                    <Text style={[PAGESTYLE.dateTimetextdummy2,{paddingRight  :hp(6)}]}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                <ArrowDown style={PAGESTYLE.dropDownArrowdatetimeMobile} height={hp(1.51)} width={hp(1.51)} />
                                                 </TouchableOpacity>
-                                                <ArrowDown style={PAGESTYLE.dropDownArrowdatetime2} height={hp(1.51)} width={hp(1.51)} />
                                             </View>
                                         </View>
                                     </View>

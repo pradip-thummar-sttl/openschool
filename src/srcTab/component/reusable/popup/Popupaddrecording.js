@@ -64,14 +64,14 @@ const Popupaddrecording = (props) => {
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStartScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, marginRight: 5 }}>
+                            style={{ ...styles.recordLinkBlock2, ...styles.topSpaceRecording, width  : hp(35)}}>
                             <Text style={styles.recordLinkText}>Start Screen + Voice Recording</Text>
                         </TouchableOpacity>
                         :
                         <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => props.onStopScrrenRecording()}
-                            style={{ ...styles.recordLinkBlock2Stop, ...styles.topSpaceRecording, marginLeft: 5 }}>
+                            style={{ ...styles.recordLinkBlock2Stop, ...styles.topSpaceRecording,width : hp(20) }}>
                             <Text style={styles.recordLinkText}>Stop Recording</Text>
                         </TouchableOpacity>
                     }

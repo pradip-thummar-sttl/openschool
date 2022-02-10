@@ -20,6 +20,7 @@ import Notification from "../../../../svg/teacher/dashboard/Notification";
 import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -118,7 +119,7 @@ const HeaderPM = (props) => {
                                 activeOpacity={opacity}
                                 onPress={() => props.navigateToAddNewUser()}>
                                 {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
-                                <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
+                                <AddWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                                 <Text style={styles.commonButtonGreenheader}>New Pupil</Text>
                             </TouchableOpacity>
                         </View>

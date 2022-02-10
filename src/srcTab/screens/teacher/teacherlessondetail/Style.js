@@ -49,7 +49,7 @@ export default StyleSheet.create({
     },
     whiteBg: {
         backgroundColor: COLORS.white,
-        paddingBottom:Platform.OS === 'android' ? hp(1) :  hp(2),
+        paddingBottom: Platform.OS === 'android' ? hp(1) : hp(2),
         paddingTop: hp(0),
         borderBottomColor: COLORS.borderGrp,
         borderBottomWidth: 1,
@@ -81,7 +81,7 @@ export default StyleSheet.create({
         color: COLORS.buttonGreen,
     },
     timedateGrp: {
-       
+
         flexDirection: 'row',
         marginBottom: hp(3.90),
     },
@@ -95,7 +95,7 @@ export default StyleSheet.create({
     subjectDateTime: {
         alignItems: 'flex-start',
         width: '100%',
-        marginBottom  : 20
+        marginBottom: 20
     },
     subjectDateTimeHomework: {
         alignSelf: 'center',
@@ -318,10 +318,10 @@ export default StyleSheet.create({
         color: COLORS.darkGrayIntro,
         // paddingRight: hp(1),
         marginLeft: Platform.OS === 'android' ? 0 : 10,
-        width : Platform.OS === 'android' ? '40%' : '55%',
+        width: Platform.OS === 'android' ? '40%' : '55%',
         // width: '40%',
-      
-        
+
+
     },
     checkBoxLabelTextNone: {
         lineHeight: hp(2.82),
@@ -394,13 +394,13 @@ export default StyleSheet.create({
         borderColor: COLORS.videoLinkBorder,
         borderRadius: 6,
         marginBottom: hp(0.65),
-        marginTop : 5
+        marginTop: 5
     },
 
-    fileRender: { flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',paddingHorizontal: hp(1),borderWidth: 1,borderColor: COLORS.videoLinkBorder,borderRadius: hp(0.8),marginBottom: hp(1.04),},
+    fileRender: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: hp(1), borderWidth: 1, borderColor: COLORS.videoLinkBorder, borderRadius: hp(0.8), marginBottom: hp(1.04), },
     fileName: { width: wp(20), fontFamily: FONTS.fontRegular, fontSize: hp(1.85), lineHeight: hp(3.60) },
-    RenderDownload: { width: wp(3), height: hp(5), justifyContent: 'center', alignItems: 'center'},
-    downloadIcon: { width: hp(2), resizeMode: 'contain'},
+    RenderDownload: { width: wp(3), height: hp(5), justifyContent: 'center', alignItems: 'center' },
+    downloadIcon: { width: hp(2), resizeMode: 'contain' },
 
     containerWrap: {
         justifyContent: 'space-between',
@@ -600,7 +600,7 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
-       
+
     },
     commonInputTextareaBoldGrey: {
         width: '100%',
@@ -1013,7 +1013,7 @@ export default StyleSheet.create({
     },
     dateNameBlock: {
         marginRight: hp(2.21),
-        right : Platform.OS === 'android' ? hp(3) : 0
+        right: Platform.OS === 'android' ? hp(3) : 0
         // right : hp(3) 
     },
     feedbackBlock: {
@@ -1196,6 +1196,14 @@ export default StyleSheet.create({
         right: hp(1.6),
         alignSelf: 'center'
     },
+
+    dropDownArrowdatetimehomeWorkArrow: {
+        width: hp(1.51),
+        resizeMode: 'contain',
+        position: 'absolute',
+        // right: hp(1.6),
+        alignSelf: 'center',
+    },
     plainBg: {
         paddingLeft: hp(3.5),
         paddingRight: hp(3.5),
@@ -1229,7 +1237,7 @@ export default StyleSheet.create({
         width: hp(2.5),
         height: hp(2.5),
         right: hp(2),
-        justifyContent : 'center'
+        justifyContent: 'center'
     },
     userIcon1: {
         // position: 'absolute',
@@ -1357,12 +1365,12 @@ export default StyleSheet.create({
         shadowRadius: hp(1),
     },
     checkMark: {
-        width : Platform.OS === 'android' ? 28 : 15,
+        width: Platform.OS === 'android' ? 28 : 15,
         // width: 25,
         height: 15,
         left: 3,
         resizeMode: 'contain',
-        marginEnd : hp(1),
+        marginEnd: hp(1),
         // top : Platform.OS === 'android' ? 0 : 0
 
     },
@@ -1400,8 +1408,8 @@ export default StyleSheet.create({
     checkBoxGroup: {
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical  :5,
-        justifyContent : 'center',alignItems : 'center'
+        marginVertical: 5,
+        justifyContent: 'center', alignItems: 'center'
     },
     hrTagMIddle: {
         flexDirection: 'row-reverse',
@@ -1461,15 +1469,15 @@ export default StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom :  10
+        marginBottom: 10
     },
 
     // New -----------------------------------
 
     dateLable: {
-        width:hp(30),
+        width: hp(30),
     },
     TimeLable: {
-        width:hp(30),
+        width: hp(30),
     },
 });
