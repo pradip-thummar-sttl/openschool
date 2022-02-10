@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource>
+@interface ChatVC : UIViewController<UITableViewDelegate, UITableViewDataSource,UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate>
 
 @property (strong, nonatomic) NSString *channels;
 @property (strong, nonatomic) NSString *dialogId;
@@ -23,11 +23,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 @property (weak, nonatomic) IBOutlet UILabel *onlyTeacherLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
 
 @property (nonatomic) BOOL isPupil;
 
 - (IBAction)onSendButtonPressed:(id)sender;
 - (IBAction)onBackPress:(id)sender;
+- (IBAction)onAttachmentButtonpress:(id)sender;
 
 
 @end

@@ -178,6 +178,10 @@
 		88BE3A70272FE11400A1693B /* PollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BE3A6F272FE11400A1693B /* PollViewController.m */; };
 		88D20505265E253200D97116 /* RCTCalendarModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D20504265E253200D97116 /* RCTCalendarModule.m */; };
 		88E77B6D26AAAC0600A20D87 /* WhiteboardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */; };
+		88EB1BA127B24E4600F5D048 /* imageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EB1B9F27B24E4600F5D048 /* imageCell.m */; };
+		88EB1BA227B24E4600F5D048 /* imageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EB1BA027B24E4600F5D048 /* imageCell.xib */; };
+		88EB1BA727B2500D00F5D048 /* DocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EB1BA527B2500D00F5D048 /* DocumentCell.m */; };
+		88EB1BA827B2500D00F5D048 /* DocumentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EB1BA627B2500D00F5D048 /* DocumentCell.xib */; };
 		8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8773182796EA4C00B07098 /* DialogTableViewCell.m */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
@@ -516,6 +520,12 @@
 		88D20504265E253200D97116 /* RCTCalendarModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCTCalendarModule.m; sourceTree = "<group>"; };
 		88E77B6B26AAAC0600A20D87 /* WhiteboardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhiteboardVC.h; sourceTree = "<group>"; };
 		88E77B6C26AAAC0600A20D87 /* WhiteboardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhiteboardVC.m; sourceTree = "<group>"; };
+		88EB1B9E27B24E4600F5D048 /* imageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = imageCell.h; sourceTree = "<group>"; };
+		88EB1B9F27B24E4600F5D048 /* imageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = imageCell.m; sourceTree = "<group>"; };
+		88EB1BA027B24E4600F5D048 /* imageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = imageCell.xib; sourceTree = "<group>"; };
+		88EB1BA427B2500D00F5D048 /* DocumentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocumentCell.h; sourceTree = "<group>"; };
+		88EB1BA527B2500D00F5D048 /* DocumentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocumentCell.m; sourceTree = "<group>"; };
+		88EB1BA627B2500D00F5D048 /* DocumentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocumentCell.xib; sourceTree = "<group>"; };
 		8B09862127952FF400E5FAFF /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = files/DialogTableViewCell.m; sourceTree = "<group>"; };
 		8B8773172796EA4C00B07098 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTableViewCell.h; sourceTree = "<group>"; };
 		8B8773182796EA4C00B07098 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTableViewCell.m; sourceTree = "<group>"; };
@@ -746,6 +756,8 @@
 		882EA020266A1DDD000B9813 /* CallViewController */ = {
 			isa = PBXGroup;
 			children = (
+				88EB1BA327B24FF000F5D048 /* DocumentCell */,
+				88EB1B9D27B24E1D00F5D048 /* imageVIewCell */,
 				882EA026266A1DF5000B9813 /* CallViewController.h */,
 				882EA02A266A1DF5000B9813 /* CallViewController.m */,
 				882EA027266A1DF5000B9813 /* LocalVideoView.h */,
@@ -1630,6 +1642,26 @@
 			name = ScreenRecorder;
 			sourceTree = "<group>";
 		};
+		88EB1B9D27B24E1D00F5D048 /* imageVIewCell */ = {
+			isa = PBXGroup;
+			children = (
+				88EB1B9E27B24E4600F5D048 /* imageCell.h */,
+				88EB1B9F27B24E4600F5D048 /* imageCell.m */,
+				88EB1BA027B24E4600F5D048 /* imageCell.xib */,
+			);
+			name = imageVIewCell;
+			sourceTree = "<group>";
+		};
+		88EB1BA327B24FF000F5D048 /* DocumentCell */ = {
+			isa = PBXGroup;
+			children = (
+				88EB1BA427B2500D00F5D048 /* DocumentCell.h */,
+				88EB1BA527B2500D00F5D048 /* DocumentCell.m */,
+				88EB1BA627B2500D00F5D048 /* DocumentCell.xib */,
+			);
+			name = DocumentCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1774,6 +1806,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88EB1BA827B2500D00F5D048 /* DocumentCell.xib in Resources */,
 				884068B22775A7F30053E668 /* HeaderCollectionReusableView.xib in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				884068662775A3C70053E668 /* Chat.storyboard in Resources */,
@@ -1784,6 +1817,7 @@
 				882EA01F266A1DD7000B9813 /* Call.storyboard in Resources */,
 				8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */,
 				884068792775A64F0053E668 /* ChatIncomingCell.xib in Resources */,
+				88EB1BA227B24E4600F5D048 /* imageCell.xib in Resources */,
 				882EA0D8266A270A000B9813 /* Main.storyboard in Resources */,
 				8840688B2775A6E40053E668 /* ChatNotificationCell.xib in Resources */,
 				884068722775A60A0053E668 /* ChatDateCell.xib in Resources */,
@@ -2116,6 +2150,7 @@
 				884068652775A3C70053E668 /* ChatViewController.m in Sources */,
 				884069112775AA7F0053E668 /* DateUtils.m in Sources */,
 				884068BD2775A8330053E668 /* ToolbarContentView.m in Sources */,
+				88EB1BA727B2500D00F5D048 /* DocumentCell.m in Sources */,
 				882EA0B9266A21EF000B9813 /* QBDataFetcher.m in Sources */,
 				884069422775AE090053E668 /* DialogCell.m in Sources */,
 				882EA095266A2151000B9813 /* InfoTableViewCell.m in Sources */,
@@ -2123,6 +2158,7 @@
 				884068532775A35D0053E668 /* QBChatMessage+QBDateDivider.m in Sources */,
 				883F562A276C5029009CD7A9 /* VideoFormat.m in Sources */,
 				8840688C2775A6E40053E668 /* ChatNotificationCell.m in Sources */,
+				88EB1BA127B24E4600F5D048 /* imageCell.m in Sources */,
 				884069092775AA0A0053E668 /* CALayer+Chat.m in Sources */,
 				8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */,
 				32B3954D27A0089800F9B79C /* MessageCell.m in Sources */,
