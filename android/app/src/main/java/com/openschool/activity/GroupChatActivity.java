@@ -147,7 +147,7 @@ public class GroupChatActivity extends AppCompatActivity {
         _btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                onBackPressed();
             }
         });
 
@@ -167,16 +167,18 @@ public class GroupChatActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void initChat() {
 
         try {
             String pubKey = BuildConfig.PUB_KEY;
             String subKey = BuildConfig.SUB_KEY;
             PNConfiguration pnConfiguration = null;
-            pnConfiguration = new PNConfiguration("myUniqueUUID");
+            pnConfiguration = new PNConfiguration(currentUserID);
             pnConfiguration.setPublishKey(pubKey);
             pnConfiguration.setSubscribeKey(subKey);
-            pnConfiguration.setUuid("myUniqueUUID");
+            pnConfiguration.setUuid(currentUserID);
 
             pnConfiguration.setLogVerbosity(PNLogVerbosity.BODY);
             pnConfiguration.setReconnectionPolicy(PNReconnectionPolicy.LINEAR);
@@ -309,7 +311,10 @@ public class GroupChatActivity extends AppCompatActivity {
 
                 @Override
                 public void file(@NotNull PubNub pubnub, @NotNull PNFileEventResult pnFileEventResult) {
-                    onSendAttachment(pnFileEventResult.getFile().getUrl(), pnFileEventResult.getFile().getId());
+                    if(pnFileEventResult.getPublisher().equals(currentUserID))
+                    {
+                        onSendAttachment(pnFileEventResult.getFile().getUrl(), pnFileEventResult.getFile().getId());
+                    }
                 }
 
             });
@@ -338,7 +343,7 @@ public class GroupChatActivity extends AppCompatActivity {
 
     private void onSendAttachment(String url, String id) {
 
-        String msg = url + "###" + currentUserName + "###" + currentUserID + "###" + "DOCUMENT" + "###" + id;
+        String msg = url + "###" + currentUserName + "###" + currentUserID + "###" + "FILE" + "###" + id;
         System.out.println("KDKD: msg " + msg);
         pubnub.publish().message(msg).channel(currentDialogId).async(new PNCallback<PNPublishResult>() {
             @Override
@@ -349,7 +354,7 @@ public class GroupChatActivity extends AppCompatActivity {
     }
 
     private void onSendMsg() {
-        String msg = _edtText.getText().toString() + "###" + currentUserName + "###" + currentUserID + "###TEXT";
+        String msg = _edtText.getText().toString() + "###" + currentUserName + "###" + currentUserID + "###TEXT"+"###-1";
         pubnub.publish().message(msg).channel(currentDialogId).async(new PNCallback<PNPublishResult>() {
             @Override
             public void onResponse(PNPublishResult result, PNStatus status) {
@@ -369,7 +374,7 @@ public class GroupChatActivity extends AppCompatActivity {
                 _chatAdapter.notifyItemInserted(newIndex);
                 _recyclerView.smoothScrollToPosition(newIndex);
 
-                if (chatView.getName().equals("You") && chatView.getRowType().equals("DOCUMENT")) {
+                if (chatView.getName().equals("You") && chatView.getRowType().equals("FILE")) {
                     _progressBar.setVisibility(View.GONE);
                     _btnAttachment.setVisibility(View.VISIBLE);
                 }
@@ -482,5 +487,11 @@ public class GroupChatActivity extends AppCompatActivity {
             }
         }
         return result;
+    }
+
+    @Override
+    public void onBackPressed() {
+        pubnub.unsubscribe();
+        finish();
     }
 }

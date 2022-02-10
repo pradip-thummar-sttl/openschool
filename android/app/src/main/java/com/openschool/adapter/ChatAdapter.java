@@ -100,7 +100,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         String type = threadList.get(position).getRowType();
         if ( type.equals("TEXT")) {
             return 0;
-        } else if (type.equals("DOCUMENT")) {
+        } else if (type.equals("FILE")) {
             return 1;
         }
         return -1;
