@@ -118,7 +118,7 @@ const WorkSpace = (props) => {
                             // text={[
                             //     { text: 'Welcome to my GitHub', font: 'fonts/IndieFlower.ttf', fontSize: 30, position: { x: 0, y: 0 }, anchor: { x: 0, y: 0 }, coordinate: 'Absolute', fontColor: 'red', lineHeightMultiple: 1  },
                             // ]}
-                            containerStyle={{ height: '100%' }}
+                            containerStyle={{ height: '100%', }}
                             canvasStyle={{ backgroundColor: 'transparent', flex: 1 }}
                             onStrokeEnd={data => {
                                 setPathCount(1)

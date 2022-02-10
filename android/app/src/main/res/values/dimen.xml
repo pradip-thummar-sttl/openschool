@@ -66,4 +66,6 @@
     <dimen name="pager_image_width">400dp</dimen>
     <dimen name="pager_image_height">500dp</dimen>
 
+    <dimen name="chat_attachment_preview_size">80dp</dimen>
+
 </resources>

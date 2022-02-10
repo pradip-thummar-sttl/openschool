@@ -8,6 +8,7 @@ import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import BackArrow from "../../../../svg/common/BackArrow";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import HWSubmitBg from "../../../../svg/teacher/lessonhwplanner/HWSubmitBg";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(true);
@@ -24,13 +25,14 @@ const Popuphomework = (props) => {
                         <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                     </TouchableOpacity>
                     {/* <ImageBackground source={require('../../../../assets/images/popup_back.png')} style={STYLE.popupBack} /> */}
-                    <BackArrow style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
+                    {/* <BackArrow style={STYLE.popupBack} height={hp(10.41)} width={'100%'} /> */}
+                    <HWSubmitBg style={STYLE.popupBack} height={55} width={'100%'} />
                     <View style={styles.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
 
                         <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}
-                            style={styles.commonButtonSubmitHomework}>
+                            style={styles.commonButtonSubmitHomework1}>
                             {props.isLoading ?
                                 <ActivityIndicator
                                     // style={styles.commonButtonGreenDashboardSide}
@@ -133,6 +135,20 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
 
     },
+
+    commonButtonSubmitHomework1: {
+        backgroundColor: COLORS.dashboardGreenButton,
+        color: COLORS.white,
+        borderRadius: hp(1),
+        overflow: 'hidden',
+        width: 220,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: hp(5.41), textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+
+    },
+
     popupTitle: {
         fontSize: wp(4.8),
         fontFamily: FONTS.fontSemiBold,

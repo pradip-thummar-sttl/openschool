@@ -25,10 +25,11 @@ const PupilTimeTable = (props) => {
     const time = ['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'];
     const dispatch = useDispatch()
 
-    const weekTimeTableDate = useSelector(state => {
-        return state.AuthReducer.weekTimeTableData
-    })
+    // const weekTimeTableDate = useSelector(state => {
+    //     return state.AuthReducer.weekTimeTableData
+    // })
 
+    const [weekTimeTableDate, setWeekTimeTableDate] = useState(null);
     const [isHide, action] = useState(true);
     const [timeTableData, setTimeTableData] = useState([])
     const [isTimeTableLoading, setTimeTableLoading] = useState(true)
@@ -79,12 +80,15 @@ const PupilTimeTable = (props) => {
             const day = new Date(element.Type == Lesson ? element.Date : element.EventDate).getDay();
             const dayOfWeek = isNaN(day) ? null : days[day];
 
-
             if (dayOfWeek == days[dayKey]) {
                 let startTime = element.Type == Lesson ? element.StartTime : element.EventStartTime
                 let endTime = element.Type == Lesson ? element.EndTime : element.EventEndTime
                 let subName = element.Type == Lesson ? element.SubjectName : element.EventType
                 let lessonTopic = element.Type == Lesson ? element.LessonTopic : element.EventLocation
+
+                if((startTime != null && startTime.trim().length == 0) || (endTime != null && endTime.trim().length == 0)){
+                    return;
+                }
 
                 if (time[timneKey].includes(startTime)) {
 
@@ -216,7 +220,7 @@ const PupilTimeTable = (props) => {
                 <HeaderTT
                     navigateToCreateNewEvent={() => props.navigation.navigate('CreateNewEventPupil', { onGoBack: () => refresh() })}
                     onAlertPress={() => { props.navigation.openDrawer() }}
-                    onCalenderPress={() => { props.navigation.navigate('Calendars') }}
+                    onCalenderPress={() => { props.navigation.navigate('Calendars', { onGoBack: (date) => { setWeekTimeTableDate(date)} }) }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                     onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('YYYY-MM-DD'))}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '', moment().format('YYYY-MM-DD')) }}

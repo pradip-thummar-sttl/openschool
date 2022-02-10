@@ -40,7 +40,6 @@ const Calendars = (props) => {
         }
 
         if (User.user.UserType === "Teacher") {
-
             Service.post(data, `${EndPoints.AllEventHomworklesson}/${User.user._id}`, (res) => {
                 if (res.code == 200) {
                     setDateApiData(res.data)
@@ -84,12 +83,14 @@ const Calendars = (props) => {
 
 
     const onDatePress = (date) => {
-        selectedDate.date = date.dateString
-        dispatch(setTimeTableWeekEventData(date.dateString))
-        setTimeout(() => {
-            props.navigation.goBack()
-            return true;
-        }, 500)
+        // selectedDate.date = date.dateString
+        // dispatch(setTimeTableWeekEventData(date.dateString))
+        // setTimeout(() => {
+        //     props.navigation.goBack()
+        //     return true;
+        // }, 1000)
+        props.route.params.onGoBack(date.dateString)
+        props.navigation.goBack()
     }
 
 
@@ -185,7 +186,6 @@ const Calendars = (props) => {
                                                 <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                                                     {
                                                         dateApiData[`${item}`].map((obj) => {
-                                                            console.log('uitem 2', dateApiData[`${item}`])
                                                             return (
                                                                 <View style={{ height: 5, width: 5, borderRadius: 2.5, backgroundColor: obj.EventColor, }} />
                                                             )

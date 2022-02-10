@@ -41,7 +41,7 @@ const ParentZonePerformance = (props) => {
     }, [])
 
     const getLessonData = () => {
-        Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
+        Service.get(`${EndPoints.GetCountLession}/${item.Pupilid}`, (res) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = [{
@@ -59,7 +59,7 @@ const ParentZonePerformance = (props) => {
     }
 
     const getHomeworkData = (lessonData) => {
-        Service.get(`${EndPoints.GetCountHomework}/${item.PupilId}`, (res) => {
+        Service.get(`${EndPoints.GetCountHomework}/${item.Pupilid}`, (res) => {
             if (res.flag) {
                 let per = res.data.percentage
                 let data = {

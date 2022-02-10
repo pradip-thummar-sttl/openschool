@@ -8,7 +8,7 @@ export default StyleSheet.create({
         paddingVertical: hp(2),
         paddingHorizontal: hp(2),
         backgroundColor: 'white',
-        height: '86.5%',
+        flex: 1,
         width: '100%',
         alignSelf: 'center',
         borderRadius: 8,
