@@ -418,12 +418,14 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                 <View style={PAGESTYLE.teacherDetailLeft}>
                                     <View style={PAGESTYLE.lessonDesc}>
                                         <Text style={PAGESTYLE.lessonTitle}>Homework Description</Text>
+                                        
                                         <TextInput
                                             multiline={true}
                                             numberOfLines={4}
                                             defaultValue={data.HomeworkDescription}
-                                            style={PAGESTYLE.commonInputTextareaNormal}
+                                            style={[PAGESTYLE.commonInputTextareaNormal, { height: hp(16) },]}
                                             editable={false} />
+                                           
                                     </View>
                                     <View style={PAGESTYLE.requirementofClass}>
                                         <Text style={PAGESTYLE.requireText}>Create Checklist</Text>
@@ -431,7 +433,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             <FlatList
                                                 data={data.CheckList}
                                                 renderItem={({ item }) => (
-                                                    <View style={[PAGESTYLE.checkBoxLabelLine,{alignItems : 'center',paddingVertical : 7}]}>
+                                                    <View style={[PAGESTYLE.checkBoxLabelLine, { alignItems: 'center',paddingTop : 10,paddingBottom  : 10 }]}>
                                                         <CheckBox
                                                             style={[PAGESTYLE.checkMark]}
                                                             value={item.IsCheck}
@@ -443,10 +445,11 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                                             onTintColor={COLORS.dashboardPupilBlue}
                                                             tintColor={COLORS.dashboardPupilBlue}
                                                         />
-                                                        <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
+                                                        <Text numberOfLines={1} style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
                                                     </View>
                                                 )}
                                                 style={{ height: 200 }} />
+
                                         </View>
                                     </View>
                                 </View>
@@ -492,7 +495,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             multiline={true}
                                             numberOfLines={4}
                                             placeholder='Leave feedback here'
-                                            style={PAGESTYLE.commonInputTextarea}
+                                            style={[PAGESTYLE.commonInputTextarea, { height: hp(16) }]}
                                             returnKeyType={"next"}
                                             defaultValue={data.Feedback}
                                             editable={!data.Marked}
@@ -507,18 +510,21 @@ const TLHomeWorkSubmittedDetail = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                     </View> */}
-                                    <Popupaddrecording
-                                        recordingArr={recordingArr}
-                                        isVisible={isAddRecording}
-                                        isRecordingStarted={isRecordingStarted}
-                                        isScreenVoiceSelected={isScreenVoiceSelected}
-                                        onClose={() => setAddRecording(false)}
-                                        onScreeCamera={() => onScreeCamera()}
-                                        onScreeVoice={() => onScreeVoice()}
-                                        onStartScrrenRecording={() => startRecording()}
-                                        onStopScrrenRecording={() => toggleModal()}
-                                        onCameraOnly={() => onCameraOnly()}
-                                        onRemoveRecording={() => removeRecording()} />
+                                    {data.Marked ? null :
+
+                                        <Popupaddrecording
+                                            recordingArr={recordingArr}
+                                            isVisible={isAddRecording}
+                                            isRecordingStarted={isRecordingStarted}
+                                            isScreenVoiceSelected={isScreenVoiceSelected}
+                                            onClose={() => setAddRecording(false)}
+                                            onScreeCamera={() => onScreeCamera()}
+                                            onScreeVoice={() => onScreeVoice()}
+                                            onStartScrrenRecording={() => startRecording()}
+                                            onStopScrrenRecording={() => toggleModal()}
+                                            onCameraOnly={() => onCameraOnly()}
+                                            onRemoveRecording={() => removeRecording()} />
+                                    }
                                 </View>
                                 <View style={PAGESTYLE.ratingBlock}>
                                     <Text style={PAGESTYLE.ratingTitle}>Instant rewards for homework</Text>

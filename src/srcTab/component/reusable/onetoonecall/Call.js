@@ -275,7 +275,7 @@ const Call = (props) => {
                 }
                 {params.userType == 'Teacher' && !isCallStarted ?
                     <FlatList
-                        style={{ position: 'absolute', height: '100%', marginVertical: 40, width: '100%', backgroundColor: COLORS.white }}
+                        style={{ position: 'absolute', height: '100%', width: '100%', backgroundColor: COLORS.white }}
                         data={pupilData}
                         renderItem={pupilRender}
                         keyExtractor={(item) => item.id}

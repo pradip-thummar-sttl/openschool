@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
@@ -263,9 +263,9 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
         paddingBottom: hp(1),
-        position: 'absolute',
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
+        top:Platform.OS === 'android' ? hp(0) : hp(5.5),
         width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,

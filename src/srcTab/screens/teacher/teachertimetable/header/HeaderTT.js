@@ -20,15 +20,16 @@ import Notification from "../../../../../svg/teacher/dashboard/Notification";
 import CalendarTop from "../../../../../svg/teacher/timetable/CalendarTop";
 import { BadgeIcon } from "../../../../../utils/Model";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const HeaderTT = (props) => {
 
     const textInput = useRef(null);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
+    const [filterBy, setFilterBy] = useState('All')
     const [keyword, setKeyword] = useState('')
-
+    console.log('ppppppppppppppp filter by', props.filterBy);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -38,6 +39,9 @@ const HeaderTT = (props) => {
             props.onSearch()
         }
     }, [isSearchActive])
+    useEffect(() => {
+        props.onFilter(filterBy)
+    }, [filterBy])
 
     return (
         <View style={styles.headerBarMainWhite}>
@@ -90,9 +94,11 @@ const HeaderTT = (props) => {
                     </TouchableOpacity>
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1,
-                        paddingVertical : Platform.OS === 'android' ? 3 : 0,    
-                        height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{
+                            flex: 1,
+                            paddingVertical: Platform.OS === 'android' ? 3 : 0,
+                            height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,
+                        }}
                         placeholder="Search subject, class, etc"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -101,9 +107,11 @@ const HeaderTT = (props) => {
                             props.onSearchKeyword(keyword);
                         }} />
                 </View>
-                <TouchableOpacity style={[styles.buttonGroup]}>
-                    <Menu style={styles.filterGroup}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By subject</Text></MenuTrigger>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Menu style={{ marginRight: 10 }}>
+                        <MenuTrigger style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={styles.commonButtonBorderedheader}>By {filterBy} </Text>
+                            <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             {/* <MenuOption style={styles.borderList}>
                                 <View style={styles.filterList}>
@@ -111,33 +119,44 @@ const HeaderTT = (props) => {
                             {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
                             {/* </View>
                             </MenuOption> */}
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>props.onFilter('')} >
+                            {/* <View style={{width:29,height : 20,backgroundColor : 'red',position :'absolute', justifyContent:'center',alignItems : 'center',right : 0,top : 15}}>
+                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                            </View> */}
+                            <MenuOption style={[styles.borderList]}>
+                                <TouchableOpacity onPress={() => { setFilterBy('All'); setSelectedIndex(0) }} >
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>All</Text>
+                                        {selectedIndex == 0 ?
+                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                            <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                            :
+                                            null
+                                        }
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>props.onFilter('LiveLesson')} >
+                                <TouchableOpacity onPress={() => { setFilterBy('Live Lesson');setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
+                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={()=>props.onFilter('PublishLesson')}>
+                                <TouchableOpacity onPress={() => { setFilterBy('Publish Lesson');setSelectedIndex(2) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
+                                        {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                     </View>
                                 </TouchableOpacity>
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)} />
+
 
                     {/* <Image style={styles.filterIcon} source={Images.FilterIcon} /> */}
-                </TouchableOpacity>
+                </View>
                 <PopupAddNewData
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()} />
@@ -150,11 +169,11 @@ export default HeaderTT;
 const styles = StyleSheet.create({
     filterIcon: {
         width: hp(1.74),
-        height: hp(1.50),
+        // height: hp(1.50),
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.30),
-        top: hp(1.85),
+        // top: hp(1.85),
     },
     buttonGroup: {
         position: 'relative',
@@ -219,7 +238,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'capitalize',
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
@@ -261,26 +280,30 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: hp(1),
         paddingBottom: hp(1),
+        alignItems : 'center'
     },
     filterListWrap: {
         paddingTop: Platform.OS === 'android' ? 0 : hp(1),
         paddingLeft: Platform.OS === 'android' ? 0 : hp(1.2),
-        paddingRight:Platform.OS === 'android' ? 0 : hp(1.2),
-        paddingBottom:Platform.OS === 'android' ? 0 : hp(1),
-        // position: 'absolute',
+        paddingRight: Platform.OS === 'android' ? 0 : hp(1.2),
+        paddingBottom: Platform.OS === 'android' ? 0 : hp(1),
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top:Platform.OS === 'android' ? 0 : hp(5.5),
+        top: Platform.OS === 'android' ? 0 : hp(5.5),
         // width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-      
+        justifyContent: 'center'
+
     },
     checkMark: {
         width: hp(1.48),
         resizeMode: 'contain',
+        // position : 'absolute',
+        // backgroundColor : 'red'
     },
     filterListText: {
         color: COLORS.darkGray,
