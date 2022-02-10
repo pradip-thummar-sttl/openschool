@@ -502,7 +502,7 @@ const TLHomeWork = (props) => {
                                         </View>
                                     </View>
                                 </View>
-                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time,{width : '40%'}]}>
+                                <View style={[PAGESTYLE.duedateBox, PAGESTYLE.time,{width : hp(38)}]}>
                                     <View style={[PAGESTYLE.subjectDateTimeHomework, PAGESTYLE.dropDownSmallWrapNormal]}>
                                         <View style={PAGESTYLE.dueDateWrap}>
                                             <Text style={PAGESTYLE.dueDateText}>Due Date</Text>

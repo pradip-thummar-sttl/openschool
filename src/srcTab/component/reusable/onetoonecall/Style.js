@@ -16,6 +16,7 @@ export default StyleSheet.create({
         backgroundColor: COLORS.white,
         alignItems: 'center',
         // paddingVertical: 50,
+        marginTop : Platform.OS === 'ios' ? hp(2) : null,
         paddingHorizontal: 20,
     },
     profile: {
