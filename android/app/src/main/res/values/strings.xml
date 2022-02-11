@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MYED Open School</string>
+    <string name="app_name">MyEd Open School</string>
 
     <string name="opponent_pending">Pending</string>
     <string name="new_connection">new connection</string>
