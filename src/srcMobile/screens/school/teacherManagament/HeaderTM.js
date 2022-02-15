@@ -61,7 +61,6 @@ const HeaderTM = (props) => {
     // }, [filterBy])
 
     const addCSV = () => {
-        console.log('hihihihihihi')
         try {
             DocumentPicker.pick({
                 type: [DocumentPicker.types.xlsx,],

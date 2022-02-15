@@ -18,6 +18,7 @@ import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 import Ic_Faq from "../../../../svg/sidebar/Ic_Faq";
+import Ic_OpenSchool from "../../../../svg/sidebar/Ic_OpenSchool";
 
 
 const Sidebar = (props) => {
@@ -127,7 +128,8 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { props.onParentZone(); toggleAnimation(true) }} style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}>
-                        <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                        {/* <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} /> */}
+                        <Ic_OpenSchool style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
                         {
                             isSmall ? null :
                                 <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>Open School</Text>

@@ -132,7 +132,6 @@ const PupiloverView = (props) => {
             />
         );
     };
-    console.log('111111122222233333333', props)
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false

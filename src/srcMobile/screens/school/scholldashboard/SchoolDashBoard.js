@@ -131,7 +131,7 @@ const SchoolDashBoard = (props) => {
             <ScrollView showsVerticalScrollIndicator={false} style={[PAGESTYLE.padLeftRight, { height: '90%' }]}>
                 <View style={PAGESTYLE.viewRow}>
                     <View style={PAGESTYLE.iconView}>
-                        <Insights style={PAGESTYLE.dayIcon} height={hp(2.9)} width={hp(2.9)} />
+                        <Insights style={[PAGESTYLE.dayIcon]} height={hp(2.9)} width={hp(4.2)} />
                         <Text H3 style={PAGESTYLE.dayTitle}>Insights</Text>
                     </View>
                     <TouchableOpacity>

@@ -271,7 +271,7 @@ const LessonDetail = (props) => {
                                     <TextInput
                                         ref={textInput}
                                         style={[STYLE.commonInput, PAGESTYLE.searchHeader]}
-                                        placeholder="Search pupil"
+                                        placeholder="Search subject,class,etc"
                                         maxLength={50}
                                         placeholderTextColor={COLORS.menuLightFonts}
                                         onChangeText={keyword => {
@@ -289,8 +289,10 @@ const LessonDetail = (props) => {
                                     </TouchableOpacity>
                                 </View>
                                 <TouchableOpacity style={[PAGESTYLE.buttonGroup]}>
-                                    <Menu style={PAGESTYLE.filterGroup}>
-                                        <MenuTrigger><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                                    <Menu style={[PAGESTYLE.filterGroup]}>
+                                        <MenuTrigger style={{justifyContent : 'center',alignItems : 'center'}}><Text style={PAGESTYLE.commonButtonBorderedheader}>By {filterBy}</Text>
+                                                <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                                                </MenuTrigger>
                                         <MenuOptions style={PAGESTYLE.filterListWrap}>
                                             <MenuOption style={PAGESTYLE.borderList}>
                                                 <TouchableOpacity
@@ -320,7 +322,6 @@ const LessonDetail = (props) => {
                                         </MenuOptions>
                                     </Menu>
                                     {/* <Image style={PAGESTYLE.filterIcon} source={Images.FilterIcon} /> */}
-                                    <FilterBlack style={PAGESTYLE.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                 </TouchableOpacity>
                             </View>
                             :

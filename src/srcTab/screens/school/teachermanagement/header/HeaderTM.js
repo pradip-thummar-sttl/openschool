@@ -30,6 +30,7 @@ const HeaderTM = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('1')
     const [keyword, setKeyword] = useState('')
+    const [filter,setFilter] = useState('Ascending')
 
     const onPressSearchButton = () => {
         setSearchActive(true)
@@ -38,6 +39,9 @@ const HeaderTM = (props) => {
         }, 500)
     }
 
+    useEffect(() => {
+        props.onFilter(filter)
+    },[])
     const onPressCloseButton = () => {
         setSearchActive(false)
         setTimeout(() => {
@@ -97,7 +101,7 @@ const HeaderTM = (props) => {
 
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%',paddingVertical  : 3, paddingStart : 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                        style={{ flex: 1, height: '100%', paddingVertical: 3, paddingStart: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                         placeholder="Search teacher"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
@@ -108,12 +112,14 @@ const HeaderTM = (props) => {
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
                     <Menu style={{}}>
-                        <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By Name</Text></MenuTrigger>
+                        <MenuTrigger style={{justifyContent : 'center',alignItems : 'center'}}><Text style={styles.commonButtonBorderedheader}>By Name({filter})</Text>
+                            <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                        </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { OnPressAsc() }}>
+                                    onPress={() => { OnPressAsc(); setFilter('Ascending')}}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
                                         {selectedIndex == 0 ?
@@ -127,7 +133,7 @@ const HeaderTM = (props) => {
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { OnPressDes() }}>
+                                    onPress={() => { OnPressDes(); setFilter('Descending') }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Desending)</Text>
                                         {selectedIndex == 1 ?
@@ -140,7 +146,6 @@ const HeaderTM = (props) => {
                             </MenuOption>
                         </MenuOptions>
                     </Menu>
-                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                 </View>
                 <PopupaddnewdataTM
                     navigateToAddLesson={() => props.navigateToAddLesson()}
@@ -210,7 +215,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'capitalize',
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         height: hp(5.20),
@@ -265,7 +270,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top:Platform.OS === 'android' ? hp(0) : hp(5.5),
+        top: Platform.OS === 'android' ? hp(0) : hp(5.5),
         width: hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
@@ -277,7 +282,7 @@ const styles = StyleSheet.create({
         width: hp(1.48),
         resizeMode: 'contain',
     },
-    
+
     headerRight: {
         flexDirection: 'row',
         alignItems: 'center',

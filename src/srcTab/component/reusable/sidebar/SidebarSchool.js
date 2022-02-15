@@ -22,7 +22,7 @@ import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
 import Teachers from "../../../../svg/sidebar/Teachers";
 import Pupils from "../../../../svg/sidebar/Pupils";
 import Messaging from "../../../../svg/sidebar/Messaging";
-import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import Ic_OpenSchool from "../../../../svg/sidebar/Ic_OpenSchool";
 
 
 const SidebarSchool = (props) => {
@@ -206,7 +206,8 @@ const SidebarSchool = (props) => {
                             source={Images.Faqs}
                         />
                          */}
-                        <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                        {/* <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} /> */}
+                        <Ic_OpenSchool style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
                         {
                             isSmall ? null :

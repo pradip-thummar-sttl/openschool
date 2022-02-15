@@ -90,7 +90,6 @@ const TeacherManagement = (props) => {
         }
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
-                // console.log('response of get all lesson event:', res)
                 // setTeacherData(res.data)
                 // dispatch(setCalendarEventData(res.data))
                 setPaginationData(res.pagination)
@@ -117,6 +116,7 @@ const TeacherManagement = (props) => {
                 showMessage(res.message);
             }
         }, (err) => {
+            
             setDataLoading(false)
             console.log('response of get all lesson error', err)
         })
@@ -147,7 +147,7 @@ const TeacherManagement = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
     }
-
+    
     const onEditClick = () => {
         setTeacherAddEdit(true);
         setTeacherDetail(false);
@@ -183,6 +183,7 @@ const TeacherManagement = (props) => {
                             <View style={{ ...PAGESTYLE.backgroundTable, flex: 1, }}>
                                 {isDataLoading ?
                                     <ActivityIndicator
+                                        style={{ marginTop: 20 }}
                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                         color={COLORS.blueButton} />
                                     :

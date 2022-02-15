@@ -31,6 +31,7 @@ const TeacherProfileView = (props) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setTeacherCountData(res.data)
+                
             } else {
                 showMessage(res.message)
             }
@@ -38,13 +39,17 @@ const TeacherProfileView = (props) => {
             console.log('Err of all pupil by teacher', err)
         })
     }, [])
+    
 
     const openNotification = () => {
         props.onNavigation.openDrawer();
     }
 
+
     return (
+       
         <View style={PAGESTYLE.mainPage1}>
+            
             {!isLessonDetail &&
                 <HeaderPMInner
                     onSearch={(search, filter) => { setSearch(search); setFilter(filter) }}
@@ -52,7 +57,9 @@ const TeacherProfileView = (props) => {
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
                     pupilName={item.FirstName + ' ' + item.LastName}
-                    onNotification={() => openNotification()} />
+                    onNotification={() => openNotification()} 
+                    // onEditTeacherProfile={}
+                    />
             }
 
             <View style={{ flex: 1 }}>

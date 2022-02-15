@@ -85,9 +85,9 @@ const HeaderPMInner = (props) => {
                 </View>
             </View>
 
-            <View style={styles.whiteBg}>
-                <View style={styles.lessonPlanTop}>
-                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true}>
+            <View style={[styles.whiteBg]}>
+                <View style={[styles.lessonPlanTop,{flex:1}]}>
+                    <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} >
                         <View style={styles.lessonPlanTab}>
                             <TouchableOpacity
                                 style={styles.tabs}
@@ -112,7 +112,7 @@ const HeaderPMInner = (props) => {
                     {
                         tabIndex == 2 &&
                         <View style={styles.serachView}>
-                            <View style={styles.field}>
+                            <View style={[styles.field, { width: hp(35) }]}>
                                 <TouchableOpacity onPress={() => { onSearch() }} style={[PAGESTYLE.userIcon1Parent]} activeOpacity={opacity}>
                                     {
                                         isSearchActive ?
@@ -124,18 +124,19 @@ const HeaderPMInner = (props) => {
 
                                 <TextInput
                                     ref={textInput}
-                                    style={[styles.searchHeader, { width: '100%', paddingVertical: Platform.OS === 'android' ? 2.5 : 0 }]}
-                                    placeholder="Search pupil"
+                                    style={[styles.searchHeader, { flex:1, paddingVertical: Platform.OS === 'android' ? 2.5 : 0 }]}
+                                    placeholder="Search subject,class,etc"
                                     maxLength={50}
 
                                     placeholderTextColor={COLORS.menuLightFonts}
                                     onChangeText={keyword => { setSearchKeyword(keyword); }} />
                             </View>
 
-                            <View style={styles.field1}>
-                                <Menu>
-                                    <MenuTrigger>
+                            <View style={{ flexDirection: 'row', alignItems: 'center',marginRight: 10 ,width : hp(16),paddingHorizontal : 2}}>
+                                <Menu style={{}}>
+                                    <MenuTrigger style={{ justifyContent: 'center', alignItems: 'center' }}>
                                         <Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                                        <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                     </MenuTrigger>
 
                                     <MenuOptions style={styles.filterListWrap}>
@@ -157,7 +158,6 @@ const HeaderPMInner = (props) => {
                                         </MenuOption>
                                     </MenuOptions>
                                 </Menu>
-                                <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                             </View>
 
                         </View>
@@ -174,14 +174,20 @@ export default HeaderPMInner;
 
 const styles = StyleSheet.create({
     serachView: {
-        height:hp(6),
+        height: hp(6),
         flexDirection: 'row'
     },
     lessonPlanTop: {
         flexDirection: 'row',
     },
+    filterIcon: {
+        width: hp(1.74),
+        resizeMode: 'contain',
+        position: 'absolute',
+        right: hp(1.30),
+    },
     lessonPlanTab: {
-        height:hp(6),
+        height: hp(6),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -212,7 +218,7 @@ const styles = StyleSheet.create({
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
         fontWeight: 'bold',
-        paddingHorizontal: hp(2),
+        // paddingHorizontal: hp(2),
         fontFamily: FONTS.fontRegular,
     },
 
@@ -242,24 +248,33 @@ const styles = StyleSheet.create({
         right: 5
     },
     commonButtonBorderedheader: {
+        backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
+        borderRadius: hp(1),
+        overflow: 'hidden',
         textAlign: 'center',
-        paddingLeft: hp(2.2),
-        paddingRight: hp(4),
+        // paddingLeft: hp(2.2),
+        paddingRight: hp(2),
+        paddingTop: hp(1.1),
+        paddingBottom: hp(1.4),
         alignSelf: 'center',
         textTransform: 'capitalize',
-        fontFamily: FONTS.fontRegular,
+        fontFamily: FONTS.fontSemiBold,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        height: hp(5.20),
         fontSize: hp(1.82),
+        width : hp(16)
     },
     filterListWrap: {
         paddingTop: hp(1),
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
         paddingBottom: hp(1),
-        position: 'absolute',
+        position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
-        width: hp(30.98),
+        top: Platform.OS === 'android' ? hp(0) : hp(5.5),
+        width: Platform.OS === 'android' ? null : hp(30.98),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
@@ -332,8 +347,8 @@ const styles = StyleSheet.create({
         justifyContent: "center"
 
     },
-    
-   
+
+
     tabs: {
         paddingRight: hp(2.5),
     },

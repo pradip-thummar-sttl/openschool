@@ -11,7 +11,7 @@ export default StyleSheet.create({
         flex: 1,
     },
     myDay: {
-        backgroundColor: COLORS.pinkInsights,
+        backgroundColor: COLORS.purpleDark,
         paddingRight: hp(2.60),
         paddingLeft: hp(1.60),
         flexDirection: 'row',

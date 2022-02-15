@@ -278,7 +278,8 @@ const Sidebar = (props) => {
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
                             /> */}
-                                <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
+                                {/* <Ic_MyAvatar style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} /> */}
+                                <Ic_parents style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>Parents</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>

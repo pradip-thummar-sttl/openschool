@@ -126,6 +126,7 @@ const Chat = (props) => {
                                 style={{ marginBottom: 120 }}
                                 inverted={true}
                                 data={reveresed}
+                                showsVerticalScrollIndicator={false}
                                 renderItem={({ item, index }) => {
                                     return (
                                         <View style={Styles.messageCell}>
@@ -142,7 +143,7 @@ const Chat = (props) => {
                         </View>
                         <View style={Styles.textView}>
                             <TextInput
-                                style={Styles.input}
+                                style={[Styles.input,{width : '85%'}]}
                                 multiline={true}
                                 placeholder={'Type a message here...'}
                                 placeholderTextColor={COLORS.menuLightFonts}

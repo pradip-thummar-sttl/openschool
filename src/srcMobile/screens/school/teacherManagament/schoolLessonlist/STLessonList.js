@@ -103,8 +103,8 @@ const STLessonList = (props) => {
         <TouchableOpacity
             style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
             activeOpacity={opacity}
-            onPress={() => navigateToDetail()}>
-            <View style={[PAGESTYLE.item, style]}>
+            onPress={null}>
+            <View style={[PAGESTYLE.item]}>
                 <View style={PAGESTYLE.classSubject}>
                     <View style={PAGESTYLE.subjecRow}>
                         <View style={PAGESTYLE.border}></View>
@@ -152,7 +152,7 @@ const STLessonList = (props) => {
     );
     
     return (
-        <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
+        <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon,flex : 1}}>
             <View style={{ width: isHide ? '100%' : '100%', flexDirection: 'column', }}>
                 <View style={{ backgroundColor: 'white', width: '100%', }}>
                     <SchoolHeader

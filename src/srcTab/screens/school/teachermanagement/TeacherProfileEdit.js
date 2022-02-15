@@ -144,8 +144,9 @@ const TeacherProfileEdit = (props) => {
         }, (err) => {
             setLoading(false)
         })
+        
     }
-
+    console.log('==========',props);
     const uploadProfile = (teacherId) => {
         if (!isProfileUri) {
             setLoading(false)
@@ -211,7 +212,7 @@ const TeacherProfileEdit = (props) => {
             },
         )
     }
-
+   
     const chooseImage = () => {
         launchImageLibrary(
             {
@@ -289,7 +290,7 @@ const TeacherProfileEdit = (props) => {
                         <View style={PAGESTYLE.managementDetail}>
                             <View style={[PAGESTYLE.managementBlockTop]}>
                                 <TopBackImg style={PAGESTYLE.managementopImage} height={hp(20)} width={'100%'} />
-                                <View style={[PAGESTYLE.TeacherProfileMainView, { zIndex: 1, backgroundColor: 'red' }]}>
+                                <View style={[PAGESTYLE.TeacherProfileMainView, { zIndex: 1}]}>
                                     <TouchableOpacity activeOpacity={opacity} onPress={() => showActionChooser()}>
                                         <Image style={{ height: '100%', backgroundColor: COLORS.lightGrey, width: '100%', borderRadius: 100 }}
                                             source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedTeacher?.ProfilePicture : isProfileUri.uri }} />
@@ -300,7 +301,7 @@ const TeacherProfileEdit = (props) => {
                                 </View>
 
                                 <View style={PAGESTYLE.btnSendView}>
-                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView,{justifyContent:'center',alignItems : 'center'}]} activeOpacity={opacity} onPress={() => { validateFields() }}>
+                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView,{justifyContent:'center',alignItems : 'center'}]} activeOpacity={opacity} onPress={() => { validateFields(); }}>
                                         {isLoading ?
                                             <ActivityIndicator
                                                 // style={PAGESTYLE.commonButtonGreenTeacher}

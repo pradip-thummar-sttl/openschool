@@ -202,7 +202,6 @@ const TeacherManagement = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
-console.log('------------->>>>>',props);
 
     return (
         <View>
