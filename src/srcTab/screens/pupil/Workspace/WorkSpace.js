@@ -147,7 +147,8 @@ const WorkSpace = (props) => {
                             }}
                             defaultStrokeIndex={0}
                             defaultStrokeWidth={5}
-                            saveComponent={<View style={PAGESTYLE.functionGreenButton}><Text style={PAGESTYLE.functionText}>{workSpacePath ? <SavedIcon style={PAGESTYLE.commonWidthIcon} width={hp(2.75)} height={hp(2.57)} /> : <SaveIcon style={PAGESTYLE.commonWidthIcon} width={hp(2.75)} height={hp(2.57)} />}</Text></View>}
+                            // <Text style={PAGESTYLE.functionText}></Text></Text>
+                            saveComponent={<View style={PAGESTYLE.functionGreenButton}>{workSpacePath ? <SavedIcon style={PAGESTYLE.commonWidthIcon} width={hp(2.75)} height={hp(2.57)} /> : <SaveIcon style={PAGESTYLE.commonWidthIcon} width={hp(2.75)} height={hp(2.57)} />}</View>}
                             savePreference={() => {
                                 return {
                                     folder: "RNSketchCanvas",
