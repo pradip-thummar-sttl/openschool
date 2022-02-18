@@ -143,14 +143,14 @@ const Chat = (props) => {
                         </View>
                         <View style={Styles.textView}>
                             <TextInput
-                                style={[Styles.input,{width : '85%'}]}
+                                style={[Styles.input,{width : '80%'}]}
                                 multiline={true}
                                 placeholder={'Type a message here...'}
                                 placeholderTextColor={COLORS.menuLightFonts}
                                 value={message}
                                 onChangeText={(text) => setMessage(text)}
                             />
-                            <View style={Styles.buttonView}>
+                            <View style={[Styles.buttonView,{flex : 1}]}>
                                 <TouchableOpacity style={Styles.btnBack} onPress={() => sendMessage(message)}>
                                     <Ic_Send style={Styles.btn} width={hp(2.5)} height={hp(2.5)} />
                                 </TouchableOpacity>
