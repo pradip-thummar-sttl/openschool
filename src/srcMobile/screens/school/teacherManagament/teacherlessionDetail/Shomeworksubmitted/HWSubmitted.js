@@ -151,7 +151,7 @@ const TLHomeWorkSubmitted = (props) => {
 
     return (
 
-        <View style={PAGESTYLE.plainBg}>
+        <View style={[PAGESTYLE.plainBg]}>
             {/* <View style={PAGESTYLE.pupilTable}>
                 <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Pupil name</Text>
@@ -169,7 +169,7 @@ const TLHomeWorkSubmitted = (props) => {
                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Marked</Text>
                 </View>
             </View> */}
-            <View >
+            <View>
                 {isLoading ?
                     <ActivityIndicator
                         style={{ flex: 1, margin: 20 }}

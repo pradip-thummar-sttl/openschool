@@ -10,7 +10,6 @@ export default StyleSheet.create({
         flexDirection: 'row',
         height:hp(80),
         width:wp(100),
-        // flex: 1,
     },
     whiteBoard: {
         backgroundColor: COLORS.white,
@@ -46,6 +45,7 @@ export default StyleSheet.create({
         shadowColor: COLORS.headerShadow,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
+        backgroundColor : COLORS.white
     },
     border: {
         height: hp(5.85),

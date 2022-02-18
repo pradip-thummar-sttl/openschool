@@ -356,10 +356,9 @@ const styles = StyleSheet.create({
         
     },
     userInfobottomMain: {
-        // position: 'absolute',
+        position: 'absolute',
         alignSelf: 'center',
         bottom: 0,
-        top : hp(12),
         paddingHorizontal: hp(1.35),
         borderColor: COLORS.bottomProfileLightBorder,
         borderWidth: 1,

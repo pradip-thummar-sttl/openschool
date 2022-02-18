@@ -126,18 +126,25 @@ const PupilManagement = (props) => {
                 // setPupilData(res.data)
                 setPaginationData(res.pagination)
                 if (allNewAndOldData.length > 0) {
-                    if (res.data) {
+                    if (res.data && res.data.length > 0) {
                         let newData = []
                         newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setPupilData(newArray)
-                        setAllNewAndOldData(newArray)
+                        if(pageNo == 1){
+                            setPupilData(res.data)
+                            setAllNewAndOldData(res.data)
+                        }
+                        else{
+                            let newArray = [allNewAndOldData, ...newData]
+                            setPupilData(newArray)
+                            setAllNewAndOldData(newArray)
+                        }
                         setLoading(false)
                     }
                     else {
-                        setPupilData(allNewAndOldData)
+                        searchBy != '' && res.data ? setPupilData(res.data) : setPupilData(allNewAndOldData)
                         setLoading(false)
                     }
+                    
                 }
                 else {
                     setPupilData(res.data)
@@ -148,6 +155,7 @@ const PupilManagement = (props) => {
                 showMessage(res.message)
             }
         }, (err) => {
+            setLoading(false)
             console.log('error of absent check', err);
         })
 
@@ -209,7 +217,7 @@ const PupilManagement = (props) => {
                         <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => {setPupilAdd(false);onRefress()}} openNotification={() => { openNotification() }}/>
                         :
                         isPupilEdit ?
-                            <PupilProfileEdit navigateToBack={() => onRefress()} 
+                            <PupilProfileEdit navigateToBack={() => onRefress()} refresh={() => refresh()}
                             selectedPupil={selectedItem} openNotification={() => { openNotification() }} />
                             :
                             <>

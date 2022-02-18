@@ -648,6 +648,16 @@ export default StyleSheet.create({
         marginBottom:wp(1),
         marginHorizontal:hp(2),
     },
+    pupilDatamessage1 : {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.95),
+        height: hp(8.85),
+        borderRadius: hp(2.0),
+        marginBottom:wp(1),
+        marginHorizontal:hp(2),
+    },
     pupilProfile: {
         width: hp(15.80),
         flexDirection: 'row',

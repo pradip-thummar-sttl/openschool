@@ -77,7 +77,7 @@ const Message = (props) => {
         <TouchableOpacity
             activeOpacity={opacity}
             onPress={() => { setSelectedItem(item.item); setAddMessage(true); }}>
-            <View style={[PAGESTYLE.pupilData]}>
+            <View style={[PAGESTYLE.pupilDatamessage1]}>
                 <View style={[PAGESTYLE.pupilProfileMessage]}>
                     <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{ paddingStart : 20}]}>{item.item.Title}</Text>
                 </View>

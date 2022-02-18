@@ -23,7 +23,7 @@ const Pupillist = (props, { style }) => (
     <TouchableOpacity
         activeOpacity={opacity}
         onPress={() => props.navigateToDetail()}>
-        <View style={[PAGESTYLE.pupilData]}>
+        <View style={[PAGESTYLE.pupilDta]}>
             <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
                 <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:wp(20)}]}>{props.item.PupilName}</Text>

@@ -273,7 +273,7 @@ const Sidebar = (props) => {
                                 <Messaging style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 3 ? styles.selectedMenuText : null]}>Messaging</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('Avatar'); setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => {  setSelectedModule(4); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 4 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.MyAvatar}
@@ -282,7 +282,7 @@ const Sidebar = (props) => {
                                 <Ic_parents style={styles.menuIcon} height={hp(3.25)} width={hp(3.25)} />
                                 <Text style={[styles.menuText, selectedModule == 4 ? styles.selectedMenuText : null]}>Parents</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { props.navigation.replace('ParentZoneSwitch'); setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
+                            <TouchableOpacity onPress={() => { setSelectedModule(5); props.navigation.closeDrawer() }} style={[styles.menuItem, selectedModule == 5 ? styles.menuItemSelected : null]}>
                                 {/* <Image
                                 style={styles.menuIcon}
                                 source={Images.OpenSchool}
