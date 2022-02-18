@@ -151,16 +151,22 @@ const TeacherManagement = (props) => {
                 // setMessageData(res.data)
                 setPaginationData(res.pagination)
                 if (allNewAndOldData.length > 0) {
-                    if (res.data) {
+                    if (res.data && res.data.length > 0) {
                         let newData = []
                         newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setMessageData(newArray)
-                        setAllNewAndOldData(newArray)
+                        if (pageNo == 1  && filterBy == ''){
+                            setMessageData(res.data)
+                            setAllNewAndOldData(res.data)
+                        }
+                        else{
+                            let newArray = [allNewAndOldData, ...newData]
+                            setMessageData(newArray)
+                            setAllNewAndOldData(newArray)
+                        }
                         setLoading(false)
                     }
                     else {
-                        setMessageData(allNewAndOldData)
+                        searchby != '' && res.data ?  setMessageData(res.data) : setMessageData(allNewAndOldData)
                         setLoading(false)
                     }
                 }

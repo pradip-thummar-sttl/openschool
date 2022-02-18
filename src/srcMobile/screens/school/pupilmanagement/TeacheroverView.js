@@ -102,16 +102,22 @@ const TeacheroverView = (props) => {
             if (res.flag) {
                 setPaginationData(res.pagination)
                 if (allNewAndOldData.length > 0) {
-                    if (res.data) {
+                    if (res.data && res.data.length > 0) {
                         let newData = []
                         newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setPupilData(newArray)
-                        setAllNewAndOldData(newArray)
+                        if(pageNo == 1){
+                            setPupilData(res.data)
+                            setAllNewAndOldData(res.data)
+                        }
+                        else{
+                            let newArray = [allNewAndOldData, ...newData]
+                            setPupilData(newArray)
+                            setAllNewAndOldData(newArray)
+                        }
                         setLoading(false)
                     }
                     else {
-                        setPupilData(allNewAndOldData)
+                        search != '' && res.data ? setPupilData(res.data) : setPupilData(allNewAndOldData)
                         setLoading(false)
                     }
                 }

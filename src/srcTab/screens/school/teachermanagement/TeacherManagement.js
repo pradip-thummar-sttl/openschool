@@ -94,16 +94,23 @@ const TeacherManagement = (props) => {
                 // dispatch(setCalendarEventData(res.data))
                 setPaginationData(res.pagination)
                 if (allNewAndOldData.length > 0) {
-                    if (res.data) {
+                    if (res.data && res.data.length) {
                         let newData = []
                         newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setTeacherData(newArray)
-                        setAllNewAndOldData(newArray)
+                        if(pageNo == 1 && filterBy == ''){
+                            setTeacherData(res.data)
+                            setAllNewAndOldData(res.data)
+                        }
+                        else{
+                            let newArray = [allNewAndOldData, ...newData]
+                            setTeacherData(newArray)
+                            setAllNewAndOldData(newArray)
+                        }
                         setDataLoading(false)
                     }
                     else {
-                        setTeacherData(allNewAndOldData)
+                        searchBy != '' && res.data ? setTeacherData(res.data) : setTeacherData(allNewAndOldData)
+                        // setTeacherData(allNewAndOldData)
                         setDataLoading(false)
                     }
                 }
@@ -137,6 +144,7 @@ const TeacherManagement = (props) => {
     }
 
     const pupilRender = ({ item }) => {
+        console.log('item pupil reader', item);
         return (
             <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }} />
         );
@@ -163,8 +171,6 @@ const TeacherManagement = (props) => {
             <View style={{ width: isHide ? '100%' : '78%' }}>
                 {isTeacherDetail ? <TeacherProfileView onNavigation={props.navigation} selectedTeacher={teacherDetailData} navigateToBack={() => setTeacherDetail(false)} onEditTeacherProfile={() => onEditClick()} />
                     :
-                    isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => setTeacherAdd(false)} />
-                        :
                         isTeacherAdd ? <TeacherProfileAdd navigateToBack={() => {setTeacherAdd(false);onRefress()}} openNotification={() => { openNotification() }} />
                             :
                             isTeacherEdit ? <TeacherProfileEdit navigateToBack={() => onRefress()} selectedTeacher={teacherDetailData} openNotification={() => { openNotification() }} />

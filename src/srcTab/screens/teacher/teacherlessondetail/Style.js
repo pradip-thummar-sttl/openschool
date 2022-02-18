@@ -792,6 +792,15 @@ export default StyleSheet.create({
         borderRadius: hp(0.6),
         marginBottom: hp(0.78),
     },
+    pupilDta: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: hp(1.95),
+        height: hp(8.85),
+        borderRadius: hp(0.6),
+        marginBottom: hp(0.78),
+    },
     pupilProfile: {
         width: '15%',
         flexDirection: 'row',

@@ -750,6 +750,7 @@ export default StyleSheet.create({
         borderRadius: hp(0.6),
         marginTop: hp(2.5),
         padding: wp(2.5),
+        flex : 1
     },
     pupilProfile: {
         width: hp(15.80),

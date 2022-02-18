@@ -295,7 +295,7 @@ const TeacherLessonDetail = (props) => {
                                     </ScrollView>
                                 </View>
                             </View>
-                            <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
+                            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{flex:1}}>
                                 {
                                     tabIndex == 0 ?
                                         <TLDetail lessonData={lessonData} />
