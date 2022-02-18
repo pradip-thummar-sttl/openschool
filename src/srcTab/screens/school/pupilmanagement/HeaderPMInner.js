@@ -49,7 +49,9 @@ const HeaderPMInner = (props) => {
                 <View style={styles.headerRight}>
                     <TouchableOpacity
                         style={styles.notificationBar}
-                        activeOpacity={opacity}>
+                        activeOpacity={opacity}
+                        onPress={() => props.openNotification()}
+                        >
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>

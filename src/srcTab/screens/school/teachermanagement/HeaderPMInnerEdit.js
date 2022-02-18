@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1, borderColor: COLORS.dashBoard,
         paddingLeft: hp(3.90),
         paddingRight: hp(2.0),
-        paddingTop: Platform.OS == 'android' ? hp(2) : hp(2),
+        paddingTop: Platform.OS == 'android' ? hp(2) : hp(3),
         paddingBottom: hp(2),
     },
     headerMain: {

@@ -90,10 +90,10 @@ const HeaderPM = (props) => {
                                 onPress={() => {
                                     keyword &&
                                         isSearchActive ?
-                                            setSearchActive(false)
-                                            :
-                                            setSearchActive(true)
-                                       
+                                        setSearchActive(false)
+                                        :
+                                        setSearchActive(true)
+
                                 }}>
                                 {isSearchActive ?
                                     <CloseBlack height={15} width={15} />
@@ -113,7 +113,9 @@ const HeaderPM = (props) => {
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10 }}>
                             <Menu style={{}}>
-                                <MenuTrigger><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text></MenuTrigger>
+                                <MenuTrigger style={{justifyContent : 'center',alignItems: 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                                    <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
+                                </MenuTrigger>
                                 <MenuOptions style={styles.filterListWrap}>
                                     <MenuOption style={styles.borderList}>
                                         <TouchableOpacity
@@ -141,13 +143,12 @@ const HeaderPM = (props) => {
                                             onPress={() => { setFilterBy('dob'); setSelectedIndex(2) }}>
                                             <View style={styles.filterList}>
                                                 <Text style={styles.filterListText}>DOB</Text>
-                                                {selectedIndex == 2 &&<TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                                {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
                                             </View>
                                         </TouchableOpacity>
                                     </MenuOption>
                                 </MenuOptions>
                             </Menu>
-                            <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                         </View>
                         <PopupaddnewdataPM
                             navigateToAddLesson={() => props.navigateToAddLesson()}

@@ -96,7 +96,7 @@ const SidebarSchool = (props) => {
 
     console.log('module index', props.moduleIndex)
     return (
-        <View style={styles.sidebarHeader}>
+        <View style={[styles.sidebarHeader]}>
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                 {/* {  isSmall ? 
@@ -356,9 +356,10 @@ const styles = StyleSheet.create({
         
     },
     userInfobottomMain: {
-        position: 'absolute',
+        // position: 'absolute',
         alignSelf: 'center',
         bottom: 0,
+        top : hp(12),
         paddingHorizontal: hp(1.35),
         borderColor: COLORS.bottomProfileLightBorder,
         borderWidth: 1,

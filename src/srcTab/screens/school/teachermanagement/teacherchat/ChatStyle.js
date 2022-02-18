@@ -147,13 +147,14 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        width: '95%',
+        width: '92%',
         height: '100%',
         fontSize: hp(1.8),
         fontFamily: FONTS.fontSemiBold,
         marginHorizontal: Platform.OS == 'android' ? hp(1) : hp(2),
         textAlignVertical: 'top',
         paddingVertical: 10,
+        
     },
     buttonView: {
         height: '100%',

@@ -79,7 +79,7 @@ function STabletOnboarding3(props) {
               <Path id="Path_3940-2" data-name="Path 3940" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3943-2" data-name="Path 3943" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3941-2" data-name="Path 3941" d="M1.153,18.544a1.872,1.872,0,0,1-.921-.823c-.157.089-.231-.144-.233-.9v0H0V5.906A5.9,5.9,0,0,1,5.9,0H16.813a1.87,1.87,0,0,1,1.323,3.191L3.188,18.138a1.866,1.866,0,0,1-2.035.406Z" transform="translate(32.01 42.274)" fill="#dc7eff"/>
-              <Text id="Csv-2" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16" font-family="Impact"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
+              <Text id="Csv-2" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
             </G>
           </G>
           <G transform="translate(84.832 -274.734)">
@@ -87,7 +87,7 @@ function STabletOnboarding3(props) {
               <Path id="Path_3940-3" data-name="Path 3940" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3943-3" data-name="Path 3943" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3941-3" data-name="Path 3941" d="M1.153,18.544a1.872,1.872,0,0,1-.921-.823c-.157.089-.231-.144-.233-.9v0H0V5.906A5.9,5.9,0,0,1,5.9,0H16.813a1.87,1.87,0,0,1,1.323,3.191L3.188,18.138a1.866,1.866,0,0,1-2.035.406Z" transform="translate(32.01 42.274)" fill="#dc7eff"/>
-              <Text id="Csv-3" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16" font-family="Impact"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
+              <Text id="Csv-3" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16" ><TSpan x="-12.754" y="0">CSV</TSpan></Text>
             </G>
           </G>
         </G>
@@ -107,13 +107,13 @@ function STabletOnboarding3(props) {
           <Path id="Path_3940-5" data-name="Path 3940" d="M8.828,61.059h33.1a8.828,8.828,0,0,0,8.828-8.828V17.162C41.514,8.2,37.537,5.181,33.654,0H8.828A8.828,8.828,0,0,0,0,8.828v43.4A8.828,8.828,0,0,0,8.828,61.059Z" transform="translate(0)" fill="#ffd719"/>
           <Path id="Path_3943-5" data-name="Path 3943" d="M8.828,61.059h33.1a8.828,8.828,0,0,0,8.828-8.828V17.162C41.514,8.2,37.537,5.181,33.654,0H8.828A8.828,8.828,0,0,0,0,8.828v43.4A8.828,8.828,0,0,0,8.828,61.059Z" transform="translate(0)" fill="#ffd719"/>
           <Path id="Path_3941-5" data-name="Path 3941" d="M1.153.142A1.872,1.872,0,0,0,.233.965C.076.876,0,1.109,0,1.868v0H0V12.78a5.9,5.9,0,0,0,5.9,5.906H16.813a1.87,1.87,0,0,0,1.323-3.191L3.188.548A1.866,1.866,0,0,0,1.153.142Z" transform="translate(32.01 0.099)" fill="#dc7eff"/>
-          <Text id="Csv-5" data-name="Csv" transform="translate(25.38 30.529) rotate(180)" fill="#8738bd" font-size="16" font-family="Impact"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
+          <Text id="Csv-5" data-name="Csv" transform="translate(25.38 30.529) rotate(180)" fill="#8738bd" font-size="16" ><TSpan x="-12.754" y="0">CSV</TSpan></Text>
         </G>
         <G id="file-6" data-name="file" transform="translate(100.583 61.059) rotate(180)">
           <Path id="Path_3940-6" data-name="Path 3940" d="M8.828,61.059h33.1a8.828,8.828,0,0,0,8.828-8.828V17.162C41.514,8.2,37.537,5.181,33.654,0H8.828A8.828,8.828,0,0,0,0,8.828v43.4A8.828,8.828,0,0,0,8.828,61.059Z" transform="translate(0)" fill="#ffd719"/>
           <Path id="Path_3943-6" data-name="Path 3943" d="M8.828,61.059h33.1a8.828,8.828,0,0,0,8.828-8.828V17.162C41.514,8.2,37.537,5.181,33.654,0H8.828A8.828,8.828,0,0,0,0,8.828v43.4A8.828,8.828,0,0,0,8.828,61.059Z" transform="translate(0)" fill="#ffd719"/>
           <Path id="Path_3941-6" data-name="Path 3941" d="M1.153.142A1.872,1.872,0,0,0,.233.965C.076.876,0,1.109,0,1.868v0H0V12.78a5.9,5.9,0,0,0,5.9,5.906H16.813a1.87,1.87,0,0,0,1.323-3.191L3.188.548A1.866,1.866,0,0,0,1.153.142Z" transform="translate(32.01 0.099)" fill="#dc7eff"/>
-          <Text id="Csv-6" data-name="Csv" transform="translate(25.381 30.529) rotate(180)" fill="#8738bd" font-size="16" font-family="Impact"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
+          <Text id="Csv-6" data-name="Csv" transform="translate(25.381 30.529) rotate(180)" fill="#8738bd" font-size="16" ><TSpan x="-12.754" y="0">CSV</TSpan></Text>
         </G>
         <G id="Group_2085" data-name="Group 2085" transform="translate(2.553 16.754)">
           <Path id="Path_5043-2" data-name="Path 5043" d="M-3373.871,2968.565v-7.272h13a3,3,0,0,0,3-3v-3a3,3,0,0,0-3-3h-13v-7.271a2,2,0,0,0-3.393-1.436l-12.128,11.772a2,2,0,0,0,0,2.87l12.128,11.771a1.96,1.96,0,0,0,1.379.569A2,2,0,0,0-3373.871,2968.565Z" transform="translate(3390 -2943.018)" fill="#fff"/>

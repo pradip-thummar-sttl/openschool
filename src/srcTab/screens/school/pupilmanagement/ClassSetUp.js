@@ -158,20 +158,20 @@ const ClassSetUp = () => {
 
     const SelectedPupillist = (props) => (
         <View>
-            <View style={PAGESTYLE.selectedPupilParent}>
+            <View style={[PAGESTYLE.selectedPupilParent,{width : hp(20)}]}>
                 <Image
                     style={PAGESTYLE.selectedMediabar}
                     source={{ uri: baseUrl + props.item.ProfilePicture }} />
-                <Text style={PAGESTYLE.selectedPupilName} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
+                <Text style={[PAGESTYLE.selectedPupilName]} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
                 <TouchableOpacity
-                    style={{ justifyContent: 'center', flex: 1 }}
+                    style={{ justifyContent: 'center', flex: 1}}
                     activeOpacity={opacity}
                     onPress={() => popPupil(props.index)}>
                     {/* <Image
                         style={PAGESTYLE.selectedRemove}
                         source={Images.PopupCloseIcon} /> */}
 
-                    <CloseBlack style={PAGESTYLE.selectedRemove} width={hp(1.69)} height={hp(1.69)} />
+                    <CloseBlack style={[PAGESTYLE.selectedRemove,{right : 0}]} width={hp(1.69)} height={hp(1.69)} />
                 </TouchableOpacity>
             </View>
         </View>

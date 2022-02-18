@@ -179,7 +179,6 @@ const SchoolNewMessage = (props) => {
     }
 
 
-    console.log(parentsData, '--------------------------');
     const parentListView = () => {
         return (
             <View style={{ marginBottom: 10, width: '65%', flexDirection: 'column', }}>
@@ -226,7 +225,7 @@ const SchoolNewMessage = (props) => {
                     behavior={Platform.OS === "ios" ? "padding" : "height"}
                     style={{ flex : 1 }}
                 >
-                    <ScrollView>
+                    <ScrollView showsVerticalScrollIndicator={false}>
                     <SafeAreaView style={{ paddingHorizontal: 20,marginBottom : 50 }}>
                         <View style={styles.field1}>
                             <Text label style={STYLE.labelCommon}>Message Title</Text>

@@ -198,14 +198,15 @@ const PupilManagement = (props) => {
         setPupilEdit(false);
         fetchRecord('', 'name');
     }
+    
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.backgroundColorCommon }}>
             {
                 isPupilProfile ?
-                    <PupilProfileView selectedPupil={selectedItem} navigateToBack={() => setPupilProfile(false)} onEditTeacherProfile={() => onEditClick()} />
+                    <PupilProfileView selectedPupil={selectedItem} navigateToBack={() => setPupilProfile(false)} onEditTeacherProfile={() => onEditClick()} {...props} />
                     :
                     isPupilAdd ?
-                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => {setPupilAdd(false);onRefress()}} />
+                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => {setPupilAdd(false);onRefress()}} openNotification={() => { openNotification() }}/>
                         :
                         isPupilEdit ?
                             <PupilProfileEdit navigateToBack={() => onRefress()} 
