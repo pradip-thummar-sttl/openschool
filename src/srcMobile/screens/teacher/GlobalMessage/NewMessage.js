@@ -87,7 +87,7 @@ const NewMessage = (props) => {
                     renderItem={({ item, index }) => (
                         <View style={{ flexDirection : 'row', marginTop: 10 ,width : '50%'}}>
                             <CheckBox
-                                // style={[{backgroundColor : 'red'}]}
+                                style={Styles.checkMark12}
                                 boxType={'square'}
                                 onCheckColor={COLORS.white}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

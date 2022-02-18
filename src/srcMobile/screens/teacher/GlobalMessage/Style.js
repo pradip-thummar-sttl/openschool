@@ -23,6 +23,12 @@ export default StyleSheet.create({
         overflow: 'hidden',
         height: hp(65),
     },
+    checkMark12: {
+        width : Platform.OS === 'android' ? hp(4.2) : hp(2.2),
+        // width: hp(2.2),
+        height: hp(2.2),
+        fontFamily: FONTS.fontBold,
+    },
     whiteBg: {
         backgroundColor: COLORS.white,
         paddingBottom: hp(2),
