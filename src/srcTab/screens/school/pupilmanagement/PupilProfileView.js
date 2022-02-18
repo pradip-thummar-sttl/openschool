@@ -50,7 +50,7 @@ const PupilProfileView = (props) => {
     useEffect(() => {
         getLessonData()
     }, [])
-
+console.log('==+++',props.navigation.openDrawer);
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             if (res.flag) {
@@ -100,7 +100,9 @@ const PupilProfileView = (props) => {
                     navigateToBack={() => props.navigateToBack()}
                     tabIndex={(index) => { setTabSelected(index) }}
                     tabSelected={tabSelected}
-                    pupilName={item.FirstName + ' ' + item.LastName} />
+                    pupilName={item.FirstName + ' ' + item.LastName}
+                    openNotification={() => props.navigation.openDrawer()}
+                    />
             }
             <View style={{ flex: 1 }}>
                 {
