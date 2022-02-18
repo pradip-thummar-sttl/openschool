@@ -126,7 +126,8 @@ export default StyleSheet.create({
         paddingVertical: wp(1)
     },
     messageSubCell: {
-        marginLeft: wp(1)
+        // marginLeft: wp(1)
+        paddingHorizontal : hp(5)
     },
     roundImage: {
         width: hp(4),
@@ -144,20 +145,23 @@ export default StyleSheet.create({
         marginTop: wp(0.2)
     },
     input: {
-        width: '100%',
+        width: '90%',
         // height: '100%',
         fontSize:hp(1.8),
         fontFamily:FONTS.fontSemiBold,
         marginHorizontal:wp(1.5),
-        // marginVertical:hp(1),  
+        // marginVertical:hp(1), 
+
+
     },
     buttonView:{
         position:'absolute',
-        right:hp(2),
+        right:hp(1),
+        flex : 1,
         // bottom:wp(2),
         alignItems: 'center',
         height: '100%',
-        flexDirection:'row'
+        justifyContent : 'center',
     },
     btn:{
         // backgroundColor:'yellow',

@@ -98,12 +98,11 @@ const STLessonList = (props) => {
             />
         );
     };
-
     const Item = ({ navigateToDetail, style, item }) => (
         <TouchableOpacity
             style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
             activeOpacity={opacity}
-            onPress={null}>
+            onPress={() => props.navigateDetails(item)}>
             <View style={[PAGESTYLE.item]}>
                 <View style={PAGESTYLE.classSubject}>
                     <View style={PAGESTYLE.subjecRow}>
@@ -162,7 +161,7 @@ const STLessonList = (props) => {
                         onFilter={(filterBy) => fetchRecord('', filterBy)} />
                 </View>
 
-                <View >
+                <View style={{flex : 1}}>
                     {isLessonLoading ?
                         <ActivityIndicator
                             style={{ margin: 20 }}
@@ -171,7 +170,7 @@ const STLessonList = (props) => {
                         :
                         lessonData.length > 0 ?
                             <FlatList
-                                style={{ paddingHorizontal: hp(1.84), marginBottom: hp(1.47) }}
+                                style={{ paddingHorizontal: hp(1.84), marginBottom: hp(1.47)}}
                                 data={lessonData}
                                 renderItem={renderItem}
                                 keyExtractor={(item) => item.id}

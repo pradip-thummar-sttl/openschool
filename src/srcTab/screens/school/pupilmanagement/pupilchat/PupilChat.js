@@ -97,7 +97,7 @@ const PupilChat = (props) => {
 
 
 
-                                <View style={[Styles.mesagesView,{  }]}>
+                                <View style={Styles.mesagesView}>
                                     <FlatList
                                         data={reveresed}
                                         showsVerticalScrollIndicator={false}
@@ -115,7 +115,7 @@ const PupilChat = (props) => {
                                             )
                                         }} />
                                 </View>
-                                <View style={[Styles.textView, { width: '100%' }]}>
+                                <View style={[Styles.textView, { width: '100%'}]}>
                                     <TextInput
                                         style={Styles.input}
                                         multiline={true}
@@ -125,7 +125,7 @@ const PupilChat = (props) => {
                                         onChangeText={(text) => setMessage(text)}
                                     />
                                     <View style={Styles.buttonView}>
-                                        <TouchableOpacity onPress={() => sendMessage(message)}>
+                                        <TouchableOpacity onPress={() => sendMessage(message)} >
                                             {/* <Image style={Styles./btn} source={Images.send} /> */}
                                             <Ic_Send style={Styles.btn} height={hp(2.5)} width={hp(2.5)} />
                                         </TouchableOpacity>

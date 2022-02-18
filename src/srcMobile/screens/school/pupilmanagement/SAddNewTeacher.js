@@ -283,6 +283,7 @@ const SAddNewTeacher = (props) => {
                     </MenuTrigger>
                     <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
                         <FlatList
+                            showsVerticalScrollIndicator={false}
                             data={teachers}
                             renderItem={({ item }) => (
                                 <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
@@ -303,7 +304,7 @@ const SAddNewTeacher = (props) => {
                 isLoading={isLoading}
 
             />
-            <View style={PAGESTYLE.MainProfile}>
+            <View style={[PAGESTYLE.MainProfile,{paddingBottom : hp(5)}]}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>

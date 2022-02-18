@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: hp(1), },
         shadowOpacity: 0.05,
         shadowRadius: hp(1),
-        paddingVertical: Platform.OS == 'android' ? hp(2) : hp(3.5),
+        paddingVertical: Platform.OS == 'android' ? hp(2) : hp(4),
         backgroundColor: COLORS.white,
         width: '100%',
         zIndex: 1,
