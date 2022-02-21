@@ -1159,6 +1159,24 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
     },
+    pupilTableHeadingMainFirst: {
+        width: '35%',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        alignItems:'center'
+    },
+    pupilTableHeadingMainSecond : {
+        width: '35%',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        alignItems:'center'
+    },
+    pupilTableHeadingMainThird : {
+        width: '10%',
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        alignItems:'center'
+    },
     tabpupil2: {
         width: hp(17.97),
     },
@@ -1184,6 +1202,9 @@ export default StyleSheet.create({
         textTransform: 'uppercase',
         lineHeight: hp(2.08),
         marginRight: hp(2.60),
+    },
+    leftSideSpace:{
+        paddingLeft:0
     },
     pupilTableHeadingMainsubTitlestar: {
         fontSize: hp(1.56),
@@ -1231,6 +1252,9 @@ export default StyleSheet.create({
     },
     firstColumn: {
         width: hp(55),
+    },
+    firstColumnMsgTitle : {
+        width:'35%',
     },
     sentBlueText: {
         fontSize: hp(1.82),

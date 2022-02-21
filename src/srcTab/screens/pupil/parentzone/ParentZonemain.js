@@ -20,14 +20,14 @@ var moment = require('moment');
 
 const MessageList = (props, { style }) => (
     <View style={[PAGESTYLE.pupilData]}>
-        <View style={PAGESTYLE.firstColumn}>
+        <View style={PAGESTYLE.firstColumnMsgTitle}>
             <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName]}>{props.item.Title}</Text>
         </View>
-        <View style={PAGESTYLE.firstColumn}>
+        <View style={{width:'35%',justifyContent:'flex-start'}}>
             <Text numberOfLines={1} style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{props.item.Message}</Text>
         </View>
-        <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-            <Text style={[PAGESTYLE.message, PAGESTYLE.userStampName]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
+        <View style={{width:'10%',alignItems:'center'}}>
+            <Text style={[PAGESTYLE.message,{fontSize:14}]}>{moment(props.item.CreatedDate).format('DD/MM/yyyy')}</Text>
         </View>
     </View>
 );
@@ -43,7 +43,6 @@ const ParentZonemain = (props) => {
     const [keyword, setKeyword] = useState('')
 
     const [messageData, setMessageData] = useState([])
-    console.log('0000000', props);
 
     const messageRender = ({ item, index }) => {
         return (
@@ -112,18 +111,18 @@ const ParentZonemain = (props) => {
                                     <View style={PAGESTYLE.managementDetail}>
                                         <View style={PAGESTYLE.table}>
                                             <View style={PAGESTYLE.pupilTable}>
-                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message title</Text>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMainFirst]}>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,PAGESTYLE.leftSideSpace]}>Message title</Text>
                                                 </View>
-                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.firstColumn]}>
-                                                    <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Message</Text>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMainSecond]}>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,PAGESTYLE.leftSideSpace]}>Message</Text>
                                                 </View>
-                                                <View>
-                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, { marginLeft: -10 }]}>Date</Text>
+                                                <View style={[PAGESTYLE.pupilTableHeadingMainThird]}>
+                                                    <Text style={[PAGESTYLE.pupilTableHeadingMainTitle,PAGESTYLE.leftSideSpace]}>Date</Text>
                                                 </View>
-                                                <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
+                                                {/* <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.lastColumn]}>
                                                     <Text style={PAGESTYLE.pupilTableHeadingMainTitle}></Text>
-                                                </View>
+                                                </View> */}
                                             </View>
                                             <View>
                                                 <SafeAreaView>
