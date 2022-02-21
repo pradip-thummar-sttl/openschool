@@ -377,6 +377,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
         flex: 1,
+        alignItems : 'center'
     },
     filterListWrap: {
         paddingTop: hp(1),

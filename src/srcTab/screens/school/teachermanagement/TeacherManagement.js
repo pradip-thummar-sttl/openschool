@@ -94,7 +94,7 @@ const TeacherManagement = (props) => {
                 // dispatch(setCalendarEventData(res.data))
                 setPaginationData(res.pagination)
                 if (allNewAndOldData.length > 0) {
-                    if (res.data && res.data.length) {
+                    if (res.data && res.data.length > 0) {
                         let newData = []
                         newData = res.data
                         if(pageNo == 1 && filterBy == ''){

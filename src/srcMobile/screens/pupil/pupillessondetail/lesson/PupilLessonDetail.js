@@ -14,6 +14,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 import HeaderWhitewithoutsearch from "../../../../component/reusable/header/bulck/HeaderWhitewithoutsearch";
 import Sidebarpupil from "../../../../component/reusable/sidebar/Sidebarpupil";
 import moment from "moment";
+import VideoPlayer from 'react-native-video-controls'
 import { Download } from "../../../../../utils/Download";
 import { Service } from "../../../../../service/Service";
 import { EndPoints } from "../../../../../service/EndPoints";
@@ -224,12 +225,21 @@ const PupilLessonDetailInternal = (props) => {
                         <View style={PAGESTYLE.largeVideoBlock}>
 
                             <View style={{ height: '100%', justifyContent: 'center' }}>
-                                <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                {/* <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
                                     // hideShutterView={true}
+                                    playInBackground={false}
                                     resizeMode={'contain'}
                                     style={PAGESTYLE.largeVideo1}
                                     controls={true}
-                                    paused={isPaused} />
+                                    paused={isPaused} /> */
+                                }
+
+                                <VideoPlayer
+                                    source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                    paused={isPaused}
+                                    resizeMode={'contain'}
+                                    style={PAGESTYLE.largeVideo1}
+                                />
                                 {isPaused ?
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -302,7 +312,7 @@ const PupilLessonDetailInternal = (props) => {
                             :
 
 
-                            <Text style={{...PAGESTYLE.homeworkText}} >see homework</Text>
+                            <Text style={{ ...PAGESTYLE.homeworkText }} >see homework</Text>
                         }
                     </TouchableOpacity>
 
