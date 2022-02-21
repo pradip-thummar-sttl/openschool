@@ -207,7 +207,7 @@ const TLHomeWork = (props) => {
             }
         }
     }
-    
+
     const stopRecording = async () => {
         if (recordingName.length > 0) {
 
@@ -348,10 +348,12 @@ const TLHomeWork = (props) => {
                     extraData={checkVal}
                     style={{ alignSelf: 'center', width: '100%', bottom: 10 }}
                     renderItem={({ item, index }) => (
-                        <View style={[PAGESTYLE.checkBoxLabelLine, { alignItems: 'center',paddingVertical:10}]}>
-                            {/* <View style={{backgroundColor:'red',alignItems:'center',marginRight:10}}> */}
+                        <View style={[PAGESTYLE.checkBoxLabelLine, {
+                            alignItems: 'center',
+                            paddingVertical: Platform.OS === 'android' ? 0 : 10
+                        }]}>
                             <CheckBox
-                                style={{width:20,height:20,margin:0,padding:0}}
+                                style={{ width: 20, height: 20, margin: 0, padding: 0 }}
                                 value={item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
@@ -362,15 +364,11 @@ const TLHomeWork = (props) => {
                                 onChange={() => onCheckList(index)}
 
                             />
-                            {/* </View> */}
-                            {/* <View style={{alignItems:'center',backgroundColor:'red',width:'50%'}}> */}
                             <TextInput
-                                style={[PAGESTYLE.txtLable,{lineHeight:hp(2.5),paddingStart:10}]}
+                                style={[PAGESTYLE.txtLable, { lineHeight: hp(2.5), paddingStart: 10 }]}
                                 maxLength={40}
                                 onChangeText={text => { editNewText(text, index) }}
                                 value={item.ItemName} />
-                                {/* </View> */}
-
                             <TouchableOpacity
                                 style={PAGESTYLE.userIcon1Parent}
                                 activeOpacity={opacity}
@@ -468,7 +466,7 @@ const TLHomeWork = (props) => {
         var arr = [...recordingArr]
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
         var arr = fname.split("/")
-        _removeRecordingArr.push(arr[arr.length-1]);
+        _removeRecordingArr.push(arr[arr.length - 1]);
 
         // _removeRecordingArr.push(fname);
         Addhomework.RemoveRecordingArr = _removeRecordingArr;
