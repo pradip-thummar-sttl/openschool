@@ -969,7 +969,7 @@ const TLDetailEdit = (props) => {
                                             <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
                                             <View style={PAGESTYLE.subjectDateTime}>
                                                 <TouchableOpacity onPress={() => showDatePicker()} style={{justifyContent : 'center'}}>
-                                                    <Text style={[PAGESTYLE.dateTimetextdummy2,{paddingRight  :hp(6)}]}>{selectedDate ? selectedDate : 'Select'}</Text>
+                                                    <Text numberOfLines={1} style={[PAGESTYLE.dateTimetextdummy2,{paddingRight  :hp(5)}]}>{selectedDate ? selectedDate : 'Select'}</Text>
                                                 <ArrowDown style={PAGESTYLE.dropDownArrowdatetimeMobile} height={hp(1.51)} width={hp(1.51)} />
                                                 </TouchableOpacity>
                                             </View>
