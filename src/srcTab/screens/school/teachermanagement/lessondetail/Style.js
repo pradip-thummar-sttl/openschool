@@ -721,6 +721,7 @@ export default StyleSheet.create({
         width: hp(15.80),
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
+        alignItems : 'center'
     },
     tabpupil2: {
         width: hp(17.97),

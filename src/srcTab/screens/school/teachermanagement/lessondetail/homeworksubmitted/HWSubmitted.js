@@ -23,8 +23,8 @@ const Pupillist = (props, { }) => (
                 <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:wp(20)}]}>{props.item.PupilName}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(15)}]}>{props.item.GroupName}</Text>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName]}>{props.item.GroupName}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile]}>
                 <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
@@ -32,7 +32,7 @@ const Pupillist = (props, { }) => (
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
                 <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile,{ width: hp(18.55),}]}>
+            <View style={{width: hp(18.55),alignItems : 'center'}}>
                 <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
                 <View style={PAGESTYLE.pupilDetailLink}>
                 </View>
