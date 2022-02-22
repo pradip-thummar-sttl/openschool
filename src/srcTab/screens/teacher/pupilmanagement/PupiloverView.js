@@ -27,45 +27,45 @@ const Pupillist = (props, { item }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={[PAGESTYLE.pupilProfile,]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: Platform.OS === 'android' ? hp(20) : wp(10) }]}>{props.item.FirstName}</Text>
+            <View style={{width:'10%',marginRight:20}}>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile, { marginRight: Platform.OS === 'android' ? 14 : 0 }]}>
+            <View style={{width:'12%',alignItems:'center',marginRight:20}}>
                 <Text style={[PAGESTYLE.pupilName, { width: Platform.OS === 'android' ? hp(20) : wp(10), textAlign: Platform.OS === 'android' ? 'center' : 'auto' }]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={[PAGESTYLE.groupColumn, { marginRight: Platform.OS === 'android' ? 14 : 0 }]}>
+            <View style={{width:'12%',alignItems:'center',marginRight:20}}>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={[PAGESTYLE.groupColumn11, { marginRight: Platform.OS === 'android' ? 12 : 0 }]}>
+            <View style={{width:'12%',alignItems:'center',marginRight:20}}>
                 <Text style={PAGESTYLE.pupilgroupName10} numberOfLines={1}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
-            <View style={PAGESTYLE.perfomanceColumn}>
-                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+            <View style={{width:'16%',flexDirection:'row',marginRight:20}}>
+                <View style={[PAGESTYLE.perfomanceDotmain,{width:'50%'}]}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
                 <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
             </View>
-            <View style={PAGESTYLE.rewardColumn}>
+            <View style={{width:'16%',alignItems:'center',flexDirection:'row'}}>
                 {props.item.RewardsList.map((item, index) => {
                     return (
                         item._id == '3' ?
-                            <View style={PAGESTYLE.rewardStar}>
+                            <View style={[{width:'33%'}]}>
                                 <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
-                                <View style={PAGESTYLE.rewardStar}>
+                                <View style={[{width:'33%'}]}>
                                     <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
-                                    <View style={PAGESTYLE.rewardStar}>
+                                    <View style={[,{width:'33%'}]}>
                                         <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
@@ -164,34 +164,34 @@ const PupiloverView = (props) => {
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
                                         <View style={{ width: Platform.OS === 'android' ? 0 : hp(2) }}></View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain]}>
+                                        <View style={{width:'12%',marginRight:20}}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
-                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                        <View style={{width:'12%',marginRight:20}}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                        <View style={{width:'12%',marginRight:20}}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
                                         </View>
 
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
+                                        <View style={{width:'12%',marginRight:20}}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                        <View style={{width:'16%',marginRight:20}}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain,{width:'100%'}]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitle,{width:'50%'}]}>Enagagement</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
                                             </View>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                        <View style={{width:'16%'}}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain, { paddingStart: Platform.OS === 'android' ? 20 : 0 }]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar,{width:'30%'}]}>Bronze</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar,{width:'30%'}]}>Silver</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar,{width:'30%'}]}>Gold</Text>
                                             </View>
                                         </View>
                                     </View>
