@@ -15,6 +15,7 @@ import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
+import { KeyboardAvoidingView } from "react-native";
 
 
 const Sidebar = (props) => {
@@ -75,6 +76,7 @@ const Sidebar = (props) => {
 
     return (
         <View style={styles.sidebarHeader}> 
+        <KeyboardAvoidingView> 
             <Animated.View style={[styles.sideBarAside, animatedStyle]}>
                 <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
                 <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
@@ -87,7 +89,7 @@ const Sidebar = (props) => {
                             </View>
                     }
                 </TouchableOpacity>
-                <View style={styles.mainMenu}>
+                <View style={[styles.mainMenu,{marginBottom:hp(18)}]}>
                     <TouchableOpacity
                         style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
                         activeOpacity={opacity}
@@ -208,6 +210,7 @@ const Sidebar = (props) => {
                     </TouchableOpacity>
                 </View>
             </Animated.View>
+            </KeyboardAvoidingView>
         </View>
     );
 }
@@ -216,7 +219,8 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor: COLORS.SidebarHeaderBack,
+        // backgroundColor: COLORS.SidebarHeaderBack,
+        backgroundColor:'white',
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
