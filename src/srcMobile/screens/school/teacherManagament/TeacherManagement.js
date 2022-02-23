@@ -26,10 +26,17 @@ import FilterBlack from '../../../../svg/teacher/timetable/Filter_Black';
 import HeaderTM from './HeaderTM';
 import { useFocusEffect } from '@react-navigation/native';
 
-var moment = require('moment');
+var pageNo = 1;
+var limit = 25;
+var DataArr = [];
 
-var pageNo = 1
 const TeacherManagement = (props) => {
+
+    const textInput = useRef(null);
+    const [filterBy, setFilterBy] = useState('')
+    const [selectedId, setSelectedId] = useState(null);
+    const [isLoading, setLoading] = useState(false)
+    const [searchKeyword, setSearchKeyword] = useState('')
 
 
     let currentCount = 0
@@ -64,24 +71,6 @@ const TeacherManagement = (props) => {
     }
 
 
-    const [isSearchActive, setSearchActive] = useState(false)
-    const textInput = useRef(null);
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('')
-    const [keyword, setKeyword] = useState('')
-    const [limit, setLimit] = useState('25')
-    const [pagination, setPaginationData] = useState([])
-    const [allNewAndOldData, setAllNewAndOldData] = useState([])
-
-
-    const [selectedId, setSelectedId] = useState(null);
-    const [isLoading, setLoading] = useState(false)
-    const [searchKeyword, setSearchKeyword] = useState('')
-    const [messageData, setMessageData] = useState([])
-
-
-  
-
     const MessageList = ({ item }) => {
         return (
             <TouchableOpacity
@@ -115,60 +104,55 @@ const TeacherManagement = (props) => {
         );
     };
 
-    // useEffect(() => {
-    //     fetchRecord('', )
-    // }, [])
 
-    useFocusEffect(
-        React.useCallback(() => {
-          // Do something when the screen is focused.
-          fetchRecord('', '')
-          return () => {
-         // Do something when the screen is unfocused
-            // alert('Home Screen was unfocused');
-          };
-        }, [filterBy])
-      );
+    useEffect(() => {
 
-    // useEffect(() => {
-    //     fetchRecord('', '')
-    // }, [filterBy])
+        fetchRecord(pageNo, searchKeyword, filterBy);
 
-    const fetchRecord = (searchby, filterBy) => {
+        return () => {
+            DataArr = [];
+        }
+
+    }, [])
+
+    const refresh = () => {
+        textInput.current.clear()
+        pageNo = 1;
+        setSearchKeyword("")
+        fetchRecord(1, "", filterBy);
+    }
+
+    const addMorePage = () => {
+        if (DataArr.length > (limit - 1)) {
+            setLoading(true)
+            pageNo = pageNo + 1
+            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1500)
+        }
+    }
+
+    const fetchRecord = (pNo, searchBy, filterBy) => {
         setLoading(true)
         let data = {
-            Searchby: searchby,
+            Searchby: searchBy,
             Filterby: filterBy,
-            page: String(pageNo),
+            page: String(pNo),
             limit: limit
         }
 
-        console.log(`${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, data);
         Service.post(data, `${EndPoints.TeacherBySchoolId}/${User.user.UserDetialId}`, (res) => {
-            // setLoading(false)
+
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
-                // setMessageData(res.data)
-                setPaginationData(res.pagination)
-                if (allNewAndOldData.length > 0) {
-                    if (res.data) {
-                        let newData = []
-                        newData = res.data
-                        let newArray = [...allNewAndOldData, ...newData]
-                        setMessageData(newArray)
-                        setAllNewAndOldData(newArray)
-                        setLoading(false)
-                    }
-                    else {
-                        setMessageData(allNewAndOldData)
-                        setLoading(false)
+
+                if (res.data && pNo == 1) {
+                    DataArr = [];
+                    DataArr = res.data;
+                }
+                else if (res.data) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        DataArr.push(res.data[i]);
                     }
                 }
-                else {
-                    setMessageData(res.data)
-                    setAllNewAndOldData(res.data)
-                    setLoading(false)
-                }
+                setLoading(false)
             } else {
                 showMessage(res.message)
             }
@@ -177,32 +161,14 @@ const TeacherManagement = (props) => {
         })
     }
 
-    const addMorePage = () => {
-        if (messageData.length != pagination.TotalCount) {
-            pageNo = pageNo + 1
-            setTimeout(() => {
-                fetchRecord('', '')
-            }, 1000)
-        }
-    }
 
 
-    const refresh = () => {
-        if (isSearchActive) {
-            textInput.current.clear()
-            setSearchActive(false)
-            fetchRecord('', filterBy)
-        } else {
-            setSearchActive(true)
-            fetchRecord(keyword, filterBy)
-        }
-    }
+
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => refresh() })
     }
-console.log('------------->>>>>',props);
 
     return (
         <View>
@@ -210,27 +176,26 @@ console.log('------------->>>>>',props);
                 onAlertPress={() => props.navigation.openDrawer()}
                 openCsv={() => { }}
                 navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
+
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                onSearch={() => fetchRecord(searchKeyword, filterBy)}
-                onClearSearch={() => fetchRecord('', '')}
+                onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}
+                onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
+                onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }}
+
+
                 navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                 refreshList={() => refresh()}
                 title={'Teacher Management'}
                 userType={'Teacher'}
-                onFilter={(filterBy) => fetchRecord('', filterBy)}
+
                 onNotification={() => openNotification()} />
 
             {/* {searchHeader()} */}
-            {isLoading ?
-                <ActivityIndicator
-                    style={{ flex: 1, marginTop: 20 }}
-                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                    color={COLORS.yellowDark} />
-                :
-                messageData.length > 0 ?
+            {
+                DataArr.length > 0 ?
                     <FlatList
                         style={{ height: '80%', marginHorizontal: 10 }}
-                        data={messageData}
+                        data={DataArr}
                         renderItem={messageRender}
                         keyExtractor={(item) => item.id}
                         extraData={selectedId}
@@ -239,11 +204,18 @@ console.log('------------->>>>>',props);
                         onEndReached={() => addMorePage()}
                     />
                     :
-                    // <View style={{ height: 100, justifyContent: 'center' }}>
-                    //     <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No data found!</Text>
-                    // </View>
                     <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
             }
+
+            {isLoading &&
+                <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator
+                        style={{ flex: 1, marginTop: 20 }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.yellowDark} />
+                </View>
+            }
+
         </View>
     )
 }
