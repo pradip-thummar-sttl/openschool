@@ -87,7 +87,7 @@ function STabletOnboarding3(props) {
               <Path id="Path_3940-3" data-name="Path 3940" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3943-3" data-name="Path 3943" d="M8.828,0h33.1a8.828,8.828,0,0,1,8.828,8.828V43.9c-9.246,8.965-13.223,11.981-17.106,17.163H8.828A8.828,8.828,0,0,1,0,52.231V8.828A8.828,8.828,0,0,1,8.828,0Z" transform="translate(0 0)" fill="#ffd719"/>
               <Path id="Path_3941-3" data-name="Path 3941" d="M1.153,18.544a1.872,1.872,0,0,1-.921-.823c-.157.089-.231-.144-.233-.9v0H0V5.906A5.9,5.9,0,0,1,5.9,0H16.813a1.87,1.87,0,0,1,1.323,3.191L3.188,18.138a1.866,1.866,0,0,1-2.035.406Z" transform="translate(32.01 42.274)" fill="#dc7eff"/>
-              <Text id="Csv-3" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16" ><TSpan x="-12.754" y="0">CSV</TSpan></Text>
+              <Text id="Csv-3" data-name="Csv" transform="translate(25.004 31.75)" fill="#8738bd" font-size="16"><TSpan x="-12.754" y="0">CSV</TSpan></Text>
             </G>
           </G>
         </G>
