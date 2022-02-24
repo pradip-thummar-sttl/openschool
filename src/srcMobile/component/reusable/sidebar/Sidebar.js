@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, AppState } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, AppState, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -525,7 +525,7 @@ const styles = StyleSheet.create({
         borderColor: COLORS.bottomProfileLightBorder,
         paddingTop: hp(1),
         paddingBottom: hp(1),
-        marginBottom: 5
+        marginBottom:Platform.OS === 'ios'? 15 : 5 
     },
     bottomUser: {
         width: hp(4.2),
