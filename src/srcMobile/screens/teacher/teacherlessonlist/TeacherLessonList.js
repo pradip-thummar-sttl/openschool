@@ -219,7 +219,7 @@ const TeacherLessonList = (props) => {
                 {isLessonLoading &&
                     <View style={{ width: '100%', height: '100%', position: 'absolute',alignItems:'center', justifyContent:'center' }}>
                         <ActivityIndicator
-                            size={'large'}
+                            size={Platform.OS === 'android' ? 'small' : 'large'}
                             color={COLORS.yellowDark} />
                     </View>
                 }

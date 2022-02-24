@@ -27,7 +27,7 @@ const Pupillist = (props, { item }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={{width:'10%',marginRight:20}}>
+            <View style={{width:'10%',marginRight:20,}}>
                 <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
             </View>
             <View style={{width:'12%',alignItems:'center',marginRight:20}}>
@@ -164,7 +164,7 @@ const PupiloverView = (props) => {
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
                                         <View style={{ width: Platform.OS === 'android' ? 0 : hp(2) }}></View>
-                                        <View style={{width:'10%',marginRight:20}}>
+                                        <View style={{width:Platform.OS==='android'? '12%' : '10%',marginRight:20}}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
@@ -181,7 +181,7 @@ const PupiloverView = (props) => {
                                         </View>
                                         <View style={{width:'18%',marginRight:25,alignItems:'center'}}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain]}>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain,{width:'100%'}]}>
                                                 <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitle]}>Enagagement</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
                                             </View>

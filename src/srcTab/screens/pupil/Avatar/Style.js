@@ -88,7 +88,7 @@ export default StyleSheet.create({
     // Right View
     borderView: {
         width:"100%",
-        height: wp(60),
+        height: wp(50),
         borderWidth: 1,
         borderRadius: 10,
         borderColor: COLORS.borderGrp,
