@@ -1,16 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { View, Text, TouchableOpacity, TextInput, Image, FlatList, ActivityIndicator, Platform, BackHandler, ToastAndroid } from 'react-native'
-import HeaderWhitepupilMessage from '../../../component/reusable/header/HeaderWhitepupilMessage';
 import COLORS from '../../../../utils/Colors'
 import { baseUrl, opacity, showMessage } from '../../../../utils/Constant';
-// import Images from '../../../../utils/Images'
 import PAGESTYLE from './Style'
-import {
-    Menu,
-    MenuOptions,
-    MenuOption,
-    MenuTrigger,
-} from 'react-native-popup-menu';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts'
 import { Service } from '../../../../service/Service';
@@ -18,13 +10,8 @@ import { EndPoints } from '../../../../service/EndPoints';
 import { BadgeIcon, User } from '../../../../utils/Model';
 import EmptyStatePlaceHohder from '../../../component/reusable/placeholder/EmptyStatePlaceHohder';
 import MESSAGE from '../../../../utils/Messages';
-import CloseBlack from '../../../../svg/teacher/timetable/Close_Black';
-import SearchBlue from '../../../../svg/teacher/timetable/Search_Blue';
-import AddWhite from '../../../../svg/teacher/timetable/Add_White';
 import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
-import FilterBlack from '../../../../svg/teacher/timetable/Filter_Black';
 import HeaderTM from './HeaderTM';
-import { useFocusEffect } from '@react-navigation/native';
 
 var pageNo = 1;
 var limit = 25;
@@ -123,10 +110,13 @@ const TeacherManagement = (props) => {
     }
 
     const addMorePage = () => {
+
+        console.log("more call -------->", DataArr.length > (limit - 1));
+
         if (DataArr.length > (limit - 1)) {
             setLoading(true)
             pageNo = pageNo + 1
-            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1500)
+            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1000)
         }
     }
 
@@ -190,28 +180,29 @@ const TeacherManagement = (props) => {
 
                 onNotification={() => openNotification()} />
 
-            {/* {searchHeader()} */}
             {
                 DataArr.length > 0 ?
-                    <FlatList
-                        style={{ height: '80%', marginHorizontal: 10 }}
-                        data={DataArr}
-                        renderItem={messageRender}
-                        keyExtractor={(item) => item.id}
-                        extraData={selectedId}
-                        showsVerticalScrollIndicator={false}
-                        onEndReachedThreshold={0}
-                        onEndReached={() => addMorePage()}
-                    />
+                    <View>
+                        <FlatList
+                            style={{ height: '80%', marginHorizontal: 10 }}
+                            data={DataArr}
+                            renderItem={messageRender}
+                            keyExtractor={(item) => item.id}
+                            extraData={selectedId}
+                            showsVerticalScrollIndicator={false}
+                            onEndReachedThreshold={0}
+                            onEndReached={() => addMorePage()}
+                        />
+                    </View>
                     :
-                    <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
+                    !isLoading && <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
             }
 
             {isLoading &&
                 <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator
                         style={{ flex: 1, marginTop: 20 }}
-                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        size={'large'}
                         color={COLORS.yellowDark} />
                 </View>
             }
