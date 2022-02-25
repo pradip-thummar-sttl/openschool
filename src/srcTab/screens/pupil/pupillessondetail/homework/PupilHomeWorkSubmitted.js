@@ -39,6 +39,7 @@ const PupilHomeWorkSubmitted = (props) => {
         props.goBack()
         return true;
     }
+   
     return (
         <View style={PAGESTYLE.mainPage}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
@@ -46,7 +47,7 @@ const PupilHomeWorkSubmitted = (props) => {
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={PAGESTYLE.whiteBg}>
+            <View style={[PAGESTYLE.whiteBg,{flex:1}]}>
                 <Header13
                     goBack={() => props.goBack()}
                     title={item.SubjectName + ' ' + item.LessonTopic}

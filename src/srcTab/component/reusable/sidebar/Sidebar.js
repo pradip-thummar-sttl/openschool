@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, Animated, Alert, Platform } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import FONTS from '../../../../utils/Fonts';
@@ -15,6 +15,7 @@ import Logout from "../../../../svg/sidebar/Logout";
 import More from "../../../../svg/teacher/dashboard/More";
 import Ic_Dashboard from "../../../../svg/sidebar/Ic_Dashboard";
 import MyEdLogo from "../../../../svg/applogo/MyEdLogo";
+import { KeyboardAvoidingView } from "react-native";
 
 
 const Sidebar = (props) => {
@@ -190,8 +191,8 @@ const Sidebar = (props) => {
                         }
                     </TouchableOpacity>
                 </View>
-                <View style={[styles.userInfobottomMain]}>
-                    <TouchableOpacity onPress={() => { props.navigateSettings(); toggleAnimation(true) }} style={[styles.userInfobottom]}>
+                <View style={styles.userInfobottomMain}>
+                    <TouchableOpacity onPress={() => { props.navigateSettings(); toggleAnimation(true) }} style={styles.userInfobottom}>
                         <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                         {
                             isSmall ? null :
@@ -216,7 +217,8 @@ export default Sidebar;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor: COLORS.SidebarHeaderBack,
+        // backgroundColor: COLORS.SidebarHeaderBack,
+        backgroundColor:'white',
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
@@ -309,19 +311,23 @@ const styles = StyleSheet.create({
         borderRadius: hp(100),
     },
     userInfobottomMain: {
-        position: 'absolute',
+        // position: 'absolute',
         alignSelf: 'center',
-        bottom: 0,
-        paddingHorizontal: hp(1.35),
-        borderColor: COLORS.bottomProfileLightBorder,
-        borderWidth: 1,
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        // bottom: 0,
         width: '100%',
+        flex:1
     },
     userInfobottom: {
         flexDirection: 'row',
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
         alignItems: 'center',
+        position:'absolute',
+        bottom:0,
+        borderColor: COLORS.bottomProfileLightBorder,
+        borderWidth: 1,
+        paddingHorizontal: hp(1.35),
+        marginBottom:5
     },
     bottomUser: {
         width: hp(4.16),

@@ -122,7 +122,7 @@ const HeaderPM = (props) => {
                     </View>
 
                     <TouchableOpacity style={{position : 'relative'}}
-                        onPress={() => props.onNotification()}
+                        onPress={() => props.openDrawer()}
                     >
                         {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={PAGESTYLE.massagesIcon} height={hp(5.20)} width={hp(5.20)} />

@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Platform } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Platform, StyleSheet } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from '../../../../service/EndPoints'
@@ -27,45 +27,45 @@ const Pupillist = (props, { item }) => (
         <View style={[PAGESTYLE.pupilData]}>
             <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + props.item.ProfilePicture }}></Image>
 
-            <View style={[PAGESTYLE.pupilProfile,]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: Platform.OS === 'android' ? hp(20) : wp(10) }]}>{props.item.FirstName}</Text>
+            <View style={styles.firstNameContent}>
+                <Text numberOfLines={1} style={PAGESTYLE.pupilName}>{props.item.FirstName}</Text>
             </View>
-            <View style={[PAGESTYLE.pupilProfile, { marginRight: Platform.OS === 'android' ? 14 : 0 }]}>
-                <Text style={[PAGESTYLE.pupilName, { width: Platform.OS === 'android' ? hp(20) : wp(10), textAlign: Platform.OS === 'android' ? 'center' : 'auto' }]}>{props.item.LastName}</Text>
+            <View style={styles.lastNameContent}>
+                <Text style={[PAGESTYLE.pupilName]}>{props.item.LastName}</Text>
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={[PAGESTYLE.groupColumn, { marginRight: Platform.OS === 'android' ? 14 : 0 }]}>
+            <View style={styles.classGroupContent}>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1]}>{props.item.GroupName ? props.item.GroupName : 'Grop A'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
-            <View style={[PAGESTYLE.groupColumn11, { marginRight: Platform.OS === 'android' ? 12 : 0 }]}>
+            <View style={styles.birthdateContent}>
                 <Text style={PAGESTYLE.pupilgroupName10} numberOfLines={1}>{moment(props.item.Dob).format('DD/MM/YYYY')}</Text>
             </View>
             {/* </View> */}
-            <View style={PAGESTYLE.perfomanceColumn}>
-                <View style={PAGESTYLE.perfomanceDotmain}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
+            <View style={styles.performanceCpntent}>
+                <View style={[PAGESTYLE.perfomanceDotmain, { width: '50%' }]}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.purpleDot]}></View></View>
                 <View style={PAGESTYLE.perfomanceDotmainTwo}><View style={[PAGESTYLE.perfomanceDots, PAGESTYLE.yellowDot]}></View></View>
             </View>
-            <View style={PAGESTYLE.rewardColumn}>
+            <View style={styles.quickStartContent}>
                 {props.item.RewardsList.map((item, index) => {
                     return (
                         item._id == '3' ?
-                            <View style={PAGESTYLE.rewardStar}>
+                            <View style={{ width: '30%' }}>
                                 <Bronze style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                 {/* <Image source={Images.BronzeStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                 <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                             </View>
                             :
                             item._id == '6' ?
-                                <View style={PAGESTYLE.rewardStar}>
+                                <View style={{ width: '30%' }}>
                                     <Silver style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                     {/* <Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                     <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
                                 </View>
                                 :
                                 item._id == '9' ?
-                                    <View style={PAGESTYLE.rewardStar}>
+                                    <View style={{ width: '30%' }}>
                                         <Gold style={PAGESTYLE.rewardStartIcon} width={hp(2.15)} height={hp(2.15)} />
                                         {/* <Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /> */}
                                         <Text style={{ alignSelf: 'center' }}>{item.count}</Text>
@@ -78,7 +78,7 @@ const Pupillist = (props, { item }) => (
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.SilverStar} style={PAGESTYLE.rewardStartIcon} /></View>
                 <View style={PAGESTYLE.rewardStar}><Image source={Images.GoldStar} style={PAGESTYLE.rewardStartIcon} /></View> */}
             </View>
-            <ArrowNext style={PAGESTYLE.pupilDetaillinkIcon} width={hp(1)} height={hp(3)} />
+            <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon, { right: 10 }]} width={hp(1)} height={hp(3)} />
             {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
         </View>
     </TouchableOpacity>
@@ -123,7 +123,7 @@ const PupiloverView = (props) => {
     }
 
     const pupilRender = ({ item }) => {
-       
+
         return (
             <Pupillist
                 navigation={props.navigation}
@@ -164,34 +164,34 @@ const PupiloverView = (props) => {
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
                                         <View style={{ width: Platform.OS === 'android' ? 0 : hp(2) }}></View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain]}>
+                                        <View style={styles.fName}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
-                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                        <View style={styles.lName}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
                                             {/* <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Total students</Text> */}
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                        <View style={styles.classGroup}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}> Class Group</Text>
                                         </View>
 
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22]}>
+                                        <View style={styles.birthdate}>
                                             <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                        <View style={styles.performanceView}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitle]}>Enagagement</Text>
                                                 <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
                                             </View>
                                         </View>
-                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                        <View style={styles.rewardStars}>
                                             <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain, { paddingStart: Platform.OS === 'android' ? 20 : 0 }]}>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                            <View style={[PAGESTYLE.pupilTableHeadingsubMain]}>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar]}>Bronze</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar]}>Silver</Text>
+                                                <Text style={[PAGESTYLE.pupilTableHeadingMainsubTitlestar]}>Gold</Text>
                                             </View>
                                         </View>
                                     </View>
@@ -221,5 +221,66 @@ const PupiloverView = (props) => {
         </View>
     )
 }
+const styles = StyleSheet.create({
+    fName: {
+        width: Platform.OS === 'android' ? '10%' : '12%',
+        marginRight: 20
+    },
+    lName: {
+        width: '12%',
+        marginRight: 20,
+        alignItems: 'center'
+    },
+    classGroup: {
+        width: '14%',
+        marginRight: 20,
+        alignItems: 'center'
+    },
+    birthdate: {
+        width: '10%',
+        marginRight: 20,
+        alignItems: 'center'
+    },
+    performanceView: {
+        width: '20%',
+        marginRight: 15,
+        alignItems: 'center'
+    },
+    rewardStars: {
+        width: '18%',
+        alignItems: 'center'
+    },
+    firstNameContent: {
+        width: Platform.OS === 'ios' ? '12%' : '10%',
+        marginRight: Platform.OS === 'ios' ? 20 : null
+    },
+    lastNameContent: {
+        width: '12%',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    classGroupContent: {
+        width: '14%',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    birthdateContent: {
+        width: '10%',
+        alignItems: 'center',
+        marginRight: 20
+    },
+    performanceCpntent: {
+        width: '18%',
+        flexDirection: 'row',
+        marginRight: 25,
+        paddingStart: Platform.OS === 'ios' ? null : 10
+    },
+    quickStartContent: {
+        width: '20%',
+        alignItems: 'center',
+        flexDirection: 'row',
+        paddingStart: Platform.OS === 'ios' ? null : 20
+    }
+})
 
 export default PupiloverView

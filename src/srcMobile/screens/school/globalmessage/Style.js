@@ -242,7 +242,7 @@ export default StyleSheet.create({
     checkBoxLabelText: {
         fontSize: hp(1.72),
         fontFamily: FONTS.fontRegular,
-        paddingLeft: Platform.OS === 'ios'? hp(1):hp(3),
+        paddingLeft: hp(1),
         paddingRight: hp(2),
     },
     checkBoxLabelTextSubmit: {

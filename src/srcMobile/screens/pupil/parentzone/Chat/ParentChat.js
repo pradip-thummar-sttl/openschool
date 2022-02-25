@@ -133,7 +133,7 @@ const ParentChat = (props) => {
                                             return (
                                                 <View style={Styles.messageCell}>
                                                     <Image style={Styles.roundImage} source={{ uri: baseUrl + item.message.split('#@#')[2] }} />
-                                                    <View style={Styles.messageSubCell}>
+                                                    <View style={[Styles.messageSubCell,{width:'100%'}]}>
                                                         <Text style={Styles.userNameText}>{item.message.split('#@#')[1]}<Text style={Styles.timeText}>   {moment(new Date(((item.timetoken / 10000000) * 1000))).format('HH:mm')}</Text></Text>
                                                         <Text style={Styles.messageText}>{item.message.split('#@#')[0]}</Text>
                                                     </View>

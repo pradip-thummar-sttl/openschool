@@ -87,7 +87,6 @@ const SMobileOnboarding3 = (props) => (
             transform="translate(374.744 334.047)"
             fill="#8738bd"
             fontSize={10}
-            // fontFamily="Impact"
           >
             <TSpan x={-7.971} y={0}>
               {"CSV"}
@@ -115,8 +114,6 @@ const SMobileOnboarding3 = (props) => (
             transform="translate(288.148 334.047)"
             fill="#8738bd"
             fontSize={10}
-            // fontFamily="Impact"
-
           >
             <TSpan x={-7.971} y={0}>
               {"CSV"}
@@ -184,7 +181,6 @@ const SMobileOnboarding3 = (props) => (
             transform="translate(76.706 81.661)"
             fill="#8738bd"
             fontSize={10}
-            // fontFamily="Impact"
           >
             <TSpan x={-7.971} y={0}>
               {"CSV"}
@@ -212,7 +208,6 @@ const SMobileOnboarding3 = (props) => (
             transform="translate(163.301 81.661)"
             fill="#8738bd"
             fontSize={10}
-            // fontFamily="Impact"
           >
             <TSpan x={-7.971} y={0}>
               {"CSV"}

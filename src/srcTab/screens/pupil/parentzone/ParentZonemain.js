@@ -55,7 +55,9 @@ const ParentZonemain = (props) => {
     useEffect(() => {
         fetchRecord('', '')
     }, [])
-
+    const openDrawer = (() => {
+        props.navigation.openDrawer()
+    })
     const fetchRecord = (searchBy, filterBy) => {
         setLoading(true)
         let data = {
@@ -88,6 +90,7 @@ const ParentZonemain = (props) => {
                 <HeaderPM
                     onSwitchPupil={(pupilData) => { setPupilIndex(pupilData) }}
                     data={pupilData}
+                    openDrawer={openDrawer}
                     onNotification={() => props.navigation.navigate('NotificationDrawer', { onGoBack: () => { } })}
                     setSelectedTabIndex={(tab) => { setProfileEdit(false); setSelectedTabIndex(tab) }}
                     navigateToAddNewUser={() => props.navigation.replace('PupilRegister')}
