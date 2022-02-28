@@ -378,7 +378,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }
 
     return (
-        <View style={PAGESTYLE.mainPage}>
+        <View style={[PAGESTYLE.mainPage,{backgroundColor:COLORS.backgroundColorCommon}]}>
             <Sidebar
                 moduleIndex={selectedIndex}
                 hide={() => action(!isHide)}

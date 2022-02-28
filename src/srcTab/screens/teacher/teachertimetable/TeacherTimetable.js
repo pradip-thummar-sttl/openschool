@@ -230,7 +230,7 @@ const TeacherTimeTable = (props) => {
                                 <ScrollView>
                                     {isTimeTableLoading ?
                                         <ActivityIndicator
-                                            style={{ flex: 1 }}
+                                            style={{ flex: 1 ,padding:30}}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :

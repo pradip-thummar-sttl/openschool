@@ -415,7 +415,7 @@ const PupuilDashboard = (props) => {
                     <PupilLessonDetail goBack={() => setPupilLessonDetail(false)} onRefresh={() => null} data={dataOfHWSubView} />
                     :
                     isHWSubmitted ?
-                        <PupilHomeWorkSubmitted goBack={() => setHWSubmitted(false)} item={hwData} onAlertPress={() => props.onAlertPress()} />
+                        <PupilHomeWorkSubmitted goBack={() => setHWSubmitted(false)} item={hwData} onAlertPress={openNotification} />
                         :
                         isHWMarked ?
                             <PupilHomeWorkMarked goBack={() => setHWMArked(false)} item={hwData} onAlertPress={() => props.onAlertPress()} />

@@ -23,6 +23,7 @@ import Teachers from "../../../../svg/sidebar/Teachers";
 import Pupils from "../../../../svg/sidebar/Pupils";
 import Messaging from "../../../../svg/sidebar/Messaging";
 import Ic_OpenSchool from "../../../../svg/sidebar/Ic_OpenSchool";
+import { KeyboardAvoidingView } from "react-native";
 
 
 const SidebarSchool = (props) => {
@@ -85,7 +86,7 @@ const SidebarSchool = (props) => {
             { cancelable: true }
         )
     }
-   
+
     const teacherLogout = () => {
         AsyncStorage.setItem('school', JSON.stringify(null))
         AsyncStorage.setItem('type', "")
@@ -96,25 +97,25 @@ const SidebarSchool = (props) => {
 
     console.log('module index', props.moduleIndex)
     return (
-        <View style={[styles.sidebarHeader]}>
-            <Animated.View style={[styles.sideBarAside, animatedStyle]}>
-                <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
-                {/* {  isSmall ? 
+        <View style={styles.sidebarHeader}>
+                <Animated.View style={[styles.sideBarAside, animatedStyle]}>
+                    <TouchableOpacity onPress={() => toggleAnimation()} style={styles.userInfo}>
+                        {/* {  isSmall ? 
                     <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
                     :
                     <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdLogo.png")} /> 
                 } */}
-                <Image style={[styles.headerClosed]} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
-                    {
-                        isSmall ? null :
-                            <View style={styles.profileTextMainTop}>
-                                {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
+                        <Image style={styles.headerClosed} source={require("../../../../assets/image/MyEdLogoClosed.png")} />
+                        {
+                            isSmall ? null :
+                                <View style={styles.profileTextMainTop}>
+                                    {/* <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
                                 <Text numberOfLines={1} style={styles.profileDesi}>{User.user.UserType}</Text> */}
-                                <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} /> 
-                            </View>
-                    }
-                   {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
-                    {/* {
+                                    <Image style={styles.headerProfilesidebar} source={require("../../../../assets/image/MyEdOpenSchoolText.png")} />
+                                </View>
+                        }
+                        {/* <MyEdLogo style={styles.headerProfile} height={hp(5.20)} width={hp(5.20)} /> */}
+                        {/* {
                         isSmall ? null :
                             <View style={styles.profileTextMain}>
                                  <Text numberOfLines={1} style={styles.profileTitle}>{User.user.FirstName} {User.user.LastName}</Text>
@@ -122,125 +123,126 @@ const SidebarSchool = (props) => {
                                 <Text numberOfLines={1} style={styles.profileTitle}>MyEd Open School</Text>
                             </View>
                     } */}
-                </TouchableOpacity>
-                <View style={styles.mainMenu}>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }}>
-                        {/* <Image
+                    </TouchableOpacity>
+                    <View style={styles.mainMenu}>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 0 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { props.navigateToDashboard(); toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Dashboard}
                         /> */}
-                        <Ic_Dashboard style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { props.navigateToTeachers(); toggleAnimation(true) }}>
-                        {/* <Image
+                            <Ic_Dashboard style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 0 ? styles.selectedMenuText : null]}>Dashboard</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 1 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { props.navigateToTeachers(); toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Teacher}
                         /> */}
-                        <Teachers style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { props.navigateToPupils(); toggleAnimation(true) }}>
-                        {/* <Image
+                            <Teachers style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 1 ? styles.selectedMenuText : null]}>Teachers</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 2 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { props.navigateToPupils(); toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Pupil}
                         /> */}
-                        <Pupils style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            <Pupils style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Pupils</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { props.navigateToMessaging(); toggleAnimation(true) }}>
-                        {/* <Image
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 2 ? styles.selectedMenuText : null]}>Pupils</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 3 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { props.navigateToMessaging(); toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Messaging}
                         /> */}
-                        <Messaging style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            <Messaging style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Messaging</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { toggleAnimation(true) }}>
-                        {/* <Image
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 3 ? styles.selectedMenuText : null]}>Messaging</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 4 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Parents}
                         /> */}
-                        <Ic_parents style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            <Ic_parents style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
-                        }
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { toggleAnimation(true) }}>
-                        {/* <Image
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 4 ? styles.selectedMenuText : null]}>Parents</Text>
+                            }
+                        </TouchableOpacity>
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 5 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.Faqs}
                         />
                          */}
-                        {/* <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} /> */}
-                        <Ic_OpenSchool style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            {/* <Ic_Faq style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} /> */}
+                            <Ic_OpenSchool style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
-                        }
-                    </TouchableOpacity>
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 5 ? styles.selectedMenuText : null]}>FAQ</Text>
+                            }
+                        </TouchableOpacity>
 
-                    <TouchableOpacity
-                        style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { showActionChooser(), toggleAnimation(true) }}>
-                        {/* <Image
+                        <TouchableOpacity
+                            style={[styles.menuItem, props.moduleIndex == 6 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { showActionChooser(), toggleAnimation(true) }}>
+                            {/* <Image
                             style={styles.menuIcon}
                             source={Images.logout}
                         /> */}
-                        <Logout style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
+                            <Logout style={styles.menuIcon} width={hp(3.26)} height={hp(3.26)} />
 
-                        {
-                            isSmall ? null :
-                                <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
-                        }
-                    </TouchableOpacity>
-                </View>
-                <View style={[styles.userInfobottomMain]}>
-                    <TouchableOpacity
-                        style={[styles.userInfobottom, props.moduleIndex == 7 ? styles.menuItemSelected : null]}
-                        activeOpacity={opacity}
-                        onPress={() => { props.navigateToSettings(); toggleAnimation(true) }}>
+                            {
+                                isSmall ? null :
+                                    <Text style={[styles.menuText, props.moduleIndex == 6 ? styles.selectedMenuText : null]}>Logout</Text>
+                            }
+                        </TouchableOpacity>
+                    </View>
+                    
+                    <View style={styles.userInfobottomMain}>
+                        <TouchableOpacity
+                            style={[styles.userInfobottom, props.moduleIndex == 7 ? styles.menuItemSelected : null]}
+                            activeOpacity={opacity}
+                            onPress={() => { props.navigateToSettings(); toggleAnimation(true) }}>
                             <Image style={styles.bottomUser} source={{ uri: baseUrl + User.user.ProfilePicture }} />
                             {
                                 isSmall ? null :
                                     <>
-                                        <View style={[styles.profileTextMain,{width : '64%'}]}>
+                                        <View style={[styles.profileTextMain, { width: '64%' }]}>
                                             <Text numberOfLines={1} style={styles.profileTitleBottom}>{User.user.FirstName} {User.user.LastName}</Text>
                                         </View>
                                         <TouchableOpacity style={styles.moreMenu}>
@@ -249,9 +251,9 @@ const SidebarSchool = (props) => {
                                         </TouchableOpacity>
                                     </>
                             }
-                    </TouchableOpacity>
-                </View>
-            </Animated.View>
+                        </TouchableOpacity>
+                    </View>
+                </Animated.View>
         </View>
     );
 }
@@ -260,7 +262,8 @@ export default SidebarSchool;
 const styles = StyleSheet.create({
     sidebarHeader: {
         flexDirection: 'row',
-        backgroundColor: COLORS.SidebarHeaderBack,
+        // backgroundColor: COLORS.SidebarHeaderBack,
+        backgroundColor:'white',
         zIndex: 9,
         position: 'relative',
         shadowColor: COLORS.SidebarHeaderShadow,
@@ -292,7 +295,7 @@ const styles = StyleSheet.create({
     profileTextMainTop: {
         paddingLeft: hp(0.8),
     },
-    profileTextMain:{
+    profileTextMain: {
         paddingLeft: hp(1.5),
     },
     profileTitle: {
@@ -331,7 +334,7 @@ const styles = StyleSheet.create({
         color: COLORS.menuLightFonts,
         paddingLeft: hp(2),
         width: hp(22),
-        height : '100%'
+        height: '100%'
     },
     headerProfile: {
         width: 190,
@@ -339,7 +342,7 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         // borderRadius: hp(100),
         // backgroundColor : 'red',
-        marginHorizontal : 3,
+        marginHorizontal: 3,
     },
     headerClosed: {
         // backgroundColor: 'blue',
@@ -353,29 +356,38 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         // borderRadius: hp(100),
         // backgroundColor : 'red',
-        
+
     },
     userInfobottomMain: {
-        position: 'absolute',
+        // position: 'absolute',
         alignSelf: 'center',
-        bottom: 0,
+        // bottom: 0,
         paddingHorizontal: hp(1.35),
-        borderColor: COLORS.bottomProfileLightBorder,
-        borderWidth: 1,
-        paddingTop: hp(1.5),
-        paddingBottom: hp(1.5),
+        // borderColor: COLORS.bottomProfileLightBorder,
+        // borderWidth: 1,
+        // paddingTop: hp(1.5),
+        // paddingBottom: hp(1.5),
         width: '100%',
+        flex:1
     },
     userInfobottom: {
         flexDirection: 'row',
         alignItems: 'center',
+        position:'absolute',
+        bottom:0,
+        borderWidth : 1,
+        borderColor: COLORS.bottomProfileLightBorder,
+        paddingTop: hp(1.5),
+        paddingBottom: hp(1.5),
+        paddingHorizontal: hp(1.35),
+        marginBottom:5
     },
     bottomUser: {
         width: hp(4.16),
         height: hp(4.16),
         // resizeMode: 'contain',
         borderRadius: hp(4.16),
-        backgroundColor : COLORS.borderGrp
+        backgroundColor: COLORS.borderGrp
     },
     profileTitleBottom: {
         fontSize: hp(2.0),
@@ -383,12 +395,12 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontSemiBold,
     },
     menuIcon: {
-       
+
     },
     moreIcon: {
         width: hp(3),
         resizeMode: 'contain',
-        right : Platform.OS === 'android' ? 8 : 0
+        right: Platform.OS === 'android' ? 8 : 0
     },
     moreMenu: {
         // position: 'absolute',
