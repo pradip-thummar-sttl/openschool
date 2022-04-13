@@ -183,10 +183,10 @@
 		88EB1BA727B2500D00F5D048 /* DocumentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 88EB1BA527B2500D00F5D048 /* DocumentCell.m */; };
 		88EB1BA827B2500D00F5D048 /* DocumentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88EB1BA627B2500D00F5D048 /* DocumentCell.xib */; };
 		8B8773192796EA4C00B07098 /* DialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B8773182796EA4C00B07098 /* DialogTableViewCell.m */; };
+		8BE945902806A4F100CB2A16 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8BE9458F2806A4F100CB2A16 /* GoogleService-Info.plist */; };
 		8F9F8B05B83A44159B8724D2 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 63DE52B6877F4CCDBE63A49F /* Poppins-Bold.ttf */; };
 		C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EEF56BC1F0F4A58BD793920 /* Poppins-Regular.ttf */; };
 		DB01CB6E85DE81B7E47A0B5F /* libPods-OpenSchool.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */; };
-		E74D156627158F4A000F6E89 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E74D156527158F4A000F6E89 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -529,9 +529,10 @@
 		8B09862127952FF400E5FAFF /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DialogTableViewCell.m; path = files/DialogTableViewCell.m; sourceTree = "<group>"; };
 		8B8773172796EA4C00B07098 /* DialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DialogTableViewCell.h; sourceTree = "<group>"; };
 		8B8773182796EA4C00B07098 /* DialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DialogTableViewCell.m; sourceTree = "<group>"; };
+		8BE9458E2806A32E00CB2A16 /* OpenSchool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = OpenSchool.entitlements; path = OpenSchool/OpenSchool.entitlements; sourceTree = "<group>"; };
+		8BE9458F2806A4F100CB2A16 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE9C454F2951C8D7B358B3A0 /* libPods-OpenSchool.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OpenSchool.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5987D201010499FA5C00400 /* Poppins-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Poppins-Light.ttf"; path = "../assets/fonts/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		E74D156527158F4A000F6E89 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		ED6E8FDDED77D903774A0C9C /* Pods-OpenSchool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenSchool.release.xcconfig"; path = "Target Support Files/Pods-OpenSchool/Pods-OpenSchool.release.xcconfig"; sourceTree = "<group>"; };
@@ -611,12 +612,13 @@
 		13B07FAE1A68108700A75B9A /* OpenSchool */ = {
 			isa = PBXGroup;
 			children = (
+				8BE9458F2806A4F100CB2A16 /* GoogleService-Info.plist */,
+				8BE9458E2806A32E00CB2A16 /* OpenSchool.entitlements */,
 				882EA016266A1D55000B9813 /* conference */,
 				882EA008266A1CAA000B9813 /* CallTestPrefixHeader.pch */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				8884886F266E1A9800B9D17C /* RCTCalendarModule.h */,
 				88D20504265E253200D97116 /* RCTCalendarModule.m */,
-				E74D156527158F4A000F6E89 /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				8833B519266643B1000938B6 /* Mains.storyboard */,
@@ -1757,9 +1759,9 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = B7587FWV9P;
+						DevelopmentTeam = 9935HBB5VW;
 						LastSwiftMigration = 1250;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1826,12 +1828,12 @@
 				540189FC005A416486257B5C /* Poppins-Italic.ttf in Resources */,
 				8833B51A266643B1000938B6 /* Mains.storyboard in Resources */,
 				6B7AF4A9045C45C7BCB9B55B /* Poppins-Light.ttf in Resources */,
-				E74D156627158F4A000F6E89 /* GoogleService-Info.plist in Resources */,
 				C5CA15F667AC4475A93FDFEE /* Poppins-Regular.ttf in Resources */,
 				8840686C2775A5710053E668 /* AttachmentUploadBar.xib in Resources */,
 				884069392775ADEE0053E668 /* Dialogs.storyboard in Resources */,
 				884068C02775A8330053E668 /* ToolbarContentView.xib in Resources */,
 				884068AB2775A7DB0053E668 /* ChatAttachmentIncomingCell.xib in Resources */,
+				8BE945902806A4F100CB2A16 /* GoogleService-Info.plist in Resources */,
 				882EA06F266A1F58000B9813 /* SettingCell.xib in Resources */,
 				884069492775B56C0053E668 /* SVProgressHUD.bundle in Resources */,
 				882EA087266A212A000B9813 /* icon-info.png in Resources */,
@@ -2249,12 +2251,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = OpenSchool/OpenSchool.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = B7587FWV9P;
+				DEVELOPMENT_TEAM = 9935HBB5VW;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
 				INFOPLIST_FILE = OpenSchool/Info.plist;
@@ -2266,9 +2269,9 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openschool;
 				PRODUCT_NAME = "MYED Open School";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = myed_open_school_profile;
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2284,12 +2287,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_ENTITLEMENTS = OpenSchool/OpenSchool.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = B7587FWV9P;
+				DEVELOPMENT_TEAM = 9935HBB5VW;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
 				INFOPLIST_FILE = OpenSchool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -2301,9 +2305,9 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.STTLEnterprise.openschool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.openschool;
 				PRODUCT_NAME = "MYED Open School";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = myed_open_school_profile;
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_VERSION = 5.0;
