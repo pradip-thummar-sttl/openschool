@@ -111,8 +111,6 @@ const TeacherManagement = (props) => {
 
     const addMorePage = () => {
 
-        console.log("more call -------->", DataArr.length > (limit - 1));
-
         if (DataArr.length > (limit - 1)) {
             setLoading(true)
             pageNo = pageNo + 1
@@ -161,7 +159,7 @@ const TeacherManagement = (props) => {
     }
 
     return (
-        <View>
+        <View style={{width:'100%', height:'100%'}}>
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
                 openCsv={() => { }}
