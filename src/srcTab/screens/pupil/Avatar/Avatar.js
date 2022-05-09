@@ -441,7 +441,7 @@ const Avatar = (props) => {
                         <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
                             {/* Avatar editing View */}
                             {currentSelectedHair == 0 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%": "25%" }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%": wp(6.5) }} ></Image>
                                 : null}
                             {currentSelectedHair == 1 ?
                                 <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "2%", zIndex: 10 }} ></Image>
