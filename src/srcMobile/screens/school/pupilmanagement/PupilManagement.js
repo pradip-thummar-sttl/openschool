@@ -19,13 +19,9 @@ const PupilManagement = (props) => {
     return (
         <View style={PAGESTYLE.mainPage}>
             <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} 
-                //   title={'Teacher Management'}
-                //   userType={'Teacher'}
-                />
+                <HeaderPM onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()}/>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainer}>
-                        {/* <Image source={Images.noData} style={PAGESTYLE.noDataImage}></Image> */}
                         <Text H2 style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
                         <Text P style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                     </View>
