@@ -5,7 +5,7 @@ import { User } from "../utils/Model"
 export const Service = {
 
     get: (endPoint, success, error) => {
-        console.log('-----Request----->', baseUrl + endPoint);
+        console.log('-----Request----->', baseUrl + endPoint,'token=========>',User.user.Token);
         fetch(`${baseUrl}${endPoint}`, {
             method: 'GET',
             headers: {

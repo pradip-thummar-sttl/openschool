@@ -29,17 +29,17 @@ const HeaderWhite = (props) => {
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onSubmitHomework()} style={styles.buttonGroup}>
                         {/* <Image style={styles.addIcon} source={Images.CheckIconWhite} /> */}
-                        {props.isLoading ?
+                        {/* {props.isLoading ?
                             <ActivityIndicator
                                 style={STYLE.commonButtonGreen}
                                 size={Platform.OS == 'ios' ? 'small' : 'small'}
                                 color={COLORS.white} />
                             :
-                            <>
+                            <> */}
                                 <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
                                 <Text style={styles.commonButtonGreenheaderwithicon}>submit homework</Text>
-                            </>
-                        }
+                            {/* </>
+                        } */}
 
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => props.onAlertPress()} style={styles.notificationBar}>

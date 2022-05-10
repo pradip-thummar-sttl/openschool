@@ -28,7 +28,8 @@ const tabs = [
 ]
 
 
-const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
+// const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
+const backgroundColorArray = ['#f5d538', '#f5d538', '#ecb229', '#a8d9fe', '#ecb229', '#a8d9fe']
 
 const Avatar = (props) => {
 

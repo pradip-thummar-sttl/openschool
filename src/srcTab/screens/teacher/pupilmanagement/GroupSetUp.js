@@ -31,6 +31,7 @@ const GroupSetUp = () => {
         loadGroup()
 
         setPupilLoading(true)
+        console.log('${EndPoints.GetPupilByTeacherId}${User.user._id}=========>',EndPoints.GetPupilByTeacherId,User.user._id);
 
         Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             setPupilLoading(false)
@@ -166,6 +167,7 @@ const GroupSetUp = () => {
     };
 
     const Grouplist = (props) => (
+        console.log('props of log ===============>',props.item),
         <View style={PAGESTYLE.groupParent}>
             <View style={PAGESTYLE.groupTitle}>
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{props.item.GroupName}</Text>
@@ -199,6 +201,7 @@ const GroupSetUp = () => {
     );
 
     const groupRender = ({ item, index }) => {
+        console.log('===================>',item, index);
         return (
             <Grouplist
                 item={item} index={index} />
