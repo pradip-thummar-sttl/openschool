@@ -24,6 +24,7 @@ import { useFocusEffect } from "@react-navigation/native";
 
 const { CallModule } = NativeModules;
 var pageNo = 1
+var DataArr = [];
 
 const TeacheroverView = (props) => {
     const [isLoading, setLoading] = useState(true);
@@ -34,7 +35,6 @@ const TeacheroverView = (props) => {
     const [limit, setLimit] = useState('25')
     const [selectedId, setSelectedId] = useState(null);
     const [pagination, setPaginationData] = useState([])
-    const [allNewAndOldData, setAllNewAndOldData] = useState([])
 
 
     let currentCount = 0
@@ -85,7 +85,8 @@ const TeacheroverView = (props) => {
 
     const fetchRecord = (search, filter) => {
 
-        setLoading(true)
+     
+            setLoading(true)
         // let data = { Searchby: search, Filterby: filter, page: "1", limit: "100" }
 
         let data = {
@@ -97,44 +98,37 @@ const TeacheroverView = (props) => {
 
 
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
-            if (res.flag) {
-                setPaginationData(res.pagination)
-                if (allNewAndOldData.length > 0) {
-                    if (res.data && res.data.length > 0) {
-                        let newData = []
-                        newData = res.data
-                        if(pageNo == 1){
-                            setPupilData(res.data)
-                            setAllNewAndOldData(res.data)
-                        }
-                        else{
-                            let newArray = [allNewAndOldData, ...newData]
-                            setPupilData(newArray)
-                            setAllNewAndOldData(newArray)
-                        }
-                        setLoading(false)
-                    }
-                    else {
-                        search != '' && res.data ? setPupilData(res.data) : setPupilData(allNewAndOldData)
-                        setLoading(false)
+            setPaginationData(res.pagination)
+            if (res?.code == 200) {
+                if (res?.data && pageNo == 1) {
+                    DataArr = [];
+                    DataArr = res?.data;
+                    setPupilData(DataArr)
+                }
+                else if (res?.data) {
+                    for (var i = 0; i < res?.data?.length; i++) {
+                        DataArr.push(res?.data[i]);
+                        setPupilData(DataArr)
                     }
                 }
-                else {
-                    setPupilData(res.data)
-                    setAllNewAndOldData(res.data)
-                    setLoading(false)
-                }
-
+                setLoading(false)
+                
             } else {
+                setLoading(false)
+               
                 showMessage(res.message)
             }
+            
         }, (err) => {
             console.log('error of absent check', err);
+            setLoading(false)
+          
         })
     }
 
     const addMorePage = () => {
-        if (pupilData.length != pagination.TotalCount) {
+        if (pupilData?.length !== pagination?.TotalCount && pagination !== '') {
+           setLoading(true)
             pageNo = pageNo + 1
             setTimeout(() => {
                 fetchRecord('', 'name')
@@ -157,11 +151,11 @@ const TeacheroverView = (props) => {
                             <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                         </View>
                         <View style={PAGESTYLE.groupPupil}>
-                            <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName.length != 0 ? item.GroupName[0] : '-'}</Text>
+                            <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item?.GroupName && item?.GroupName?.length !== 0 ? item?.GroupName[0] : '-'}</Text>
                         </View>
                     </View>
                     <View style={PAGESTYLE.rewardColumn}>
-                        {item.RewardsList.map((item, index) => {
+                        {item?.RewardsList && item.RewardsList.map((item, index) => {
                             return (
                                 item._id == '3' ?
                                     <View style={PAGESTYLE.rewardStar}>
@@ -232,8 +226,12 @@ const TeacheroverView = (props) => {
                                     keyExtractor={(item) => item.id}
                                     extraData={selectedId}
                                     showsVerticalScrollIndicator={false}
-                                    onEndReachedThreshold={0}
+                                    onEndReachedThreshold={0.01}
                                     onEndReached={() => addMorePage()}
+                                    // ListFooterComponent={() => loadingMore &&  <ActivityIndicator
+                                    //     style={{ margin: 20 }}
+                                    //     size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                    //     color={COLORS.yellowDark} />}
                                 />
                             </View>
                             :

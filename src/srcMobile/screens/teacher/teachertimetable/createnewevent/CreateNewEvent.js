@@ -25,7 +25,6 @@ import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import CalendarUpload from "../../../../../svg/teacher/timetable/CalendarUpload";
 
 const CreateNewEvent = (props) => {
-    console.log('props', props);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -54,23 +53,14 @@ const CreateNewEvent = (props) => {
 
     const [timeSlot, setTimeSlots] = useState(['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'])
     const [colorArr, setColorArr] = useState([])
-    // this.state = {
-    //     userName: '',
-    //     password: '',
-    // }
+    
 
     const showMode = (currentMode) => {
         setShow(true);
         setMode(currentMode);
     };
 
-    // const showDatepicker = () => {
-    //     showMode('date');
-    // };
-
-    // const showTimepicker = () => {
-    //     showMode('time');
-    // };
+  
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -82,7 +72,6 @@ const CreateNewEvent = (props) => {
     }, [props.navigation]);
 
     const handleBackButtonClick = () => {
-        // props.route.params.goBack()
         props.navigation.goBack()
         return true;
     }
@@ -143,7 +132,7 @@ const CreateNewEvent = (props) => {
             EventTypeId: selectColorId,
             CreatedBy: User.user._id
         }
-        console.log(data);
+       
 
         Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)
@@ -176,7 +165,6 @@ const CreateNewEvent = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -390,7 +378,8 @@ const CreateNewEvent = (props) => {
                                                 value={note}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
-                                                onChangeText={notes => setnote(notes)} />
+                                                onChangeText={notes => setnote(notes)} 
+                                                onSubmitEditing={isFieldsValidated}/>
                                         </View>
                                         <View style={[styles.copyInputParent, styles.colorPicker]}>
                                             <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
@@ -398,12 +387,10 @@ const CreateNewEvent = (props) => {
                                                     <TouchableOpacity>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
                                                     </TouchableOpacity>
-                                                    {/* <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} /> */}
                                                     <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </TouchableOpacity>
                                             <TouchableOpacity>
-                                                {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                                 <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                             </TouchableOpacity>
                                         </View>

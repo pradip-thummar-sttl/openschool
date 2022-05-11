@@ -95,7 +95,8 @@ const HeaderWhitepupilMessage = (props) => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
                         }} 
-                        onSubmitEditing={()=> setSearchActive(true)}/>
+                        onSubmitEditing={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}
+                        />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Menu style={{ marginLeft: 10 }}>

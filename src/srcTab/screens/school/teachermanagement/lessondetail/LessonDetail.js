@@ -73,7 +73,6 @@ const LessonDetail = (props) => {
     }, [isSearchActive])
 
     const isFiedlsValidated = () => {
-        console.log('Addhomework', Addhomework);
         if (!Addhomework.HomeworkDescription) {
             showMessage(MESSAGE.description)
             return
@@ -95,15 +94,12 @@ const LessonDetail = (props) => {
             CreatedBy: User.user._id,
             CheckList: Addhomework.CheckList,
         }
-        console.log('add homework data', data)
+        
         if (Addhomework.IsUpdate) {
             Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
-                console.log('res', res);
+          
                 if (res.flag) {
-                    // setHomeworkLoading(false)
-                    // setVisiblePopup(false)
-                    // showMessage('Homework updated successfully')
-
+                    
                     uploadMatirial(res.data._id)
                 } else {
                     setHomeworkLoading(false)
@@ -118,9 +114,6 @@ const LessonDetail = (props) => {
         } else {
             Service.post(data, EndPoints.Homework, (res) => {
                 Addhomework.IsUpdate = true
-                // setHomeworkLoading(false)
-                // setVisiblePopup(false)
-                // showMessage('Homework added successfully')
                 uploadMatirial(res.data._id)
             }, (err) => {
                 console.log('response of add homework err', err)
@@ -185,10 +178,10 @@ const LessonDetail = (props) => {
             return
         }
 
-        console.log('data', data._parts, homeworkId);
+       
 
         Service.postFormData(data, `${EndPoints.HomeworkMaterialUpload}${homeworkId}`, (res) => {
-            console.log('res.code', res.code);
+            
             if (res.code == 200) {
                 setHomeworkLoading(false)
                 setVisiblePopup(false)

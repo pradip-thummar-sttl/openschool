@@ -144,10 +144,10 @@ const NotificationDrawer = (props) => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard', { index: 2, })
         } else {
-            props.navigation.replace('PupuilDashboard', { index: 2, })
+            props.navigation.replace('PupuilDashboard', { index: 2 })
         }
     }
-
+  
     const onMonthChangeFunction = (month) => {
         // const date = moment().format('YYYY-MM-DD')
         // // const m = month
@@ -368,6 +368,8 @@ const NotificationDrawer = (props) => {
                                         {
                                             notifications.length ?
                                                 notifications.map((item, index) => {
+                                                    const date = new Date(item.SubDesc);
+                                                    const time = date.toLocaleTimeString()
                                                     return (
 
                                                         item.NotificationType === 'LIVE CLASSES' ?
@@ -418,7 +420,7 @@ const NotificationDrawer = (props) => {
                                                                             </View>
                                                                             <View style={styles.timingJoinClass}>
                                                                                 <View style={[styles.timing, styles.timingOne]}>
-                                                                                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{item.SubDesc}</Text>
+                                                                                    <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{time}</Text>
                                                                                 </View>
                                                                                 <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                                                     <Text style={STYLE.openClassLink}>Check</Text>
@@ -447,7 +449,7 @@ const NotificationDrawer = (props) => {
                                                                                 <View style={[styles.timingJoinClass]}>
                                                                                     <View style={[styles.timing, styles.timingOne]}>
                                                                                         <Clock style={[styles.closeIconSmall1, { marginRight: 5 }]} height={hp(1.5)} width={hp(1.5)} />
-                                                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{item.SubDesc}</Text>
+                                                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{item.SubDesc == " - " ? "-" : time}</Text>
                                                                                     </View>
                                                                                     <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                                                         {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
