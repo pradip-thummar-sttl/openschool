@@ -268,7 +268,6 @@ const SAddNewTeacher = (props) => {
         else
             setSelectedTeacher(oldArray => [...oldArray, item]);
 
-        console.log("=-=-=-=-=->", item);
     }
 
     const isCheckedTeacherAreAvailable = (item) => {
