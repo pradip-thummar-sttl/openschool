@@ -761,4 +761,6 @@ export default StyleSheet.create({
         alignItems:'flex-end',
         justifyContent:'center',
     },
+    teacherListView:{width:hp(100), marginTop:10, flexDirection:'row',marginStart:10, 
+    alignItems:'center',}
 });
