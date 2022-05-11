@@ -68,8 +68,6 @@ const SchoolMessage = (props) => {
                                 :
                                 null
                         }}>
-                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                             {isSearchActive ?
                             <CloseBlack height={15} width={15} />
                             :
@@ -82,7 +80,8 @@ const SchoolMessage = (props) => {
                         placeholder="Search message"
                         placeholderTextColor={COLORS.menuLightFonts}
                         multiline={false}
-                        onChangeText={keyword => { setKeyword(keyword) }} />
+                        onChangeText={keyword => { setKeyword(keyword) }} 
+                        onSubmitEditing={()=>refresh()}/>
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>

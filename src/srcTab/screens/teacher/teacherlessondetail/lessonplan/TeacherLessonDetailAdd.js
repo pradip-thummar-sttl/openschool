@@ -1013,10 +1013,7 @@ const TLDetailAdd = (props) => {
                                                 style={PAGESTYLE.commonInputTextareaBoldGrey}
                                                 onChangeText={text => setDescription(text)} />
                                         </View>
-                                        {/* <TouchableOpacity onPress={() => setAddRecording(true)} style={[PAGESTYLE.recordLinkBlock, PAGESTYLE.topSpaceRecording]}>
-                                            <Image source={Images.RecordIcon} style={PAGESTYLE.recordingLinkIcon} />
-                                            <Text style={PAGESTYLE.recordLinkText}>Add recording</Text>
-                                        </TouchableOpacity> */}
+                                       
                                         <Popupaddrecording
                                             recordingArr={recordingArr}
                                             isVisible={isAddRecording}

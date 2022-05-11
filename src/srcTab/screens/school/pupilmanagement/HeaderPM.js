@@ -101,11 +101,13 @@ const HeaderPM = (props) => {
                                     <SearchBlue height={15} width={15} />
                                 }
                             </TouchableOpacity>
+
                             <TextInput
                                 ref={textInput}
                                 style={{ width: '100%', height: '100%', paddingVertical: 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search pupil"
                                 placeholderTextColor={COLORS.menuLightFonts}
+                                onSubmitEditing={()=>setSearchActive(true)}
                                 onChangeText={keyword => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
