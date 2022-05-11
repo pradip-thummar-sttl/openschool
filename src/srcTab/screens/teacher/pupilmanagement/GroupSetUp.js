@@ -32,8 +32,13 @@ const GroupSetUp = () => {
 
         setPupilLoading(true)
         console.log('${EndPoints.GetPupilByTeacherId}${User.user._id}=========>',EndPoints.GetPupilByTeacherId,User.user._id);
-
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        let data = {
+            Searchby: "",
+            Filterby: "",
+            page:1,
+            limit:12
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
                 setPupils(res.data)

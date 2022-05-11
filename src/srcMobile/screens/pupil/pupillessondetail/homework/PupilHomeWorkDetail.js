@@ -187,6 +187,7 @@ console.log('endpoint  url', `${EndPoints.PupilUploadHomework}/${item.HomeWorkId
                                                         onFillColor={COLORS.dashboardPupilBlue}
                                                         onTintColor={COLORS.dashboardPupilBlue}
                                                         tintColor={COLORS.dashboardPupilBlue}
+                                                        
                                                     />
                                                     <Text style={PAGESTYLE.checkBoxLabelText}>{item.ItemName}</Text>
                                                 </View>
