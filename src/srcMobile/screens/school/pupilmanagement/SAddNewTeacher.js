@@ -5,17 +5,12 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
-
-// import Images from '../../../../utils/Images';
 import PAGESTYLE from '../teacherManagament/ProfileStyle';
 import FONTS from '../../../../utils/Fonts';
 import { PanGestureHandler, TextInput } from "react-native-gesture-handler";
 import TopBackImg from "../../../../svg/teacher/pupilmanagement/TopBackImg";
-// import HeaderPTInnerEdit from "./HeaderPTInnerEdit";
-import ActivityRings from "react-native-activity-rings";
 import AddNewTeacherHeader from "./AddNewTeacherHeader";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
-// import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker/src";
 import MESSAGE from "../../../../utils/Messages";
 import { baseUrl, emailValidate, opacity, showMessage, showMessageWithCallBack } from "../../../../utils/Constant";
@@ -25,13 +20,8 @@ import ArrowDown from "../../../../svg/teacher/login/ArrowDown";
 import Calender from "../../../../svg/teacher/dashboard/Calender";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from "moment";
-import Styles from "../../../../srcTab/screens/teacher/GlobalMessage/Styles";
+import WhiteCheck from "../../../../svg/pupil/timetable/WhiteCheck";
 
-// import { EndPoints } from "../../../../service/EndPoints";
-// import { Service } from "../../../../service/Service";
-// import moment from 'moment';
-
-const { CallModule } = NativeModules;
 
 const SAddNewTeacher = (props) => {
     const item = props.route.params.item;
@@ -49,7 +39,7 @@ const SAddNewTeacher = (props) => {
     const [parentLastName, setParentLastName] = useState('');
     const [profileUri, setProfileUri] = useState('')
     const [selectedTeacher, setSelectedTeacher] = useState([])
-    const [teachers, setTeachers] = useState([])
+    const [teachers, setTeachers] = useState([]);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isLoading, setLoading] = useState(false)
 
@@ -107,12 +97,12 @@ const SAddNewTeacher = (props) => {
         } else if (!selectedDate.trim()) {
             showMessage(MESSAGE.selectDOB)
             return false;
-        } 
+        }
         else if (!selectedTeacher.length) {
             showMessage(MESSAGE.selectTeacher)
             return false;
-            
-        }else if (!parentFirstName.trim()) {
+
+        } else if (!parentFirstName.trim()) {
             showMessage(MESSAGE.parentFirstName)
             return false
         } else if (!parentLastName.trim()) {
@@ -135,24 +125,24 @@ const SAddNewTeacher = (props) => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             ParentFirstName: parentFirstName,
             ParentLastName: parentLastName,
             FirstName: firstName,
             LastName: lastName,
             Email: email,
             MobileNumber: mobile,
-            CreatedBy: User.user.UserDetialId,
             UserTypeId: userType,
+            Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
+            CreatedBy: User.user.UserDetialId,
             IsInvited: 'false',
-            Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
+            TeacherList:selectedTeacher,
+            ProfilePicture:"sdvds",
         }
 
         console.log('data', data);
 
         Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
-                console.log('response of save lesson', res)
                 uploadProfile(res.data._id)
             } else {
                 showMessage(res.message)
@@ -193,7 +183,6 @@ const SAddNewTeacher = (props) => {
     const uploadProfile = (pupilId) => {
         if (!profileUri) {
             setLoading(false)
-            //return
             showMessageWithCallBack(MESSAGE.inviteSent, () => {
                 props.navigation.goBack()
             });
@@ -272,21 +261,53 @@ const SAddNewTeacher = (props) => {
         );
     }
 
+    const onSelectTeacher = (item) => {
+
+        if (isCheckedTeacherAreAvailable(item))
+            setSelectedTeacher(selectedTeacher.filter(value => value.TeacherId !== item.TeacherId));
+        else
+            setSelectedTeacher(oldArray => [...oldArray, item]);
+
+        console.log("=-=-=-=-=->", item);
+    }
+
+    const isCheckedTeacherAreAvailable = (item) => {
+        let isAvailable = false;
+        selectedTeacher.forEach(element => {
+            if (item.TeacherId === element.TeacherId)
+                isAvailable = true;
+        });
+
+        return isAvailable;
+    }
+
     const teacherDropDown = () => {
         return (
             <View style={[PAGESTYLE.dropDownFormInput, { marginBottom: hp(2) }]}>
-                <Text style={[PAGESTYLE.fieldInputLabel,{ paddingLeft: hp(1.5),}]}>Assigned Teacher</Text>
-                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+                <Text style={[PAGESTYLE.fieldInputLabel, { paddingLeft: hp(1.5), }]}>Assigned Teacher</Text>
+
+                <Menu onSelect={(item) => onSelectTeacher(item)}>
+
                     <MenuTrigger style={[STYLE.commonInputGrayBack, STYLE.common]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 13, } }}>
+
+                    <MenuOptions customStyles={{ optionText: { fontSize: 13 } }} style={{ height: hp(40) }}>
                         <FlatList
                             showsVerticalScrollIndicator={false}
                             data={teachers}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                                <TouchableOpacity style={PAGESTYLE.teacherListView}>
+                                    {
+                                    isCheckedTeacherAreAvailable(item) ? 
+                                    <WhiteCheck height={hp(1.55)} width={hp(1.55)} fill={"#000"} />
+                                    :
+                                    <View style={{width:hp(1.55), height:hp(1.55)}}/>
+                                    }
+                                    <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular, }} value={item} text={item.FirstName + ' ' + item.LastName} />
+                                    {/* <Text style={PAGESTYLE.txtTeacherList}>{item.FirstName + ' ' + item.LastName}</Text> */}
+                                </TouchableOpacity>
                             )}
                             style={{ height: 130 }} />
                     </MenuOptions>
@@ -300,11 +321,11 @@ const SAddNewTeacher = (props) => {
             <AddNewTeacherHeader
                 navigateToBack={() => props.navigation.goBack()}
                 onAlertPress={() => props.navigation.openDrawer()}
-                OnSaveEdit={() => {validateFields()}}
+                OnSaveEdit={() => { validateFields() }}
                 isLoading={isLoading}
 
             />
-            <View style={[PAGESTYLE.MainProfile,{paddingBottom : hp(5)}]}>
+            <View style={[PAGESTYLE.MainProfile, { paddingBottom: hp(5) }]}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
                     <View style={PAGESTYLE.mainContainerProfile}>
                         <View style={PAGESTYLE.profileImageArea}>
@@ -361,12 +382,12 @@ const SAddNewTeacher = (props) => {
                                     <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                                 </View>
                             </TouchableOpacity>
-                            
+
                         </View>
                         <View>
                             {teacherDropDown()}
                         </View>
-                       
+
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
@@ -427,9 +448,9 @@ const SAddNewTeacher = (props) => {
                                 onChangeText={number => setMobile(number)}
                             />
                         </View>
-                      
+
                     </View>
-                    
+
 
                     <DateTimePickerModal
                         isVisible={isDatePickerVisible}

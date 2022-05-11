@@ -144,7 +144,9 @@ const HeaderTM = (props) => {
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
                 <View style={styles.menuIconWithTitle}>
-                    <TouchableOpacity onPress={() => props.onAlertPress()}><HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} /></TouchableOpacity>
+                    <TouchableOpacity onPress={() => props.onAlertPress()}>
+                        <HamburgerMenu width={hp(2.60)} height={hp(1.84)} style={styles.menuIcon} />
+                    </TouchableOpacity>
                     <Text style={styles.mainTitle}>{props.title}</Text>
                 </View>
                 <View style={styles.headerRight}>
@@ -163,7 +165,7 @@ const HeaderTM = (props) => {
                     {isSearchActive ?
                         <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
                             <CloseBlack height={18} width={18} />
-                        </TouchableOpacity> 
+                        </TouchableOpacity>
                         :
                         <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
                             <SearchBlue height={18} width={18} />
@@ -174,7 +176,8 @@ const HeaderTM = (props) => {
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
                         placeholder="Search name"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => {props.onSearchKeyword(keyword);}} />
+                        onSubmitEditing={()=>onPressSearchButton()}
+                        onChangeText={keyword => { props.onSearchKeyword(keyword); }} />
 
                     <Menu>
                         <MenuTrigger>
@@ -206,7 +209,7 @@ const HeaderTM = (props) => {
                     {/*  */}
                 </View>
                 <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
-                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)}  />
+                    <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
                 <RBSheet
@@ -402,7 +405,7 @@ const styles = StyleSheet.create({
     },
     commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
-        
+
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
@@ -532,7 +535,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     searchParent: {
-        flexDirection: 'row', paddingHorizontal: hp(1.84), alignItems: 'center',paddingTop : Platform.OS === 'android' ? 0 : hp(1.23), paddingBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
+        flexDirection: 'row', paddingHorizontal: hp(1.84), alignItems: 'center', paddingTop: Platform.OS === 'android' ? 0 : hp(1.23), paddingBottom: hp(1.23), marginTop: 0, backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10

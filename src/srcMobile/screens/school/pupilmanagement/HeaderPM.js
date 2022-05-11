@@ -104,6 +104,7 @@ const HeaderPM = (props) => {
                             style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                             placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
+                            onSubmitEditing={()=>onPressSearch()}
                             onChangeText={keyword => {
                                 setKeyword(keyword);
                                 props.onSearchKeyword(keyword);

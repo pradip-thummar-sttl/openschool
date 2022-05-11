@@ -54,7 +54,6 @@ const Popupaddrecording = (props) => {
         showMode('time');
     };
 
-    console.log('props.recordingArr', props.recordingArr);
 
     return (
         <View>
@@ -81,9 +80,9 @@ const Popupaddrecording = (props) => {
                     <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={toggleModal}
-                        style={[styles.recordLinkBlock, styles.topSpaceRecording,]}>
+                        style={styles.recordingNewButton}>
                         <Recording style={styles.recordingLinkIcon} height={hp(2.34)} width={hp(2.34)} />
-                        <Text numberOfLines={2} ellipsizeMode='tail' style={[styles.recordLinkText]}>Add Recording</Text>
+                        <Text numberOfLines={2} ellipsizeMode='tail' style={styles.txtRecordLink}>Add Recording</Text>
                     </TouchableOpacity>
                     :
                     <TouchableOpacity  onPress={() => {Download(props.recordingArr[0], (res) => { }) }} activeOpacity={opacity}
@@ -240,9 +239,24 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         color: COLORS.darkGrayIntro,
         paddingEnd : 10
-       
+    },
 
-
-        // backgroundColor : 'green'
+    recordingNewButton: {
+        width: wp(16),
+        height: hp(5.20),
+        paddingHorizontal: hp(1.43),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        borderRadius: hp(1),
+        alignItems: 'center',
+        flexDirection: 'row',
+        marginTop: hp(1.401),
+    },
+    txtRecordLink: {
+        fontSize: hp(1.56),
+        fontFamily: FONTS.fontBold,
+        textTransform: 'uppercase',
+        color: COLORS.darkGrayIntro,
+        paddingEnd : 10,
     },
 });

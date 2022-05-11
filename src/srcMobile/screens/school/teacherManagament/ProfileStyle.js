@@ -678,5 +678,10 @@ export default StyleSheet.create({
         marginTop: hp(1),
         paddingHorizontal: hp(2),
     },
-    
+    txtTeacherList: {
+        fontSize: hp(1.6),
+        fontFamily: FONTS.fontRegular,
+    },
+    teacherListView:{width:hp(100), marginTop:10, flexDirection:'row',marginStart:10, 
+    alignItems:'center',}
 });
