@@ -1759,7 +1759,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 9935HBB5VW;
+						DevelopmentTeam = 39365BNV88;
 						LastSwiftMigration = 1250;
 						ProvisioningStyle = Manual;
 					};
@@ -2252,12 +2252,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OpenSchool/OpenSchool.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				CODE_SIGN_IDENTITY = "Apple Development: Dhruv Patel (9J3544HB2Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Dhruv Patel (9J3544HB2Z)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 9935HBB5VW;
+				DEVELOPMENT_TEAM = 39365BNV88;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
 				INFOPLIST_FILE = OpenSchool/Info.plist;
@@ -2269,9 +2269,9 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.openschool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myed.openschool;
 				PRODUCT_NAME = "MYED Open School";
-				PROVISIONING_PROFILE_SPECIFIER = myed_open_school_profile;
+				PROVISIONING_PROFILE_SPECIFIER = MyEd_Open_School;
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2288,12 +2288,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = OpenSchool/OpenSchool.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Himanshu Chudasama (5LM58UP73P)";
+				CODE_SIGN_IDENTITY = "Apple Development: Dhruv Patel (9J3544HB2Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development: Dhruv Patel (9J3544HB2Z)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 9935HBB5VW;
+				DEVELOPMENT_TEAM = 39365BNV88;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/CallTestPrefixHeader.pch";
 				INFOPLIST_FILE = OpenSchool/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -2305,9 +2305,9 @@
 					"-lc++",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.openschool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myed.openschool;
 				PRODUCT_NAME = "MYED Open School";
-				PROVISIONING_PROFILE_SPECIFIER = myed_open_school_profile;
+				PROVISIONING_PROFILE_SPECIFIER = MyEd_Open_School;
 				SWIFT_OBJC_BRIDGING_HEADER = "RecorderClass/OpenSchool-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "MYED_Open_School-Swift.h";
 				SWIFT_VERSION = 5.0;

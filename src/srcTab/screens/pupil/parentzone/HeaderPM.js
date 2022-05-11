@@ -57,7 +57,7 @@ const HeaderPM = (props) => {
         <View style={PAGESTYLE.headerBarMainWhite}>
 
             <View style={PAGESTYLE.headerMain}>
-                <View style={{ right: Platform.OS === 'android' ? hp(8) : hp(10) }}>
+                <View style={PAGESTYLE.headerParent}>
                     <TouchableOpacity
                         onPress={() => props.onReplace()}
                         style={{ height: 20, width: 40, zIndex: 9, left: 0 }}>
@@ -65,12 +65,8 @@ const HeaderPM = (props) => {
                         <BackArrow height={hp(2.67)} width={hp(2.33)} />
 
                     </TouchableOpacity>
-
-
+                    <Text style={[PAGESTYLE.mainTitle,]}>Parent Zone</Text>
                 </View>
-
-
-                <Text style={[PAGESTYLE.mainTitle, { left: Platform.OS === 'android' ? hp(-58) : hp(-40) }]}>Parent Zone</Text>
 
                 <View style={PAGESTYLE.headerRight}>
 
@@ -121,7 +117,7 @@ const HeaderPM = (props) => {
 
                     </View>
 
-                    <TouchableOpacity style={{position : 'relative'}}
+                    <TouchableOpacity style={{ position: 'relative' }}
                         onPress={() => props.openDrawer()}
                     >
                         {/* <Image style={PAGESTYLE.massagesIcon} source={Images.Notification} /> */}
@@ -184,13 +180,13 @@ const HeaderPM = (props) => {
                                 }}>
                                 {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                                     source={Images.SearchIcon} /> */}
-                                    {
-                                isSearchActive ?
-                                    <CloseBlack height={20} width={20} />
-                                    :  <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                                {
+                                    isSearchActive ?
+                                        <CloseBlack height={20} width={20} />
+                                        : <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
 
-                                    }
-                              </TouchableOpacity>
+                                }
+                            </TouchableOpacity>
                             <TextInput
                                 ref={textInput}
                                 style={{
@@ -262,7 +258,7 @@ const styles = StyleSheet.create({
     filterCard: {
         backgroundColor: COLORS.white,
         position: Platform.OS === 'android' ? 'relative' : 'absolute',
-        top: Platform.OS === 'android' ? 0 :50,
+        top: Platform.OS === 'android' ? 0 : 50,
         right: 0,
         width: 200,
         padding: 10,
@@ -278,26 +274,26 @@ const styles = StyleSheet.create({
         borderBottomColor: COLORS.bottomProfileLightBorder,
         borderBottomWidth: hp(0.26),
     },
-filterList: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 5,
-    flex: 1,
-},
-filterListText: {
-    color: COLORS.darkGray,
-    fontSize: hp(1.82),
-    fontFamily: FONTS.fontRegular,
-},
-filterListSub: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-},
-checkMark: {
-    width: hp(1.48),
-    resizeMode: 'contain',
-},
+    filterList: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 5,
+        flex: 1,
+    },
+    filterListText: {
+        color: COLORS.darkGray,
+        fontSize: hp(1.82),
+        fontFamily: FONTS.fontRegular,
+    },
+    filterListSub: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    checkMark: {
+        width: hp(1.48),
+        resizeMode: 'contain',
+    },
 })
 export default HeaderPM;

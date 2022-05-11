@@ -33,7 +33,8 @@ export default StyleSheet.create({
     },
     commonWidthSmall: {
         alignSelf: 'flex-end',
-        width: Platform.OS === 'android' ? '70%' : '60%'
+        // width: Platform.OS === 'android' ? '70%' : '60%'
+        width: wp(38.8)
     },
     commonWidthlarge: {
         alignSelf: 'flex-end',
@@ -651,6 +652,11 @@ export default StyleSheet.create({
         color: COLORS.darkGray,
         fontFamily: FONTS.fontRegular,
         alignSelf: 'center',
+    },
+    popUpContent: {
+        fontSize: hp(1.82),
+        color: COLORS.darkGray,
+        fontFamily: FONTS.fontRegular,
     },
     dateTimetextdummy1: {
         fontSize: 14,

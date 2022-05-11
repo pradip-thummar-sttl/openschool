@@ -491,7 +491,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         height: hp(5.20),
-        width : Platform.OS === 'android' ? hp(16) : hp(17),
+        width : Platform.OS === 'android' ? wp(12) : wp(13),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
     },
