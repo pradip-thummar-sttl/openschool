@@ -345,7 +345,8 @@ class Login extends Component {
                                     maxLength={40}
                                     value={this.state.userName}
                                     placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={userName => this.setState({ userName })} />
+                                    onChangeText={userName => this.setState({ userName })}
+                                     />
                             </View>
                             <View style={styles.field}>
                                 <Text style={styles.labelInput}>Password</Text>
@@ -361,7 +362,9 @@ class Login extends Component {
                                         style={{ ...STYLE.commonInputPassword, borderColor: (this.state.isPasswordFocus) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                         placeholderTextColor={COLORS.menuLightFonts}
                                         secureTextEntry={this.state.isPasswordHide}
-                                        onChangeText={password => this.setState({ password })} />
+                                        onChangeText={password => this.setState({ password })} 
+                                        onSubmitEditing={() => { isDesignBuild ? this.props.navigation.replace('TeacherDashboard') : this.isFieldsValidated() }}
+                                        />
 
                                     <View style={styles.eye}>
                                         <TouchableOpacity

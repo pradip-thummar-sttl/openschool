@@ -60,6 +60,7 @@ class PupilRegister extends Component {
             cpassword: "",
         }
     }
+    
     state = {
         isDayFocused: false,
         isMonthFocused: false,
@@ -68,7 +69,7 @@ class PupilRegister extends Component {
         isLastNameFocused: false,
         isPasswordFocus: false,
     };
-
+   
     isFieldsValidated = () => {
         const { userName, password, cpassword, firstName, lastName, day, month, year, PushToken, mobile, Device, OS, AccessedVia, isRemember } = this.state;
         if (!day) {
@@ -111,7 +112,7 @@ class PupilRegister extends Component {
                 var userData = res.data
                 var userType = ""
                 userData.map((item) => {
-                    if (item.Name === this.props.route.params.userType) {
+                    if (item.Name === User.user.UserType) {
                         userType = item._id
                     }
                 })
@@ -231,6 +232,7 @@ class PupilRegister extends Component {
     };
 
     render() {
+        console.log('props',this.props);
         return (
             <View style={styles.container}>
                 <View style={styles.lefImage}>
@@ -376,7 +378,9 @@ class PupilRegister extends Component {
                                             style={{ ...STYLE.commonInputPassword, borderColor: (this.state.isCPasswordFocus) ? COLORS.dashboardPupilBlue : COLORS.videoLinkBorder }}
                                             placeholderTextColor={COLORS.lightGray}
                                             secureTextEntry={this.state.iscPasswordHide}
-                                            onChangeText={cpassword => this.setState({ cpassword })} />
+                                            onChangeText={cpassword => this.setState({ cpassword })} 
+                                            onSubmitEditing={() => { this.isFieldsValidated() }}
+                                            />
 
                                         <View style={styles.eye}>
                                             <TouchableOpacity

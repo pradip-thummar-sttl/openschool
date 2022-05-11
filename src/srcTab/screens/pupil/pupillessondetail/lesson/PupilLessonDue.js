@@ -15,7 +15,6 @@ import SubmittedIcon from "../../../../../svg/pupil/lessonhwplanner/SubmittedIco
 import MarkedIcon from "../../../../../svg/pupil/lessonhwplanner/MarkedIcon";
 
 const PupilLessonDue = (props) => {
-    console.log('props of homework', props)
     return (
 
         <View style={[PAGESTYLE.commonBg, PAGESTYLE.videoSliderSpace,{paddingTop : 0,paddingBottom : 0}]}>

@@ -155,13 +155,11 @@ const TLDetailAdd = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
 
     const addMaterial = () => {
-        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -171,14 +169,7 @@ const TLDetailAdd = (props) => {
                 DocumentPicker.types.images,
                 DocumentPicker.types.plainText],
             }).then((results) => {
-                console.log('results', results);
                 for (const res of results) {
-                    console.log('KDKDKD',
-                        res.uri,
-                        res.type, // mime type
-                        res.name,
-                        res.size
-                    );
                     arr.push(res)
 
                 }
@@ -199,7 +190,6 @@ const TLDetailAdd = (props) => {
         var array = [...materialArr];
         array.splice(index1, 1);
         setMaterialArr(array)
-        console.log('hello material', array)
     }
 
     const showDatepicker = () => {
@@ -243,7 +233,6 @@ const TLDetailAdd = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item._id !== filteredPupils[_index]._id);
             setSelectedPupils(newList)
@@ -295,7 +284,6 @@ const TLDetailAdd = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -312,7 +300,6 @@ const TLDetailAdd = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -382,7 +369,6 @@ const TLDetailAdd = (props) => {
             setScreenVoiceSelected(false)
             setRecordingName("")
             toggleModal()
-            console.log('url', url);
         }
     }else{
         // setRecordingStarted(false)
@@ -417,7 +403,6 @@ const TLDetailAdd = (props) => {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
-                console.log('response', response);
      
                 setVideoRecordingResponse(response)
                 setCurrentRecordMode('isCamera')
@@ -517,7 +502,9 @@ const TLDetailAdd = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={80}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }} 
+                        onSubmitEditing={() => pushCheckListItem()}
+                        />
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10, paddingLeft: 12, borderLeftColor: COLORS.borderGrp, borderLeftWidth: 1, }}
                         opacity={opacity}
@@ -797,7 +784,6 @@ const TLDetailAdd = (props) => {
             QBDilogID: ID
         }
 
-        console.log('postData', data);
         Service.post(data, `${EndPoints.Lesson}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
@@ -846,8 +832,6 @@ const TLDetailAdd = (props) => {
             setLoading(false)
             return
         }
-
-        console.log('data', data._parts, lessionId);
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
