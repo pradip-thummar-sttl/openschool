@@ -9,9 +9,15 @@ export default StyleSheet.create({
     checkMarkTab: {
         width: hp(1.48),
         resizeMode: 'contain',
-        position : 'absolute',
-        right : 0,
-        
+        position: 'absolute',
+        right: 0,
+
+    },
+    headerParent: {
+        right: Platform.OS === 'android' ? hp(8) : hp(10),
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     mainPage: {
         flexDirection: 'row',
@@ -24,7 +30,7 @@ export default StyleSheet.create({
         borderRightWidth: 1,
         paddingTop: 20
     },
-    saveParentZoneProfileTextBtn : {
+    saveParentZoneProfileTextBtn: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
@@ -32,9 +38,9 @@ export default StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         height: hp(5.20),
-        width : 120,
-        justifyContent : 'center',
-        alignItems : 'center'
+        width: 120,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     middle: {
         flex: 0.48,
@@ -232,14 +238,14 @@ export default StyleSheet.create({
         borderRadius: 8,
         borderWidth: 1,
         // width: 125,
-        width: Platform.OS === 'android' ? 122: 125,
-        height: Platform.OS === 'android' ? 34: 40,
+        width: Platform.OS === 'android' ? 122 : 125,
+        height: Platform.OS === 'android' ? 34 : 40,
         textAlign: 'center',
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
         backgroundColor: COLORS.buttonGreen,
     },
-    saveParentzonePupilProfile : {
+    saveParentzonePupilProfile: {
         color: COLORS.white,
         fontSize: hp(1.56),
         borderRadius: hp(1),
@@ -1163,19 +1169,19 @@ export default StyleSheet.create({
         width: '35%',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        alignItems:'center'
+        alignItems: 'center'
     },
-    pupilTableHeadingMainSecond : {
+    pupilTableHeadingMainSecond: {
         width: '35%',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        alignItems:'center'
+        alignItems: 'center'
     },
-    pupilTableHeadingMainThird : {
+    pupilTableHeadingMainThird: {
         width: '10%',
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        alignItems:'center'
+        alignItems: 'center'
     },
     tabpupil2: {
         width: hp(17.97),
@@ -1203,8 +1209,8 @@ export default StyleSheet.create({
         lineHeight: hp(2.08),
         marginRight: hp(2.60),
     },
-    leftSideSpace:{
-        paddingLeft:0
+    leftSideSpace: {
+        paddingLeft: 0
     },
     pupilTableHeadingMainsubTitlestar: {
         fontSize: hp(1.56),
@@ -1253,8 +1259,8 @@ export default StyleSheet.create({
     firstColumn: {
         width: hp(55),
     },
-    firstColumnMsgTitle : {
-        width:'35%',
+    firstColumnMsgTitle: {
+        width: '35%',
     },
     sentBlueText: {
         fontSize: hp(1.82),
