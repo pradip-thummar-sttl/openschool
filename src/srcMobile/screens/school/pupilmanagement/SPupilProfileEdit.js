@@ -55,7 +55,7 @@ const SPupilProfileEdit = (props) => {
         setSelectedDate(moment(item.Dob).format('DD/MM/yyyy'))
         setMobile(item.MobileNumber + '');
 
-        var SelTeacher=[]
+        var SelTeacher = []
         item.TeacherList.forEach(element => {
             SelTeacher.push(element.TeacherId)
         });
@@ -71,7 +71,7 @@ const SPupilProfileEdit = (props) => {
 
         Service.get(`${EndPoints.Teacherdownbyschoolid}/${User.user.UserDetialId}`, (res) => {
             if (res.code == 200) {
-        console.log("item ---->", res.data);
+                console.log("item ---->", res.data);
 
                 setTeachers(res.data);
             } else {
@@ -173,6 +173,17 @@ const SPupilProfileEdit = (props) => {
     }
     const saveProfile = () => {
         setLoading(true)
+
+        var selectArr = [];
+        var removeArr = [];
+        selectedTeacher.forEach(element => {
+            selectArr.push({ TeacherId: element })
+        });
+        removeTeacher.forEach(element => {
+            removeArr.push({ TeacherId: element })
+        });
+
+
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
@@ -184,8 +195,8 @@ const SPupilProfileEdit = (props) => {
             IsInvited: true,
             MobileNumber: isMobile,
             CreatedBy: User.user.UserDetialId,
-            AddTeacherList: [],
-            RemoveTeacherList: []
+            AddTeacherList: selectArr,
+            RemoveTeacherList: removeArr
         }
 
 
@@ -254,198 +265,215 @@ const SPupilProfileEdit = (props) => {
 
     const selectTeacher = (item, index, isCheck) => {
         console.log('hello check check index of check flag', index, isCheck);
+        var selectTech = [...selectedTeacher];
+        var removeTech = [...removeTeacher];
+        if (selectTech.includes(item.TeacherId)) {
+            let idx = selectTech.indexOf(item.TeacherId)
+            selectTech.splice(idx, 1)
+            removeTech.push(item.TeacherId)
+        } else {
+            selectTech.push(item.TeacherId)
+            if (removeTech.includes(item.TeacherId)) {
+                let idx = removeTech.indexOf(item.TeacherId)
+                removeTech.splice(idx, 1)
+            }
+        }
+        setSelectedTeacher(selectTech);
+        setRemovedTeacher(removeTech);
+
+        console.log('hello dude select and remove array is', selectTech, removeTech);
     }
 
-        const teacherDropDown = () => {
-            return (
-                <View style={[PAGESTYLE.commonInputGrayBack, { marginBottom: hp(2) }]}>
-                    <Text style={[PAGESTYLE.labelForm, { paddingLeft: hp(1.5), }]}>Assigned Teacher</Text>
-
-                    <FlatList
-                        showsVerticalScrollIndicator={false}
-                        data={teachers}
-                        numColumns={2}
-                        renderItem={({ item, index }) => (
-                            <View style={PAGESTYLE.alignRow}>
-                                <CheckBox
-                                    style={[PAGESTYLE.checkMark1]}
-                                    value={selectedTeacher.includes(item.TeacherId)?true:false}
-                                    boxType={'square'}
-                                    tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                    onCheckColor={COLORS.white}
-                                    onFillColor={COLORS.dashboardPupilBlue}
-                                    onTintColor={COLORS.dashboardPupilBlue}
-                                    tintColor={COLORS.dashboardPupilBlue}
-                                    onValueChange={(check) => selectTeacher(item, index, check)}
-                                />
-                                <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName + ' ' + item.LastName}</Text>
-                            </View>
-                        )}
-                    />
-
-                </View>
-            );
-        };
-
+    const teacherDropDown = () => {
         return (
-            <View>
-                <HeaderPMInnerEdit
-                    onAlertPress={() => props.navigation.openDrawer()}
-                    OnSaveEdit={() => { validateFields() }}
-                    navigateToBack={() => props.navigation.goBack()}
-                    isLoading={isLoading}
+            <View style={[PAGESTYLE.commonInputGrayBack, { marginBottom: hp(2) }]}>
+                <Text style={[PAGESTYLE.labelForm, { paddingLeft: hp(1.5), }]}>Assigned Teacher</Text>
 
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={teachers}
+                    numColumns={2}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.alignRow}>
+                            <CheckBox
+                                style={[PAGESTYLE.checkMark1]}
+                                value={selectedTeacher.includes(item.TeacherId) ? true : false}
+                                boxType={'square'}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onValueChange={(check) => selectTeacher(item, index, check)}
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName + ' ' + item.LastName}</Text>
+                        </View>
+                    )}
                 />
-                <View style={PAGESTYLE.MainProfile}>
-                    <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
 
-                        <View style={[PAGESTYLE.profileImageArea]}>
-                            <View style={PAGESTYLE.coverImage}>
-                                <TopBackImg height={hp(13.8)} width={'100%'} />
-                            </View>
-                            <View style={[PAGESTYLE.profileOuter]}>
-                                <Image style={PAGESTYLE.profileImage}
-                                    source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedPupil?.ProfilePicture : isProfileUri.uri }} />
-                                <TouchableOpacity style={PAGESTYLE.editprofileStyl1} activeOpacity={opacity} onPress={() => showActionChooser()}>
-                                    <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-
-                        <View style={PAGESTYLE.mainDetailsForm}>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="First Name"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={isFirstName}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={firstName => setFirstName(firstName)}
-                                />
-                            </View>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="Last Name"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={isLastName}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={firstName => setLastName(firstName)}
-                                />
-                            </View>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
-
-
-                                <TouchableOpacity onPress={() => showDatePicker()}>
-                                    <View style={[STYLE.commonInputGrayBack, { flexDirection: 'row' }]}>
-                                        <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
-                                        <Text style={PAGESTYLE.dateTimetextdummy}>{isSelectedDate ? isSelectedDate : 'Select Date'}</Text>
-                                        <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
-                                    </View>
-                                </TouchableOpacity>
-                                {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
-                            </View>
-
-                            <View >
-                                {teacherDropDown()}
-                            </View>
-
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="Unique I.D (auto-generated)"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={"RP170712"}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    editable={false}
-                                // onChangeText={firstName => set(firstName)}
-                                />
-                            </View>
-
-                            <View HR style={STYLE.hrCommon}></View>
-
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="Parent's First Name"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={isPFirstName}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={firstName => setPFirstName(firstName)}
-                                />
-                            </View>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Parent's Last Name</Text>
-                                <TextInput
-                                    returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="parent's Last Name"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={isPLastName}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={firstName => setPLastName(firstName)}
-                                />
-                            </View>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
-                                <TextInput
-                                    // returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-                                    placeholder="Email"
-                                    autoCapitalize={'none'}
-                                    maxLength={40}
-                                    value={email}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={email => setEmail(email)}
-
-                                />
-                            </View>
-                            <View style={PAGESTYLE.fieldDetailsForm}>
-                                <Text LABLE style={PAGESTYLE.labelForm}>Mobile Number</Text>
-                                <TextInput
-                                    // returnKeyType={"next"}
-                                    style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
-
-
-                                    keyboardType="numeric"
-                                    autoCapitalize={false}
-                                    maxLength={40}
-                                    value={isMobile}
-                                    placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={lastName => setMobile(lastName)}
-                                />
-                            </View>
-
-                        </View>
-                        <View HR style={STYLE.hrCommon}></View>
-
-
-                        <DateTimePickerModal
-                            isVisible={isDatePickerVisible}
-                            mode="date"
-                            maximumDate={new Date()}
-                            onConfirm={onHandleConfirm}
-                            onCancel={onHideDatePicker}
-                        />
-                        <View style={{ height: Platform.OS == "ios" ? 130 : 30 }} />
-                    </ScrollView>
-                </View>
             </View>
         );
-    }
+    };
 
-    export default SPupilProfileEdit;
+    return (
+        <View>
+            <HeaderPMInnerEdit
+                onAlertPress={() => props.navigation.openDrawer()}
+                OnSaveEdit={() => { validateFields() }}
+                navigateToBack={() => props.navigation.goBack()}
+                isLoading={isLoading}
+
+            />
+            <View style={PAGESTYLE.MainProfile}>
+                <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
+
+                    <View style={[PAGESTYLE.profileImageArea]}>
+                        <View style={PAGESTYLE.coverImage}>
+                            <TopBackImg height={hp(13.8)} width={'100%'} />
+                        </View>
+                        <View style={[PAGESTYLE.profileOuter]}>
+                            <Image style={PAGESTYLE.profileImage}
+                                source={{ uri: !isProfileUri.uri ? baseUrl + props?.selectedPupil?.ProfilePicture : isProfileUri.uri }} />
+                            <TouchableOpacity style={PAGESTYLE.editprofileStyl1} activeOpacity={opacity} onPress={() => showActionChooser()}>
+                                <Ic_Edit style={PAGESTYLE.pzEditIcon} width={hp(1.7)} height={hp(1.7)} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
+                    <View style={PAGESTYLE.mainDetailsForm}>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>First Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="First Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={isFirstName}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={firstName => setFirstName(firstName)}
+                            />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Last Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="Last Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={isLastName}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={firstName => setLastName(firstName)}
+                            />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Date of Birth</Text>
+
+
+                            <TouchableOpacity onPress={() => showDatePicker()}>
+                                <View style={[STYLE.commonInputGrayBack, { flexDirection: 'row' }]}>
+                                    <Calender style={PAGESTYLE.calIcon} height={hp(1.76)} width={hp(1.76)} />
+                                    <Text style={PAGESTYLE.dateTimetextdummy}>{isSelectedDate ? isSelectedDate : 'Select Date'}</Text>
+                                    <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
+                                </View>
+                            </TouchableOpacity>
+                            {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                        </View>
+
+                        <View >
+                            {teacherDropDown()}
+                        </View>
+
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="Unique I.D (auto-generated)"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={"RP170712"}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                editable={false}
+                            // onChangeText={firstName => set(firstName)}
+                            />
+                        </View>
+
+                        <View HR style={STYLE.hrCommon}></View>
+
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Parent's First Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="Parent's First Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={isPFirstName}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={firstName => setPFirstName(firstName)}
+                            />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Parent's Last Name</Text>
+                            <TextInput
+                                returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="parent's Last Name"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={isPLastName}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={firstName => setPLastName(firstName)}
+                            />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Email</Text>
+                            <TextInput
+                                // returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+                                placeholder="Email"
+                                autoCapitalize={'none'}
+                                maxLength={40}
+                                value={email}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={email => setEmail(email)}
+
+                            />
+                        </View>
+                        <View style={PAGESTYLE.fieldDetailsForm}>
+                            <Text LABLE style={PAGESTYLE.labelForm}>Mobile Number</Text>
+                            <TextInput
+                                // returnKeyType={"next"}
+                                style={[STYLE.commonInputGrayBack, { paddingVertical: 3 }]}
+
+
+                                keyboardType="numeric"
+                                autoCapitalize={false}
+                                maxLength={40}
+                                value={isMobile}
+                                placeholderTextColor={COLORS.menuLightFonts}
+                                onChangeText={lastName => setMobile(lastName)}
+                            />
+                        </View>
+
+                    </View>
+                    <View HR style={STYLE.hrCommon}></View>
+
+
+                    <DateTimePickerModal
+                        isVisible={isDatePickerVisible}
+                        mode="date"
+                        maximumDate={new Date()}
+                        onConfirm={onHandleConfirm}
+                        onCancel={onHideDatePicker}
+                    />
+                    <View style={{ height: Platform.OS == "ios" ? 130 : 30 }} />
+                </ScrollView>
+            </View>
+        </View>
+    );
+}
+
+export default SPupilProfileEdit;
