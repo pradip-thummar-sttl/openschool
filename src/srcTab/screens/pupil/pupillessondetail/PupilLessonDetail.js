@@ -28,6 +28,7 @@ import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 const PupilLessonDetail = (props) => {
+
     const [isHide, action] = useState(true);
 
     const textInput = useRef(null);
@@ -102,7 +103,6 @@ const PupilLessonDetail = (props) => {
             Filterby: filterBy,
         }
 
-        console.log('data', data);
         setHomeworkLoading(true)
         Service.post(data, `${EndPoints.GetAllHomeworkListByPupil}/${User.user.UserDetialId}`, (res) => {
             console.log('response of all pupil homework list', res)
@@ -138,7 +138,6 @@ const PupilLessonDetail = (props) => {
             Filterby: filterBy,
         }
         setLoading(true)
-        console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
             console.log('Get All Pupil LessonList response', res)
             var startDate = moment().startOf('week');

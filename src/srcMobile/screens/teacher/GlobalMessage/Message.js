@@ -80,7 +80,14 @@ const Message = (props) => {
                         placeholder="Search message"
                         placeholderTextColor={COLORS.menuLightFonts}
                         multiline={false}
-                        onChangeText={keyword => { setKeyword(keyword) }} />
+                        onChangeText={keyword => { setKeyword(keyword) }} 
+                        onSubmitEditing={() => {
+                            keyword ?
+                                refresh()
+                                :
+                                null
+                        }}
+                        />
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>

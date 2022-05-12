@@ -24,21 +24,21 @@ const Pupillist = (props, { style }) => (
         activeOpacity={opacity}
         onPress={() => props.navigateToDetail()}>
         <View style={[PAGESTYLE.pupilDta]}>
-            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn}>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.firstColumn]}>
                 <Image source={{ uri: baseUrl + props.item.ProfilePicture }} style={PAGESTYLE.userStamp} />
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:wp(20)}]}>{props.item.PupilName}</Text>
             </View>
-            <View style={PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn}>
+            <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(15)}]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText}>{props.item.Submited ? 'Yes' : 'No'}</Text>
+                <Text style={[PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText]}>{props.item.Submited ? 'Yes' : 'No'}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.date]}>
                 <Text style={PAGESTYLE.pupilName}>{props.item.HomeWorkDate ? moment(props.item.HomeWorkDate).format('DD/MM/yyyy') : '-'}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.marked]}>
-                <Text style={PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText}>{props.item.Marked ? 'Yes' : 'No'}</Text>
+                <Text style={[PAGESTYLE.pupilName, props.item.Marked ? PAGESTYLE.markText : PAGESTYLE.noText]}>{props.item.Marked ? 'Yes' : 'No'}</Text>
                 <View style={PAGESTYLE.pupilDetailLink}>
                     {/* <Image style={PAGESTYLE.pupilDetaillinkIcon} source={Images.DashboardRightArrow} /> */}
                     <ArrowNext style={[PAGESTYLE.pupilDetaillinkIcon,]} height={hp(1.51)} width={hp(0.95)} />

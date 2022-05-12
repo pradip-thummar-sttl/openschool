@@ -22,6 +22,7 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-m
 import Calender from "../../../../svg/teacher/dashboard/Calender";
 import { showMessageWithCallBack } from "../../../../utils/Constant";
 import FONTS from "../../../../utils/Fonts";
+import WhiteCheck from "../../../../svg/pupil/timetable/WhiteCheck";
 
 const PupilProfileAdd = (props) => {
     const [isHide, action] = useState(true);
@@ -71,20 +72,48 @@ const PupilProfileAdd = (props) => {
         })
     }
 
+    const onSelectTeacher = (item) => {
+
+        if (isCheckedTeacherAreAvailable(item))
+            setSelectedTeacher(selectedTeacher.filter(value => value.TeacherId !== item.TeacherId));
+        else
+            setSelectedTeacher(oldArray => [...oldArray, item]);
+    }
+
+    const isCheckedTeacherAreAvailable = (item) => {
+        let isAvailable = false;
+        selectedTeacher.forEach(element => {
+            if (item.TeacherId === element.TeacherId)
+                isAvailable = true;
+        });
+
+        return isAvailable;
+    }
+
     const teacherDropDown = () => {
         return (
             <View style={PAGESTYLE.dropDownFormInput}>
                 <Text style={PAGESTYLE.fieldInputLabel}>Assigned Teacher</Text>
-                <Menu onSelect={(item) => setSelectedTeacher([...selectedTeacher, item])}>
+
+                <Menu onSelect={(item) => onSelectTeacher(item)}>
                     <MenuTrigger style={[PAGESTYLE.dropDown]}>
                         <Text style={PAGESTYLE.dateTimetextdummy}>{selectedTeacher.length > 0 ? (selectedTeacher[selectedTeacher.length - 1].FirstName || selectedTeacher[selectedTeacher.length - 1].TeacherFirstName) + ' ' + (selectedTeacher[selectedTeacher.length - 1].LastName || selectedTeacher[selectedTeacher.length - 1].TeacherLastName) : 'Select a Teacher'}</Text>
                         <ArrowDown style={PAGESTYLE.dropDownArrow} height={hp(1.51)} width={hp(1.51)} />
                     </MenuTrigger>
-                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }}>
+                    <MenuOptions customStyles={{ optionText: { fontSize: 14, } }} style={{ height: hp(40) }}>
                         <FlatList
                             data={teachers}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular }} value={item} text={item.FirstName + ' ' + item.LastName}></MenuOption>
+                                <View style={PAGESTYLE.teacherListView}>
+                                    {
+                                        isCheckedTeacherAreAvailable(item) ?
+                                            <WhiteCheck height={hp(1.55)} width={hp(1.55)} fill={"#000"} />
+                                            :
+                                            <View style={{ width: hp(1.55), height: hp(1.55) }} />
+                                    }
+                                    <MenuOption style={{ padding: 10, fontFamily: FONTS.fontRegular }} value={item} text={item.FirstName + ' ' + item.LastName} />
+                                </View>
+                                // 
                             )}
                             style={{ height: 130 }} />
                     </MenuOptions>
@@ -144,18 +173,20 @@ const PupilProfileAdd = (props) => {
 
         let data = {
             SchoolId: User.user.UserDetialId,
-            TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             ParentFirstName: parentFirstName,
             ParentLastName: parentLastName,
             FirstName: firstName,
             LastName: lastName,
             Email: email,
             MobileNumber: mobile,
-            CreatedBy: User.user.UserDetialId,
             UserTypeId: userType,
+            Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
+            CreatedBy: User.user.UserDetialId,
             IsInvited: 'false',
-            Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD')
+            TeacherList:selectedTeacher,
+            ProfilePicture:"sdvds",
         }
+       
         Service.post(data, `${EndPoints.Pupil}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)

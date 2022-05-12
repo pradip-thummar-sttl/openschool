@@ -30,7 +30,7 @@ const Header = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
 
-    
+
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -44,6 +44,16 @@ const Header = (props) => {
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
+
+    const search = () => {
+        keyword ?
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
+            :
+            null
+    }
 
     return (
         <View style={styles.headerBarMainWhite}>
@@ -66,15 +76,7 @@ const Header = (props) => {
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
+                        onPress={() => search()}>
                         {isSearchActive ?
                             <CloseBlack height={20} width={20} />
                             :
@@ -94,7 +96,9 @@ const Header = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }} 
+                        onSubmitEditing={() => search()}
+                        />
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Menu style={{ marginLeft: 10 }}>
@@ -156,7 +160,7 @@ const Header = (props) => {
                     style={styles.buttonGroup}
                     activeOpacity={opacity}
                     onPress={() => props.navigateToAddSubject()}>
-                        
+
                     <>
                         <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                         <Text style={styles.commonButtonGreenheader}>Add Subject</Text>

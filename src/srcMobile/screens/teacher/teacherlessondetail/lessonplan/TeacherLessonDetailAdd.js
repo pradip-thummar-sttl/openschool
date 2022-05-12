@@ -150,7 +150,6 @@ const TLDetailAdd = (props) => {
     };
 
     const addMaterial = () => {
-        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -160,18 +159,10 @@ const TLDetailAdd = (props) => {
                 DocumentPicker.types.images,
                 DocumentPicker.types.plainText],
             }).then((results) => {
-                console.log('results', results);
                 for (const res of results) {
-                    console.log('KDKDKD',
-                        res.uri,
-                        res.type, // mime type
-                        res.name,
-                        res.size
-                    );
                     arr.push(res)
 
                 }
-                console.log('hello response arr', arr)
                 setMaterialArr(arr)
             });
 
@@ -188,7 +179,6 @@ const TLDetailAdd = (props) => {
         var array = [...materialArr];
         array.splice(index1, 1);
         setMaterialArr(array)
-        console.log('hello material', array)
     }
 
 
@@ -225,7 +215,6 @@ const TLDetailAdd = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item._id !== filteredPupils[_index]._id);
             setSelectedPupils(newList)
@@ -279,7 +268,6 @@ const TLDetailAdd = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -318,7 +306,6 @@ const TLDetailAdd = (props) => {
                 setScreenVoiceSelected(false)
                 setRecordingName("")
                 toggleModal()
-                console.log('url', url);
             }
         } else {
             showMessage('Please provide recording name proper')
@@ -339,7 +326,6 @@ const TLDetailAdd = (props) => {
             } else if (response.didCancel) {
 
             } else {
-                console.log('response', response);
                 setVideoRecordingResponse(response)
                 setCurrentRecordMode('isCamera')
                 toggleModal()
@@ -415,7 +401,10 @@ const TLDetailAdd = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }}
+                        onSubmitEditing={() => pushCheckListItem()}
+                        />
+                        
                     <TouchableOpacity
                         style={{ alignSelf: 'center', position: 'absolute', right: hp(1) }}
                         opacity={opacity}
@@ -437,7 +426,6 @@ const TLDetailAdd = (props) => {
         pupils.forEach(ele1 => {
             let flag = false
             item.PupilList.forEach(ele2 => {
-                console.log(ele1.PupilId + '==' + ele2.PupilId);
                 if (ele1.PupilId == ele2.PupilId) {
                     flag = true
                 }
@@ -475,7 +463,7 @@ const TLDetailAdd = (props) => {
                                         tintColor={COLORS.dashboardPupilBlue}
                                         value={isPupilChecked(index)}
                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
-                                        onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
+                                        onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
                                 </View>
@@ -611,7 +599,6 @@ const TLDetailAdd = (props) => {
             try {
                 if (Platform.OS == 'android') {
                     DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                        console.log('error:eventId', error, ID);
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -659,7 +646,6 @@ const TLDetailAdd = (props) => {
             QBDilogID: ID
         }
 
-        console.log('postData', data);
         Service.post(data, `${EndPoints.Lesson}`, (res) => {
             if (res.code == 200) {
                 console.log('response of save lesson', res)
@@ -709,7 +695,6 @@ const TLDetailAdd = (props) => {
             return
         }
 
-        console.log('data', data);
 
         Service.postFormData(data, `${EndPoints.LessonMaterialUpload}${lessionId}`, (res) => {
             if (res.code == 200) {
@@ -738,7 +723,6 @@ const TLDetailAdd = (props) => {
     }
 
     const toggleModal = () => {
-        console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };

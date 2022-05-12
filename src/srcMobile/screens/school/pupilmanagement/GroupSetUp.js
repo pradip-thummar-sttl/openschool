@@ -7,8 +7,6 @@ import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import COLORS from "../../../../utils/Colors";
 import { baseUrl, opacity, showMessage } from "../../../../utils/Constant";
-import FONTS from "../../../../utils/Fonts";
-// import Images from "../../../../utils/Images";
 import MESSAGE from "../../../../utils/Messages";
 import { User } from "../../../../utils/Model";
 import PAGESTYLE from './Style';
@@ -26,37 +24,19 @@ const GroupSetUp = (props) => {
     const [isPupilLoading, setPupilLoading] = useState([])
     const [isGroupLoading, setGroupLoading] = useState([])
 
-    // const [pupilsClone, setPupilsClone] = useState([])
-    // const [groupsClone, setGroupsClone] = useState([])
     useEffect(() => {
         refresh()
     }, [])
 
     const refresh = () => {
-        // setGroupLoading(true)
-
-        // Service.get(`${EndPoints.GetParticipants}${User.user._id}`, (res) => {
-        //     setGroupLoading(false)
-        //     if (res.code == 200) {
-        //         setGroups(res.data)
-        //         setGroupsClone(res.data)
-        //     } else {
-        //         showMessage(res.message)
-        //     }
-        // }, (err) => {
-        //     setGroupLoading(false)
-        //     console.log('error of GetParticipants', err)
-        // })
-
         loadGroup()
 
     }
 
     const loadGroup = () => {
         setGroupLoading(true)
-        console.log('User.user.UserDetialId', User.user.UserDetialId);
         Service.get(`${EndPoints.GetClassSetup}/${User.user.UserDetialId}`, (res) => {
-            console.log('response of groups', res);
+          
             setGroupLoading(false)
             if (res.code == 200) {
                 setGroups(res.data)
@@ -74,7 +54,6 @@ const GroupSetUp = (props) => {
     const Grouplist = (item) => (
         <View style={PAGESTYLE.groupParent}>
             <View style={PAGESTYLE.groupTitle1}>
-                {console.log('----item------', item)}
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{item.item.TeacherFirstName} {item.item.TeacherLastName}</Text>
                 <TouchableOpacity
                     activeOpacity={opacity}

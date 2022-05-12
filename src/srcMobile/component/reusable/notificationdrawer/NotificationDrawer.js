@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground, Platform ,ActivityIndicator} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground, Platform, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -21,6 +21,7 @@ import { User } from "../../../../utils/Model";
 
 const markdate = ["2021-03-19", "2021-03-20", "2021-03-21", "2021-03-22"]
 const periodDate = ["2021-03-08", "2021-03-09", "2021-03-10", "2021-03-11", "2021-03-12"]
+
 const NotificationDrawer = (props) => {
     const calEventData = useSelector(state => {
         // console.log('state of user',state)
@@ -101,6 +102,7 @@ const NotificationDrawer = (props) => {
             props.navigation.replace('PupilTimetable')
         }
     }
+
     const onOpenhomework = () => {
         if (User.user.UserType == "Teacher") {
             // props.navigation.replace('TeacherDashboard',{index:2,})
@@ -109,6 +111,7 @@ const NotificationDrawer = (props) => {
             props.navigation.replace('PupilLessonDetail')
         }
     }
+    
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -218,13 +221,15 @@ const NotificationDrawer = (props) => {
 
                         {
                             isLoading ? <ActivityIndicator
-                            size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin}
-                            style={{paddingTop : 20}}
+                                size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.lightOrangeLogin}
+                                style={{ paddingTop: 20 }}
                             /> :
                                 <>
                                     {
                                         notifications.length ?
                                             notifications.map((item, index) => {
+                                                const date = new Date(item.SubDesc);
+                                                const time = date.toLocaleTimeString()
                                                 return (
 
                                                     item.NotificationType === 'LIVE CLASSES' ?
@@ -274,7 +279,7 @@ const NotificationDrawer = (props) => {
                                                                         </View>
                                                                         <View style={styles.timingJoinClass}>
                                                                             <View style={[styles.timing, { width: '85%' }]}>
-                                                                                <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{item.SubDesc}</Text>
+                                                                                <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{time}</Text>
                                                                             </View>
                                                                             <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                                                 <Text style={STYLE.openClassLink}>Check</Text>
@@ -303,7 +308,7 @@ const NotificationDrawer = (props) => {
                                                                             <View style={styles.timingJoinClass}>
                                                                                 <View style={[styles.timing, { width: '85%' }]}>
                                                                                     <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
-                                                                                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{item.SubDesc}</Text>
+                                                                                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{item.SubDesc == " - " ? "-" : time}</Text>
                                                                                 </View>
                                                                                 <TouchableOpacity onPress={() => { onOpenhomework() }} >
                                                                                     {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}

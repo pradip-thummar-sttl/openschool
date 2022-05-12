@@ -102,9 +102,11 @@ const PupiloverView = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            page:1,
+            limit:12
         }
 
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
+        Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => { ///name/${searchBy}
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setPupilData(res.data)
@@ -114,6 +116,8 @@ const PupiloverView = (props) => {
             }
         }, (err) => {
             console.log('Err of all pupil by teacher', err)
+            setLoading(false)
+
         })
     }
 

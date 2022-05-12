@@ -17,7 +17,8 @@ export default StyleSheet.create({
         paddingHorizontal: hp(1.5)
     },
     rightView: {
-        paddingHorizontal: hp(1.5)
+        paddingHorizontal: hp(1.5),
+        paddingVertical: hp(1.5)
     },
     starView: {
         width: '100%',

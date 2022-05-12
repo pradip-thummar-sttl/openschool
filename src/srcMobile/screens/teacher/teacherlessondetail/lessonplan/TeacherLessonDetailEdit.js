@@ -248,10 +248,9 @@ const TLDetailEdit = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index, selectedPupils.length);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item._id !== filteredPupils[_index]._id);
-            console.log('newList', newList);
+            
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, filteredPupils[_index]])
@@ -288,7 +287,6 @@ const TLDetailEdit = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -305,7 +303,6 @@ const TLDetailEdit = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -343,7 +340,6 @@ const TLDetailEdit = (props) => {
                 setScreenVoiceSelected(false)
                 setRecordingName("")
                 toggleModal()
-                console.log('url', url);
             }
         } else {
             showMessage('Please provide recording name proper')
@@ -357,7 +353,6 @@ const TLDetailEdit = (props) => {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
-                console.log('response', response);
                 arr.push(response)
                 setVideoRecordingResponse(response)
                 setCurrentRecordMode('isCamera')
@@ -440,7 +435,9 @@ const TLDetailEdit = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }} 
+                        onSubmitEditing={() => pushCheckListItem()}
+                        />
                     <TouchableOpacity
                         style={{ alignSelf: 'center', position: 'absolute', right: 10, }}
                         opacity={opacity}
@@ -458,7 +455,6 @@ const TLDetailEdit = (props) => {
         pupils.forEach(ele1 => {
             let flag = false
             item.PupilList.forEach(ele2 => {
-                console.log(ele1.PupilId + '==' + ele2.PupilId);
 
                 if (ele1.PupilId == ele2.PupilId) {
                     flag = true
@@ -618,16 +614,9 @@ const TLDetailEdit = (props) => {
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name
-                    console.log(
-                        res.uri,
-                        res.type, // mime type
-                        res.name,
-                        res.size
-                    );
                     arr.push(res)
 
                 }
-                console.log('hello response arr', arr)
                 setMaterialArr(arr)
             });
 
@@ -917,7 +906,6 @@ const TLDetailEdit = (props) => {
 
     }
 
-    console.log('-->>', isRemoveMaterialArr);
     return (
         <View style={PAGESTYLE.mainPage}>
 

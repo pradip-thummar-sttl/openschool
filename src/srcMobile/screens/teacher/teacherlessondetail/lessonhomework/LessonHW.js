@@ -387,7 +387,9 @@ const TLHomeWork = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }} 
+                        onSubmitEditing={() => pushCheckListItem()}
+                        />
                     <TouchableOpacity
                         style={{ alignSelf: 'center', position: 'absolute', right: 10 }}
                         opacity={opacity}

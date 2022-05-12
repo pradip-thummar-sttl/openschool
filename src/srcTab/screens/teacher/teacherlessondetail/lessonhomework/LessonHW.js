@@ -423,7 +423,9 @@ const TLHomeWork = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }}
+                        onSubmitEditing={() => pushCheckListItem()}
+                        />
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', backgroundColor: COLORS.white, paddingLeft: hp(1), paddingTop: hp(1), paddingBottom: hp(1), borderLeftColor: COLORS.borderGrp, position: 'absolute', right: 10 }} //borderLeftWidth: 1
                         opacity={opacity}

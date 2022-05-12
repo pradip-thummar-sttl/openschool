@@ -30,7 +30,7 @@ const HeaderPM = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
-    console.log('99999999999999999',props);
+
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -46,6 +46,15 @@ const HeaderPM = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    const search = () => {
+        keyword ?
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
+            :
+            null
+    }
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -86,15 +95,7 @@ const HeaderPM = (props) => {
                         <View style={styles.searchInner}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => {
-                                    keyword ?
-                                        isSearchActive ?
-                                            setSearchActive(false)
-                                            :
-                                            setSearchActive(true)
-                                        :
-                                        null
-                                }}>
+                                onPress={() => search() }>
                                 {isSearchActive ?
                                     <CloseBlack height={20} width={20} />
                                     :
@@ -111,7 +112,9 @@ const HeaderPM = (props) => {
                                 onChangeText={keyword => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
-                                }} />
+                                }} 
+                                onSubmitEditing={() => search() }
+                                />
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, }}>
                             <TouchableOpacity

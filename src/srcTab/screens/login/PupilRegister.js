@@ -113,13 +113,11 @@ class Login extends Component {
 
         this.setLoading(true)
         Service.get(EndPoints.GetAllUserType, (res) => {
-
-            // console.log('user type data', this.props.route);
             if (res.flag) {
                 var userData = res.data
                 var userType = ""
                 userData.map((item) => {
-                    if (item.Name === this.props.route.params.userType) {
+                    if (item.Name === User.user.UserType) {
                         userType = item._id
                     }
                 })
@@ -160,10 +158,13 @@ class Login extends Component {
         })
     }
 
+     submitAccountDetail = () => {
+        isDesignBuild ?
+            this.props.navigation.replace('TeacherDashboard')
+            :
+            this.isFieldsValidated()
 
-
-
-
+    }
 
     daysDropDown = () => {
         return (
@@ -388,7 +389,9 @@ class Login extends Component {
                                         maxLength={30}
                                         placeholderTextColor={COLORS.lightplaceholder}
                                         secureTextEntry={this.state.iscPasswordHide}
-                                        onChangeText={cpassword => this.setState({ cpassword })} />
+                                        onChangeText={cpassword => this.setState({ cpassword })}
+                                        onSubmitEditing={() => this.submitAccountDetail()}
+                                        />
 
                                     <View style={styles.eye}>
                                         <TouchableOpacity
@@ -409,13 +412,7 @@ class Login extends Component {
                             <View style={styles.loginButtonView}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => {
-                                        isDesignBuild ?
-                                            this.props.navigation.replace('TeacherDashboard')
-                                            :
-                                            this.isFieldsValidated()
-
-                                    }}
+                                    onPress={() => this.submitAccountDetail()}
                                     style={styles.createAccountBtnn}
                                 >
                                     {this.state.isLoading ?

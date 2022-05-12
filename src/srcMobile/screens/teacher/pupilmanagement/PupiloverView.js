@@ -65,7 +65,13 @@ const PupiloverView = (props) => {
     const fetchRecord = (searchBy, filterBy) => {
 
         setSelectedTabIndex(item)
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+            page:1,
+            limit:12
+        }
+        Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             console.log('res of all pupil by teacher', res)
             if (res.flag) {
                 setLoading(false)

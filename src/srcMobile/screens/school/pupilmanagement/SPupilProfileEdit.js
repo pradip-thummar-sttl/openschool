@@ -4,6 +4,8 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
+import CheckBox from '@react-native-community/checkbox';
+
 import PAGESTYLE from './Style';
 import FONTS from '../../../../utils/Fonts';
 import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
@@ -37,10 +39,12 @@ const SPupilProfileEdit = (props) => {
     const [isSelectedDate, setSelectedDate] = useState('')
     const [isUserType, setUserType] = useState('')
     const [isLoading, setLoading] = useState(false);
-    const [selectedTeacher, setSelectedTeacher] = useState()
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [removeTeacher, setRemovedTeacher] = useState([])
+    const [teachers, setTeachers] = useState([])
     const item = props.route.params.item;
     const navigateToBack = props.route.params.navigateToBack;
-    console.log('xyz----------', props)
+    console.log('xyz----------', item)
 
     useEffect(() => {
         setFirstName(item.FirstName);
@@ -50,11 +54,33 @@ const SPupilProfileEdit = (props) => {
         setEmail(item.Email);
         setSelectedDate(moment(item.Dob).format('DD/MM/yyyy'))
         setMobile(item.MobileNumber + '');
+
+        var SelTeacher = []
+        item.TeacherList.forEach(element => {
+            SelTeacher.push(element.TeacherId)
+        });
+        setSelectedTeacher(SelTeacher);
+
         getUserType();
 
-        console.log("item ---->", item);
+        console.log("item of selected teacher ---->", selectedTeacher);
+        loadTeacher()
 
     }, [item])
+    const loadTeacher = () => {
+
+        Service.get(`${EndPoints.Teacherdownbyschoolid}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                console.log("item ---->", res.data);
+
+                setTeachers(res.data);
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
 
     const showActionChooser = () => {
         Alert.alert(
@@ -147,6 +173,17 @@ const SPupilProfileEdit = (props) => {
     }
     const saveProfile = () => {
         setLoading(true)
+
+        var selectArr = [];
+        var removeArr = [];
+        selectedTeacher.forEach(element => {
+            selectArr.push({ TeacherId: element })
+        });
+        removeTeacher.forEach(element => {
+            removeArr.push({ TeacherId: element })
+        });
+
+
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
@@ -158,7 +195,11 @@ const SPupilProfileEdit = (props) => {
             IsInvited: true,
             MobileNumber: isMobile,
             CreatedBy: User.user.UserDetialId,
+            AddTeacherList: selectArr,
+            RemoveTeacherList: removeArr
         }
+
+
         console.log('THIS IS URL PUPLIEDIT MOBILE `${EndPoints.PupilUpdate}/${item?.PupilId}`', `${EndPoints.PupilUpdate}/${item?.PupilId}`)
         console.log('THIS IS DATA', data)
         Service.post(data, `${EndPoints.PupilUpdate}/${item?.PupilId}`, (res) => {
@@ -222,7 +263,57 @@ const SPupilProfileEdit = (props) => {
         })
     }
 
+    const selectTeacher = (item, index, isCheck) => {
+        console.log('hello check check index of check flag', index, isCheck);
+        var selectTech = [...selectedTeacher];
+        var removeTech = [...removeTeacher];
+        if (selectTech.includes(item.TeacherId)) {
+            let idx = selectTech.indexOf(item.TeacherId)
+            selectTech.splice(idx, 1)
+            removeTech.push(item.TeacherId)
+        } else {
+            selectTech.push(item.TeacherId)
+            if (removeTech.includes(item.TeacherId)) {
+                let idx = removeTech.indexOf(item.TeacherId)
+                removeTech.splice(idx, 1)
+            }
+        }
+        setSelectedTeacher(selectTech);
+        setRemovedTeacher(removeTech);
 
+        console.log('hello dude select and remove array is', selectTech, removeTech);
+    }
+
+    const teacherDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.commonInputGrayBack, { marginBottom: hp(2) }]}>
+                <Text style={[PAGESTYLE.labelForm, { paddingLeft: hp(1.5), }]}>Assigned Teacher</Text>
+
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={teachers}
+                    numColumns={2}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.alignRow}>
+                            <CheckBox
+                                style={[PAGESTYLE.checkMark1]}
+                                value={selectedTeacher.includes(item.TeacherId) ? true : false}
+                                boxType={'square'}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onValueChange={(check) => selectTeacher(item, index, check)}
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName + ' ' + item.LastName}</Text>
+                        </View>
+                    )}
+                />
+
+            </View>
+        );
+    };
 
     return (
         <View>
@@ -231,7 +322,7 @@ const SPupilProfileEdit = (props) => {
                 OnSaveEdit={() => { validateFields() }}
                 navigateToBack={() => props.navigation.goBack()}
                 isLoading={isLoading}
-               
+
             />
             <View style={PAGESTYLE.MainProfile}>
                 <ScrollView style={PAGESTYLE.scrollViewCommonPupilEdit} showsVerticalScrollIndicator={false}>
@@ -288,6 +379,10 @@ const SPupilProfileEdit = (props) => {
                                 </View>
                             </TouchableOpacity>
                             {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
+                        </View>
+
+                        <View >
+                            {teacherDropDown()}
                         </View>
 
                         <View style={PAGESTYLE.fieldDetailsForm}>

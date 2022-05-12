@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground } from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, TextInput, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import COLORS from "../../../../utils/Colors";
@@ -7,6 +7,7 @@ import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
 import Modal from 'react-native-modal';
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
+import HWSubmitBg from "../../../../svg/teacher/lessonhwplanner/HWSubmitBg";
 
 const Popuphomework = (props) => {
     const [isModalVisible, setModalVisible] = useState(true);
@@ -27,12 +28,22 @@ const Popuphomework = (props) => {
                         <CloseBlack style={STYLE.cancelButtonIcon}/>
                     </TouchableOpacity>
                     {/* source={require('../../../../assets/images/popup_back.png')} */}
-                    <ImageBackground  style={STYLE.popupBack} height={hp(5)} width={hp(10)} />
+                    {/* <ImageBackground  style={STYLE.popupBack} height={hp(5)} width={hp(10)} /> */}
+                    <HWSubmitBg style={STYLE.popupBack} height={hp(10.41)} width={'100%'} />
+
                     <View style={STYLE.popupContentMain}>
                         <Text style={styles.popupTitle}>Ready to submit your homework?</Text>
                         <Text style={[styles.popupText, STYLE.centerText]}>You are submitting your homework to your teacher. You can review and edit your work in the homework section of your lessons. You will be notified when your teacher has marked</Text>
                         <TouchableOpacity onPress={() => props.OnSubmitHomeworkPress()}>
+                        {props.isLoading ?
+                            <ActivityIndicator
+                                style={STYLE.commonButtonGreen}
+                                size={Platform.OS == 'ios' ? 'small' : 'small'}
+                                color={COLORS.white} />
+                            :
+                            
                             <Text style={STYLE.commonButtonGreenDashboardSide}>yes, submit my homework</Text>
+                        }
                         </TouchableOpacity>
                     </View>
                 </View>

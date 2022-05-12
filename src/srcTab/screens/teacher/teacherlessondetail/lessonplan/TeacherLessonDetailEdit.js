@@ -134,7 +134,6 @@ const TLDetailEdit = (props) => {
     useEffect(() => {
         Service.get(`${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`, (res) => {
             if (res.code == 200) {
-                console.log('res.data', res.data);
                 setSubjects(res.data)
                 res.data.forEach(element => {
                     if (element._id == lessonData.SubjectId) {
@@ -188,7 +187,6 @@ const TLDetailEdit = (props) => {
         let newDataOfPupils = []
         pupils.forEach(pupil => {
             let flag = false
-            console.log('selectedPupils', tempPupil.length);
             tempPupil.forEach(selectedPupil => {
                 if (selectedPupil._id == pupil._id) {
                     flag = true
@@ -214,8 +212,6 @@ const TLDetailEdit = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
-        console.log('date', date);
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -253,10 +249,9 @@ const TLDetailEdit = (props) => {
     }
 
     const pushPupilItem = (isSelected, _index) => {
-        console.log('isSelected', isSelected, _index, selectedPupils.length);
         if (!isSelected) {
             const newList = selectedPupils.filter((item, index) => item._id !== pupils[_index]._id);
-            console.log('newList', newList);
+            
             setSelectedPupils(newList)
         } else {
             setSelectedPupils([...selectedPupils, pupils[_index]])
@@ -293,7 +288,6 @@ const TLDetailEdit = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.ANDROID.CAMERA);
-                console.log('hello', res2);
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -310,7 +304,7 @@ const TLDetailEdit = (props) => {
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
             } else {
                 const res2 = await request(PERMISSIONS.IOS.CAMERA);
-                console.log('hello', res2);
+               
 
                 if (res2 === "granted") {
                     setRecordingStarted(true)
@@ -332,9 +326,7 @@ const TLDetailEdit = (props) => {
                 showMessage(response.errorCode)
             } else if (response.didCancel) {
             } else {
-                console.log('response', response);
-
-                setVideoRecordingResponse(response)
+                 setVideoRecordingResponse(response)
                 setCurrentRecordMode('isCamera')
                 toggleModal()
             }
@@ -415,7 +407,9 @@ const TLDetailEdit = (props) => {
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={text => { setNewItem(text) }} />
+                        onChangeText={text => { setNewItem(text) }}
+                        onSubmitEditing={() => pushCheckListItem()}
+                    />
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10, paddingLeft: 12, borderLeftColor: COLORS.borderGrp, borderLeftWidth: 1, }}
                         opacity={opacity}
@@ -433,7 +427,6 @@ const TLDetailEdit = (props) => {
         pupils.forEach(ele1 => {
             let flag = false
             item.PupilList.forEach(ele2 => {
-                console.log(ele1.PupilId + '==' + ele2.PupilId);
                 if (ele1.PupilId == ele2.PupilId) {
                     flag = true
                 }
@@ -498,7 +491,7 @@ const TLDetailEdit = (props) => {
                         <FlatList
                             data={subjects}
                             renderItem={({ item }) => (
-                                <MenuOption style={{ padding: hp(1.85)}} value={item} text={item.SubjectName}></MenuOption>
+                                <MenuOption style={{ padding: hp(1.85) }} value={item} text={item.SubjectName}></MenuOption>
                             )}
                             style={{ height: hp(22) }} />
                     </MenuOptions>
@@ -641,7 +634,7 @@ const TLDetailEdit = (props) => {
             try {
                 if (Platform.OS == 'android') {
                     DialogModule.qbCreateDialog(userIDs, userNames, names, (error, ID) => {
-                        console.log('error:eventId', error, ID);
+
                         if (ID && ID != '' && ID != null && ID != undefined) {
                             saveLesson(ID)
                         } else {
@@ -792,7 +785,6 @@ const TLDetailEdit = (props) => {
     }
 
     const addMaterial = () => {
-        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -804,16 +796,10 @@ const TLDetailEdit = (props) => {
             }).then((results) => {
                 for (const res of results) {
                     res.originalname = res.name
-                    console.log(
-                        res.uri,
-                        res.type, // mime type
-                        res.name,
-                        res.size
-                    );
+
                     arr.push(res)
 
                 }
-                console.log('hello response arr', arr)
 
                 setMaterialArr(arr)
             });
@@ -834,7 +820,7 @@ const TLDetailEdit = (props) => {
         var fname = array[index1]?.filename ? array[index1]?.filename : array[index1]?.name;
 
         var arr = fname.split("/")
-        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, arr[arr.length-1],]);
+        setRemoveMaterialArr((isRemoveMaterialArr) => [...isRemoveMaterialArr, arr[arr.length - 1],]);
 
         array.splice(index1, 1);
         setMaterialArr(array)
@@ -846,13 +832,12 @@ const TLDetailEdit = (props) => {
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
         var currentName = fname.split("/")
 
-        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, currentName[currentName.length-1],]);
+        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, currentName[currentName.length - 1],]);
         arr.splice(0, 1)
         setRecordingArr(arr)
     }
 
     const toggleModal = () => {
-        console.log('!isModalVisible', !isModalVisible);
         setRecordingStarted(false)
         setModalVisible(!isModalVisible);
     };
@@ -903,16 +888,12 @@ const TLDetailEdit = (props) => {
 
         if (recordingName.length > 0) {
 
-            console.log('1url', res);
-
             var arr = []
             const res = await RecordScreen.stopRecording().catch((error) => {
                 setRecordingStarted(false)
 
-                console.log("=-=->", error);
-            });
 
-            console.log('2url', res);
+            });
 
             if (res) {
                 setRecordingStarted(false)
