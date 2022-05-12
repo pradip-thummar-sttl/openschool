@@ -20,6 +20,9 @@ import Header from "./HeaderPMInnerEdit";
 import Ic_Edit from "../../../../svg/teacher/pupilmanagement/Ic_Edit";
 import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 
+import CheckBox from '@react-native-community/checkbox';
+
+
 const PupilProfileEdit = (props) => {
     const [isFirstName, setFirstName] = useState('');
     const [isLastName, setLastName] = useState('');
@@ -32,6 +35,10 @@ const PupilProfileEdit = (props) => {
     const [isUserType, setUserType] = useState('')
     const [isLoading, setLoading] = useState(false);
 
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [removeTeacher, setRemovedTeacher] = useState([])
+    const [teachers, setTeachers] = useState([])
+
     useEffect(() => {
         setFirstName(props?.selectedPupil?.FirstName);
         setLastName(props?.selectedPupil?.LastName);
@@ -40,11 +47,31 @@ const PupilProfileEdit = (props) => {
         setSelectedDate(moment(props?.selectedPupil?.Dob).format('DD/MM/yyyy'))
         setMobile(props?.selectedPupil?.MobileNumber + '');
         getUserType();
+        var SelTeacher = []
+        props?.selectedPupil?.TeacherList.forEach(element => {
+            SelTeacher.push(element.TeacherId)
+        });
+        setSelectedTeacher(SelTeacher);
 
         console.log("props ----> props.selectedPupil", props.selectedPupil);
+        loadTeacher()
 
     }, [props.selectedPupil])
 
+    const loadTeacher = () => {
+
+        Service.get(`${EndPoints.Teacherdownbyschoolid}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+                console.log("item ---->", res.data);
+
+                setTeachers(res.data);
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('error of GetSubjectBySchoolId', err)
+        })
+    }
     const showActionChooser = () => {
         Alert.alert(
             '',
@@ -134,6 +161,15 @@ const PupilProfileEdit = (props) => {
     }
     const saveProfile = () => {
         setLoading(true)
+
+        var selectArr = [];
+        var removeArr = [];
+        selectedTeacher.forEach(element => {
+            selectArr.push({ TeacherId: element })
+        });
+        removeTeacher.forEach(element => {
+            removeArr.push({ TeacherId: element })
+        });
         let data = {
             ParentFirstName: isPFirstName,
             ParentLastName: isPLastName,
@@ -145,12 +181,14 @@ const PupilProfileEdit = (props) => {
             IsInvited: true,
             MobileNumber: isMobile,
             CreatedBy: User.user.UserDetialId,
+            AddTeacherList: selectArr,
+            RemoveTeacherList: removeArr
         }
         console.log('THIS IS URL `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`', `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`)
-        console.log('data in tab profile edoit',data)
+        console.log('data in tab profile edoit', data)
 
         Service.post(data, `${EndPoints.PupilUpdate}/${props?.selectedPupil?.PupilId}`, (res) => {
-           console.log('THIS IS RESPONSE --------> res', res);
+            console.log('THIS IS RESPONSE --------> res', res);
             if (res.code == 200) {
                 uploadProfile(res.data.UserDetialId)
             } else {
@@ -209,7 +247,57 @@ const PupilProfileEdit = (props) => {
         }, (err) => {
         })
     }
+    const selectTeacher = (item, index, isCheck) => {
+        console.log('hello check check index of check flag', index, isCheck);
+        var selectTech = [...selectedTeacher];
+        var removeTech = [...removeTeacher];
+        if (selectTech.includes(item.TeacherId)) {
+            let idx = selectTech.indexOf(item.TeacherId)
+            selectTech.splice(idx, 1)
+            removeTech.push(item.TeacherId)
+        } else {
+            selectTech.push(item.TeacherId)
+            if (removeTech.includes(item.TeacherId)) {
+                let idx = removeTech.indexOf(item.TeacherId)
+                removeTech.splice(idx, 1)
+            }
+        }
+        setSelectedTeacher(selectTech);
+        setRemovedTeacher(removeTech);
 
+        console.log('hello dude select and remove array is', selectTech, removeTech);
+    }
+
+    const teacherDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.commonInputGrayBack, { marginBottom: hp(2), width:'100%' }]}>
+                <Text style={[PAGESTYLE.fieldInputLabel, ]}>Assigned Teacher</Text>
+
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={teachers}
+                    numColumns={2}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.alignRow}>
+                            <CheckBox
+                                style={[PAGESTYLE.checkMark1]}
+                                value={selectedTeacher.includes(item.TeacherId) ? true : false}
+                                boxType={'square'}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onValueChange={(check) => selectTeacher(item, index, check)}
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName + ' ' + item.LastName}</Text>
+                        </View>
+                    )}
+                />
+
+            </View>
+        );
+    };
     return (
         <View style={PAGESTYLE.mainPage1}>
             <Header
@@ -234,15 +322,15 @@ const PupilProfileEdit = (props) => {
                                 </View>
 
                                 <View style={PAGESTYLE.btnSendView}>
-                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView,{justifyContent : 'center',alignItems : 'center'}]}
-                                     activeOpacity={opacity} onPress={() => { validateFields() }}>
-                                    {isLoading ?
+                                    <TouchableOpacity style={[PAGESTYLE.btnInnerSendView, { justifyContent: 'center', alignItems: 'center' }]}
+                                        activeOpacity={opacity} onPress={() => { validateFields() }}>
+                                        {isLoading ?
                                             <ActivityIndicator
                                                 size={Platform.OS == 'ios' ? 'small' : 'small'}
                                                 color={COLORS.white} />
                                             :
                                             <Text style={PAGESTYLE.btnSendTextView}>Save</Text>
-                                        } 
+                                        }
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -311,7 +399,7 @@ const PupilProfileEdit = (props) => {
                                     </View>
                                 </View>
 
-                                <View>
+                                <View style={{width:hp(70),}}>
                                     <View style={{ marginTop: hp(2) }}>
                                         <Text style={PAGESTYLE.fieldInputLabel}>Date of Birth</Text>
                                         <TouchableOpacity style={[PAGESTYLE.field, PAGESTYLE.filedSpace]} onPress={() => showDatePicker()}>
@@ -323,7 +411,7 @@ const PupilProfileEdit = (props) => {
                                         </TouchableOpacity>
                                     </View>
 
-                                    <View style={{ marginTop: hp(2) }} >
+                                    <View style={{ marginTop: hp(2),}} >
                                         <Text style={PAGESTYLE.fieldInputLabel}>Mobile Number</Text>
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                             <TextInput
@@ -353,6 +441,10 @@ const PupilProfileEdit = (props) => {
                                                 placeholderTextColor={COLORS.lightplaceholder}
                                             />
                                         </View>
+                                    </View>
+
+                                    <View style={{ marginTop: hp(2) }}>
+                                        {teacherDropDown()}
                                     </View>
 
                                 </View>
