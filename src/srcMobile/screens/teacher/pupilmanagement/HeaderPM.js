@@ -43,11 +43,15 @@ const HeaderPM = (props) => {
     }, [isSearchActive])
 
     useEffect(() => {
-        // props.onFilter(filterBy)
-        console.log('log of props in header pm mobile', props.tabs);
         setSelectedTab(props.tabs)
     }, [filterBy, props.tabs])
 
+    const search = () => {
+        isSearchActive ?
+            setSearchActive(false)
+            :
+            setSearchActive(true)
+    }
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -76,12 +80,7 @@ const HeaderPM = (props) => {
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
+                        onPress={() => search()}>
                         {/* <Image style={{ height: 20, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         {isSearchActive ?
@@ -96,7 +95,9 @@ const HeaderPM = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }} 
+                        onSubmitEditing={() => search()}
+                        />
                     <Menu>
                         <MenuTrigger>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}

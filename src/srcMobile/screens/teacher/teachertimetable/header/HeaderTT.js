@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import { View, StyleSheet, TextInput, Text, TouchableOpacity, Image } from "react-native";
+import { View, StyleSheet, TextInput, Text, TouchableOpacity } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../../utils/Colors";
 import STYLE from '../../../../../utils/Style';
-// import Images from '../../../../../utils/Images';
 import FONTS from '../../../../../utils/Fonts';
 import {
     Menu,
@@ -12,10 +11,8 @@ import {
     MenuTrigger,
 } from 'react-native-popup-menu';
 import { opacity } from "../../../../../utils/Constant";
-import { useLinkProps } from "@react-navigation/native";
 import { useState } from "react";
 import RBSheet from "react-native-raw-bottom-sheet";
-import PopupdataSecond from "../../../../component/reusable/popup/PopupdataSecond";
 import HamburgerMenu from "../../../../../svg/common/HamburgerMenu";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import SearchBlue from "../../../../../svg/teacher/timetable/Search_Blue";
@@ -34,7 +31,6 @@ const HeaderTT = (props) => {
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(2)
     const [filterBy, setFilterBy] = useState('Date')
-    const [isModalVisible, setModalVisible] = useState(false)
 
     useEffect(() => {
         if (!isSearchActive) {
@@ -49,6 +45,12 @@ const HeaderTT = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    const search = () => {
+        isSearchActive ?
+            setSearchActive(false)
+            :
+            setSearchActive(true)
+    }
     return (
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
@@ -58,19 +60,16 @@ const HeaderTT = (props) => {
                 </View>
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
-                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
                         <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
                         {
                             BadgeIcon.isBadge ?
                                 <View style={STYLE.redDot}></View> : null
                         }
-                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -78,14 +77,8 @@ const HeaderTT = (props) => {
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            isSearchActive ?
-                                setSearchActive(false)
-                                :
-                                setSearchActive(true)
-                        }}>
-                        {/* <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                        onPress={() => search()}>
+                        
                         {isSearchActive ?
                             <CloseBlack height={18} width={18} />
                             :
@@ -99,10 +92,10 @@ const HeaderTT = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }}
+                        onSubmitEditing={() => search()} />
                     <Menu>
-                        <MenuTrigger style={{width : 20,height : 30,justifyContent : 'center'}}>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                        <MenuTrigger style={{ width: 20, height: 30, justifyContent: 'center' }}>
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
                         <MenuOptions style={{
@@ -120,7 +113,6 @@ const HeaderTT = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>All</Text>
                                         {selectedIndex == 2 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -135,7 +127,6 @@ const HeaderTT = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -150,7 +141,6 @@ const HeaderTT = (props) => {
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 1 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -164,7 +154,6 @@ const HeaderTT = (props) => {
                 <TouchableOpacity
                     style={styles.buttonGroup}
                     onPress={() => refRBSheet.current.open()}>
-                    {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} width={hp(1.55)} height={hp(1.55)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
                 </TouchableOpacity>
@@ -185,7 +174,6 @@ const HeaderTT = (props) => {
                 >
                     <View style={styles.popupLarge}>
                         <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
-                            {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
                         <View style={styles.popupContent}>
@@ -197,14 +185,12 @@ const HeaderTT = (props) => {
                                             activeOpacity={opacity}
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToAddLesson() }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewLessons} /> */}
                                             <NewLesson style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Lesson</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity
                                             style={styles.entryData}
                                             onPress={() => { refRBSheet.current.close(); props.navigateToCreateNewEvent(); }}>
-                                            {/* <Image style={styles.entryIcon} source={Images.NewEvents} /> */}
                                             <NewEvent style={styles.entryIcon} height={hp(10)} width={hp(10)} />
                                             <Text style={styles.entryTitle}>New Event</Text>
                                         </TouchableOpacity>
@@ -377,7 +363,7 @@ const styles = StyleSheet.create({
         paddingTop: hp(1),
         paddingBottom: hp(1),
         flex: 1,
-        alignItems : 'center'
+        alignItems: 'center'
     },
     filterListWrap: {
         paddingTop: hp(1),

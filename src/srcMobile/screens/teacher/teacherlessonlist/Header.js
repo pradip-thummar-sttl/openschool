@@ -43,6 +43,15 @@ const Header = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    const search = () => {
+        keyword ?
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
+            :
+            null
+    }
     return (
         <View style={{ backgroundColor: COLORS.white, borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, }}>
             <View style={styles.headerMain}>
@@ -74,15 +83,7 @@ const Header = (props) => {
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
+                        onPress={() => search()}>
                         {/* <Image style={{ height: 15, resizeMode: 'contain' }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         {isSearchActive ?
@@ -102,7 +103,9 @@ const Header = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }} 
+                        onSubmitEditing={() => search()}
+                        />
                     <Menu>
                         <MenuTrigger>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}

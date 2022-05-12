@@ -29,7 +29,6 @@ import ImportCSV from "../../../../svg/school/teachermanagment/ImportCSV";
 
 const PopupdataSecond = (props) => {
     const isFromDashboard = props.isFromDashboard
-    console.log('isFromDashboard', isFromDashboard);
     const [isModalVisible, setModalVisible] = useState(isFromDashboard == true);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -85,7 +84,6 @@ const PopupdataSecond = (props) => {
     // };
 
     const isFieldsValidated = () => {
-        console.log(timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime));
         if (!event.trim()) {
             showMessage(MESSAGE.event)
             return false;
@@ -141,7 +139,6 @@ const PopupdataSecond = (props) => {
             EventTypeId: selectColorId,
             CreatedBy: User.user._id
         }
-        console.log(data, selectDate);
 
         Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
             setLoading(false)
@@ -173,7 +170,6 @@ const PopupdataSecond = (props) => {
     };
 
     const handleConfirm = (date) => {
-        // console.log("A date has been picked: ", date, moment(date).format('DD/MM/yyyy'));
         setSelectedDate(moment(date).format('DD/MM/yyyy'))
         hideDatePicker();
     };
@@ -367,13 +363,14 @@ const PopupdataSecond = (props) => {
                                                     value={note}
                                                     placeholderStyle={styles.somePlaceholderStyle}
                                                     style={styles.commonInputTextarea}
-                                                    onChangeText={notes => setnote(notes)} />
+                                                    onChangeText={notes => setnote(notes)} 
+                                                    onSubmitEditing={isFieldsValidated}
+                                                    />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker,]}>
                                                 <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                     <View style={styles.subjectDateTime}>
                                                         <View style={[styles.colorSelect, { backgroundColor: selectedColor, }]}></View>
-                                                        {/* <Image style={styles.dropDownArrowdatetime2} source={Images.DropArrow} /> */}
                                                         <ArrowDown style={styles.dropDownArrowdatetime2} height={hp(1.51)} width={hp(1.51)} />
                                                     </View>
                                                 </TouchableOpacity>
@@ -382,7 +379,6 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>

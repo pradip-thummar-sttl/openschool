@@ -22,7 +22,8 @@ import PupilProfileView from './PupilProfileView';
 import PupilProfileAdd from './PupilProfileAdd';
 import PupilProfileEdit from './PupilProfileEdit';
 
-var pageNo = 1;
+var pageNo = 1
+let DataArr = [];
 
 const Pupillist = (props, { item }) => (
     <TouchableOpacity
@@ -40,7 +41,7 @@ const Pupillist = (props, { item }) => (
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props.item.GroupName.length != 0 ? props.item.GroupName[0] : '-'}</Text>
+                {/* <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props?.item?.GroupName?.length !== 0 ? props?.item?.GroupName[0] : '-'}</Text> */}
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
@@ -121,37 +122,22 @@ const PupilManagement = (props) => {
 
         // let data = {"Searchby":searchBy,"Filterby":filterBy,"page":"1","limit":"100"}
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
-            if (res.flag) {
-                // setLoading(false)
-                // setPupilData(res.data)
-                setPaginationData(res.pagination)
-                if (allNewAndOldData.length > 0) {
-                    if (res.data && res.data.length > 0) {
-                        let newData = []
-                        newData = res.data
-                        if(pageNo == 1){
-                            setPupilData(res.data)
-                            setAllNewAndOldData(res.data)
-                        }
-                        else{
-                            let newArray = [allNewAndOldData, ...newData]
-                            setPupilData(newArray)
-                            setAllNewAndOldData(newArray)
-                        }
-                        setLoading(false)
-                    }
-                    else {
-                        searchBy != '' && res.data ? setPupilData(res.data) : setPupilData(allNewAndOldData)
-                        setLoading(false)
-                    }
-                    
+            setPaginationData(res.pagination)
+            if (res?.code == 200) {
+                if (res?.data && pageNo == 1) {
+                    DataArr = [];
+                    DataArr = res.data;
+                    setPupilData(DataArr)
                 }
-                else {
-                    setPupilData(res.data)
-                    setAllNewAndOldData(res.data)
-                    setLoading(false)
+                else if (res?.data) {
+                    for (var i = 0; i < res?.data?.length; i++) {
+                        DataArr.push(res.data[i]);
+                        setPupilData(DataArr)
+                    }
                 }
+                setLoading(false)
             } else {
+                setLoading(false)
                 showMessage(res.message)
             }
         }, (err) => {
@@ -159,30 +145,19 @@ const PupilManagement = (props) => {
             console.log('error of absent check', err);
         })
 
-        // Service.get(`${EndPoints.PupilByShoolId}/${User.user.UserDetialId}/${filterBy}/${searchBy}`, (res) => {
-        //     if (res.flag) {
-        //         setPupilData(res.data)
-        //         setLoading(false)
-        //     } else {
-        //         showMessage(res.message)
-        //     }
-        // }, (err) => {
-        //     console.log('Err of all pupil by teacher', err)
-        // })
     }
 
     const addMorePage = () => {
-        console.log('-----lesson data length---', pupilData.length)
-        if (pupilData.length != pagination.TotalCount) {
+        if (pupilData?.length !== pagination?.TotalCount && pagination !== '') {
+            setLoading(false)
             pageNo = pageNo + 1
             setTimeout(() => {
-                fetchRecord('', '')
+                fetchRecord('', 'name')
             }, 1000)
         }
     }
 
     const refresh = () => {
-        console.log('refreshed');
         fetchRecord('', '')
     }
 
@@ -282,7 +257,7 @@ const PupilManagement = (props) => {
                                                         showsVerticalScrollIndicator={false}
                                                         nestedScrollEnabled
                                                         style={{ height: '85%' }}
-                                                        onEndReachedThreshold={0.5}
+                                                        onEndReachedThreshold={0.01}
                                                         onEndReached={() => addMorePage()}
                                                     />
                                                 </View>

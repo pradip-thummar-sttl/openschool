@@ -98,7 +98,7 @@ console.log('------->>>><_______________',props);
                                         <View style={styles.filterListSub}>
                                             <View style={styles.userparentInMenuAddmain}>
                                                 {/* <Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /> */}
-                                                <AddWhite style={[styles.userparentInMenuAdd]} height={hp(2.47)} width={hp(2.47)} />
+                                                <AddWhite style={[styles.userparentInMenuAdd]} height={hp(2.47)} width={hp(2.47)} fill={true} />
                                                 </View>
                                             <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>ADD NEW USER</Text>
                                         </View>

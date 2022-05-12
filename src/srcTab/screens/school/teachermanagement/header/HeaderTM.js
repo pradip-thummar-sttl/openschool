@@ -105,6 +105,7 @@ const HeaderTM = (props) => {
                         placeholder="Search teacher"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
+                        onSubmitEditing={()=>onPressSearchButton()}
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
@@ -147,6 +148,7 @@ const HeaderTM = (props) => {
                         </MenuOptions>
                     </Menu>
                 </View>
+                
                 <PopupaddnewdataTM
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()}

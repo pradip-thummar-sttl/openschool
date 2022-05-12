@@ -42,6 +42,15 @@ const HeaderTT = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    const search = () => {
+        keyword ?
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
+            :
+            null
+    }
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -74,15 +83,7 @@ const HeaderTT = (props) => {
                 <View style={styles.searchInner}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
+                        onPress={() => search()}>
                         {/* <Image style={{ height: 20, resizeMode: 'contain', }}
                             source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         {isSearchActive ?
@@ -104,7 +105,8 @@ const HeaderTT = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }}
+                        onSubmitEditing={() => search()}/>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Menu style={{ marginRight: 10 }}>
@@ -135,7 +137,7 @@ const HeaderTT = (props) => {
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={() => { setFilterBy('Live Lesson');setSelectedIndex(1) }}>
+                                <TouchableOpacity onPress={() => { setFilterBy('Live Lesson'); setSelectedIndex(1) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
@@ -143,7 +145,7 @@ const HeaderTT = (props) => {
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={() => { setFilterBy('Publish Lesson');setSelectedIndex(2) }}>
+                                <TouchableOpacity onPress={() => { setFilterBy('Publish Lesson'); setSelectedIndex(2) }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingTop: hp(1),
         paddingBottom: hp(1),
-        alignItems : 'center'
+        alignItems: 'center'
     },
     filterListWrap: {
         paddingTop: Platform.OS === 'android' ? 0 : hp(1),
