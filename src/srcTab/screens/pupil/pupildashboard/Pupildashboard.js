@@ -69,7 +69,6 @@ const PupuilDashboard = (props) => {
     const [isHWDetail, setHWDetail] = useState(false)
     const [isHWSubmitted, setHWSubmitted] = useState(false)
     const [isHWMarked, setHWMArked] = useState(false)
-
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
@@ -403,7 +402,7 @@ const PupuilDashboard = (props) => {
                     moduleIndex={selectedIndex}
                     navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0); getPupilAvtarList(); onRefreshData(); }}
                     navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
-                    onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
+                    onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2); }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
                     onAvatar={() => { setPupilLessonDetail(false); setSelectedIndex(4) }}
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
@@ -737,7 +736,7 @@ const PupuilDashboard = (props) => {
                                     : selectedIndex == 1 ?
                                         <PupilTimetable navigation={props.navigation} />
                                         : selectedIndex == 2 ?
-                                            <PupilLessonDetail navigation={props.navigation} />
+                                            <PupilLessonDetail navigation={props.navigation} tabIndex={props?.route?.params?.tabIndex}/>
                                             : selectedIndex == 3 ?
                                                 <Setting navigation={props.navigation} />
                                                 : selectedIndex == 4 ?
