@@ -209,6 +209,7 @@ const NotificationDrawer = (props) => {
                 }
             }, (err) => {
                 console.log('response of calender event eror is:', err)
+                setLoading(false)
             })
         }
 

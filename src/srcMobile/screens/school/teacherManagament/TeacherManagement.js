@@ -103,7 +103,7 @@ const TeacherManagement = (props) => {
     }, [])
 
     const refresh = () => {
-        textInput.current.clear()
+        // textInput.current.clear()
         pageNo = 1;
         setSearchKeyword("")
         fetchRecord(1, "", filterBy);

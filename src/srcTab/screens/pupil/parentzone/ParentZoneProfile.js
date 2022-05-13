@@ -32,7 +32,7 @@ const ParentZoneProfile = (props) => {
                                     <EditProfileTop_Tablet style={PAGESTYLE.managementopImage} 
                                     height={hp(14.06)} width={'100%'}/>
                                     {/* childrenList.length == 0 ? Images.userparent : */}
-                                    <Image style={PAGESTYLE.proffileLogo} source={ { uri: baseUrl + props.data.ProfilePicture }} />
+                                    <Image style={PAGESTYLE.proffileLogo} source={ { uri: baseUrl + props?.data?.ProfilePicture }} />
                                     <View style={PAGESTYLE.topBannerParent}>
                                         <TouchableOpacity
                                             activeOpacity={opacity}
@@ -47,20 +47,20 @@ const ParentZoneProfile = (props) => {
                                 <View style={PAGESTYLE.managementProfileSec}>
                                     <View style={PAGESTYLE.nameSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Name</Text>
-                                        <Text style={PAGESTYLE.userName}>{props.data.FirstName} {props.data.LastName}</Text>
+                                        <Text style={PAGESTYLE.userName}>{props?.data?.FirstName} {props?.data?.LastName}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Date of Birth</Text>
-                                        <Text style={PAGESTYLE.userName}>{moment(props.data.Dob).format('DD/MM/yyyy')}</Text>
+                                        <Text style={PAGESTYLE.userName}>{moment(props?.data?.Dob).format('DD/MM/yyyy')}</Text>
                                     </View>
                                     <View style={PAGESTYLE.UniqueNumberClass}>
                                         <Text style={PAGESTYLE.userLabel}>Unique I.D (auto-generated)</Text>
-                                        <Text style={PAGESTYLE.userName}>{props.data.UniqueNumber}</Text>
+                                        <Text style={PAGESTYLE.userName}>{props?.data?.UniqueNumber}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.managementParaSec}>
                                     <Text style={PAGESTYLE.userLabel}>Notes</Text>
-                                    <Text style={PAGESTYLE.paragraphText}>{props.data.Note ? props.data.Note : '-'}</Text>
+                                    <Text style={PAGESTYLE.paragraphText}>{props?.data?.Note ? props.data.Note : '-'}</Text>
                                 </View>
 
                                 <View style={[PAGESTYLE.profileTitleRow]}>
@@ -69,32 +69,32 @@ const ParentZoneProfile = (props) => {
                                 <View style={PAGESTYLE.managementProfileSec}>
                                     <View style={PAGESTYLE.nameSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Relationship to pupil</Text>
-                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.Relationship ? props.data.Relationship : '-'}</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props?.data?.Relationship ? props?.data?.Relationship : '-'}</Text>
                                     </View>
                                     <View style={PAGESTYLE.dateSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Parent/Guardian Name</Text>
-                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.ParentFirstName} {props.data.ParentLastName}</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props?.data?.ParentFirstName} {props?.data?.ParentLastName}</Text>
                                     </View>
                                     <View>
                                         <Text style={PAGESTYLE.userLabel}>Contact tel.</Text>
-                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.MobileNumber}</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props?.data?.MobileNumber}</Text>
                                     </View>
                                 </View>
                                 <View style={PAGESTYLE.managementProfileSec}>
                                     <View style={PAGESTYLE.mailSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Associated email for child’s acc.</Text>
-                                        <Text style={PAGESTYLE.userNameNormal}>{props.data.Email}</Text>
+                                        <Text style={PAGESTYLE.userNameNormal}>{props?.data?.Email}</Text>
                                     </View>
                                     <View style={PAGESTYLE.passSmlBlock}>
                                         <Text style={PAGESTYLE.userLabel}>Password</Text>
                                         <Text style={PAGESTYLE.userNameNormal}>*******</Text>
                                     </View>
                                 </View>
-                                {props.data.AddressLine1.length > 0 || props.data.AddressLine1.length > 0 ?
+                                {props?.data?.AddressLine1?.length > 0 || props?.data?.AddressLine1?.length > 0 ?
                                     <View style={PAGESTYLE.managementProfileSec}>
                                         <View style={PAGESTYLE.addSmlBlock}>
                                             <Text style={PAGESTYLE.userLabel}>Address</Text>
-                                            <Text style={[PAGESTYLE.userNameNormal, PAGESTYLE.addressText]}>{props.data.AddressLine1} {props.data.AddressLine2} {props.data.City} {props.data.PostCode}</Text>
+                                            <Text style={[PAGESTYLE.userNameNormal, PAGESTYLE.addressText]}>{props?.data?.AddressLine1} {props?.data?.AddressLine2} {props?.data?.City} {props?.data?.PostCode}</Text>
                                         </View>
                                     </View>
                                     :
