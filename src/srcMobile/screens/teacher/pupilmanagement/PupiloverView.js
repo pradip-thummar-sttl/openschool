@@ -85,7 +85,7 @@ const PupiloverView = (props) => {
                 setLoading(false)
             }
         }, (err) => {
-            console.log('Err of all pupil by teacher', err)
+            console.log('Err of   all pupil by teacher', err)
             setLoading(false)
         })
     }
