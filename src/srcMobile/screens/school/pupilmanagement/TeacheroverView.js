@@ -23,18 +23,21 @@ import MESSAGE from '../../../../utils/Messages';
 import { useFocusEffect } from "@react-navigation/native";
 
 const { CallModule } = NativeModules;
-var pageNo = 1
+
+var pageNo = 1;
+var limit = 10;
 var DataArr = [];
 
 const TeacheroverView = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-    const [searchKeyword, setSearchKeyword] = useState('')
+    const [searchKeyword, setSearchKeyword] = useState('name')
     const [isCsvPopup, setCsvPopup] = useState(false)
-    const [limit, setLimit] = useState('25')
     const [selectedId, setSelectedId] = useState(null);
-    const [pagination, setPaginationData] = useState([])
+    const [pagination, setPaginationData] = useState([]);
+
+    const [filterBy, setFilterBy] = useState('');
 
 
     let currentCount = 0
@@ -67,78 +70,73 @@ const TeacheroverView = (props) => {
         return true;
     }
 
-   
 
-    // Function triggers when screen gets focused or unfocused
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused.
-      fetchRecord('', 'name')
-      return () => {
-     // Do something when the screen is unfocused
-        // alert('Home Screen was unfocused');
-      };
-    }, [])
-  );
-
- 
-
-    const fetchRecord = (search, filter) => {
-
-     
-            setLoading(true)
-        // let data = { Searchby: search, Filterby: filter, page: "1", limit: "100" }
-
-        let data = {
-            Searchby: search,
-            Filterby: filter,
-            page: String(pageNo),
-            limit: limit
-        }
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchRecord(searchKeyword, pageNo, filterBy);
+            return () => {
+                // Do something when the screen is unfocused
+                // alert('Home Screen was unfocused');
+            };
+        }, [])
+    );
 
 
-        Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
-            setPaginationData(res.pagination)
-            if (res?.code == 200) {
-                if (res?.data && pageNo == 1) {
-                    DataArr = [];
-                    DataArr = res?.data;
-                    setPupilData(DataArr)
-                }
-                else if (res?.data) {
-                    for (var i = 0; i < res?.data?.length; i++) {
-                        DataArr.push(res?.data[i]);
-                        setPupilData(DataArr)
-                    }
-                }
-                setLoading(false)
-                
-            } else {
-                setLoading(false)
-               
-                showMessage(res.message)
-            }
-            
-        }, (err) => {
-            console.log('error of absent check', err);
-            setLoading(false)
-          
-        })
+    const onChangeTab = (tab) => {
+        setSelectedTabIndex(tab);
+        if (tab == 0)
+            fetchRecord(searchKeyword, pageNo, filterBy);
+        else
+            setPupilData([])
+
     }
 
     const addMorePage = () => {
-        if (pupilData?.length !== pagination?.TotalCount && pagination !== '') {
-           setLoading(true)
+
+        if (DataArr.length > (limit - 1)) {
+            setLoading(true)
             pageNo = pageNo + 1
-            setTimeout(() => {
-                fetchRecord('', 'name')
-            }, 1000)
+            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1000)
         }
     }
 
+    const fetchRecord = (pNo, searchBy, filterBy) => {
+        setLoading(true)
+        let data = {
+            Searchby: searchBy,
+            Filterby: filterBy,
+            page: String(pNo),
+            limit: limit
+        }
+
+        Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+            if (res.code == 200) {
+
+                if (res.data && pNo == 1) {
+                    DataArr = [];
+                    DataArr = res.data;
+                }
+                else if (res.data) {
+                    for (var i = 0; i < res.data.length; i++) {
+                        DataArr.push(res.data[i]);
+                    }
+                }
+                setLoading(false)
+            } else {
+                showMessage(res.message)
+            }
+
+        }, (err) => {
+            console.log('error of absent check', err);
+            setLoading(false)
+        })
+    }
+
+   
+
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', 'name') })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord(pageNo, searchKeyword, filterBy)})
     }
 
     const messageRender = ({ item, index }) => {
@@ -199,46 +197,48 @@ const TeacheroverView = (props) => {
             <View style={{ width: '100%', height: '100%' }}>
 
                 <TeacheroverViewHeader
+
+                    onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}
+                    onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
+                    onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }}
                     onAlertPress={() => props.navigation.openDrawer()}
-                    setSelectedTabIndex={(tab) => setSelectedTabIndex(tab)}
+                    setSelectedTabIndex={(tab) => onChangeTab(tab)}
                     tabs={selectedTabIndex}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, 'name')}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', 'name') }}
-                    onFilter={(filterBy) => fetchRecord('', filterBy)}
                     navigateToCsvPopup={() => { setCsvPopup(true); console.log('iscsvpopup', isCsvPopup); }}
                     navigateToCreateNewEvent={() => props.navigation.navigate('SAddNewTeacher', { onGoBack: () => refresh() })}
                     onNotification={() => openNotification()}
                 />
 
                 {selectedTabIndex == 0 ?
-                    isLoading ?
-                        <ActivityIndicator
-                            style={{ margin: 20 }}
-                            size={Platform.OS == 'ios' ? 'large' : 'small'}
-                            color={COLORS.yellowDark} />
+                    DataArr.length > 0 ?
+                        <View style={[PAGESTYLE.mainContainer, { height: '76%' }]}>
+                            <FlatList
+                                data={DataArr}
+                                renderItem={messageRender}
+                                keyExtractor={(item) => item.id}
+                                extraData={selectedId}
+                                showsVerticalScrollIndicator={false}
+                                onEndReachedThreshold={0.01}
+                                onEndReached={() => addMorePage()}
+                            />
+                        </View>
+
+
                         :
-                        pupilData.length > 0 ?
-                            <View style={[PAGESTYLE.mainContainer, { height: '76%' }]}>
-                                <FlatList
-                                    data={pupilData}
-                                    renderItem={messageRender}
-                                    keyExtractor={(item) => item.id}
-                                    extraData={selectedId}
-                                    showsVerticalScrollIndicator={false}
-                                    onEndReachedThreshold={0.01}
-                                    onEndReached={() => addMorePage()}
-                                    // ListFooterComponent={() => loadingMore &&  <ActivityIndicator
-                                    //     style={{ margin: 20 }}
-                                    //     size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                    //     color={COLORS.yellowDark} />}
-                                />
-                            </View>
-                            :
-                            <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
+                        <EmptyStatePlaceHohder holderType={6} title1={MESSAGE.teacherManage1} title2={MESSAGE.teacherManage2} />
 
                     :
                     <GroupSetUp props={props} />
+                }
+
+                {isLoading &&
+                    <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                        <ActivityIndicator
+                            style={{ flex: 1, marginTop: 20 }}
+                            size={'large'}
+                            color={COLORS.yellowDark} />
+                    </View>
                 }
             </View>
         </View>
