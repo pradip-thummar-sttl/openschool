@@ -22,9 +22,7 @@ import NoPupil from '../../../../svg/emptystate/NoPupil';
 const { CallModule } = NativeModules;
 
 const PupiloverView = (props) => {
-
     const item = props.route.params.item;
-    
     const [isHide, action] = useState(true);
     const [isLoading, setLoading] = useState(true);
     const [pupilData, setPupilData] = useState([])
@@ -33,29 +31,6 @@ const PupiloverView = (props) => {
 
 
     let currentCount = 0
-
-    useEffect(() => {
-        fetchRecord('', '');
-    }, [])
-
-    const fetchRecord = (searchBy, filterBy) => {
-
-        setSelectedTabIndex(item)
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
-            console.log('res of all pupil by teacher', res)
-            if (res.flag) {
-                setLoading(false)
-                setPupilData(res.data)
-            } else {
-                showMessage(res.message)
-            }
-        }, (err) => {
-            console.log('Err of all pupil by teacher', err)
-        })
-    }
-
-
-
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -81,6 +56,26 @@ const PupiloverView = (props) => {
         }, 2000);
 
         return true;
+    }
+
+    useEffect(() => {
+        fetchRecord('', '')
+    }, [])
+
+    const fetchRecord = (searchBy, filterBy) => {
+
+        setSelectedTabIndex(item)
+        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}/name/${searchBy}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                setLoading(false)
+                setPupilData(res.data)
+            } else {
+                showMessage(res.message)
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
     }
 
     const openNotification = () => {

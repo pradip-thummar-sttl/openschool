@@ -29,7 +29,9 @@ const tabs = [
     // { name: 'CLOTHES', isSelected: false, }
 ]
 
-const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
+// const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
+const backgroundColorArray = ["#A194EC","#A8DAFF","#D18EEA","#F2DD92","#B0E2AF","#E1A052"]
+
 
 const Avatar = (prop) => {
 

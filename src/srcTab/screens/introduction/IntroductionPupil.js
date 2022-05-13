@@ -38,7 +38,7 @@ export default class Introduction extends Component {
                     slideCount={3}
                     dots={this.state.activeDot >= 3 ? false : true}
                     dotActiveColor={COLORS.dotActive}
-                    dotInactiveColor={COLORS.transparent}
+                    dotInactiveColor={COLORS.greyInsightLable}
                     dotsContainerStyle={styles.dotContainer}
                     activeDot={(activeDot) => { this.setState({ activeDot })}}
                 />

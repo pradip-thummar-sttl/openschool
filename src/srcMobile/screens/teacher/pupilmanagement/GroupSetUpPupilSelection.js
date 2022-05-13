@@ -49,7 +49,13 @@ const GroupSetUpPupilSelection = (props) => {
             setSelectedPupils(previoslySelectedData)
         }
 
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        let data = {
+            Searchby: "",
+            Filterby: "",
+            page:1,
+            limit:12
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {
 

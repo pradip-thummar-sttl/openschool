@@ -38,7 +38,8 @@ import Ic_BlueCheck from "../../../../svg/teacher/timetable/Ic_BlueCheck";
 const PupilLessonDetail = (props) => {
     const textInput = useRef(null);
     const [isHide, action] = useState(true);
-    const [isLesson, setLesson] = useState(true);
+    const tabIndex = props?.route?.params?.tabIndex ?? 1;
+    const [isLesson, setLesson] = useState(tabIndex === 1 ? true : false);
     const [lessonData, setLessonData] = useState([]);
     const [DueHomeWork, setDueHomeWork] = useState([]);
     const [SubmitHomeWork, setSubmitHomeWork] = useState([]);

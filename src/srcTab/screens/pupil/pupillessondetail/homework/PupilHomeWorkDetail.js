@@ -55,10 +55,11 @@ const PupilHomeWorkDetail = (props) => {
         }
         console.log(isSubmitPopup);
         setSubmitPopup(true)
-        setLoading(true)
     }
 
     const onSubmitHomework = () => {
+        setLoading(true)
+
         let formData = new FormData();
 
         materialArr.forEach(element => {
@@ -249,7 +250,7 @@ const PupilHomeWorkDetail = (props) => {
                 </View>
             </View>
             {
-                isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} /> : null
+                isSubmitPopup ? <Popuphomework OnSubmitHomeworkPress={() => onSubmitHomework()} onPopupClosed={(flag) => setSubmitPopup(flag)} isLoading={isLoading} /> : null
             }
         </View>
     );

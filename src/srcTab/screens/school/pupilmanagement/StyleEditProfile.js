@@ -733,5 +733,34 @@ export default StyleSheet.create({
         overflow: 'hidden',
         borderColor: COLORS.buttonGreen,
     },
+    alignRow: {
+        flexDirection: 'row',
+        width: '35%',
+        // marginTop:10
+    },
+    checkMark: {
+        position :'absolute',
+        alignContent: 'flex-end',
+        right: 10,
+    },
+    checkMark1: {
+        // position :'absolute',
+        // alignContent: 'flex-end',
+        width:20,
+        height:20,
+        top:3,
+        
+        // marginVertical:10,
+        // right: 10,
+    },
+    checkBoxLabelText: {
+        lineHeight: hp(2.82),
+        // paddingTop:5,
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(3),
+        minHeight: hp(6),
+        paddingRight: hp(1),
+    },
   
 });
