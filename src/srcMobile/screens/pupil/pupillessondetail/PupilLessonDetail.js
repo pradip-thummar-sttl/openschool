@@ -52,8 +52,8 @@ const PupilLessonDetail = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
-    const [isLoading,setLoading] = useState(false)
-    const [isHomeworkLoading,setHomeworkLoading] = useState(false)
+    const [isLoading, setLoading] = useState(false)
+    const [isHomeworkLoading, setHomeworkLoading] = useState(false)
 
     let currentCount = 0
     useEffect(() => {
@@ -192,6 +192,16 @@ const PupilLessonDetail = (props) => {
         })
     }
 
+    const searchEnter = () => {
+        keyword ?
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
+            :
+            null
+    }
+
     const searchHeader = () => {
         return (
 
@@ -221,12 +231,15 @@ const PupilLessonDetail = (props) => {
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => { setKeyword(keyword) }} />
+                        onChangeText={keyword => { setKeyword(keyword) }}
+                        returnKeyType='search'
+                        onSubmitEditing={()=>searchEnter()}
+                    />
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
                             <MenuTrigger>
-                            <FilterBlack style={PAGESTYLE.searchMenu} height={15} width={15} />
+                                <FilterBlack style={PAGESTYLE.searchMenu} height={15} width={15} />
 
                                 {/* <Image style={PAGESTYLE.searchMenu} source={Images.mobileFilter} /> */}
                             </MenuTrigger>
@@ -369,20 +382,20 @@ const PupilLessonDetail = (props) => {
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => { } })
     }
 
     return (
-        <View style={[{flex  : 1}]}>
+        <View style={[{ flex: 1 }]}>
             {/* <Sidebarpupil hide={() => action(!isHide)}
                 moduleIndex={2}
                 navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
                 navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
                 onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
-            <View style={{ backgroundColor: COLORS.white ,height : '100%'}}>
-                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={()=>openNotification()} />
+            <View style={{ backgroundColor: COLORS.white, height: '100%' }}>
+                <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} />
                 {searchHeader()}
-                <View style={[PAGESTYLE.whiteBg1,{}]}>
+                <View style={[PAGESTYLE.whiteBg1, {}]}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
                             <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { setSearchActive(false); setLesson(true); getLessonData('', ''); }}>
@@ -394,28 +407,28 @@ const PupilLessonDetail = (props) => {
                         </View>
                     </View>
                 </View>
-                <ScrollView showsVerticalScrollIndicator={false}  contentContainerStyle={[PAGESTYLE.teacherLessonGrid,{flex : 1}]}>
+                <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={[PAGESTYLE.teacherLessonGrid, { flex: 1 }]}>
                     {/* <View> */}
-                        {
-                            isLesson ?
+                    {
+                        isLesson ?
 
-                                <PupilLesson
-                                    currentWeekLesson={currentWeekLesson}
-                                    lastWeekLesson={lastWeekLesson}
-                                    navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }} 
-                                    isLoading={isLoading}
-                                    />
-                                :
-                                <PupilLessonDue
-                                    DueHomeWork={DueHomeWork}
-                                    SubmitHomeWork={SubmitHomeWork}
-                                    MarkedHomeWork={MarkedHomeWork}
-                                    navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
-                                    navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
-                                    navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }} 
-                                    isHomeworkLoading={isHomeworkLoading}
-                                    />
-                        }
+                            <PupilLesson
+                                currentWeekLesson={currentWeekLesson}
+                                lastWeekLesson={lastWeekLesson}
+                                navigatePupilLessonDetailInternal={(item) => { props.navigation.navigate('PupilLessonDetailInternal', { item: item }) }}
+                                isLoading={isLoading}
+                            />
+                            :
+                            <PupilLessonDue
+                                DueHomeWork={DueHomeWork}
+                                SubmitHomeWork={SubmitHomeWork}
+                                MarkedHomeWork={MarkedHomeWork}
+                                navigatePupilHomeWorkDetail={(item) => props.navigation.navigate('PupilHomeWorkDetail', { item: item, })}
+                                navigatePupilHomeworkesubmited={(item) => { props.navigation.navigate('PupilHomeWorkSubmitted', { item: item }) }}
+                                navigatePupilHomeworkemarked={(item) => { props.navigation.navigate('PupilHomeWorkMarked', { item: item }) }}
+                                isHomeworkLoading={isHomeworkLoading}
+                            />
+                    }
                     {/* </View> */}
                     {/* <HeaderBulk /> */}
                     {/* <PupilLessonDetailInternal /> */}

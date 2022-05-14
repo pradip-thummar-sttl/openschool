@@ -227,7 +227,9 @@ const PupilTimeTable = (props) => {
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()}
                     onNotification={() => openNotification()}
-                    onFilterBy={(filter) => { fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD')) }} />
+                    onFilterBy={(filter) => { fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD')) }} 
+                    
+                    />
 
                 <View style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?

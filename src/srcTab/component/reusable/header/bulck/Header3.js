@@ -45,6 +45,15 @@ const HeaderWhite = (props) => {
         props.onFilter(filterBy)
     }, [filterBy])
   
+    const searchEnter=()=>{
+        keyword ?
+        isSearchActive ?
+            setSearchActive(false)
+            :
+            setSearchActive(true)
+        :
+        null
+    }
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -106,7 +115,10 @@ const HeaderWhite = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }} 
+                        returnKeyType='search'
+                        onSubmitEditing={()=>searchEnter()}
+                        />
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
