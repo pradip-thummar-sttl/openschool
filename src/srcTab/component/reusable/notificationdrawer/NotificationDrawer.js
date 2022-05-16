@@ -75,13 +75,14 @@ const NotificationDrawer = (props) => {
         }
 
         if (isOpen) {
+            // getAllNotification()
             getAllNotification()
         }
 
     }, [isOpen])
 
 
-    getAllNotification = () => {
+    const getAllNotification = () => {
         console.log('user dtaaaa===>', User.user)
         let data = {
             userid: User.user.UserType == "Teacher" ? User.user._id : User.user.UserDetialId,//"6047645b9a6ac02f68642c72",
@@ -121,7 +122,7 @@ const NotificationDrawer = (props) => {
 
     }
 
-    deleteNotification = (id) => {
+    const deleteNotification = (id) => {
         Service.get(`${EndPoints.deleteNotification}/${id}`, (res) => {
             console.log('res-delete', res)
             if (res.flag) {
