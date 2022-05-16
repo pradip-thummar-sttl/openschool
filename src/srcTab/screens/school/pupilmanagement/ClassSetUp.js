@@ -115,10 +115,12 @@ const ClassSetUp = () => {
             SchoolId: User.user.UserDetialId,
             TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             CreatedBy: User.user.UserDetialId,
-            PupilList: list
+            PupilList: list,
+            RemovePupilList : list
+
+            
         }
 
-        console.log('data', data);
         Service.post(data, `${EndPoints.ClassSetup}`, (res) => {
             setPupilLoading(false)
             if (res.code == 200) {

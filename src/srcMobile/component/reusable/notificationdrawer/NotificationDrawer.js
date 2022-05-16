@@ -108,10 +108,10 @@ const NotificationDrawer = (props) => {
             // props.navigation.replace('TeacherDashboard',{index:2,})
             props.navigation.replace('TeacherLessonList');
         } else {
-            props.navigation.replace('PupilLessonDetail',{tabIndex})
+            props.navigation.replace('PupilLessonDetail', { tabIndex })
         }
     }
-    
+
     return (
         <View style={styles.drawerMain}>
             {Var.isCalender ?
@@ -228,7 +228,7 @@ const NotificationDrawer = (props) => {
                                     {
                                         notifications.length ?
                                             notifications.map((item, index) => {
-                                                const date = new Date(item.SubDesc);
+                                                const date = new Date(item.CreatedDate);
                                                 const time = date.toLocaleTimeString()
                                                 return (
 
@@ -308,7 +308,7 @@ const NotificationDrawer = (props) => {
                                                                             <View style={styles.timingJoinClass}>
                                                                                 <View style={[styles.timing, { width: '85%' }]}>
                                                                                     <Clock style={styles.closeIconSmall1} height={hp(1.5)} width={hp(1.5)} />
-                                                                                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{item.SubDesc == " - " ? "-" : time}</Text>
+                                                                                    <Text numberOfLines={1} ellipsizeMode="tail" style={styles.timingText}>{time}</Text>
                                                                                 </View>
                                                                                 <TouchableOpacity onPress={() => { onOpenhomework(1) }} >
                                                                                     <Text style={STYLE.openClassLink}>VIEW</Text>

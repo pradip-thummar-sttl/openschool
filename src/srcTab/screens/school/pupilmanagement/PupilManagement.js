@@ -105,7 +105,7 @@ const PupilManagement = (props) => {
     const [pagination, setPaginationData] = useState([])
     const [allNewAndOldData, setAllNewAndOldData] = useState([])
 
-    const [limit, setLimit] = useState('25')
+    const [limit, setLimit] = useState('50')
 
     useEffect(() => {
         pageNo = 1;
@@ -113,6 +113,7 @@ const PupilManagement = (props) => {
     }, [])
 
     const fetchRecord = (searchBy, filterBy) => {
+        setLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
@@ -149,7 +150,7 @@ const PupilManagement = (props) => {
 
     const addMorePage = () => {
         if (pupilData?.length !== pagination?.TotalCount && pagination !== '') {
-            setLoading(false)
+            setLoading(true)
             pageNo = pageNo + 1
             setTimeout(() => {
                 fetchRecord('', 'name')
@@ -181,7 +182,7 @@ const PupilManagement = (props) => {
         setPupilEdit(false);
         fetchRecord('', 'name');
     }
-    
+
     return (
         <View style={{ flex: 1, backgroundColor: COLORS.backgroundColorCommon }}>
             {
@@ -189,11 +190,11 @@ const PupilManagement = (props) => {
                     <PupilProfileView selectedPupil={selectedItem} navigateToBack={() => setPupilProfile(false)} onEditTeacherProfile={() => onEditClick()} {...props} />
                     :
                     isPupilAdd ?
-                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => {setPupilAdd(false);onRefress()}} openNotification={() => { openNotification() }}/>
+                        <PupilProfileAdd selectedPupil={selectedItem} navigateToBack={() => { setPupilAdd(false); onRefress() }} openNotification={() => { openNotification() }} />
                         :
                         isPupilEdit ?
                             <PupilProfileEdit navigateToBack={() => onRefress()} refresh={() => refresh()}
-                            selectedPupil={selectedItem} openNotification={() => { openNotification() }} />
+                                selectedPupil={selectedItem} openNotification={() => { openNotification() }} />
                             :
                             <>
                                 <HeaderPM
@@ -210,70 +211,73 @@ const PupilManagement = (props) => {
                                 {selectedTab == 0 ?
                                     <View style={[PAGESTYLE.whiteBoard, PAGESTYLE.pupilDashboard]}>
                                         {
-                                            isLoading ?
-                                                <ActivityIndicator
-                                                    style={{ margin: 20 }}
-                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                    color={COLORS.yellowDark} />
-                                                :
-                                                pupilData.length > 0 ?
-                                                    <>
-                                                        <View style={PAGESTYLE.pupilTable}>
-                                                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
-                                                            </View>
-                                                            <View style={PAGESTYLE.pupilTableHeadingMain}>
-                                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
-                                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
-                                                            </View>
+                                            pupilData.length > 0 ?
+                                                <>
+                                                    <View style={PAGESTYLE.pupilTable}>
+                                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>First Name</Text>
+                                                        </View>
+                                                        <View style={PAGESTYLE.pupilTableHeadingMain}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Last Name</Text>
+                                                        </View>
+                                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil2]}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>Class Group</Text>
+                                                        </View>
 
-                                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22, { alignItems: 'center' }]}>
-                                                                <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
-                                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
-                                                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
-                                                                </View>
-                                                            </View>
-                                                            <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
-                                                                <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
-                                                                <View style={PAGESTYLE.pupilTableHeadingsubMain}>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
-                                                                    <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
-                                                                </View>
+                                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil22, { alignItems: 'center' }]}>
+                                                            <Text style={PAGESTYLE.pupilTableHeadingMainTitle}>D.O.B</Text>
+                                                        </View>
+                                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil3]}>
+                                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Performance</Text>
+                                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Enagagement</Text>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitle}>Effort</Text>
                                                             </View>
                                                         </View>
-                                                <View style={PAGESTYLE.pupilTabledata}>
-                                                    <FlatList
-                                                        data={pupilData}
-                                                        renderItem={pupilRender}
-                                                        keyExtractor={(item) => item.id}
-                                                        extraData={selectedId}
-                                                        showsVerticalScrollIndicator={false}
-                                                        nestedScrollEnabled
-                                                        style={{ height: '85%' }}
-                                                        onEndReachedThreshold={0.01}
-                                                        onEndReached={() => addMorePage()}
-                                                    />
+                                                        <View style={[PAGESTYLE.pupilTableHeadingMain, PAGESTYLE.tabpupil4]}>
+                                                            <Text style={[PAGESTYLE.pupilTableHeadingMainTitle, STYLE.centerText]}>Quick Reward</Text>
+                                                            <View style={PAGESTYLE.pupilTableHeadingsubMain}>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Bronze</Text>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Silver</Text>
+                                                                <Text style={PAGESTYLE.pupilTableHeadingMainsubTitlestar}>Gold</Text>
+                                                            </View>
+                                                        </View>
+                                                    </View>
+                                                    <View style={PAGESTYLE.pupilTabledata}>
+                                                        <FlatList
+                                                            data={pupilData}
+                                                            renderItem={pupilRender}
+                                                            keyExtractor={(item) => item.id}
+                                                            extraData={selectedId}
+                                                            showsVerticalScrollIndicator={false}
+                                                            nestedScrollEnabled
+                                                            style={{ height: '85%' }}
+                                                            onEndReachedThreshold={0.01}
+                                                            onEndReached={() => addMorePage()}
+                                                        />
+                                                    </View>
+                                                </>
+                                                :
+                                                <View style={PAGESTYLE.mainContainer}>
+                                                    <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
+                                                    <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
+                                                    <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
                                                 </View>
-                                            </>
-                                            :
-                                            <View style={PAGESTYLE.mainContainer}>
-                                                <NoPupil style={PAGESTYLE.noDataImage} height={300} width={300} />
-                                                <Text style={PAGESTYLE.nodataTitle}>There doesn’t seem to be any pupils here</Text>
-                                                <Text style={PAGESTYLE.nodataContent}>Start adding teachers to invite them to join the school</Text>
-                                            </View>
                                         }
                                     </View>
                                     :
                                     <ClassSetUp />
                                 }
                             </>
+
+            }
+            {isLoading &&
+                <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator
+                        style={{ flex: 1, marginTop: 20 }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.yellowDark} />
+                </View>
             }
         </View>
     )

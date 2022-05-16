@@ -14,7 +14,6 @@ import ArrowNext from '../../../../svg/teacher/lessonhwplanner/ArrowNext';
 import HeaderTM from './HeaderTM';
 
 var pageNo = 1;
-var limit = 25;
 var DataArr = [];
 
 const TeacherManagement = (props) => {
@@ -24,6 +23,7 @@ const TeacherManagement = (props) => {
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
     const [searchKeyword, setSearchKeyword] = useState('')
+    const [limit,setLimit] = useState('50')
 
 
     let currentCount = 0
@@ -188,7 +188,7 @@ const TeacherManagement = (props) => {
                             keyExtractor={(item) => item.id}
                             extraData={selectedId}
                             showsVerticalScrollIndicator={false}
-                            onEndReachedThreshold={0}
+                            onEndReachedThreshold={0.5}
                             onEndReached={() => addMorePage()}
                         />
                     </View>
@@ -200,7 +200,7 @@ const TeacherManagement = (props) => {
                 <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
                     <ActivityIndicator
                         style={{ flex: 1, marginTop: 20 }}
-                        size={'large'}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
                         color={COLORS.yellowDark} />
                 </View>
             }

@@ -34,6 +34,7 @@ const TeacheroverView = (props) => {
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
     const [searchKeyword, setSearchKeyword] = useState('name')
     const [isCsvPopup, setCsvPopup] = useState(false)
+    const [limit, setLimit] = useState('50')
     const [selectedId, setSelectedId] = useState(null);
     const [pagination, setPaginationData] = useState([]);
 
@@ -244,6 +245,14 @@ const TeacheroverView = (props) => {
                     </View>
                 }
             </View>
+            {isLoading &&
+                <View style={{ width: '100%', height: '100%', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
+                    <ActivityIndicator
+                        style={{ flex: 1, marginTop: 20 }}
+                        size={Platform.OS == 'ios' ? 'large' : 'small'}
+                        color={COLORS.yellowDark} />
+                </View>
+            }
         </View>
     );
 }

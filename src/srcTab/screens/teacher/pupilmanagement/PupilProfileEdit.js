@@ -51,19 +51,17 @@ const PupilProfileEdit = (props) => {
     const [parentName, setParentName] = useState('');
     const [mobile, setMobile] = useState('');
     const [childEmail, setChildEmail] = useState('');
-
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [removeTeacher, setRemovedTeacher] = useState([])
 
 
     useEffect(() => {
 
-        console.log('----item-----', props.route.params.item)
-        console.log('-----profileUri-------', profileUri)
 
         setPupilId(profileData.Pupilid)
         setFirstName(profileData.FirstName)
         setLastName(profileData.LastName)
         setDob(moment(profileData.Dob).format('DD/MM/yyyy'))
-        // setProfile(profileData.ProfilePicture)
         setUniqueCode(profileData.UniqueNumber)
         setNote(profileData.Note)
         setMobile(profileData.MobileNumber + '')
@@ -150,6 +148,14 @@ const PupilProfileEdit = (props) => {
                         userType = item._id
                     }
                 })
+                var selectArr = [];
+                var removeArr = [];
+                selectedTeacher.forEach(element => {
+                    selectArr.push({ TeacherId: element })
+                });
+                removeTeacher.forEach(element => {
+                    removeArr.push({ TeacherId: element })
+                });
 
                 let data = {
                     FirstName: firstName,
@@ -163,6 +169,8 @@ const PupilProfileEdit = (props) => {
                     Email: profileData.Email,
                     MobileNumber: profileData.MobileNumber,
                     UpdatedBy: User.user._id,
+                    AddTeacherList: selectArr,
+                    RemoveTeacherList: removeArr
                 }
 
 
