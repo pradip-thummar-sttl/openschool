@@ -172,15 +172,14 @@ const SGroupSetUpPupilSelection = (props) => {
             SchoolId: User.user.UserDetialId,
             TeacherId: selectedTeacher[selectedTeacher.length - 1].TeacherId,
             CreatedBy: User.user.UserDetialId,
-            PupilList: list
+            PupilList: list,
+            RemovePupilList : list
         }
         setGroupLoading(true)
-        console.log('data', data);
         Service.post(data, `${EndPoints.ClassSetup}`, (res) => {
             setGroupLoading(false)
             if (res.code == 200) {
                 reset()
-                // loadGroup()
                 showMessage(MESSAGE.classSetup)
                 setTimeout(() => {
                     props.route.params.onRefresh();
