@@ -49,9 +49,9 @@ import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 
 const PupilLessonDetail = (props) => {
   const [isHide, action] = useState(true);
-
   const textInput = useRef(null);
-  const [isLesson, setLesson] = useState(true);
+  const tabIndex =props.tabIndex ?? 1;
+  const [isLesson, setLesson] = useState(tabIndex === 1 ? true : false);
   const [isLessonDetail, setLessonDetail] = useState(false);
   const [isHomeworkDetail, setHomeworkDetail] = useState(false);
   const [isHomeWorkSubmitted, setHomeWorkSubmitted] = useState(false);
