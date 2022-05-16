@@ -369,7 +369,7 @@ const NotificationDrawer = (props) => {
                                         {
                                             notifications.length ?
                                                 notifications.map((item, index) => {
-                                                    const date = new Date(item.SubDesc);
+                                                    const date = new Date(item.CreatedDate);
                                                     const time = date.toLocaleTimeString()
                                                     return (
 
@@ -437,7 +437,7 @@ const NotificationDrawer = (props) => {
                                                                     <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
                                                                         <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>LESSON</Text>
                                                                         <View style={styles.classDetail}>
-
+                                                                      
                                                                             <>
                                                                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                                                     <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
@@ -450,7 +450,7 @@ const NotificationDrawer = (props) => {
                                                                                 <View style={[styles.timingJoinClass]}>
                                                                                     <View style={[styles.timing, styles.timingOne]}>
                                                                                         <Clock style={[styles.closeIconSmall1, { marginRight: 5 }]} height={hp(1.5)} width={hp(1.5)} />
-                                                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{item.SubDesc == " - " ? "-" : time}</Text>
+                                                                                        <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{time}</Text>
                                                                                     </View>
                                                                                     <TouchableOpacity onPress={() => { onOpenhomework(1) }} >
                                                                                         {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}

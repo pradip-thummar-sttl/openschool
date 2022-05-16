@@ -19,7 +19,6 @@ import { FlatList } from "react-native-gesture-handler";
 import FONTS from "../../../../utils/Fonts";
 
 var pageNo = 1;
-var limit = 25;
 var DataArr = [];
 
 const Pupillist = (props) => (
@@ -69,6 +68,7 @@ const TeacherManagement = (props) => {
     const [isDataLoading, setDataLoading] = useState(true)
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
+    const [limit,setLimit] = useState('50')
    
     useEffect(() => {
         pageNo = 1
@@ -127,7 +127,6 @@ const TeacherManagement = (props) => {
     }
 
     const pupilRender = ({ item }) => {
-        console.log('item pupil reader', item);
         return (
             <Pupillist item={item} onPress={() => { setTeacherDetailData(item); setTeacherDetail(true) }} />
         );
