@@ -334,7 +334,17 @@ const TeacherLessonDetail = (props) => {
                                                             placeholderTextColor={COLORS.menuLightFonts}
                                                             onChangeText={keyword => {
                                                                 setSearchKeyword(keyword);
-                                                            }} />
+                                                            }}
+                                                            onSubmitEditing={() => {
+                                                                searchKeyword ?
+                                                                    isSearchActive ?
+                                                                        setSearchActive(false)
+                                                                        :
+                                                                        setSearchActive(true)
+                                                                    :
+                                                                    null
+                                                            }}
+                                                            />
                                                         <TouchableOpacity
                                                             style={PAGESTYLE.userIcon1Parent}
                                                             activeOpacity={opacity}

@@ -477,7 +477,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         color={COLORS.yellowDark}
                                                         style={{ margin: 20 }} />
                                                     :
-                                                    dashData.length > 0 && dataOfSubView ?
+                                                    dashData?.length > 0 && dataOfSubView ?
                                                         <View style={STYLE.viewRow}>
                                                             <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                                                 <FlatList

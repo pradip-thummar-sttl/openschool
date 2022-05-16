@@ -339,7 +339,7 @@ const TeacherProfileEdit = (props) => {
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                             <TextInput
                                                 ref={t2}
-                                                returnKeyType={"next"}
+                                                returnKeyType={"done"}
                                                 onSubmitEditing={() => { t3.current.focus(); }}
                                                 style={PAGESTYLE.commonInput}
                                                 autoCapitalize={false}
@@ -376,8 +376,9 @@ const TeacherProfileEdit = (props) => {
                                         <Text style={PAGESTYLE.fieldInputLabel}>Email</Text>
                                         <View style={[PAGESTYLE.field, PAGESTYLE.filedSpace]}>
                                             <TextInput
-                                                ref={t1}
-                                                onSubmitEditing={() => { t2.current.focus(); }}
+                                                ref={t3}
+                                                // onSubmitEditing={() => { t2.current.focus(); }}
+                                                returnKeyType={"done"}
                                                 style={PAGESTYLE.commonInput}
                                                 autoCapitalize={false}
                                                 maxLength={40}

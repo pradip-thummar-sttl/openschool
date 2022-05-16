@@ -50,6 +50,16 @@ const HeaderTT = (props) => {
         // props.onFilter(filterBy)
     }, [filterBy])
 
+    const handleKeyDown = (e) => {
+            keyword ?
+                isSearchActive ?
+                    setSearchActive(false)
+                    :
+                    setSearchActive(true)
+                :
+                null
+            // props.onSearch()
+    }
     return (
         <View style={{ backgroundColor: COLORS.white, shadowColor: COLORS.black, shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1), paddingBottom: hp(1.5) }}>
             <View style={styles.headerMain}>
@@ -107,7 +117,10 @@ const HeaderTT = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }}
+                        returnKeyType='search'
+                        onSubmitEditing={() => handleKeyDown()}
+                    />
 
                     <Menu>
                         <MenuTrigger>

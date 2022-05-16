@@ -165,7 +165,6 @@ const PupilProfileEdit = (props) => {
                     UpdatedBy: User.user._id,
                 }
 
-                console.log('postData', User.user.UserDetialId, data);
 
                 Service.post(data, `${EndPoints.PupilUpdate}/${profileData.PupilId}`, (res) => {
                     if (res.code == 200) {
