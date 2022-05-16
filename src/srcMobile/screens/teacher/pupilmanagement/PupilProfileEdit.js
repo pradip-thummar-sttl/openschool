@@ -49,12 +49,8 @@ const PupilProfileEdit = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [profileUri, setProfileUri] = useState('')
     const [dob, setDob] = useState(moment(pupilProfileData.Dob).format('DD/MM/yyyy'));
-
-
-
-
-    console.log('----pupilProfileData-----', pupilProfileData)
-
+    const [selectedTeacher, setSelectedTeacher] = useState([])
+    const [removeTeacher, setRemovedTeacher] = useState([])
 
     const handleBackButtonClick = () => {
         props.navigation.goBack()
@@ -159,6 +155,14 @@ const PupilProfileEdit = (props) => {
                         userType = item._id
                     }
                 })
+                var selectArr = [];
+                var removeArr = [];
+                selectedTeacher.forEach(element => {
+                    selectArr.push({ TeacherId: element })
+                });
+                removeTeacher.forEach(element => {
+                    removeArr.push({ TeacherId: element })
+                });
 
                 let data = {
                     FirstName: firstName,
@@ -172,9 +176,10 @@ const PupilProfileEdit = (props) => {
                     Email: pupilProfileData.Email,
                     MobileNumber: pupilProfileData.MobileNumber,
                     UpdatedBy: User.user._id,
+                    AddTeacherList: selectArr,
+                    RemoveTeacherList: removeArr
                 }
 
-                console.log('postData', User.user.UserDetialId, data);
 
                 Service.post(data, `${EndPoints.PupilUpdate}/${pupilProfileData.PupilId}`, (res) => {
                     if (res.code == 200) {
