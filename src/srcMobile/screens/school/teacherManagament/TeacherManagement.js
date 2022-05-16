@@ -181,9 +181,8 @@ const TeacherManagement = (props) => {
 
             {
                 DataArr.length > 0 ?
-                    <View style={{ height: '80%', marginHorizontal: 10 }}>
-                        <FlatList
-                            
+                    <View style={{ height: '80%', marginHorizontal: 5 }}>
+                        <FlatList 
                             data={DataArr}
                             renderItem={messageRender}
                             keyExtractor={(item) => item.id}
