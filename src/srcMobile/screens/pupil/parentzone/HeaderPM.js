@@ -68,7 +68,7 @@ console.log('------->>>><_______________',props);
                 <View style={styles.headerRight}>
                     <Menu>
                     {/* childrenList.length == 0 ? Images.userparent :  */}
-                        <MenuTrigger><Image style={styles.userparent} source={{ uri: baseUrl + childrenList[selectedPupilIndex].ProfilePicture }} /></MenuTrigger>
+                        <MenuTrigger><Image style={styles.userparent} source={{ uri: baseUrl + childrenList[selectedPupilIndex]?.ProfilePicture }} /></MenuTrigger>
                         <MenuOptions style={styles.filterCard}>
                             {childrenList.map((item, index) => (
                                 <MenuOption style={styles.borderList}>
@@ -77,7 +77,7 @@ console.log('------->>>><_______________',props);
                                         onPress={() => { props.onSwitchPupil(index); setSelectedPupilIndex(index) }}>
                                         <View style={styles.filterList}>
                                             <View style={styles.filterListSub}>
-                                                <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item.ProfilePicture }} />
+                                                <Image style={styles.userparentInMenu} source={{ uri: baseUrl + item?.ProfilePicture }} />
                                                 <Text numberOfLines={1} style={{ ...styles.filterListText, fontFamily: FONTS.fontSemiBold, width: hp(15) }}>{item.FirstName} {item.LastName}</Text>
                                             </View>
                                             {index == selectedPupilIndex ?

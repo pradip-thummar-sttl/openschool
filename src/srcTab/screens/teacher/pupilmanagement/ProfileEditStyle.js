@@ -196,6 +196,7 @@ export default StyleSheet.create({
         borderRadius: hp(13),
         borderColor: COLORS.white,
         borderWidth: 4,
+        backgroundColor:COLORS.greyInsightLable
     },
     topBannerBtn: {
         position: 'absolute',

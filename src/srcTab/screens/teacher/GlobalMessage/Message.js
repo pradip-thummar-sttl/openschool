@@ -46,7 +46,8 @@ const Message = (props) => {
         setLoading(true)
         let data = {
             Searchby: searchby,
-            Filterby: filterBy
+            Filterby: filterBy,
+            limit : '50'
         }
 
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {

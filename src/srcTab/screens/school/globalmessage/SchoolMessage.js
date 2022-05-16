@@ -46,7 +46,8 @@ const SchoolMessage = (props) => {
         setLoading(true)
         let data = {
             Searchby: searchby,
-            Filterby: filterBy
+            Filterby: filterBy,
+            limit:'50'
         }
 
         // Service.post(data, 'globalmessaging/60b0b79a0e74b0373679d1b6/T', (res) => {

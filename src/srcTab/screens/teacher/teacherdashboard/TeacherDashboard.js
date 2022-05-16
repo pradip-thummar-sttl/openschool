@@ -150,6 +150,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isHide, action] = useState(true);
     const [selectedId, setSelectedId] = useState(0);
     const [dataOfSubView, setDataOfSubView] = useState([])
+    const [limit,setLimit] = useState('50')
 
     let currentCount = 0
     useEffect(() => {
@@ -207,8 +208,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
         }, (err) => {
             console.log('response of get all lesson error', err)
         })
-
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        let data = {
+            Searchby:'',
+            Filterby:'',
+            page:String(1),
+            limit:limit
+        }
+        Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 console.log('response of get all pupil data', res)
@@ -218,6 +224,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             }
         }, (err) => {
             console.log('response of get all pupil error', err)
+            
         })
         return () => {
         }
@@ -470,7 +477,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                                                         color={COLORS.yellowDark}
                                                         style={{ margin: 20 }} />
                                                     :
-                                                    dashData.length > 0 && dataOfSubView ?
+                                                    dashData?.length > 0 && dataOfSubView ?
                                                         <View style={STYLE.viewRow}>
                                                             <SafeAreaView style={PAGESTYLE.leftTabbing}>
                                                                 <FlatList
