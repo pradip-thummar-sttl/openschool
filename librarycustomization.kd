@@ -8,7 +8,7 @@ dotContainer: {
   },
   dot: {
     marginHorizontal: hp('1.2%'),
-    padding: hp('1.6%'),
+    padding: hp('.8%'),
     borderRadius: hp('100.0%'),
   }
 ==========================================================

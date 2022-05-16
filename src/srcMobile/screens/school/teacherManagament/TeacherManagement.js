@@ -111,7 +111,6 @@ const TeacherManagement = (props) => {
 
     const addMorePage = () => {
 
-        console.log("More -=-=-=---->")
         if (DataArr.length > (limit - 1)) {
             setLoading(true)
             pageNo = pageNo + 1
