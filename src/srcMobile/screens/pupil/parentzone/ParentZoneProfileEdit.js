@@ -83,7 +83,7 @@ const ParentZoneProfileEdit = (props) => {
     }
 
     useEffect(() => {
-        setPupilId(profileData.PupilId)
+        setPupilId(profileData?.PupilId ? profileData.PupilId : profileData.Pupilid)
         setFirstName(profileData.FirstName)
         setLastName(profileData.LastName)
         setDob(moment(profileData.Dob).format('DD/MM/yyyy'))

@@ -101,7 +101,6 @@ const HeaderPM = (props) => {
                     <Menu>
                         <MenuTrigger>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
-                            
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>

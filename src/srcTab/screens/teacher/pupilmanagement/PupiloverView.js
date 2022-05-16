@@ -1,6 +1,6 @@
 import moment from 'moment'
 import React, { useState, useEffect } from 'react'
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Platform, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, Image, ActivityIndicator, Platform, StyleSheet, ScrollView } from 'react-native'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 import { EndPoints } from '../../../../service/EndPoints'
@@ -91,6 +91,9 @@ const PupiloverView = (props) => {
     const [searchKeyword, setSearchKeyword] = useState('')
     const [filterBy, setFilterBy] = useState('')
     const [isLoading, setLoading] = useState(true);
+    const [pagination, setPaginationData] = useState([])
+    const [limit, setLimit] = useState('50')
+    let pageNo = 1;
 
     useEffect(() => {
         console.log('`${EndPoints.PupilByTeacherId}/${User.user._id}`', `${EndPoints.PupilByTeacherId}/${User.user._id}`);
@@ -102,17 +105,19 @@ const PupiloverView = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
-            page:1,
-            limit:12
+            page: String(pageNo),
+            limit: limit
         }
 
         Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => { ///name/${searchBy}
             console.log('res of all pupil by teacher', res)
+            setPaginationData(res?.pagination)
             if (res.flag) {
                 setPupilData(res.data)
                 setLoading(false)
             } else {
                 showMessage(res.message)
+                setLoading(false)
             }
         }, (err) => {
             console.log('Err of all pupil by teacher', err)
@@ -142,8 +147,17 @@ const PupiloverView = (props) => {
         props.navigation.openDrawer()
         // props.navigation.navigate('NotificationDrawer',{ onGoBack: () => {} })
     }
+    const addMorePage = () => {
+        if (pupilData?.length !== pagination?.TotalCount && pagination !== '')  {
+        //    setLoading(true)
+            pageNo = pageNo + 1
+            setTimeout(() => { 
+                fetchRecord('','') 
+            }, 1500)
+        }
+    }
     return (
-        <View style={{ width: '100%', backgroundColor: COLORS.backgroundColorCommon }}>
+        <View style={{ width: '100%',backgroundColor: COLORS.backgroundColorCommon }}>
             <HeaderPM
                 onNotification={() => openNotification()}
                 onAlertPress={() => props.navigation.openDrawer()}
@@ -164,7 +178,7 @@ const PupiloverView = (props) => {
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                 color={COLORS.yellowDark} />
                             :
-                            pupilData.length > 0 ?
+                            pupilData?.length > 0 ?
                                 <>
                                     <View style={PAGESTYLE.pupilTable}>
                                         <View style={{ width: Platform.OS === 'android' ? 0 : hp(2) }}></View>
@@ -199,16 +213,16 @@ const PupiloverView = (props) => {
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={PAGESTYLE.pupilTabledata}>
                                         <FlatList
                                             data={pupilData}
                                             renderItem={pupilRender}
                                             keyExtractor={(item) => item.id}
                                             extraData={selectedId}
                                             showsVerticalScrollIndicator={false}
-                                            nestedScrollEnabled
+                                            // onEndReachedThreshold={0.9}
+                                            // onEndReached={() => addMorePage()}
+                                            contentContainerStyle={{flexGrow:1,paddingBottom:wp(12)}}
                                         />
-                                    </View>
                                 </>
                                 :
                                 <View style={PAGESTYLE.mainContainer}>

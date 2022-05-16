@@ -140,11 +140,11 @@ const NotificationDrawer = (props) => {
             props.navigation.replace('PupuilDashboard', { index: 1, })
         }
     }
-    const onOpenhomework = () => {
+    const onOpenhomework = (tabIndex = 1) => {
         if (User.user.UserType == "Teacher") {
-            props.navigation.replace('TeacherDashboard', { index: 2, })
+            props.navigation.replace('TeacherDashboard', { index: 2 })
         } else {
-            props.navigation.replace('PupuilDashboard', { index: 2 })
+            props.navigation.replace('PupuilDashboard', { index: 2 ,tabIndex})
         }
     }
   
@@ -209,6 +209,7 @@ const NotificationDrawer = (props) => {
                 }
             }, (err) => {
                 console.log('response of calender event eror is:', err)
+                setLoading(false)
             })
         }
 
@@ -422,7 +423,7 @@ const NotificationDrawer = (props) => {
                                                                                 <View style={[styles.timing, styles.timingOne]}>
                                                                                     <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{time}</Text>
                                                                                 </View>
-                                                                                <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                                <TouchableOpacity onPress={() => { onOpenhomework(2) }} >
                                                                                     <Text style={STYLE.openClassLink}>Check</Text>
                                                                                 </TouchableOpacity>
                                                                             </View>
@@ -451,7 +452,7 @@ const NotificationDrawer = (props) => {
                                                                                         <Clock style={[styles.closeIconSmall1, { marginRight: 5 }]} height={hp(1.5)} width={hp(1.5)} />
                                                                                         <Text numberOfLines={1} ellipsizeMode={'tail'} style={styles.timingText}>{item.SubDesc == " - " ? "-" : time}</Text>
                                                                                     </View>
-                                                                                    <TouchableOpacity onPress={() => { onOpenhomework() }} >
+                                                                                    <TouchableOpacity onPress={() => { onOpenhomework(1) }} >
                                                                                         {/* <Text style={{ ...STYLE.openClassLink, marginBottom: 0, }}>{[<PopupUser />]}</Text> */}
                                                                                         <Text style={STYLE.openClassLink}>VIEW</Text>
                                                                                     </TouchableOpacity>

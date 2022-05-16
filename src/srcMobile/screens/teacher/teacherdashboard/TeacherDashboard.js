@@ -93,6 +93,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     const [isUploading, setUploading] = useState(false);
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
+    const [limit,setLimit] = useState('50')
 
     let currentCount = 0
 
@@ -139,7 +140,13 @@ const LessonandHomeworkPlannerDashboard = (props) => {
             console.log('response of get all lesson error', err)
         })
 
-        Service.get(`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
+        let data = {
+            Searchby:'',
+            Filterby:'dob',
+            page:1,
+            limit:limit
+        }
+        Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => {
             setPupilDataLoading(false)
             if (res.code == 200) {
                 setPupilData(res.data)

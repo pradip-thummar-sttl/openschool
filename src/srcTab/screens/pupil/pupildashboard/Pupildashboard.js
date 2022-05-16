@@ -69,7 +69,6 @@ const PupuilDashboard = (props) => {
     const [isHWDetail, setHWDetail] = useState(false)
     const [isHWSubmitted, setHWSubmitted] = useState(false)
     const [isHWMarked, setHWMArked] = useState(false)
-
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
@@ -403,7 +402,7 @@ const PupuilDashboard = (props) => {
                     moduleIndex={selectedIndex}
                     navigateToDashboard={() => { setPupilLessonDetail(false); setSelectedIndex(0); getPupilAvtarList(); onRefreshData(); }}
                     navigateToTimetable={() => { setPupilLessonDetail(false); setSelectedIndex(1) }}
-                    onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2) }}
+                    onLessonAndHomework={() => { setPupilLessonDetail(false); setSelectedIndex(2); }}
                     onSetting={() => { setPupilLessonDetail(false); setSelectedIndex(3) }}
                     onAvatar={() => { setPupilLessonDetail(false); setSelectedIndex(4) }}
                     onParentZone={() => { setPupilLessonDetail(false); setSelectedIndex(5) }}
@@ -715,9 +714,9 @@ const PupuilDashboard = (props) => {
                                                             <AvtarBg width={"100%"} height={hp(55)} position={"absolute"} style={{ bottom: 0 }} />
 
                                                             <View style={{ width: "100%", height: '100%', alignItems: 'center', bottom: Platform.OS == "ios" ? '-15%' : '-18%' }}>
-                                                                {avatarListIndex == 0 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-2.9) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? wp(21.5) : "35.5%" }} ></Image>}
+                                                                {avatarListIndex == 0 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: Platform.OS === 'android' ? hp(21) : hp(15), resizeMode: 'contain', position: 'absolute', top: Platform.OS === 'android' ? hp(-2.9) : 0, zIndex: 10, alignSelf: 'center', left: Platform.OS === 'android' ? wp(22.5) : "35.5%" }} ></Image>}
                                                                 {avatarListIndex == 1 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "-9%", zIndex: 10 }} />}
-                                                                {avatarListIndex == 2 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2.4%', zIndex: 10, right: Platform.OS === 'android' ?  wp(21.2) : "38%" }} />}
+                                                                {avatarListIndex == 2 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(18), height: hp(18), resizeMode: 'contain', position: 'absolute', top: '-2.4%', zIndex: 10, right: Platform.OS === 'android' ?  wp(22.2) : "38%" }} />}
                                                                 {avatarListIndex == 3 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
                                                                 {avatarListIndex == 4 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, }} />}
                                                                 {avatarListIndex == 5 && <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(24), height: hp(24), resizeMode: 'contain', position: 'absolute', top: hp(-10), zIndex: 10, }} />}
@@ -737,7 +736,7 @@ const PupuilDashboard = (props) => {
                                     : selectedIndex == 1 ?
                                         <PupilTimetable navigation={props.navigation} />
                                         : selectedIndex == 2 ?
-                                            <PupilLessonDetail navigation={props.navigation} />
+                                            <PupilLessonDetail navigation={props.navigation} tabIndex={props?.route?.params?.tabIndex}/>
                                             : selectedIndex == 3 ?
                                                 <Setting navigation={props.navigation} />
                                                 : selectedIndex == 4 ?

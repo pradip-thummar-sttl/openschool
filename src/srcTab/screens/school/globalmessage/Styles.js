@@ -228,7 +228,7 @@ export default StyleSheet.create({
         fontSize: hp(1.85),
         fontFamily: FONTS.fontRegular,
         // paddingLeft: hp(3.2), //1.2
-        paddingLeft : Platform.OS === 'android' ? hp(3.2) : hp(1.2)
+        paddingLeft: Platform.OS === 'android' ? hp(3.2) : hp(1.2)
     },
     checkMark: {
         width: hp(2.2),
@@ -237,7 +237,7 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
     },
     checkMark1: {
-        width : Platform.OS === 'android' ? hp(4.2) : hp(2.2),
+        width: Platform.OS === 'android' ? hp(4.2) : hp(2.2),
         // width: hp(2.2),
         height: hp(2.2),
         // top: hp(0.55),
@@ -472,7 +472,7 @@ export default StyleSheet.create({
         lineHeight: hp(2.60),
         fontFamily: FONTS.fontSemiBold,
     },
-    
+
     commonInputTextareaNormal: {
         width: '100%',
         height: hp(10.67),
@@ -555,35 +555,35 @@ export default StyleSheet.create({
         alignItems: 'flex-start',
         height: hp(4.60),
         lineHeight: hp(4.60),
-        marginTop:wp(2),
+        marginTop: wp(2),
         paddingVertical: 10,
         backgroundColor: COLORS.greyBack
     },
 
-    pupilTableHeadingMessage : {
+    pupilTableHeadingMessage: {
         width: "40%",
         fontFamily: FONTS.fontRegular,
         color: COLORS.menuLightFonts,
-        marginHorizontal : 10,
-        justifyContent : 'center',
-        alignItems : 'center'
-},
-    pupilTableHeadingDate : {
-    width: "22%",
-    fontFamily: FONTS.fontRegular,
-    color: COLORS.menuLightFonts,
-    marginHorizontal : 10,
-    justifyContent : 'center',
-    alignItems : 'center'
-},
-    pupilTableHeadingStatus : {
-    width: "22%",
-    fontFamily: FONTS.fontRegular,
-    color: COLORS.menuLightFonts,
-    marginHorizontal : 10,
-    justifyContent : 'center',
-    alignItems : 'center'
-},
+        marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    pupilTableHeadingDate: {
+        width: "22%",
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    pupilTableHeadingStatus: {
+        width: "22%",
+        fontFamily: FONTS.fontRegular,
+        color: COLORS.menuLightFonts,
+        marginHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 
     pupilDashboard: {
         paddingLeft: hp(3.125),
@@ -640,41 +640,46 @@ export default StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: COLORS.white,
-        shadowColor: COLORS.black,
-        shadowOffset: { width: 0, height: 1, },
+        shadowColor:COLORS.black, 
+        shadowOffset: { //
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
         elevation: 3,
         borderRadius: hp(1.95),
         height: hp(8.85),
-        borderRadius: hp(2.0),
-        marginBottom:wp(1),
-        marginHorizontal:hp(2),
+        marginBottom: wp(1),
+        marginHorizontal: hp(2),
     },
-    pupilProfileMessage : {
-        width:'40%',
+    pupilProfileMessage: {
+        width: '40%',
         flexDirection: 'row',
         alignItems: 'center',
-        marginHorizontal : 10,
-      
+        marginHorizontal: 10,
+
     },
-    pupilProfileDate : {
-        width:'22%',
+    pupilProfileDate: {
+        width: '22%',
         flexDirection: 'row',
-        justifyContent : 'center',
+        justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal : 10,
+        marginHorizontal: 10,
     },
-    pupilProfileStatus : {
-        width:'22%',
+    pupilProfileStatus: {
+        width: '22%',
         flexDirection: 'row',
-        justifyContent : 'center',
+        justifyContent: 'center',
         alignItems: 'center',
-        marginHorizontal : 10,
+        marginHorizontal: 10,
     },
-    lastColumnArrow : {
-        width : '10%',
-        paddingHorizontal :10,
-        justifyContent : 'center',
-        alignItems :'center'
+    lastColumnArrow: {
+        width: '10%',
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     pupilProfile: {
         width: hp(15.80),
@@ -801,7 +806,7 @@ export default StyleSheet.create({
         left: hp(3.5),
     },
     userStampName: {
-        width:'70%', marginLeft:-12
+        width: '70%', marginLeft: -12
     },
     uploadBoard: {
         width: hp(33.07),
@@ -1533,7 +1538,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     searchParent: {
-        flexDirection: 'row', width:hp(55.61), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
+        flexDirection: 'row', width: hp(55.61), alignItems: 'center', marginBottom: 10, height: hp(5.20), backgroundColor: COLORS.white,
     },
     searchInner: {
         height: '100%', flex: 1, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
@@ -1546,17 +1551,17 @@ export default StyleSheet.create({
     field1: {
         marginBottom: hp(2.5),
         // marginLeft:hp(2.5),
-        marginTop:wp(2),
+        marginTop: wp(2),
         backgroundColor: COLORS.white
     },
     somePlaceholderStyle: {
         fontFamily: FONTS.fontSemiBold,
         color: COLORS.menuLightFonts,
-        paddingLeft:10
+        paddingLeft: 10
     },
     commonInputTextarea1: {
         height: hp(5.20),
-        width:'65%',
+        width: '65%',
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
         borderRadius: hp(1),
@@ -1565,8 +1570,8 @@ export default StyleSheet.create({
         // paddingRight: hp(1.5),
         paddingLeft: hp(1.5),
         marginTop: hp(1.3),
-        marginLeft:hp(1.3),
-        marginRight:wp(2),
+        marginLeft: hp(1.3),
+        marginRight: wp(2),
         fontSize: hp(1.82),
         color: COLORS.darkGray,
         lineHeight: hp(2.60),
@@ -1587,27 +1592,27 @@ export default StyleSheet.create({
         left: 2,
         top: hp(0.52),
     },
-    copyInputParent:{
-        flexDirection:'row',
-        alignItems:'center',
+    copyInputParent: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
-    inputWidth:{
-        width:'50%'
+    inputWidth: {
+        width: '50%'
     },
-    inputHeight:{
-        height:wp(15)
+    inputHeight: {
+        height: wp(15)
     },
     buttonGroup1: {
         position: 'relative',
         flexDirection: 'row',
         alignItems: 'center',
         marginRight: hp(1.69),
-        borderRadius:10,
-        borderWidth:1,
-        borderColor:COLORS.borderGrp,
-        width:hp(20),
-        marginLeft:hp(1.8)
-        
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        width: hp(20),
+        marginLeft: hp(1.8)
+
     },
     addIcon: {
         width: hp(1.55),
