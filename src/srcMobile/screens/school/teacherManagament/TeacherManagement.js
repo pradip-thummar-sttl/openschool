@@ -111,6 +111,7 @@ const TeacherManagement = (props) => {
 
     const addMorePage = () => {
 
+        console.log("More -=-=-=---->")
         if (DataArr.length > (limit - 1)) {
             setLoading(true)
             pageNo = pageNo + 1
@@ -180,9 +181,9 @@ const TeacherManagement = (props) => {
 
             {
                 DataArr.length > 0 ?
-                    <View>
+                    <View style={{ height: '80%', marginHorizontal: 10 }}>
                         <FlatList
-                            style={{ height: '80%', marginHorizontal: 10 }}
+                            
                             data={DataArr}
                             renderItem={messageRender}
                             keyExtractor={(item) => item.id}

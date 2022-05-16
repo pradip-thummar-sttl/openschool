@@ -42,7 +42,6 @@ const HeaderPM = (props) => {
     useEffect(() => {
         setChildrenList(props.data);
     }, [props.data]);
-    // console.log('222222',props);
     useEffect(() => {
         if (!isSearchActive) {
             props.onClearSearch()
@@ -56,7 +55,7 @@ const HeaderPM = (props) => {
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
-console.log('------->>>><_______________',props);
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>

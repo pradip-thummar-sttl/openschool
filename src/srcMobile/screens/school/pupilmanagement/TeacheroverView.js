@@ -73,7 +73,7 @@ const TeacheroverView = (props) => {
 
     useFocusEffect(
         React.useCallback(() => {
-            fetchRecord(searchKeyword, pageNo, filterBy);
+            fetchRecord(searchKeyword, 1, filterBy);
             return () => {
                 // Do something when the screen is unfocused
                 // alert('Home Screen was unfocused');
@@ -116,10 +116,13 @@ const TeacheroverView = (props) => {
                     DataArr = [];
                     DataArr = res.data;
                 }
-                else if (res.data) {
+                else if (res.data.length != 0) {
                     for (var i = 0; i < res.data.length; i++) {
                         DataArr.push(res.data[i]);
                     }
+                }
+                else{
+                    pageNo = pageNo - 1
                 }
                 setLoading(false)
             } else {
