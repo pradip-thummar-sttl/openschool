@@ -80,6 +80,7 @@ const PupilHomeWorkDetail = (props) => {
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.hwSubmitted, () => {
                     props.goBack()
+                    props.getHomeworkData("","")
                 })
                 setSubmitPopup(false)
                 // props.route.params.goBack()

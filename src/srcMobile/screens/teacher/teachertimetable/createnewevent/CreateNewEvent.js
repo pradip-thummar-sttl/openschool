@@ -321,7 +321,7 @@ const CreateNewEvent = (props) => {
                                 </View>
                                 <View style={styles.fieldWidthtwoMain}>
                                     <View style={styles.fieldWidthtwo1}>
-                                        <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                        <Text label style={STYLE.labelCommon}>Date</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                             {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                             <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
@@ -349,11 +349,11 @@ const CreateNewEvent = (props) => {
                                 </View>
                                 <View style={styles.fieldWidthtwoMain}>
                                     <View style={styles.fieldWidthtwo}>
-                                        <Text label style={STYLE.labelCommon}>What time is it?</Text>
+                                        <Text label style={STYLE.labelCommon}>Time From</Text>
                                         {fromTimeDropDown()}
                                     </View>
                                     <View style={styles.fieldWidthtwo}>
-                                        <Text label style={STYLE.labelCommon}></Text>
+                                        <Text label style={STYLE.labelCommon}>Time To</Text>
                                         {toTimeDropDown()}
                                     </View>
                                 </View>
@@ -658,7 +658,7 @@ const styles = StyleSheet.create({
         color: COLORS.darkGray,
         fontSize: hp('1.9%'),
         borderWidth: 1,
-        top: hp(0.5),
+        // top: hp(0.5),
         borderColor: COLORS.borderGrp,
         borderRadius: hp('1.0%'),
         lineHeight: hp(2.3),
