@@ -196,10 +196,11 @@ const LessonandHomeworkPlannerDashboard = (props) => {
     }, [])
 
     const refresh = () => {
-        Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
+        const dataOfMyday = {CurrentDate:moment(Date()).format('YYYY-MM-DD')}
+        Service.post(dataOfMyday,`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of get all lesson dash data', res)
                 setdashData(res.data)
                 setDataOfSubView(res.data[0])
             } else {
