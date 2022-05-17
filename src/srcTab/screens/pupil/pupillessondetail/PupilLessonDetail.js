@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import {
   View,
   StyleSheet,
@@ -16,6 +16,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+
+import { useFocusEffect } from "@react-navigation/native";
 import COLORS from "../../../../utils/Colors";
 import STYLE from "../../../../utils/Style";
 // import Images from '../../../../utils/Images';
@@ -407,7 +409,7 @@ const PupilLessonDetail = (props) => {
               SubmitHomeWork={SubmitHomeWork}
               MarkedHomeWork={MarkedHomeWork}
               navigatePupilHomeWorkDetail={(item) => {
-                setItem(item), setHomeworkDetail(true);
+                setItem(item), setHomeworkDetail(true); 
               }}
               navigatePupilHomeworkesubmited={(item) => {
                 setItem(item), setHomeWorkSubmitted(true);
@@ -416,6 +418,7 @@ const PupilLessonDetail = (props) => {
                 setItem(item), setHomeWorkMarked(true);
               }}
               isHomeworkLoading={isHomeworkLoading}
+              getHomeworkData={() => getHomeworkData()}
             />
           )}
         </ScrollView>
@@ -436,6 +439,7 @@ const PupilLessonDetail = (props) => {
           item={item}
           goBack={() => setHomeworkDetail(false)}
           onAlertPress={() => openNotification()}
+          getHomeworkData={() => getHomeworkData("", "")}
         />
       ) : isHomeWorkSubmitted ? (
         <PupilHomeWorkSubmitted

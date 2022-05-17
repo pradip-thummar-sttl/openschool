@@ -289,7 +289,7 @@ const PopupdataSecondPupil = (props) => {
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>Date</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <Calender style={[styles.calIcon, { top: 13 }]} height={hp(1.76)} width={hp(1.76)} />
@@ -303,7 +303,7 @@ const PopupdataSecondPupil = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo1}>
-                                            <Text label style={STYLE.labelCommon}>What time is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>Time From</Text>
                                             {/* <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
@@ -316,7 +316,7 @@ const PopupdataSecondPupil = (props) => {
                                             {fromTimeDropDown()}
                                         </View>
                                         <View style={styles.fieldWidthtwo2}>
-                                            <Text label style={STYLE.labelCommon}> </Text>
+                                            <Text label style={STYLE.labelCommon}>Time To</Text>
                                             {toTimeDropDown()}
                                         </View>
                                     </View>
@@ -371,7 +371,9 @@ const PopupdataSecondPupil = (props) => {
                                                     <ActivityIndicator
                                                         // style={STYLE.commonButtonGreen}
                                                         size={Platform.OS == 'ios' ? 'small' : 'small'}
-                                                        color={COLORS.white} />
+                                                        color={COLORS.white} 
+                                                        style={{ width : wp(9.7) }}
+                                                        />
                                                     :
                                                     <>
                                                         <TickMarkWhite style={styles.checkWhiteIcon} height={hp(1.48)} width={hp(1.48)} />
@@ -491,7 +493,7 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         textAlign: 'center',
         height: hp(5.20),
-        width : Platform.OS === 'android' ? wp(12) : wp(13),
+        // width : Platform.OS === 'android' ? wp(12) : wp(13),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
     },
