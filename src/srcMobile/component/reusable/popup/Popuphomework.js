@@ -21,12 +21,14 @@ const Popuphomework = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup, styles.commonButtonGreenheader,
-             {width: props.updateFlag ? 100 : 70}]}>
+            ]}>
                 {props.isHomeworkLoading ?
                     <ActivityIndicator
                         // style={{ alignSelf: 'center' }}
                         size={Platform.OS == 'ios' ? 'large' : 'small'}
-                        color={COLORS.white} />
+                        color={COLORS.white} 
+                        style={{width:hp(10)}}
+                        />
                     :
                     <>
                         <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />
@@ -163,10 +165,10 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         textAlign: 'center',
-        // paddingLeft: hp(4),
-        // paddingRight: hp(2),
+        paddingLeft: hp(1.5),
+        paddingRight: hp(1.5),
 
-        width: 100,
+        // width: 100,
         height: 40,
         justifyContent: 'center',
         alignItems: 'center',

@@ -330,7 +330,7 @@ const CreateNewEventPupil = (props) => {
                                 </View>
                                 <View style={styles.fieldWidthtwoMain}>
                                     <View style={styles.fieldWidthtwo1}>
-                                        <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                        <Text label style={STYLE.labelCommon}>Date</Text>
                                         <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                             {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                             <CalSmall style={styles.calIcon} width={hp(1.76)} height={hp(1.76)} />
@@ -358,11 +358,11 @@ const CreateNewEventPupil = (props) => {
                                 </View>
                                 <View style={styles.fieldWidthtwoMain}>
                                     <View style={styles.fieldWidthtwo}>
-                                        <Text label style={STYLE.labelCommon}>What time is it?</Text>
+                                        <Text label style={STYLE.labelCommon}>Time From</Text>
                                         {fromTimeDropDown()}
                                     </View>
                                     <View style={styles.fieldWidthtwo2}>
-                                        <Text label style={STYLE.labelCommon}></Text>
+                                        <Text label style={STYLE.labelCommon}>Time To</Text>
                                         {toTimeDropDown()}
                                     </View>
                                 </View>
@@ -569,7 +569,7 @@ const styles = StyleSheet.create({
         width: '50%',
         paddingLeft: hp(0.9),
         paddingRight: hp(0.9),
-        top: Platform.OS == 'android' ? hp(0.3) : hp(0.56),
+        // top: Platform.OS == 'android' ? hp(0.3) : hp(0.56),
     },
     fieldWidthtwo1: {
         width: '100%',

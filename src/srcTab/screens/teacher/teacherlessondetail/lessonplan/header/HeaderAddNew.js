@@ -34,7 +34,7 @@ const HeaderAddNew = (props) => {
                     <TouchableOpacity style={[styles.buttonGroup,styles.saveLessonBtn]} activeOpacity={opacity} onPress={() => props.saveLesson()}>
                         {
                             props.isLoading ?
-                                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />
+                                <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white}   style={{width:hp(11)}}/>
                              :
                                 <>
                                     <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width :Platform.OS === 'ios' ? hp(17) : hp(17.5),
+        // width :Platform.OS === 'ios' ? hp(17) : hp(17.5),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',

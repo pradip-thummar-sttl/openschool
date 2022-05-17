@@ -21,11 +21,12 @@ const Popuphomework = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={() => props.onOpenPopup()} style={[styles.buttonGroup,styles.setHomeworkBtnn,
-                 {width: props.updateFlag ? hp(23): hp(20)}]}>
+            ]}>
                   {props.isHomeworkLoading ?
                     <ActivityIndicator
                         size={Platform.OS == 'ios' ? 'large' : 'small'}
-                        color={COLORS.dashboardGreenButton} />
+                        color={COLORS.white} 
+                        style={{width:hp(14)}}/>
                     :
                     <>
                         <TickMarkWhite style={[styles.addIcon, styles.iconTop]} height={hp(1.55)} width={hp(1.55)} />

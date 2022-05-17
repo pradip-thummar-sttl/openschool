@@ -40,7 +40,9 @@ const HeaderUpdate = (props) => {
                             <ActivityIndicator
                                 // style={styles.commonButtonGreenheaderwithouticon}
                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                color={COLORS.white} />
+                                color={COLORS.white} 
+                                style={{width:hp(13)}}
+                                />
                             :
                             <>
                                 <TickMarkWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width : hp(19),
+        // width : hp(19),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',
