@@ -145,20 +145,20 @@ const GroupSetUp = () => {
 
     const SelectedPupillist = (props) => (
         <View>
-            <View style={PAGESTYLE.selectedPupilParent}>
+            <View style={[PAGESTYLE.selectedPupilParent,{justifyContent:'space-around'}]}>
                 <Image
                     style={PAGESTYLE.selectedMediabar}
                     source={{ uri: baseUrl + props.item.ProfilePicture }} />
                 <Text style={PAGESTYLE.selectedPupilName} numberOfLines={1}>{props.item.FirstName} {props.item.LastName}</Text>
                 <TouchableOpacity
-                    style={{ justifyContent: 'center', flex: 1 }}
+                    style={{ justifyContent: 'center',width:20}}
                     activeOpacity={opacity}
                     onPress={() => popPupil(props.index)}>
                     {/* <Image
                         style={PAGESTYLE.selectedRemove}
                         source={Images.PopupCloseIcon} /> */}
 
-                        <CloseBlack style={PAGESTYLE.selectedRemove} width={13} height={13}  />
+                        <CloseBlack style={PAGESTYLE.cancel} width={13} height={13}  />
                 </TouchableOpacity>
             </View>
         </View>
@@ -172,7 +172,6 @@ const GroupSetUp = () => {
     };
 
     const Grouplist = (props) => (
-        console.log('props of log ===============>',props.item),
         <View style={PAGESTYLE.groupParent}>
             <View style={PAGESTYLE.groupTitle}>
                 <Text style={PAGESTYLE.groupName} numberOfLines={1}>{props.item.GroupName}</Text>
@@ -206,7 +205,6 @@ const GroupSetUp = () => {
     );
 
     const groupRender = ({ item, index }) => {
-        console.log('===================>',item, index);
         return (
             <Grouplist
                 item={item} index={index} />
