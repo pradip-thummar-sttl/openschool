@@ -175,7 +175,9 @@ const PupuilDashboard = (props) => {
     }
 
     const refresh = () => {
-        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
+        const dataOfMyday = {CurrentDate:moment(Date()).format('YYYY-MM-DD')}
+
+        Service.post(dataOfMyday,`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
                 setMyClass(res.data)

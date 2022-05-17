@@ -105,7 +105,8 @@ const PupuilDashboard = (props) => {
 
     const onRefreshData = () => {
         setMyDayLoading(true);
-        Service.get(`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
+        const dataOfMyday = {CurrentDate:moment(Date()).format('YYYY-MM-DD')}
+        Service.post(dataOfMyday,`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             if (res.flag === true) {
                 setMyDay(res.data)
                 setDataOfSubView(res.data[0])

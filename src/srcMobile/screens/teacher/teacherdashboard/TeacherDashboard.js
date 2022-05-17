@@ -128,7 +128,9 @@ const LessonandHomeworkPlannerDashboard = (props) => {
 
     const refresh = () => {
         console.log(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`);
-        Service.get(`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
+        const dataOfMyday = {CurrentDate:moment(Date()).format('YYYY-MM-DD')}
+
+        Service.post(dataOfMyday,`${EndPoints.GetMyDayByTeacherId}/${User.user._id}`, (res) => {
             setDashDataLoading(false)
             if (res.code == 200) {
                 setdashData(res.data)
