@@ -345,7 +345,7 @@ const NotificationDrawer = (props) => {
                                             })
                                             :
                                             <View style={{ height: 100, justifyContent: 'center' }}>
-                                                <Text style={{ alignItems: 'center', fontSize: 16, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
+                                                <Text style={{ alignItems: 'center', fontSize: 16, padding: 10, textAlign: 'center', fontFamily: FONTS.fontRegular }}>No new notifications!</Text>
                                             </View>
                                     }
                                 </>

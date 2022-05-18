@@ -39,6 +39,8 @@ const SPupilProfileEdit = (props) => {
     const [isSelectedDate, setSelectedDate] = useState('')
     const [isUserType, setUserType] = useState('')
     const [isLoading, setLoading] = useState(false);
+  const [addedTeacher, setAddedTeacher] = useState([]);
+
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [removeTeacher, setRemovedTeacher] = useState([])
     const [teachers, setTeachers] = useState([])
@@ -176,12 +178,16 @@ const SPupilProfileEdit = (props) => {
 
         var selectArr = [];
         var removeArr = [];
-        selectedTeacher.forEach(element => {
-            selectArr.push({ TeacherId: element })
-        });
-        removeTeacher.forEach(element => {
-            removeArr.push({ TeacherId: element })
-        });
+       selectedTeacher.forEach((element) => {
+            if (!addedTeacher.includes(element)) {
+              selectArr.push({ TeacherId: element });
+            }
+          });
+          removeTeacher.forEach((element) => {
+            if (addedTeacher.includes(element)) {
+              removeArr.push({ TeacherId: element });
+            }
+          });
 
 
         let data = {

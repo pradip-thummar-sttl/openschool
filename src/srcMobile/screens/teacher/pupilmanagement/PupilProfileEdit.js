@@ -23,7 +23,7 @@ import { Service } from '../../../../service/Service';
 import { EndPoints } from '../../../../service/EndPoints';
 import { User } from "../../../../utils/Model";
 
-
+import CheckBox from '@react-native-community/checkbox';
 
 const { CallModule } = NativeModules;
 
@@ -51,6 +51,7 @@ const PupilProfileEdit = (props) => {
     const [dob, setDob] = useState(moment(pupilProfileData.Dob).format('DD/MM/yyyy'));
     const [selectedTeacher, setSelectedTeacher] = useState([])
     const [removeTeacher, setRemovedTeacher] = useState([])
+    const [addedTeacher, setAddedTeacher] = useState([]);
 
     const handleBackButtonClick = () => {
         props.navigation.goBack()
@@ -157,12 +158,16 @@ const PupilProfileEdit = (props) => {
                 })
                 var selectArr = [];
                 var removeArr = [];
-                selectedTeacher.forEach(element => {
-                    selectArr.push({ TeacherId: element })
-                });
-                removeTeacher.forEach(element => {
-                    removeArr.push({ TeacherId: element })
-                });
+                selectedTeacher.forEach((element) => {
+                    if (!addedTeacher.includes(element)) {
+                      selectArr.push({ TeacherId: element });
+                    }
+                  });
+                  removeTeacher.forEach((element) => {
+                    if (addedTeacher.includes(element)) {
+                      removeArr.push({ TeacherId: element });
+                    }
+                  });
 
                 let data = {
                     FirstName: firstName,
@@ -248,6 +253,58 @@ const PupilProfileEdit = (props) => {
         })
 
     }
+
+    const selectTeacher = (item, index, isCheck) => {
+        console.log('hello check check index of check flag', index, isCheck);
+        var selectTech = [...selectedTeacher];
+        var removeTech = [...removeTeacher];
+        if (selectTech.includes(item.TeacherId)) {
+            let idx = selectTech.indexOf(item.TeacherId)
+            selectTech.splice(idx, 1)
+            removeTech.push(item.TeacherId)
+        } else {
+            selectTech.push(item.TeacherId)
+            if (removeTech.includes(item.TeacherId)) {
+                let idx = removeTech.indexOf(item.TeacherId)
+                removeTech.splice(idx, 1)
+            }
+        }
+        setSelectedTeacher(selectTech);
+        setRemovedTeacher(removeTech);
+
+        console.log('hello dude select and remove array is', selectTech, removeTech);
+    }
+
+    const teacherDropDown = () => {
+        return (
+            <View style={[PAGESTYLE.commonInputGrayBack, { marginBottom: hp(2) }]}>
+                <Text style={[PAGESTYLE.labelForm, { paddingLeft: hp(1.5), }]}>Assigned Teacher</Text>
+
+                <FlatList
+                    showsVerticalScrollIndicator={false}
+                    data={teachers}
+                    numColumns={2}
+                    renderItem={({ item, index }) => (
+                        <View style={PAGESTYLE.alignRow}>
+                            <CheckBox
+                                style={[PAGESTYLE.checkMark1]}
+                                value={selectedTeacher.includes(item.TeacherId) ? true : false}
+                                boxType={'square'}
+                                tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                onCheckColor={COLORS.white}
+                                onFillColor={COLORS.dashboardPupilBlue}
+                                onTintColor={COLORS.dashboardPupilBlue}
+                                tintColor={COLORS.dashboardPupilBlue}
+                                onValueChange={(check) => selectTeacher(item, index, check)}
+                            />
+                            <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName + ' ' + item.LastName}</Text>
+                        </View>
+                    )}
+                />
+
+            </View>
+        );
+    };
 
     return (
         <View>
@@ -348,6 +405,9 @@ const PupilProfileEdit = (props) => {
                                 {/* <Image style={PAGESTYLE.calIcon} source={Images.CalenderIconSmall} /> */}
                                 <Ic_Calendar style={PAGESTYLE.calIcon} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
+                        </View>
+                        <View >
+                            {teacherDropDown()}
                         </View>
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
