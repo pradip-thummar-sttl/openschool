@@ -145,7 +145,7 @@ const NotificationDrawer = (props) => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard', { index: 2 })
         } else {
-            props.navigation.replace('PupuilDashboard', { index: 2 ,tabIndex})
+            props.navigation.replace('PupuilDashboard', { index: 2 , tabIndex })
         }
     }
   
@@ -490,7 +490,7 @@ const NotificationDrawer = (props) => {
                                                 })
                                                 :
                                                 <View style={{ height: 100, justifyContent: 'center' }}>
-                                                    <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center' }}>No new notifications!</Text>
+                                                    <Text style={{ alignItems: 'center', fontSize: 20, padding: 10, textAlign: 'center', fontFamily: FONTS.fontRegular }}>No new notifications!</Text>
                                                 </View>
 
                                         }
