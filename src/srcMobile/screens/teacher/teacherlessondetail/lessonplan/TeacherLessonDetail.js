@@ -24,7 +24,7 @@ const TLDetail = (props) => {
 
     return (
         <View style={PAGESTYLE.whiteBg}>
-            <View style={PAGESTYLE.containerWrap}>
+            <ScrollView contentContainerStyle={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
                     <View style={PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -197,7 +197,7 @@ const TLDetail = (props) => {
                         null
                     }
                 </View>
-            </View>
+            </ScrollView>
         </View>
 
     );
