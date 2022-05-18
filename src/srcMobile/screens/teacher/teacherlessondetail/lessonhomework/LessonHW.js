@@ -354,7 +354,7 @@ const TLHomeWork = (props) => {
                         }]}>
                             <CheckBox
                                 style={{ width: 20, height: 20, margin: 0, padding: 0 }}
-                                value={item.IsCheck}
+                                value={!item.IsCheck}
                                 boxType={'square'}
                                 tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                 onCheckColor={COLORS.white}
