@@ -587,5 +587,28 @@ export default StyleSheet.create({
     },
     bottomText: {
         color: COLORS.darkGray, fontFamily: FONTS.fontRegular, padding: 10
-    }
+    },
+    alignRow: {
+        flexDirection: 'row',
+        width: '50%',
+    },
+    checkMark1: {
+        // position :'absolute',
+        // alignContent: 'flex-end',
+        width:20,
+        height:20,
+        top:3
+        // marginVertical:10,
+        // right: 10,
+    },
+    checkBoxLabelText: {
+        lineHeight: hp(2.82),
+        // paddingTop:5,
+        fontSize: hp(1.72),
+        fontFamily: FONTS.fontRegular,
+        paddingLeft: Platform.OS === 'ios' ? hp(1.5) : hp(3),
+        minHeight: hp(6),
+        paddingRight: hp(1),
+    },
+
 });
