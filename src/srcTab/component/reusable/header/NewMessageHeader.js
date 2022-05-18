@@ -36,7 +36,8 @@ const NewMessageHeader = (props) => {
                                 <ActivityIndicator
                                     // style={STYLE.commonButtonGreen}
                                     size={Platform.OS == 'ios' ? 'small' : 'small'}
-                                    color={COLORS.white} />
+                                    color={COLORS.white} 
+                                    style={{width:hp(12)}}/>
                                 :
                                 <>
                                     <Ic_CheckWhite style={styles.addIcon} height={hp(1.55)} width={hp(1.55)} />
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width : Platform.OS ==='ios'? hp(20) : hp(19),
+        // width : Platform.OS ==='ios'? hp(20) : hp(19),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         alignSelf: 'center',

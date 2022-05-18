@@ -310,7 +310,7 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.fieldWidthtwoMain}>
                                         <View style={styles.fieldWidthtwo}>
-                                            <Text label style={STYLE.labelCommon}>What day is it?</Text>
+                                            <Text label style={STYLE.labelCommon}>Date</Text>
                                             <TouchableOpacity onPress={() => showDatePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 {/* <Image style={styles.calIcon} source={Images.CalenderIconSmall} /> */}
                                                 <Calender style={styles.calIcon} height={hp(1.76)} width={hp(1.76)} />
@@ -324,7 +324,7 @@ const PopupdataSecond = (props) => {
                                             </TouchableOpacity>
                                         </View>
                                         <View style={styles.fieldWidthtwo1}>
-                                            <Text label style={STYLE.labelCommon1}>What time is it?</Text>
+                                            <Text label style={STYLE.labelCommon1}>Time From</Text>
                                             {/* <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
                                                 <Image style={styles.calIcon} source={Images.Clock} />
                                                 <View style={styles.subjectDateTime}>
@@ -337,7 +337,7 @@ const PopupdataSecond = (props) => {
                                             {fromTimeDropDown()}
                                         </View>
                                         <View style={styles.fieldWidthtwo2}>
-                                            <Text label style={STYLE.labelCommon}> </Text>
+                                            <Text label style={STYLE.labelCommon}>Time To </Text>
                                             {toTimeDropDown()}
                                         </View>
                                     </View>
@@ -388,7 +388,7 @@ const PopupdataSecond = (props) => {
                                                 activeOpacity={opacity}>
                                                 {isLoading ?
                                                     <ActivityIndicator
-                                                        // style={{ ...styles.buttonGrp, right: 30 }}
+                                                        style={{ width : wp(5.5) }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                         color={COLORS.white} />
                                                     :
@@ -466,7 +466,7 @@ const styles = StyleSheet.create({
         paddingLeft: hp(4.175),
         paddingRight: hp(2.50),
         height: hp(5.20),
-        width : Platform.OS === 'ios' ? hp(16) : hp(17),
+        // width : Platform.OS === 'ios' ? hp(16) : hp(17),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
         justifyContent : 'center',

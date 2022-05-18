@@ -88,13 +88,16 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         right: 10,
     },
+    cancel : {
+        width: 13,
+    },
     groupEdit: {
         width: 15,
         resizeMode: 'contain',
     },
     selectedPupilName: {
         fontSize: 14,
-        marginLeft: 7,
+        marginLeft: 15,
         paddingRight: 10,
         fontFamily: FONTS.fontRegular,
         color: COLORS.darkGrayIntro,
