@@ -45,6 +45,8 @@ import {
 } from "react-native-responsive-screen";
 import HeaderPMInnerEdit from "./HeaderPMInnerEdit";
 import Ic_Calendar from "../../../../svg/pupil/parentzone/Ic_Calendar";
+import CheckBox from '@react-native-community/checkbox';
+
 
 const PupilProfileEdit = (props) => {
   const [isHide, action] = useState(true);
