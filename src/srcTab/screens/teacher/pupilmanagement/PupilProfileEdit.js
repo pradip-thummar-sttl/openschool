@@ -480,7 +480,6 @@ const PupilProfileEdit = (props) => {
                       editable={false}
                       autoCapitalize={"words"}
                       maxLength={40}
-                      editable={false}
                       placeholderTextColor={COLORS.menuLightFonts}
                       onChangeText={(lastName) => setUniqueCode(uniqueCode)}
                     />
