@@ -203,7 +203,6 @@ const SchoolMessage = (props) => {
             Searchby: searchby,
             Filterby: filterBy
         }
-console.log('gfhfuehjheikurfkirrf==>',`${EndPoints.GlobalMessaging}/${User.user._id}/S`);
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/S`, (res) => {
             setLoading(false)
             if (res.code == 200) {
