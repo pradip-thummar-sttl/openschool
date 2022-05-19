@@ -82,6 +82,7 @@ const TLDetailAdd = (props) => {
 
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+    const [limit, setLimit] = useState('50')
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -118,8 +119,13 @@ const TLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetParticipants', err)
         })
-
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        const data = {
+            Searchby: "",
+            Filterby: "",
+            page: "1",
+            limit: limit
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             console.log('response of GetPupilByTeacherId response', res)
             if (res.code == 200) {
                 let newData = []

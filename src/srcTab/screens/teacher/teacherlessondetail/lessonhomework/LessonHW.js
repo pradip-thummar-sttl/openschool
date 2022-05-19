@@ -164,7 +164,6 @@ const TLHomeWork = (props) => {
 
     const onCheckList = (index) => {
         itemCheckList[index].IsCheck = !itemCheckList[index].IsCheck
-        console.log('check item', itemCheckList)
         Addhomework.CheckList = itemCheckList
         setcheckVal(!checkVal);
     }

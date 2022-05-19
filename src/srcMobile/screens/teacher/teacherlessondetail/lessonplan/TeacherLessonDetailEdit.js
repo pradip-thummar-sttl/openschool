@@ -54,6 +54,7 @@ const TLDetailEdit = (props) => {
     const [isAddRecording, setAddRecording] = useState(false)
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+    const [limit, setLimit] = useState('50')
     var tempPupil = [];
 
     useEffect(() => {
@@ -165,7 +166,14 @@ const TLDetailEdit = (props) => {
     }, [])
 
     const getAllPupils = () => {
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        const data = {
+            Searchby: "",
+            Filterby: "",
+            page: "1",
+            limit: limit
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        
             if (res.code == 200) {
                 let newData = []
                 res.data.forEach(element => {
