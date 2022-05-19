@@ -29,7 +29,7 @@ const STLDetail = (props) => {
     return (
 
         <View style={PAGESTYLE.whiteBg}>
-            <View style={PAGESTYLE.containerWrap}>
+            <ScrollView contentContainerStyle={PAGESTYLE.containerWrap}>
                 <View style={PAGESTYLE.teacherDetailLeft}>
                     <View style={PAGESTYLE.timedateGrp, PAGESTYLE.timedateGrpRow}>
                         <View style={PAGESTYLE.dateWhiteBoard}>
@@ -250,7 +250,7 @@ const STLDetail = (props) => {
                         </View>
                     </View> */}
                 </View>
-            </View>
+            </ScrollView>
         </View>
 
     );

@@ -110,6 +110,7 @@ const TLDetailEdit = (props) => {
 
     const [isRemoveRecordingArr, setRemoveRecordingArr] = useState([]);
     const [isRemoveMaterialArr, setRemoveMaterialArr] = useState([]);
+    const [limit, setLimit] = useState('50')
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -167,7 +168,13 @@ const TLDetailEdit = (props) => {
     }, [])
 
     const getAllPupils = () => {
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        const data = {
+            Searchby: "",
+            Filterby: "",
+            page: "1",
+            limit: limit
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             if (res.code == 200) {
                 let newData = []
                 res.data.forEach(element => {
@@ -421,9 +428,10 @@ const TLDetailEdit = (props) => {
         );
     };
 
-    const showRemainingPupils = (item) => {
+    const showRemainingPupils = (pupils,item) => {
         // setSelectedPupils([])
         let newArr = []
+        console.log('pupils of editable',pupils);
         pupils.forEach(ele1 => {
             let flag = false
             item.PupilList.forEach(ele2 => {
