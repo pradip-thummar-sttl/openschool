@@ -401,14 +401,14 @@ const TLDetailEdit = (props) => {
                     <TextInput
                         ref={item}
                         returnKeyType={"done"}
-                        onSubmitEditing={() => { item.current.focus(); }}
+                        // onSubmitEditing={() => {  }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items your pupil need to prepare before class"
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }}
-                        onSubmitEditing={() => pushCheckListItem()}
+                        onSubmitEditing={() =>{item.current.focus(); pushCheckListItem()}}
                     />
                     <TouchableOpacity
                         style={{ alignSelf: 'flex-end', position: 'absolute', right: 10, paddingLeft: 12, borderLeftColor: COLORS.borderGrp, borderLeftWidth: 1, }}
