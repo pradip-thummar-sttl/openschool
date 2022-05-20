@@ -87,8 +87,8 @@ const STLDetailAdd = (props) => {
 
     const [currentRecordMode, setCurrentRecordMode] = useState('isScreen');
     const [videoRecordingResponse, setVideoRecordingResponse] = useState([])
+    const [limit, setLimit] = useState('50')
 
-    
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -124,8 +124,13 @@ const STLDetailAdd = (props) => {
         }, (err) => {
             console.log('error of GetParticipants', err)
         })
-
-        Service.get(`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
+        const data = {
+            Searchby: "",
+            Filterby: "",
+            page: "1",
+            limit: limit
+        }
+        Service.post(data,`${EndPoints.GetPupilByTeacherId}${User.user._id}`, (res) => {
             console.log('response of GetPupilByTeacherId response', res)
             if (res.code == 200) {
                 let newData = []
@@ -328,47 +333,47 @@ const STLDetailAdd = (props) => {
     }
     const stopRecording = async () => {
         if (recordingName.length > 0) {
-         
-        var arr = []
-        const res = await RecordScreen.stopRecording().catch((error) => {
-            setRecordingStarted(false)
-            console.warn(error)
-        });
-        if (res) {
-            setRecordingStarted(false)
-            const url = res.result.outputURL;
-            let ext = url.split('.');
-            // let obj = {
-            //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
-            //     originalname: 'MY_RECORDING.mp4',
-            //     fileName: 'MY_RECORDING.mp4',
-            //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
-            // }
-            let obj = {
-                uri: Platform.OS == 'android' ? 'file:///' + url : url,
-                originalname: `${recordingName}.mp4`,
-                fileName: `${recordingName}.mp4`,
-                type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+
+            var arr = []
+            const res = await RecordScreen.stopRecording().catch((error) => {
+                setRecordingStarted(false)
+                console.warn(error)
+            });
+            if (res) {
+                setRecordingStarted(false)
+                const url = res.result.outputURL;
+                let ext = url.split('.');
+                // let obj = {
+                //     uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                //     originalname: 'MY_RECORDING.mp4',
+                //     fileName: 'MY_RECORDING.mp4',
+                //     type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                // }
+                let obj = {
+                    uri: Platform.OS == 'android' ? 'file:///' + url : url,
+                    originalname: `${recordingName}.mp4`,
+                    fileName: `${recordingName}.mp4`,
+                    type: 'video/' + (ext.length > 0 ? ext[1] : 'mp4')
+                }
+                arr.push(obj)
+                setRecordingArr(arr)
+                setScreenVoiceSelected(false)
+                setRecordingName("")
+                toggleModal()
+                console.log('url', url);
             }
-            arr.push(obj)
-            setRecordingArr(arr)
-            setScreenVoiceSelected(false)
-            setRecordingName("")
-            toggleModal()
-            console.log('url', url);
+        } else {
+            // setRecordingStarted(false)
+            // toggleModal()
+            showMessage('Please provide recording name proper')
         }
-    }else{
-        // setRecordingStarted(false)
-        // toggleModal()
-        showMessage('Please provide recording name proper')
-    }
     }
 
-//
+    //
 
 
 
-//
+    //
 
 
 
@@ -441,7 +446,7 @@ const STLDetailAdd = (props) => {
             mediaType: "video",
             cameraType: "back"
         };
-     
+
         launchCamera(options, (response) => {
             // Same code as in above section!
             if (response.errorCode) {
@@ -914,7 +919,7 @@ const STLDetailAdd = (props) => {
                                                 value={recordingName}
                                                 placeholderStyle={PAGESTYLE.somePlaceholderStyle}
                                                 placeholderTextColor={COLORS.popupPlaceHolder}
-                                                style={[PAGESTYLE.commonInputTextarea,{height:50,width:'89%'}]}
+                                                style={[PAGESTYLE.commonInputTextarea, { height: 50, width: '89%' }]}
                                                 onChangeText={eventName => setRecordingName(eventName)} />
                                         </View>
                                     </View>
@@ -927,7 +932,7 @@ const STLDetailAdd = (props) => {
                                 activeOpacity={opacity}>
                                 <Text style={[STYLE.commonButtonGreenDashboardSide,]}>save</Text>
                             </TouchableOpacity>
-                    </View>
+                        </View>
                     </View>
                 </KeyboardAwareScrollView>
             </Modal>
