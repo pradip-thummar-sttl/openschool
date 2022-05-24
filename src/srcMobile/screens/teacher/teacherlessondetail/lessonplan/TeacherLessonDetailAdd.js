@@ -254,6 +254,7 @@ const TLDetailAdd = (props) => {
     const startRecording = async () => {
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
+            console.log('tldetail add check permission',res);
             if (res === "granted") {
                 setRecordingStarted(true)
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
@@ -468,7 +469,7 @@ const TLDetailAdd = (props) => {
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                         value={isPupilChecked(index)}
-                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                        // tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                         onValueChange={(newValue) => { pushPupilItem(newValue, index) }}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>
