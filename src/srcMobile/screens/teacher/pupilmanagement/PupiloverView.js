@@ -120,7 +120,7 @@ const PupiloverView = (props) => {
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                     </View>
                     <View style={PAGESTYLE.groupPupil}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.GroupName ? item.GroupName : '-'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item?.GroupName.length  !== 0 ? item.GroupName : '-'}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.rewardColumn}>

@@ -21,7 +21,7 @@ import ArrowNext from "../../../../svg/teacher/lessonhwplanner/ArrowNext";
 var moment = require('moment');
 
 var pageNo = 1;
-var limit = 10;
+var limit = 50;
 var DataArr = [];
 
 const Pupillist = (props, { style }) => (
@@ -43,10 +43,10 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(1), color: props?.item?.LiveSession === true ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props?.item?.LiveSession === true ? 'Yes' : 'No' }</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.Publish === true ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.Publish === true ? 'Yes' : 'No'}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>

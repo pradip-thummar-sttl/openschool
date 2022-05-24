@@ -242,7 +242,6 @@ const PupilProfileEdit = (props) => {
       setLoading(false);
       return;
     }
-
     let data = new FormData();
     let ext = profileUri.uri.split(".");
 
@@ -288,7 +287,7 @@ const PupilProfileEdit = (props) => {
 
         <FlatList
           showsVerticalScrollIndicator={false}
-          data={teachers}
+          data={addedTeacher}
           numColumns={2}
           renderItem={({ item, index }) => (
             <View style={PAGESTYLE.alignRow}>

@@ -169,6 +169,7 @@ const Message = (props) => {
     const [selectedId, setSelectedId] = useState(null);
     const [isLoading, setLoading] = useState(false)
     const [messageData, setMessageData] = useState([])
+    const [limit,setLimit] = useState('50')
 
     const MessageList = (item) => {
         return (
@@ -213,7 +214,9 @@ const Message = (props) => {
         setLoading(true)
         let data = {
             Searchby: searchby,
-            Filterby: filterBy
+            Filterby: filterBy,
+            pageNo : '1',
+            limit : limit
         }
 
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {

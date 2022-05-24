@@ -179,7 +179,7 @@ console.log('endpoint  url', `${EndPoints.PupilUploadHomework}/${item.HomeWorkId
                                                 <View style={PAGESTYLE.alignRow}>
                                                     <CheckBox
                                                         style={PAGESTYLE.checkMark}
-                                                        value={item.IsCheck}
+                                                        value={!item.IsCheck}
                                                         boxType={'square'}
                                                         disabled
                                                         tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}

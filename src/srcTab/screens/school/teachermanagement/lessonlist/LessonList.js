@@ -31,10 +31,10 @@ const Pupillist = (props, { }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: hp(12) }]}>{props.item.GroupName}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.LiveSession).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.LiveSession === true ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props?.item?.LiveSession === true ? 'Yes' : 'No' }</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
-                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props.item.LiveSession ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{(props.item.Publish).toString()}</Text>
+                <Text style={[PAGESTYLE.pupilName, PAGESTYLE.yesText, { marginLeft: hp(0.8), color: props?.item?.Publish === true ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props?.item?.Publish === true ? 'Yes' : 'No' }</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.lastColumn]}>
                 <Text style={[PAGESTYLE.pupilName, PAGESTYLE.noText, { marginLeft: hp(0.8), color: props.item.HomeWork == 'Yes' ? COLORS.dashboardPupilBlue : COLORS.yellowDark }]}>{props.item.HomeWork}</Text>
@@ -81,6 +81,8 @@ const LessonList = (props) => {
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
+            limit : '50',
+            pageNo:'1'
         }
         Service.post(data, `${EndPoints.GetLessionById}/${props.data.TeacherId}`, (res) => {
             setLessonLoading(false)

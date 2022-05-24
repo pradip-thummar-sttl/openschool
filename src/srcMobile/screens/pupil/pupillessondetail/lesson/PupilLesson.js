@@ -33,7 +33,7 @@ const PupilLesson = (props) => {
                                 {currentWeekLesson.length > 0 ?
                                     <>
                                        
-                                        <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons for Week beginning</Text>
+                                        <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Lessons for This Week</Text>
                                         <ScrollView showsHorizontalScrollIndicator={false} horizontal={true} style={PAGESTYLE.videoWrap}>
                                             {
                                                 currentWeekLesson.map((item) => {

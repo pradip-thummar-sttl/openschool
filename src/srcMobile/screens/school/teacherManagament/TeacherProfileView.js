@@ -21,7 +21,6 @@ import STLessonList from "./schoolLessonlist/STLessonList";
 
 const TeacherProfileView = (props) => {
     const item = props.route.params.item;
-    console.log('item', item)
     const [tabSelected, setTabSelected] = useState(0);
     const [teacherCountData, setTeacherCountData] = useState([])
 
@@ -68,7 +67,7 @@ const TeacherProfileView = (props) => {
             <HeaderPTInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('TeacherProfileEdit', { item: item })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('TeacherProfileEdit', { item: item,onGoBack:() => props.route.params.onGoBack() })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
                 onNotification={() => openNotification()} />
