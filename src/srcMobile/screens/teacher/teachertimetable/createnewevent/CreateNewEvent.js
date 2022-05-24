@@ -390,9 +390,9 @@ const CreateNewEvent = (props) => {
                                                     <ArrowDown style={styles.dropDownArrowdatetime} height={hp(1.51)} width={hp(1.51)} />
                                                 </View>
                                             </TouchableOpacity>
-                                            <TouchableOpacity>
+                                            {/* <TouchableOpacity>
                                                 <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
-                                            </TouchableOpacity>
+                                            </TouchableOpacity> */}
                                         </View>
                                     </View>
                                 </View>

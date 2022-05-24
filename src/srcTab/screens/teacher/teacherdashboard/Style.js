@@ -533,7 +533,7 @@ export default StyleSheet.create({
     uploadVideoTextStl:{ textAlign: 'center', color: COLORS.darkGray, fontSize: 16, fontWeight: 'bold', marginBottom:hp(2) },
 
     buttonGrp: {
-        width: '30%',
+        width: '47.5%',
         backgroundColor: COLORS.dashboardGreenButton,
         borderRadius: 6,
         overflow: 'hidden',
@@ -554,7 +554,7 @@ export default StyleSheet.create({
     },
 
     btnEditStyle: {
-        width: '65%',
+        width: '47.5%',
         backgroundColor: COLORS.white,
         borderRadius: 6,
         overflow: 'hidden',

@@ -113,31 +113,34 @@ const PupilHomeWorkMarked = (props) => {
                                             <Text style={PAGESTYLE.descriptionText}>{item.Feedback}</Text>
                                         </View>
                                     </View>
-                                    <View style={PAGESTYLE.feedbackVideoBlock}>
-                                        {item.RecordingList.length == 0 ?
-                                            null
+                                    {
+                                        item.RecordingList.length == 0 ?
+                                            null 
                                             :
-                                            <View style={PAGESTYLE.largeVideoBlock}>
-                                                <View style={{ height: '100%', justifyContent: 'center' }}>
-                                                    <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
-                                                        resizeMode={'contain'}
-                                                        style={PAGESTYLE.largeVideo1}
-                                                        controls={true}
-                                                        paused={isPaused} />
-                                                    {isPaused ?
-                                                        <TouchableOpacity
-                                                            activeOpacity={opacity}
-                                                            onPress={() => setPause(!isPaused)}>
-                                                            {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
-                                                            <PlayBlue style={{ resizeMode: 'cover', alignSelf: 'center' }} height={hp(4)} width={hp(4)} />
-                                                        </TouchableOpacity>
-                                                        :
-                                                        null
-                                                    }
+                                            <View style={PAGESTYLE.feedbackVideoBlock}>
+
+                                                <View style={PAGESTYLE.largeVideoBlock}>
+                                                    <View style={{ height: '100%', justifyContent: 'center' }}>
+                                                        <Video source={{ uri: baseUrl + item.RecordingList[0].filename }}
+                                                            resizeMode={'contain'}
+                                                            style={PAGESTYLE.largeVideo1}
+                                                            controls={true}
+                                                            paused={isPaused} />
+                                                        {isPaused ?
+                                                            <TouchableOpacity
+                                                                activeOpacity={opacity}
+                                                                onPress={() => setPause(!isPaused)}>
+                                                                {/* <Image source={Images.PlayIcon} style={{ width: 30, height: 30, resizeMode: 'cover', alignSelf: 'center' }} /> */}
+                                                                <PlayBlue style={{ resizeMode: 'cover', alignSelf: 'center' }} height={hp(4)} width={hp(4)} />
+                                                            </TouchableOpacity>
+                                                            :
+                                                            null
+                                                        }
+                                                    </View>
                                                 </View>
                                             </View>
-                                        }
-                                    </View>
+
+                                    }
                                 </View>
                             </View>
                         </ScrollView>
@@ -149,13 +152,13 @@ const PupilHomeWorkMarked = (props) => {
                                     style={{ alignSelf: 'center', }}
                                     renderItem={({ item, index }) => (
                                         <TouchableOpacity onPress={() => {
-                                            setLoader(true);setMateIndex(index); Download(item, (res) => {
+                                            setLoader(true); setMateIndex(index); Download(item, (res) => {
                                                 setLoader(false)
                                                 setMateIndex(-1)
                                             })
                                         }} style={PAGESTYLE.downloaBtn}>
                                             <View style={PAGESTYLE.alignRow1}>
-                                                {(isMatLoading && index==mateIndex) ?
+                                                {(isMatLoading && index == mateIndex) ?
                                                     <ActivityIndicator
                                                         style={{ ...PAGESTYLE.pdfIcon }}
                                                         size={Platform.OS == 'ios' ? 'large' : 'small'}
@@ -163,7 +166,7 @@ const PupilHomeWorkMarked = (props) => {
                                                     :
 
                                                     // <Image source={Images.pdfIcon} style={PAGESTYLE.pdfIcon} />
-                                                <Doc style={PAGESTYLE.pdfIcon} width={wp(7)} height={wp(7)}/>
+                                                    <Doc style={PAGESTYLE.pdfIcon} width={wp(7)} height={wp(7)} />
 
                                                 }
                                             </View>

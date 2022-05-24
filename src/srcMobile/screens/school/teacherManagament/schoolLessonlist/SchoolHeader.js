@@ -70,7 +70,9 @@ const SchoolHeader = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} />
+                        }} 
+                        onSubmitEditing={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}
+                        />
                     <Menu>
                         <MenuTrigger>
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />

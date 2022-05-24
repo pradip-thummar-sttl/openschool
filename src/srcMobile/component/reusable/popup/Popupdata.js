@@ -342,13 +342,12 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                     </View>
-                                    <View style={[styles.uploadCalendar, { marginBottom: 10 }]}>
+                                    {/* <View style={[styles.uploadCalendar, { marginBottom: 10 }]}>
                                         <TouchableOpacity>
-                                            {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
                                             <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
                                         </TouchableOpacity>
 
-                                    </View>
+                                    </View> */}
                                 </ScrollView>
                                 <View style={styles.lessonstartButton}>
                                     {/* {!props.isPupil && props.data.Type == Lesson?

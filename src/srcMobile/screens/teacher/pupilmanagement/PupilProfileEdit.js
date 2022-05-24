@@ -255,7 +255,6 @@ const PupilProfileEdit = (props) => {
     }
 
     const selectTeacher = (item, index, isCheck) => {
-        console.log('hello check check index of check flag', index, isCheck);
         var selectTech = [...selectedTeacher];
         var removeTech = [...removeTeacher];
         if (selectTech.includes(item.TeacherId)) {
@@ -282,7 +281,7 @@ const PupilProfileEdit = (props) => {
 
                 <FlatList
                     showsVerticalScrollIndicator={false}
-                    data={teachers}
+                    data={addedTeacher}
                     numColumns={2}
                     renderItem={({ item, index }) => (
                         <View style={PAGESTYLE.alignRow}>

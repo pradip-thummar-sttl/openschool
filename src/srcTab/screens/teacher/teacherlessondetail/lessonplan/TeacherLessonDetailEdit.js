@@ -757,7 +757,8 @@ const TLDetailEdit = (props) => {
         if (materialArr.length == 0 && recordingArr.length == 0 && lessionId) {
             showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
                 // props.route.params.onGoBack();
-                props.goBack()
+                props.onRefresh();
+                props.goBack();
             })
             setLoading(false)
             return
@@ -766,7 +767,8 @@ const TLDetailEdit = (props) => {
         if (data._parts.length == 0) {
             showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
                 // props.route.params.onGoBack();
-                props.goBack()
+                props.onRefresh();
+                props.goBack();
             })
             setLoading(false)
             return
@@ -779,7 +781,8 @@ const TLDetailEdit = (props) => {
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.lessonUpdated, () => {
                     // props.route.params.onGoBack();
-                    props.goBack()
+                    props.onRefresh();
+                    props.goBack();
                 })
             } else {
                 setLoading(false)
@@ -1050,10 +1053,10 @@ const TLDetailEdit = (props) => {
                                                 <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsPublishBeforeSesson} onToggle={isOn => setPublishBeforeSesson(isOn)} />
                                             </View>
-                                            <View style={PAGESTYLE.toggleGrp}>
+                                            {/* <View style={PAGESTYLE.toggleGrp}>
                                                 <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
                                                 <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={IsVotingEnabled} onToggle={isOn => setVotingEnabled(isOn)} />
-                                            </View>
+                                            </View> */}
                                         </View>
                                     </View>
                                     <View style={PAGESTYLE.rightSideBar}>

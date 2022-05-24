@@ -37,7 +37,7 @@ const HeaderPMInner = (props) => {
                 <View style={styles.titleRow}>
                     <TouchableOpacity
                         activeOpacity={opacity}
-                        onPress={() => props.navigateToBack()}>
+                        onPress={() => {props.refresh();props.navigateToBack()}}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
                         <BackArrow style={styles.arrow} height={hp(2.4)} width={hp(2.4)} />
                     </TouchableOpacity>

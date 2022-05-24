@@ -35,7 +35,7 @@ const Pupillist = (props) => (
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.TeachingYear}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{props.item.TeachingYear.length > 0 ? props.item.TeachingYear : ' - '}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>

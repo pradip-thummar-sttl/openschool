@@ -66,10 +66,10 @@ export default StyleSheet.create({
     },
     checkBoxcommon: {
         // width: hp(4.2),
-        width : Platform.OS === 'android' ? hp(4.2) : hp(1.8),
+        width: Platform.OS === 'android' ? hp(4.2) : hp(1.8),
         height: hp(1.8),
         top: 0,
-       
+
     },
     checkBoxcommon1: {
         width: 20,
@@ -135,9 +135,9 @@ export default StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        
+
     },
-   
+
     commonButtonGreenDashboardSide: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
@@ -155,10 +155,18 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
         // marginBottom : 10,
-        paddingVertical : Platform.OS === 'android' ? 10 : 15
+        paddingVertical: Platform.OS === 'android' ? 10 : 15
+    },
+    commonClassBtn: {
+
+        color: COLORS.white,
+        fontSize: hp(1.56),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     commonButtonGreenDashboardSideSetHomework: {
-        width  :200,
+        width: 200,
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
@@ -167,8 +175,8 @@ export default StyleSheet.create({
         // textAlign: 'center',
         // paddingLeft: hp(3.125),
         // paddingRight: hp(3.125),
-        justifyContent : 'center',
-        alignItems : 'center',
+        justifyContent: 'center',
+        alignItems: 'center',
         // paddingTop: hp(1.21),
         // paddingBottom: hp(1.21),
         // alignSelf: 'center',
@@ -177,7 +185,7 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
         // marginBottom : 10,
-        paddingVertical : Platform.OS === 'android' ? 10 : 15
+        paddingVertical: Platform.OS === 'android' ? 10 : 15
     },
     commonButtonBordered: {
         backgroundColor: COLORS.transparent,
@@ -227,13 +235,13 @@ export default StyleSheet.create({
         position: 'absolute',
         right: hp(1.21),
         zIndex: 9,
-      },
+    },
     cancelButtonHomework: {
         position: 'absolute',
         right: hp(1.21),
         zIndex: 9,
-        width : 20,
-        height : 30
+        width: 20,
+        height: 30
     },
     cancelButtonIcon: {
         width: hp(2.94),
@@ -315,6 +323,14 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.buttonGreen,
     },
+   markAbsentText: {
+        color: COLORS.buttonGreen,
+        fontSize: hp(1.56),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
+    },
+    
     labelCommon: {
         fontSize: hp(1.82),
         color: COLORS.lightGray,
@@ -368,17 +384,17 @@ export default StyleSheet.create({
     },
 
     btnEditView: {
-        width:hp(17),
-        height:hp(5),
-        marginRight:hp(2),
-        marginTop:hp(2),
+        width: hp(17),
+        height: hp(5),
+        marginRight: hp(2),
+        marginTop: hp(2),
         backgroundColor: COLORS.buttonGreen,
         borderRadius: hp('1.3%'),
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
         fontFamily: FONTS.fontBold,
     },
-    
+
     txtEditView: {
         color: COLORS.white,
         fontSize: hp(1.7),

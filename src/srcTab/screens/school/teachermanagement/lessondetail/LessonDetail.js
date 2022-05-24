@@ -207,7 +207,7 @@ const LessonDetail = (props) => {
         })
 
     }
-
+   
     return (
         <View style={PAGESTYLE.mainPage}>
 
@@ -269,11 +269,18 @@ const LessonDetail = (props) => {
                                         placeholderTextColor={COLORS.menuLightFonts}
                                         onChangeText={keyword => {
                                             setSearchKeyword(keyword);
-                                        }} />
+                                        }}
+                                        onSubmitEditing={ () => { isSearchActive ? setSearchActive(false):setSearchActive(true) }}
+                                        />
                                     <TouchableOpacity
                                         style={[PAGESTYLE.userIcon1Parent,]}
                                         activeOpacity={opacity}
-                                        onPress={() => {searchKeyword ? isSearchActive && setSearchActive(false):setSearchActive(true)}}>
+                                        onPress={() => {
+                                            isSearchActive ?
+                                                setSearchActive(false)
+                                                :
+                                                setSearchActive(true)
+                                        }}>
                                         {isSearchActive ?
                                             <CloseBlack style={PAGESTYLE.userIcon1} height={20} width={20} />
                                             :

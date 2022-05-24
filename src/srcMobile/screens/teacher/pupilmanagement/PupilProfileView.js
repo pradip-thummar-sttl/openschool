@@ -38,7 +38,7 @@ const PupilProfileView = (props) => {
     const [isGold, setGold] = useState(false);
     const [feedBack, setFeedback] = useState('')
 
-    console.log('item', item);
+    
     // const handleOnClick = (index) => {
     //     setTabSelected(index)
     // }
@@ -167,6 +167,7 @@ const PupilProfileView = (props) => {
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
+                refresh={() => props.route.params.onGoBack()}
                 navigateToPupilProfileEdit={() => props.navigation.replace('PupilProfileEdit', { item: item, onGoBack: () => props.route.params.onGoBack() })}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}

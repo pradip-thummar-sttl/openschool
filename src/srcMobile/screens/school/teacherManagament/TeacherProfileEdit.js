@@ -19,6 +19,9 @@ import { launchCamera, launchImageLibrary } from "react-native-image-picker/src"
 import FONTS from "../../../../utils/Fonts";
 
 const TeacherProfileEdit = (props) => {
+
+    
+
     const item = props.route.params.item;
     const [isFirstName, setFirstName] = useState();
     const [isLastName, setLastName] = useState();
@@ -104,6 +107,10 @@ const TeacherProfileEdit = (props) => {
         });
         return id;
     }
+    const refresh = () => {
+        alert(JSON.stringify(props.route.params.onGoBack))
+        return props.route.params.onGoBack;
+    }
 
     const validateFields = () => {
         if (!isFirstName.trim()) {
@@ -150,7 +157,10 @@ const TeacherProfileEdit = (props) => {
            
             showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
                 props.navigation.goBack();
+                props.route.params.onGoBack()
+              
             })
+            
             return
         }
 
@@ -164,8 +174,10 @@ const TeacherProfileEdit = (props) => {
         Service.postFormData(data, `${EndPoints.TeacherUploadProfile}/${teacherId}`, (res) => {
             if (res.code == 200) {
                 setLoading(false)
-                showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=>{
+                showMessageWithCallBack(MESSAGE.updateTeacherProfile, ()=> {
                     props.navigation.goBack();
+                    props.route.params.onGoBack();
+                   
                 })
             } else {
                 showMessage(res.message)
@@ -176,6 +188,7 @@ const TeacherProfileEdit = (props) => {
         })
 
     }
+  
 
     const showActionChooser = () => {
         Alert.alert(
