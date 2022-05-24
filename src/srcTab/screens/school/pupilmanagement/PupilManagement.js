@@ -41,7 +41,7 @@ const Pupillist = (props, { item }) => (
             </View>
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
             <View style={PAGESTYLE.groupColumn}>
-                {/* <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props?.item?.GroupName?.length !== 0 ? props?.item?.GroupName[0] : '-'}</Text> */}
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilgroupName1, { width: wp(9) }]}>{props?.item?.GroupName?.length !== 0 ? props?.item?.GroupName[0] : '-'}</Text>
             </View>
             {/* </View> */}
             {/* <View style={PAGESTYLE.groupColumnmain}> */}
