@@ -82,10 +82,7 @@ const PopupdataSecondPupil = (props) => {
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
-        } else if (!note.trim()) {
-            showMessage(MESSAGE.note);
-            return false;
-        }
+        } 
         saveEvent()
     }
 
@@ -359,7 +356,7 @@ const PopupdataSecondPupil = (props) => {
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
                                             {/* <Image style={styles.uploadCalIcon} source={Images.UploadCalender} /> */}
-                                            <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
+                                            {/* <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} /> */}
 
                                         </TouchableOpacity>
                                         <View style={[styles.lessonstartButton]}>

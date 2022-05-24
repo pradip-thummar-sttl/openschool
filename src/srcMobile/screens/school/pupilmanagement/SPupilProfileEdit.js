@@ -46,7 +46,8 @@ const SPupilProfileEdit = (props) => {
     const [teachers, setTeachers] = useState([])
     const item = props.route.params.item;
     const navigateToBack = props.route.params.navigateToBack;
-    console.log('xyz----------', item)
+    const refresh = props.route.params.refresh
+   
 
     useEffect(() => {
         setFirstName(item.FirstName);
@@ -173,6 +174,7 @@ const SPupilProfileEdit = (props) => {
 
         saveProfile()
     }
+    
     const saveProfile = () => {
         setLoading(true)
 
@@ -270,7 +272,6 @@ const SPupilProfileEdit = (props) => {
     }
 
     const selectTeacher = (item, index, isCheck) => {
-        console.log('hello check check index of check flag', index, isCheck);
         var selectTech = [...selectedTeacher];
         var removeTech = [...removeTeacher];
         if (selectTech.includes(item.TeacherId)) {

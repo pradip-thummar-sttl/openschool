@@ -132,7 +132,6 @@ const PupilProfileView = (props) => {
         props.navigateToBack()
     }
 
-    console.log('props', props.selectedPupil);
     return (
         <View style={PAGESTYLE.mainPage1}>
             <HeaderPMInner

@@ -107,9 +107,6 @@ const CreateNewEventPupil = (props) => {
         } else if (!location.trim()) {
             showMessage(MESSAGE.location);
             return false;
-        } else if (!note.trim()) {
-            showMessage(MESSAGE.note);
-            return false;
         }
         saveEvent()
     }

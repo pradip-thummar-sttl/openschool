@@ -63,7 +63,7 @@ const TeacherManagement = (props) => {
             <TouchableOpacity
                 activeOpacity={opacity}
                 style={{ ...PAGESTYLE.pupilData, marginBottom: 8 }}
-                onPress={() => props.navigation.navigate('TeacherProfileView', { item: item })}>
+                onPress={() => props.navigation.navigate('TeacherProfileView', { item: item, onGoBack : () => refresh()})}>
                 <View style={PAGESTYLE.pupilProfile}>
                     <View style={PAGESTYLE.rowProfile}>
                         <Image style={PAGESTYLE.pupilImage} source={{ uri: baseUrl + item.ProfilePicture }}></Image>
@@ -73,7 +73,7 @@ const TeacherManagement = (props) => {
                         </View>
                     </View>
                     <View style={PAGESTYLE.groupPupil}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.TeachingYear ? item.TeachingYear : '-'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item.TeachingYear ? item.TeachingYear : ' - '}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.pupilDetailLink}>
@@ -87,7 +87,7 @@ const TeacherManagement = (props) => {
         return (
             <MessageList
                 item={item}
-                navigateToDetail={() => { }} />
+                navigateToDetail={() =>{} } />
         );
     };
 
@@ -163,7 +163,7 @@ const TeacherManagement = (props) => {
             <HeaderTM
                 onAlertPress={() => props.navigation.openDrawer()}
                 openCsv={() => { }}
-                navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher', { onGoBack: () => refresh() })}
+                navigateToCreateNewEvent={() => props.navigation.navigate('AddNewTeacher')}
 
                 onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
                 onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}

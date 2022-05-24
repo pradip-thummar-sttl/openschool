@@ -91,7 +91,8 @@ const Pupillist = ({ item, onPress }) => (
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear}</Text>
+                    {console.log('item.TeachingYear',item.TeachingYear.length)}
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear.length > 0 ? item.TeachingYear : "-"}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>

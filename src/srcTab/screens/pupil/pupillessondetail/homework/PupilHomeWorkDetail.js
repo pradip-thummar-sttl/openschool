@@ -185,7 +185,7 @@ const PupilHomeWorkDetail = (props) => {
                                                 <CheckBox
                                                     tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                                     style={PAGESTYLE.checkMark}
-                                                    value={item.IsCheck}
+                                                    value={!item.IsCheck}
                                                     boxType={'square'}
                                                     disabled
                                                     onCheckColor={COLORS.white}

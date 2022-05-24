@@ -129,7 +129,9 @@ const HeaderPMInner = (props) => {
                                     maxLength={50}
 
                                     placeholderTextColor={COLORS.menuLightFonts}
-                                    onChangeText={keyword => { setSearchKeyword(keyword); }} />
+                                    onChangeText={keyword => { setSearchKeyword(keyword); }} 
+                                    onSubmitEditing={() => { onSearch() }}
+                                    />
                             </View>
 
                             <View style={{ flexDirection: 'row', alignItems: 'center',marginRight: 10 ,width : hp(16),paddingHorizontal : 2}}>
