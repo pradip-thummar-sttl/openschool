@@ -50,7 +50,7 @@ const PupilProfileView = (props) => {
     useEffect(() => {
         getLessonData()
     }, [])
-console.log('==+++',props.navigation.openDrawer);
+
     const getLessonData = () => {
         Service.get(`${EndPoints.GetCountLession}/${item.PupilId}`, (res) => {
             if (res.flag) {

@@ -46,9 +46,11 @@ const SPupilProfileEdit = (props) => {
     const [teachers, setTeachers] = useState([])
     const item = props.route.params.item;
     const navigateToBack = props.route.params.navigateToBack;
-    const refresh = props.route.params.refresh
+    const refresh = () => {
+        return  props.route.params.refresh()
+    }
    
-
+    // console.log('helllo props refresh',refresh());
     useEffect(() => {
         setFirstName(item.FirstName);
         setLastName(item.LastName);
@@ -227,6 +229,7 @@ const SPupilProfileEdit = (props) => {
             setLoading(false)
             showMessageWithCallBack(MESSAGE.updatePupilProfile, () => {
                 navigateToBack();
+                refresh();
             })
             return
         }
@@ -245,6 +248,7 @@ const SPupilProfileEdit = (props) => {
 
                 showMessageWithCallBack(MESSAGE.updatePupilProfile, () => {
                     navigateToBack();
+                    refresh();
                 })
             } else {
                 showMessage(res.message)
