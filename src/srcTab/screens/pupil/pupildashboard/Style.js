@@ -1,6 +1,6 @@
 import { Dimensions, Platform, StyleSheet } from 'react-native'
 import COLORS from '../../../../utils/Colors';
-import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
 import { color } from 'react-native-reanimated';
 
@@ -26,7 +26,7 @@ export default StyleSheet.create({
     rightContent: {
         flexDirection: 'row',
     },
-    ScrollViewFlatlist:{
+    ScrollViewFlatlist: {
         height: hp(60),
     },
     dayIcon: {
@@ -66,7 +66,7 @@ export default StyleSheet.create({
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(0.2),},
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         height: hp(67.70),
@@ -75,11 +75,11 @@ export default StyleSheet.create({
         marginTop: hp(5),
         backgroundColor: COLORS.dashboardHomeWorkPurple,
     },
-    pupilGridTopBg:{
+    pupilGridTopBg: {
         position: 'absolute',
         resizeMode: 'contain',
         width: hp(40.49),
-        height:hp(10.67),
+        height: hp(10.67),
         top: hp(-9.76),
         right: hp(18.88),
     },
@@ -111,24 +111,24 @@ export default StyleSheet.create({
         marginTop: 7,
     },
     whiteBoard: {
-        width:'100%',
+        width: '100%',
         backgroundColor: COLORS.white,
         borderRadius: hp(1),
         marginTop: hp(1.30),
         borderColor: COLORS.commonBorderColor,
         borderWidth: 1,
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: hp(0.2),},
+        shadowOffset: { width: 0, height: hp(0.2), },
         shadowOpacity: 0.16,
         shadowRadius: hp(1.95),
         overflow: 'hidden',
     },
     timeIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.76),
     },
     calIcon: {
-        resizeMode:'contain',
+        resizeMode: 'contain',
         width: hp(1.76),
     },
     pupilBoard: {
@@ -184,7 +184,7 @@ export default StyleSheet.create({
     },
     leftTabbing: {
         width: '40%',
-        borderRightWidth:1,
+        borderRightWidth: 1,
         borderColor: COLORS.commonBorderColor,
     },
     rightTabContent: {
@@ -285,7 +285,7 @@ export default StyleSheet.create({
     mediabar: {
         width: hp(4.16),
         height: hp(4.16),
-        borderRadius: hp(4.16/2),
+        borderRadius: hp(4.16 / 2),
         backgroundColor: COLORS.lightGrayPupil,
     },
     moreMedia: {
@@ -408,17 +408,24 @@ export default StyleSheet.create({
     },
     lessonstartButton: {
         flexDirection: 'row',
-        alignSelf:'flex-end',
+        alignSelf: 'flex-end',
         marginLeft: hp(-1),
         marginRight: hp(-1),
         marginBottom: 60
-    },    
+    },
+    btnModifiesPupil: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        alignSelf: 'center',
+    },
     lessonstartButtonTroffy: {
         flexDirection: 'row',
-        alignSelf:'center',
+        alignSelf: 'center',
         marginLeft: hp(-1),
         marginRight: hp(-1),
-    },    
+    },
     buttonGrp: {
         paddingLeft: 7.5,
         paddingRight: 7.5,
@@ -446,36 +453,36 @@ export default StyleSheet.create({
     tabpupil4: {
         width: hp(18.22),
     },
-    dashboardOrangeBox:{
+    dashboardOrangeBox: {
         backgroundColor: COLORS.orage,
-        padding:hp(1),
+        padding: hp(1),
         borderRadius: hp(1),
         position: 'relative',
         zIndex: 9,
     },
-    orangeBoxTop:{
-        justifyContent:'flex-end',
+    orangeBoxTop: {
+        justifyContent: 'flex-end',
         zIndex: 9,
     },
-    orangeBoxBottom:{
+    orangeBoxBottom: {
         flexDirection: 'row',
         flex: 1,
         marginTop: hp(-3),
         zIndex: 9,
     },
-    pupilHeader:{
+    pupilHeader: {
         paddingLeft: 0,
         paddingRight: 0,
         zIndex: 9,
     },
-    dashboardPurpleBox:{
+    dashboardPurpleBox: {
         backgroundColor: COLORS.dashboardHomeWorkPurple,
-        padding:hp(1),
+        padding: hp(1),
         borderRadius: hp(1),
-        marginTop: hp(14.),    
+        marginTop: hp(14.),
     },
-    purpleBoxTop:{
-        justifyContent:'flex-end',
+    purpleBoxTop: {
+        justifyContent: 'flex-end',
         position: 'relative',
         zIndex: 9,
     },
@@ -489,11 +496,11 @@ export default StyleSheet.create({
         justifyContent: 'space-between',
         height: hp(8.5),
     },
-    pupilHomeWorkGridTopBg:{
+    pupilHomeWorkGridTopBg: {
         position: 'absolute',
         resizeMode: 'contain',
         width: hp(46.87),
-        height:hp(14.41),
+        height: hp(14.41),
         top: hp(-13.29),
         right: 50,
     },
@@ -511,105 +518,105 @@ export default StyleSheet.create({
         resizeMode: 'contain',
         top: 3.7,
     },
-    achivementWrap:{
+    achivementWrap: {
         flexDirection: 'row',
-        marginTop:hp(7.5),
-        marginBottom:hp(7.5),
-        width:'100%',
+        marginTop: hp(7.5),
+        marginBottom: hp(7.5),
+        width: '100%',
         alignItems: 'center',
     },
-    achivementRobot:{
+    achivementRobot: {
         width: '67%',
         shadowColor: COLORS.transparent,
         alignItems: 'center',
     },
-    achivementBox:{
+    achivementBox: {
         borderColor: COLORS.dashboardBorder,
         borderWidth: 1,
         borderTopWidth: 0,
         width: '33%',
-        alignItems:'center',
-        backgroundColor:COLORS.white,
-        borderRadius:6,
+        alignItems: 'center',
+        backgroundColor: COLORS.white,
+        borderRadius: 6,
         // overflow:'hidden',
-        paddingBottom:hp(3.8),
+        paddingBottom: hp(3.8),
         shadowColor: COLORS.black,
-        shadowOffset: {width: 0,height: 5,},
+        shadowOffset: { width: 0, height: 5, },
         shadowOpacity: 0.08,
         shadowRadius: 10,
         elevation: 1,
-       
-        paddingTop : hp(3.8)
+
+        paddingTop: hp(3.8)
     },
-    starCovertPoints:{
+    starCovertPoints: {
         fontSize: hp(3.125),
-        fontFamily: FONTS.fontBold, 
-        marginBottom: hp(1.8),   
+        fontFamily: FONTS.fontBold,
+        marginBottom: hp(1.8),
     },
-    starCovert:{
+    starCovert: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.8),
         paddingTop: hp(1.8),
     },
-    rewardStar:{
-        width :hp(43.48),
-        height:hp(9.98),
+    rewardStar: {
+        width: hp(43.48),
+        height: hp(9.98),
         resizeMode: 'contain',
         marginTop: -11,
         borderTopLeftRadius: 6,
         borderTopRightRadius: 6,
     },
-    rewardStarMark:{
+    rewardStarMark: {
         justifyContent: 'space-around',
-        width:'100%',
-        marginBottom:hp(3),
+        width: '100%',
+        marginBottom: hp(3),
         flexDirection: 'row',
-        paddingTop:hp(1.8),
-        paddingBottom:hp(1.8),
-        borderBottomWidth:1,
-        borderBottomColor:COLORS.bottomProfileLightBorder,
-        borderTopWidth:1,
-        borderTopColor:COLORS.bottomProfileLightBorder,
+        paddingTop: hp(1.8),
+        paddingBottom: hp(1.8),
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.bottomProfileLightBorder,
+        borderTopWidth: 1,
+        borderTopColor: COLORS.bottomProfileLightBorder,
     },
-    starSelected:{
-        width:hp(4.94),
-        height:hp(4.68),
+    starSelected: {
+        width: hp(4.94),
+        height: hp(4.68),
         resizeMode: 'contain',
-        alignItems:'center',
+        alignItems: 'center',
         alignSelf: 'center',
         marginBottom: hp(1.30),
     },
-    starSelectedText:{
+    starSelectedText: {
         fontFamily: FONTS.fontBold,
-        color:COLORS.white,
+        color: COLORS.white,
         fontSize: hp(1.82),
         lineHeight: hp(5.1),
     },
-    centerStar:{
-        borderLeftWidth:1,
+    centerStar: {
+        borderLeftWidth: 1,
         borderColor: COLORS.bottomProfileLightBorder,
-        borderRightWidth:1,
+        borderRightWidth: 1,
         width: hp(14.32),
         alignItems: 'center',
     },
-    cartoon:{
+    cartoon: {
         resizeMode: 'contain',
-        width:hp(57.51),
-        height:hp(35.18),
+        width: hp(57.51),
+        height: hp(35.18),
     },
-    starText:{
+    starText: {
         fontFamily: FONTS.fontRegular,
         fontSize: hp(1.82),
         color: COLORS.darkGrayIntro,
     },
-    centerText:{
-        alignItems:'center',
+    centerText: {
+        alignItems: 'center',
     },
 
     // new update
     buttonView: {
-        width:wp(12),
-        height:Platform.OS === 'android' ? hp(5.5) : hp(5),
+        width: wp(12),
+        height: Platform.OS === 'android' ? hp(5.5) : hp(5),
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
@@ -625,7 +632,31 @@ export default StyleSheet.create({
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
-        marginBottom : 10
+        marginBottom: 10
+    },
+    joinPupil: {
+        width: '47.5%',
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: 6,
+        overflow: 'hidden',
+        alignItems: 'center',
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        alignSelf: 'center',
+        borderWidth: 1,
+        borderColor: COLORS.dashboardGreenButton,
+        justifyContent:'center'
+    },
+    markAbsentBtn: {
+        width: '47.5%',
+        backgroundColor: COLORS.transparent,
+        borderRadius: hp(1),
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        borderWidth: 1,
+        borderColor: COLORS.buttonGreen,
+        alignItems: 'center',
+        justifyContent:'center'
     },
     txtJointClass: {
         color: COLORS.white,

@@ -29,6 +29,7 @@ const Message = (props) => {
     const [keyword, setKeyword] = useState('')
     const [isAddMessage, setAddMessage] = useState(false)
     const [selectedItem, setSelectedItem] = useState()
+    const [limit,setLimit]= useState('50')
 
     const pupilRender = ({ item, index }) => {
         return (
@@ -47,7 +48,7 @@ const Message = (props) => {
         let data = {
             Searchby: searchby,
             Filterby: filterBy,
-            limit : '50'
+            limit : limit
         }
 
         Service.post(data, `${EndPoints.GlobalMessaging}/${User.user._id}/T`, (res) => {

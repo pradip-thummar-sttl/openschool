@@ -324,9 +324,13 @@ const Popupdata = (props) => {
                                             }
                                         </View>
                                         <View style={styles.uploadCalendar}>
-                                            <TouchableOpacity>
-                                                <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
-                                            </TouchableOpacity>
+                                            {!props.isPupil && props.data.Type == Lesson ?
+                                                null
+                                                :
+                                                <TouchableOpacity>
+                                                    {/* <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} /> */}
+                                                </TouchableOpacity>
+                                            }
 
                                             <View style={styles.lessonstartButton}>
                                                 {!props.isPupil && props.data.Type == Lesson ?
@@ -334,7 +338,7 @@ const Popupdata = (props) => {
                                                         style={styles.buttonGrp1}
                                                         activeOpacity={opacity}
                                                         onPress={() => { toggleModal(); props.navigateToDetail() }}>
-                                                        <Text style={[styles.commonButtonBordered]}>Edit Lesson</Text>
+                                                        <Text style={[styles.editCommonBtn]}>Edit Lesson</Text>
                                                     </TouchableOpacity>
                                                     :
                                                     <View style={{ width: hp(20) }}></View>
@@ -349,7 +353,7 @@ const Popupdata = (props) => {
                                                                 style={{ ...styles.buttonGrp, paddingVertical: 13 }}
                                                                 size={Platform.OS == 'ios' ? 'large' : 'small'}
                                                                 color={COLORS.white} /> :
-                                                            <Text style={STYLE.commonButtonGreenDashboardSide}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
+                                                            <Text style={STYLE.commonClassBtn}>{props.isPupil ? 'Join Class' : 'Start Class'}</Text>
 
                                                     }
                                                 </TouchableOpacity>
@@ -608,17 +612,31 @@ const styles = StyleSheet.create({
     },
     lessonstartButton: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        top : 6
+        // justifyContent: 'flex-end',
+        // alignItems: 'center',
+        top: 6,
     },
     buttonGrp: {
-        width: hp(18),
-        marginLeft: hp(1),
+        width: hp(25),
+        marginLeft: hp(1.5),
+        backgroundColor: COLORS.dashboardGreenButton,
+        borderRadius: hp(1),
+        borderWidth: 1,
+        borderColor: COLORS.dashboardGreenButton,
+        // marginBottom : 10,
+        paddingVertical: Platform.OS === 'android' ? 10 : 15,
+        alignItems: 'center'
     },
     buttonGrp1: {
-        width: hp(32),
-        marginLeft: hp(1),
+        width: hp(25),
+        backgroundColor: COLORS.transparent,
+        borderRadius: 6,
+        alignItems: 'center',
+        paddingTop: hp(1.21),
+        paddingBottom: hp(1.21),
+        borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        marginLeft: hp(1.5),
     },
     calIcon: {
         width: hp(1.8),
@@ -659,6 +677,13 @@ const styles = StyleSheet.create({
         fontFamily: FONTS.fontBold,
         borderWidth: 1,
         borderColor: COLORS.borderGrp,
+    },
+    editCommonBtn: {
+        color: COLORS.darkGray,
+        fontSize: hp(1.56),
+        overflow: 'hidden',
+        textTransform: 'uppercase',
+        fontFamily: FONTS.fontBold,
     },
     uploadVideoStl: {
         width: '50%', height: '100%', alignSelf: 'center',

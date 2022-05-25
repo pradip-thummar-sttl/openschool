@@ -379,7 +379,7 @@ const PopupdataSecond = (props) => {
                                     </View>
                                     <View style={styles.uploadCalendar}>
                                         <TouchableOpacity>
-                                            <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} />
+                                            {/* <CalendarUpload style={styles.uploadCalIcon} height={hp(5.20)} width={hp(5.20)} /> */}
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
                                             <TouchableOpacity

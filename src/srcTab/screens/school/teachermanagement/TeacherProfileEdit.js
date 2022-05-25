@@ -146,7 +146,7 @@ const TeacherProfileEdit = (props) => {
         })
         
     }
-    console.log('==========',props);
+    
     const uploadProfile = (teacherId) => {
         if (!isProfileUri) {
             setLoading(false)

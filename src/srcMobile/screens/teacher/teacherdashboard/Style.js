@@ -85,6 +85,7 @@ export default StyleSheet.create({
     groupPupil: {
         left: hp(5.2),
         bottom: hp(0.6),
+        
     },
     date: {
         fontSize: Platform.OS == 'android' ? hp(1.7) : hp(1.82),

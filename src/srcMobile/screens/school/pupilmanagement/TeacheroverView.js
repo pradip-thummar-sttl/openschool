@@ -25,7 +25,6 @@ import { useFocusEffect } from "@react-navigation/native";
 const { CallModule } = NativeModules;
 
 var pageNo = 1;
-var limit = 10;
 var DataArr = [];
 
 const TeacheroverView = (props) => {
@@ -136,7 +135,12 @@ const TeacheroverView = (props) => {
         })
     }
 
-   
+    const refreshRender = () => {
+        // textInput.current.clear()
+        pageNo = 1;
+        setSearchKeyword("")
+        fetchRecord(1, "", filterBy);
+    }
 
     const openNotification = () => {
         BadgeIcon.isBadge = false

@@ -22,7 +22,7 @@ import TickMarkGrey from "../../../../svg/teacher/lessonhwplanner/TickMark_Grey"
 
 
 var pageNo = 1;
-var limit = 25;
+var limit = 50;
 var DataArr = [];
 
 const TeacherLessonList = (props) => {

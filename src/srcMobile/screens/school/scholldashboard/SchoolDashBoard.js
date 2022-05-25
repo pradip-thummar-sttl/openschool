@@ -98,7 +98,7 @@ const SchoolDashBoard = (props) => {
 
                     <View >
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(40) }]}>{item.FirstName} {item.LastName}</Text>
-                        <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.TeachingYear}</Text>
+                        <Text numberOfLines={1} style={PAGESTYLE.groupName}>{item.TeachingYear.length > 0 ? item.TeachingYear : " - "}</Text>
                     </View>
                     {/* {item.sort((a,b) => {
                         var nameA = a.FirstName.toUpperCase();

@@ -554,12 +554,12 @@ const PupuilDashboard = (props) => {
                                                                                                 keyExtractor={(item, index) => index.toString()}
                                                                                             />
                                                                                         </View>
-                                                                                        <View style={PAGESTYLE.lessonstartButton}>
-                                                                                            <TouchableOpacity onPress={() => markAsAbsent()} style={PAGESTYLE.buttonGrp}>
-                                                                                                <Text style={STYLE.commonButtonBorderedGreen}>Mark As Absent</Text>
+                                                                                        <View style={PAGESTYLE.btnModifiesPupil}>
+                                                                                            <TouchableOpacity onPress={() => markAsAbsent()} style={PAGESTYLE.markAbsentBtn}>
+                                                                                                <Text style={STYLE.markAbsentText}>Mark As Absent</Text>
                                                                                             </TouchableOpacity>
 
-                                                                                            <TouchableOpacity style={PAGESTYLE.buttonView} onPress={() => { launchLiveClass() }}>
+                                                                                            <TouchableOpacity style={PAGESTYLE.joinPupil} onPress={() => { launchLiveClass() }}>
                                                                                                 {
                                                                                                     isLoading ?
                                                                                                         <ActivityIndicator size={Platform.OS == 'ios' ? 'large' : 'small'} color={COLORS.white} />

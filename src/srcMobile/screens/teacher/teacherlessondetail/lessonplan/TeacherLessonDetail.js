@@ -123,10 +123,10 @@ const TLDetail = (props) => {
                             <Text style={PAGESTYLE.toggleText}>Publish lesson before live lesson</Text>
                             <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.Publish} onToggle={isOn => console.log("changed to : ", isOn)} />
                         </View>
-                        <View style={PAGESTYLE.toggleGrp}>
+                        {/* <View style={PAGESTYLE.toggleGrp}>
                             <Text style={PAGESTYLE.toggleText}>Switch on in -class voting</Text>
                             <ToggleSwitch onColor={COLORS.dashboardGreenButton} isOn={props.lessonData.IsVotingEnabled} onToggle={isOn => console.log("changed to : ", isOn)} />
-                        </View>
+                        </View> */}
                     </View>
                 </View>
                 <View style={PAGESTYLE.rightSideBar}>
