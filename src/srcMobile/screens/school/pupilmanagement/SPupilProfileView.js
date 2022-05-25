@@ -20,7 +20,7 @@ const { CallModule } = NativeModules;
 
 const SPupilProfileView = (props) => {
     const item = props.route.params.item;
-    
+   
     const [isHide, action] = useState(true);
     const [tabSelected, setTabSelected] = useState(0);
 
@@ -157,7 +157,7 @@ const SPupilProfileView = (props) => {
             <HeaderPMInner
                 name={item.FirstName + ' ' + item.LastName}
                 navigateToBack={() => props.navigation.goBack()}
-                navigateToPupilProfileEdit={() => props.navigation.replace('SPupilProfileEdit', { item: item,navigateToBack: () => props.navigation.goBack() })}
+                navigateToPupilProfileEdit={() => props.navigation.replace('SPupilProfileEdit', { item: item,navigateToBack: () => props.navigation.goBack() ,refresh: () => props.route.params.onGoBack()})}
                 onAlertPress={() => props.navigation.openDrawer()}
                 tabIndex={(index) => { handleOnClick(index) }}
             />
