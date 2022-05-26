@@ -295,6 +295,7 @@ const STLDetailAdd = (props) => {
         // RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
         if (Platform.OS === 'android') {
             const res = await check(PERMISSIONS.ANDROID.CAMERA);
+            console.log('response of check permission',res);
             if (res === "granted") {
                 setRecordingStarted(true)
                 RecordScreen.startRecording().catch((error) => setRecordingStarted(false));
@@ -592,7 +593,7 @@ const STLDetailAdd = (props) => {
                                         onTintColor={COLORS.dashboardPupilBlue}
                                         tintColor={COLORS.dashboardPupilBlue}
                                         value={isPupilChecked(index)}
-                                        tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
+                                        // tintColors={{ true: COLORS.dashboardPupilBlue, false: COLORS.dashboardPupilBlue }}
                                         onValueChange={(newValue) => { console.log('newValue', newValue); pushPupilItem(newValue, index) }}
                                     />
                                     <Text style={PAGESTYLE.checkBoxLabelText}>{item.FirstName} {item.LastName}</Text>

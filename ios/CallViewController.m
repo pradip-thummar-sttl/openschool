@@ -735,6 +735,7 @@ static NSString * const kUsersSegue = @"PresentUsersViewController";
       chatController.currentUserId = weakSelf.currentUserID;
       chatController.isPupil = weakSelf.isTeacher;
       chatController.openChat = weakSelf.isOpenToChat?@"YES":@"NO";
+      chatController.modalPresentationStyle = UIModalPresentationFullScreen;
 //          chatController.dialogID = weakSelf.dialogID;//@"61ced5f4ccccb382170b2223";//createdDialog.ID; //@"61c95a462802ef0030cf1e2e";
 //          chatController.currentUserID = weakSelf.currentUserID;
 //          chatController.currentUserName=weakSelf.currentName;

@@ -405,9 +405,9 @@ const PupilProfileEdit = (props) => {
                                 <Ic_Calendar style={PAGESTYLE.calIcon} height={hp(2)} width={hp(2)} />
                             </TouchableOpacity>
                         </View>
-                        <View >
+                        {/* <View >
                             {teacherDropDown()}
-                        </View>
+                        </View> */}
 
                         <View style={PAGESTYLE.fieldDetailsForm}>
                             <Text LABLE style={PAGESTYLE.labelForm}>Unique I.D (auto-generated)</Text>

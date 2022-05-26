@@ -200,7 +200,7 @@ static NSString * const kChannelGuide = @"the_guide";
   
   
   UIAlertController * alertvc = [UIAlertController alertControllerWithTitle: @"Choose any one"
-                                   message: @"" preferredStyle: UIAlertControllerStyleActionSheet
+                                   message: @"" preferredStyle: UIAlertControllerStyleAlert
                                   ];
     UIAlertAction * cameraaction = [UIAlertAction actionWithTitle: @ "Camera"
                               style: UIAlertActionStyleDefault handler: ^ (UIAlertAction * _Nonnull action) {
@@ -257,6 +257,7 @@ static NSString * const kChannelGuide = @"the_guide";
     [alertvc addAction: videoaction];
     [alertvc addAction: documentaction];
     [alertvc addAction: dismiss];
+//  [alertvc setModalPresentationStyle:UIModalPresentationPopover];
     [self presentViewController: alertvc animated: true completion: nil];
   
  
@@ -514,7 +515,7 @@ static NSString * const kChannelGuide = @"the_guide";
           
           NSLog(@" location of =====================>%@",self.chatHistory);
           UIAlertController * alertvc = [UIAlertController alertControllerWithTitle: @"File download successfully see path"
-                                           message:[NSString stringWithFormat:@"%@", result.data.location]  preferredStyle: UIAlertControllerStyleActionSheet
+                                           message:[NSString stringWithFormat:@"%@", result.data.location]  preferredStyle: UIAlertControllerStyleAlert
                                           ];
            
           UIAlertAction * dismiss = [UIAlertAction actionWithTitle: @"Dismiss"

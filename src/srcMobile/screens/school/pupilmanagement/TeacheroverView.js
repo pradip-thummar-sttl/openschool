@@ -25,13 +25,13 @@ import { useFocusEffect } from "@react-navigation/native";
 const { CallModule } = NativeModules;
 
 var pageNo = 1;
-var DataArr = [];
+let DataArr = [];
 
 const TeacheroverView = (props) => {
     const [isLoading, setLoading] = useState(true);
     const [pupilData, setPupilData] = useState([])
     const [selectedTabIndex, setSelectedTabIndex] = useState(0)
-    const [searchKeyword, setSearchKeyword] = useState('name')
+    const [searchKeyword, setSearchKeyword] = useState('')
     const [isCsvPopup, setCsvPopup] = useState(false)
     const [limit, setLimit] = useState('50')
     const [selectedId, setSelectedId] = useState(null);
@@ -52,6 +52,11 @@ const TeacheroverView = (props) => {
         };
     }, [props.navigation]);
 
+    useEffect(() => {
+        pageNo = 1;
+        fetchRecord('', 'name')
+    }, [])
+
     const handleBackButtonClick = () => {
 
         if (currentCount === 1) {
@@ -71,15 +76,15 @@ const TeacheroverView = (props) => {
     }
 
 
-    useFocusEffect(
-        React.useCallback(() => {
-            fetchRecord(searchKeyword, 1, filterBy);
-            return () => {
-                // Do something when the screen is unfocused
-                // alert('Home Screen was unfocused');
-            };
-        }, [])
-    );
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         fetchRecord(searchKeyword, 1, filterBy);
+    //         return () => {
+    //             // Do something when the screen is unfocused
+    //             // alert('Home Screen was unfocused');
+    //         };
+    //     }, [])
+    // );
 
 
     const onChangeTab = (tab) => {
@@ -92,40 +97,45 @@ const TeacheroverView = (props) => {
     }
 
     const addMorePage = () => {
-
-        if (DataArr.length > (limit - 1)) {
+        if (pupilData?.length !== pagination?.TotalCount && pagination !== '') {
             setLoading(true)
             pageNo = pageNo + 1
-            setTimeout(() => { fetchRecord(pageNo, searchKeyword, filterBy) }, 1000)
+            setTimeout(() => {
+                fetchRecord('', 'name')
+            }, 1000)
         }
     }
 
-    const fetchRecord = (pNo, searchBy, filterBy) => {
+    const fetchRecord = (searchBy, filterBy) => {
         setLoading(true)
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
-            page: String(pNo),
+            page: String(pageNo),
             limit: limit
         }
 
         Service.post(data, `${EndPoints.PupilByShoolId}/${User.user.UserDetialId}`, (res) => {
+            setPaginationData(res.pagination)
             if (res.code == 200) {
 
-                if (res.data && pNo == 1) {
+                if (res.data && pageNo == 1) {
                     DataArr = [];
                     DataArr = res.data;
+                    setPupilData(DataArr)
                 }
-                else if (res.data.length != 0) {
+                else if (res.data) {
                     for (var i = 0; i < res.data.length; i++) {
                         DataArr.push(res.data[i]);
+                        setPupilData(DataArr)
                     }
                 }
-                else{
-                    pageNo = pageNo - 1
-                }
+                // else{
+                //     pageNo = pageNo - 1
+                // }
                 setLoading(false)
             } else {
+                setLoading(false)
                 showMessage(res.message)
             }
 
@@ -135,11 +145,9 @@ const TeacheroverView = (props) => {
         })
     }
 
-    const refreshRender = () => {
-        // textInput.current.clear()
+    const refresh = () => {
         pageNo = 1;
-        setSearchKeyword("")
-        fetchRecord(1, "", filterBy);
+        fetchRecord('', '')
     }
 
     const openNotification = () => {
@@ -147,9 +155,9 @@ const TeacheroverView = (props) => {
         props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord(pageNo, searchKeyword, filterBy)})
     }
 
-    const messageRender = ({ item, index }) => {
+    const messageRender = ({ item}) => {
         return (
-            <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item })}>
+            <TouchableOpacity onPress={() => props.navigation.navigate('SPupilProfileView', { item: item, onGoBack: () => refresh()  })}>
                 <View style={[PAGESTYLE.pupilData,]}>
                     <View style={PAGESTYLE.pupilProfile}>
                         <View style={PAGESTYLE.rowProfile}>
@@ -206,7 +214,7 @@ const TeacheroverView = (props) => {
 
                 <TeacheroverViewHeader
 
-                    onSearch={() => { pageNo = 1; fetchRecord(1, searchKeyword, filterBy) }}
+                    onSearch={() => { pageNo = 1; fetchRecord( searchKeyword, filterBy) }}
                     onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
                     onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }}
                     onAlertPress={() => props.navigation.openDrawer()}
@@ -219,10 +227,10 @@ const TeacheroverView = (props) => {
                 />
 
                 {selectedTabIndex == 0 ?
-                    DataArr.length > 0 ?
+                    pupilData.length > 0 ?
                         <View style={[PAGESTYLE.mainContainer, { height: '76%' }]}>
                             <FlatList
-                                data={DataArr}
+                                data={pupilData}
                                 renderItem={messageRender}
                                 keyExtractor={(item) => item.id}
                                 extraData={selectedId}

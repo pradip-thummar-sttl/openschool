@@ -514,7 +514,7 @@ const PupilProfileEdit = (props) => {
                   </View>
                 </View>
               </View>
-              <View style={{ marginTop: hp(2) }}>{teacherDropDown()}</View>
+              {/* <View style={{ marginTop: hp(2) }}>{teacherDropDown()}</View> */}
             </View>
           </ScrollView>
         </KeyboardAwareScrollView>
