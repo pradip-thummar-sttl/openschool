@@ -375,7 +375,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                             <TouchableOpacity
                                 style={PAGESTYLE.boxDash}
                                 activeOpacity={opacity}
-                                onPress={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => null })}>
+                                onPress={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}>
                                 <View style={[PAGESTYLE.boxInnerMain, PAGESTYLE.yellowBox]}>
                                     <Text H3 style={PAGESTYLE.titleBox}>New lesson</Text>
                                     {/* <ImageBackground style={PAGESTYLE.imageIcon} source={Images.LessonIcon}></ImageBackground> */}

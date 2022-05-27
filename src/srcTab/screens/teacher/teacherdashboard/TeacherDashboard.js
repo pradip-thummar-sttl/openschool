@@ -414,7 +414,7 @@ const LessonandHomeworkPlannerDashboard = (props) => {
                         :
                         isAddSubject ?
                             <TLDetailAdd
-                                goBack={() => { setAddSubject(false) }}
+                                goBack={() => { setAddSubject(false); refresh() }}
                                 onAlertPress={() => openNotification()} />
                             :
                             selectedIndex == 0 ?
