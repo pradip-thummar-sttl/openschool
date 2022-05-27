@@ -173,7 +173,7 @@ const TPupilProfileAdd = (props) => {
         setLoading(true)
 
         let data = {
-            SchoolId: User.user.UserDetialId,
+            SchoolId: User.user.SchoolId,
             ParentFirstName: parentFirstName,
             ParentLastName: parentLastName,
             FirstName: firstName,
@@ -182,9 +182,9 @@ const TPupilProfileAdd = (props) => {
             MobileNumber: mobile,
             UserTypeId: userType,
             Dob: moment(selectedDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
-            CreatedBy: User.user.UserDetialId,
+            CreatedBy: User.user._id,
             IsInvited: 'false',
-            TeacherList:selectedTeacher,
+            TeacherList:[{TeacherId:User.user._id}],
             ProfilePicture:"sdvds",
         }
        
