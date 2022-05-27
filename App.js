@@ -19,6 +19,7 @@ import { isTablet } from 'react-native-device-info';
 import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
 import NotificationDrawer from './src/srcTab/component/reusable/notificationdrawer/NotificationDrawer';
 import { BadgeIcon, NotificationToken } from './src/utils/Model';
+import Orientation from 'react-native-orientation';
 
 requestMultiple(
   [PERMISSIONS.ANDROID.CAMERA,
@@ -166,6 +167,12 @@ export default function App() {
      */
     requestPermissions: true,
   });
+
+  useEffect(() => {
+    isTablet()?Orientation.lockToLandscape():Orientation.lockToPortrait()
+    
+  }, []);
+  
 
   return (
     <>

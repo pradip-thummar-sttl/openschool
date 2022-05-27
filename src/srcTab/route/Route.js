@@ -82,7 +82,7 @@ const pubnubDetail = new PubNub({
 export default function Route() {
     return (
 
-        <NavigationContainer drawerPosition='right'>
+        <NavigationContainer  drawerPosition='right'>
             <Stack.Navigator headerMode='none'>
                 <Stack.Screen name="MyDrawer" component={MyDrawer} />
             </Stack.Navigator>
