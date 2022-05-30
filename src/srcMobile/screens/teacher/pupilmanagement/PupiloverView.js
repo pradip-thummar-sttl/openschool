@@ -18,6 +18,7 @@ import Silver from '../../../../svg/teacher/pupilmanagement/StartSilver';
 import Gold from '../../../../svg/teacher/pupilmanagement/StarGold';
 import ArrowNext from '../../../../svg/teacher/pupilmanagement/ArrowNext';
 import NoPupil from '../../../../svg/emptystate/NoPupil';
+import PupilProfileAdd from "./ProfilePupilAdd";
 
 const { CallModule } = NativeModules;
 
@@ -120,7 +121,7 @@ const PupiloverView = (props) => {
                         <Text numberOfLines={1} style={[PAGESTYLE.pupilName, { width: wp(35) }]}>{item.FirstName} {item.LastName}</Text>
                     </View>
                     <View style={PAGESTYLE.groupPupil}>
-                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item?.GroupName.length  !== 0 ? item.GroupName : '-'}</Text>
+                        <Text numberOfLines={1} style={[PAGESTYLE.groupName, { width: wp(35) }]}>{item?.GroupName.length !== 0 ? item.GroupName : '-'}</Text>
                     </View>
                 </View>
                 <View style={PAGESTYLE.rewardColumn}>
@@ -182,8 +183,8 @@ const PupiloverView = (props) => {
                     onSearch={() => fetchRecord(searchKeyword, '')}
                     onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
                     onFilter={(filterBy) => fetchRecord('', filterBy)}
-                    navigateToAddNewUser={() => props.navigation.replace('PupilRegister', { userType: "Pupil" })}
                     onNotification={() => openNotification()}
+                    addProfile={() => props.navigation.navigate('ProfilePupilAdd')}
                 />
 
                 <View style={{ flex: 1 }}>
@@ -235,8 +236,10 @@ const PupiloverView = (props) => {
                         <GroupSetUp props={props} />
                     }
                 </View>
+           
             </View>
         </View>
+
     );
 }
 

@@ -139,7 +139,7 @@ const HeaderPM = (props) => {
                 </View>
 
                 <TouchableOpacity style={styles.buttonGroup}
-                    onPress={() => props.navigateToAddNewUser()}>
+                    onPress={() => props.addProfile()}>
                     {/* <Image style={styles.addIcon} source={Images.AddIconWhite} /> */}
                     <AddWhite style={styles.addIcon} height={hp(1.6)} width={hp(1.6)} />
                     <Text style={styles.commonButtonGreenheader}></Text>
