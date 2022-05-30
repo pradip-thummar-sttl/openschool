@@ -11,7 +11,7 @@ import Popup from "../../../component/reusable/popup/Popup";
 import { EndPoints } from "../../../../service/EndPoints";
 import { Service } from "../../../../service/Service";
 import { useDispatch, useSelector } from "react-redux";
-import { setCalendarEventData } from "../../../../actions/action";
+import { setCalendarEventData, setTimeTableWeekEventData } from "../../../../actions/action";
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 import { BadgeIcon, User } from "../../../../utils/Model";
 import { Lesson } from "../../../../utils/Constant";
@@ -130,6 +130,7 @@ const TeacherTimeTable = (props) => {
     useEffect(() => {
         if (weekTimeTableDate != "") {
             fetchRecord("", "", weekTimeTableDate)
+            dispatch(setTimeTableWeekEventData(""))
         }
     }, [weekTimeTableDate])
 
