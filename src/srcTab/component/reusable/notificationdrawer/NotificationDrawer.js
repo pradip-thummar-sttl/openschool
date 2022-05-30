@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useFocus, createRef, RefObject } from "react";
-import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground ,ActivityIndicator} from "react-native";
+import { View, StyleSheet, Text, TouchableOpacity, Button, Image, ImageBackground, ActivityIndicator } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
@@ -145,10 +145,10 @@ const NotificationDrawer = (props) => {
         if (User.user.UserType == "Teacher") {
             props.navigation.replace('TeacherDashboard', { index: 2 })
         } else {
-            props.navigation.replace('PupuilDashboard', { index: 2 , tabIndex })
+            props.navigation.replace('PupuilDashboard', { index: 2, tabIndex })
         }
     }
-  
+
     const onMonthChangeFunction = (month) => {
         // const date = moment().format('YYYY-MM-DD')
         // // const m = month
@@ -370,8 +370,12 @@ const NotificationDrawer = (props) => {
                                         {
                                             notifications.length ?
                                                 notifications.map((item, index) => {
+
                                                     const date = new Date(item.CreatedDate);
-                                                    const time = date.toLocaleTimeString()
+                                                    let time1 = moment(date).format('HH:mm')
+                                                    const timeSplit = time1.split(':')
+                                                    const time = `${timeSplit[0]}:${timeSplit[1]}`
+                                                    
                                                     return (
 
                                                         item.NotificationType === 'LIVE CLASSES' ?
@@ -438,7 +442,7 @@ const NotificationDrawer = (props) => {
                                                                     <View style={{ borderBottomWidth: 1, borderColor: COLORS.commonBorderColor, backgroundColor: item.IsSeen ? COLORS.white : COLORS.lightSkyBlueDue }}>
                                                                         <Text style={{ ...styles.notificationsText, paddingTop: hp(1), }}>LESSON</Text>
                                                                         <View style={styles.classDetail}>
-                                                                      
+
                                                                             <>
                                                                                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                                                                                     <Text style={[styles.classsummary, { width: '80%' }]}>{item.Description}</Text>
