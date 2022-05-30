@@ -91,16 +91,15 @@ const Pupillist = ({ item, onPress }) => (
             </View>
             <View style={PAGESTYLE.groupColumnmain}>
                 <View style={PAGESTYLE.groupColumn}>
-                    {console.log('item.TeachingYear',item.TeachingYear.length)}
                     <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.TeachingYear.length > 0 ? item.TeachingYear : "-"}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.perfomanceColumn}>
                 <View style={PAGESTYLE.perfomanceDotmain}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.LessonCount}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item?.LessonCount}</Text>
                 </View>
                 <View style={PAGESTYLE.perfomanceDotmainTwo}>
-                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item.HomeworkCount}</Text>
+                    <Text numberOfLines={1} style={PAGESTYLE.pupilgroupName}>{item?.HomeworkCount}</Text>
                 </View>
             </View>
             <View style={PAGESTYLE.rewardColumn}>

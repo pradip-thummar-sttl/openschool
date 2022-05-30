@@ -50,7 +50,6 @@ const SPupilProfileEdit = (props) => {
         return  props.route.params.refresh()
     }
    
-    // console.log('helllo props refresh',refresh());
     useEffect(() => {
         setFirstName(item.FirstName);
         setLastName(item.LastName);

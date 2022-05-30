@@ -59,7 +59,6 @@ import GroupSetUpPupilSelection from '../screens/teacher/pupilmanagement/GroupSe
 import Passcode from '../screens/pupil/parentzone/Passcode';
 import Chat from '../screens/Chat/Chat';
 import ParentChat from '../screens/pupil/parentzone/Chat/ParentChat';
-
 import PubNub from 'pubnub';
 import { PubNubProvider, usePubNub } from 'pubnub-react';
 import Avatar from '../screens/pupil/Avatar/Avatar';
@@ -82,6 +81,7 @@ import SPupilProfileView from '../screens/school/pupilmanagement/SPupilProfileVi
 import SAddNewTeacher from '../screens/school/pupilmanagement/SAddNewTeacher';
 import SPupilProfileEdit from '../screens/school/pupilmanagement/SPupilProfileEdit';
 import SGroupSetUpPupilSelection from '../screens/school/pupilmanagement/SGroupSetUpPupilSelection';
+import ProfilePupilAdd from '../screens/teacher/pupilmanagement/ProfilePupilAdd';
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator();
 
@@ -125,6 +125,7 @@ function ScreenStack() {
                 <Stack.Screen name="Header" component={Header} />
                 <Stack.Screen name="PupilManagement" component={PupilManagement} />
                 <Stack.Screen name="PupiloverView" component={PupiloverView} />
+                
                 <Stack.Screen name="PupilProfileView" component={PupilProfileView} />
                 <Stack.Screen name="PupilProfileEdit" component={PupilProfileEdit} />
                 <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
@@ -145,6 +146,7 @@ function ScreenStack() {
                 <Stack.Screen name="PupilHomeWorkSubmitted" component={PupilHomeWorkSubmitted} />
                 <Stack.Screen name="PupilHomeWorkDetail" component={PupilHomeWorkDetail} />
                 <Stack.Screen name="TLDetailAdd" component={TLDetailAdd} />
+                <Stack.Screen name="ProfilePupilAdd" component={ProfilePupilAdd} />
                 <Stack.Screen name="TLVideoGallery" component={TLVideoGallery} />
                 <Stack.Screen name="TLHomeWorkSubmittedDetail" component={TLHomeWorkSubmittedDetail} />
                 <Stack.Screen name="WorkSpace" component={WorkSpace} />

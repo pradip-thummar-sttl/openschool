@@ -29,7 +29,7 @@ const Pupillist = (props, { style }) => (
                 <Text numberOfLines={1} style={[PAGESTYLE.pupilName, PAGESTYLE.userStampName,{width:wp(20)}]}>{props.item.PupilName}</Text>
             </View>
             <View style={[PAGESTYLE.pupilProfile, PAGESTYLE.secoundColumn]}>
-                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(15)}]}>{props.item.GroupName}</Text>
+                <Text numberOfLines={1} style={[PAGESTYLE.pupilName,{width:wp(15)}]}>{props?.item?.GroupName ? props.item.GroupName : ' - '}</Text>
             </View>
             <View style={PAGESTYLE.pupilProfile}>
                 <Text style={[PAGESTYLE.pupilName, props.item.Submited ? PAGESTYLE.yesText : PAGESTYLE.noText]}>{props.item.Submited ? 'Yes' : 'No'}</Text>
