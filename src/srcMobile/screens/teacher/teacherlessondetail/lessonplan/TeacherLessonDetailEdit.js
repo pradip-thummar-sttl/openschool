@@ -437,14 +437,14 @@ const TLDetailEdit = (props) => {
                     <TextInput
                         ref={item}
                         returnKeyType={"done"}
-                        onSubmitEditing={() => { item.current.focus(); }}
+                        onSubmitEditing={() => { item.current.focus();pushCheckListItem() }}
                         style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                         placeholder="Add items pupil may need"
                         autoCapitalize={'sentences'}
                         maxLength={40}
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={text => { setNewItem(text) }} 
-                        onSubmitEditing={() => pushCheckListItem()}
+                        // onSubmitEditing={() => }
                         />
                     <TouchableOpacity
                         style={{ alignSelf: 'center', position: 'absolute', right: 10, }}
@@ -654,6 +654,7 @@ const TLDetailEdit = (props) => {
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
 
         setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, fname,]);
+        console.log('remove recording array=======>',isRemoveRecordingArr);
         arr.splice(0, 1)
         setRecordingArr(arr)
     }
