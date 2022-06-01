@@ -902,8 +902,6 @@ const TLDetailEdit = (props) => {
             var arr = []
             const res = await RecordScreen.stopRecording().catch((error) => {
                 setRecordingStarted(false)
-
-
             });
 
             if (res) {
