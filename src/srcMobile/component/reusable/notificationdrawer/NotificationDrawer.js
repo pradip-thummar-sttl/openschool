@@ -229,7 +229,7 @@ const NotificationDrawer = (props) => {
                                         notifications.length ?
                                             notifications.map((item, index) => {
                                                 const date = new Date(item.CreatedDate);
-                                                const time = date.toLocaleTimeString()
+                                                let time = moment(date).format('hh:mm')
                                                 return (
 
                                                     item.NotificationType === 'LIVE CLASSES' ?
