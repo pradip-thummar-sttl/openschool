@@ -37,7 +37,6 @@ var moment = require('moment');
 
 const TLHomeWorkSubmittedDetail = (props) => {
     var data = props.item
-    console.log('data', data);
 
     const [isHide, action] = useState(true);
     const [feedBack, setFeedback] = useState('')
@@ -113,7 +112,7 @@ const TLHomeWorkSubmittedDetail = (props) => {
                 console.log('response of save lesson', res)
                 // setDefaults()
                 showMessageWithCallBack(MESSAGE.homeworkMarked, () => {
-                    props.onGoBack();
+                    // props.onGoBack();
                     props.goBack()
                 })
             } else {
