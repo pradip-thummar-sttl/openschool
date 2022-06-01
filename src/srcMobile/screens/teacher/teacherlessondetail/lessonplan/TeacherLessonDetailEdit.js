@@ -652,8 +652,10 @@ const TLDetailEdit = (props) => {
     const removeRecording = () => {
         var arr = [...recordingArr]
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
+        var currentName = fname.split("/")
 
-        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, fname,]);
+        setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, currentName[currentName.length - 1],]);
+        // setRemoveRecordingArr((isRemoveRecordingArr) => [...isRemoveRecordingArr, fname,]);
         console.log('remove recording array=======>',isRemoveRecordingArr);
         arr.splice(0, 1)
         setRecordingArr(arr)
