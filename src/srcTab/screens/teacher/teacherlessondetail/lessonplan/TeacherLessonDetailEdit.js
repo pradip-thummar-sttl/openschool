@@ -709,6 +709,7 @@ const TLDetailEdit = (props) => {
 
     const onRemoveUnselectedFile = (lessionId) => {
         let data = { "deletematerial": isRemoveMaterialArr, "deleterecording": isRemoveRecordingArr, "type": "L" }
+        console.log('data ==============>', data)
 
         Service.post(data, `${EndPoints.DeleteRecordingAndMaterial}${lessonData._id}`, (res) => {
             if (res.code == 200) {
