@@ -23,6 +23,8 @@ import AddWhite from '../../../../svg/teacher/timetable/Add_White'
 import Notification from '../../../../svg/teacher/dashboard/Notification'
 import CheckedBlue from "../../../../svg/pupil/dashboard/Checked_Blue";
 import { BadgeIcon } from "../../../../utils/Model";
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -43,8 +45,9 @@ const HeaderPM = (props) => {
     }, [isSearchActive])
 
     useEffect(() => {
-        setSelectedTab(props.tabs)
-    }, [filterBy, props.tabs])
+        // setSelectedTab(props.tabs)
+        props.onFilter(filterBy)
+    }, [filterBy])//props.tabs
 
     const search = () => {
         isSearchActive ?
@@ -98,9 +101,11 @@ const HeaderPM = (props) => {
                         }} 
                         onSubmitEditing={() => search()}
                         />
-                    <Menu>
+                    <Menu style={{ ...styles.filterIcon }}>
                         <MenuTrigger>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
+                            <FilterBlack style={styles.filterIcon1} height={hp(1.74)} width={hp(1.74)} />
+                        
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>
@@ -111,7 +116,7 @@ const HeaderPM = (props) => {
                                         <Text style={styles.filterListText}>Name</Text>
                                         {selectedIndex == 0 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+                                            <TickMarkBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
 
                                             :
                                             null
@@ -127,7 +132,7 @@ const HeaderPM = (props) => {
                                         <Text style={styles.filterListText}>DOB</Text>
                                         {selectedIndex == 1 ?
                                             // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                                            <CheckedBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
+                                            <TickMarkBlue style={styles.checkMark} width={hp(1.48)} height={hp(1.48)} />
                                             :
                                             null
                                         }
@@ -262,7 +267,8 @@ const styles = StyleSheet.create({
         resizeMode: 'contain',
         position: 'absolute',
         right: hp(1.30),
-        top: hp(1.19),
+        top: hp(1.5),
+        alignSelf:'center'
     },
     filterIcon1: {
         width: hp(1.74),
