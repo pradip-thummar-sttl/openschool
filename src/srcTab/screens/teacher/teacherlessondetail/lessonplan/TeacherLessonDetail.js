@@ -191,7 +191,7 @@ const TLDetail = (props) => {
                                 null
                             }
 
-                            {props.lessonData.RecordingList ?
+                            {props.lessonData.RecordingList.length > 0 ?
                                 <View style={[PAGESTYLE.videoLinkBlockSpaceBottom, PAGESTYLE.videoLinkBlockSpaceTop]}>
                                     <Text style={PAGESTYLE.requireText}>View lesson recording</Text>
                                     {props.lessonData.RecordingList.map((item, index) => {
