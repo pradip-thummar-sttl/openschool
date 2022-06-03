@@ -119,7 +119,6 @@ const TLHomeWork = (props) => {
     };
 
     const addMaterial = () => {
-        console.log('hihihihihihi')
         var arr = [...materialArr]
         try {
             DocumentPicker.pickMultiple({
@@ -467,10 +466,11 @@ const TLHomeWork = (props) => {
     const removeRecording = () => {
         var arr = [...recordingArr]
         var fname = arr[0]?.filename ? arr[0]?.filename : arr[0]?.fileName;
-        var arr = fname.split("/")
-        _removeRecordingArr.push(arr[arr.length - 1]);
+        var currentName = fname.split("/");
+        _removeRecordingArr.push(currentName[currentName.length - 1]);
 
         // _removeRecordingArr.push(fname);
+        
         Addhomework.RemoveRecordingArr = _removeRecordingArr;
         arr.splice(0, 1)
         setRecordingArr(arr)

@@ -5,6 +5,7 @@ import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 // import Images from '../../../../utils/Images';
 import FONTS from '../../../../utils/Fonts';
+import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import {
     Menu,
     MenuOptions,
@@ -21,6 +22,7 @@ import Ic_CheckWhite from "../../../../svg/pupil/parentzone/Ic_CheckWhite";
 import SearchBlue from "../../../../svg/teacher/timetable/Search_Blue";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import AddWhite from "../../../../svg/teacher/timetable/Add_White";
+import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 const HeaderPM = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
@@ -45,6 +47,7 @@ const HeaderPM = (props) => {
         setSelectedTab(props.tabs)
         props.onFilter(filterBy)
     }, [filterBy])
+    
 
     const search = () => {
         keyword ?
@@ -95,7 +98,7 @@ const HeaderPM = (props) => {
                         <View style={styles.searchInner}>
                             <TouchableOpacity
                                 activeOpacity={opacity}
-                                onPress={() => search() }>
+                                onPress={() => search()}>
                                 {isSearchActive ?
                                     <CloseBlack height={20} width={20} />
                                     :
@@ -112,9 +115,44 @@ const HeaderPM = (props) => {
                                 onChangeText={keyword => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
-                                }} 
-                                onSubmitEditing={() => search() }
-                                />
+                                }}
+                                onSubmitEditing={() => search()}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Menu style={{ marginLeft: 10,width:wp(10), }}>
+                                <MenuTrigger style={{ alignItems: 'center', justifyContent: 'center' }}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                                    <FilterBlack style={[styles.filterIcon]} height={hp(1.74)} width={hp(1.74)} />
+                                </MenuTrigger>
+                                <MenuOptions style={[styles.filterListWrap]}>
+                                    <MenuOption style={[styles.borderList]}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Name'); setSelectedIndex(0) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Name</Text>
+                                                {selectedIndex == 0 ?
+                                                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                                                    <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
+                                                    :
+                                                    null
+                                                }
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                    <MenuOption style={styles.borderList}>
+                                        <TouchableOpacity
+                                            activeOpacity={opacity}
+                                            onPress={() => { setFilterBy('Date'); setSelectedIndex(1) }}>
+                                            <View style={styles.filterList}>
+                                                <Text style={styles.filterListText}>Date</Text>
+                                                {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                            </View>
+                                        </TouchableOpacity>
+                                    </MenuOption>
+                                </MenuOptions>
+                            </Menu>
+
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, }}>
                             <TouchableOpacity
@@ -224,8 +262,7 @@ const styles = StyleSheet.create({
         width: hp(1.74),
         resizeMode: 'contain',
         position: 'absolute',
-        right: hp(1.30),
-        top: hp(1.19),
+        right: hp(1.60),
     },
     filterIcon1: {
         width: hp(1.74),
@@ -306,11 +343,10 @@ const styles = StyleSheet.create({
         paddingLeft: hp(1.2),
         paddingRight: hp(1.2),
         paddingBottom: hp(1),
-        position: 'absolute',
+        position: 'relative',
         backgroundColor: COLORS.white,
-        top: hp(5.5),
         right: hp(0),
-        width: hp(30.78),
+        // width: hp(30.78),
         borderRadius: hp(1),
         shadowColor: COLORS.black,
         shadowOffset: { width: 0, height: hp(1), },
