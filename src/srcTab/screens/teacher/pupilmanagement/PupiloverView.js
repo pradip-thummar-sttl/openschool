@@ -109,7 +109,7 @@ const PupiloverView = (props) => {
             page: String(pageNo),
             limit: limit
         }
-
+        setLoading(true);
         Service.post(data,`${EndPoints.PupilByTeacherId}/${User.user._id}`, (res) => { ///name/${searchBy}
             console.log('res of all pupil by teacher', res)
             setPaginationData(res?.pagination)
