@@ -175,9 +175,9 @@ const PupuilDashboard = (props) => {
     }
 
     const refresh = () => {
-        const dataOfMyday = {CurrentDate:moment(Date()).format('YYYY-MM-DD')}
+        const dataOfMyday = { CurrentDate: moment(Date()).format('YYYY-MM-DD') }
 
-        Service.post(dataOfMyday,`${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
+        Service.post(dataOfMyday, `${EndPoints.GetListOfPupilMyDay}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag === true) {
                 setMyClass(res.data)
@@ -421,7 +421,9 @@ const PupuilDashboard = (props) => {
     return (
         <View style={PAGESTYLE.mainPage} >
             <View style={{ width: isHide ? '100%' : '100%' }}>
+
                 <Header isOpen={BadgeIcon.isBadge} onNotification={() => openNotification()} onAlertPress={() => { props.navigation.openDrawer() }} STYLE={STYLE.pupilHeader} />
+
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={STYLE.padLeftRight}>
 
@@ -578,15 +580,17 @@ const PupuilDashboard = (props) => {
 
                                                                             <View style={PAGESTYLE.lessonstartButton}>
                                                                                 <View style={{ width: '48%', }}>
-                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }} 
-                                                                                    style={{ ...STYLE.commonButtonBordered, width: '100%',height:hp(6), justifyContent:'center', alignItems:'center' }}>
+                                                                                    <TouchableOpacity onPress={() => { markAsAbsent() }}
+                                                                                        style={{ ...STYLE.commonButtonBordered, width: '100%', height: hp(6), justifyContent: 'center', alignItems: 'center' }}>
                                                                                         <Text style={{ textTransform: 'uppercase', fontFamily: FONTS.fontBold, color: COLORS.dashboardGreenButton }}>Mark As Absent</Text>
                                                                                     </TouchableOpacity>
                                                                                 </View>
 
                                                                                 <View style={{ width: '48%' }}>
-                                                                                    <TouchableOpacity style={{ ...STYLE.commonButtonBordered, 
-                                                                                    backgroundColor: COLORS.dashboardGreenButton, height:hp(6), justifyContent:'center', alignItems:'center',width: '100%'}} onPress={() => { launchLiveClass() }}>
+                                                                                    <TouchableOpacity style={{
+                                                                                        ...STYLE.commonButtonBordered,
+                                                                                        backgroundColor: COLORS.dashboardGreenButton, height: hp(6), justifyContent: 'center', alignItems: 'center', width: '100%'
+                                                                                    }} onPress={() => { launchLiveClass() }}>
                                                                                         {
                                                                                             isLoading ?
                                                                                                 <ActivityIndicator size={'small'} color={COLORS.white} /> :
@@ -723,7 +727,7 @@ const PupuilDashboard = (props) => {
                                                             </ScrollView>
                                                         </RBSheet>
                                                     </> :
-                                                   
+
                                                     <EmptyStatePlaceHohder holderType={1} title1={MESSAGE.noLessonHWPupil1} title2={MESSAGE.noLessonHWPupil2} />
                                             }
                                         </View>
@@ -732,10 +736,10 @@ const PupuilDashboard = (props) => {
                             </View>
                         </View>
 
-                        <View style={[PAGESTYLE.achivementWrap,{paddingBottom:hp(5)}]}>
+                        <View style={[PAGESTYLE.achivementWrap, { paddingBottom: hp(5) }]}>
                             <View style={PAGESTYLE.achivementBox}>
                                 {/* <RewardStarback width={Platform.OS == 'android' ? hp(41.13) : '100%'} height={Platform.OS == 'android' ? hp(9.35) : hp(8.9)} style={PAGESTYLE.rewardStar} /> */}
-                                <Image style={{ width: '100%', height: hp(10)}} source={GetImage.ImageReward} />
+                                <Image style={{ width: '100%', height: hp(10) }} source={GetImage.ImageReward} />
                                 <Text style={PAGESTYLE.starCovert}>Your stars convert to</Text>
                                 <Text style={PAGESTYLE.starCovertPoints}>{bronze + silver + gold}</Text>
                                 <View style={PAGESTYLE.paddingDiv}>
@@ -767,11 +771,11 @@ const PupuilDashboard = (props) => {
                             </View>
                             {pupilAvatarList.length ?
                                 <View style={PAGESTYLE.achivementRobot}>
-                                    
+
                                     <AvtarBg width={"100%"} height={hp(30)} position={"absolute"} style={{ bottom: 0 }} />
 
                                     {avatarListIndex == 0 ?
-                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, left:Platform.OS === 'android' ? hp(11) : hp(8.5), alignSelf: 'center' }} ></Image>
+                                        <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(13), height: hp(13), resizeMode: 'contain', position: 'absolute', top: hp(-3), zIndex: 10, left: Platform.OS === 'android' ? hp(11) : hp(8.5), alignSelf: 'center' }} ></Image>
                                         : null}
                                     {avatarListIndex == 1 ?
                                         <Image source={{ uri: baseUrl + pupilAvatarList[1].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(-5.5), zIndex: 10, alignSelf: 'center' }} ></Image>
