@@ -49,7 +49,6 @@ const PupilLessonDetail = (props) => {
 
     const initialRender = useRef(true);
 
-    const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
     const [filterBy, setFilterBy] = useState('Date')
     const [keyword, setKeyword] = useState('')
@@ -83,28 +82,6 @@ const PupilLessonDetail = (props) => {
 
         return true;
     }
-    useEffect(() => {
-        console.log('keyword', keyword);
-        if (initialRender.current) {
-            initialRender.current = false
-        } else {
-            if (!isSearchActive) {
-                setKeyword('')
-                if (isLesson) {
-                    getLessonData('', '')
-                } else {
-                    getHomeworkData('', '')
-                }
-                textInput.current.clear()
-            } else {
-                if (isLesson) {
-                    getLessonData(keyword, '')
-                } else {
-                    getHomeworkData(keyword, '')
-                }
-            }
-        }
-    }, [isSearchActive])
 
     useEffect(() => {
         if (initialRender.current) {
@@ -193,14 +170,50 @@ const PupilLessonDetail = (props) => {
         })
     }
 
-    const searchEnter = () => {
-        keyword ?
-            isSearchActive ?
-                setSearchActive(false)
-                :
-                setSearchActive(true)
-            :
-            null
+    // const searchEnter = () => {
+    //     keyword ?
+    //         isSearchActive ?
+    //             setSearchActive(false)
+    //             :
+    //             setSearchActive(true)
+    //         :
+    //         null
+    // }
+
+    const onSearchClick = (search) => {
+
+        if (initialRender.current) {
+            initialRender.current = false
+        } else {
+            if (search && keyword != "") {
+                if (isLesson) {
+                    getLessonData(keyword, '')
+                } else {
+                    getHomeworkData(keyword, '')
+                }
+
+            }
+            else if(!search){
+                setKeyword('')
+                if (isLesson) {
+                    getLessonData('', '')
+                } else {
+                    getHomeworkData('', '')
+                }
+                textInput.current.clear()
+            }
+        }
+
+        // if (search && keyword != "") {
+        //     props.onSearch()
+        // } 
+        // else if(!search)
+        // {
+        //     props.onClearSearch()
+        //     setKeyword('')
+        //     textInput.current.clear()
+
+        // }
     }
 
     const searchHeader = () => {
@@ -208,25 +221,12 @@ const PupilLessonDetail = (props) => {
 
             <View style={PAGESTYLE.searchParent}>
                 <View style={PAGESTYLE.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
-                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                        {isSearchActive ?
-                            <CloseBlack height={15} width={15} />
-                            :
-                            <SearchBlue height={15} width={15} />
-                        }
+
+                    <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => { onSearchClick(true) }}>
+                        {<SearchBlue height={15} width={15} />}
                     </TouchableOpacity>
+
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
@@ -234,8 +234,14 @@ const PupilLessonDetail = (props) => {
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => { setKeyword(keyword) }}
                         returnKeyType='search'
-                        onSubmitEditing={()=>searchEnter()}
+                        onSubmitEditing={() => onSearchClick(true)}
                     />
+
+                    <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                        onPress={() => { keyword != "" && onSearchClick(false) }}>
+                        {keyword != "" && <CloseBlack height={15} width={15} />}
+                    </TouchableOpacity>
+
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
@@ -380,6 +386,7 @@ const PupilLessonDetail = (props) => {
             // </View>
         )
     }
+
     const openNotification = () => {
         Var.isCalender = false
         BadgeIcon.isBadge = false
@@ -388,21 +395,18 @@ const PupilLessonDetail = (props) => {
 
     return (
         <View style={[{ flex: 1 }]}>
-            {/* <Sidebarpupil hide={() => action(!isHide)}
-                moduleIndex={2}
-                navigateToDashboard={() => props.navigation.navigate('PupuilDashboard')}
-                navigateToTimetable={() => props.navigation.navigate('PupilTimetable')}
-                onLessonAndHomework={() => props.navigation.navigate('PupilLessonDetail')} /> */}
+
             <View style={{ backgroundColor: COLORS.white, height: '100%' }}>
                 <Header4_LH onAlertPress={() => props.navigation.openDrawer()} onNotification={() => openNotification()} />
                 {searchHeader()}
                 <View style={[PAGESTYLE.whiteBg1, {}]}>
                     <View style={PAGESTYLE.lessonPlanTop}>
                         <View style={PAGESTYLE.lessonPlanTab}>
-                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { setSearchActive(false); setLesson(true); getLessonData('', ''); }}>
+                            <TouchableOpacity style={PAGESTYLE.tabs} onPress={() => { onSearchClick(false); setLesson(true); getLessonData('', ''); }}>
                                 <Text style={[PAGESTYLE.tabsText, { color: isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Lesson</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => { setSearchActive(false); setLesson(false); getHomeworkData('', '') }}>
+
+                            <TouchableOpacity onPress={() => { onSearchClick(false); setLesson(false); getHomeworkData('', '') }}>
                                 <Text style={[PAGESTYLE.tabsText, { color: !isLesson ? COLORS.buttonGreen : COLORS.menuLightFonts, fontFamily: !isLesson ? FONTS.fontSemiBold : FONTS.fontRegular }]}>Homework</Text>
                             </TouchableOpacity>
                         </View>
