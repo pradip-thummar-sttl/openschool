@@ -76,30 +76,7 @@ const PupilLessonDetail = (props) => {
   const [filterBy, setFilterBy] = useState("Date");
   const [keyword, setKeyword] = useState("");
 
-  useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      if (!isSearchActive) {
-        setKeyword("");
-        if (isLesson) {
-          getLessonData("", "");
-        } else {
-          getHomeworkData("", "");
-        }
-        if (textInput.current) {
-          textInput.current.clear();
-        }
-      } else {
-        if (isLesson) {
-          getLessonData(keyword, "");
-        } else {
-          getHomeworkData(keyword, "");
-        }
-      }
-    }
-  }, [isSearchActive]);
-
+ 
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false;
@@ -155,6 +132,7 @@ const PupilLessonDetail = (props) => {
       (err) => {}
     );
   };
+
   const getLessonData = (searchBy, filterBy) => {
     let data = {
       Searchby: searchBy,
@@ -189,6 +167,7 @@ const PupilLessonDetail = (props) => {
       (err) => {}
     );
   };
+
   const searchEnter = () => {
     keyword
       ? isSearchActive
@@ -196,11 +175,43 @@ const PupilLessonDetail = (props) => {
         : setSearchActive(true)
       : null;
   };
+
+  const onSearchClick = (search) => {
+
+    if (initialRender.current) {
+      initialRender.current = false;
+    } 
+    else 
+    {
+      if (!search) {
+        setKeyword("");
+        if (isLesson) {
+          getLessonData("", "");
+        } else {
+          getHomeworkData("", "");
+        }
+        if (textInput.current) {
+          textInput.current.clear();
+        }
+      } 
+      else if (search && keyword != "")
+      {
+        if (isLesson) {
+          getLessonData(keyword, "");
+        } else {
+          getHomeworkData(keyword, "");
+        }
+      }
+    }
+
+   
+}
+
   const searchHeader = () => {
     return (
       <View style={PAGESTYLE.searchParent}>
         <View style={PAGESTYLE.searchInner}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             activeOpacity={opacity}
             onPress={() => {
               keyword
@@ -215,9 +226,14 @@ const PupilLessonDetail = (props) => {
             ) : (
               <SearchBlue height={18} width={18} />
             )}
-            {/* <Image style={{ height: 18, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-          </TouchableOpacity>
+            
+          </TouchableOpacity> */}
+
+<TouchableOpacity activeOpacity={opacity}
+                        onPress={() => { onSearchClick(true) }}>
+                        {<SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
+                    </TouchableOpacity>
+
           <TextInput
             ref={textInput}
             style={{
@@ -235,8 +251,15 @@ const PupilLessonDetail = (props) => {
             placeholderTextColor={COLORS.menuLightFonts}
             onChangeText={(keyword) => {
               setKeyword(keyword);
+              keyword == "" && onSearchClick(false);
             }}
           />
+
+<TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                        onPress={() => { keyword != "" && onSearchClick(false) }}>
+                        {keyword != "" && <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
+                    </TouchableOpacity>
+
         </View>
         <View style={{ flexDirection: "row", marginLeft: hp(1.8) }}>
           <Menu style={PAGESTYLE.filterGroup}>

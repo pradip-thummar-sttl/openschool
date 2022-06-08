@@ -21,7 +21,7 @@ import PopupdataSecond from "../../popup/PopupdataSecond";
 import PopupdataSecondPupil from "../../popup/PopupdataSecondPupil";
 import { BadgeIcon } from "../../../../../utils/Model";
 import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
-import TickMarkBlue from  "../../../../../svg/teacher/dashboard/TickMark_Blue";
+import TickMarkBlue from "../../../../../svg/teacher/dashboard/TickMark_Blue";
 
 const HeaderWhite = (props) => {
 
@@ -31,29 +31,43 @@ const HeaderWhite = (props) => {
     const [filterBy, setFilterBy] = useState('All')
     const [keyword, setKeyword] = useState('')
 
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         setKeyword('')
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
 
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
-  
-    const searchEnter=()=>{
+
+    const searchEnter = () => {
         keyword ?
-        isSearchActive ?
-            setSearchActive(false)
+            isSearchActive ?
+                setSearchActive(false)
+                :
+                setSearchActive(true)
             :
-            setSearchActive(true)
-        :
-        null
+            null
     }
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            props.onSearch()
+        }
+        else if (!search) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
+    }
+
     return (
         <View style={styles.headerBarMainWhite}>
             <View style={styles.headerMain}>
@@ -83,7 +97,7 @@ const HeaderWhite = (props) => {
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         activeOpacity={opacity}
                         onPress={() => {
                             keyword ?
@@ -94,14 +108,18 @@ const HeaderWhite = (props) => {
                                 :
                                 null
                         }}>
-                        {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
                         {
                             isSearchActive ?
-                                <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
-                                : <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
+                                
+                                : 
                         }
+                    </TouchableOpacity> */}
+
+                    <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => { onSearchClick(true) }}>
+                        {<SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
                     </TouchableOpacity>
+
                     <TextInput
                         ref={textInput}
                         style={{
@@ -115,10 +133,17 @@ const HeaderWhite = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} 
+                            keyword == "" && onSearchClick(false);
+                        }}
                         returnKeyType='search'
-                        onSubmitEditing={()=>searchEnter()}
-                        />
+                        onSubmitEditing={() => searchEnter()}
+                    />
+
+                    <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                        onPress={() => { keyword != "" && onSearchClick(false) }}>
+                        {keyword != "" && <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
+                    </TouchableOpacity>
+
                 </View>
                 <TouchableOpacity style={styles.buttonGroup}>
                     <Menu style={styles.filterGroup}>
@@ -126,18 +151,12 @@ const HeaderWhite = (props) => {
                             <FilterBlack style={styles.filterIcon} width={hp(1.74)} height={hp(1.50)} />
                         </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
-                            {/* <MenuOption style={styles.borderList}>
-                                <View style={styles.filterList}>
-                                    <Text style={styles.filterListText}>Subject</Text> */}
-                            {/* <Image source={Images.CheckIcon} style={styles.checkMark} /> */}
-                            {/* </View>
-                            </MenuOption> */}
+
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={() => { setSelectedIndex(0);setFilterBy('All') }}>
+                                <TouchableOpacity onPress={() => { setSelectedIndex(0); setFilterBy('All') }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>All</Text>
                                         {selectedIndex == 0 ?
-                                            // <Image source={Images.CheckIcon} style={styles.checkMark} />
                                             <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />
                                             :
                                             null
@@ -146,7 +165,7 @@ const HeaderWhite = (props) => {
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={() => {setSelectedIndex(1);setFilterBy('Live Lesson')  }}>
+                                <TouchableOpacity onPress={() => { setSelectedIndex(1); setFilterBy('Live Lesson') }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Live Lesson</Text>
                                         {selectedIndex == 1 ?
@@ -159,7 +178,7 @@ const HeaderWhite = (props) => {
                                 </TouchableOpacity>
                             </MenuOption>
                             <MenuOption style={styles.borderList}>
-                                <TouchableOpacity onPress={() => { setSelectedIndex(2);setFilterBy('Publish Lesson')  }}>
+                                <TouchableOpacity onPress={() => { setSelectedIndex(2); setFilterBy('Publish Lesson') }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Publish Lesson</Text>
                                         {selectedIndex == 2 ?

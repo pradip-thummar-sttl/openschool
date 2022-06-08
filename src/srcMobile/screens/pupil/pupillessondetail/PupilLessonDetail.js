@@ -232,7 +232,7 @@ const PupilLessonDetail = (props) => {
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
                         placeholder="Search subject, topic name etc"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onChangeText={keyword => { setKeyword(keyword) }}
+                        onChangeText={keyword => { setKeyword(keyword), keyword.length == 0 && onSearchClick(false)}}
                         returnKeyType='search'
                         onSubmitEditing={() => onSearchClick(true)}
                     />

@@ -42,20 +42,37 @@ const HeaderPM = (props) => {
     useEffect(() => {
         setChildrenList(props.data);
     }, [props.data]);
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
 
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
 
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         setKeyword('')
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
+
+  
+
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            props.onSearch()
+        } 
+        else if(!search)
+        {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
+    }
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -66,7 +83,7 @@ const HeaderPM = (props) => {
 
                 <View style={styles.headerRight}>
                     <Menu>
-                    {/* childrenList.length == 0 ? Images.userparent :  */}
+                        {/* childrenList.length == 0 ? Images.userparent :  */}
                         <MenuTrigger><Image style={styles.userparent} source={{ uri: baseUrl + childrenList[selectedPupilIndex]?.ProfilePicture }} /></MenuTrigger>
                         <MenuOptions style={styles.filterCard}>
                             {childrenList.map((item, index) => (
@@ -98,7 +115,7 @@ const HeaderPM = (props) => {
                                             <View style={styles.userparentInMenuAddmain}>
                                                 {/* <Image style={styles.userparentInMenuAdd} source={Images.AddIcon} /> */}
                                                 <AddWhite style={[styles.userparentInMenuAdd]} height={hp(2.47)} width={hp(2.47)} fill={true} />
-                                                </View>
+                                            </View>
                                             <Text style={{ ...styles.filterListText, fontFamily: FONTS.fontBold }}>ADD NEW USER</Text>
                                         </View>
                                     </View>
@@ -110,19 +127,19 @@ const HeaderPM = (props) => {
                         onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
                         {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
-                    <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
-                    {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
-                    {/* <View style={STYLE.redDot}></View> */}
+                        <Notification style={styles.massagesIcon} height={hp(5.20)} width={hp(5.20)} />
+                        {
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
+                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
             {tabIndex == 0 ?
                 <View style={styles.searchParent}>
                     <View style={styles.searchInner}>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             activeOpacity={opacity}
                             onPress={() => {
                                 keyword ? 
@@ -140,9 +157,14 @@ const HeaderPM = (props) => {
                                     : <Ic_Search height={20} width={20} />
 
                             }
-                            {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                                source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
+                           
+                        </TouchableOpacity> */}
+
+                        <TouchableOpacity activeOpacity={opacity}
+                            onPress={() => { onSearchClick(true) }}>
+                            {<Ic_Search height={20} width={20} />}
                         </TouchableOpacity>
+
                         <TextInput
                             ref={textInput}
                             style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
@@ -151,13 +173,20 @@ const HeaderPM = (props) => {
                             onChangeText={keyword => {
                                 setKeyword(keyword);
                                 props.onSearchKeyword(keyword);
+                                keyword == "" && onSearchClick(false);
                             }} />
+
+                        <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                            onPress={() => { keyword != "" && onSearchClick(false) }}>
+                            {keyword != "" && <CloseBlack height={20} width={20} />}
+                        </TouchableOpacity>
+
                         <Menu>
                             <MenuTrigger>
                                 {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
-                                <FilterBlack style={styles.searchMenu}height={15} width={15} />
-                                </MenuTrigger>
-                            <MenuOptions  style={[styles.filterCard]}>
+                                <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                            </MenuTrigger>
+                            <MenuOptions style={[styles.filterCard]}>
                                 <MenuOption style={styles.borderList}>
                                     <TouchableOpacity
                                         activeOpacity={opacity}
@@ -290,20 +319,20 @@ const styles = StyleSheet.create({
         height: hp(3.81),
         borderRadius: hp(3.81 / 2),
         marginRight: hp(1.5),
-        backgroundColor : COLORS.lightGrayPupil
+        backgroundColor: COLORS.lightGrayPupil
     },
     userparentInMenu: {
         width: hp(3.81),
         height: hp(3.81),
         marginRight: hp(1),
         borderRadius: hp(3.81 / 2),
-        backgroundColor : COLORS.lightGrayPupil
+        backgroundColor: COLORS.lightGrayPupil
     },
     userparentInMenuAdd: {
         width: hp(1.47),
         height: hp(1.47),
         resizeMode: 'contain',
-       
+
     },
     userparentInMenuAddmain: {
         width: hp(3.81),

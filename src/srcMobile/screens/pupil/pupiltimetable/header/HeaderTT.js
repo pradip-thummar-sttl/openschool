@@ -106,6 +106,7 @@ const HeaderTT = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
+                            keyword.length == 0 && onSearchClick(false);
                         }}
                         returnKeyType='search'
                         onSubmitEditing={() => onSearchClick(true)}
