@@ -60,7 +60,7 @@ const TeacherTimeTable = (props) => {
                 let subName = element.Type == Lesson ? element.SubjectName : element.EventType
                 let lessonTopic = element.Type == Lesson ? element.LessonTopic : element.EventLocation
 
-                if((startTime != null && startTime.trim().length == 0) || (endTime != null && endTime.trim().length == 0)){
+                if ((startTime != null && startTime.trim().length == 0) || (endTime != null && endTime.trim().length == 0)) {
                     return;
                 }
 
@@ -89,7 +89,9 @@ const TeacherTimeTable = (props) => {
             return (
                 <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
                     navigateToDetail={() => { setTeacherLessonDetail(true); setTeacherDetailData(data) }}
-                    isLesson={data.Type == Lesson} />
+                    isLesson={data.Type == Lesson}
+                    refreshList={() => refresh()}
+                />
             );
         } else {
             return (
@@ -162,7 +164,7 @@ const TeacherTimeTable = (props) => {
         setTimeout(() => {
             if (!isTimeTableLoading && _flatListRefrence && _flatListRefrence.current) {
                 // if (scrollIndex < 20)
-                    _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
+                _flatListRefrence.current.scrollToIndex({ index: scrollIndex, Animation: true })
                 // else {
                 //     _flatListRefrence.current.scrollToIndex({ index: 19, Animation: true });
                 //     onNext();
@@ -199,7 +201,6 @@ const TeacherTimeTable = (props) => {
     const getItemLayout = (data, index) => (
         { length: cellWidth, offset: cellWidth * index, index }
     )
-
     return (
         <View style={{ ...PAGESTYLE.mainPage, backgroundColor: COLORS.backgroundColorCommon }}>
             {
@@ -231,7 +232,7 @@ const TeacherTimeTable = (props) => {
                                 <ScrollView>
                                     {isTimeTableLoading ?
                                         <ActivityIndicator
-                                            style={{ flex: 1 ,padding:30}}
+                                            style={{ flex: 1, padding: 30 }}
                                             size={Platform.OS == 'ios' ? 'large' : 'small'}
                                             color={COLORS.yellowDark} />
                                         :
