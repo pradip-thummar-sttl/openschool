@@ -56,12 +56,19 @@ const HeaderWhitepupilMessage = (props) => {
   }
 
 
-  const onCloseSearch = () => {
-    props.onClearSearch();
-    setKeyword("");
-    textInput.current.clear();
-    setSearchActive(false);
-  };
+  const onSearchClick = (search) => {
+
+    if (search && keyword != "") {
+      setTimeout(() => {
+        props.onSearch(keyword);
+      }, 500)
+    }
+    else if (!search) {
+      props.onClearSearch()
+      setKeyword('')
+      textInput.current.clear()
+    }
+  }
 
   return (
     <View style={styles.headerBarMainWhite}>
@@ -84,7 +91,7 @@ const HeaderWhitepupilMessage = (props) => {
       </View>
       <View style={styles.searchParent}>
         <View style={styles.searchInner}>
-          <TouchableOpacity activeOpacity={opacity} onPress={() => search()}>
+          <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
             <SearchBlue height={20} width={20} />
           </TouchableOpacity>
 
@@ -104,117 +111,110 @@ const HeaderWhitepupilMessage = (props) => {
             onChangeText={(keyword) => {
               setKeyword(keyword);
               props.onSearchKeyword(keyword);
-              if (keyword == "") {
-                search();
-                setSearchActive(false);
-              }
+              keyword == "" && onSearchClick(false);
             }}
-            onSubmitEditing={() => {
-              search();
-            }}
+            onSubmitEditing={() => {keyword != "" && onSearchClick(true)}}
           />
-          <TouchableOpacity
-            activeOpacity={opacity}
-            onPress={() => onCloseSearch()}
-          >
-            {isSearchActive ? <CloseBlack height={20} width={20} /> : null}
+          <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+            {keyword != "" && <CloseBlack height={20} width={20} />}
           </TouchableOpacity>
-        </View>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Menu style={{ marginLeft: 10 }}>
-            <MenuTrigger
-              style={{ alignItems: "center", justifyContent: "center" }}
-            >
-              <Text style={styles.commonButtonBorderedheader}>
-                By {filterBy}
-              </Text>
-              <FilterBlack
-                style={[styles.filterIcon]}
-                height={hp(1.74)}
-                width={hp(1.74)}
-              />
-            </MenuTrigger>
-            <MenuOptions style={[styles.filterListWrap]}>
-              <MenuOption style={[styles.borderList]}>
-                <TouchableOpacity
-                  activeOpacity={opacity}
-                  onPress={() => {
-                    setFilterBy("Date");
-                    setSelectedIndex(0);
-                  }}
-                >
-                  <View style={styles.filterList}>
-                    <Text style={styles.filterListText}>Date</Text>
-                    {selectedIndex == 0 ? (
-                      // <Image source={Images.CheckIcon} style={styles.checkMark} />
-                      <TickMarkBlue
-                        style={styles.checkMark}
-                        height={hp(1.48)}
-                        width={hp(1.48)}
-                      />
-                    ) : null}
-                  </View>
-                </TouchableOpacity>
-              </MenuOption>
-              <MenuOption style={styles.borderList}>
-                <TouchableOpacity
-                  activeOpacity={opacity}
-                  onPress={() => {
-                    setFilterBy("Title");
-                    setSelectedIndex(1);
-                  }}
-                >
-                  <View style={styles.filterList}>
-                    <Text style={styles.filterListText}>Title</Text>
-                    {selectedIndex == 1 ? (
-                      <TickMarkBlue
-                        style={styles.checkMark}
-                        height={hp(1.48)}
-                        width={hp(1.48)}
-                      />
-                    ) : null}
-                  </View>
-                </TouchableOpacity>
-              </MenuOption>
-              <MenuOption style={styles.borderList}>
-                <TouchableOpacity
-                  activeOpacity={opacity}
-                  onPress={() => {
-                    setFilterBy("Status");
-                    setSelectedIndex(2);
-                  }}
-                >
-                  <View style={styles.filterList}>
-                    <Text style={styles.filterListText}>Status</Text>
-                    {selectedIndex == 2 ? (
-                      <TickMarkBlue
-                        style={styles.checkMark}
-                        height={hp(1.48)}
-                        width={hp(1.48)}
-                      />
-                    ) : null}
-                  </View>
-                </TouchableOpacity>
-              </MenuOption>
-            </MenuOptions>
-          </Menu>
-        </View>
-        <TouchableOpacity
-          style={styles.buttonGroup}
-          activeOpacity={opacity}
-          onPress={() => props.onNewMessage()}
-        >
-          <>
-            <AddWhite
-              style={styles.addIcon}
-              width={hp(1.55)}
-              height={hp(1.55)}
-            />
-            <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
-          </>
-        </TouchableOpacity>
+          
       </View>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <Menu style={{ marginLeft: 10 }}>
+          <MenuTrigger
+            style={{ alignItems: "center", justifyContent: "center" }}
+          >
+            <Text style={styles.commonButtonBorderedheader}>
+              By {filterBy}
+            </Text>
+            <FilterBlack
+              style={[styles.filterIcon]}
+              height={hp(1.74)}
+              width={hp(1.74)}
+            />
+          </MenuTrigger>
+          <MenuOptions style={[styles.filterListWrap]}>
+            <MenuOption style={[styles.borderList]}>
+              <TouchableOpacity
+                activeOpacity={opacity}
+                onPress={() => {
+                  setFilterBy("Date");
+                  setSelectedIndex(0);
+                }}
+              >
+                <View style={styles.filterList}>
+                  <Text style={styles.filterListText}>Date</Text>
+                  {selectedIndex == 0 ? (
+                    // <Image source={Images.CheckIcon} style={styles.checkMark} />
+                    <TickMarkBlue
+                      style={styles.checkMark}
+                      height={hp(1.48)}
+                      width={hp(1.48)}
+                    />
+                  ) : null}
+                </View>
+              </TouchableOpacity>
+            </MenuOption>
+            <MenuOption style={styles.borderList}>
+              <TouchableOpacity
+                activeOpacity={opacity}
+                onPress={() => {
+                  setFilterBy("Title");
+                  setSelectedIndex(1);
+                }}
+              >
+                <View style={styles.filterList}>
+                  <Text style={styles.filterListText}>Title</Text>
+                  {selectedIndex == 1 ? (
+                    <TickMarkBlue
+                      style={styles.checkMark}
+                      height={hp(1.48)}
+                      width={hp(1.48)}
+                    />
+                  ) : null}
+                </View>
+              </TouchableOpacity>
+            </MenuOption>
+            <MenuOption style={styles.borderList}>
+              <TouchableOpacity
+                activeOpacity={opacity}
+                onPress={() => {
+                  setFilterBy("Status");
+                  setSelectedIndex(2);
+                }}
+              >
+                <View style={styles.filterList}>
+                  <Text style={styles.filterListText}>Status</Text>
+                  {selectedIndex == 2 ? (
+                    <TickMarkBlue
+                      style={styles.checkMark}
+                      height={hp(1.48)}
+                      width={hp(1.48)}
+                    />
+                  ) : null}
+                </View>
+              </TouchableOpacity>
+            </MenuOption>
+          </MenuOptions>
+        </Menu>
+      </View>
+      <TouchableOpacity
+        style={styles.buttonGroup}
+        activeOpacity={opacity}
+        onPress={() => props.onNewMessage()}
+      >
+        <>
+          <AddWhite
+            style={styles.addIcon}
+            width={hp(1.55)}
+            height={hp(1.55)}
+          />
+          <Text style={styles.commonButtonGreenheader}>NEW MESSAGE</Text>
+        </>
+      </TouchableOpacity>
     </View>
+    </View >
   );
 };
 export default HeaderWhitepupilMessage;
