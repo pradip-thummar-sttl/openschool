@@ -55,15 +55,7 @@ const HeaderPM = (props) => {
 
         }
     }
-    // useEffect(() => {
-    //     if (!isSearchActive && textInput.current) {
-    //         props.onClearSearch()
-    //         setKeyword('')
-    //         textInput.current.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
+  
 
 
     return (
@@ -219,7 +211,9 @@ const HeaderPM = (props) => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
                                     keyword == "" && onSearchClick(false);
-                                }} />
+                                }}
+                                onSubmitEditing={() => keyword != "" && onSearchClick(true)}
+                            />
 
                             <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
                                 onPress={() => { keyword != "" && onSearchClick(false) }}>

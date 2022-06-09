@@ -168,14 +168,7 @@ const PupilLessonDetail = (props) => {
     );
   };
 
-  const searchEnter = () => {
-    keyword
-      ? isSearchActive
-        ? setSearchActive(false)
-        : setSearchActive(true)
-      : null;
-  };
-
+  
   const onSearchClick = (search) => {
 
     if (initialRender.current) {
@@ -247,7 +240,7 @@ const PupilLessonDetail = (props) => {
             placeholder="Search subject,topic name, etc"
             maxLength={50}
             returnKeyType="search"
-            onSubmitEditing={() => searchEnter()}
+            onSubmitEditing={()=>keyword != "" && onSearchClick(true)}
             placeholderTextColor={COLORS.menuLightFonts}
             onChangeText={(keyword) => {
               setKeyword(keyword);

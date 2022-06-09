@@ -31,29 +31,12 @@ const HeaderWhite = (props) => {
     const [filterBy, setFilterBy] = useState('All')
     const [keyword, setKeyword] = useState('')
 
-    // useEffect(() => {
-    //     if (!isSearchActive) {
-    //         props.onClearSearch()
-    //         setKeyword('')
-    //         textInput.current.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
+   
 
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
 
-    const searchEnter = () => {
-        keyword ?
-            isSearchActive ?
-                setSearchActive(false)
-                :
-                setSearchActive(true)
-            :
-            null
-    }
 
     const onSearchClick = (search) => {
 
@@ -136,7 +119,7 @@ const HeaderWhite = (props) => {
                             keyword == "" && onSearchClick(false);
                         }}
                         returnKeyType='search'
-                        onSubmitEditing={() => searchEnter()}
+                        onSubmitEditing={()=>keyword != "" && onSearchClick(true)}
                     />
 
                     <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}

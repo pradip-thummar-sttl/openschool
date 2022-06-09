@@ -25,20 +25,10 @@ import AddWhite from "../../../../svg/teacher/timetable/Add_White";
 const HeaderWhitepupilMessage = (props) => {
 
     const textInput = useRef(null);
-    const [isSearchActive, setSearchActive] = useState(false)
-    const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
-    const [keyword, setKeyword] = useState('')
-
-    useEffect(() => {
-        if (!isSearchActive) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
-        }
-    }, [isSearchActive])
+    const [isSearchActive, setSearchActive] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(1);
+    const [filterBy, setFilterBy] = useState('Date');
+    const [keyword, setKeyword] = useState('');
 
     useEffect(() => {
         props.onFilter(filterBy)
@@ -46,14 +36,23 @@ const HeaderWhitepupilMessage = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false;
-        // props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord('', '') })
-        // props.navigation.navigate('NotificationDrawer', {
-        //     onGoBack: () => 
-
-        //         fetchRecord('','')
-
-        // })
         props.navigation.openDrawer()
+    }
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            setTimeout(() => {
+                props.onSearch()
+            }, 500)
+        } 
+        else if(!search)
+        {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
     }
 
     return (
@@ -74,13 +73,11 @@ const HeaderWhitepupilMessage = (props) => {
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity activeOpacity={opacity} onPress={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}>
-                        {isSearchActive ?
-                            <CloseBlack height={20} width={20} />
-                            :
-                            <SearchBlue height={20} width={20} />
-                        }
+
+                    <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                        <SearchBlue height={20} width={20} />
                     </TouchableOpacity>
+
                     <TextInput
                         ref={textInput}
                         style={{
@@ -94,9 +91,15 @@ const HeaderWhitepupilMessage = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} 
-                        onSubmitEditing={() => { keyword && isSearchActive ? setSearchActive(false) : setSearchActive(true) }}
-                        />
+                            keyword == "" && onSearchClick(false);
+                        }}
+                        onSubmitEditing={() => { keyword != "" && onSearchClick(true); }}
+                    />
+
+                    <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+                        {keyword != "" && <CloseBlack height={20} width={20} />}
+                    </TouchableOpacity>
+
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Menu style={{ marginLeft: 10 }}>

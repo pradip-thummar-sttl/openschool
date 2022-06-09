@@ -4,7 +4,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import COLORS from "../../../../utils/Colors";
 import STYLE from '../../../../utils/Style';
 import FONTS from '../../../../utils/Fonts';
-import {Menu,MenuOptions,MenuOption,MenuTrigger,} from 'react-native-popup-menu';
+import { Menu, MenuOptions, MenuOption, MenuTrigger, } from 'react-native-popup-menu';
 import FilterBlack from "../../../../svg/teacher/timetable/Filter_Black";
 import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
 import { opacity } from "../../../../utils/Constant";
@@ -23,26 +23,31 @@ const TeacheroverViewHeader = (props) => {
     const [tabIndex, setSelectedTab] = useState(0);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(0)
+    const [keyword, setKeyword] = useState('')
 
-    const onPressSearch = () => {
-        setSearchActive(true)
-        setTimeout(() => {
-            props.onSearch()
-        }, 500)
-    }
-    const onPressClose = () => {
-        setSearchActive(false)
-        setTimeout(() => {
-            props.onClearSearch()
-            textInput.current.clear()
-        }, 500)
-    }
-
+   
     const onFilter = (filter) => {
         setTimeout(() => {
             props.onFilter(filter)
         }, 500)
     }
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            setTimeout(() => {
+                props.onSearch()
+            }, 500)
+        } 
+        else if(!search)
+        {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
+    }
+
     return (
         <View style={styles.headerMain}>
             <View style={styles.headerMaintop}>
@@ -64,64 +69,60 @@ const TeacheroverViewHeader = (props) => {
             {props.tabs === 0 &&
                 <View style={styles.searchParent}>
                     <View style={styles.searchInner}>
-                        {!isSearchActive ?
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => { onPressSearch() }}>
-                                <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />
-                            </TouchableOpacity>
-                            :
-                            <TouchableOpacity
-                                activeOpacity={opacity}
-                                onPress={() => { onPressClose() }}>
-                                <CloseBlack style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />
-                            </TouchableOpacity>}
+                       
+                        <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                            <Ic_Search style={{ resizeMode: 'contain', marginLeft: wp(1.5) }} height={hp(2.2)} width={hp(2.2)} />
+                        </TouchableOpacity>
 
                         <TextInput
                             ref={textInput}
-                            style={{ width:'85%', height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                            style={{ flex:1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                             placeholder="Search pupil"
                             placeholderTextColor={COLORS.menuLightFonts}
-                            onSubmitEditing={()=>onPressSearch()}
-                            onChangeText={keyword => {  props.onSearchKeyword(keyword);}} />
+                            onSubmitEditing={() => onPressSearch()}
+                            onChangeText={keyword => { props.onSearchKeyword(keyword); setKeyword(keyword)}} />
+                      
+                        <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+                            {keyword != "" && <CloseBlack style={{ resizeMode: 'contain', paddingHorizontal: wp(5) }} height={hp(2.2)} width={hp(2.2)} />}
+                        </TouchableOpacity>
 
                         <Menu>
-                        <MenuTrigger>
-                            <FilterBlack style={styles.searchMenu} height={15} width={15} />
-                        </MenuTrigger>
-                        <MenuOptions style={styles.filterListWrap}>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setSelectedIndex(0);onFilter("name"); }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Name</Text>
-                                        {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setSelectedIndex(1);onFilter("group"); }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>Group</Text>
-                                        {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                            <MenuOption style={styles.borderList}>
-                                <TouchableOpacity
-                                    activeOpacity={opacity}
-                                    onPress={() => { setSelectedIndex(2);onFilter("dob"); }}>
-                                    <View style={styles.filterList}>
-                                        <Text style={styles.filterListText}>DOB</Text>
-                                        {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
-                                    </View>
-                                </TouchableOpacity>
-                            </MenuOption>
-                        </MenuOptions>
-                    </Menu>
+                            <MenuTrigger>
+                                <FilterBlack style={styles.searchMenu} height={15} width={15} />
+                            </MenuTrigger>
+                            <MenuOptions style={styles.filterListWrap}>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setSelectedIndex(0); onFilter("name"); }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Name</Text>
+                                            {selectedIndex == 0 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setSelectedIndex(1); onFilter("group"); }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>Group</Text>
+                                            {selectedIndex == 1 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                                <MenuOption style={styles.borderList}>
+                                    <TouchableOpacity
+                                        activeOpacity={opacity}
+                                        onPress={() => { setSelectedIndex(2); onFilter("dob"); }}>
+                                        <View style={styles.filterList}>
+                                            <Text style={styles.filterListText}>DOB</Text>
+                                            {selectedIndex == 2 && <TickMarkBlue style={styles.checkMark} height={hp(1.48)} width={hp(1.48)} />}
+                                        </View>
+                                    </TouchableOpacity>
+                                </MenuOption>
+                            </MenuOptions>
+                        </Menu>
                     </View>
 
                     <TouchableOpacity style={styles.buttonGroup} onPress={() => refRBSheet.current.open()}>
@@ -174,7 +175,7 @@ const TeacheroverViewHeader = (props) => {
                             <View style={styles.beforeBorder}>
                                 <Text h2 style={[styles.titleTab, STYLE.centerText]}>Add New Pupil</Text>
                                 <View style={styles.entryContentMain}>
-                                    
+
                                     <MPopupdataSecondCSVUpload />
                                     <TouchableOpacity
                                         style={styles.entryData}
@@ -188,7 +189,7 @@ const TeacheroverViewHeader = (props) => {
                     </View>
                 </View>
             </RBSheet>
-           
+
         </View>
     );
 }
