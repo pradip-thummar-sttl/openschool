@@ -121,6 +121,7 @@ const Avatar = (prop) => {
     Service.get(
       `${EndPoints.PupilGetAvatar}/${User.user.UserDetialId}`,
       (res) => {
+          console.log('respnse of get avtar',res);
         let previousAvatarData = res.data;
 
         if (res.flag === true) {
@@ -266,6 +267,24 @@ const Avatar = (prop) => {
       }
     );
   };
+
+  const unlockImage=(item)=>{
+      let data={
+        Id:item._id,
+        PupilId:User.user.UserDetialId,
+        Point:item.Point
+      }
+      Service.post(data,EndPoints.GetAvatarImg,(res)=>{
+        if (res.flag) {
+            refresh();
+            showMessage(res.message)
+        }else{
+            showMessage(res.message)
+        }
+      },(err)=>{
+
+      })
+  }
 
   const getPreviosAvatar = () => {
     Service.get(
@@ -688,7 +707,7 @@ const Avatar = (prop) => {
               renderItem={({ item, index }) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => onPressAvtarParts(index)}
+                    onPress={() => item.IsActive?onPressAvtarParts(index):unlockImage(item)}
                     style={[
                       Styles.itemBtn,
                       {
@@ -706,6 +725,8 @@ const Avatar = (prop) => {
                         resizeMode: "contain",
                       }}
                     />
+                    {
+                    item.IsActive?null:
                     <View
                       style={{
                         height: "100%",
@@ -726,6 +747,7 @@ const Avatar = (prop) => {
                         Locked
                       </Text>
                     </View>
+              }
                   </TouchableOpacity>
                 );
               }}
