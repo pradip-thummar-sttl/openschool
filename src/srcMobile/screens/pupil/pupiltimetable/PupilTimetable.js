@@ -112,7 +112,9 @@ const PupilTimeTable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson}
+                navigateEditEvent={() => props.navigation.navigate('PupilEventEdit',{ onGoBack: () => refresh(), 'data': data })}
+                />
             );
         } else {
             return (

@@ -15,6 +15,7 @@ import { Lesson } from "../../../../utils/Constant";
 import EmptyStatePlaceHohder from "../../../component/reusable/placeholder/EmptyStatePlaceHohder";
 import MESSAGE from "../../../../utils/Messages";
 import moment from "moment";
+import CreateNewEvent from "./createnewevent/CreateNewEvent";
 
 
 const TeacherTimeTable = (props) => {
@@ -80,7 +81,9 @@ const TeacherTimeTable = (props) => {
             return (
                 <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={false}
                     navigateToDetail={() => props.navigation.navigate('TeacherLessonDetail', { onGoBack: () => refresh(), 'data': data })}
-                    isLesson={data.Type == Lesson} />
+                    isLesson={data.Type == Lesson} 
+                    navigateEditEvent={() => props.navigation.navigate('TeacherEventEdit',{ onGoBack: () => refresh(), 'data': data })}
+                    />
             );
         } else {
             return (
