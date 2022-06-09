@@ -36,6 +36,7 @@ import STYLE from '../../utils/Style';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import Splash from '../screens/splash/Splash';
 import TLDetailEdit from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetailEdit';
+import TeacherEventEdit from '../screens/teacher/teachertimetable/createnewevent/TeacherEventEdit';
 import TLVideoGallery from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonVideoGallery';
 import TLDetail from '../screens/teacher/teacherlessondetail/lessonplan/TeacherLessonDetail';
 // import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDetail';
@@ -49,6 +50,7 @@ import PupilLessonDetail from '../screens/pupil/pupillessondetail/PupilLessonDet
 import PupilHomeWorkSubmitted from '../screens/pupil/pupillessondetail/homework/PupilHomeWorkSubmitted';
 import CreateNewEvent from '../screens/teacher/teachertimetable/createnewevent/CreateNewEvent';
 import CreateNewEventPupil from '../screens/pupil/pupiltimetable/createnewevent/CreateNewEventPupil';
+import PupilEventEdit from '../screens/pupil/pupiltimetable/createnewevent/PupilEventEdit';
 import WorkSpace from '../screens/pupil/Workspace/WorkSpace';
 import Calendars from '../component/reusable/Calendar/Calendar';
 import Setting from '../screens/Setting/Setting';
@@ -138,8 +140,10 @@ function ScreenStack() {
                 <Stack.Screen name="PupilLessonDetail" component={PupilLessonDetail} />
                 <Stack.Screen name="CreateNewEvent" component={CreateNewEvent} />
                 <Stack.Screen name="CreateNewEventPupil" component={CreateNewEventPupil} />
+                <Stack.Screen name="PupilEventEdit" component={PupilEventEdit} />
                 <Stack.Screen name="PupilTimetable" component={PupilTimetable} />
                 <Stack.Screen name="TLDetailEdit" component={TLDetailEdit} />
+                <Stack.Screen name="TeacherEventEdit" component={TeacherEventEdit} />
                 <Stack.Screen name="TLDetail" component={TLDetail} />
                 <Stack.Screen name="PupilLessonDetailInternal" component={PupilLessonDetailInternal} />
                 <Stack.Screen name="PupilHomeWorkMarked" component={PupilHomeWorkMarked} />

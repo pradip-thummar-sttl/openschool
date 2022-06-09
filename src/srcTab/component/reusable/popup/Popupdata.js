@@ -23,6 +23,8 @@ import DownloadSVG from "../../../../svg/teacher/lessonhwplanner/Download";
 import CloseBlack from "../../../../svg/teacher/timetable/Close_Black";
 import CalendarUpload from "../../../../svg/teacher/timetable/CalendarUpload";
 import TickMarkBlue from "../../../../svg/teacher/dashboard/TickMark_Blue";
+import PupilEventEdit from "./PupilEventEdit";
+import TeacherEventEdit from "./TeacherEventEdit";
 
 const { CallModule, CallModuleIos } = NativeModules;
 
@@ -387,6 +389,27 @@ const Popupdata = (props) => {
                                             <Text style={styles.requireText1}>Notes: {props.data.EventDescription}</Text>
                                         </View>
                                     </View>
+                                    <View>
+
+                                        {
+                                            props.isPupil == 'false' ? 
+                                            <TeacherEventEdit 
+                                            data={props.data}
+                                            refreshList={props.refreshList}
+                                            />
+                                            :
+                                            <PupilEventEdit 
+                                            data={props.data}
+                                            refreshList={props.refreshList}  />
+
+                                        }
+                                    </View>
+                                    {/* <TouchableOpacity
+                                        style={styles.eventEditBtn}
+                                        activeOpacity={opacity}
+                                        onPress={() => { toggleModal(); props.navigateToEvent() }}>
+                                        <Text style={[styles.editCommonBtn]}>Edit Event</Text>
+                                    </TouchableOpacity> */}
                                 </View>
                             }
                         </View>
@@ -624,6 +647,17 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: COLORS.dashboardGreenButton,
         // marginBottom : 10,
+        paddingVertical: Platform.OS === 'android' ? 10 : 15,
+        alignItems: 'center'
+    },
+    eventEditBtn : {
+        width: '90%',
+        backgroundColor: COLORS.transparent,
+        borderRadius: 6,
+        alignItems: 'center', borderWidth: 1,
+        borderColor: COLORS.borderGrp,
+        marginHorizontal : 20,
+        marginBottom : 20,
         paddingVertical: Platform.OS === 'android' ? 10 : 15,
         alignItems: 'center'
     },

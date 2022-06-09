@@ -91,7 +91,9 @@ const PupilTimetable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson} 
+                refreshList={() => refresh()}
+                />
             );
         } else {
             return (

@@ -73,9 +73,9 @@ const HeaderPM = (props) => {
                         </View>
                         {/* <View style={STYLE.redDot}></View> */}
                         {
-                        BadgeIcon.isBadge ?
-                            <View style={STYLE.redDot}></View> : null
-                    }
+                            BadgeIcon.isBadge ?
+                                <View style={STYLE.redDot}></View> : null
+                        }
                     </TouchableOpacity>
                 </View>
             </View>
@@ -98,14 +98,14 @@ const HeaderPM = (props) => {
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
-                        }} 
+                        }}
                         onSubmitEditing={() => search()}
-                        />
+                    />
                     <Menu style={{ ...styles.filterIcon }}>
-                        <MenuTrigger>
+                        <MenuTrigger style={styles.menuContainer}>
                             {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
-                            <FilterBlack style={styles.filterIcon1} height={hp(1.74)} width={hp(1.74)} />
-                        
+                            <FilterBlack style={styles.filterIcon1} height={hp(2)} width={hp(2)} />
+
                         </MenuTrigger>
                         <MenuOptions>
                             <MenuOption style={styles.borderList}>
@@ -268,7 +268,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: hp(1.30),
         top: hp(1.5),
-        alignSelf:'center'
+        alignSelf: 'center',
+    },
+    menuContainer: {
+        width: hp(2),
+        height: hp(3),
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     filterIcon1: {
         width: hp(1.74),
