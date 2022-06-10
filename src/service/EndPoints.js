@@ -91,4 +91,6 @@ export const EndPoints = {
     // common 
     DeleteRecordingAndMaterial:"deleteuplodfile/",
 
+    GetAvatarImg:"getavatarImg",
+
 }
