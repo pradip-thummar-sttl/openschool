@@ -50,6 +50,7 @@ export const EndPoints = {
     GetAllAvtar : 'getallavatar',
     UpdateAvtar : 'updateavatar',
     PupilGetAvatar :'pupilgetavatar',
+    PupilGetAvatarImg :'getavatarImg',
     TeacherProfileEdit: 'teacherupdate',
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",

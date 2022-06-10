@@ -29,7 +29,7 @@ const tabs = [
 
 
 // const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
-const backgroundColorArray = ["#A194EC","#A8DAFF","#D18EEA","#F2DD92","#B0E2AF","#E1A052"]
+const backgroundColorArray = ["#A194EC", "#A8DAFF", "#D18EEA", "#F2DD92", "#B0E2AF", "#E1A052"]
 
 const Avatar = (props) => {
 
@@ -61,9 +61,13 @@ const Avatar = (props) => {
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
+    const [totalPoint, setTotalPoint] = useState(0)
 
     useEffect(() => {
+        onGetData()
+    }, [])
 
+    const onGetData = () => {
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag) {
@@ -77,6 +81,9 @@ const Avatar = (props) => {
                             break;
                         case '9':
                             setGold(element.count)
+                            break;
+                        case 'Point':
+                            setTotalPoint(element.count)
                             break;
                         default:
                             break;
@@ -186,24 +193,6 @@ const Avatar = (props) => {
                                 }
                             })
                             setEyesAvtar(eyes)
-
-                            //     if (User.user.AvatarIdList.length) {
-                            //     let newArr = [...eyesAvtar];
-                            //     newArr.map((item) => {
-                            //         item.isSelected = false;
-                            //     })
-
-
-
-
-                            //     element.imglist.map((item, dataIndex) => {
-                            //         if (item._id === User.user.AvatarIdList[2].AvatarId) {
-                            //             setCurrentSelectedEyes(dataIndex)
-                            //             newArr[dataIndex].isSelected = true;
-                            //             setEyesAvtar(newArr)
-                            //         }
-                            //     })
-                            // }
                         }
                         else if (element.Type === 'mouth') {
                             let mouth = [];
@@ -264,8 +253,27 @@ const Avatar = (props) => {
         }, (err) => {
             console.log('------errrrrrr---------', res)
         })
+    }
 
-    }, [])
+    const onGetAvtarImage = () => {
+
+
+        let data = { "Id": "615addcece1b8b4e989e39e0", "PupilId": "61dd2dfbced4ee226e60dab5", "Point": 5 }
+
+        Service.post(data, `${EndPoints.PupilGetAvatarImg}`, (res) => {
+            console.log('res of all pupil by teacher', res)
+            if (res.flag) {
+                onGetData();
+            } else {
+
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
+
+
+
+    }
 
     const changeTab = (index) => {
         console.log('currentSelected', currentSelected)
@@ -296,8 +304,6 @@ const Avatar = (props) => {
             return clothsAvtar
         }
     }
-
-
 
     const onPressAvtarParts = (index) => {
 
@@ -371,23 +377,18 @@ const Avatar = (props) => {
     }
 
     const saveMyAvtar = () => {
+
         setTimeout(() => {
-            console.log('colour', colourId)
-            console.log('hair', hairId)
-            console.log('eyes', eyesId)
-            console.log('mouth', mouthId)
-
-
-
             let avatarIdListArray = []
             let colourApiId = { "AvatarId": colourId }
             let hairApiId = { "AvatarId": hairId }
             let eyesApiId = { "AvatarId": eyesId }
             let cmouthApiId = { "AvatarId": mouthId }
+
             avatarIdListArray.push(colourApiId, hairApiId, eyesApiId, cmouthApiId)
 
 
-            console.log('avatarIdList', avatarIdListArray)
+            console.log('avatarIdList-------->', avatarIdListArray)
 
             let data =
             {
@@ -411,10 +412,10 @@ const Avatar = (props) => {
         props.navigation.openDrawer()
     }
     return (
-        <ScrollView contentContainerStyle={{width : '100%'}} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={{ width: '100%' }} showsVerticalScrollIndicator={false}>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
-                <View style={[Styles.leftView, {width:'35%'}]}>
+                <View style={[Styles.leftView, { width: '35%' }]}>
                     <View style={Styles.starView}>
                         <View style={Styles.yellowView}>
                             <Text style={Styles.subText}>Your stars convert to</Text>
@@ -442,7 +443,7 @@ const Avatar = (props) => {
                         <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
                             {/* Avatar editing View */}
                             {currentSelectedHair == 0 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%": wp(7.5) }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%" : wp(7.5) }} ></Image>
                                 : null}
                             {currentSelectedHair == 1 ?
                                 <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "2%", zIndex: 10 }} ></Image>
@@ -465,7 +466,7 @@ const Avatar = (props) => {
                         </View> : null}
                 </View>
 
-                <View style={[Styles.rightView,{width:'65%'}]}>
+                <View style={[Styles.rightView, { width: '65%' }]}>
                     <View style={Styles.borderView}>
                         {isLoading == false &&
                             <View style={Styles.tabView}>
@@ -485,7 +486,8 @@ const Avatar = (props) => {
                                     data={currentSelectedTab()}
                                     ListFooterComponent={
                                         isLoading == false ?
-                                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }} onPress={() => saveMyAvtar()} >
+                                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }}
+                                                onPress={() => saveMyAvtar()} >
                                                 <Text style={{
                                                     color: COLORS.white,
                                                     fontSize: hp(1.56),
@@ -498,6 +500,9 @@ const Avatar = (props) => {
                                         return (
                                             <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
                                                 <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
+                                                <View style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: '#0000008c' }}>
+                                                    <Text style={{ fontSize: 22, color: "#ffffff", fontFamily: FONTS.fontSemiBold }}>Locked</Text>
+                                                </View>
                                             </TouchableOpacity>
                                         )
                                     }}
