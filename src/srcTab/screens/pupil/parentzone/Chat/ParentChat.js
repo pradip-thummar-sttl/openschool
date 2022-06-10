@@ -105,32 +105,6 @@ const ParentChat = (props) => {
     return (
 
         <View style={{ height: '100%', }}>
-            {/* <ChatHeader /> */}
-            {/* tabs */}
-            {/* <View style={{ flexDirection: 'row', justifyContent: 'space-between', backgroundColor: 'white' }}>
-                <View style={[Styles.lessonPlanTab, { height: 50 }]}>
-                    {
-                        tabs.map((item, index) => {
-                            return (
-                                <TouchableOpacity onPress={() => onPressTab(index)} style={Styles.tabs}>
-                                    <Text style={[Styles.tabsText, item.isSelected ? Styles.tabsTextSelected : null]}>{item.name}</Text>
-                                </TouchableOpacity>
-                            )
-                        })
-                    }
-                </View>
-                <View style={Styles.field}>
-                    <Image
-                        style={Styles.userIcon}
-                        source={Images.SearchIcon} />
-                    <TextInput
-                        style={[STYLE.commonInput, Styles.searchHeader]}
-                        placeholder="Search Messages"
-                        maxLength={50}
-                        placeholderTextColor={COLORS.menuLightFonts}
-                    />
-                </View>
-            </View> */}
 
             <View style={{ flex: 1 }}>
                 {!isLoading && teacherData.length > 0 && selectedTeacherIndex != -1 ?

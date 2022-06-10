@@ -416,6 +416,14 @@ const Popupdata = (props) => {
                                 <Text style={styles.requireText1}>Notes: {props.data.EventDescription}</Text>
                             </View>
                         </View>
+                        <View style={{ ...STYLE.commonButtonBordered,width:'100%'}}>
+                            <TouchableOpacity
+                                style={styles.editButton}
+                                activeOpacity={opacity}
+                                onPress={() => { refRBSheet.current.close(); props.navigateEditEvent() }}>
+                                <Text style={styles.btnEditSty}>Edit Event</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
                 }

@@ -56,32 +56,41 @@ const SchoolMessage = (props) => {
 
         return true;
     }
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            fetchRecord(keyword, filterBy)
+        }
+        else if (!search) {
+            textInput.current.clear()
+            setKeyword("");
+            fetchRecord('', filterBy)
+        }
+    }
+
     const searchHeader = () => {
         return (
             <View style={PAGESTYLE.searchParent}>
                 <View style={PAGESTYLE.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                refresh()
-                                :
-                                null
-                        }}>
-                            {isSearchActive ?
-                            <CloseBlack height={15} width={15} />
-                            :
-                            <SearchBlue height={15} width={15} />
-                        }
+                   
+                    <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                        <SearchBlue height={20} width={20} />
                     </TouchableOpacity>
+
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold,paddingVertical:0 }}
                         placeholder="Search message"
                         placeholderTextColor={COLORS.menuLightFonts}
                         multiline={false}
-                        onChangeText={keyword => { setKeyword(keyword) }} 
-                        onSubmitEditing={()=>refresh()}/>
+                        onChangeText={keyword => { setKeyword(keyword); keyword == "" && onSearchClick(false); }} 
+                        onSubmitEditing={()=>keyword != "" && onSearchClick(true)}/>
+
+                     <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} style={{marginRight:wp(2)}} >
+                        {keyword != "" && <CloseBlack height={20} width={20} />}
+                    </TouchableOpacity>
+                    
                     <TouchableOpacity
                         activeOpacity={opacity}>
                         <Menu style={PAGESTYLE.filterGroup}>
@@ -138,8 +147,7 @@ const SchoolMessage = (props) => {
                 </View>
                 <TouchableOpacity
                     style={PAGESTYLE.buttonGroup}
-                    onPress={() => props.navigation.navigate('SchoolNewMessage', { onGoBack: () => refresh() })}>
-                    {/* <Image style={PAGESTYLE.addIcon4} source={Images.AddIconWhite} /> */}
+                    onPress={() => props.navigation.navigate('SchoolNewMessage', { onGoBack: () => onSearchClick(false) })}>
                     <AddWhite style={PAGESTYLE.addIcon4} height={hp(1.56)} width={hp(1.56)} />
                 </TouchableOpacity>
             </View>
@@ -214,17 +222,6 @@ const SchoolMessage = (props) => {
         }, (err) => {
             console.log('response of get all global messages', err)
         })
-    }
-
-    const refresh = () => {
-        if (isSearchActive) {
-            textInput.current.clear()
-            setSearchActive(false)
-            fetchRecord('', filterBy)
-        } else {
-            setSearchActive(true)
-            fetchRecord(keyword, filterBy)
-        }
     }
 
     const openNotification = () => {

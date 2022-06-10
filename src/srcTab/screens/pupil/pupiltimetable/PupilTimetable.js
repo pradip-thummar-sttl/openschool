@@ -91,7 +91,9 @@ const PupilTimetable = (props) => {
 
         if (flag) {
             return (
-                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson} />
+                <Popupdata span={span} title={lblTitle} time={lblTime} data={data} isPupil={true} isLesson={data.Type == Lesson} 
+                refreshList={() => refresh()}
+                />
             );
         } else {
             return (
@@ -124,6 +126,11 @@ const PupilTimetable = (props) => {
     }, [])
 
     const fetchRecord = (searchBy, filterBy, currentDate) => {
+
+        console.log("searchBy--->", searchBy);
+        console.log("filterBy--->", filterBy);
+        console.log("currentDate--->", currentDate);
+
         let data = {
             Searchby: searchBy,
             Filterby: filterBy,
@@ -194,15 +201,16 @@ const PupilTimetable = (props) => {
         <View style={PAGESTYLE.mainPage}>
 
             <View style={{ width: isHide ? '100%' : '78%', backgroundColor: COLORS.white }}>
+                
                 <Header3
                     onAlertPress={() => { openNotification() }}
                     onCalenderPress={() => { Var.isCalender = true; props.navigation.openDrawer() }}
                     onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
-                    onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('YYYY-MM-DD'))}
-                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '') }}
+                    onSearch={() => fetchRecord(searchKeyword, filterBy, moment().format('yyyy-MM-DD'))}
+                    onClearSearch={() => { setSearchKeyword(''); fetchRecord('', '', moment().format('yyyy-MM-DD')) }}
                     navigateToAddLesson={() => props.navigation.navigate('TLDetailAdd', { onGoBack: () => refresh() })}
                     refreshList={() => refresh()}
-                    onFilter={(filter) => fetchRecord(searchKeyword, filter, moment().format('YYYY-MM-DD'))} />
+                    onFilter={(filter) => fetchRecord(searchKeyword, filter, moment().format('yyyy-MM-DD'))} />
 
                 <ScrollView style={{ ...PAGESTYLE.backgroundTable }}>
                     {isTimeTableLoading ?

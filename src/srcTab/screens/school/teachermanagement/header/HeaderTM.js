@@ -26,24 +26,18 @@ import { BadgeIcon } from "../../../../../utils/Model";
 const HeaderTM = (props) => {
 
     const textInput = useRef(null);
-    const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('1')
     const [keyword, setKeyword] = useState('')
-    const [filter,setFilter] = useState('Ascending')
+    const [filter, setFilter] = useState('Ascending')
 
-    const onPressSearchButton = () => {
-        setSearchActive(true)
-        setTimeout(() => {
-            props.onSearch()
-        }, 500)
-    }
+
 
     useEffect(() => {
         props.onFilter(filter)
-    },[])
+    }, [])
+
     const onPressCloseButton = () => {
-        setSearchActive(false)
         setTimeout(() => {
             props.onClearSearch()
             textInput.current.clear()
@@ -64,6 +58,22 @@ const HeaderTM = (props) => {
             props.onFilter('-1')
         }, 500)
     }
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            setTimeout(() => {
+                props.onSearch()
+            }, 500)
+        }
+        else if (!search) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
+    }
+
 
     return (
         <View style={styles.headerBarMainWhite}>
@@ -90,14 +100,11 @@ const HeaderTM = (props) => {
                 <Text style={[styles.tabsText, styles.tabsTextSelected]}>Teacher Overview</Text>
                 <View style={styles.searchInner}>
 
-                    {isSearchActive ?
-                        <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
-                            <CloseBlack height={20} width={20} />
-                        </TouchableOpacity> :
 
-                        <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
-                            <SearchBlue height={20} width={20} />
-                        </TouchableOpacity>}
+
+                    <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                        <SearchBlue height={20} width={20} />
+                    </TouchableOpacity>
 
                     <TextInput
                         ref={textInput}
@@ -105,22 +112,28 @@ const HeaderTM = (props) => {
                         placeholder="Search teacher"
                         maxLength={50}
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onSubmitEditing={()=>onPressSearchButton()}
+                        onSubmitEditing={() => keyword != "" && onSearchClick(true)}
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
+                            keyword == "" && onSearchClick(false);
                         }} />
+
+                    <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+                        {keyword != "" && <CloseBlack height={20} width={20} />}
+                    </TouchableOpacity>
+
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginRight: 10 }}>
                     <Menu style={{}}>
-                        <MenuTrigger style={{justifyContent : 'center',alignItems : 'center'}}><Text style={styles.commonButtonBorderedheader}>By Name({filter})</Text>
+                        <MenuTrigger style={{ justifyContent: 'center', alignItems: 'center' }}><Text style={styles.commonButtonBorderedheader}>By Name({filter})</Text>
                             <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                         </MenuTrigger>
                         <MenuOptions style={styles.filterListWrap}>
                             <MenuOption style={styles.borderList}>
                                 <TouchableOpacity
                                     activeOpacity={opacity}
-                                    onPress={() => { OnPressAsc(); setFilter('Ascending')}}>
+                                    onPress={() => { OnPressAsc(); setFilter('Ascending') }}>
                                     <View style={styles.filterList}>
                                         <Text style={styles.filterListText}>Name (Ascending)</Text>
                                         {selectedIndex == 0 ?
@@ -148,7 +161,7 @@ const HeaderTM = (props) => {
                         </MenuOptions>
                     </Menu>
                 </View>
-                
+
                 <PopupaddnewdataTM
                     navigateToAddLesson={() => props.navigateToAddLesson()}
                     refreshList={() => props.refreshList()}

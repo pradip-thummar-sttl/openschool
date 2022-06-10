@@ -46,19 +46,13 @@ const HeaderTM = (props) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [filterBy, setFilterBy] = useState('1')
     const [isModalVisible, setModalVisible] = useState(false)
+    const [keyword, setKeyword] = useState('')
 
-    // useEffect(() => {
-    //     if (!isSearchActive) {
-    //         props.onClearSearch()
-    //         textInput.current.clear()
-    //     } else {
-    //         props.onSearch()
-    //     }
-    // }, [isSearchActive])
+    
 
-    // useEffect(() => {
-    //     props.onFilter(filterBy)
-    // }, [filterBy])
+    useEffect(() => {
+        props.onFilter(filterBy)
+    }, [filterBy])
 
     const addCSV = () => {
         try {
@@ -140,6 +134,22 @@ const HeaderTM = (props) => {
         }, 500)
     }
 
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            setTimeout(() => {
+                props.onSearch()
+            }, 500)
+        } 
+        else if(!search)
+        {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+
+        }
+    }
+    
     return (
         <View style={{ borderBottomWidth: 1, borderBottomColor: COLORS.dashBoard, marginBottom: hp(1.23), }}>
             <View style={styles.headerMain}>
@@ -162,22 +172,30 @@ const HeaderTM = (props) => {
             </View>
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    {isSearchActive ?
+                    {/* {isSearchActive ?
                         <TouchableOpacity onPress={() => { onPressCloseButton() }} activeOpacity={opacity} >
                             <CloseBlack height={18} width={18} />
                         </TouchableOpacity>
                         :
                         <TouchableOpacity onPress={() => { onPressSearchButton() }} activeOpacity={opacity} >
                             <SearchBlue height={18} width={18} />
-                        </TouchableOpacity>}
+                        </TouchableOpacity>} */}
+
+                    <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                        <SearchBlue height={20} width={20} />
+                    </TouchableOpacity>
 
                     <TextInput
                         ref={textInput}
                         style={{ flex: 1, height: '100%', paddingHorizontal: 5, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0, }}
                         placeholder="Search name"
                         placeholderTextColor={COLORS.menuLightFonts}
-                        onSubmitEditing={()=>onPressSearchButton()}
-                        onChangeText={keyword => { props.onSearchKeyword(keyword); }} />
+                        onSubmitEditing={()=>keyword != "" && onSearchClick(true)}
+                        onChangeText={keyword => { props.onSearchKeyword(keyword); setKeyword(keyword); keyword == "" && onSearchClick(false);}} />
+
+                    <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+                        {keyword != "" && <CloseBlack height={20} width={20} />}
+                    </TouchableOpacity>
 
                     <Menu>
                         <MenuTrigger>

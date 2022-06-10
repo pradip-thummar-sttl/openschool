@@ -30,36 +30,37 @@ import FilterBlack from "../../../../../svg/teacher/timetable/Filter_Black";
 const HeaderTT = (props) => {
     const refRBSheet = useRef();
     const textInput = useRef(null);
-    const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(2)
-    const [filterBy, setFilterBy] = useState('Date')
-    const [isModalVisible, setModalVisible] = useState(false)
     const [keyword, setKeyword] = useState('')
 
-    useEffect(() => {
-        if (!isSearchActive) {
+    // useEffect(() => {
+    //     if (!isSearchActive) {
+    //         props.onClearSearch()
+    //         setKeyword('')
+    //         textInput.current.clear()
+    //     } else {
+    //         props.onSearch()
+    //     }
+    // }, [isSearchActive])
+
+ 
+
+    
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            props.onSearch()
+        } 
+        else if(!search)
+        {
             props.onClearSearch()
             setKeyword('')
             textInput.current.clear()
-        } else {
-            props.onSearch()
+
         }
-    }, [isSearchActive])
-
-    useEffect(() => {
-        // props.onFilter(filterBy)
-    }, [filterBy])
-
-    const handleKeyDown = (e) => {
-            keyword ?
-                isSearchActive ?
-                    setSearchActive(false)
-                    :
-                    setSearchActive(true)
-                :
-                null
-            // props.onSearch()
     }
+
     return (
         <View style={{ backgroundColor: COLORS.white, shadowColor: COLORS.black, shadowOffset: { width: 0, height: hp(1), }, shadowOpacity: 0.05, shadowRadius: hp(1), paddingBottom: hp(1.5) }}>
             <View style={styles.headerMain}>
@@ -70,19 +71,15 @@ const HeaderTT = (props) => {
 
                 <View style={styles.headerRight}>
                     <TouchableOpacity onPress={() => props.onCalenderPress()} style={styles.notificationBar} activeOpacity={opacity}>
-                        {/* <Image style={styles.calnderDashHeaderIcon} source={Images.calnderDashHeaderIcon} /> */}
                         <CalendarTop style={styles.calnderDashHeaderIcon} height={hp(5.20)} width={hp(5.20)} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.notificationBar}
                         onPress={() => props.onNotification()}
                         activeOpacity={opacity}>
-                        {/* <Image style={styles.massagesIcon} source={Images.Notification} /> */}
                         <Notification style={styles.massagesIcon} height={hp(5.2)} width={hp(5.2)} />
                         {
-                            BadgeIcon.isBadge ?
-                                <View style={STYLE.redDot}></View> : null
+                            BadgeIcon.isBadge ? <View style={STYLE.redDot}></View> : null
                         }
-                        {/* <View style={STYLE.redDot}></View> */}
                     </TouchableOpacity>
                 </View>
             </View>
@@ -90,41 +87,38 @@ const HeaderTT = (props) => {
 
             <View style={styles.searchParent}>
                 <View style={styles.searchInner}>
-                    <TouchableOpacity
-                        activeOpacity={opacity}
-                        onPress={() => {
-                            keyword ?
-                                isSearchActive ?
-                                    setSearchActive(false)
-                                    :
-                                    setSearchActive(true)
-                                :
-                                null
-                        }}>
-                        {/* <Image style={{ height: 15, resizeMode: 'contain' }}
-                            source={isSearchActive ? Images.PopupCloseIcon : Images.SearchIcon} /> */}
-                        {isSearchActive ?
-                            <CloseBlack height={15} width={15} />
-                            :
-                            <SearchBlue height={15} width={15} />
-                        }
+
+                    <TouchableOpacity activeOpacity={opacity}
+                        onPress={() => { onSearchClick(true) }}>
+                        {<SearchBlue height={15} width={15} />}
                     </TouchableOpacity>
+
                     <TextInput
                         ref={textInput}
-                        style={{ flex: 1, height: '100%', paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, paddingVertical: 0 }}
+
+                        style={{
+                            flex: 1, height: '100%', paddingStart: 10, fontSize: hp(1.82),
+                            fontFamily: FONTS.fontSemiBold, paddingVertical: 0
+                        }}
+
                         placeholder="Search subject etc"
                         placeholderTextColor={COLORS.menuLightFonts}
                         onChangeText={keyword => {
                             setKeyword(keyword);
                             props.onSearchKeyword(keyword);
+                            keyword.length == 0 && onSearchClick(false);
                         }}
                         returnKeyType='search'
-                        onSubmitEditing={() => handleKeyDown()}
+                        onSubmitEditing={() => onSearchClick(true)}
                     />
+
+                    <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                        onPress={() => { keyword != "" && onSearchClick(false) }}>
+                        {keyword != "" && <CloseBlack height={15} width={15} />}
+                    </TouchableOpacity>
 
                     <Menu>
                         <MenuTrigger>
-                            {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
                             <FilterBlack style={styles.searchMenu} height={15} width={15} />
                         </MenuTrigger>
                         <MenuOptions style={{
@@ -653,7 +647,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row', alignItems: 'center', height: hp(5.20), marginLeft: hp(1.95), marginRight: hp(1.95), backgroundColor: COLORS.white
     },
     searchInner: {
-        height: '100%', flex: 1, marginRight: 10, borderColor: COLORS.borderGrp, borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
+        height: '100%', flex: 1, marginRight: 10, borderColor: COLORS.borderGrp,
+        borderWidth: 1, borderRadius: 10, flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
