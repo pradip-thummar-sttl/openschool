@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Platform } from 'react-native'
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Platform, Alert } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 // import Images from '../../../../utils/Images'
 // import Images from '../../../../../srcmobile/utils/Images'
@@ -54,9 +54,7 @@ const Avatar = (props) => {
     const [clothsId, setClothsId] = useState('');
 
     const [allAvtarData, setAllAvtarData] = useState([]);
-
     const [isLoading, setIsLoading] = useState(true);
-
 
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
@@ -68,6 +66,7 @@ const Avatar = (props) => {
     }, [])
 
     const onGetData = () => {
+
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
             if (res.flag) {
@@ -102,9 +101,8 @@ const Avatar = (props) => {
 
             if (res.flag === true) {
 
-                Service.get(EndPoints.GetAllAvtar, (res) => {
-
-                    console.log('get avtar ', res)
+                Service.get(`${EndPoints.GetAllAvtar}/${User.user.UserDetialId}`, (res) => {
+                    // Service.get(EndPoints.GetAllAvtar, (res) => {
 
                     setAllAvtarData(res.data)
 
@@ -234,8 +232,6 @@ const Avatar = (props) => {
                                 }
                             })
                             setClothsAvtar(clothes)
-                            console.log('cloth', clothes)
-                            console.log('cloth', clothsAvtar)
                             setTimeout(() => {
                                 setIsLoading(false)
                             }, 1000)
@@ -253,26 +249,6 @@ const Avatar = (props) => {
         }, (err) => {
             console.log('------errrrrrr---------', res)
         })
-    }
-
-    const onGetAvtarImage = () => {
-
-
-        let data = { "Id": "615addcece1b8b4e989e39e0", "PupilId": "61dd2dfbced4ee226e60dab5", "Point": 5 }
-
-        Service.post(data, `${EndPoints.PupilGetAvatarImg}`, (res) => {
-            console.log('res of all pupil by teacher', res)
-            if (res.flag) {
-                onGetData();
-            } else {
-
-            }
-        }, (err) => {
-            console.log('Err of all pupil by teacher', err)
-        })
-
-
-
     }
 
     const changeTab = (index) => {
@@ -305,72 +281,96 @@ const Avatar = (props) => {
         }
     }
 
-    const onPressAvtarParts = (index) => {
+    const onPressAvtarParts = (index, item) => {
 
-        if (currentSelected === 'COLOUR') {
-
-            let newArr = [...colourAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedColour(index)
-            setColourAvtar(newArr)
-            allAvtarData.map((item) => {
-                if (item.Type === "colour") {
-                    setColourId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'HAIR') {
-            let newArr = [...hairAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedHair(index)
-            setHairAvtar(newArr);
-
-            allAvtarData.map((item) => {
-                if (item.Type === "hair") {
-                    setHairId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'EYES') {
-            let newArr = [...eyesAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedEyes(index)
-            setEyesAvtar(newArr)
-
-            allAvtarData.map((item) => {
-                if (item.Type === "eyes") {
-                    setEyesId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'MOUTH') {
-            let newArr = [...mouthAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedMouth(index)
-            setMouthAvtar(newArr)
-
-            allAvtarData.map((item) => {
-                if (item.Type === "mouth") {
-                    setMouthId(item.imglist[index]._id)
-                }
-            })
+        if (item.IsGet == false && index !=0) {
+            if (item.Point <= totalPoint)
+                onUnlockImage(item._id, item.Point);
+            else
+                Alert.alert("Sorry, you don't have enough points to unlock this item")
+                
         }
         else {
-            return clothsAvtar
+            if (currentSelected === 'COLOUR') {
+
+                let newArr = [...colourAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedColour(index)
+                setColourAvtar(newArr)
+                allAvtarData.map((item) => {
+                    if (item.Type === "colour") {
+                        setColourId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'HAIR') {
+                let newArr = [...hairAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedHair(index)
+                setHairAvtar(newArr);
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "hair") {
+                        setHairId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'EYES') {
+                let newArr = [...eyesAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedEyes(index)
+                setEyesAvtar(newArr)
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "eyes") {
+                        setEyesId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'MOUTH') {
+                let newArr = [...mouthAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedMouth(index)
+                setMouthAvtar(newArr)
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "mouth") {
+                        setMouthId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else {
+                return clothsAvtar
+            }
         }
 
+    }
+
+    const onUnlockImage = (id, Point) => {
+
+        let data = { "Id": id, "PupilId": User.user.UserDetialId, "Point": Point }
+
+        Service.post(data, `${EndPoints.PupilGetAvatarImg}`, (res) => {
+            if (res.flag) {
+                onGetData();
+            } else {
+
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
 
 
 
@@ -411,6 +411,7 @@ const Avatar = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
     }
+
     return (
         <ScrollView contentContainerStyle={{ width: '100%' }} showsVerticalScrollIndicator={false}>
             <AvatarHeader onAlertPress={() => openNotification()} />
@@ -419,7 +420,7 @@ const Avatar = (props) => {
                     <View style={Styles.starView}>
                         <View style={Styles.yellowView}>
                             <Text style={Styles.subText}>Your stars convert to</Text>
-                            <Text style={Styles.headText}>{bronze + silver + gold} points</Text>
+                            <Text style={Styles.headText}>{totalPoint} points</Text>
                         </View>
                         <View style={Styles.rewardStarMark}>
                             <View style={Styles.centerStar}>
@@ -498,11 +499,15 @@ const Avatar = (props) => {
                                     }
                                     renderItem={({ item, index }) => {
                                         return (
-                                            <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
+                                            <TouchableOpacity onPress={() => onPressAvtarParts(index, item)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
                                                 <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
-                                                <View style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'absolute', backgroundColor: '#0000008c' }}>
-                                                    <Text style={{ fontSize: 22, color: "#ffffff", fontFamily: FONTS.fontSemiBold }}>Locked</Text>
-                                                </View>
+
+                                                {item.IsGet != true && index != 0 &&
+                                                    <View style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: '#0000008c', borderRadius:wp(0.5) }}>
+                                                        <Text style={{ fontSize: 18, color: "#ffffff", fontFamily: FONTS.fontSemiBold, left: 6 }}>{item.Point + " Points"}</Text>
+                                                        <Text style={{ fontSize: 22, position: 'absolute', alignSelf: 'center', marginTop: hp(7), color: "#ffffff", fontFamily: FONTS.fontSemiBold }}>Locked</Text>
+                                                    </View>
+                                                }
                                             </TouchableOpacity>
                                         )
                                     }}
