@@ -51,6 +51,7 @@ export const EndPoints = {
     GetAllAvtar : 'getallavatar',
     UpdateAvtar : 'updateavatar',
     PupilGetAvatar :'pupilgetavatar',
+    PupilGetAvatarImg :'getavatarImg',
     TeacherProfileEdit: 'teacherupdate',
     // pupil management.
     PupilByTeacherId:"pupilbyteacherid",
@@ -90,5 +91,7 @@ export const EndPoints = {
 
     // common 
     DeleteRecordingAndMaterial:"deleteuplodfile/",
+
+    GetAvatarImg:"getavatarImg",
 
 }

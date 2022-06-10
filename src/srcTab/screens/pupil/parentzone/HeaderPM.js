@@ -43,15 +43,20 @@ const HeaderPM = (props) => {
         setChildrenList(props.data);
     }, [props.data]);
 
-    useEffect(() => {
-        if (!isSearchActive && textInput.current) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch()
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            props.onSearch();
         }
-    }, [isSearchActive])
+        else if (!search) {
+            props.onClearSearch();
+            setKeyword('');
+            textInput.current.clear();
+
+        }
+    }
+  
+
 
     return (
         <View style={PAGESTYLE.headerBarMainWhite}>
@@ -167,7 +172,7 @@ const HeaderPM = (props) => {
                 {tabIndex == 0 ?
                     <View style={PAGESTYLE.searchParent}>
                         <View style={PAGESTYLE.searchInner}>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 activeOpacity={opacity}
                                 onPress={() => {
                                     keyword ?
@@ -178,15 +183,20 @@ const HeaderPM = (props) => {
                                         :
                                         null
                                 }}>
-                                {/* <Image style={{ height: 20, resizeMode: 'contain' }}
-                                    source={Images.SearchIcon} /> */}
+                               
                                 {
                                     isSearchActive ?
                                         <CloseBlack height={20} width={20} />
                                         : <SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />
 
                                 }
+                            </TouchableOpacity> */}
+
+                            <TouchableOpacity activeOpacity={opacity}
+                                onPress={() => { onSearchClick(true) }}>
+                                {<SearchBlue style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
                             </TouchableOpacity>
+
                             <TextInput
                                 ref={textInput}
                                 style={{
@@ -200,7 +210,16 @@ const HeaderPM = (props) => {
                                 onChangeText={keyword => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
-                                }} />
+                                    keyword == "" && onSearchClick(false);
+                                }}
+                                onSubmitEditing={() => keyword != "" && onSearchClick(true)}
+                            />
+
+                            <TouchableOpacity activeOpacity={opacity} style={{ paddingHorizontal: hp(1) }}
+                                onPress={() => { keyword != "" && onSearchClick(false) }}>
+                                {keyword != "" && <CloseBlack style={{ height: 20, resizeMode: 'contain' }} height={20} width={20} />}
+                            </TouchableOpacity>
+
                             <Menu>
                                 <MenuTrigger>
                                     {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}

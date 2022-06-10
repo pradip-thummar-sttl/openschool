@@ -30,23 +30,27 @@ const HeaderPM = (props) => {
     const [tabIndex, setSelectedTab] = useState(0);
     const [isSearchActive, setSearchActive] = useState(false)
     const [selectedIndex, setSelectedIndex] = useState(1)
-    const [filterBy, setFilterBy] = useState('Date')
-    const [isModalVisible, setModalVisible] = useState(false)
+    const [filterBy, setFilterBy] = useState('')
     const [keyword, setKeyword] = useState('')
 
-    useEffect(() => {
-        if (!isSearchActive && textInput.current) {
-            props.onClearSearch()
-            setKeyword('')
-            textInput.current.clear()
-        } else {
-            props.onSearch(keyword)
-        }
-    }, [isSearchActive])
 
     useEffect(() => {
         props.onFilter(filterBy)
     }, [filterBy])
+
+    const onSearchClick = (search) => {
+
+        if (search && keyword != "") {
+            setTimeout(() => {
+                props.onSearch(keyword);
+            }, 500)
+        }
+        else if (!search) {
+            props.onClearSearch()
+            setKeyword('')
+            textInput.current.clear()
+        }
+    }
 
     return (
         <View style={styles.headerMain}>
@@ -85,7 +89,7 @@ const HeaderPM = (props) => {
                 {tabIndex == 0 ?
                     <View style={styles.searchParent}>
                         <View style={styles.searchInner}>
-                            <TouchableOpacity
+                            {/* <TouchableOpacity
                                 activeOpacity={opacity}
                                 onPress={() => {
                                     keyword &&
@@ -100,22 +104,32 @@ const HeaderPM = (props) => {
                                     :
                                     <SearchBlue height={15} width={15} />
                                 }
+                            </TouchableOpacity> */}
+
+                            <TouchableOpacity onPress={() => { onSearchClick(true) }} activeOpacity={opacity} >
+                                <SearchBlue height={20} width={20} />
                             </TouchableOpacity>
 
                             <TextInput
                                 ref={textInput}
-                                style={{ width: '100%', height: '100%', paddingVertical: 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
+                                style={{ flex: 1, height: '100%', paddingVertical: 3.5, paddingHorizontal: 10, fontSize: hp(1.82), fontFamily: FONTS.fontSemiBold, }}
                                 placeholder="Search pupil"
                                 placeholderTextColor={COLORS.menuLightFonts}
-                                onSubmitEditing={()=>setSearchActive(true)}
+                                onSubmitEditing={()=>keyword != "" && onSearchClick(true)}
                                 onChangeText={keyword => {
                                     setKeyword(keyword);
                                     props.onSearchKeyword(keyword);
+                                    keyword == "" && onSearchClick(false);
                                 }} />
+
+                            <TouchableOpacity onPress={() => { onSearchClick(false) }} activeOpacity={opacity} >
+                                {keyword != "" && <CloseBlack height={20} width={20} />}
+                            </TouchableOpacity>
+
                         </View>
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginHorizontal: 10 }}>
                             <Menu style={{}}>
-                                <MenuTrigger style={{justifyContent : 'center',alignItems: 'center'}}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
+                                <MenuTrigger style={{ justifyContent: 'center', alignItems: 'center' }}><Text style={styles.commonButtonBorderedheader}>By {filterBy}</Text>
                                     <FilterBlack style={styles.filterIcon} height={hp(1.74)} width={hp(1.74)} />
                                 </MenuTrigger>
                                 <MenuOptions style={styles.filterListWrap}>
@@ -337,7 +351,7 @@ const styles = StyleSheet.create({
         paddingBottom: hp(1),
         position: Platform.OS === 'android' ? 'relative' : 'absolute',
         backgroundColor: COLORS.white,
-        top:Platform.OS === 'android' ? hp(0) :hp(5.5),
+        top: Platform.OS === 'android' ? hp(0) : hp(5.5),
         right: hp(0),
         width: Platform.OS === 'android' ? null : hp(30.78),
         borderRadius: hp(1),
