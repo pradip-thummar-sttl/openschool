@@ -24,7 +24,7 @@ import CalSmall from "../../../../../svg/teacher/dashboard/Calender";
 import UploadCal from "../.././../../../svg/pupil/timetable/UploadCal";
 import BackArrow from "../../../../../svg/common/BackArrow";
 const PupilEventEdit = (props) => {
-    console.log('props', props);
+   
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -54,10 +54,7 @@ const PupilEventEdit = (props) => {
     const [timeSlot, setTimeSlots] = useState(['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'])
     const [colorArr, setColorArr] = useState([])
     const [eventData,setEventData] = useState(props.route.params.data)
-    // this.state = {
-    //     userName: '',
-    //     password: '',
-    // }
+  
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -110,7 +107,7 @@ const PupilEventEdit = (props) => {
             showMessage(MESSAGE.location);
             return false;
         }
-        saveEvent()
+        updateEvent()
     }
 
     useEffect(() => {
@@ -131,7 +128,7 @@ const PupilEventEdit = (props) => {
         })
     }, [])
 
-    const saveEvent = () => {
+    const updateEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
@@ -143,13 +140,12 @@ const PupilEventEdit = (props) => {
             EventTypeId: selectColorId,
             CreatedBy: User.user.UserDetialId
         }
-
-        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
+        Service.post(data, `${EndPoints.CalenderEventUpdate}/${eventData._id}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of update event', res)
                 setDefaults()
-                showMessageWithCallBack(MESSAGE.eventAdded, () => {
+                showMessageWithCallBack(MESSAGE.eventUpdate, () => {
                     props.route.params.onGoBack();
                     props.navigation.goBack();
                 })
@@ -158,9 +154,10 @@ const PupilEventEdit = (props) => {
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
+            console.log('response of update event error', err)
         })
     }
+
     const selectColor = (item) => {
         setSelectColor(item.EventColor)
         setColorDropOpen(false)

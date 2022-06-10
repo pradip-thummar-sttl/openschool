@@ -27,7 +27,6 @@ import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_Whit
 import { ActivityIndicator } from "react-native";
 
 const PupilEventEdit = (props) => {
-    console.log('data is here',props.data);
     const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
@@ -36,8 +35,6 @@ const PupilEventEdit = (props) => {
         setFromDropOpen(false)
         setToDropOpen(false)
         setColorDropOpen(false)
-        setSelectedToTime('')
-        setSelectedFromTime('')
     };
 
     const [event, setEvent] = useState('');
@@ -94,7 +91,7 @@ const PupilEventEdit = (props) => {
             showMessage(MESSAGE.location);
             return false;
         } 
-        saveEvent()
+        updateEvent()
     }
 
     useEffect(() => {
@@ -114,8 +111,7 @@ const PupilEventEdit = (props) => {
             console.log('response of get all lesson error', err)
         })
     }, [])
-
-    const saveEvent = () => {
+    const updateEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
@@ -126,15 +122,14 @@ const PupilEventEdit = (props) => {
             EventDescription: note,
             EventTypeId: selectColorId,
             CreatedBy: User.user.UserDetialId
-        }
-        console.log(data);
 
-        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
+        }
+        Service.post(data, `${EndPoints.CalenderEventUpdate}/${eventData._id}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of update event', res)
                 setDefaults()
-                showMessageWithCallBack(MESSAGE.eventAdded, () => {
+                showMessageWithCallBack(MESSAGE.eventUpdate, () => {
                     props.refreshList();
                     toggleModal()
                 })
@@ -143,9 +138,10 @@ const PupilEventEdit = (props) => {
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
+            console.log('response of update event error', err)
         })
     }
+    
     const selectColor = (item) => {
         setSelectColor(item.EventColor)
         setColorDropOpen(false)

@@ -52,14 +52,8 @@ const TeacherEventEdit = (props) => {
 
     const [timeSlot, setTimeSlots] = useState(['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'])
     const [colorArr, setColorArr] = useState([])
-    const [eventData,setEventData] = useState(props.route.params.data)
+    const [eventData, setEventData] = useState(props.route.params.data)
 
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
-  
     useEffect(() => {
         setEvent(eventData.EventName)
         setSelectedDate(moment(eventData.EventDate).format('DD/MM/yyyy'))
@@ -68,6 +62,7 @@ const TeacherEventEdit = (props) => {
         setSelectedFromTime(eventData.EventStartTime)
         setSelectedToTime(eventData.EventEndTime)
     }, [eventData])
+
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -105,7 +100,8 @@ const TeacherEventEdit = (props) => {
             showMessage(MESSAGE.location);
             return false;
         }
-        saveEvent()
+        setLoading(true)
+        updateEvent()
     }
 
     useEffect(() => {
@@ -126,8 +122,8 @@ const TeacherEventEdit = (props) => {
         })
     }, [])
 
-    const saveEvent = () => {
-        setLoading(true)
+   
+    const updateEvent = () => {
         let data = {
             EventName: event,
             EventDate: moment(selectDate, 'DD/MM/yyyy').format('yyyy-MM-DD'),
@@ -136,16 +132,14 @@ const TeacherEventEdit = (props) => {
             EventLocation: location,
             EventDescription: note,
             EventTypeId: selectColorId,
-            CreatedBy: User.user._id
+            CreatedBy: User.user.UserDetialId
         }
-       
-
-        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
+        Service.post(data, `${EndPoints.CalenderEventUpdate}/${eventData._id}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of update event', res)
                 setDefaults()
-                showMessageWithCallBack(MESSAGE.eventAdded, () => {
+                showMessageWithCallBack(MESSAGE.eventUpdate, () => {
                     props.route.params.onGoBack();
                     props.navigation.goBack();
                 })
@@ -154,9 +148,10 @@ const TeacherEventEdit = (props) => {
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
+            console.log('response of update event error', err)
         })
     }
+
     const selectColor = (item) => {
         setSelectColor(item.EventColor)
         setColorDropOpen(false)
@@ -290,7 +285,7 @@ const TeacherEventEdit = (props) => {
                                                     color={COLORS.buttonGreen} />
                                                 : */}
                                             <TouchableOpacity
-                                                onPress={isFieldsValidated}
+                                                onPress={() => isFieldsValidated()}
                                                 style={[styles.buttonGrp, styles.commonButtonGreenheader]}
                                                 activeOpacity={opacity}>
                                                 {isLoading ?
@@ -384,8 +379,8 @@ const TeacherEventEdit = (props) => {
                                                 value={note}
                                                 placeholderStyle={styles.somePlaceholderStyle}
                                                 style={styles.commonInputTextarea}
-                                                onChangeText={notes => setnote(notes)} 
-                                                onSubmitEditing={isFieldsValidated}/>
+                                                onChangeText={notes => setnote(notes)}
+                                                 />
                                         </View>
                                         <View style={[styles.copyInputParent, styles.colorPicker]}>
                                             <TouchableOpacity onPress={() => { setColorDropOpen(!isColorDropOpen); setToDropOpen(false); setFromDropOpen(false) }} style={[styles.subjectDateTime, styles.dropDownSmallWrap, styles.dateandColor]}>
@@ -465,7 +460,7 @@ const styles = StyleSheet.create({
         width: '100%',
         marginTop: Platform.OS == 'android' ? hp(-1) : hp(3),
     },
-     beforeBorder: {
+    beforeBorder: {
         padding: hp(1.95),
         paddingBottom: hp(0.5),
     },
@@ -493,15 +488,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         right: 0
     },
-    commonButtonGreenheader : {
+    commonButtonGreenheader: {
         backgroundColor: COLORS.dashboardGreenButton,
         color: COLORS.white,
         fontSize: hp(1.56),
         borderRadius: hp(1),
         overflow: 'hidden',
-        justifyContent : 'center',
-        alignItems:'center',
-        width : 42,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 42,
         height: hp(5.20),
         paddingTop: hp(1.4),
         paddingBottom: hp(1.4),
