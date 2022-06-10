@@ -126,7 +126,7 @@ const Avatar = (prop) => {
 
         if (res.flag === true) {
           Service.get(
-            EndPoints.GetAllAvtar,
+            `${EndPoints.GetAllAvtar}/${User.user.UserDetialId}`,
             (res) => {
               console.log("get avtar ", res);
 
@@ -269,6 +269,7 @@ const Avatar = (prop) => {
   };
 
   const unlockImage=(item)=>{
+    if (points>=item.Point) {
       let data={
         Id:item._id,
         PupilId:User.user.UserDetialId,
@@ -284,6 +285,10 @@ const Avatar = (prop) => {
       },(err)=>{
 
       })
+    }else{
+      showMessage('Not sufficient point')
+    }
+      
   }
 
   const getPreviosAvatar = () => {
@@ -707,7 +712,7 @@ const Avatar = (prop) => {
               renderItem={({ item, index }) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => item.IsActive?onPressAvtarParts(index):unlockImage(item)}
+                    onPress={() => item.IsGet?onPressAvtarParts(index):unlockImage(item)}
                     style={[
                       Styles.itemBtn,
                       {
@@ -726,7 +731,7 @@ const Avatar = (prop) => {
                       }}
                     />
                     {
-                    item.IsActive?null:
+                    item.IsGet?null:
                     <View
                       style={{
                         height: "100%",
@@ -744,7 +749,16 @@ const Avatar = (prop) => {
                           fontFamily: FONTS.fontBold,
                         }}
                       >
-                        Locked
+                        Unlocked
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: hp(2),
+                          fontFamily: FONTS.fontBold,
+                        }}
+                      >
+                        {item.Point}
                       </Text>
                     </View>
               }
