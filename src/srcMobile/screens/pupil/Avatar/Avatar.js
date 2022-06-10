@@ -286,7 +286,7 @@ const Avatar = (prop) => {
 
       })
     }else{
-      showMessage('Not sufficient point')
+      showMessage("Sorry, you don't have enough points to unlock this item")
     }
       
   }
@@ -749,16 +749,19 @@ const Avatar = (prop) => {
                           fontFamily: FONTS.fontBold,
                         }}
                       >
-                        Unlocked
+                        Locked
                       </Text>
                       <Text
                         style={{
                           color: "white",
-                          fontSize: hp(2),
+                          fontSize: hp(1.5),
                           fontFamily: FONTS.fontBold,
+                          position:'absolute',
+                          top:5,
+                          left:5
                         }}
                       >
-                        {item.Point}
+                        {item.Point} Point
                       </Text>
                     </View>
               }
