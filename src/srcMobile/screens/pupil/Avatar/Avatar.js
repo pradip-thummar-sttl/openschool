@@ -268,7 +268,7 @@ const Avatar = (prop) => {
     );
   };
 
-  const unlockImage=(item)=>{
+  const unlockImage=(item, index)=>{
     if (points>=item.Point) {
       let data={
         Id:item._id,
@@ -712,7 +712,7 @@ const Avatar = (prop) => {
               renderItem={({ item, index }) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => item.IsGet?onPressAvtarParts(index):unlockImage(item)}
+                    onPress={() => (item.IsGet||index==0)?onPressAvtarParts(index):unlockImage(item, index)}
                     style={[
                       Styles.itemBtn,
                       {
@@ -731,7 +731,7 @@ const Avatar = (prop) => {
                       }}
                     />
                     {
-                    item.IsGet?null:
+                    (item.IsGet||index==0)?null:
                     <View
                       style={{
                         height: "100%",
@@ -740,6 +740,7 @@ const Avatar = (prop) => {
                         position: "absolute",
                         alignItems: "center",
                         justifyContent: "center",
+                        borderRadius:10
                       }}
                     >
                       <Text
