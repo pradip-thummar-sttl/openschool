@@ -24,17 +24,16 @@ import ArrowDown from "../../../../svg/teacher/lessonhwplanner/ArrowDown";
 import TickMarkWhite from "../../../../svg/teacher/lessonhwplanner/TickMark_White";
 
 const TeacherEventEdit = (props) => {
-    const isFromDashboard = props.isFromDashboard
-    const [isModalVisible, setModalVisible] = useState(true);
+    
+    const [isModalVisible, setModalVisible] = useState(false);
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
+
     const toggleModal = () => {
         setModalVisible(!isModalVisible);
         setFromDropOpen(false)
         setToDropOpen(false)
         setColorDropOpen(false)
-        setSelectedToTime('')
-        setSelectedFromTime('')
         if (props.goBack != undefined) {
             props.goBack()
         }
@@ -55,7 +54,7 @@ const TeacherEventEdit = (props) => {
     const [selectDate, setSelectedDate] = useState(moment().format('DD/MM/yyyy'))
     const [selectTime, setSelectedTime] = useState(moment().format('hh:mm'))
 
-    const [selectedFromTime, setSelectedFromTime] = useState('')
+    const [selectedFromTime, setSelectedFromTime] = useState('07:00')
     const [selectedToTime, setSelectedToTime] = useState('')
 
     const [timeSlot, setTimeSlots] = useState(['06:00', '06:30', '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00', '22:30', '23:00', '23:30', '24:00'])
@@ -65,24 +64,12 @@ const TeacherEventEdit = (props) => {
     useEffect(() => {
         setEvent(eventData.EventName)
         setSelectedDate(moment(eventData.EventDate).format('DD/MM/yyyy'))
+        setSelectedFromTime(eventData.EventStartTime)
+        setSelectedToTime(eventData.EventEndTime) 
         setLocation(eventData.EventLocation)
         setnote(eventData.EventDescription)
-        setSelectedFromTime(eventData?.EventStartTime && eventData.EventStartTime)
-        setSelectedToTime(eventData.EventEndTime)
+
     }, [eventData])
-
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
-    // const showDatepicker = () => {
-    //     showMode('date');
-    // };
-
-    // const showTimepicker = () => {
-    //     showMode('time');
-    // };
 
     const isFieldsValidated = () => {
         if (!event.trim()) {
@@ -107,9 +94,8 @@ const TeacherEventEdit = (props) => {
             showMessage(MESSAGE.location);
             return false;
         }
-        saveEvent()
+        updateEvent()
     }
-
     useEffect(() => {
         setLoading(true)
         Service.get(`${EndPoints.EventType}`, (res) => {
@@ -128,7 +114,7 @@ const TeacherEventEdit = (props) => {
         })
     }, [])
 
-    const saveEvent = () => {
+    const updateEvent = () => {
         setLoading(true)
         let data = {
             EventName: event,
@@ -138,27 +124,27 @@ const TeacherEventEdit = (props) => {
             EventLocation: location,
             EventDescription: note,
             EventTypeId: selectColorId,
-            CreatedBy: User.user._id
-        }
+            CreatedBy: User.user.UserDetialId
 
-        Service.post(data, `${EndPoints.CalenderEvent}`, (res) => {
+        }
+        Service.post(data, `${EndPoints.CalenderEventUpdate}/${eventData._id}`, (res) => {
             setLoading(false)
             if (res.code == 200) {
-                console.log('response of get all lesson', res)
+                console.log('response of update event', res)
                 setDefaults()
-                showMessageWithCallBack(MESSAGE.eventAdded, () => {
+                showMessageWithCallBack(MESSAGE.eventUpdate, () => {
+                    props.refreshList();
                     toggleModal()
                 })
-                props.onRefresh();
-                props.goBack();
             } else {
                 showMessage(res.message)
             }
         }, (err) => {
             setLoading(false)
-            console.log('response of get all lesson error', err)
+            console.log('response of update event error', err)
         })
     }
+
     const selectColor = (item) => {
         setSelectColor(item.EventColor)
         setColorDropOpen(false)
@@ -198,7 +184,7 @@ const TeacherEventEdit = (props) => {
         setToDropOpen(false)
         setColorDropOpen(false)
         setSelectedToTime('')
-        setSelectedFromTime('')
+        // setSelectedFromTime('')
     };
 
     const fromTimeDropDown = () => {
@@ -270,7 +256,7 @@ const TeacherEventEdit = (props) => {
             </View>
         );
     };
-
+console.log('props od update teacher event',props);
     return (
         <View>
             {/* <TouchableOpacity><Text style={STYLE.openClassLink} onPress={toggleModal}>Event Calendar Entry</Text></TouchableOpacity> */}
@@ -285,7 +271,7 @@ const TeacherEventEdit = (props) => {
             <Modal isVisible={isModalVisible}>
                 <KeyboardAwareScrollView>
                     <View style={styles.popupCard}>
-                        <TouchableOpacity style={styles.cancelButton} onPress={toggleModal}>
+                        <TouchableOpacity style={styles.cancelButton} onPress={() => { props.refreshList(); toggleModal() }}>
                             {/* <Image style={STYLE.cancelButtonIcon} source={Images.PopupCloseIcon} /> */}
                             <CloseBlack style={STYLE.cancelButtonIcon} height={hp(2.94)} width={hp(2.94)} />
                         </TouchableOpacity>
@@ -320,16 +306,7 @@ const TeacherEventEdit = (props) => {
                                         </View>
                                         <View style={styles.fieldWidthtwo1}>
                                             <Text label style={STYLE.labelCommon1}>Time From</Text>
-                                            {/* <TouchableOpacity onPress={() => showTimePicker()} style={[styles.subjectDateTime, styles.dropDownSmallWrap]}>
-                                                <Image style={styles.calIcon} source={Images.Clock} />
-                                                <View style={styles.subjectDateTime}>
-                                                    <View>
-                                                        <Text style={styles.dateTimetextdummy}>{selectTime}</Text>
-                                                    </View>
-                                                    <Image style={styles.dropDownArrowdatetime} source={Images.DropArrow} />
-                                                </View>
-                                            </TouchableOpacity> */}
-                                            {fromTimeDropDown()}
+                                             {fromTimeDropDown()}
                                         </View>
                                         <View style={styles.fieldWidthtwo2}>
                                             <Text label style={STYLE.labelCommon}>Time To </Text>
@@ -359,7 +336,6 @@ const TeacherEventEdit = (props) => {
                                                     placeholderStyle={styles.somePlaceholderStyle}
                                                     style={styles.commonInputTextarea}
                                                     onChangeText={notes => setnote(notes)}
-                                                    onSubmitEditing={isFieldsValidated}
                                                 />
                                             </View>
                                             <View style={[styles.copyInputParent, styles.colorPicker,]}>
@@ -378,7 +354,7 @@ const TeacherEventEdit = (props) => {
                                         </TouchableOpacity>
                                         <View style={styles.lessonstartButton}>
                                             <TouchableOpacity
-                                                onPress={isFieldsValidated}
+                                                onPress={() => isFieldsValidated()}
                                                 style={[styles.buttonGrp, styles.saveEntryBtn]}
                                                 activeOpacity={opacity}>
                                                 {isLoading ?
@@ -448,7 +424,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
     },
- commonEventEdit : {
+    commonEventEdit: {
         backgroundColor: COLORS.transparent,
         color: COLORS.darkGray,
         borderWidth: 1,
@@ -463,9 +439,9 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textTransform: 'uppercase',
         fontFamily: FONTS.fontBold,
-        width:'95%',
-        marginHorizontal:'2%',
-        marginBottom:10
+        width: '95%',
+        marginHorizontal: '2%',
+        marginBottom: 10
     },
     saveEntryBtntext: {
         color: COLORS.white,

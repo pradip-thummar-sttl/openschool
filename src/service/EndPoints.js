@@ -8,6 +8,7 @@ export const EndPoints = {
     PupilByTeacherId: 'pupilbyteacherid',
     GetTimeTable: 'gettimetable',
     CalenderEvent: 'calenderevent',
+    CalenderEventUpdate: 'calendereventupdate',
     AllEventHomworklesson:"allEventHomworklesson",
     AllEventHomworklessonpupil:"allEventHomworklessonpupil",
     GetSubjectBySchoolId: 'subjectbyschoolid/',
