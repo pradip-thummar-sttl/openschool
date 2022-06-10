@@ -76,21 +76,12 @@ const TeacheroverView = (props) => {
     }
 
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         fetchRecord(searchKeyword, 1, filterBy);
-    //         return () => {
-    //             // Do something when the screen is unfocused
-    //             // alert('Home Screen was unfocused');
-    //         };
-    //     }, [])
-    // );
 
 
     const onChangeTab = (tab) => {
         setSelectedTabIndex(tab);
         if (tab == 0)
-            fetchRecord(searchKeyword, pageNo, filterBy);
+            fetchRecord(searchKeyword, filterBy);
         else
             setPupilData([])
 
@@ -107,6 +98,7 @@ const TeacheroverView = (props) => {
     }
 
     const fetchRecord = (searchBy, filterBy) => {
+
         setLoading(true)
         let data = {
             Searchby: searchBy,
@@ -152,7 +144,7 @@ const TeacheroverView = (props) => {
 
     const openNotification = () => {
         BadgeIcon.isBadge = false
-        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord(pageNo, searchKeyword, filterBy)})
+        props.navigation.navigate('NotificationDrawer', { onGoBack: () => fetchRecord(searchKeyword, filterBy)})
     }
 
     const messageRender = ({ item}) => {
@@ -215,8 +207,8 @@ const TeacheroverView = (props) => {
                 <TeacheroverViewHeader
 
                     onSearch={() => { pageNo = 1; fetchRecord( searchKeyword, filterBy) }}
-                    onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord(1, '', filterBy) }}
-                    onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(1, searchKeyword, filterBy) }}
+                    onClearSearch={() => { setSearchKeyword(''); pageNo = 1; fetchRecord('', filterBy) }}
+                    onFilter={(filterBy) => { pageNo = 1; setFilterBy(filterBy); fetchRecord(searchKeyword, filterBy) }}
                     onAlertPress={() => props.navigation.openDrawer()}
                     setSelectedTabIndex={(tab) => onChangeTab(tab)}
                     tabs={selectedTabIndex}
