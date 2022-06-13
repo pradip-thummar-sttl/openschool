@@ -24,6 +24,7 @@ const MESSAGE = {
     description: "Please enter description",
     recording: "Please add recording",
     eventAdded: "Event added successfully",
+    eventUpdate: "Event updated successfully",
     lessonAdded: "Lesson added successfully",
     lessonUpdated: "Lesson updated successfully",
     homeworkAdded: "Homework added successfully",

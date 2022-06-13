@@ -126,7 +126,7 @@ const Avatar = (prop) => {
 
         if (res.flag === true) {
           Service.get(
-            EndPoints.GetAllAvtar,
+            `${EndPoints.GetAllAvtar}/${User.user.UserDetialId}`,
             (res) => {
               console.log("get avtar ", res);
 
@@ -268,7 +268,8 @@ const Avatar = (prop) => {
     );
   };
 
-  const unlockImage=(item)=>{
+  const unlockImage=(item, index)=>{
+    if (points>=item.Point) {
       let data={
         Id:item._id,
         PupilId:User.user.UserDetialId,
@@ -284,6 +285,10 @@ const Avatar = (prop) => {
       },(err)=>{
 
       })
+    }else{
+      showMessage("Sorry, you don't have enough points to unlock this item")
+    }
+      
   }
 
   const getPreviosAvatar = () => {
@@ -707,7 +712,7 @@ const Avatar = (prop) => {
               renderItem={({ item, index }) => {
                 return (
                   <TouchableOpacity
-                    onPress={() => item.IsActive?onPressAvtarParts(index):unlockImage(item)}
+                    onPress={() => (item.IsGet||index==0)?onPressAvtarParts(index):unlockImage(item, index)}
                     style={[
                       Styles.itemBtn,
                       {
@@ -726,7 +731,7 @@ const Avatar = (prop) => {
                       }}
                     />
                     {
-                    item.IsActive?null:
+                    (item.IsGet||index==0)?null:
                     <View
                       style={{
                         height: "100%",
@@ -735,6 +740,7 @@ const Avatar = (prop) => {
                         position: "absolute",
                         alignItems: "center",
                         justifyContent: "center",
+                        borderRadius:10
                       }}
                     >
                       <Text
@@ -745,6 +751,18 @@ const Avatar = (prop) => {
                         }}
                       >
                         Locked
+                      </Text>
+                      <Text
+                        style={{
+                          color: "white",
+                          fontSize: hp(1.5),
+                          fontFamily: FONTS.fontBold,
+                          position:'absolute',
+                          top:5,
+                          left:5
+                        }}
+                      >
+                        {item.Point} Point
                       </Text>
                     </View>
               }

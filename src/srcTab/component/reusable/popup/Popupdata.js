@@ -392,15 +392,15 @@ const Popupdata = (props) => {
                                     <View>
 
                                         {
-                                            props.isPupil == 'false' ? 
+                                            props.isPupil ? 
+                                            <PupilEventEdit 
+                                            data={props.data}
+                                            refreshList={props.refreshList}  />
+                                            :
                                             <TeacherEventEdit 
                                             data={props.data}
                                             refreshList={props.refreshList}
                                             />
-                                            :
-                                            <PupilEventEdit 
-                                            data={props.data}
-                                            refreshList={props.refreshList}  />
 
                                         }
                                     </View>

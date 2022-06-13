@@ -138,12 +138,10 @@ const HeaderPM = (props) => {
             {isSearchActive ? <CloseBlack height={20} width={20} /> : null}
           </TouchableOpacity>
           <Menu style={{ ...styles.filterIcon }}>
-            <MenuTrigger>
+            <MenuTrigger style={{width:20,height:20,justifyContent:'center',alignItems:'center'}}>
               {/* <Image style={styles.searchMenu} source={Images.mobileFilter} /> */}
               <FilterBlack
-                style={styles.filterIcon1}
-                height={hp(1.74)}
-                width={hp(1.74)}
+                style={styles.filterIcon1} height={15} width={15}
               />
             </MenuTrigger>
             <MenuOptions>
@@ -342,13 +340,14 @@ const styles = StyleSheet.create({
     // resizeMode: "contain",
     // position: "absolute",
     // right: hp(1.3),
-    bottom: hp(0.8),
+    // bottom: hp(0.8),
     alignSelf: "center",
   },
   filterIcon1: {
     width: hp(1.74),
     resizeMode: "contain",
     position: "absolute",
+    right:5
   },
   userIcon1Parent: {
     position: "absolute",

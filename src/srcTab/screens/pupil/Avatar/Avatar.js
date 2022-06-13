@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Platform } from 'react-native'
+import { View, Text, ImageBackground, TouchableOpacity, Image, ScrollView, Platform, Alert } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 // import Images from '../../../../utils/Images'
 // import Images from '../../../../../srcmobile/utils/Images'
@@ -29,7 +29,7 @@ const tabs = [
 
 
 // const backgroundColorArray = ['#a8d9fe', '#f5d538', '#ecb229', '#ecb229', '#a8d9fe', '#f5d538']
-const backgroundColorArray = ["#A194EC","#A8DAFF","#D18EEA","#F2DD92","#B0E2AF","#E1A052"]
+const backgroundColorArray = ["#A194EC", "#A8DAFF", "#D18EEA", "#F2DD92", "#B0E2AF", "#E1A052"]
 
 const Avatar = (props) => {
 
@@ -54,15 +54,18 @@ const Avatar = (props) => {
     const [clothsId, setClothsId] = useState('');
 
     const [allAvtarData, setAllAvtarData] = useState([]);
-
     const [isLoading, setIsLoading] = useState(true);
-
 
     const [bronze, setBronze] = useState(0)
     const [silver, setSilver] = useState(0)
     const [gold, setGold] = useState(0)
+    const [totalPoint, setTotalPoint] = useState(0)
 
     useEffect(() => {
+        onGetData()
+    }, [])
+
+    const onGetData = () => {
 
         Service.get(`${EndPoints.GetPupilRewards}/${User.user.UserDetialId}`, (res) => {
             console.log('response of my day', res)
@@ -77,6 +80,9 @@ const Avatar = (props) => {
                             break;
                         case '9':
                             setGold(element.count)
+                            break;
+                        case 'Point':
+                            setTotalPoint(element.count)
                             break;
                         default:
                             break;
@@ -95,9 +101,8 @@ const Avatar = (props) => {
 
             if (res.flag === true) {
 
-                Service.get(EndPoints.GetAllAvtar, (res) => {
-
-                    console.log('get avtar ', res)
+                Service.get(`${EndPoints.GetAllAvtar}/${User.user.UserDetialId}`, (res) => {
+                    // Service.get(EndPoints.GetAllAvtar, (res) => {
 
                     setAllAvtarData(res.data)
 
@@ -186,24 +191,6 @@ const Avatar = (props) => {
                                 }
                             })
                             setEyesAvtar(eyes)
-
-                            //     if (User.user.AvatarIdList.length) {
-                            //     let newArr = [...eyesAvtar];
-                            //     newArr.map((item) => {
-                            //         item.isSelected = false;
-                            //     })
-
-
-
-
-                            //     element.imglist.map((item, dataIndex) => {
-                            //         if (item._id === User.user.AvatarIdList[2].AvatarId) {
-                            //             setCurrentSelectedEyes(dataIndex)
-                            //             newArr[dataIndex].isSelected = true;
-                            //             setEyesAvtar(newArr)
-                            //         }
-                            //     })
-                            // }
                         }
                         else if (element.Type === 'mouth') {
                             let mouth = [];
@@ -245,8 +232,6 @@ const Avatar = (props) => {
                                 }
                             })
                             setClothsAvtar(clothes)
-                            console.log('cloth', clothes)
-                            console.log('cloth', clothsAvtar)
                             setTimeout(() => {
                                 setIsLoading(false)
                             }, 1000)
@@ -264,8 +249,7 @@ const Avatar = (props) => {
         }, (err) => {
             console.log('------errrrrrr---------', res)
         })
-
-    }, [])
+    }
 
     const changeTab = (index) => {
         console.log('currentSelected', currentSelected)
@@ -297,97 +281,114 @@ const Avatar = (props) => {
         }
     }
 
+    const onPressAvtarParts = (index, item) => {
 
-
-    const onPressAvtarParts = (index) => {
-
-        if (currentSelected === 'COLOUR') {
-
-            let newArr = [...colourAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedColour(index)
-            setColourAvtar(newArr)
-            allAvtarData.map((item) => {
-                if (item.Type === "colour") {
-                    setColourId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'HAIR') {
-            let newArr = [...hairAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedHair(index)
-            setHairAvtar(newArr);
-
-            allAvtarData.map((item) => {
-                if (item.Type === "hair") {
-                    setHairId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'EYES') {
-            let newArr = [...eyesAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedEyes(index)
-            setEyesAvtar(newArr)
-
-            allAvtarData.map((item) => {
-                if (item.Type === "eyes") {
-                    setEyesId(item.imglist[index]._id)
-                }
-            })
-        }
-        else if (currentSelected === 'MOUTH') {
-            let newArr = [...mouthAvtar];
-            newArr.map((item) => {
-                item.isSelected = false;
-            })
-            newArr[index].isSelected = true;
-            setCurrentSelectedMouth(index)
-            setMouthAvtar(newArr)
-
-            allAvtarData.map((item) => {
-                if (item.Type === "mouth") {
-                    setMouthId(item.imglist[index]._id)
-                }
-            })
+        if (item.IsGet == false && index !=0) {
+            if (item.Point <= totalPoint)
+                onUnlockImage(item._id, item.Point);
+            else
+                Alert.alert("Sorry, you don't have enough points to unlock this item")
+                
         }
         else {
-            return clothsAvtar
+            if (currentSelected === 'COLOUR') {
+
+                let newArr = [...colourAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedColour(index)
+                setColourAvtar(newArr)
+                allAvtarData.map((item) => {
+                    if (item.Type === "colour") {
+                        setColourId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'HAIR') {
+                let newArr = [...hairAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedHair(index)
+                setHairAvtar(newArr);
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "hair") {
+                        setHairId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'EYES') {
+                let newArr = [...eyesAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedEyes(index)
+                setEyesAvtar(newArr)
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "eyes") {
+                        setEyesId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else if (currentSelected === 'MOUTH') {
+                let newArr = [...mouthAvtar];
+                newArr.map((item) => {
+                    item.isSelected = false;
+                })
+                newArr[index].isSelected = true;
+                setCurrentSelectedMouth(index)
+                setMouthAvtar(newArr)
+
+                allAvtarData.map((item) => {
+                    if (item.Type === "mouth") {
+                        setMouthId(item.imglist[index]._id)
+                    }
+                })
+            }
+            else {
+                return clothsAvtar
+            }
         }
 
+    }
+
+    const onUnlockImage = (id, Point) => {
+
+        let data = { "Id": id, "PupilId": User.user.UserDetialId, "Point": Point }
+
+        Service.post(data, `${EndPoints.PupilGetAvatarImg}`, (res) => {
+            if (res.flag) {
+                onGetData();
+            } else {
+
+            }
+        }, (err) => {
+            console.log('Err of all pupil by teacher', err)
+        })
 
 
 
     }
 
     const saveMyAvtar = () => {
+
         setTimeout(() => {
-            console.log('colour', colourId)
-            console.log('hair', hairId)
-            console.log('eyes', eyesId)
-            console.log('mouth', mouthId)
-
-
-
             let avatarIdListArray = []
             let colourApiId = { "AvatarId": colourId }
             let hairApiId = { "AvatarId": hairId }
             let eyesApiId = { "AvatarId": eyesId }
             let cmouthApiId = { "AvatarId": mouthId }
+
             avatarIdListArray.push(colourApiId, hairApiId, eyesApiId, cmouthApiId)
 
 
-            console.log('avatarIdList', avatarIdListArray)
+            console.log('avatarIdList-------->', avatarIdListArray)
 
             let data =
             {
@@ -410,15 +411,16 @@ const Avatar = (props) => {
         BadgeIcon.isBadge = false
         props.navigation.openDrawer()
     }
+
     return (
-        <ScrollView contentContainerStyle={{width : '100%'}} showsVerticalScrollIndicator={false}>
+        <ScrollView contentContainerStyle={{ width: '100%' }} showsVerticalScrollIndicator={false}>
             <AvatarHeader onAlertPress={() => openNotification()} />
             <View style={Styles.mainView}>
-                <View style={[Styles.leftView, {width:'35%'}]}>
+                <View style={[Styles.leftView, { width: '35%' }]}>
                     <View style={Styles.starView}>
                         <View style={Styles.yellowView}>
                             <Text style={Styles.subText}>Your stars convert to</Text>
-                            <Text style={Styles.headText}>{bronze + silver + gold} points</Text>
+                            <Text style={Styles.headText}>{totalPoint} points</Text>
                         </View>
                         <View style={Styles.rewardStarMark}>
                             <View style={Styles.centerStar}>
@@ -442,7 +444,7 @@ const Avatar = (props) => {
                         <View style={{ alignItems: "center", justifyContent: "center", paddingTop: hp(5), height: hp(60) }} >
                             {/* Avatar editing View */}
                             {currentSelectedHair == 0 ?
-                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%": wp(7.5) }} ></Image>
+                                <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(15), height: hp(15), resizeMode: 'contain', position: 'absolute', top: hp(5.2), zIndex: 10, left: Platform.OS === "ios" ? "21.5%" : wp(7.5) }} ></Image>
                                 : null}
                             {currentSelectedHair == 1 ?
                                 <Image source={{ uri: baseUrl + hairAvtar[currentSelectedHair].Images }} style={{ width: hp(20), height: hp(20), resizeMode: 'contain', position: 'absolute', top: "2%", zIndex: 10 }} ></Image>
@@ -465,7 +467,7 @@ const Avatar = (props) => {
                         </View> : null}
                 </View>
 
-                <View style={[Styles.rightView,{width:'65%'}]}>
+                <View style={[Styles.rightView, { width: '65%' }]}>
                     <View style={Styles.borderView}>
                         {isLoading == false &&
                             <View style={Styles.tabView}>
@@ -485,7 +487,8 @@ const Avatar = (props) => {
                                     data={currentSelectedTab()}
                                     ListFooterComponent={
                                         isLoading == false ?
-                                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }} onPress={() => saveMyAvtar()} >
+                                            <TouchableOpacity style={{ width: wp(13), height: hp(6), backgroundColor: COLORS.dashboardGreenButton, borderRadius: 10, alignItems: 'center', justifyContent: 'center', marginBottom: 15, alignSelf: 'center', marginTop: 25 }}
+                                                onPress={() => saveMyAvtar()} >
                                                 <Text style={{
                                                     color: COLORS.white,
                                                     fontSize: hp(1.56),
@@ -496,8 +499,15 @@ const Avatar = (props) => {
                                     }
                                     renderItem={({ item, index }) => {
                                         return (
-                                            <TouchableOpacity onPress={() => onPressAvtarParts(index)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
+                                            <TouchableOpacity onPress={() => onPressAvtarParts(index, item)} style={[Styles.itemBtn, { backgroundColor: backgroundColorArray[index], borderColor: COLORS.black, borderWidth: item.isSelected ? 2 : 0 }]}>
                                                 <Image source={{ uri: baseUrl + item.Images }} style={{ width: hp(10), height: hp(10), resizeMode: 'contain' }} />
+
+                                                {item.IsGet != true && index != 0 &&
+                                                    <View style={{ width: '100%', height: '100%', position: 'absolute', backgroundColor: '#0000008c', borderRadius:wp(0.5) }}>
+                                                        <Text style={{ fontSize: 18, color: "#ffffff", fontFamily: FONTS.fontSemiBold, left: 6 }}>{item.Point + " Points"}</Text>
+                                                        <Text style={{ fontSize: 22, position: 'absolute', alignSelf: 'center', marginTop: hp(7), color: "#ffffff", fontFamily: FONTS.fontSemiBold }}>Locked</Text>
+                                                    </View>
+                                                }
                                             </TouchableOpacity>
                                         )
                                     }}
