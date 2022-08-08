@@ -6,6 +6,7 @@ import STYLE from '../../../../../../utils/Style';
 // import Images from '../../../../../../utils/Images';
 import FONTS from '../../../../../../utils/Fonts';
 import { opacity } from "../../../../../../utils/Constant";
+import BackArrow from "../../../../../../svg/common/BackArrow";
 const HeaderGallery = (props) => {
     return (
         <View style={styles.headerBarMainWhite}>
@@ -15,6 +16,8 @@ const HeaderGallery = (props) => {
                         activeOpacity={opacity}
                         onPress={() => props.navigateToBack()}>
                         {/* <Image style={styles.arrow} source={Images.backArrow} /> */}
+                        <BackArrow style={styles.arrow} height={hp(2.34)} width={hp(2.34)} />
+
                     </TouchableOpacity>
                     <Text style={styles.mainTitle}>Recommended Content</Text>
                 </View>

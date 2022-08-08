@@ -1056,6 +1056,8 @@ export default StyleSheet.create({
     videoThumb: {
         position: 'relative',
         flexDirection: 'row',
+        backgroundColor:'gray'
+
     },
     videoThumbnail: {
         width: '100%',
@@ -1084,8 +1086,9 @@ export default StyleSheet.create({
         flexDirection: 'row',
         lineHeight: hp(2.6),
         paddingBottom: wp(6.5),
-        width: wp(89.33),
+        width: '100%',
         flexWrap: 'wrap',
+        marginTop:2
     },
     spaceTop: {
         marginTop: hp(3),
