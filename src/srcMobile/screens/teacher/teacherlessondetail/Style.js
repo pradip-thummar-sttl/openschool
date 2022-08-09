@@ -1086,7 +1086,7 @@ export default StyleSheet.create({
         flexDirection: 'row',
         lineHeight: hp(2.6),
         paddingBottom: wp(6.5),
-        width: '100%',
+        // width: '60%',
         flexWrap: 'wrap',
         marginTop:2
     },
@@ -1209,6 +1209,8 @@ export default StyleSheet.create({
         height: wp(25.33),
         resizeMode: 'contain',
         marginBottom: wp(1.5),
+        backgroundColor:'gray',
+         borderRadius:5,
     },
     smlThumbVideoText: {
         fontSize: wp(3.46),

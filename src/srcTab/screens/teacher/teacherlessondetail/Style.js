@@ -1127,6 +1127,7 @@ export default StyleSheet.create({
         width: hp(26.17),
         height: hp(17.83),
         resizeMode: 'contain',
+        backgroundColor:'gray'
     },
     videoPlay: {
         width: hp(5.20),
