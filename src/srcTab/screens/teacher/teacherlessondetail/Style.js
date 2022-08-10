@@ -408,10 +408,12 @@ export default StyleSheet.create({
         flexDirection: 'row',
     },
     grpThumbVideo: {
-        width: 250,
-        height: 120,
-        marginVertical: hp(2),
+        width: hp(15),
+        height: hp(10),
+        marginVertical: hp(1),
         resizeMode: 'contain',
+        borderRadius:5,
+        backgroundColor:'gray'
     },
     subLineTitle: {
         marginTop: 5,
@@ -1187,6 +1189,7 @@ export default StyleSheet.create({
     thumbVideo: {
         // marginTop:hp(6.38),
         // marginBottom:hp(2.99),
+        marginRight:5
     },
     topSpaceRecording: {
         marginTop: hp(1.401),

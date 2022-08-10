@@ -80,6 +80,7 @@ const TLHomeWork = (props) => {
 
   const [currentRecordMode, setCurrentRecordMode] = useState("isScreen");
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
+  const [videoMaterial, setVideoMaterial] = useState([]);
   const [checkVal, setcheckVal] = useState("false");
 
   useEffect(() => {
@@ -127,6 +128,10 @@ const TLHomeWork = (props) => {
       }
     );
   }, []);
+  useEffect(() => {
+  setVideoMaterial(props.videoMaterial)
+  }, [props.videoMaterial]);
+  
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -714,7 +719,7 @@ const TLHomeWork = (props) => {
                 })}
             </View>
             <FlatList
-              data={props.videoMaterial}
+              data={videoMaterial}
               renderItem={({item, index}) => (
                 <View style={PAGESTYLE.thumbVideo}>
                   <Image

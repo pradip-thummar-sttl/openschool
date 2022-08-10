@@ -116,7 +116,7 @@ const TLVideoGallery = (props) => {
                 navigateToLessonAndHomework={() => props.navigation.replace('TeacherLessonList')} /> */}
       <View style={{ width: "100%" }}>
         <HeaderGallery
-          navigateToBack={() => props.goBack()}
+          navigateToBack={() => props.goBack(selectItem)}
           onAlertPress={() => openNotification()}
           onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
           onSearch={() => {

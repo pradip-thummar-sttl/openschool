@@ -49,6 +49,7 @@ const LessonDetail = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isHSDataChanged, setHSDataChanged] = useState(false)
+    const [selectVideo, setSelectVideo] = useState([]);
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -338,7 +339,8 @@ const LessonDetail = (props) => {
                                     id={lessonData._id}
                                     updateBtnName={(flag) => setUpdate(flag)}
                                     navigateScreeCamera={() => { setScreenAndCameraRecording(true) }}
-                                    navigateToVideoGallery={() => { setTLVideoGallery(true) }} />
+                                    navigateToVideoGallery={() => { setTLVideoGallery(true) }} 
+                                    selectVideo={selectVideo}/>
                                 :
                                 <TLHomeWorkSubmitted
                                     lessonId={lessonData._id}
