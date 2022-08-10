@@ -1,149 +1,166 @@
-import React, { useState ,useEffect} from "react";
-import { View, StyleSheet, Text, TouchableOpacity, H3, ScrollView, Image, ImageBackground, FlatList, SafeAreaView, Platform, BackHandler } from "react-native";
-import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  H3,
+  ScrollView,
+  Image,
+  ImageBackground,
+  FlatList,
+  SafeAreaView,
+  Platform,
+  BackHandler,
+} from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 import COLORS from "../../../../../utils/Colors";
-import STYLE from '../../../../../utils/Style';
+import STYLE from "../../../../../utils/Style";
 // import Images from '../../../../../utils/Images';
-import PAGESTYLE from '../Style';
-import FONTS from '../../../../../utils/Fonts';
-import CheckBox from '@react-native-community/checkbox';
-import ToggleSwitch from 'toggle-switch-react-native';
+import PAGESTYLE from "../Style";
+import FONTS from "../../../../../utils/Fonts";
+import CheckBox from "@react-native-community/checkbox";
+import ToggleSwitch from "toggle-switch-react-native";
 import { opacity } from "../../../../../utils/Constant";
 import HeaderGallery from "./header/HeaderGallery";
 import Sidebar from "../../../../component/reusable/sidebar/Sidebar";
-
+import { Service } from "../../../../../service/Service";
+import { EndPoints } from "../../../../../service/EndPoints";
+import TickMarkGreen from "../../../../../svg/teacher/lessonhwplanner/TickMark_Green";
+import TickMarkGrey from "../../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
+import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 
 const TLVideoGallery = (props) => {
-    const [isHide, action] = useState(true);
-    console.log('props', props);
+  const [isHide, action] = useState(true);
+  const [videos, setVideos] = useState([]);
+  const [selectItem, setSelectedItem] = useState([]);
+  const [page, setPageNumber] = useState(1);
+  const [searchKeyword, setSearchKeyword] = useState("");
 
-    useEffect(() => {
-        if (Platform.OS==="android") {
-            BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
-        }   
-        return () => {
-          BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
-        };
-      }, [props.navigation]);
+  console.log("props", props);
 
-      const handleBackButtonClick=()=> {
-        props.route.params.goBack()
-        return true;
+  useEffect(() => {
+    if (Platform.OS === "android") {
+      BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
+    }
+    return () => {
+      BackHandler.removeEventListener(
+        "hardwareBackPress",
+        handleBackButtonClick
+      );
+    };
+  }, [props.navigation]);
+  useEffect(() => {
+    getChannelUser();
+  }, []);
+  const getChannelUser = () => {
+    const data = {
+      Searchby: searchKeyword,
+      Filterby: "",
+      page: page,
+      limit: "10",
+    };
+    Service.post(
+      data,
+      EndPoints.channelUser,
+      (res) => {
+        console.log("Channel User response ===>", res);
+        if (page == 1) {
+          setVideos(res.data);
+        } else {
+          setVideos([...videos, ...res.data]);
+        }
+      },
+      (err) => {
+        console.log("Channel User error ===>", err);
       }
-    return (
-        <View style={PAGESTYLE.mainPage}>
-            <View style={{ width: isHide ? '100%' : '100%' }}>
-                <HeaderGallery
-                    navigateToBack={() => props.route.params.goBack()}
-                    onAlertPress={() => props.navigation.openDrawer()} />
-                <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
-                    <View style={PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder}>
-                        <Text style={PAGESTYLE.videoTitle}>Videos</Text>
-                        <View style={PAGESTYLE.videoWrap}>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    <TouchableOpacity>
-                                        </TouchableOpacity>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    <TouchableOpacity>
-                                        </TouchableOpacity>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>TED-ED. Conserving the Amazo…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
-                            </View>
-                            <View>
-                                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>Amazing Rainforest: Birds &amp; Inse…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>DreamWorksTV: 25 Facts about…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>Scratch Garden. Plants and Inse…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>Nat Geo Kids: What comes from…</Text>
-                            </View>
-                        </View>
-                        <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Games &amp; Quizes</Text>
-                        <View style={STYLE.hrCommon}></View>
-                        <View style={PAGESTYLE.videoWrap}>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    <TouchableOpacity
-                                        activeOpacity={opacity}>
-                                    </TouchableOpacity>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    <TouchableOpacity activeOpacity={opacity}>
-                                    </TouchableOpacity>
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.SearchGarden} />
-                                    <Image style={PAGESTYLE.videoPlay} source={Images.PlayTransperent} />
-                                    <Image style={PAGESTYLE.videoSelected} source={Images.TickUnselected} /> */}
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={[PAGESTYLE.videoThumb, PAGESTYLE.rightSpaceNone]}>
-                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.RainForest} />
-                                    <Image style={PAGESTYLE.videoPlay} source={Images.PlayTransperent} />
-                                    <Image style={PAGESTYLE.videoSelected} source={Images.TickUnselected} /> */}
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.DreamWorks} />
-                                    <Image style={PAGESTYLE.videoPlay} source={Images.PlayTransperent} />
-                                    <Image style={PAGESTYLE.videoSelected} source={Images.TickUnselected} /> */}
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.GardenNew} />
-                                    <Image style={PAGESTYLE.videoPlay} source={Images.PlayTransperent} />
-                                    <Image style={PAGESTYLE.videoSelected} source={Images.TickUnselected} /> */}
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                            <View>
-                                <View style={PAGESTYLE.videoThumb}>
-                                    {/* <Image style={PAGESTYLE.videoThumbnail} source={Images.KidsNet} />
-                                    <Image style={PAGESTYLE.videoPlay} source={Images.PlayTransperent} />
-                                    <Image style={PAGESTYLE.videoSelected} source={Images.TickUnselected} /> */}
-                                </View>
-                                <Text style={PAGESTYLE.videoSubTitle}>BBC Bitesize. The Amazon Ra…</Text>
-                            </View>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
-        </View>
-
     );
-}
+  };
+
+  const handleBackButtonClick = () => {
+    props.route.params.goBack();
+    return true;
+  };
+  const onPaggination = () => {
+    console.log("page number is ===>");
+
+    if (videos.length / 10 == page) {
+      //   console.log("page number is ===>");
+      setPageNumber(page + 1);
+      getChannelUser();
+    }
+  };
+  const onSelectVideo = (item) => {
+    let items = [...selectItem];
+    if (items.includes(item)) {
+      const index = items.indexOf(item);
+      items.splice(index, 1);
+    } else {
+      items.push(item);
+    }
+    setSelectedItem(items);
+  };
+  return (
+    <View style={PAGESTYLE.mainPage}>
+      <View style={{ width: isHide ? "100%" : "100%" }}>
+        <HeaderGallery
+          navigateToBack={() => props.route.params.goBack(selectItem)}
+          onAlertPress={() => props.navigation.openDrawer()}
+          onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
+          onSearch={() => {
+            setPageNumber(1);
+            getChannelUser();
+          }}
+          onClearSearch={() => {
+            setSearchKeyword("");
+            setPageNumber(1);
+            getChannelUser();
+          }}
+        />
+
+        <View style={(PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder)}>
+          {/* <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Games &amp; Quizes</Text> */}
+          <View style={STYLE.hrCommon}></View>
+          <FlatList
+            data={videos}
+            style={{ height: "80%" }}
+            renderItem={({ item, index }) => {
+              return (
+                <View style={PAGESTYLE.videoWrap}>
+                  <View>
+                    <View style={PAGESTYLE.videoThumb}>
+                      <Image style={PAGESTYLE.videoThumbnail} />
+                      <TouchableOpacity style={PAGESTYLE.videoPlay}>
+                        <PlayBlue height={hp(4)} width={hp(4)} />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={PAGESTYLE.videoSelected}
+                        onPress={() => onSelectVideo(item)}
+                      >
+                        {selectItem.includes(item) ? (
+                          <TickMarkGreen height={hp(2.9)} width={hp(2.9)} />
+                        ) : (
+                          <TickMarkGrey height={hp(2.9)} width={hp(2.9)} />
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                    <Text numberOfLines={2} style={PAGESTYLE.videoSubTitle}>
+                      {item.Description}
+                    </Text>
+                  </View>
+                </View>
+              );
+            }}
+            keyExtractor={(item) => item.id}
+            onEndReached={onPaggination}
+            onEndReachedThreshold={0.1}
+          />
+        </View>
+      </View>
+    </View>
+  );
+};
 export default TLVideoGallery;

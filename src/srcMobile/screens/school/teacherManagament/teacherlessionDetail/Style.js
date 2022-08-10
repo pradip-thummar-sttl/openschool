@@ -13,6 +13,7 @@ export default StyleSheet.create({
     },
     fullWidthButton: {
         width: '100%',
+        
     },
     whiteBoard: {
         backgroundColor: COLORS.white,

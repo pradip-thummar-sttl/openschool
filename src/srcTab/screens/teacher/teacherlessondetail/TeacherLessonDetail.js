@@ -53,6 +53,8 @@ const TeacherLessonDetail = (props) => {
     const [filterBy, setFilterBy] = useState('Date')
     const [searchKeyword, setSearchKeyword] = useState('')
     const [isHSDataChanged, setHSDataChanged] = useState(false)
+    const [selectVideo, setSelectVideo] = useState([]);
+
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -256,7 +258,7 @@ const TeacherLessonDetail = (props) => {
                                 goBack={() => { setScreenAndCameraRecording(false) }}
                                 onAlertPress={() => { props.onAlertPress() }} />
                             : isTLVideoGallery ?
-                                <TLVideoGallery goBack={() => { setTLVideoGallery(false) }}
+                                <TLVideoGallery goBack={(selectVideo) => {setSelectVideo(selectVideo); setTLVideoGallery(false) }}
                                     onAlertPress={() => { props.onAlertPress() }} />
                                 :
                                 <View style={{ width: isHide ? '100%' : '78%' }}>
@@ -427,7 +429,8 @@ const TeacherLessonDetail = (props) => {
                                                         id={lessonData._id}
                                                         updateBtnName={(flag) => setUpdate(flag)}
                                                         navigateScreeCamera={() => { setScreenAndCameraRecording(true) }}
-                                                        navigateToVideoGallery={() => { setTLVideoGallery(true) }} />
+                                                        navigateToVideoGallery={() => { setTLVideoGallery(true) }} 
+                                                        selectVideo={selectVideo}/>
                                                     :
                                                     <TLHomeWorkSubmitted
                                                         lessonId={lessonData._id}

@@ -94,4 +94,6 @@ export const EndPoints = {
 
     GetAvatarImg:"getavatarImg",
 
+    channelUser:"channelUser",
+
 }
