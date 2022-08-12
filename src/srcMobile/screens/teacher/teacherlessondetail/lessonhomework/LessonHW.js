@@ -129,9 +129,8 @@ const TLHomeWork = (props) => {
     );
   }, []);
   useEffect(() => {
-  setVideoMaterial(props.videoMaterial)
+    setVideoMaterial(props.videoMaterial);
   }, [props.videoMaterial]);
-  
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -718,21 +717,40 @@ const TLHomeWork = (props) => {
                   );
                 })}
             </View>
-            <FlatList
-              data={videoMaterial}
-              renderItem={({item, index}) => (
-                <View style={PAGESTYLE.thumbVideo}>
-                  <Image
-                    // source={Images.VideoSmlThumb}
-                    style={PAGESTYLE.smlThumbVideo}
-                  />
-                  <Text style={PAGESTYLE.smlThumbVideoText}>
-                    {item.description}
-                  </Text>
-                </View>
-              )}
-              numColumns={3}
-            />
+            <View>
+            {videoMaterial.length > 0 && (
+              <FlatList
+                data={videoMaterial}
+                renderItem={({ item, index }) => {
+                  console.log("selected items of lessonHW", item, index)
+                  return (
+                    <View style={PAGESTYLE.thumbVideo}>
+                      <Image
+                        // source={Images.VideoSmlThumb}
+                        style={PAGESTYLE.smlThumbVideo}
+                      />
+                      <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                        let selArr = [...videoMaterial];
+                        selArr.splice(index,1);
+                        setVideoMaterial(selArr);
+                      }}>
+                      <CloseBlack
+                              style={[PAGESTYLE.downloadIcon]}
+                              height={hp(2.5)}
+                              width={hp(2.5)}
+                            />
+                      </TouchableOpacity>
+                        
+                      <Text style={PAGESTYLE.smlThumbVideoText}>
+                        {item.description}
+                      </Text>
+                    </View>
+                  )
+                }}
+                numColumns={2}
+              />
+            )}
+            </View>
 
             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
               <TouchableOpacity

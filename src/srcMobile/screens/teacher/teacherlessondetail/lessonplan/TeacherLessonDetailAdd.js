@@ -1261,19 +1261,30 @@ const TLDetailAdd = (props) => {
                   })}
 
                 <FlatList
-                  data={props.videoMaterial}
+                  data={videoMaterial}
                   renderItem={({ item, index }) => (
                     <View style={PAGESTYLE.thumbVideo}>
                       <Image
                         // source={Images.VideoSmlThumb}
                         style={PAGESTYLE.smlThumbVideo}
                       />
+                      <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                        let selArr = [...videoMaterial];
+                        selArr.splice(index,1);
+                        setVideoMaterial(selArr);
+                      }}>
+                      <CloseBlack
+                              style={[PAGESTYLE.downloadIcon]}
+                              height={hp(2.5)}
+                              width={hp(2.5)}
+                            />
+                      </TouchableOpacity>
                       <Text style={PAGESTYLE.smlThumbVideoText}>
                         {item.description}
                       </Text>
                     </View>
                   )}
-                  numColumns={3}
+                  numColumns={2}
                 />
 
                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
