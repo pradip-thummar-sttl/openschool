@@ -61,6 +61,7 @@ const TeacherLessonDetail = (props) => {
   const [isHSDataChanged, setHSDataChanged] = useState(false);
 
   const [videoMaterial, setVideoMaterial] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState([]);
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -283,7 +284,10 @@ const TeacherLessonDetail = (props) => {
           goBack={() => setScreenAndCameraRecording(false)}
         />
       ) : isTLVideoGallery ? (
-        <TLVideoGallery goBack={() => setTLVideoGallery(false)} />
+        <TLVideoGallery goBack={(selectVideo) => {
+          setSelectedVideo(selectVideo)
+          setVideoGallery(false)
+      }} />
       ) : (
         <View style={{ width: isHide ? "100%" : "100%" }}>
           {tabIndex == 0 ? (

@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   Platform,
   BackHandler,
+  ActivityIndicator,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -39,6 +40,7 @@ const TLVideoGallery = (props) => {
   const [selectItem, setSelectedItem] = useState([]);
   const [page, setPageNumber] = useState(1);
   const [searchKeyword, setSearchKeyword] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   console.log("props", props);
 
@@ -54,13 +56,14 @@ const TLVideoGallery = (props) => {
     };
   }, [props.navigation]);
   useEffect(() => {
-    getChannelUser();
+    getChannelUser(1,searchKeyword);
   }, []);
-  const getChannelUser = () => {
+  const getChannelUser = (pageNumber, search) => {
+    setLoading(true);
     const data = {
-      Searchby: searchKeyword,
+      Searchby: search,
       Filterby: "",
-      page: page,
+      page: pageNumber,
       limit: "10",
     };
     Service.post(
@@ -68,29 +71,32 @@ const TLVideoGallery = (props) => {
       EndPoints.channelUser,
       (res) => {
         console.log("Channel User response ===>", res);
-        if (page == 1) {
+        if (pageNumber == 1) {
           setVideos(res.data);
         } else {
           setVideos([...videos, ...res.data]);
         }
+        setLoading(false);
       },
       (err) => {
         console.log("Channel User error ===>", err);
+        setLoading(false);
       }
     );
   };
 
   const handleBackButtonClick = () => {
-    props.route.params.goBack();
+    props.route.params.goBack(selectItem);
     return true;
   };
   const onPaggination = () => {
     console.log("page number is ===>");
 
     if (videos.length / 10 == page) {
-      //   console.log("page number is ===>");
-      setPageNumber(page + 1);
-      getChannelUser();
+      console.log("page number is under block ===>");
+      let p = page + 1;
+      setPageNumber(p);
+        getChannelUser(page + 1, searchKeyword);
     }
   };
   const onSelectVideo = (item) => {
@@ -112,52 +118,62 @@ const TLVideoGallery = (props) => {
           onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
           onSearch={() => {
             setPageNumber(1);
-            getChannelUser();
+            getChannelUser(1,searchKeyword);
           }}
           onClearSearch={() => {
             setSearchKeyword("");
             setPageNumber(1);
-            getChannelUser();
+            getChannelUser(1,"");
           }}
         />
 
         <View style={(PAGESTYLE.whiteBg, PAGESTYLE.mobileGalleryHolder)}>
           {/* <Text style={[PAGESTYLE.videoTitle, PAGESTYLE.spaceTop]}>Games &amp; Quizes</Text> */}
           <View style={STYLE.hrCommon}></View>
-          <FlatList
-            data={videos}
-            style={{ height: "80%" }}
-            renderItem={({ item, index }) => {
-              return (
-                <View style={PAGESTYLE.videoWrap}>
-                  <View>
-                    <View style={PAGESTYLE.videoThumb}>
-                      <Image style={PAGESTYLE.videoThumbnail} />
-                      <TouchableOpacity style={PAGESTYLE.videoPlay}>
-                        <PlayBlue height={hp(4)} width={hp(4)} />
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={PAGESTYLE.videoSelected}
-                        onPress={() => onSelectVideo(item)}
-                      >
-                        {selectItem.includes(item) ? (
-                          <TickMarkGreen height={hp(2.9)} width={hp(2.9)} />
-                        ) : (
-                          <TickMarkGrey height={hp(2.9)} width={hp(2.9)} />
-                        )}
-                      </TouchableOpacity>
+          
+            <FlatList
+              data={videos}
+              style={{ height: "80%" }}
+              renderItem={({ item, index }) => {
+                return (
+                  <View style={PAGESTYLE.videoWrap}>
+                    <View>
+                      <View style={PAGESTYLE.videoThumb}>
+                        <Image style={PAGESTYLE.videoThumbnail} />
+                        {/* <TouchableOpacity style={PAGESTYLE.videoPlay}>
+                          <PlayBlue height={hp(4)} width={hp(4)} />
+                        </TouchableOpacity> */}
+                        <TouchableOpacity
+                          style={PAGESTYLE.videoSelected}
+                          onPress={() => onSelectVideo(item)}
+                        >
+                          {selectItem.includes(item) ? (
+                            <TickMarkGreen height={hp(2.9)} width={hp(2.9)} />
+                          ) : (
+                            <TickMarkGrey height={hp(2.9)} width={hp(2.9)} />
+                          )}
+                        </TouchableOpacity>
+                      </View>
+                      <Text numberOfLines={2} style={PAGESTYLE.videoSubTitle}>
+                        {item.Description}
+                      </Text>
                     </View>
-                    <Text numberOfLines={2} style={PAGESTYLE.videoSubTitle}>
-                      {item.Description}
-                    </Text>
                   </View>
-                </View>
-              );
-            }}
-            keyExtractor={(item) => item.id}
-            onEndReached={onPaggination}
-            onEndReachedThreshold={0.1}
-          />
+                );
+              }}
+              keyExtractor={(item) => item.id}
+              onEndReached={onPaggination}
+              onEndReachedThreshold={0.1}
+            />
+            {isLoading ? (
+            <ActivityIndicator
+              size={Platform.OS == "ios" ? "large" : "small"}
+              color={COLORS.lightOrangeLogin}
+              style={{ paddingTop: 20 }}
+            />
+          ) : (
+            null
+          )}
         </View>
       </View>
     </View>

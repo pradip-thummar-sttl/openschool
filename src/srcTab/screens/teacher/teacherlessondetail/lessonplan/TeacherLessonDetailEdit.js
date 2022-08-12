@@ -55,6 +55,7 @@ const TLDetailEdit = (props) => {
     const [cameraResponse, setCameraResponse] = useState({})
     const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false)
     const [isRecordingStarted, setRecordingStarted] = useState(false)
+    const [selectedVideo, setSelectedVideo] = useState([]);
 
     var tempPupil = [];
     useEffect(() => {
@@ -166,7 +167,9 @@ const TLDetailEdit = (props) => {
         })
 
     }, [])
-
+    // useEffect(() => {
+    //     setSelectedVideo(props.selectVideo);
+    //   }, [props.selectVideo]);
     const getAllPupils = () => {
         const data = {
             Searchby: "",
@@ -940,7 +943,10 @@ const TLDetailEdit = (props) => {
         <View style={PAGESTYLE.mainPage}>
             {
                 isVideoGallery ?
-                    <TLVideoGallery goBack={() => setVideoGallery(false)} />
+                    <TLVideoGallery goBack={(selectVideo) => {
+                        setSelectedVideo(selectVideo)
+                        setVideoGallery(false)
+                    }}/>
                     :
                     <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? '100%' : '78%' }}>
                         <HeaderUpdate
@@ -1084,6 +1090,28 @@ const TLDetailEdit = (props) => {
                                                 )
                                             })
                                         }
+                                                      {selectedVideo.length > 0 ?? (
+                <FlatList
+                  data={selectedVideo}
+                  renderItem={({ item, index }) => (
+                    <View style={PAGESTYLE.thumbVideo}>
+                      <Image style={PAGESTYLE.grpThumbVideo} />
+                      <TouchableOpacity style={{position:'absolute', right:10,top:10}} onPress={()=>{
+                        let selArr = [...selectedVideo];
+                        selArr.splice(index,1);
+                        setSelectedVideo(selArr);
+                      }}>
+                        <CloseBlack
+                          style={PAGESTYLE.downloadIcon}
+                          height={hp(2.5)}
+                          width={hp(2.5)}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                  numColumns={2}
+                />
+              )}
                                         <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                                             <TouchableOpacity
                                                 style={PAGESTYLE.buttonGrp}

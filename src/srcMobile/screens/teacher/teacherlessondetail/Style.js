@@ -1127,8 +1127,8 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     thumbVideo: {
-        width: '100%',
-        flexDirection: 'column',
+        // width: '100%',
+        // flexDirection: 'column',
         marginRight: hp(1),
     },
     topSpaceRecording: {

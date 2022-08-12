@@ -94,7 +94,7 @@ const HeaderGallery = (props) => {
                 styles.searchHeader,
                 { paddingVertical: Platform.OS === "android" ? 2 : 0 },
               ]}
-              placeholder="Search subject, class, etc"
+              placeholder="Search recomended content"
               maxLength={50}
               placeholderTextColor={COLORS.menuLightFonts}
               onChangeText={(keyword) => {

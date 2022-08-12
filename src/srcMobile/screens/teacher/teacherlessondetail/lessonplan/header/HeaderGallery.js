@@ -96,7 +96,7 @@ const HeaderGallery = (props) => {
             <TextInput
               ref={textInput}
               style={[styles.searchHeader]}
-              placeholder="Search subject, class, etc"
+              placeholder="Search recomended content"
               maxLength={50}
               placeholderTextColor={COLORS.menuLightFonts}
               onChangeText={(keyword) => {

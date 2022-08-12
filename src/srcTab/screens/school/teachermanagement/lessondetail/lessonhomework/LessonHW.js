@@ -879,12 +879,23 @@ const TLHomeWork = (props) => {
               {/* <View style={PAGESTYLE.thumbVideo}>
                                 <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                             </View> */}
-              {selectedVideo.length > 0 ?? (
+              {selectedVideo.length > 0 && (
                 <FlatList
                   data={selectedVideo}
                   renderItem={({ item, index }) => (
                     <View style={PAGESTYLE.thumbVideo}>
                       <Image style={PAGESTYLE.grpThumbVideo} />
+                      <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                        let selArr = [...selectedVideo];
+                        selArr.splice(index,1);
+                        setSelectedVideo(selArr);
+                      }}>
+                        <CloseBlack
+                          style={PAGESTYLE.downloadIcon}
+                          height={hp(2.5)}
+                          width={hp(2.5)}
+                        />
+                      </TouchableOpacity>
                     </View>
                   )}
                   numColumns={2}

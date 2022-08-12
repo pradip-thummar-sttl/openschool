@@ -52,13 +52,13 @@ const TLVideoGallery = (props) => {
   }, [props.navigation]);
 
   useEffect(() => {
-    getChannelUser();
+    getChannelUser(1,searchKeyword);
   }, []);
-  const getChannelUser = () => {
+  const getChannelUser = (pageNumber, search) => {
     const data = {
-      Searchby: searchKeyword,
+      Searchby: search,
       Filterby: "",
-      page: page,
+      page: pageNumber,
       limit: "20",
     };
     Service.post(
@@ -66,7 +66,7 @@ const TLVideoGallery = (props) => {
       EndPoints.channelUser,
       (res) => {
         console.log("Channel User response ===>", res);
-        if (page == 1) {
+        if (pageNumber == 1) {
           setVideos(res.data);
         } else {
           setVideos([...videos, ...res.data]);
@@ -78,7 +78,7 @@ const TLVideoGallery = (props) => {
     );
   };
   const handleBackButtonClick = () => {
-    props.goBack();
+    props.goBack(selectItem);
     return true;
   };
   const openNotification = () => {
@@ -93,7 +93,7 @@ const TLVideoGallery = (props) => {
     if (videos.length / 20 == page) {
       //   console.log("page number is ===>");
       setPageNumber(page + 1);
-      getChannelUser();
+      getChannelUser(page + 1,searchKeyword);
     }
   };
   const onSelectVideo = (item) => {
@@ -121,12 +121,12 @@ const TLVideoGallery = (props) => {
           onSearchKeyword={(keyword) => setSearchKeyword(keyword)}
           onSearch={() => {
             setPageNumber(1);
-            getChannelUser();
+            getChannelUser(1,searchKeyword);
           }}
           onClearSearch={() => {
             setSearchKeyword("");
             setPageNumber(1);
-            getChannelUser();
+            getChannelUser(1,"");
           }}
         />
         {/* <ScrollView showsVerticalScrollIndicator={false} style={PAGESTYLE.teacherLessonGrid}>
@@ -274,9 +274,9 @@ const TLVideoGallery = (props) => {
                 <View>
                   <View style={PAGESTYLE.videoThumb}>
                     <Image style={PAGESTYLE.videoThumbnail} />
-                    <TouchableOpacity style={PAGESTYLE.videoPlay}>
+                    {/* <TouchableOpacity style={PAGESTYLE.videoPlay}>
                       <PlayBlue height={hp(4)} width={hp(4)} />
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity
                       style={PAGESTYLE.videoSelected}
                       onPress={() => onSelectVideo(item)}

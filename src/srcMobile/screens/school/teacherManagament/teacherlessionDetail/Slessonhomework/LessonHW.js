@@ -83,7 +83,6 @@ const TLHomeWork = (props) => {
   const [isChecked, setIsChecked] = useState(false);
   const [videoMaterial, setVideoMaterial] = useState([]);
 
-
   useEffect(() => {
     console.log(
       "`${EndPoints.Homework}/${props.id}`",
@@ -127,10 +126,10 @@ const TLHomeWork = (props) => {
       }
     );
   }, []);
-  
+
   useEffect(() => {
-    setVideoMaterial(props.videoMaterial)
-    }, [props.videoMaterial]);
+    setVideoMaterial(props.videoMaterial);
+  }, [props.videoMaterial]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -757,21 +756,38 @@ const TLHomeWork = (props) => {
                                 <Image source={Images.VideoUpload} style={PAGESTYLE.grpThumbVideo} />
                             </View>
                         </ScrollView> */}
-            <FlatList
-              data={videoMaterial}
-              renderItem={({ item, index }) => (
-                <View style={PAGESTYLE.thumbVideo}>
-                  <Image
-                    // source={Images.VideoSmlThumb}
-                    style={PAGESTYLE.smlThumbVideo}
-                  />
-                  <Text style={PAGESTYLE.smlThumbVideoText}>
-                    {item.description}
-                  </Text>
-                </View>
-              )}
-              numColumns={3}
-            />
+            {/* {} */}
+            {videoMaterial.length > 0 && (
+              <FlatList
+              style={{alignSelf:'center'}}
+                data={videoMaterial}
+                renderItem={({ item, index }) => (
+                  // console.log("selected items of lessonHW ======>", item, index),
+                  <View style={PAGESTYLE.thumbVideo}>
+                    <Image
+                      // source={Images.VideoSmlThumb}
+                      style={PAGESTYLE.smlThumbVideo}
+                    />
+                  <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                        let selArr = [...videoMaterial];
+                        selArr.splice(index,1);
+                        setVideoMaterial(selArr);
+                      }}>
+                      <CloseBlack
+                              style={[PAGESTYLE.downloadIcon]}
+                              height={hp(2.5)}
+                              width={hp(2.5)}
+                            />
+                      </TouchableOpacity>
+                    <Text style={PAGESTYLE.smlThumbVideoText}>
+                      {item.description}
+                    </Text>
+
+                  </View>
+                )}
+                numColumns={2}
+              />
+            )}
 
             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
               <TouchableOpacity
