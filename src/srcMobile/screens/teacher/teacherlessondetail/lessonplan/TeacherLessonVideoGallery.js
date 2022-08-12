@@ -140,9 +140,9 @@ const TLVideoGallery = (props) => {
                     <View>
                       <View style={PAGESTYLE.videoThumb}>
                         <Image style={PAGESTYLE.videoThumbnail} />
-                        <TouchableOpacity style={PAGESTYLE.videoPlay}>
+                        {/* <TouchableOpacity style={PAGESTYLE.videoPlay}>
                           <PlayBlue height={hp(4)} width={hp(4)} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         <TouchableOpacity
                           style={PAGESTYLE.videoSelected}
                           onPress={() => onSelectVideo(item)}
