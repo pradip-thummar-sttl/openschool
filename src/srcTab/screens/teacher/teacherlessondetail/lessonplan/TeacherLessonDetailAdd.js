@@ -72,6 +72,7 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import Modal from "react-native-modal";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -100,6 +101,8 @@ const TLDetailAdd = (props) => {
   const [pupils, setPupils] = useState([]);
   const [filteredPupils, setFilteredPupils] = useState([]);
 
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+  const [videoRecord, setVideoRecord] = useState({});
   const [timeSlot, setTimeSlots] = useState([
     "06:00",
     "06:30",
@@ -159,6 +162,12 @@ const TLDetailAdd = (props) => {
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
   const [limit, setLimit] = useState("50");
   const [selectedVideo, setSelectedVideo] = useState([]);
+
+  const openPopup = (item) => {
+    setVideoRecord(item);
+    setVideoModalVisible(true);
+  };
+
   useEffect(() => {
     if (Platform.OS === "android") {
       BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -1000,6 +1009,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
+      ChannelList:selectedVideo,
     };
 
     Service.post(
@@ -1407,7 +1417,7 @@ const TLDetailAdd = (props) => {
                     scrollEnabled={true}
                       data={selectedVideo}
                       renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.thumbVideo}>
+                        <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)}>
                           <Image style={PAGESTYLE.grpThumbVideo} />
                           <TouchableOpacity
                             style={{ position: "absolute", right: 10, top: 10 }}
@@ -1423,7 +1433,7 @@ const TLDetailAdd = (props) => {
                               width={hp(2.5)}
                             />
                           </TouchableOpacity>
-                        </View>
+                        </TouchableOpacity>
                       )}
                       numColumns={2}
                     />
@@ -1464,6 +1474,11 @@ const TLDetailAdd = (props) => {
           </KeyboardAwareScrollView>
         </View>
       )}
+      <VideoPopup
+        isVisible={isVideoModalVisible}
+        onClose={() => setVideoModalVisible(false)}
+        item={videoRecord}
+      />
     </View>
   );
 };

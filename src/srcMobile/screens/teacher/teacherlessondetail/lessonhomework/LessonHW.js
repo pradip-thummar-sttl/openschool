@@ -109,6 +109,8 @@ const TLHomeWork = (props) => {
           setDescription(res.data.HomeworkDescription);
           setSwitch(res.data.IsIncluded);
           setItemCheckList(res.data.CheckList);
+          // setVideoMaterial(res.data.ChannelList)
+
           props.updateBtnName(true);
         } else {
           Addhomework.IsIncluded = true;

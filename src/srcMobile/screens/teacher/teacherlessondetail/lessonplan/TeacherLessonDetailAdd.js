@@ -66,6 +66,7 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 import Modal from "react-native-modal";
+import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -147,6 +148,7 @@ const TLDetailAdd = (props) => {
   const [isRecordingStarted, setRecordingStarted] = useState(false);
 
   const [isModalVisible, setModalVisible] = useState(false);
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
   const [recordingName, setRecordingName] = useState("");
 
   const [currentRecordMode, setCurrentRecordMode] = useState("isScreen");
@@ -154,6 +156,7 @@ const TLDetailAdd = (props) => {
   const [limit, setLimit] = useState("50");
 
   const [videoMaterial, setVideoMaterial] = useState([]);
+  const [videoRecord, setVideoRecord] = useState({});
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -171,6 +174,10 @@ const TLDetailAdd = (props) => {
     props.navigation.goBack();
     return true;
   };
+  const openPopup = (item) => {
+    setVideoRecord(item);
+    setVideoModalVisible(true);
+  };
   useEffect(() => {
     Service.get(
       `${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`,
@@ -186,6 +193,7 @@ const TLDetailAdd = (props) => {
         console.log("error of GetSubjectBySchoolId", err);
       }
     );
+
 
     Service.get(
       `${EndPoints.GetParticipants}${User.user._id}`,
@@ -859,6 +867,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
+      ChannelList:videoMaterial,
     };
 
     Service.post(
@@ -1263,7 +1272,7 @@ const TLDetailAdd = (props) => {
                 <FlatList
                   data={videoMaterial}
                   renderItem={({ item, index }) => (
-                    <View style={PAGESTYLE.thumbVideo}>
+                    <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)}>
                       <Image
                         // source={Images.VideoSmlThumb}
                         style={PAGESTYLE.smlThumbVideo}
@@ -1282,7 +1291,7 @@ const TLDetailAdd = (props) => {
                       <Text style={PAGESTYLE.smlThumbVideoText}>
                         {item.description}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
                   )}
                   numColumns={2}
                 />
@@ -1319,6 +1328,11 @@ const TLDetailAdd = (props) => {
           />
         </KeyboardAwareScrollView>
       </View>
+      <VideoPopup
+        isVisible={isVideoModalVisible}
+        onClose={() => setVideoModalVisible(false)}
+        item={videoRecord}
+      />
     </View>
   );
 };

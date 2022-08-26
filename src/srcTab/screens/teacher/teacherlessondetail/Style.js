@@ -260,7 +260,7 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         // marginBottom: hp(2),
-        // marginTop: hp(1),
+        marginTop: hp(1),
     },
     videoLinkIcon: {
         width: hp(2.38),
@@ -1488,7 +1488,8 @@ export default StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        // marginTop:10
     },
 
     // New -----------------------------------
