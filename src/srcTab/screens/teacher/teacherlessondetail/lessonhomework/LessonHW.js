@@ -756,28 +756,37 @@ const TLHomeWork = (props) => {
                   );
                 })}
               {console.log("selected video ====>", selectedVideo)}
-              {selectedVideo.length > 0 ?? (
+              {selectedVideo.length > 0 ? (
                 <FlatList
                   data={selectedVideo}
                   renderItem={({ item, index }) => (
                     <View style={PAGESTYLE.thumbVideo}>
                       <Image style={PAGESTYLE.grpThumbVideo} />
-                      <TouchableOpacity style={{position:'absolute', right:10,top:10}} onPress={()=>{
-                        let selArr = [...selectedVideo];
-                        selArr.splice(index,1);
-                        setSelectedVideo(selArr);
-                      }}>
+                      <TouchableOpacity
+                        style={{ position: "absolute", right: 10, top: 10 }}
+                        onPress={() => {
+                          let selArr = [...selectedVideo];
+                          selArr.splice(index, 1);
+                          setSelectedVideo(selArr);
+                        }}
+                      >
                         <CloseBlack
                           style={PAGESTYLE.downloadIcon}
                           height={hp(2.5)}
                           width={hp(2.5)}
                         />
                       </TouchableOpacity>
+                      <Text
+                        numberOfLines={1}
+                        style={PAGESTYLE.smlThumbVideoText}
+                      >
+                        {item.Description}
+                      </Text>
                     </View>
                   )}
                   numColumns={2}
                 />
-              )}
+              ):null}
 
               <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                 <TouchableOpacity

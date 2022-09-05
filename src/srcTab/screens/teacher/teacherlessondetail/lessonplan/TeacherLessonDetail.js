@@ -395,6 +395,9 @@ const TLDetail = (props) => {
                           width={hp(2.5)}
                         />
                       </TouchableOpacity>
+                      <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                      {item.Description}
+                    </Text>
                     </TouchableOpacity>
                   )}
                   numColumns={2}

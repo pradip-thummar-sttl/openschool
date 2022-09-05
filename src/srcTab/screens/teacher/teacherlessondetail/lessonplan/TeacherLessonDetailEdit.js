@@ -94,7 +94,7 @@ const TLDetailEdit = (props) => {
   };
 
   useEffect(() => {
-    console.log('lesson data of edit lesson in tab',lessonData);
+    console.log("lesson data of edit lesson in tab", lessonData);
     if (itemCheckList.length == 0) {
       setItemCheckList(lessonData.CheckList);
     }
@@ -1220,6 +1220,7 @@ const TLDetailEdit = (props) => {
     <View style={PAGESTYLE.mainPage}>
       {isVideoGallery ? (
         <TLVideoGallery
+          data={selectedVideo}
           goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
             setVideoGallery(false);
@@ -1461,13 +1462,19 @@ const TLDetailEdit = (props) => {
                         </View>
                       );
                     })}
-                    {console.log('log of selected video in Flatelist', selectedVideo)}
+                  {console.log(
+                    "log of selected video in Flatelist",
+                    selectedVideo
+                  )}
                   {selectedVideo.length > 0 ? (
                     <FlatList
-                      style={{ maxHeight:hp(25) }}
+                      style={{ maxHeight: hp(25) }}
                       data={selectedVideo}
                       renderItem={({ item, index }) => (
-                        <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)}>
+                        <TouchableOpacity
+                          style={PAGESTYLE.thumbVideo}
+                          onPress={() => openPopup(item)}
+                        >
                           <Image style={PAGESTYLE.grpThumbVideo} />
                           <TouchableOpacity
                             style={{ position: "absolute", right: 10, top: 10 }}
@@ -1483,11 +1490,17 @@ const TLDetailEdit = (props) => {
                               width={hp(2.5)}
                             />
                           </TouchableOpacity>
+                          <Text
+                            numberOfLines={1}
+                            style={PAGESTYLE.smlThumbVideoText}
+                          >
+                            {item.Description}
+                          </Text>
                         </TouchableOpacity>
                       )}
                       numColumns={2}
-                    />):null
-                  }
+                    />
+                  ) : null}
                   <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
                     <TouchableOpacity
                       style={PAGESTYLE.buttonGrp}
