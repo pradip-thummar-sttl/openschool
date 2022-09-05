@@ -242,9 +242,9 @@ const TLDetailAdd = (props) => {
       }
     );
   }, []);
-//   useEffect(() => {
-//     setSelectedVideo(props.selectVideo);
-//   }, [props.selectVideo]);
+  //   useEffect(() => {
+  //     setSelectedVideo(props.selectVideo);
+  //   }, [props.selectVideo]);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -1009,7 +1009,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
-      ChannelList:selectedVideo,
+      ChannelList: selectedVideo,
     };
 
     Service.post(
@@ -1171,10 +1171,12 @@ const TLDetailAdd = (props) => {
   return (
     <View style={PAGESTYLE.mainPage}>
       {isVideoGallery ? (
-        <TLVideoGallery goBack={(selectVideo) => {
+        <TLVideoGallery
+          goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
-            setVideoGallery(false)
-        } }/>
+            setVideoGallery(false);
+          }}
+        />
       ) : (
         <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? "100%" : "78%" }}>
           <HeaderAddNew
@@ -1413,11 +1415,14 @@ const TLDetailAdd = (props) => {
                     })}
                   {selectedVideo.length > 0 && (
                     <FlatList
-                    style={{flex:1}}
-                    scrollEnabled={true}
+                      style={{ flex: 1 }}
+                      scrollEnabled={true}
                       data={selectedVideo}
                       renderItem={({ item, index }) => (
-                        <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)}>
+                        <TouchableOpacity
+                          style={PAGESTYLE.thumbVideo}
+                          onPress={() => openPopup(item)}
+                        >
                           <Image style={PAGESTYLE.grpThumbVideo} />
                           <TouchableOpacity
                             style={{ position: "absolute", right: 10, top: 10 }}
@@ -1438,18 +1443,19 @@ const TLDetailAdd = (props) => {
                       numColumns={2}
                     />
                   )}
-
-                  <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                    <TouchableOpacity
-                      style={PAGESTYLE.buttonGrp}
-                      activeOpacity={opacity}
-                      onPress={() => setVideoGallery(true)}
-                    >
-                      <Text style={STYLE.commonButtonBorderedGreen}>
-                        find me learning material
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                  {selectedSubject && lessonTopic != "" ? (
+                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                      <TouchableOpacity
+                        style={PAGESTYLE.buttonGrp}
+                        activeOpacity={opacity}
+                        onPress={() => setVideoGallery(true)}
+                      >
+                        <Text style={STYLE.commonButtonBorderedGreen}>
+                          find me learning material
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : null}
                 </View>
               </View>
             </ScrollView>
