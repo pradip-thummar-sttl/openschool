@@ -63,7 +63,8 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import Modal from "react-native-modal";
-import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
+import VideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -1550,7 +1551,8 @@ const TLDetailEdit = (props) => {
           </KeyboardAwareScrollView>
         </View>
       )}
-      <VideoPopup
+      
+      <TabVideoPopup
         isVisible={isVideoModalVisible}
         onClose={() => setVideoModalVisible(false)}
         item={videoRecord}

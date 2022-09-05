@@ -280,16 +280,14 @@ const TeacherLessonDetail = (props) => {
   return (
     <View style={PAGESTYLE.mainPage}>
       {isScreenAndCameraRecording ? (
-        <ScreenAndCameraRecording
-          goBack={() => setScreenAndCameraRecording(false)}
-        />
+        <ScreenAndCameraRecording goBack={() => setScreenAndCameraRecording(false)}/>
       ) : isTLVideoGallery ? (
         <TLVideoGallery goBack={(selectVideo) => {
           setSelectedVideo(selectVideo)
           setVideoGallery(false)
-      }} />
+        }} />
       ) : (
-        <View style={{ width: isHide ? "100%" : "100%" }}>
+        <View style={{ width: isHide ? "100%" : "100%"}}>
           {tabIndex == 0 ? (
             <HeaderLP
               lessonData={lessonData}

@@ -21,6 +21,7 @@ import { EndPoints } from "../../../../../service/EndPoints";
 import TickMarkGreen from "../../../../../svg/teacher/lessonhwplanner/TickMark_Green";
 import TickMarkGrey from "../../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
+import TabVideoPopup from "../../../../../srcTab/component/reusable/popup/TabVideoPopup";
 
 const TLVideoGallery = (props) => {
   const [isHide, action] = useState(true);
@@ -57,8 +58,6 @@ const TLVideoGallery = (props) => {
   const openPopup = (item) => {
     setVideoRecord(item);
     setVideoModalVisible(true);
-
-    console.log("=-=-=-=-=-=-=->")
   };
 
   const getChannelUser = (pageNumber, search) => {

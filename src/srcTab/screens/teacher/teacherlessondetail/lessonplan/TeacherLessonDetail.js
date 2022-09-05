@@ -37,6 +37,7 @@ import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 
 const TLDetail = (props) => {
   const [isRecordLoading, setRecordLoader] = useState(false);
@@ -418,7 +419,7 @@ const TLDetail = (props) => {
           ) : null}
         </View>
       </View>
-      <VideoPopup
+      <TabVideoPopup
         isVisible={isVideoModalVisible}
         onClose={() => setVideoModalVisible(false)}
         item={videoRecord}

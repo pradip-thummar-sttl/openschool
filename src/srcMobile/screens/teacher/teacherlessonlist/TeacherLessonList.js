@@ -128,7 +128,7 @@ const TeacherLessonList = (props) => {
 
     const Item = ({ navigateToDetail, style, item }) => (
         <TouchableOpacity
-            style={[PAGESTYLE.pupilDetailLink, PAGESTYLE.topListingArrow]}
+            style={[PAGESTYLE.topListingArrow]}
             activeOpacity={opacity}
             onPress={() => navigateToDetail()}>
             <View style={[PAGESTYLE.item, style]}>

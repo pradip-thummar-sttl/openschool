@@ -73,6 +73,7 @@ import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import Modal from "react-native-modal";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
 import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -1474,7 +1475,7 @@ const TLDetailAdd = (props) => {
           </KeyboardAwareScrollView>
         </View>
       )}
-      <VideoPopup
+      <TabVideoPopup
         isVisible={isVideoModalVisible}
         onClose={() => setVideoModalVisible(false)}
         item={videoRecord}

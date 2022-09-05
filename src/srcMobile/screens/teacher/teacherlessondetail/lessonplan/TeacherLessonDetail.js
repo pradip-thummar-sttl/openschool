@@ -44,7 +44,6 @@ const TLDetail = (props) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [videoRecord, setVideoRecord] = useState({});
 
-  console.log("lesson data of props passed", props.lessonData);
   const openPopup = (item) => {
     setVideoRecord(item);
     setModalVisible(true);
@@ -337,7 +336,6 @@ const TLDetail = (props) => {
                     onPress={() => openPopup(item)}
                   >
                     <Image
-                      // source={Images.VideoSmlThumb}
                       style={PAGESTYLE.smlThumbVideo}
                     />
                     <TouchableOpacity
@@ -354,8 +352,8 @@ const TLDetail = (props) => {
                         width={hp(2.5)}
                       />
                     </TouchableOpacity>
-                    <Text style={PAGESTYLE.smlThumbVideoText}>
-                      {item.description}
+                    <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                      {item.Description}
                     </Text>
                   </TouchableOpacity>
                 )}
