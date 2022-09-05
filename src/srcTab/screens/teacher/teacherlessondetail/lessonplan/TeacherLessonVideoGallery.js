@@ -34,15 +34,19 @@ import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import TickMarkGreen from "../../../../../svg/teacher/lessonhwplanner/TickMark_Green";
 import TickMarkGrey from "../../../../../svg/teacher/lessonhwplanner/TickMark_Grey";
 import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 const TLVideoGallery = (props) => {
   const [isHide, action] = useState(true);
   const [videos, setVideos] = useState([]);
   const [selectItem, setSelectedItem] = useState([]);
   const [page, setPageNumber] = useState(1);
-  const [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState(props.lessonTopic);
+  const [subjectBy, setSubjectBy] = useState(props.selectedSubject);
   const [isVideoModalVisible, setVideoModalVisible] = useState(false);
   const [videoRecord, setVideoRecord] = useState({});
 
+  // selectedSubject
+  // lessonTopic
   useEffect(() => {
     if (Platform.OS === "android") {
       BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -65,6 +69,7 @@ const TLVideoGallery = (props) => {
   const getChannelUser = (pageNumber, search) => {
     const data = {
       Searchby: search,
+      SubjectBy:subjectBy,
       Filterby: "",
       page: pageNumber,
       limit: "20",
@@ -205,7 +210,7 @@ const TLVideoGallery = (props) => {
           />
         </View>
       </View>
-      <VideoPopup
+      <TabVideoPopup
         isVisible={isVideoModalVisible}
         onClose={() => setVideoModalVisible(false)}
         item={videoRecord}

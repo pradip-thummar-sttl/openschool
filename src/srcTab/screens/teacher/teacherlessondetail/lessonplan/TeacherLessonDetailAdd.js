@@ -1173,7 +1173,9 @@ const TLDetailAdd = (props) => {
     <View style={PAGESTYLE.mainPage}>
       {isVideoGallery ? (
         <TLVideoGallery
-        data={selectedVideo}
+          data={selectedVideo}
+          lessonTopic={lessonTopic}
+          selectedSubject={selectedSubject.SubjectName}
           goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
             setVideoGallery(false);

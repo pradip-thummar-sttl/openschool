@@ -99,6 +99,8 @@ const TLHomeWork = (props) => {
     Service.get(
       `${EndPoints.Homework}/${props.id}`,
       (res) => {
+        console.log("Response of homework by lesson id", res.data);
+
         if (res.flag) {
           Addhomework.IsIncluded = res.data.IsIncluded;
           Addhomework.HomeworkDescription = res.data.HomeworkDescription;
@@ -786,19 +788,21 @@ const TLHomeWork = (props) => {
                   )}
                   numColumns={2}
                 />
-              ):null}
+              ) : null}
 
-              <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                <TouchableOpacity
-                  style={PAGESTYLE.buttonGrp}
-                  activeOpacity={opacity}
-                  onPress={() => props.navigateToVideoGallery()}
-                >
-                  <Text style={STYLE.commonButtonBorderedGreen}>
-                    find me learning material
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              {isSwitch ? (
+                <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                  <TouchableOpacity
+                    style={PAGESTYLE.buttonGrp}
+                    activeOpacity={opacity}
+                    onPress={() => props.navigateToVideoGallery()}
+                  >
+                    <Text style={STYLE.commonButtonBorderedGreen}>
+                      find me learning material
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
             </View>
           </View>
           {renderRecordingNamePopup()}
