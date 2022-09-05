@@ -3,6 +3,7 @@ import COLORS from '../../../../utils/Colors';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import FONTS from '../../../../utils/Fonts';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 const { width, height } = Dimensions.get('window');
 
@@ -339,7 +340,14 @@ export default StyleSheet.create({
         marginRight: hp(1),
     },
     thumbVideo: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+    },
+    thumbVideoInner: {
+        flexDirection: 'row',
+        height:100,
+        width:120,
+        backgroundColor:'red',
+        marginRight:10
     },
     subLineTitle: {
         marginTop: hp(-3.5),
@@ -1643,5 +1651,21 @@ export default StyleSheet.create({
     },
     searchMenu: {
         height: 15, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+    smlThumbVideo: {
+        width: wp(39.2),
+        height: wp(25.33),
+        resizeMode: 'contain',
+        marginBottom: wp(1.5),
+        backgroundColor:'gray',
+         borderRadius:5,
+    },
+    smlThumbVideoText: {
+        fontSize: wp(3.46),
+        width: hp(19),
+        color: COLORS.lightGray,
+        lineHeight: wp(4.25),
+        marginBottom: hp(1),
+        fontFamily: FONTS.fontRegular,
+    },
 });
