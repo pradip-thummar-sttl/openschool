@@ -34,7 +34,10 @@ const TLVideoGallery = (props) => {
   const [videoRecord, setVideoRecord] = useState({});
   const [isVideoModalVisible, setVideoModalVisible] = useState(false);
 
-  useEffect(() => {
+  const [isSubject, setSubject] = useState("");
+  const [isTopic, setTopic] = useState("");
+
+    useEffect(() => {
     if (props?.route?.params?.data?.videoMaterial.length > 0)
       setSelectedItem(props?.route?.params?.data?.videoMaterial)
   }, [videos]);
@@ -52,6 +55,9 @@ const TLVideoGallery = (props) => {
   }, [props.navigation]);
 
   useEffect(() => {
+    setSubject(props?.route?.params?.subject);
+    setTopic(props?.route?.params?.topic);
+    
     getChannelUser(1, searchKeyword);
   }, []);
 
@@ -63,7 +69,8 @@ const TLVideoGallery = (props) => {
   const getChannelUser = (pageNumber, search) => {
     setLoading(true);
     const data = {
-      Searchby: search,
+      Searchby: search != "" ? search  : isTopic,
+      SubjectBy:isSubject,
       Filterby: "",
       page: pageNumber,
       limit: "10",

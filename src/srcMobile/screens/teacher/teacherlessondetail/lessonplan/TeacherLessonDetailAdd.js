@@ -1298,7 +1298,11 @@ const TLDetailAdd = (props) => {
 
                   {selectedSubject != "" && lessonTopic != "" &&
                     <TouchableOpacity style={PAGESTYLE.buttonGrp} activeOpacity={opacity} onPress={() => {
-                      props.navigation.navigate("TLVideoGallery", { data: { videoMaterial }, goBack: (selectItem) => { setVideoMaterial(selectItem), props.navigation.goBack(); }, })
+                      props.navigation.navigate("TLVideoGallery", { 
+                        subject:selectedSubject?.SubjectName,
+                        topic:lessonTopic,
+                        data: { videoMaterial }, 
+                        goBack: (selectItem) => { setVideoMaterial(selectItem), props.navigation.goBack(); }, })
                     }}>
                       <Text style={STYLE.commonButtonBorderedGreen}>
                         find me learning material

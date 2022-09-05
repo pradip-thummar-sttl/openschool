@@ -56,7 +56,12 @@ import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMat
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import Modal from "react-native-modal";
 import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
+import { useNavigation } from '@react-navigation/native'
+
+
 const TLHomeWork = (props) => {
+  const navigation = useNavigation();
+
   var _removeRecordingArr = [];
   var _removeMaterialArr = [];
 
@@ -88,6 +93,9 @@ const TLHomeWork = (props) => {
   const [videoRecord, setVideoRecord] = useState({});
 
   useEffect(() => {
+    Addhomework.ChannelList = videoMaterial
+  },[videoMaterial]);
+  useEffect(() => {
     return () => {
       _removeRecordingArr = [];
       _removeMaterialArr = [];
@@ -95,41 +103,36 @@ const TLHomeWork = (props) => {
   });
 
   useEffect(() => {
-    Service.get(
-      `${EndPoints.Homework}/${props.id}`,
-      (res) => {
-        console.log("response of homework by lesson id", res);
-        if (res.flag) {
-          Addhomework.IsIncluded = res.data.IsIncluded;
-          Addhomework.HomeworkDescription = res.data.HomeworkDescription;
-          Addhomework.LessonId = res.data.LessonId;
-          Addhomework.CheckList = res.data.CheckList;
-          Addhomework.CreatedBy = res.data.CreatedBy;
-          Addhomework.IsUpdate = true;
-          Addhomework.DueDate = moment(res.data.DueDate).format("DD/MM/yyyy");
-          Addhomework.HwId = res.data._id;
-          setSelectedDate(moment(res.data.DueDate).format("DD/MM/yyyy"));
-          setMaterialArr(res.data.MaterialList);
-          setRecordingArr(res.data.RecordingList);
-          setDescription(res.data.HomeworkDescription);
-          setSwitch(res.data.IsIncluded);
-          setItemCheckList(res.data.CheckList);
-          // setVideoMaterial(res.data.ChannelList)
-
-          props.updateBtnName(true);
-        } else {
-          Addhomework.IsIncluded = true;
-          Addhomework.HomeworkDescription = "";
-          Addhomework.LessonId = "";
-          Addhomework.CheckList = [];
-          Addhomework.CreatedBy = "";
-          Addhomework.HwId = "";
-          Addhomework.DueDate = moment().format("DD/MM/yyyy");
-          Addhomework.IsUpdate = false;
-          setSelectedDate(moment().format("DD/MM/yyyy"));
-          props.updateBtnName(false);
-        }
-      },
+    Service.get(`${EndPoints.Homework}/${props.id}`, (res) => {
+      if (res.flag) {
+        Addhomework.IsIncluded = res.data.IsIncluded;
+        Addhomework.HomeworkDescription = res.data.HomeworkDescription;
+        Addhomework.LessonId = res.data.LessonId;
+        Addhomework.CheckList = res.data.CheckList;
+        Addhomework.CreatedBy = res.data.CreatedBy;
+        Addhomework.IsUpdate = true;
+        Addhomework.DueDate = moment(res.data.DueDate).format("DD/MM/yyyy");
+        Addhomework.HwId = res.data._id;
+        setSelectedDate(moment(res.data.DueDate).format("DD/MM/yyyy"));
+        setMaterialArr(res.data.MaterialList);
+        setRecordingArr(res.data.RecordingList);
+        setDescription(res.data.HomeworkDescription);
+        setSwitch(res.data.IsIncluded);
+        setItemCheckList(res.data.CheckList);
+        props.updateBtnName(true);
+      } else {
+        Addhomework.IsIncluded = true;
+        Addhomework.HomeworkDescription = "";
+        Addhomework.LessonId = "";
+        Addhomework.CheckList = [];
+        Addhomework.CreatedBy = "";
+        Addhomework.HwId = "";
+        Addhomework.DueDate = moment().format("DD/MM/yyyy");
+        Addhomework.IsUpdate = false;
+        setSelectedDate(moment().format("DD/MM/yyyy"));
+        props.updateBtnName(false);
+      }
+    },
       (err) => {
         console.log("Error of homework by lesson id", err);
       }
@@ -761,20 +764,31 @@ const TLHomeWork = (props) => {
             </View>
 
             <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-              <TouchableOpacity
-                style={PAGESTYLE.buttonGrp}
-                activeOpacity={opacity}
-                onPress={() => props.navigateToVideoGallery()}
-              >
-                <Text
-                  style={[
-                    STYLE.commonButtonBorderedGreen,
-                    PAGESTYLE.fullWidthButton,
-                  ]}
+              {isSwitch &&
+                <TouchableOpacity
+                  style={PAGESTYLE.buttonGrp}
+                  activeOpacity={opacity}
+                  onPress={() =>
+                    navigation.navigate("TLVideoGallery",
+                      {
+                        subject: props.subject,
+                        topic: props.topic,
+                        data: { videoMaterial },
+                        goBack: (selectItem) => { setVideoMaterial(selectItem); navigation.goBack(); },
+                      })
+                  }
                 >
-                  find me learning material
-                </Text>
-              </TouchableOpacity>
+                  <Text
+                    style={[
+                      STYLE.commonButtonBorderedGreen,
+                      PAGESTYLE.fullWidthButton,
+                    ]}
+                  >
+                    find me learning material
+                  </Text>
+                </TouchableOpacity>
+
+              }
             </View>
           </View>
         </View>
@@ -793,7 +807,7 @@ const TLHomeWork = (props) => {
           item={videoRecord}
         />
       </View>
-    </KeyboardAwareScrollView>
+    </KeyboardAwareScrollView >
   );
 };
 export default TLHomeWork;

@@ -1423,8 +1423,9 @@ const TLDetailEdit = (props) => {
                     activeOpacity={opacity}
                     onPress={() =>
                       props.navigation.navigate("TLVideoGallery", {
+                        subject: selectedSubject?.SubjectName,
+                        topic: lessonTopic,
                         goBack: (selectItem) => {
-                          console.log("Selected items=====>", selectItem);
                           setVideoMaterial(selectItem);
                           props.navigation.goBack();
                         },

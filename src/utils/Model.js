@@ -15,6 +15,7 @@ export var Addhomework={
     RecordingArr: [],
     RemoveRecordingArr:[],
     RemoveMaterialArr:[],
+    ChannelList:[],
 }
 export const appSettings = {
     appId: '95414',
