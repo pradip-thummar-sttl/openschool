@@ -93,6 +93,7 @@ const TeacherLessonDetail = (props) => {
   };
 
   useEffect(() => {
+    console.log('lesson data is ======>', lessonData);
     if (!isSearchActive && tabIndex == 2 && textInput.current) {
       textInput.current.clear();
       setSearchKeyword("");
@@ -319,6 +320,8 @@ const TeacherLessonDetail = (props) => {
       ) : isTLVideoGallery ? (
         <TLVideoGallery
           data={selectVideo}
+          lessonTopic={lessonData.LessonTopic}
+          selectedSubject={lessonData.SubjectName}
           goBack={(selectVideo) => {
             console.log('====================================');
             console.log('tlvideo galalry back data', selectVideo);

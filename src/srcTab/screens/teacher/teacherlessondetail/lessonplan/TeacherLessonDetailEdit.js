@@ -1221,6 +1221,8 @@ const TLDetailEdit = (props) => {
       {isVideoGallery ? (
         <TLVideoGallery
           data={selectedVideo}
+          lessonTopic={lessonTopic}
+          selectedSubject={selectedSubject.SubjectName}
           goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
             setVideoGallery(false);
