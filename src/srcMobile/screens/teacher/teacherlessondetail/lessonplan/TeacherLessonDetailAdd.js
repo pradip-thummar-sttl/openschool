@@ -15,6 +15,7 @@ import {
   SafeAreaView,
   Platform,
   BackHandler,
+  Alert,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -628,12 +629,12 @@ const TLDetailAdd = (props) => {
     return (
       <View style={PAGESTYLE.dropDownFormInput}>
         <Text style={PAGESTYLE.subjectText}>Subject</Text>
+
         <Menu onSelect={(item) => setSelectedSubject(item)}>
           <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
             <Text style={PAGESTYLE.dateTimetextdummy}>
               {selectedSubject ? selectedSubject.SubjectName : "Select Subject"}
             </Text>
-            {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
             <ArrowDown
               style={PAGESTYLE.dropDownArrow}
               height={hp(1.51)}
@@ -839,7 +840,7 @@ const TLDetailAdd = (props) => {
                 showMessage("Sorry, we are unable to add lesson!");
               }
             },
-            (error) => {}
+            (error) => { }
           );
         }
       } catch (e) {
@@ -867,7 +868,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
-      ChannelList:videoMaterial,
+      ChannelList: videoMaterial,
     };
 
     Service.post(
@@ -1051,7 +1052,7 @@ const TLDetailAdd = (props) => {
       return false;
     } else if (
       timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) >
-        4 &&
+      4 &&
       IsDeliveredLive != ""
     ) {
       showMessage(MESSAGE.invalidFrom);
@@ -1272,24 +1273,24 @@ const TLDetailAdd = (props) => {
                 <FlatList
                   data={videoMaterial}
                   renderItem={({ item, index }) => (
-                    <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)}>
+                    <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={() => openPopup(item)}>
                       <Image
                         // source={Images.VideoSmlThumb}
                         style={PAGESTYLE.smlThumbVideo}
                       />
-                      <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                      <TouchableOpacity style={{ position: 'absolute', right: 10, top: 5 }} onPress={() => {
                         let selArr = [...videoMaterial];
-                        selArr.splice(index,1);
+                        selArr.splice(index, 1);
                         setVideoMaterial(selArr);
                       }}>
-                      <CloseBlack
-                              style={[PAGESTYLE.downloadIcon]}
-                              height={hp(2.5)}
-                              width={hp(2.5)}
-                            />
+                        <CloseBlack
+                          style={[PAGESTYLE.downloadIcon]}
+                          height={hp(2.5)}
+                          width={hp(2.5)}
+                        />
                       </TouchableOpacity>
                       <Text style={PAGESTYLE.smlThumbVideoText}>
-                        {item.description}
+                        {item.ChannelTitle}
                       </Text>
                     </TouchableOpacity>
                   )}
@@ -1297,23 +1298,16 @@ const TLDetailAdd = (props) => {
                 />
 
                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                  <TouchableOpacity
-                    style={PAGESTYLE.buttonGrp}
-                    activeOpacity={opacity}
-                    onPress={() =>
-                      props.navigation.navigate("TLVideoGallery", {
-                        goBack: (selectItem) => {
-                          console.log("Selected items=====>", selectItem);
-                          setVideoMaterial(selectItem)
-                          props.navigation.goBack();
-                        },
-                      })
-                    }
-                  >
-                    <Text style={STYLE.commonButtonBorderedGreen}>
-                      find me learning material
-                    </Text>
-                  </TouchableOpacity>
+
+                  {selectedSubject != "" && lessonTopic != "" &&
+                    <TouchableOpacity style={PAGESTYLE.buttonGrp} activeOpacity={opacity} onPress={() => {
+                      props.navigation.navigate("TLVideoGallery", { data: { videoMaterial }, goBack: (selectItem) => { setVideoMaterial(selectItem), props.navigation.goBack(); }, })
+                    }}>
+                      <Text style={STYLE.commonButtonBorderedGreen}>
+                        find me learning material
+                      </Text>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>
             </View>
