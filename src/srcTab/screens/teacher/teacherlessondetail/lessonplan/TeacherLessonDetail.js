@@ -247,7 +247,7 @@ const TLDetail = (props) => {
         </View>
         <View style={PAGESTYLE.rightSideBar}>
           {props.lessonData.RecordingList.length > 0 ||
-          props.lessonData.ChatTranscript.length > 0 ||
+          // props.lessonData.ChatTranscript.length > 0 ||
           props.lessonData.RecommendedList.length > 0 ||
           props.lessonData.MaterialList.length > 0 ||
           selectedVideo.length > 0 ? (
@@ -394,6 +394,9 @@ const TLDetail = (props) => {
                           width={hp(2.5)}
                         />
                       </TouchableOpacity>
+                      <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                      {item.Description}
+                    </Text>
                     </TouchableOpacity>
                   )}
                   numColumns={2}

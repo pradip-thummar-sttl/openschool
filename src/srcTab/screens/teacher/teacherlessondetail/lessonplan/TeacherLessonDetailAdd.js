@@ -1172,6 +1172,7 @@ const TLDetailAdd = (props) => {
     <View style={PAGESTYLE.mainPage}>
       {isVideoGallery ? (
         <TLVideoGallery
+        data={selectedVideo}
           goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
             setVideoGallery(false);
@@ -1438,6 +1439,12 @@ const TLDetailAdd = (props) => {
                               width={hp(2.5)}
                             />
                           </TouchableOpacity>
+                          <Text
+                            numberOfLines={1}
+                            style={PAGESTYLE.smlThumbVideoText}
+                          >
+                            {item.Description}
+                          </Text>
                         </TouchableOpacity>
                       )}
                       numColumns={2}

@@ -284,7 +284,8 @@ const TeacherLessonDetail = (props) => {
           goBack={() => setScreenAndCameraRecording(false)}
         />
       ) : isTLVideoGallery ? (
-        <TLVideoGallery goBack={(selectVideo) => {
+        <TLVideoGallery 
+        goBack={(selectVideo) => {
           setSelectedVideo(selectVideo)
           setVideoGallery(false)
       }} />
