@@ -247,7 +247,7 @@ const TLDetail = (props) => {
         </View>
         <View style={PAGESTYLE.rightSideBar}>
           {props.lessonData.RecordingList.length > 0 ||
-          props.lessonData.ChatTranscript.length > 0 ||
+          // props.lessonData.ChatTranscript.length > 0 ||
           props.lessonData.RecommendedList.length > 0 ||
           props.lessonData.MaterialList.length > 0 ||
           selectedVideo.length > 0 ? (

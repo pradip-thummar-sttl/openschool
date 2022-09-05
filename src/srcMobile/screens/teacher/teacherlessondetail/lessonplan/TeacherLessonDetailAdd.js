@@ -149,14 +149,14 @@ const TLDetailAdd = (props) => {
   const [isRecordingStarted, setRecordingStarted] = useState(false);
 
   const [isModalVisible, setModalVisible] = useState(false);
-  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
   const [recordingName, setRecordingName] = useState("");
-
+  
   const [currentRecordMode, setCurrentRecordMode] = useState("isScreen");
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
   const [limit, setLimit] = useState("50");
-
+  
   const [videoMaterial, setVideoMaterial] = useState([]);
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
   const [videoRecord, setVideoRecord] = useState({});
 
   useEffect(() => {
@@ -1274,10 +1274,7 @@ const TLDetailAdd = (props) => {
                   data={videoMaterial}
                   renderItem={({ item, index }) => (
                     <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={() => openPopup(item)}>
-                      <Image
-                        // source={Images.VideoSmlThumb}
-                        style={PAGESTYLE.smlThumbVideo}
-                      />
+                      <Image style={PAGESTYLE.smlThumbVideo}/>
                       <TouchableOpacity style={{ position: 'absolute', right: 10, top: 5 }} onPress={() => {
                         let selArr = [...videoMaterial];
                         selArr.splice(index, 1);
@@ -1289,8 +1286,8 @@ const TLDetailAdd = (props) => {
                           width={hp(2.5)}
                         />
                       </TouchableOpacity>
-                      <Text style={PAGESTYLE.smlThumbVideoText}>
-                        {item.ChannelTitle}
+                      <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                        {item.Description}
                       </Text>
                     </TouchableOpacity>
                   )}
