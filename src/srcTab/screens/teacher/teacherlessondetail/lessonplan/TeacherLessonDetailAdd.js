@@ -1235,9 +1235,11 @@ const TLDetailAdd = (props) => {
                           style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                           placeholder="e.g. Grammar, Fractions, etc"
                           autoCapitalize={"sentences"}
+                          value={lessonTopic}
                           maxLength={60}
                           placeholderTextColor={COLORS.menuLightFonts}
                           onChangeText={(text) => setLessonTopic(text)}
+                          
                         />
                       </View>
                     </View>
@@ -1419,8 +1421,8 @@ const TLDetailAdd = (props) => {
                     })}
                   {selectedVideo.length > 0 && (
                     <FlatList
-                      style={{ flex: 1 }}
-                      scrollEnabled={true}
+                      style={{ maxHeight:hp(30) }}
+                      // scrollEnabled={true}
                       data={selectedVideo}
                       renderItem={({ item, index }) => (
                         <TouchableOpacity
