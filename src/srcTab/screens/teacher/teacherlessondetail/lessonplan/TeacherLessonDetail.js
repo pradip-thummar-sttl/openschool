@@ -396,7 +396,7 @@ const TLDetail = (props) => {
                         />
                       </TouchableOpacity>
                       <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
-                      {item.Description}
+                      {item.Title}
                     </Text>
                     </TouchableOpacity>
                   )}

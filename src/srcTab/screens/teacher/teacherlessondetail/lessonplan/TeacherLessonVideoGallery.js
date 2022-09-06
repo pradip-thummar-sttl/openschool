@@ -40,10 +40,13 @@ const TLVideoGallery = (props) => {
   const [videos, setVideos] = useState([]);
   const [selectItem, setSelectedItem] = useState([]);
   const [page, setPageNumber] = useState(1);
-  const [searchKeyword, setSearchKeyword] = useState(props.lessonTopic);
-  const [subjectBy, setSubjectBy] = useState(props.selectedSubject);
+  const [searchKeyword, setSearchKeyword] = useState("");
+ 
   const [isVideoModalVisible, setVideoModalVisible] = useState(false);
   const [videoRecord, setVideoRecord] = useState({});
+
+  const [isSubject, setSubject] = useState("");
+  const [isTopic, setTopic] = useState("");
 
   // selectedSubject
   // lessonTopic
@@ -59,26 +62,30 @@ const TLVideoGallery = (props) => {
     };
   }, [props.navigation]);
   useEffect(() => {
-    console.log("props o data in selected video", props.data);
     setSelectedItem(props.data);
   }, [props.data]);
 
   useEffect(() => {
-    getChannelUser(1, searchKeyword);
-  }, []);
+    setSubject(props?.selectedSubject);
+    setTopic(props?.lessonTopic);
+
+    if (isSubject != "" && isTopic != "")
+      getChannelUser(1, searchKeyword);
+
+  }, [isSubject, isTopic]);
+
   const getChannelUser = (pageNumber, search) => {
     const data = {
-      Searchby: search,
-      SubjectBy:subjectBy,
+       Searchby: search != "" ? [search] : [isTopic],
+      SubjectBy: [isSubject],
       Filterby: "",
       page: pageNumber,
-      limit: "20",
+      limit: "15",
     };
     Service.post(
       data,
       EndPoints.channelUser,
       (res) => {
-        console.log("Channel User response ===>", res);
         if (pageNumber == 1) {
           setVideos(res.data);
         } else {
@@ -202,7 +209,7 @@ const TLVideoGallery = (props) => {
                       </TouchableOpacity>
                     </View>
                     <Text numberOfLines={2} style={PAGESTYLE.videoSubTitle}>
-                      {item.Description}
+                      {item.Title}
                     </Text>
                   </View>
                 </TouchableOpacity>

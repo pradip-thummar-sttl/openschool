@@ -1472,5 +1472,24 @@ export default StyleSheet.create({
     },
     searchMenu: {
         height: 20, resizeMode: 'contain', right: 0, alignSelf: 'center',
-    }
+    },
+    thumbVideo: {
+        flexDirection: 'row',
+    },
+    smlThumbVideo: {
+        width: wp(10.2),
+        height: wp(7),
+        marginTop:5,
+        resizeMode: 'contain',
+        backgroundColor:'gray',
+         borderRadius:5,
+    },
+    smlThumbVideoText: {
+        fontSize: wp(1.2),
+        width: hp(15),
+        color: COLORS.lightGray,
+        lineHeight: wp(4.25),
+        marginBottom: hp(1),
+        fontFamily: FONTS.fontRegular,
+    },
 });

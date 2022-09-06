@@ -753,7 +753,7 @@ const TLHomeWork = (props) => {
                         </TouchableOpacity>
 
                         <Text style={PAGESTYLE.smlThumbVideoText}>
-                          {item.description}
+                          {item.Title}
                         </Text>
                       </TouchableOpacity>
                     )

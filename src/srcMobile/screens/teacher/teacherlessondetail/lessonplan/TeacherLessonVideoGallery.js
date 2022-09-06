@@ -38,6 +38,8 @@ const TLVideoGallery = (props) => {
   const [isTopic, setTopic] = useState("");
 
   useEffect(() => {
+
+    
     if (props?.route?.params?.data?.videoMaterial.length > 0)
       setSelectedItem(props?.route?.params?.data?.videoMaterial)
   }, [videos]);
@@ -57,7 +59,8 @@ const TLVideoGallery = (props) => {
   useEffect(() => {
     setSubject(props?.route?.params?.subject);
     setTopic(props?.route?.params?.topic);
-    getChannelUser(1, searchKeyword);
+    if (isSubject != "" && isTopic != "")
+      getChannelUser(1, searchKeyword);
 
   }, [isSubject, isTopic]);
 
@@ -69,11 +72,11 @@ const TLVideoGallery = (props) => {
   const getChannelUser = (pageNumber, search) => {
     setLoading(true);
     const data = {
-      Searchby: search != "" ? search : isTopic,
-      SubjectBy: isSubject,
+      Searchby: search != "" ? [search] : [isTopic],
+      SubjectBy: [isSubject],
       Filterby: "",
       page: pageNumber,
-      limit: "10",
+      limit: "15",
     };
     Service.post(data, EndPoints.channelUser, (res) => {
       if (pageNumber == 1) {
@@ -176,7 +179,7 @@ const TLVideoGallery = (props) => {
                       </TouchableOpacity>
                     </View>
                     <Text numberOfLines={2} style={PAGESTYLE.videoSubTitle}>
-                      {item.Description}
+                      {item.Title}
                     </Text>
                   </View>
                 </TouchableOpacity>
