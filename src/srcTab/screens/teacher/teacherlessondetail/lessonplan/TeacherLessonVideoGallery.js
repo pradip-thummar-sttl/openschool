@@ -121,17 +121,22 @@ const TLVideoGallery = (props) => {
   // };
   const onSelectVideo = (item) => {
     let items = [...selectItem];
-    const person = items.find(element => {
-      if (element._id === item._id) {
-        return true;
+
+    let added = true;
+    for (let person of items) {
+      if (person._id === item._id) {
+        added = false;
+        break;
       }
-      return false;
-    });
-    if (person == undefined)
+    }
+
+    if (added)
       items.push(item);
     else {
-      const index = items.indexOf(item);
-      items.splice(index, 1);
+      for (let i = 0; i < items.length; i++) {
+        if (items[i]._id === item._id)
+          items.splice(i, 1);
+      }
     }
 
     setSelectedItem(items);
