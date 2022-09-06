@@ -37,7 +37,7 @@ const TLVideoGallery = (props) => {
   const [isSubject, setSubject] = useState("");
   const [isTopic, setTopic] = useState("");
 
-    useEffect(() => {
+  useEffect(() => {
     if (props?.route?.params?.data?.videoMaterial.length > 0)
       setSelectedItem(props?.route?.params?.data?.videoMaterial)
   }, [videos]);
@@ -57,9 +57,9 @@ const TLVideoGallery = (props) => {
   useEffect(() => {
     setSubject(props?.route?.params?.subject);
     setTopic(props?.route?.params?.topic);
-    
     getChannelUser(1, searchKeyword);
-  }, []);
+
+  }, [isSubject, isTopic]);
 
   const openPopup = (item) => {
     setVideoRecord(item);
@@ -69,23 +69,20 @@ const TLVideoGallery = (props) => {
   const getChannelUser = (pageNumber, search) => {
     setLoading(true);
     const data = {
-      Searchby: search != "" ? search  : isTopic,
-      SubjectBy:isSubject,
+      Searchby: search != "" ? search : isTopic,
+      SubjectBy: isSubject,
       Filterby: "",
       page: pageNumber,
       limit: "10",
     };
-    Service.post(
-      data,
-      EndPoints.channelUser,
-      (res) => {
-        if (pageNumber == 1) {
-          setVideos(res.data);
-        } else {
-          setVideos([...videos, ...res.data]);
-        }
-        setLoading(false);
-      },
+    Service.post(data, EndPoints.channelUser, (res) => {
+      if (pageNumber == 1) {
+        setVideos(res.data);
+      } else {
+        setVideos([...videos, ...res.data]);
+      }
+      setLoading(false);
+    },
       (err) => {
         setLoading(false);
       }
@@ -106,17 +103,22 @@ const TLVideoGallery = (props) => {
 
   const onSelectVideo = (item) => {
     let items = [...selectItem];
-    const person = items.find(element => {
-      if (element._id === item._id) {
-        return true;
+
+    let added = true;
+    for (let person of items) {
+      if (person._id === item._id) {
+        added = false;
+        break;
       }
-      return false;
-    });
-    if (person == undefined)
+    }
+
+    if (added)
       items.push(item);
     else {
-      const index = items.indexOf(item);
-      items.splice(index, 1);
+      for (let i = 0; i < items.length; i++) {
+        if (items[i]._id === item._id)
+          items.splice(i, 1);
+      }
     }
 
     setSelectedItem(items);

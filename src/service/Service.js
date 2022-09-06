@@ -34,7 +34,7 @@ export const Service = {
             },
             body: JSON.stringify(data),
         }).then((res) => res.json()).then((res) => {
-            console.log('+++++Response+++++>', baseUrl, res);
+            // console.log('+++++Response+++++>', baseUrl, res);
             return success(res)
         }).catch((err) => {
             console.log('errr1', err)
