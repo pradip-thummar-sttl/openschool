@@ -72,6 +72,8 @@ import CloseBlack from "../../../../../svg/teacher/timetable/Close_Black";
 import UploadDoc from "../../../../../svg/teacher/lessonhwplanner/UploadDoc";
 import Modal from "react-native-modal";
 import { backgroundColor } from "react-native/Libraries/Components/View/ReactNativeStyleAttributes";
+import VideoPopup from "../../../../../srcMobile/component/reusable/popup/VideoPopup";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -100,6 +102,8 @@ const TLDetailAdd = (props) => {
   const [pupils, setPupils] = useState([]);
   const [filteredPupils, setFilteredPupils] = useState([]);
 
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+  const [videoRecord, setVideoRecord] = useState({});
   const [timeSlot, setTimeSlots] = useState([
     "06:00",
     "06:30",
@@ -159,6 +163,12 @@ const TLDetailAdd = (props) => {
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
   const [limit, setLimit] = useState("50");
   const [selectedVideo, setSelectedVideo] = useState([]);
+
+  const openPopup = (item) => {
+    setVideoRecord(item);
+    setVideoModalVisible(true);
+  };
+
   useEffect(() => {
     if (Platform.OS === "android") {
       BackHandler.addEventListener("hardwareBackPress", handleBackButtonClick);
@@ -233,9 +243,9 @@ const TLDetailAdd = (props) => {
       }
     );
   }, []);
-//   useEffect(() => {
-//     setSelectedVideo(props.selectVideo);
-//   }, [props.selectVideo]);
+  //   useEffect(() => {
+  //     setSelectedVideo(props.selectVideo);
+  //   }, [props.selectVideo]);
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -1000,6 +1010,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
+      ChannelList: selectedVideo,
     };
 
     Service.post(
@@ -1161,10 +1172,15 @@ const TLDetailAdd = (props) => {
   return (
     <View style={PAGESTYLE.mainPage}>
       {isVideoGallery ? (
-        <TLVideoGallery goBack={(selectVideo) => {
+        <TLVideoGallery
+          data={selectedVideo}
+          lessonTopic={lessonTopic}
+          selectedSubject={selectedSubject.SubjectName}
+          goBack={(selectVideo) => {
             setSelectedVideo(selectVideo);
-            setVideoGallery(false)
-        } }/>
+            setVideoGallery(false);
+          }}
+        />
       ) : (
         <View style={{ ...PAGESTYLE.whiteBg, width: isHide ? "100%" : "78%" }}>
           <HeaderAddNew
@@ -1219,9 +1235,11 @@ const TLDetailAdd = (props) => {
                           style={[PAGESTYLE.commonInput, PAGESTYLE.textBox]}
                           placeholder="e.g. Grammar, Fractions, etc"
                           autoCapitalize={"sentences"}
+                          value={lessonTopic}
                           maxLength={60}
                           placeholderTextColor={COLORS.menuLightFonts}
                           onChangeText={(text) => setLessonTopic(text)}
+                          
                         />
                       </View>
                     </View>
@@ -1403,11 +1421,14 @@ const TLDetailAdd = (props) => {
                     })}
                   {selectedVideo.length > 0 && (
                     <FlatList
-                    style={{flex:1}}
-                    scrollEnabled={true}
+                      style={{ maxHeight:hp(30) }}
+                      // scrollEnabled={true}
                       data={selectedVideo}
                       renderItem={({ item, index }) => (
-                        <View style={PAGESTYLE.thumbVideo}>
+                        <TouchableOpacity
+                          style={PAGESTYLE.thumbVideo}
+                          onPress={() => openPopup(item)}
+                        >
                           <Image style={PAGESTYLE.grpThumbVideo} />
                           <TouchableOpacity
                             style={{ position: "absolute", right: 10, top: 10 }}
@@ -1423,23 +1444,30 @@ const TLDetailAdd = (props) => {
                               width={hp(2.5)}
                             />
                           </TouchableOpacity>
-                        </View>
+                          <Text
+                            numberOfLines={1}
+                            style={PAGESTYLE.smlThumbVideoText}
+                          >
+                            {item.Title}
+                          </Text>
+                        </TouchableOpacity>
                       )}
                       numColumns={2}
                     />
                   )}
-
-                  <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                    <TouchableOpacity
-                      style={PAGESTYLE.buttonGrp}
-                      activeOpacity={opacity}
-                      onPress={() => setVideoGallery(true)}
-                    >
-                      <Text style={STYLE.commonButtonBorderedGreen}>
-                        find me learning material
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                  {selectedSubject && lessonTopic != "" ? (
+                    <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                      <TouchableOpacity
+                        style={PAGESTYLE.buttonGrp}
+                        activeOpacity={opacity}
+                        onPress={() => setVideoGallery(true)}
+                      >
+                        <Text style={STYLE.commonButtonBorderedGreen}>
+                          find me learning material
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  ) : null}
                 </View>
               </View>
             </ScrollView>
@@ -1464,6 +1492,11 @@ const TLDetailAdd = (props) => {
           </KeyboardAwareScrollView>
         </View>
       )}
+      <TabVideoPopup
+        isVisible={isVideoModalVisible}
+        onClose={() => setVideoModalVisible(false)}
+        item={videoRecord}
+      />
     </View>
   );
 };

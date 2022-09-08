@@ -67,6 +67,7 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import DownloadSVG from "../../../../../svg/teacher/lessonhwplanner/Download";
 import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
+import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
 
 const { DialogModule, Dialog } = NativeModules;
 
@@ -82,9 +83,18 @@ const TLDetailEdit = (props) => {
   const [isScreenVoiceSelected, setScreenVoiceSelected] = useState(false);
   const [isRecordingStarted, setRecordingStarted] = useState(false);
   const [limit, setLimit] = useState("50");
+  const [videoMaterial, setVideoMaterial] = useState([]);
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+  const [videoRecord, setVideoRecord] = useState({});
+
   var tempPupil = [];
+  const openPopup = (item) => {
+    setVideoRecord(item);
+    setVideoModalVisible(true);
+  };
 
   useEffect(() => {
+    console.log('channel list of edit lesson', lessonData);
     if (itemCheckList.length == 0) {
       setItemCheckList(lessonData.CheckList);
     }
@@ -99,6 +109,7 @@ const TLDetailEdit = (props) => {
     setMaterialArr(lessonData.MaterialList);
     setRecordingArr(lessonData.RecordingList);
     setSelectedPupils(lessonData.PupilList);
+    setVideoMaterial(lessonData.ChannelList)
     tempPupil = lessonData.PupilList;
   }, [lessonData]);
 
@@ -175,7 +186,6 @@ const TLDetailEdit = (props) => {
 
   const [currentRecordMode, setCurrentRecordMode] = useState("isScreen");
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
-  const [videoMaterial, setVideoMaterial] = useState([]);
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -1059,6 +1069,7 @@ const TLDetailEdit = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
+      ChannelList:videoMaterial,
     };
 
     Service.post(
@@ -1382,7 +1393,7 @@ const TLDetailEdit = (props) => {
                 <FlatList
                   data={videoMaterial}
                   renderItem={({ item, index }) => (
-                    <View style={PAGESTYLE.thumbVideo}>
+                    <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={()=>openPopup(item)} >
                       <Image
                         // source={Images.VideoSmlThumb}
                         style={PAGESTYLE.smlThumbVideo}
@@ -1401,7 +1412,7 @@ const TLDetailEdit = (props) => {
                       <Text style={PAGESTYLE.smlThumbVideoText}>
                         {item.description}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
                   )}
                   numColumns={2}
                 />
@@ -1412,8 +1423,9 @@ const TLDetailEdit = (props) => {
                     activeOpacity={opacity}
                     onPress={() =>
                       props.navigation.navigate("TLVideoGallery", {
+                        subject: selectedSubject?.SubjectName,
+                        topic: lessonTopic,
                         goBack: (selectItem) => {
-                          console.log("Selected items=====>", selectItem);
                           setVideoMaterial(selectItem);
                           props.navigation.goBack();
                         },
@@ -1479,6 +1491,11 @@ const TLDetailEdit = (props) => {
           />
         </KeyboardAwareScrollView>
       </View>
+      <VideoPopup
+        isVisible={isVideoModalVisible}
+        onClose={() => setVideoModalVisible(false)}
+        item={videoRecord}
+      />
     </View>
   );
 };

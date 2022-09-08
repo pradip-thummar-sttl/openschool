@@ -93,6 +93,7 @@ const HeaderGallery = (props) => {
             >
               <SearchBlue height={18} width={18} />
             </TouchableOpacity>
+
             <TextInput
               ref={textInput}
               style={[styles.searchHeader]}
@@ -164,23 +165,22 @@ const styles = StyleSheet.create({
     borderColor: COLORS.InoutBorder,
   },
   searchHeader: {
-    height: Platform.OS == "android" ? "auto" : hp(5.2),
+    height: hp(5),
     width: "80%",
-    paddingLeft: hp(2.5),
+    paddingLeft: hp(0.8),
     fontSize: Platform.OS == "android" ? hp(1.7) : hp(1.82),
     fontFamily: FONTS.fontSemiBold,
     color: COLORS.themeBlue,
-
     lineHeight: hp(2.3),
     paddingRight: hp("2.0%"),
-    // backgroundColor:"red"
+
   },
   userIcon: {
-    // position: "absolute",
-    width: hp(1.9),
+    height: hp(4),
+    width: hp(4),
     resizeMode: "contain",
     left: hp(1.43),
-    alignSelf: "center",
+    justifyContent:'center'
   },
   commonButtonBorderedheader: {
     backgroundColor: COLORS.transparent,

@@ -86,7 +86,6 @@ const TeacherLessonDetail = (props) => {
   }, [isSearchActive]);
 
   const isFiedlsValidated = () => {
-    console.log("Addhomework", Addhomework, User.user._id);
     if (!Addhomework.HomeworkDescription) {
       showMessage(MESSAGE.description);
       return;
@@ -107,26 +106,22 @@ const TeacherLessonDetail = (props) => {
       HomeworkDescription: Addhomework.HomeworkDescription,
       CreatedBy: User.user._id,
       CheckList: Addhomework.CheckList,
+      ChannelList: Addhomework.ChannelList,
     };
 
     if (Addhomework.IsUpdate) {
-      Service.post(
-        data,
-        `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`,
-        (res) => {
-          if (res.flag) {
-            if (
-              Addhomework.RemoveRecordingArr.length > 0 ||
-              Addhomework.RemoveMaterialArr.length > 0
-            )
-              onRemoveUnselectedFile(res.data._id);
-            else uploadMatirial(res.data._id);
-          } else {
-            setHomeworkLoading(false);
-            setVisiblePopup(false);
-            showMessage(res.message);
-          }
-        },
+      Service.post(data, `${EndPoints.HomeworkUpdate}/${Addhomework.HwId}`, (res) => {
+        if (res.flag) {
+          if (Addhomework.RemoveRecordingArr.length > 0 || Addhomework.RemoveMaterialArr.length > 0)
+            onRemoveUnselectedFile(res.data._id);
+          else
+            uploadMatirial(res.data._id);
+        } else {
+          setHomeworkLoading(false);
+          setVisiblePopup(false);
+          showMessage(res.message);
+        }
+      },
         (err) => {
           setHomeworkLoading(false);
           setVisiblePopup(false);
@@ -236,14 +231,6 @@ const TeacherLessonDetail = (props) => {
       return;
     }
 
-    console.log(
-      "data",
-      data._parts,
-      homeworkId,
-      Addhomework.MaterialArr.length,
-      Addhomework.RecordingArr.length
-    );
-
     Service.postFormData(
       data,
       `${EndPoints.HomeworkMaterialUpload}${homeworkId}`,
@@ -280,14 +267,13 @@ const TeacherLessonDetail = (props) => {
   return (
     <View style={PAGESTYLE.mainPage}>
       {isScreenAndCameraRecording ? (
-        <ScreenAndCameraRecording
-          goBack={() => setScreenAndCameraRecording(false)}
-        />
+        <ScreenAndCameraRecording goBack={() => setScreenAndCameraRecording(false)} />
       ) : isTLVideoGallery ? (
-        <TLVideoGallery goBack={(selectVideo) => {
-          setSelectedVideo(selectVideo)
-          setVideoGallery(false)
-      }} />
+        <TLVideoGallery
+          goBack={(selectVideo) => {
+            setSelectedVideo(selectVideo)
+            setVideoGallery(false)
+          }} />
       ) : (
         <View style={{ width: isHide ? "100%" : "100%" }}>
           {tabIndex == 0 ? (
@@ -394,17 +380,11 @@ const TeacherLessonDetail = (props) => {
             ) : tabIndex == 1 ? (
               <TLHomeWork
                 id={props.route.params.data._id}
+                subject={lessonData.SubjectName}
+                topic={lessonData.LessonTopic}
                 updateBtnName={(flag) => setUpdate(flag)}
                 navigateScreeCamera={() => setScreenAndCameraRecording(true)}
-                navigateToVideoGallery={() =>
-                  props.navigation.navigate("TLVideoGallery", {
-                    goBack: (selectItem) => {
-                      console.log("Selected items=====>", selectItem);
-                      setVideoMaterial(selectItem);
-                      props.navigation.goBack();
-                    },
-                  })
-                }
+                navigateToVideoGallery={() => { null }}
                 videoMaterial={videoMaterial}
               />
             ) : (
@@ -417,7 +397,6 @@ const TeacherLessonDetail = (props) => {
                 navigateToDetail={(data) =>
                   props.navigation.navigate("TLHomeWorkSubmittedDetail", {
                     onGoBack: () => {
-                      console.log("BACK");
                       setHSDataChanged(true);
                     },
                     item: data,

@@ -1217,7 +1217,7 @@ export default StyleSheet.create({
         width: hp(19),
         color: COLORS.lightGray,
         lineHeight: wp(4.25),
-        marginTop: hp(1),
+        marginBottom: hp(1),
         fontFamily: FONTS.fontRegular,
     },
     videoScroll: {

@@ -27,6 +27,7 @@ import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import DownloadSVG from '../../../../../svg/teacher/lessonhwplanner/Download'
 import BookMarkOn from "../../../../../svg/pupil/lessonhwplanner/BookMark_On";
 import BookMarkOff from "../../../../../svg/pupil/lessonhwplanner/BookMark_Off";
+import TabVideoPopup from "../../../../component/reusable/popup/TabVideoPopup";
 
 
 const PupilLessonDetailInternal = (props) => {
@@ -46,6 +47,8 @@ const PupilLessonDetailInternal = (props) => {
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
 
+    const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+    const [videoRecord, setVideoRecord] = useState({});
 
     useEffect(() => {
         if (Platform.OS === "android") {
@@ -119,6 +122,11 @@ const PupilLessonDetailInternal = (props) => {
             console.log('response of get all lesson error', err)
         })
     }
+
+    const openPopup = (item) => {
+        setVideoRecord(item);
+        setVideoModalVisible(true);
+    };
 
     return (
         <View style={PAGESTYLE.mainPage}>
@@ -228,36 +236,53 @@ const PupilLessonDetailInternal = (props) => {
                                                 <View style={PAGESTYLE.fileBoxGrpWrap}>
                                                     <Text style={PAGESTYLE.requireText}>Learning material</Text>
                                                     {
-                                                        item != undefined && item.MaterialList.length > 0 ?
-                                                            item.MaterialList.map((obj, index) => {
-                                                                return (
-                                                                    <TouchableOpacity onPress={() => {
-                                                                        setLoader(true); setMateIndex(index); Download(obj, (res) => {
-                                                                            setLoader(false)
-                                                                            setMateIndex(-1)
-                                                                        })
-                                                                    }} style={PAGESTYLE.fileGrp}>
-                                                                        <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
-                                                                        <View style={[PAGESTYLE.downloaBtn, { justifyContent: 'center' }]}>
-                                                                            {(isMatLoading && index == mateIndex) ?
-                                                                                <ActivityIndicator
-                                                                                    style={{ ...PAGESTYLE.downloadIcon }}
-                                                                                    size={Platform.OS == 'ios' ? 'large' : 'small'}
-                                                                                    color={COLORS.blueBorder} />
-                                                                                :
-                                                                                // <Image source={Images.Download} style={PAGESTYLE.downloadIcon} />
-                                                                                <DownloadSVG style={[PAGESTYLE.downloadIconTab]} height={hp(2.01)} width={hp(2.01)} />
+                                                        item != undefined && item.MaterialList.length > 0 &&
+                                                        item.MaterialList.map((obj, index) => {
+                                                            return (
+                                                                <TouchableOpacity onPress={() => {
+                                                                    setLoader(true); setMateIndex(index); Download(obj, (res) => {
+                                                                        setLoader(false)
+                                                                        setMateIndex(-1)
+                                                                    })
+                                                                }} style={PAGESTYLE.fileGrp}>
+                                                                    <Text numberOfLines={1} style={[PAGESTYLE.fileName, { width: hp(20) }]}>{obj.originalname}</Text>
+                                                                    <View style={[PAGESTYLE.downloaBtn, { justifyContent: 'center' }]}>
+                                                                        {(isMatLoading && index == mateIndex) ?
+                                                                            <ActivityIndicator
+                                                                                style={{ ...PAGESTYLE.downloadIcon }}
+                                                                                size={Platform.OS == 'ios' ? 'large' : 'small'}
+                                                                                color={COLORS.blueBorder} />
+                                                                            :
+                                                                            <DownloadSVG style={[PAGESTYLE.downloadIconTab]} height={hp(2.01)} width={hp(2.01)} />
+                                                                        }
+                                                                    </View>
+                                                                </TouchableOpacity>
+                                                            )
+                                                        })
 
-                                                                            }
-                                                                            {/* <Image source={Images.Download} style={PAGESTYLE.downloadIcon} /> */}
-                                                                        </View>
-                                                                        {/* <Image source={require('../../../../assets/images/download2.png')} style={PAGESTYLE.downloadIcon} /> */}
-                                                                    </TouchableOpacity>
-                                                                )
-                                                            })
-                                                            :
-                                                            <Text style={{ alignSelf: 'center' }}>No material</Text>
                                                     }
+                                                    {
+                                                        item.ChannelList.length > 0 &&
+                                                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                                            <View style={PAGESTYLE.thumbVideo}>
+                                                                {
+                                                                    item.ChannelList.map((items, index) => {
+                                                                        return (
+                                                                            <TouchableOpacity onPress={() => openPopup(items)}>
+                                                                                <Image style={PAGESTYLE.smlThumbVideo} />
+                                                                                <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                                                                                    {items.Title}
+                                                                                </Text>
+                                                                            </TouchableOpacity>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </View>
+                                                        </ScrollView>
+                                                    }
+
+                                                    {item.ChannelList.length == 0 && item.MaterialList.length == 0 && <Text style={{ alignSelf: 'center' }}>No material</Text>}
+
 
                                                 </View>
 
@@ -288,6 +313,11 @@ const PupilLessonDetailInternal = (props) => {
                                     </ScrollView>
                                 </View>
             }
+            <TabVideoPopup
+                isVisible={isVideoModalVisible}
+                onClose={() => setVideoModalVisible(false)}
+                item={videoRecord}
+            />
         </View >
     );
 }

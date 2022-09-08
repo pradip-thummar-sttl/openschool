@@ -15,6 +15,7 @@ import {
   SafeAreaView,
   Platform,
   BackHandler,
+  Alert,
 } from "react-native";
 import {
   widthPercentageToDP as wp,
@@ -66,6 +67,7 @@ import Clock from "../../../../../svg/teacher/dashboard/Clock";
 import Calender from "../../../../../svg/teacher/dashboard/Calender";
 import UploadMaterial from "../../../../../svg/teacher/lessonhwplanner/UploadMaterial";
 import Modal from "react-native-modal";
+import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
 const { DialogModule, Dialog } = NativeModules;
 
 const TLDetailAdd = (props) => {
@@ -148,12 +150,14 @@ const TLDetailAdd = (props) => {
 
   const [isModalVisible, setModalVisible] = useState(false);
   const [recordingName, setRecordingName] = useState("");
-
+  
   const [currentRecordMode, setCurrentRecordMode] = useState("isScreen");
   const [videoRecordingResponse, setVideoRecordingResponse] = useState([]);
   const [limit, setLimit] = useState("50");
-
+  
   const [videoMaterial, setVideoMaterial] = useState([]);
+  const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+  const [videoRecord, setVideoRecord] = useState({});
 
   useEffect(() => {
     if (Platform.OS === "android") {
@@ -171,6 +175,10 @@ const TLDetailAdd = (props) => {
     props.navigation.goBack();
     return true;
   };
+  const openPopup = (item) => {
+    setVideoRecord(item);
+    setVideoModalVisible(true);
+  };
   useEffect(() => {
     Service.get(
       `${EndPoints.GetSubjectBySchoolId}${User.user.SchoolId}`,
@@ -186,6 +194,7 @@ const TLDetailAdd = (props) => {
         console.log("error of GetSubjectBySchoolId", err);
       }
     );
+
 
     Service.get(
       `${EndPoints.GetParticipants}${User.user._id}`,
@@ -620,12 +629,12 @@ const TLDetailAdd = (props) => {
     return (
       <View style={PAGESTYLE.dropDownFormInput}>
         <Text style={PAGESTYLE.subjectText}>Subject</Text>
+
         <Menu onSelect={(item) => setSelectedSubject(item)}>
           <MenuTrigger style={[PAGESTYLE.subjectDateTime, PAGESTYLE.dropDown]}>
             <Text style={PAGESTYLE.dateTimetextdummy}>
               {selectedSubject ? selectedSubject.SubjectName : "Select Subject"}
             </Text>
-            {/* <Image style={PAGESTYLE.dropDownArrow} source={Images.DropArrow} /> */}
             <ArrowDown
               style={PAGESTYLE.dropDownArrow}
               height={hp(1.51)}
@@ -831,7 +840,7 @@ const TLDetailAdd = (props) => {
                 showMessage("Sorry, we are unable to add lesson!");
               }
             },
-            (error) => {}
+            (error) => { }
           );
         }
       } catch (e) {
@@ -859,6 +868,7 @@ const TLDetailAdd = (props) => {
       PupilList: selectedPupils,
       CheckList: itemCheckList,
       QBDilogID: ID,
+      ChannelList: videoMaterial,
     };
 
     Service.post(
@@ -1042,7 +1052,7 @@ const TLDetailAdd = (props) => {
       return false;
     } else if (
       timeSlot.indexOf(selectedToTime) - timeSlot.indexOf(selectedFromTime) >
-        4 &&
+      4 &&
       IsDeliveredLive != ""
     ) {
       showMessage(MESSAGE.invalidFrom);
@@ -1263,48 +1273,42 @@ const TLDetailAdd = (props) => {
                 <FlatList
                   data={videoMaterial}
                   renderItem={({ item, index }) => (
-                    <View style={PAGESTYLE.thumbVideo}>
-                      <Image
-                        // source={Images.VideoSmlThumb}
-                        style={PAGESTYLE.smlThumbVideo}
-                      />
-                      <TouchableOpacity style={{position:'absolute', right:10,top:5}} onPress={()=>{
+                    <TouchableOpacity style={PAGESTYLE.thumbVideo} onPress={() => openPopup(item)}>
+                      <Image style={PAGESTYLE.smlThumbVideo}/>
+                      <TouchableOpacity style={{ position: 'absolute', right: 10, top: 5 }} onPress={() => {
                         let selArr = [...videoMaterial];
-                        selArr.splice(index,1);
+                        selArr.splice(index, 1);
                         setVideoMaterial(selArr);
                       }}>
-                      <CloseBlack
-                              style={[PAGESTYLE.downloadIcon]}
-                              height={hp(2.5)}
-                              width={hp(2.5)}
-                            />
+                        <CloseBlack
+                          style={[PAGESTYLE.downloadIcon]}
+                          height={hp(2.5)}
+                          width={hp(2.5)}
+                        />
                       </TouchableOpacity>
-                      <Text style={PAGESTYLE.smlThumbVideoText}>
-                        {item.description}
+                      <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                        {item.Title}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
                   )}
                   numColumns={2}
                 />
 
                 <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                  <TouchableOpacity
-                    style={PAGESTYLE.buttonGrp}
-                    activeOpacity={opacity}
-                    onPress={() =>
-                      props.navigation.navigate("TLVideoGallery", {
-                        goBack: (selectItem) => {
-                          console.log("Selected items=====>", selectItem);
-                          setVideoMaterial(selectItem)
-                          props.navigation.goBack();
-                        },
-                      })
-                    }
-                  >
-                    <Text style={STYLE.commonButtonBorderedGreen}>
-                      find me learning material
-                    </Text>
-                  </TouchableOpacity>
+
+                  {selectedSubject != "" && lessonTopic != "" &&
+                    <TouchableOpacity style={PAGESTYLE.buttonGrp} activeOpacity={opacity} onPress={() => {
+                      props.navigation.navigate("TLVideoGallery", { 
+                        subject:selectedSubject?.SubjectName,
+                        topic:lessonTopic,
+                        data: { videoMaterial }, 
+                        goBack: (selectItem) => { setVideoMaterial(selectItem), props.navigation.goBack(); }, })
+                    }}>
+                      <Text style={STYLE.commonButtonBorderedGreen}>
+                        find me learning material
+                      </Text>
+                    </TouchableOpacity>
+                  }
                 </View>
               </View>
             </View>
@@ -1319,6 +1323,11 @@ const TLDetailAdd = (props) => {
           />
         </KeyboardAwareScrollView>
       </View>
+      <VideoPopup
+        isVisible={isVideoModalVisible}
+        onClose={() => setVideoModalVisible(false)}
+        item={videoRecord}
+      />
     </View>
   );
 };

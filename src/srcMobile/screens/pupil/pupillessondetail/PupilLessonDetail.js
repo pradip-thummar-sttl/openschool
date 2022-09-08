@@ -149,6 +149,7 @@ const PupilLessonDetail = (props) => {
         setLoading(true)
         console.log('data', data, User.user.UserDetialId);
         Service.post(data, `${EndPoints.GetAllPupilLessonList}/${User.user.UserDetialId}`, (res) => {
+           
             var startDate = moment().startOf('week');
             var endDate = moment().endOf('week');
             var current = []
@@ -161,7 +162,6 @@ const PupilLessonDetail = (props) => {
                     last.push(item)
                 }
             })
-            console.log('current', current.length, "last", last.length);
             setCurrentWeekLesson(current)
             setLastWeekLesson(last)
             setLoading(false)

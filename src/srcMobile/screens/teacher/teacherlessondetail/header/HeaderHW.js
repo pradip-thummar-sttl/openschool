@@ -21,16 +21,17 @@ const HeaderHW = (props) => {
                     </TouchableOpacity>
                     <View>
                         <Text style={styles.mainTitle}>
-                        {props.SubjectName}
-                    </Text>
+                            {props.SubjectName}
+                        </Text>
                         <Text style={styles.date}>{moment(props.date).format('DD/MM/yyyy')}</Text>
                     </View>
                 </View>
                 <View style={styles.headerRight}>
-                    <Popuphomework updateFlag={props.updateFlag} hwBtnName={props.hwBtnName} isHomeworkLoading={props.isHomeworkLoading} isHomeworkLoading={props.isHomeworkLoading} isVisible={props.isVisible} 
-                    onOpenPopup={() => props.onOpenPopup()} 
-                    onClose={() => props.onClose()} 
-                    setHomework={() => props.setHomework()} />
+                    <Popuphomework updateFlag={props.updateFlag} hwBtnName={props.hwBtnName} isHomeworkLoading={props.isHomeworkLoading}
+                        isHomeworkLoading={props.isHomeworkLoading} isVisible={props.isVisible}
+                        onOpenPopup={() => props.onOpenPopup()}
+                        onClose={() => props.onClose()}
+                        setHomework={() => props.setHomework()} />
                 </View>
             </View>
         </View>

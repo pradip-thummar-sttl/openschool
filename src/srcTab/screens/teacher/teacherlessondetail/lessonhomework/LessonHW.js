@@ -99,6 +99,8 @@ const TLHomeWork = (props) => {
     Service.get(
       `${EndPoints.Homework}/${props.id}`,
       (res) => {
+        console.log("Response of homework by lesson id", res.data);
+
         if (res.flag) {
           Addhomework.IsIncluded = res.data.IsIncluded;
           Addhomework.HomeworkDescription = res.data.HomeworkDescription;
@@ -756,40 +758,51 @@ const TLHomeWork = (props) => {
                   );
                 })}
               {console.log("selected video ====>", selectedVideo)}
-              {selectedVideo.length > 0 ?? (
+              {selectedVideo.length > 0 ? (
                 <FlatList
                   data={selectedVideo}
                   renderItem={({ item, index }) => (
                     <View style={PAGESTYLE.thumbVideo}>
                       <Image style={PAGESTYLE.grpThumbVideo} />
-                      <TouchableOpacity style={{position:'absolute', right:10,top:10}} onPress={()=>{
-                        let selArr = [...selectedVideo];
-                        selArr.splice(index,1);
-                        setSelectedVideo(selArr);
-                      }}>
+                      <TouchableOpacity
+                        style={{ position: "absolute", right: 10, top: 10 }}
+                        onPress={() => {
+                          let selArr = [...selectedVideo];
+                          selArr.splice(index, 1);
+                          setSelectedVideo(selArr);
+                        }}
+                      >
                         <CloseBlack
                           style={PAGESTYLE.downloadIcon}
                           height={hp(2.5)}
                           width={hp(2.5)}
                         />
                       </TouchableOpacity>
+                      <Text
+                        numberOfLines={1}
+                        style={PAGESTYLE.smlThumbVideoText}
+                      >
+                        {item.Title}
+                      </Text>
                     </View>
                   )}
                   numColumns={2}
                 />
-              )}
+              ) : null}
 
-              <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
-                <TouchableOpacity
-                  style={PAGESTYLE.buttonGrp}
-                  activeOpacity={opacity}
-                  onPress={() => props.navigateToVideoGallery()}
-                >
-                  <Text style={STYLE.commonButtonBorderedGreen}>
-                    find me learning material
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              {isSwitch ? (
+                <View style={PAGESTYLE.videoLinkBlockSpaceBottom}>
+                  <TouchableOpacity
+                    style={PAGESTYLE.buttonGrp}
+                    activeOpacity={opacity}
+                    onPress={() => props.navigateToVideoGallery()}
+                  >
+                    <Text style={STYLE.commonButtonBorderedGreen}>
+                      find me learning material
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              ) : null}
             </View>
           </View>
           {renderRecordingNamePopup()}

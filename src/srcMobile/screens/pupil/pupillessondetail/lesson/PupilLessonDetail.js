@@ -29,6 +29,7 @@ import DownloadIcon from "../../../../../svg/teacher/lessonhwplanner/Download";
 import PlayBlue from "../../../../../svg/pupil/lessonhwplanner/Play_Blue";
 import BookMarkOn from "../../../../../svg/pupil/lessonhwplanner/BookMark_On";
 import BookMarkOff from "../../../../../svg/pupil/lessonhwplanner/BookMark_Off";
+import VideoPopup from "../../../../component/reusable/popup/VideoPopup";
 const PupilLessonDetailInternal = (props) => {
     const [activeSections, setActiveSections] = useState([])
     const [item, setItem] = useState(props.route.params.item)
@@ -37,7 +38,10 @@ const PupilLessonDetailInternal = (props) => {
     const [isMatLoading, setLoader] = useState(false)
     const [mateIndex, setMateIndex] = useState(-1)
 
+    const [isVideoModalVisible, setVideoModalVisible] = useState(false);
+    const [videoRecord, setVideoRecord] = useState({});
 
+    console.log("item.MaterialList.length -=-=-=-=-->", item.ChannelList)
     useEffect(() => {
         if (Platform.OS === "android") {
             BackHandler.addEventListener('hardwareBackPress', handleBackButtonClick);
@@ -46,6 +50,11 @@ const PupilLessonDetailInternal = (props) => {
             BackHandler.removeEventListener('hardwareBackPress', handleBackButtonClick);
         };
     }, [props.navigation]);
+
+    const openPopup = (item) => {
+        setVideoRecord(item);
+        setVideoModalVisible(true);
+    };
 
     const handleBackButtonClick = () => {
         props.navigation.goBack()
@@ -131,7 +140,7 @@ const PupilLessonDetailInternal = (props) => {
         );
     };
     const _renderContent = section => {
-        console.log('activeSections', activeSections);
+
         return (
             activeSections.includes(0) ?
                 <View style={PAGESTYLE.content}>
@@ -145,7 +154,7 @@ const PupilLessonDetailInternal = (props) => {
                         <View style={PAGESTYLE.lessonDesc}>
                             <View style={[PAGESTYLE.fileBoxGrpWrap]}>
                                 {
-                                    item != undefined && item.MaterialList.length > 0 ?
+                                    item.MaterialList.length > 0 &&
                                         item.MaterialList.map((obj, index) => {
                                             return (
                                                 <TouchableOpacity onPress={() => {
@@ -169,16 +178,31 @@ const PupilLessonDetailInternal = (props) => {
                                                     </View>
                                                 </TouchableOpacity>
                                             )
-                                        }) :
-                                        <Text style={{ alignSelf: 'center', paddingVertical: 10, }}>No material</Text>
+                                        })
+                                }
+                                {
+                                    item.ChannelList.length > 0 &&
+                                    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                        <View style={PAGESTYLE.thumbVideo}>
+                                            {
+                                                item.ChannelList.map((items, index) => {
+                                                    return (
+                                                        <TouchableOpacity onPress={() => openPopup(items)}>
+                                                            <Image style={PAGESTYLE.smlThumbVideo} />
+                                                            <Text numberOfLines={1} style={PAGESTYLE.smlThumbVideoText}>
+                                                                {items.Description}
+                                                            </Text>
+                                                        </TouchableOpacity>
+                                                    )
+                                                })
+                                            }
+                                        </View>
+                                    </ScrollView>
+                                }
+                                {
+                                     item.ChannelList.length == 0 && item.MaterialList.length == 0 && <Text style={{ alignSelf: 'center', paddingVertical: 10, }}>No material</Text>
                                 }
                             </View>
-                            {/* <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={PAGESTYLE.thumbVideo}>
-                                    <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
-                                    <Image source={require('../../../../../assets/images/video-uploads2.png')} style={PAGESTYLE.grpThumbVideo} />
-                                </View>
-                            </ScrollView> */}
                         </View>
                     </View>
                     :
@@ -318,6 +342,11 @@ const PupilLessonDetailInternal = (props) => {
 
                 </View>
             </View>
+            <VideoPopup
+                isVisible={isVideoModalVisible}
+                onClose={() => setVideoModalVisible(false)}
+                item={videoRecord}
+            />
         </View>
     );
 }

@@ -260,7 +260,7 @@ export default StyleSheet.create({
     },
     videoLinkBlockSpaceBottom: {
         // marginBottom: hp(2),
-        // marginTop: hp(1),
+        marginTop: hp(1),
     },
     videoLinkIcon: {
         width: hp(2.38),
@@ -402,6 +402,14 @@ export default StyleSheet.create({
     fileName: { width: wp(20), fontFamily: FONTS.fontRegular, fontSize: hp(1.85), lineHeight: hp(3.60) },
     RenderDownload: { width: wp(3), height: hp(5), justifyContent: 'center', alignItems: 'center' },
     downloadIcon: { width: hp(2), resizeMode: 'contain' },
+    smlThumbVideoText: {
+        fontSize: wp(1.46),
+        width: hp(15),
+        color: COLORS.lightGray,
+        // lineHeight: wp(1.25),
+        // marginTop: hp(1),
+        fontFamily: FONTS.fontRegular,
+    },
 
     containerWrap: {
         justifyContent: 'space-between',
@@ -1488,7 +1496,8 @@ export default StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 10
+        marginBottom: 10,
+        // marginTop:10
     },
 
     // New -----------------------------------
